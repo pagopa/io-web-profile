@@ -21,9 +21,13 @@
     "@pagopa/eslint-config/strong"
   ],
   "rules": {}
+<<<<<<< Updated upstream
 }
 
 
 
 
 
+=======
+}
+>>>>>>> Stashed changes
