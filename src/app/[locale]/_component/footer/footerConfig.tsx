@@ -8,8 +8,6 @@ export const pagoPALink: CompanyLinkType = {
   href: 'temp link',
 };
 
-declare const window: any;
-
 export const LANGUAGES = {
   it: { it: 'Italiano' },
 };

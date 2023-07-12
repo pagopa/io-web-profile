@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import Access from '../page';
+import Accesso from '../page';
 
 describe('test suite for Access component', () => {
   test('should render component Access', () => {
-    render(<Access />);
+    render(<Accesso />);
     expect(screen.getByText('Access'));
   });
 });

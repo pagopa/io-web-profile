@@ -1,0 +1,11 @@
+{
+  "home": {
+    "hello": "Ciao"
+  },
+  "access": {
+    "hello": "Ciao Access"
+  },
+  "logout": {
+    "title": "Esci"
+  }
+}

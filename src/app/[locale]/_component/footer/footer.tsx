@@ -1,6 +1,6 @@
+/* eslint-disable no-console */
 'use client';
 /* eslint-disable functional/prefer-readonly-type */
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable sort-keys */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable max-lines-per-function */
@@ -19,6 +19,7 @@ interface IOFooterProps {
   productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any;
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export default function Footer({
@@ -215,6 +216,7 @@ export default function Footer({
       legalInfo={companyLegalInfo}
       loggedUser={loggedUser}
       onExit={onExit}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       languages={LANGUAGES as any}
       onLanguageChanged={(language: string) => console.log(language)}
       currentLangCode="it"

@@ -18,16 +18,7 @@
     "sourceType": "module"
   },
   "extends": [
-    "@pagopa/eslint-config/strong"
+    "@pagopa/eslint-config/recommended"
   ],
   "rules": {}
-<<<<<<< Updated upstream
 }
-
-
-
-
-
-=======
-}
->>>>>>> Stashed changes
