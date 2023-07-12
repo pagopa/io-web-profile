@@ -8,7 +8,7 @@ const Header = (): React.ReactElement => (
       rootLink={{
         ariaLabel: 'string',
         href: 'string',
-        label: 'string',
+        label: 'PagoPa',
         title: 'string',
       }}
       loggedUser={false}
@@ -20,6 +20,8 @@ const Header = (): React.ReactElement => (
         // eslint-disable-next-line no-console
         console.log('User login');
       }}
+      enableLogin={false}
+      enableAssistanceButton={false}
     />
   </>
 );

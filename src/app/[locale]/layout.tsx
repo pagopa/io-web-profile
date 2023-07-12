@@ -1,6 +1,9 @@
 import { NextIntlClientProvider } from 'next-intl';
 
 import { notFound } from 'next/navigation';
+import ThemeProviderComponent from './_component/themeProvider/themeProvider';
+import Header from './_component/header/header';
+import Footer from './_component/footer/footer';
 
 export async function generateStaticParams() {
   return [{ lang: 'it-IT' }, { lang: 'it' }];
@@ -26,7 +29,11 @@ const RootLayoutWithLocaleAndTheme = async ({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <ThemeProviderComponent>
+            <Header />
+            {children}
+            <Footer loggedUser={false} />
+          </ThemeProviderComponent>
         </NextIntlClientProvider>
       </body>
     </html>
