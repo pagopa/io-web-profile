@@ -1,5 +1,4 @@
 import { NextIntlClientProvider } from 'next-intl';
-
 import { notFound } from 'next/navigation';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import Header from './_component/header/header';
@@ -27,7 +26,7 @@ const RootLayoutWithLocaleAndTheme = async ({
   }
   return (
     <html lang={locale}>
-      <body>
+      <body style={{ margin: '0' }}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProviderComponent>
             <Header />

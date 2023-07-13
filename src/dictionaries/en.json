@@ -3,7 +3,7 @@
     "hello": "Hello"
   },
   "access": {
-    "hello": "Hello Access"
+    "title": "Hello Access"
   },
   "logout": {
     "title": "Logout"
