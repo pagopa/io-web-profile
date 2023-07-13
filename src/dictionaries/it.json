@@ -1,6 +1,6 @@
 {
   "home": {
-    "hello": "Ciao"
+    "template": "modello"
   },
   "access": {
     "title": "Non hai più il tuo dispositivo?"

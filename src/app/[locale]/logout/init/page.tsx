@@ -6,12 +6,13 @@ import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { AccordionCustom } from '../../_component/accordion/accordion';
 import { Introduction } from '../../_component/introduction/introduction';
+import { commonBackground } from '../../_utils/utils';
 
 const Index = (): React.ReactElement => {
   const t = useTranslations('logout');
   return (
     <>
-      <Grid sx={{ backgroundColor: '#FAFAFA', p: 20 }} container item>
+      <Grid sx={commonBackground} container>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction title={t('title')} summary={t('description')} />
         </Grid>
@@ -24,7 +25,6 @@ const Index = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-
       <Grid sx={{ backgroundColor: 'primary', pt: 10, pb: 10 }} container item>
         <Grid item xs={1} />
         <Grid item xs={10} maxWidth="100%">

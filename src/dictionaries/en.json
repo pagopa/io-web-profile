@@ -1,6 +1,6 @@
 {
   "home": {
-    "hello": "Hello"
+    "template": "template"
   },
   "access": {
     "title": "Hello Access"
