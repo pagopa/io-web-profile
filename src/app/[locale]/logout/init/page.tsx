@@ -1,123 +1,72 @@
 'use client';
 
-import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
+import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
+import { AccordionCustom } from '../../_component/accordion/accordion';
+import { Introduction } from '../../_component/introduction/introduction';
 
 const Index = (): React.ReactElement => {
   const t = useTranslations('logout');
   return (
     <>
-      <Grid sx={{ backgroundColor: '#FAFAFA', pt: 5 }} container item>
+      <Grid sx={{ backgroundColor: '#FAFAFA', p: 20 }} container item>
+        <Grid item xs={12} justifySelf={'center'}>
+          <Introduction title={t('title')} summary={t('description')} />
+        </Grid>
+        <Grid item xs={12} pt={2}>
+          <Button sx={{ mr: 2 }} startIcon={<CieIcon />} variant="contained">
+            Entra con SPID
+          </Button>
+          <Button startIcon={<SpidIcon />} variant="contained">
+            Entra con CIE
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Grid sx={{ backgroundColor: 'primary', pt: 10, pb: 10 }} container item>
         <Grid item xs={1} />
         <Grid item xs={10} maxWidth="100%">
           <Typography
-            variant="h3"
-            py={1}
+            fontSize={32}
+            fontWeight={700}
+            py={0}
             px={0}
-            color="textPrimary"
+            color="pagoPA.main"
             sx={{
               textAlign: 'left',
-            }}
-          >
-            {t('title')}
-          </Typography>
-          <Grid item xs={1} />
-        </Grid>
-      </Grid>
-      <Grid sx={{ backgroundColor: '#FAFAFA' }} container item columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={1} />
-        <Grid item xs={4} maxWidth="100%">
-          <Typography
-            variant="subtitle1"
-            py={1}
-            px={0}
-            color="textPrimary"
-            sx={{
-              textAlign: 'left',
-            }}
-          >
-            {t('description')}
-          </Typography>
-        </Grid>
-        <Grid item xs={7} />
-      </Grid>
-      <Grid sx={{ backgroundColor: '#FFFFFF', pt: 5 }} container item>
-        <Grid item xs={1} />
-        <Grid item xs={10} maxWidth="100%">
-          <Typography
-            variant="h4"
-            py={1}
-            px={0}
-            color="#0062C3"
-            sx={{
-              textAlign: 'left',
+              pb: 5,
             }}
           >
             {'Dubbi o domande?'}
           </Typography>
-          <Accordion expanded>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography color="#0062C3">Cosa vuol dire uscire da app IO?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-                ex, sit amet blandit leo lobortis eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography color="#0062C3">Come posso rientrare in app IO?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-                ex, sit amet blandit leo lobortis eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography color="#0062C3">
-                Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-                ex, sit amet blandit leo lobortis eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography color="#0062C3">A cosa serve effettuare il logout da web?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus
-                ex, sit amet blandit leo lobortis eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+          <AccordionCustom
+            entries={[
+              {
+                summary: 'Cosa vuol dire uscire da app IO?',
+                details:
+                  'Lorem ipsum dolor sit amet, consectur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              },
+              {
+                summary: 'A che cosa serve effettuare il logout da web?',
+                details:
+                  'Lorem ipsum dolor sit amet, consectetur apiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              },
+              {
+                summary: 'Come posso rientrare in app IO?',
+                details:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              },
+              {
+                summary: 'Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?',
+                details:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing lit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              },
+            ]}
+            summaryColor={'pagoPA.main'}
+            detailColor={'action.active'}
+          />
         </Grid>
       </Grid>
     </>
