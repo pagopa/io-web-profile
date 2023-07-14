@@ -1,16 +1,20 @@
 import React from 'react';
 import { Typography, Grid } from '@mui/material';
 
-interface IntroductionProps {
+interface IntroductionObj {
   title: string;
   summary: string | JSX.Element;
+  summaryColumns: {
+    xs: number;
+    md: number;
+  };
 }
 
-export function Introduction(props: IntroductionProps) {
+export function Introduction({ title, summary, summaryColumns }: IntroductionObj) {
   return (
     <>
       <Grid container>
-        <Grid item xs={12} maxWidth="100%">
+        <Grid item xs={12} md={8} maxWidth="100%" pb={2}>
           <Typography
             fontSize={32}
             fontWeight={700}
@@ -21,20 +25,21 @@ export function Introduction(props: IntroductionProps) {
               textAlign: 'left',
             }}
           >
-            {props.title}
+            {title}
           </Typography>
         </Grid>
-        <Grid item xs={6} maxWidth="100%">
+        <Grid item xs={summaryColumns.xs} md={summaryColumns.md} maxWidth="100%" pb={4}>
           <Typography
-            variant="subtitle1"
-            py={1}
+            fontSize={20}
+            fontWeight={400}
+            py={0}
             px={0}
             color="textPrimary"
             sx={{
               textAlign: 'left',
             }}
           >
-            {props.summary}
+            {summary}
           </Typography>
         </Grid>
       </Grid>
