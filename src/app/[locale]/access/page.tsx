@@ -5,7 +5,7 @@ import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-const Accesso = (): React.ReactElement => {
+const Access = (): React.ReactElement => {
   const t = useTranslations('access');
   return (
     <Grid
@@ -143,4 +143,4 @@ const Accesso = (): React.ReactElement => {
   );
 };
 
-export default Accesso;
+export default Access;

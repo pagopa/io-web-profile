@@ -6,10 +6,10 @@ const Header = (): React.ReactElement => (
   <>
     <HeaderAccount
       rootLink={{
-        ariaLabel: 'io WEB',
-        href: '#',
-        label: 'io WEB beta',
-        title: 'io WEB beta',
+        ariaLabel: 'PagoPA',
+        href: 'https://www.pagopa.it/',
+        label: 'PagoPA S.p.a.',
+        title: 'PagoPA S.p.a.',
       }}
       loggedUser={false}
       onAssistanceClick={(): void => {
@@ -21,7 +21,7 @@ const Header = (): React.ReactElement => (
         console.log('User login');
       }}
       enableLogin={false}
-      enableAssistanceButton={false}
+      enableAssistanceButton={true}
     />
   </>
 );
