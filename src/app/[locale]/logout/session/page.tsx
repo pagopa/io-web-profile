@@ -29,7 +29,7 @@ const Session = (): React.ReactElement => (
       <Grid item xs={4} justifySelf={'center'}>
         <Card
           sx={{
-            'box-shadow': '0px 0px 0px 1px #E0E0E0',
+            boxShadow: '0px 0px 0px 1px #E0E0E0',
             width: '400px',
             display: 'flex',
             padding: '30px',
