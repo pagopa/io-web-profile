@@ -6,10 +6,10 @@ const Header = (): React.ReactElement => (
   <>
     <HeaderAccount
       rootLink={{
-        ariaLabel: 'string',
-        href: 'string',
-        label: 'PagoPa',
-        title: 'string',
+        ariaLabel: 'io WEB',
+        href: '#',
+        label: 'io WEB beta',
+        title: 'io WEB beta',
       }}
       loggedUser={false}
       onAssistanceClick={(): void => {
