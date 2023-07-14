@@ -1,4 +1,7 @@
 export const commonBackground = {
   backgroundColor: 'background.default',
-  padding: 20,
+  padding: {
+    xs: 2,
+    sm: 20,
+  },
 };
