@@ -72,7 +72,7 @@ const Session = (): React.ReactElement => (
       </Grid>
 
       <Grid item xs={12} mt={4}>
-        <Link href={'/logout/thankyou'}>
+        <Link href={'/thankyou'}>
           <Button sx={{ mr: 2 }} variant="contained">
             Esci da IO
           </Button>

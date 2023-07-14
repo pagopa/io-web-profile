@@ -4,10 +4,10 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Card, CardContent, Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import Link from 'next/link';
-import { Introduction } from '../_component/introduction/introduction';
-import HourglassIcon from '../_icons/hourglass';
-import QuestionIcon from '../_icons/question';
-import { commonBackground } from '../_utils/utils';
+import { Introduction } from '../../_component/introduction/introduction';
+import HourglassIcon from '../../_icons/hourglass';
+import QuestionIcon from '../../_icons/question';
+import { commonBackground } from '../../_utils/utils';
 
 const Profile = () => {
   const bgColor = 'background.paper';
@@ -102,7 +102,7 @@ const Profile = () => {
                 Non hai più il tuo dispositivo ed era collegato all’app IO? Tieni al sicuro i tuoi
                 dati e scollega il tuo account.
               </Typography>
-              <Link href={'/logout/session'}>
+              <Link href={'/session'}>
                 <ButtonNaked
                   color="primary"
                   endIcon={<ArrowForwardIcon />}

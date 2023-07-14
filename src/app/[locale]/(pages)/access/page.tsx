@@ -33,7 +33,7 @@ const Access = (): React.ReactElement => {
           </Typography>
         </Grid>
         <Grid item mb={2}>
-          <Link href="/logout/init">
+          <Link href="/logoutInit">
             <Button
               variant="outlined"
               sx={{ backgroundColor: 'background.paper', color: 'primary.main' }}

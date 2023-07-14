@@ -22,7 +22,7 @@ const LogOutKo = (): React.ReactElement => (
             </span>
           }
           button={{
-            href: '/logout/session',
+            href: '/session',
             isVisible: true,
             variant: 'contained',
             text: 'Riprova',
