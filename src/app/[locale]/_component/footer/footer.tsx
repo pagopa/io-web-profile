@@ -1,16 +1,9 @@
-/* eslint-disable no-console */
 'use client';
-/* eslint-disable functional/prefer-readonly-type */
-/* eslint-disable sort-keys */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable max-lines-per-function */
 import {
   Footer as MuiItaliaFooter,
   FooterLinksType,
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
-// import { Trans, useTranslation } from 'react-i18next';
-// import i18n from '../../locale/locale-utils';
 // import { CONFIG } from '../../config/env';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
@@ -19,40 +12,17 @@ interface IOFooterProps {
   productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const window: any;
-// eslint-disable-next-line sonarjs/cognitive-complexity
+
 export default function Footer({
   loggedUser,
   productsJsonUrl,
   onExit = (exitAction) => exitAction(),
 }: IOFooterProps) {
-  //  const { t } = useTranslation();
-  /*
-
-  // TODO Temporary solution, will be changed as soon as possible
-  const isPnpgDev =
-    window.location.hostname?.startsWith('pnpg.dev') ||
-    window.location.hostname?.startsWith('imprese.dev');
-  const isPnpgUat =
-    window.location.hostname?.startsWith('pnpg.uat') ||
-    window.location.hostname?.startsWith('imprese.uat');
-  const isPnpg =
-    window.location.hostname?.startsWith('pnpg.selfcare') ||
-    window.location.hostname?.startsWith('imprese.notifichedigitali');
-*/
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
       title: undefined,
       links: [
-        // TODO
-        // {
-        //   label: 'PNRR',
-        //   href: 'CONFIG.FOOTER.LINK.PNRR',
-        //   ariaLabel: 'Vai al link: PNRR',
-        //   linkType: 'internal',
-        // },
         {
           label: 'about',
           href: 'link',
@@ -66,7 +36,7 @@ export default function Footer({
           linkType: 'internal',
         },
         {
-          label: 'workwithud',
+          label: 'workwithus',
           href: 'link',
           ariaLabel: 'Vai al link: Lavora con noi',
           linkType: 'internal',
@@ -103,7 +73,7 @@ export default function Footer({
         },
         {
           label: 'cookie',
-          onClick: () => window.OneTrust.ToggleInfoDisplay(),
+          // onClick: () => window.OneTrust.ToggleInfoDisplay(),
           ariaLabel: 'Vai al link: Preferenze Cookie',
           linkType: 'internal',
         },
@@ -162,15 +132,7 @@ export default function Footer({
           ariaLabel: 'Link: vai al sito Medium di PagoPA S.p.A.',
         },
       ],
-      links: [
-        // TODO
-        // {
-        //   label: 'Accessibilità',
-        //   href: CONFIG.FOOTER.LINK.ACCESSIBILITY,
-        //   ariaLabel: 'Vai al link: Accessibilità',
-        //   linkType: 'internal',
-        // },
-      ],
+      links: [],
     },
   };
   const postLoginLinks: FooterLinksType[] = [
@@ -192,13 +154,6 @@ export default function Footer({
       ariaLabel: 'Vai al link: Termini e condizioni',
       linkType: 'internal',
     },
-    // TODO
-    // {
-    //   label: 'Accessibilità',
-    //   href: CONFIG.FOOTER.LINK.ACCESSIBILITY,
-    //   ariaLabel: 'Vai al link: Accessibilità',
-    //   linkType: 'internal',
-    // },
   ];
   const companyLegalInfo = (
     <>
@@ -216,8 +171,8 @@ export default function Footer({
       legalInfo={companyLegalInfo}
       loggedUser={loggedUser}
       onExit={onExit}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      languages={LANGUAGES as any}
+      languages={LANGUAGES}
+      // eslint-disable-next-line no-console
       onLanguageChanged={(language: string) => console.log(language)}
       currentLangCode="it"
       productsJsonUrl={productsJsonUrl}

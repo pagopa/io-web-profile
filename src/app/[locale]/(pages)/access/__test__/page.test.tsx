@@ -6,6 +6,7 @@ describe('test suite for Access component', () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const useRouter = jest.spyOn(require('next/router'), 'useRouter');
   const locale = 'it';
+
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const messages = require(`../../../../../dictionaries/${locale}.json`);
 

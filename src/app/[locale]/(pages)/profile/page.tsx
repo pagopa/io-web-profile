@@ -46,7 +46,7 @@ const Profile = () => {
               <Typography variant="body2">Accesso in app</Typography>
               <Typography variant="sidenav">Abilitato</Typography>
             </Grid>
-            <Grid item xs={2} alignSelf={'center'}>
+            <Grid item xs={2} textAlign={'center'} alignSelf={'center'}>
               <Tooltip
                 title={'L’accesso a IO è abilitato con tutte le tue identità digitali'}
                 placement="top"
@@ -64,7 +64,7 @@ const Profile = () => {
               <Typography variant="body2">Sessione in app</Typography>
               <Typography variant="sidenav">Attiva fino al 08/06/2023</Typography>
             </Grid>
-            <Grid xs={2} item alignSelf={'center'}>
+            <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
               <Tooltip
                 title={'Fino al 08/06/2023 accedi a IO senza login SPID o CIE'}
                 placement="top"
@@ -89,7 +89,6 @@ const Profile = () => {
               backgroundColor: bgColor,
               padding: '32px',
               boxShadow: '0px 8px 38px 7px #002B551A',
-              height: '405px',
               borderRadius: '16px',
             }}
           >
@@ -103,12 +102,7 @@ const Profile = () => {
                 dati e scollega il tuo account.
               </Typography>
               <Link href={'/session'}>
-                <ButtonNaked
-                  color="primary"
-                  endIcon={<ArrowForwardIcon />}
-                  // onFocusVisible={function noRefCheck() {}}
-                  size="medium"
-                >
+                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
                   Esci da IO
                 </ButtonNaked>
               </Link>
@@ -121,7 +115,6 @@ const Profile = () => {
               backgroundColor: bgColor,
               padding: '32px',
               boxShadow: '0px 8px 38px 7px #002B551A',
-              height: '405px',
               borderRadius: '16px',
             }}
           >
@@ -135,12 +128,7 @@ const Profile = () => {
                 all’app IO.
               </Typography>
               <Link href={'#'}>
-                <ButtonNaked
-                  color="primary"
-                  endIcon={<ArrowForwardIcon />}
-                  // onFocusVisible={function noRefCheck() {}}
-                  size="medium"
-                >
+                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
                   Blocca accesso a IO
                 </ButtonNaked>
               </Link>

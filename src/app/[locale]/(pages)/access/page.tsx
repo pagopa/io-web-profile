@@ -36,7 +36,12 @@ const Access = (): React.ReactElement => {
           <Link href="/logoutInit">
             <Button
               variant="outlined"
-              sx={{ backgroundColor: 'background.paper', color: 'primary.main' }}
+              sx={{
+                backgroundColor: 'background.paper',
+                '&:hover': {
+                  backgroundColor: '#ffffff',
+                },
+              }}
             >
               Esci da IO
             </Button>

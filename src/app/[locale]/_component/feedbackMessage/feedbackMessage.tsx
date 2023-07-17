@@ -52,11 +52,11 @@ export function FeedbackMessage({ topIcon, title, summary, button }: Introductio
             </Typography>
           </Grid>
           <Grid item xs={12} textAlign={'center'}>
-            {button.isVisible ? (
+            {button.isVisible && (
               <Link href={button.href}>
                 <Button variant={button.variant}>{button.text || 'Missing Text'}</Button>
               </Link>
-            ) : null}
+            )}
           </Grid>
         </Grid>
       </Box>

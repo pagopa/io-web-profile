@@ -11,11 +11,7 @@ export function SelectIdp({ open, onClose }: IDialog) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {
-    if (open === true) {
-      setOpenDialog(true);
-    } else {
-      setOpenDialog(false);
-    }
+    setOpenDialog(open);
   }, [open]);
 
   return (
