@@ -1,0 +1,11 @@
+{
+  "home": {
+    "template": "template"
+  },
+  "access": {
+    "title": "Hello Access"
+  },
+  "logout": {
+    "title": "Logout"
+  }
+}

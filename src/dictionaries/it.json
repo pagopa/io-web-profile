@@ -1,0 +1,12 @@
+{
+  "home": {
+    "template": "modello"
+  },
+  "access": {
+    "title": "Non hai più il tuo dispositivo?"
+  },
+  "logout": {
+    "title": "Esci da IO",
+    "description": "Se hai perso il tuo dispositivo, termina la sessione attiva sull’app IO per mantenere i tuoi dati al sicuro. Accedi con SPID o CIE e segui i passaggi indicati."
+  }
+}
