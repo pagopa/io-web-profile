@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import Header from './_component/header/header';
 import Footer from './_component/footer/footer';
+import { Providers } from './_redux/provider';
 
 export async function generateStaticParams() {
   return [{ lang: 'it-IT' }, { lang: 'it' }];
@@ -27,13 +28,15 @@ const RootLayoutWithLocaleAndTheme = async ({
   return (
     <html lang={locale}>
       <body style={{ margin: '0' }}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProviderComponent>
-            <Header />
-            {children}
-            <Footer loggedUser={false} />
-          </ThemeProviderComponent>
-        </NextIntlClientProvider>
+        <Providers>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <ThemeProviderComponent>
+              <Header />
+              {children}
+              <Footer loggedUser={false} />
+            </ThemeProviderComponent>
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

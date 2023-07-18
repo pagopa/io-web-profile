@@ -5,7 +5,7 @@ import Link from 'next/link';
 import AppleIcon from '@mui/icons-material/Apple';
 import AndroidIcon from '@mui/icons-material/Android';
 import { Introduction } from '../../../_component/introduction/introduction';
-import { commonBackground } from '../../../_utils/utils';
+import { commonBackground } from '../../../_utils/styles';
 import { FAQDefault } from '../../../_component/accordion/faqDefault';
 
 const L2NoSession = (): React.ReactElement => (

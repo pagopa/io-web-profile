@@ -2,7 +2,7 @@
 
 import { Grid } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
-import { commonBackground } from '../../_utils/utils';
+import { commonBackground } from '../../_utils/styles';
 import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
 
 const LoginKo = (): React.ReactElement => (
