@@ -1,22 +1,25 @@
 'use client';
-
-import { Grid } from '@mui/material';
-import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/utils';
-import { extractToken, parseJwt } from '../../_utils/jwt';
+import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
+import { ROUTES } from '../../_utils/routes';
+import useToken from '../../_hooks/useToken';
+import Loader from '../../_component/loader/loader';
 
 const Check = (): React.ReactElement => {
-  const tokenTest: string = extractToken();
+  const { tokenError } = useToken();
 
-  parseJwt(tokenTest);
+  useEffect(() => {
+    if (tokenError === 'error') {
+      redirect(ROUTES.LOGOUT_AUTH_KO);
+    }
+    if (tokenError === 'ok') {
+      redirect(ROUTES.SESSION);
+    }
+  }, [tokenError]);
 
   return (
     <>
-      <Grid sx={commonBackground} container>
-        <Grid item xs={12} justifySelf={'center'} maxWidth="100%">
-          <Introduction title={'Check...'} summary={''} summaryColumns={{ xs: 12, md: 10 }} />
-        </Grid>
-      </Grid>
+      <Loader />
     </>
   );
 };

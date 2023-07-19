@@ -4,6 +4,7 @@ import { Grid } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { commonBackground } from '../../_utils/utils';
 import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
+import { ROUTES } from '../../_utils/routes';
 
 const LoginKo = (): React.ReactElement => (
   <>
@@ -19,7 +20,7 @@ const LoginKo = (): React.ReactElement => (
             </span>
           }
           button={{
-            href: '/access/',
+            href: ROUTES.LOGIN,
             isVisible: true,
             variant: 'contained',
             text: 'Torna alla home',

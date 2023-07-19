@@ -4,6 +4,7 @@ import { Grid } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { commonBackground } from '../../_utils/utils';
 import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
+import { ROUTES } from '../../_utils/routes';
 
 const LogOutKo = (): React.ReactElement => (
   <>
@@ -22,7 +23,7 @@ const LogOutKo = (): React.ReactElement => (
             </span>
           }
           button={{
-            href: '/session',
+            href: ROUTES.SESSION,
             isVisible: true,
             variant: 'contained',
             text: 'Riprova',

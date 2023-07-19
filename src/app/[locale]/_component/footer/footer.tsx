@@ -5,16 +5,15 @@ import {
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
 // import { CONFIG } from '../../config/env';
+import useLogin from '../../_hooks/useLogin';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 interface IOFooterProps {
-  loggedUser: boolean;
   productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
 }
 
 export default function Footer({
-  loggedUser,
   productsJsonUrl,
   onExit = (exitAction) => exitAction(),
 }: IOFooterProps) {
@@ -162,6 +161,7 @@ export default function Footer({
       CAP 00187 - N. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009
     </>
   );
+  const { isLoggedIn } = useLogin();
 
   return (
     <MuiItaliaFooter
@@ -169,7 +169,7 @@ export default function Footer({
       postLoginLinks={postLoginLinks}
       preLoginLinks={preLoginLinks}
       legalInfo={companyLegalInfo}
-      loggedUser={loggedUser}
+      loggedUser={isLoggedIn}
       onExit={onExit}
       languages={LANGUAGES}
       // eslint-disable-next-line no-console
