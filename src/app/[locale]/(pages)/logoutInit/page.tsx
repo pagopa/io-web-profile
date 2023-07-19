@@ -6,7 +6,7 @@ import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useState } from 'react';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/utils';
+import { commonBackground } from '../../_utils/styles';
 import { FAQDefault } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 

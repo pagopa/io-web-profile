@@ -2,7 +2,7 @@
 
 import { Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { commonBackground } from './_utils/utils';
+import { commonBackground } from './_utils/styles';
 
 const Index = (): React.ReactElement => {
   const t = useTranslations('home');

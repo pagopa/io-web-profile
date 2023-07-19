@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
-import { commonBackground } from '../../_utils/utils';
+import { commonBackground } from '../../_utils/styles';
 
 const Profile = () => {
   const bgColor = 'background.paper';

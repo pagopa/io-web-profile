@@ -4,7 +4,7 @@ import { Grid, Button, Box, Typography, Card } from '@mui/material';
 import Link from 'next/link';
 import { IllusSms } from '@pagopa/mui-italia';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/utils';
+import { commonBackground } from '../../_utils/styles';
 import { FAQDefault } from '../../_component/accordion/faqDefault';
 
 const Session = (): React.ReactElement => (
