@@ -9,23 +9,26 @@ export function IdpList() {
 
   return (
     <>
-      <Grid item pb={5} width={400}>
-        <Grid container direction="row" justifyItems="center" spacing={2}>
+      <Grid item maxWidth={375}>
+        <Grid container direction="row" justifyItems="center">
           {IDPS.identityProviders.map((IDP, i) => (
             <Grid
               item
               key={IDP.entityId}
               xs={6}
+              p={1}
               textAlign={i % 2 === 0 ? 'right' : 'left'}
               sx={{ minWidth: '100px' }}
             >
               <Button
                 onClick={() => getSPID(IDP)}
-                sx={{ width: '100px', padding: '0', marginLeft: '10px' }}
+                sx={{ backgroundColor: 'background.default', alignItems: 'center' }}
                 aria-label={IDP.name}
                 id={IDP.entityId}
               >
-                <Icon sx={{ width: '100px', height: '48px' }}>
+                <Icon
+                  sx={{ width: '100px', height: '48px', display: 'flex', alignItems: ' center' }}
+                >
                   <img width="100px" src={IDP.imageUrl} alt={IDP.name} />
                 </Icon>
               </Button>
