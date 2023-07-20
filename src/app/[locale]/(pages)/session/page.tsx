@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { IllusSms } from '@pagopa/mui-italia';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
-import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { FAQ } from '../../_component/accordion/faqDefault';
 
 const Session = (): React.ReactElement => (
   <>
@@ -79,7 +79,7 @@ const Session = (): React.ReactElement => (
         </Link>
       </Grid>
     </Grid>
-    <FAQDefault />
+    <FAQ />
   </>
 );
 

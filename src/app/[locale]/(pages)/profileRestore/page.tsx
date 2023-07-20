@@ -1,7 +1,7 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
-import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
@@ -21,7 +21,7 @@ const RestoreProfile = (): React.ReactElement => (
 
       <IdpListOnApp />
       <Typography my={5}>
-        Per ripristinare l'accesso all'app IO ti serve il codice sblocco fornito in fase di blocco.
+        Per ripristinare l'accesso all'app IO ti serve il <b>codice sblocco</b> fornito in fase di blocco.
       </Typography>
 
       <Link href="/restoreCode">
@@ -30,8 +30,7 @@ const RestoreProfile = (): React.ReactElement => (
         </Button>
       </Link>
     </Grid>
-    {/* TODO: change texts for reactivation flow */}
-    <FAQDefault />
+    <FAQ flow='RESTORE' />
   </>
 );
 

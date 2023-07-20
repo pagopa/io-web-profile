@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Button, Grid, Link, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { FAQ } from '../../_component/accordion/faqDefault';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
 
@@ -80,8 +80,7 @@ const ReactivateCode = (): React.ReactElement => {
           </Link>
         </Grid>
       </Grid>
-      {/* TODO: change texts for reactivation flow */}
-      <FAQDefault />
+      <FAQ flow='RESTORE'/>
     </>
   );
 };
