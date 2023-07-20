@@ -16,7 +16,7 @@ const RestoreThankYouPage = (): React.ReactElement => (
         summary={
           'Da questo momento puoi entrare di nuovo in app IO con tutte le tue identità SPID o CIE.'
         }
-        summaryColumns={{ xs: 12, md: 10 }}
+        summaryColumns={{ xs: 12, md: 4.5 }}
       />
 
       <IdpListOnApp />
