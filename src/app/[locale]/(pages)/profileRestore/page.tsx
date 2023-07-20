@@ -16,12 +16,12 @@ const RestoreProfile = (): React.ReactElement => (
         summary={
           "Se hai messo in sicurezza la tua identità digitale puoi ripristinare l'accesso a IO e entrare nuovamente in app con tutte le tue identità."
         }
-        summaryColumns={{ xs: 12, md: 4.5 }}
+        summaryColumns={{ xs: 12, md: 7.5 }}
       />
 
       <Grid container flexDirection={'column'}>
         <IdpListOnApp />
-        <Grid item md={4.4}>
+        <Grid item md={7}>
           <Typography my={5} fontSize={'20px'}>
             Per ripristinare l'accesso all'app IO ti serve il <b>codice sblocco</b> fornito 
             in fase di blocco.
