@@ -16,12 +16,12 @@ const ProfileBlock = (): React.ReactElement => {
           title={'Vuoi bloccare l’accesso a IO?'}
           summary={
             <>
-              Hai effettuato l’accesso in app IO con le seguenti identità,
-              <br /> se sospetti che una di queste sia stata compromessa blocca l’accesso all’app
-              <br /> per mantenere i tuoi dati al sicuro.
+              Hai effettuato l’accesso in app IO con le seguenti identità, se sospetti che una di
+              queste sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al
+              sicuro.
             </>
           }
-          summaryColumns={{ xs: 12, md: 8 }}
+          summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
           {isIDPKnown && <IdpListOnApp />}

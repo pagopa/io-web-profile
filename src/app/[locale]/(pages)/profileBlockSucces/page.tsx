@@ -16,10 +16,9 @@ const ProfileBlock = (): React.ReactElement => {
         title={'L’accesso a IO è stato bloccato'}
         summary={
           <>
-            Da questo momento è stato bloccato l’accesso in app IO con tutte le <br /> tue identità
-            di livello 2. Per ripristinare l’accesso ti verrà richiesto il
-            <br />
-            <strong>codice di ripristino</strong>, assicurati di salvarlo e tenerlo al sicuro!
+            Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di
+            livello 2. <br /> <br /> Per ripristinare l’accesso ti verrà richiesto il
+            <strong> codice di ripristino</strong>, assicurati di salvarlo e tenerlo al sicuro!
           </>
         }
         summaryColumns={{ xs: 12, md: 8 }}
@@ -28,10 +27,10 @@ const ProfileBlock = (): React.ReactElement => {
 
       {isIDPKnown && <IdpListOnApp />}
 
-      <Typography variant="h6" my={5}>
+      <Typography variant="h6" my={3}>
         Come posso ripristinare l’accesso a IO?
       </Typography>
-      <Typography mt={5}>Per sbloccare l’accesso in app IO segui questi passaggi:</Typography>
+      <Typography>Per sbloccare l’accesso in app IO segui questi passaggi:</Typography>
       <List
         sx={{
           listStyleType: 'disc',
@@ -57,7 +56,7 @@ const ProfileBlock = (): React.ReactElement => {
         </Typography>
       </List>
 
-      <Button href={'/profile'} variant="outlined" size="medium">
+      <Button href={'/profileAccessBlocked'} variant="outlined" size="medium">
         Torna al profilo
       </Button>
     </Grid>

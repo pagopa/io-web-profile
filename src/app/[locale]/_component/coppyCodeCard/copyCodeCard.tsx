@@ -32,7 +32,9 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
       >
         <Grid>
           <Typography variant="caption">Codice di ripristino</Typography>
-          <Typography fontWeight={600}>{code}</Typography>
+          <Typography fontWeight={600} fontSize="32px">
+            {code}
+          </Typography>
         </Grid>
         <Grid alignSelf="center">
           <ButtonNaked
