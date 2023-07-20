@@ -3,10 +3,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Card, CardContent, Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
-import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
-import HourglassIcon from '../../_icons/hourglass';
-import QuestionIcon from '../../_icons/question';
+import Firework from '../../_icons/firework';
 import { commonBackground } from '../../_utils/styles';
 
 const Profile = () => {
@@ -81,51 +79,24 @@ const Profile = () => {
         <Typography variant="h4">Cosa devi fare?</Typography>
       </Grid>
 
-      <Grid container gap={2} flexWrap={'nowrap'}>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={5} textAlign={'center'}>
+      <Grid container flexDirection="column" justifyContent="center" alignItems="center">
+        <Grid item textAlign={'center'}>
           <Card
             sx={{
               backgroundColor: bgColor,
-              padding: '32px',
+              padding: '8px',
               boxShadow: '0px 8px 38px 7px #002B551A',
               borderRadius: '16px',
+              maxWidth: '364px',
             }}
           >
             <CardContent>
-              <QuestionIcon />
-              <Typography variant="h6" pt={2}>
-                Esci da IO
+              <Firework />
+              <Typography variant="h6" py={2}>
+                Ripristina accesso a IO
               </Typography>
-              <Typography variant="body2" padding={2}>
-                Non hai più il tuo dispositivo ed era collegato all’app IO? Tieni al sicuro i tuoi
-                dati e scollega il tuo account.
-              </Typography>
-              <Link href={'/session'}>
-                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
-                  Esci da IO
-                </ButtonNaked>
-              </Link>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={5} textAlign={'center'}>
-          <Card
-            sx={{
-              backgroundColor: bgColor,
-              padding: '32px',
-              boxShadow: '0px 8px 38px 7px #002B551A',
-              borderRadius: '16px',
-            }}
-          >
-            <CardContent>
-              <HourglassIcon />
-              <Typography variant="h6" pt={2}>
-                Blocca l’accesso a IO
-              </Typography>
-              <Typography variant="body2" padding={2}>
-                Sospetti che la tua identità digitale sia stata compromessa? Blocca l’accesso
-                all’app IO.
+              <Typography variant="body2" textAlign="center" px={5}>
+                Hai messo in sicurezza la tua identità digitale? Ripristina l’accesso all’app IO.
               </Typography>
 
               <ButtonNaked
@@ -133,13 +104,25 @@ const Profile = () => {
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"
+                sx={{ py: '19px' }}
               >
-                Blocca accesso a IO
+                Ripristina accesso a IO
+              </ButtonNaked>
+              <Divider />
+              <Typography variant="body2" padding={2}>
+                Non hai il codice di ripristino?
+              </Typography>
+              <ButtonNaked
+                href="/profileBlock"
+                color="primary"
+                size="medium"
+                sx={{ textDecorationLine: 'underline' }}
+              >
+                Scopri cosa fare
               </ButtonNaked>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={1}></Grid>
       </Grid>
     </Grid>
   );
