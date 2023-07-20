@@ -5,22 +5,32 @@ import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundWithBack } from '../../_utils/styles';
+import { isIDPKnown } from '../../_utils/idps';
 
 const ProfileBlock = (): React.ReactElement => {
-  const isIDPKnown = true;
+  const renderSummary = (isIDPKnown: boolean) => {
+    if (isIDPKnown === true) {
+      return (
+        <>
+          Hai effettuato l’accesso in app IO con le seguenti identità, se sospetti che una di queste
+          sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al sicuro.{' '}
+        </>
+      );
+    }
+    return (
+      <>
+        Se sospetti che la tua identità digitale sia stata compromessa blocca l’accesso all’app per
+        mantenere i tuoi dati al sicuro.
+      </>
+    );
+  };
   return (
     <>
       <Grid sx={commonBackgroundWithBack}>
         <BackButton />
         <Introduction
           title={'Vuoi bloccare l’accesso a IO?'}
-          summary={
-            <>
-              Hai effettuato l’accesso in app IO con le seguenti identità, se sospetti che una di
-              queste sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al
-              sicuro.
-            </>
-          }
+          summary={renderSummary(isIDPKnown)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
