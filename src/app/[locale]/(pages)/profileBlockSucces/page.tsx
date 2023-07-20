@@ -1,7 +1,6 @@
 'use client';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Button, Grid, Link, List, ListItem, Typography } from '@mui/material';
-import { ButtonNaked } from '@pagopa/mui-italia';
+import { Button, Grid, Link, List, Typography } from '@mui/material';
+import { BackButton } from '../../_component/backButton/backButton';
 import { CopyCodeCard } from '../../_component/coppyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
@@ -12,14 +11,7 @@ const ProfileBlock = (): React.ReactElement => {
 
   return (
     <Grid sx={commonBackgroundWithBack}>
-      <ButtonNaked
-        href="/profile"
-        startIcon={<ArrowBackIcon />}
-        color="primary"
-        sx={{ marginBottom: '41px' }}
-      >
-        Torna al profilo
-      </ButtonNaked>
+      <BackButton />
       <Introduction
         title={'L’accesso a IO è stato bloccato'}
         summary={
@@ -45,21 +37,24 @@ const ProfileBlock = (): React.ReactElement => {
           listStyleType: 'disc',
           listStylePosition: 'inside',
           marginBottom: '42px',
+          padding: '8px',
         }}
       >
-        <ListItem sx={{ display: 'list-item' }}>
+        <Typography sx={{ display: 'list-item' }}>
           Vai sul sito{' '}
           <Link href="#" color={'textPrimary'}>
             io.italia.it
           </Link>
-        </ListItem>
-        <ListItem sx={{ display: 'list-item' }}>Accedi con le tue credenziali SPID o CIE</ListItem>
-        <ListItem sx={{ display: 'list-item' }}>
+        </Typography>
+        <Typography sx={{ display: 'list-item' }}>
+          Accedi con le tue credenziali SPID o CIE
+        </Typography>
+        <Typography sx={{ display: 'list-item' }}>
           Vai alla sezione <i>Ripristina accesso a IO</i>
-        </ListItem>
-        <ListItem sx={{ display: 'list-item' }}>
+        </Typography>
+        <Typography sx={{ display: 'list-item' }}>
           Segui i passaggi e quando richiesto inserisci il <strong>codice di ripristino</strong>
-        </ListItem>
+        </Typography>
       </List>
 
       <Button href={'/profile'} variant="outlined" size="medium">

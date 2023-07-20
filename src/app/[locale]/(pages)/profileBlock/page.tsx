@@ -1,8 +1,7 @@
 'use client';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button, Grid, Typography } from '@mui/material';
-import { ButtonNaked } from '@pagopa/mui-italia';
 import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundWithBack } from '../../_utils/styles';
@@ -12,14 +11,7 @@ const ProfileBlock = (): React.ReactElement => {
   return (
     <>
       <Grid sx={commonBackgroundWithBack}>
-        <ButtonNaked
-          href="/profile"
-          startIcon={<ArrowBackIcon />}
-          color="primary"
-          sx={{ marginBottom: '41px' }}
-        >
-          Torna al profilo
-        </ButtonNaked>
+        <BackButton />
         <Introduction
           title={'Vuoi bloccare l’accesso a IO?'}
           summary={
