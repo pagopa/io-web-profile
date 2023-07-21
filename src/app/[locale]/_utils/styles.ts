@@ -36,14 +36,14 @@ export const commonBackgroundWithBack = {
   backgroundColor: 'background.default',
   paddingTop: '34px',
   paddingBottom: {
-    xs: 4,
+    xs: 5,
     sm: 8,
-    md: 10,
   },
   paddingX: {
     xs: 4,
     sm: 3,
-    md: 20,
+    md: 3,
+    lg: 20,
   },
 };
 
