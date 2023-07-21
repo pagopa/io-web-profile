@@ -9,7 +9,7 @@ import { commonBackgroundWithBack } from '../../_utils/styles';
 
 const RestoreProfile = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackgroundWithBack}>
+    <Grid sx={commonBackgroundWithBack} xs={12} sm={12}>
       <BackButton />
       <Introduction
         title={"Vuoi ripristinare l'accesso a IO?"}
@@ -21,7 +21,7 @@ const RestoreProfile = (): React.ReactElement => (
 
       <Grid container flexDirection={'column'}>
         <IdpListOnApp />
-        <Grid item md={7}>
+        <Grid item sm={10} md={7}>
           <Typography my={5} fontSize={'20px'}>
             Per ripristinare l'accesso all'app IO ti serve il <b>codice sblocco</b> fornito 
             in fase di blocco.

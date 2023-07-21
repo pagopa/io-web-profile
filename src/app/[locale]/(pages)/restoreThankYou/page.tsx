@@ -16,13 +16,13 @@ const RestoreThankYouPage = (): React.ReactElement => (
         summary={
           'Da questo momento puoi entrare di nuovo in app IO con tutte le tue identità SPID o CIE.'
         }
-        summaryColumns={{ xs: 12, md: 7.5 }}
+        summaryColumns={{ xs: 12, sm: 10, md: 7.5 }}
       />
 
       <IdpListOnApp />
 
       <Link href="/profile">
-        <Button variant="outlined" sx={{ marginTop: '60px' }}>
+        <Button variant="outlined" sx={{ marginTop: { xs: 6, sm: 4, md: '60px' } }}>
           Torna al profilo
         </Button>
       </Link>

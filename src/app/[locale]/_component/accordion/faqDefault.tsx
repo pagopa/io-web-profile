@@ -11,8 +11,7 @@ interface FAQEntries {
   details: string;
 }
 
-export function FAQ({ flow='DEFAULT' }: FAQProps) {
-
+export function FAQ({ flow = 'DEFAULT' }: FAQProps) {
   // #region entries
   const defaultEntries: FAQEntries[] = [
     {
@@ -39,17 +38,17 @@ export function FAQ({ flow='DEFAULT' }: FAQProps) {
 
   const restoreEntries: FAQEntries[] = [
     {
-      summary: 'Cosa vuol dire ripristinare l\'accesso a IO?',
+      summary: "Cosa vuol dire ripristinare l'accesso a IO?",
       details:
         'Lorem ipsum dolor sit amet, consectur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
-      summary: 'Quando è opportuno ripristinare l\'accesso a IO?',
+      summary: "Quando è opportuno ripristinare l'accesso a IO?",
       details:
         'Lorem ipsum dolor sit amet, consectetur apiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
-      summary: 'Cos\'è il codice di ripristino?',
+      summary: "Cos'è il codice di ripristino?",
       details:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
@@ -59,7 +58,7 @@ export function FAQ({ flow='DEFAULT' }: FAQProps) {
         'Lorem ipsum dolor sit amet, consectetur adipiscing lit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
     {
-      summary: 'Posso ripristinare l\'accesso direttamente dall\'app IO?',
+      summary: "Posso ripristinare l'accesso direttamente dall'app IO?",
       details:
         'Lorem ipsum dolor sit amet, consectetur adipiscing lit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
@@ -77,7 +76,7 @@ export function FAQ({ flow='DEFAULT' }: FAQProps) {
 
   return (
     <>
-      <Grid sx={{ backgroundColor: 'primary', pt: 10, pb: 10 }} container item>
+      <Grid sx={{ backgroundColor: 'primary', pt: { xs: 4, sm: 10 }, pb: 10 }} container item>
         <Grid item xs={1} />
         <Grid item xs={10} maxWidth="100%">
           <Typography
@@ -88,7 +87,7 @@ export function FAQ({ flow='DEFAULT' }: FAQProps) {
             color="pagoPA.main"
             sx={{
               textAlign: 'left',
-              pb: 5,
+              pb: { xs: '28px', sm: 5 },
             }}
           >
             {'Dubbi o domande?'}
