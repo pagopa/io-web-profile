@@ -85,4 +85,4 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
 
 export { IDPS };
 
-export const isIDPKnown = false;
+export const isIDPKnown = true;

@@ -25,8 +25,8 @@ const Profile = () => {
       <Typography variant="h5" my={2}>
         Il tuo profilo
       </Typography>
-      <Grid container gap={2} mb={2} flexWrap={'nowrap'}>
-        <Grid item xs={6} bgcolor={bgColor}>
+      <Grid container gap={2} mb={2} flexWrap={{ xs: 'wrap', sm: 'nowrap', md: 'nowrap' }}>
+        <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
           <Grid padding={3}>
             <Typography variant="body2">Nome e Cognome</Typography>
             <Typography variant="sidenav">Mario Rossi</Typography>
@@ -38,7 +38,7 @@ const Profile = () => {
           </Grid>
         </Grid>
 
-        <Grid item xs={6} bgcolor={bgColor}>
+        <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
           <Grid container>
             <Grid item xs={10} padding={3}>
               <Typography variant="body2">Accesso in app</Typography>
