@@ -5,21 +5,21 @@ import { cookieTokenOps, cookieUserOps } from '../_utils/cookie';
 
 interface Token {
   token: string;
-  tokenError: 'pending' | 'ok' | 'error';
+  tokenError: 'PENDING' | 'OK' | 'ERROR';
 }
 
 const useToken = (): Token => {
   const [token, setToken] = useState<string>('');
-  const [tokenError, setTokenError] = useState<'pending' | 'ok' | 'error'>('pending');
+  const [tokenError, setTokenError] = useState<'PENDING' | 'OK' | 'ERROR'>('PENDING');
 
   useEffect(() => {
     if (parseJwt(extractToken())) {
       setToken(extractToken());
-      setTokenError('ok');
+      setTokenError('OK');
       cookieTokenOps.write(extractToken());
       cookieUserOps.write(userFromJwtToken(extractToken()));
     } else {
-      setTokenError('error');
+      setTokenError('ERROR');
     }
   }, []);
 
