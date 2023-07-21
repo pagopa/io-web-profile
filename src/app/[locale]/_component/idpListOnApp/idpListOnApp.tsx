@@ -23,38 +23,33 @@ export const IdpListOnApp = () => {
   ];
 
   return (
-    <>
-      <Typography variant="overline" color={'textSecondary'}>
-        Le tue identità su APP IO:
-      </Typography>
-      <Paper elevation={2} sx={{ marginTop: '22px', maxWidth: '550px' }}>
-        {mockedIdentityProviders &&
-          mockedIdentityProviders.map((item) => (
-            <>
-              <Grid
-                key={item.entityId}
-                container
-                justifyContent={'space-between'}
-                py={1}
-                pl={4}
-                pr={6}
-              >
-                <Grid item>
-                  <Typography variant="sidenav">{item.name}</Typography>
-                  <Typography variant="body2">{item.identifier}</Typography>
-                </Grid>
-                <Grid item>
-                  <Icon
-                    sx={{ width: '100px', height: '48px', display: 'flex', alignItems: 'center' }}
-                  >
-                    <img width="85.44px" src={item.imageUrl} alt={item.entityId} />
-                  </Icon>
-                </Grid>
+    <Paper elevation={2} sx={{ marginTop: '22px' }}>
+      {mockedIdentityProviders &&
+        mockedIdentityProviders.map((item) => (
+          <>
+            <Grid
+              key={item.entityId}
+              container
+              justifyContent={'space-between'}
+              py={1}
+              pl={4}
+              pr={6}
+            >
+              <Grid item>
+                <Typography variant="sidenav">{item.name}</Typography>
+                <Typography variant="body2">{item.identifier}</Typography>
               </Grid>
-              <Divider />
-            </>
-          ))}
-      </Paper>
-    </>
+              <Grid item>
+                <Icon
+                  sx={{ width: '100px', height: '48px', display: 'flex', alignItems: 'center' }}
+                >
+                  <img width="85.44px" src={item.imageUrl} alt={item.entityId} />
+                </Icon>
+              </Grid>
+            </Grid>
+            <Divider />
+          </>
+        ))}
+    </Paper>
   );
 };
