@@ -9,10 +9,10 @@ const Check = (): React.ReactElement => {
   const { tokenError } = useToken();
 
   useEffect(() => {
-    if (tokenError === 'error') {
+    if (tokenError === 'ERROR') {
       redirect(ROUTES.LOGOUT_AUTH_KO);
     }
-    if (tokenError === 'ok') {
+    if (tokenError === 'OK') {
       redirect(ROUTES.SESSION);
     }
   }, [tokenError]);
