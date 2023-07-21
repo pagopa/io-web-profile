@@ -3,6 +3,8 @@ import { Typography, Grid } from '@mui/material';
 
 interface IntroductionObj {
   title: string;
+  summaryColor?: string;
+  titleColor?: string;
   summary: string | JSX.Element;
   summaryColumns: {
     xs: number;
@@ -10,7 +12,13 @@ interface IntroductionObj {
   };
 }
 
-export function Introduction({ title, summary, summaryColumns }: IntroductionObj) {
+export function Introduction({
+  title,
+  summary,
+  summaryColumns,
+  titleColor,
+  summaryColor,
+}: IntroductionObj) {
   return (
     <>
       <Grid container>
@@ -20,7 +28,7 @@ export function Introduction({ title, summary, summaryColumns }: IntroductionObj
             fontWeight={700}
             py={0}
             px={0}
-            color="textPrimary"
+            color={titleColor || 'textPrimary'}
             sx={{
               textAlign: 'left',
             }}
@@ -34,7 +42,7 @@ export function Introduction({ title, summary, summaryColumns }: IntroductionObj
             fontWeight={400}
             py={0}
             px={0}
-            color="textPrimary"
+            color={summaryColor || 'textPrimary'}
             sx={{
               textAlign: 'left',
             }}

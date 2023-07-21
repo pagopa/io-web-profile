@@ -1,36 +1,48 @@
+
 # io-web-profile
 
-This is a [Next.js](https://nextjs.org/) project 
+`` 
+io-web-profile`` is the IO web platform that allows citizens to logout from the IO App session.
 
-## Getting Started
+This repository contains the code that composes the io-web-profile front-end.
 
-First, run the development server:
+
+
+## Technologies
+[![My Skills](https://skillicons.dev/icons?i=ts,react,next)](https://skillicons.dev)
+
+This is Next.js 13 with app route project
+## Prerequisites
+In order to run the ``io-web-profile`` front-end locally you need the following tool installed on your machine.
+
+- ``Node.js 18 ``
+- ``yarn 1.22``
+
+The preferred way to set up the local environment is using nodenv to manage Node.js installation and corepack (included with Node.js) to manage the installation of yarn.
+
+
+## Installation
+
+To test the webapp locally:
+
+Install the project (if you haven't already). Run from the root folder the following commands.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# to install the dependencies
+yarn install
 ```
+    
+## Run
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To run the webapp locally:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# to run in dev mode
+yarn run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# to build
+yarn run build
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#to run build solution
+yarn run start
+```

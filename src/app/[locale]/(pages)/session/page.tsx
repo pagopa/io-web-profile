@@ -4,13 +4,13 @@ import { Grid, Button, Box, Typography, Card } from '@mui/material';
 import Link from 'next/link';
 import { IllusSms } from '@pagopa/mui-italia';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/styles';
+import { commonBackgroundLight } from '../../_utils/styles';
 import { FAQDefault } from '../../_component/accordion/faqDefault';
 import { ROUTES } from '../../_utils/routes';
 
 const Session = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackground} container>
+    <Grid sx={commonBackgroundLight} container>
       <Grid item xs={12} justifySelf={'center'}>
         <Introduction
           title={'Ciao Mario!'}
@@ -23,23 +23,21 @@ const Session = (): React.ReactElement => (
               </span>
             </>
           }
-          summaryColumns={{ xs: 12, md: 10 }}
+          summaryColumns={{ xs: 12, md: 6 }}
         />
       </Grid>
 
-      <Grid item xs={4} justifySelf={'center'}>
+      <Grid item xs={12} justifySelf={'center'}>
         <Card
           sx={{
-            boxShadow: '0px 0px 0px 1px #E0E0E0',
-            width: '400px',
             display: 'flex',
-            padding: '30px',
+            p: 2,
           }}
         >
           <Box>
-            <IllusSms size={48} />
+            <IllusSms size={72} />
           </Box>
-          <Box sx={{ ml: 1 }}>
+          <Box sx={{ ml: 2 }} alignSelf={'center'}>
             <Box>
               <Typography
                 fontSize={18}

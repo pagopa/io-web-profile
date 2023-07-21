@@ -6,7 +6,7 @@ import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useState } from 'react';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/styles';
+import { commonBackgroundDark } from '../../_utils/styles';
 import { FAQDefault } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 
@@ -15,29 +15,52 @@ const Init = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   return (
     <>
-      <Grid sx={commonBackground} container>
+      <Grid sx={commonBackgroundDark} container>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={t('title')}
             summary={t('description')}
             summaryColumns={{ xs: 12, md: 8 }}
+            summaryColor={'primary.contrastText'}
+            titleColor={'primary.contrastText'}
           />
         </Grid>
-        <Grid item xs={12}>
-          <Button
-            sx={{ mr: 2 }}
-            onClick={(event) => {
-              event.preventDefault();
-              setOpenDialog(true);
-            }}
-            startIcon={<CieIcon />}
-            variant="contained"
-          >
-            Entra con SPID
-          </Button>
-          <Button startIcon={<SpidIcon />} variant="contained">
-            Entra con CIE
-          </Button>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4} md={3}>
+            <Button
+              fullWidth
+              sx={{
+                mr: 2,
+                backgroundColor: 'background.paper',
+                '&:hover': {
+                  backgroundColor: '#ffffff',
+                },
+              }}
+              onClick={(event) => {
+                event.preventDefault();
+                setOpenDialog(true);
+              }}
+              startIcon={<CieIcon />}
+              variant="outlined"
+            >
+              Entra con SPID
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={4} md={3}>
+            <Button
+              fullWidth
+              sx={{
+                backgroundColor: 'background.paper',
+                '&:hover': {
+                  backgroundColor: '#ffffff',
+                },
+              }}
+              startIcon={<SpidIcon />}
+              variant="outlined"
+            >
+              Entra con CIE
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       <FAQDefault />

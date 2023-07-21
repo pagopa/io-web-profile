@@ -5,17 +5,24 @@ import { AccordionCustom } from './accordion';
 export function FAQDefault() {
   return (
     <>
-      <Grid sx={{ backgroundColor: 'primary', pt: 10, pb: 10 }} container item>
+      <Grid
+        sx={{
+          backgroundColor: 'background.default',
+          pt: { xs: 4, sm: 4, md: 0 },
+          pb: { xs: 4, sm: 4, md: 0 },
+        }}
+        container
+      >
         <Grid item xs={1} />
-        <Grid item xs={10} maxWidth="100%">
+        <Grid item xs={10} p={{ xs: 0, sm: 0, md: 10 }}>
           <Typography
             fontSize={32}
             fontWeight={700}
             py={0}
             px={0}
-            color="pagoPA.main"
+            color="text.primary"
             sx={{
-              textAlign: 'left',
+              textAlign: 'center',
               pb: 5,
             }}
           >
@@ -44,10 +51,11 @@ export function FAQDefault() {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing lit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
               },
             ]}
-            summaryColor={'pagoPA.main'}
-            detailColor={'action.active'}
+            summaryColor={'text.primary'}
+            detailColor={'text.primary'}
           />{' '}
         </Grid>
+        <Grid item xs={1} />
       </Grid>
     </>
   );
