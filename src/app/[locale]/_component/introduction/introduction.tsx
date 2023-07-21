@@ -8,6 +8,7 @@ interface IntroductionObj {
   summary: string | JSX.Element;
   summaryColumns: {
     xs: number;
+    sm?: number;
     md: number;
   };
 }
@@ -24,7 +25,7 @@ export function Introduction({
       <Grid container>
         <Grid item xs={12} md={8} maxWidth="100%" pb={2}>
           <Typography
-            fontSize={32}
+            fontSize={42}
             fontWeight={700}
             py={0}
             px={0}
@@ -36,7 +37,7 @@ export function Introduction({
             {title}
           </Typography>
         </Grid>
-        <Grid item xs={summaryColumns.xs} md={summaryColumns.md} maxWidth="100%" pb={4}>
+        <Grid item xs={summaryColumns.xs} sm={summaryColumns.sm || summaryColumns.xs} md={summaryColumns.md} maxWidth="100%" pb={4}>
           <Typography
             fontSize={20}
             fontWeight={400}

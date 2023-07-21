@@ -7,7 +7,7 @@ import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useState } from 'react';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundDark } from '../../_utils/styles';
-import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { FAQ } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 
 const Init = (): React.ReactElement => {
@@ -63,7 +63,7 @@ const Init = (): React.ReactElement => {
           </Grid>
         </Grid>
       </Grid>
-      <FAQDefault />
+      <FAQ />
       <SelectIdp
         open={openDialog}
         onClose={(opn) => {

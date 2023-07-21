@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Button, Grid, Link, TextField } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { FAQ } from '../../_component/accordion/faqDefault';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
 
@@ -37,7 +37,7 @@ const ReactivateCode = (): React.ReactElement => {
   return (
     <>
       <Grid sx={commonBackground} container>
-        <Grid item xs={12} justifySelf={'center'} pb={'10px'}>
+        <Grid item xs={12} justifySelf={'center'} sx={{ pb: { xs: 0, md: '10px' } }}>
           <Introduction
             title="Inserisci il codice di ripristino"
             summary={
@@ -53,7 +53,7 @@ const ReactivateCode = (): React.ReactElement => {
             summaryColumns={{ xs: 12, md: 8 }}
           />
         </Grid>
-        <Grid item xs={12} pb={'60px'}>
+        <Grid item xs={12} sx={{ pb: { sm: 4, md: '60px' } }}>
           <TextField
             id="reactivationCode"
             label="Codice di ripristino"
@@ -61,27 +61,32 @@ const ReactivateCode = (): React.ReactElement => {
             fullWidth={true}
             inputProps={{ maxLength: 9, pattern: '[0-9]*' }}
             onChange={handleChange}
-            sx={{ maxWidth: '317px' }}
+            sx={{ maxWidth: '317px', pb: { xs: 6, sm: 0 } }}
             error={notValidCode}
             helperText={errorMessage}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={8}>
           <Button
-            sx={{ mr: 3 }}
+            sx={{
+              mr: { sm: 3 },
+              mb: { xs: '20px', sm: 0 },
+              width: { xs: '100%', sm: 'auto' },
+            }}
             variant="contained"
             disabled={restoreCode.length !== 9}
             onClick={handleClick}
           >
             Ripristina profilo IO
           </Button>
-          <Link href="/profileRestore">
-            <Button variant="outlined">Annulla</Button>
+          <Link href="/profile">
+            <Button variant="outlined" sx={{ width: { xs: '100%', sm: 'auto' } }}>
+              Annulla
+            </Button>
           </Link>
         </Grid>
       </Grid>
-      {/* TODO: change texts for reactivation flow */}
-      <FAQDefault />
+      <FAQ flow="RESTORE" />
     </>
   );
 };
