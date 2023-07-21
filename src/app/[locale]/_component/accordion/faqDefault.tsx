@@ -5,9 +5,16 @@ import { AccordionCustom } from './accordion';
 export function FAQDefault() {
   return (
     <>
-      <Grid sx={{ backgroundColor: 'background.default', pt: 10, pb: 10 }} container>
+      <Grid
+        sx={{
+          backgroundColor: 'background.default',
+          pt: { xs: 4, sm: 4, md: 0 },
+          pb: { xs: 4, sm: 4, md: 0 },
+        }}
+        container
+      >
         <Grid item xs={1} />
-        <Grid item xs={10} p={{ xs: 0, sm: 10 }}>
+        <Grid item xs={10} p={{ xs: 0, sm: 0, md: 10 }}>
           <Typography
             fontSize={32}
             fontWeight={700}

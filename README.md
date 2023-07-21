@@ -1,7 +1,7 @@
 
 # io-web-profile
 
-``bash 
+`` 
 io-web-profile`` is the IO web platform that allows citizens to logout from the IO App session.
 
 This repository contains the code that composes the io-web-profile front-end.
