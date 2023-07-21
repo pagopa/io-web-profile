@@ -37,7 +37,14 @@ export function Introduction({
             {title}
           </Typography>
         </Grid>
-        <Grid item xs={summaryColumns.xs} sm={summaryColumns.sm || summaryColumns.xs} md={summaryColumns.md} maxWidth="100%" pb={4}>
+        <Grid
+          item
+          xs={summaryColumns.xs}
+          sm={summaryColumns.sm || summaryColumns.xs}
+          md={summaryColumns.md}
+          maxWidth="100%"
+          pb={4}
+        >
           <Typography
             fontSize={20}
             fontWeight={400}

@@ -2,7 +2,7 @@ export const COMMON_PADDING_HERO = {
   pt: {
     xs: 5,
     sm: 5,
-    md: 20,
+    md: 10,
   },
   pb: {
     xs: 5,

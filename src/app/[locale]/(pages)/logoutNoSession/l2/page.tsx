@@ -6,11 +6,10 @@ import AppleIcon from '@mui/icons-material/Apple';
 import AndroidIcon from '@mui/icons-material/Android';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { commonBackground } from '../../../_utils/styles';
-import { FAQ } from '../../../_component/accordion/faqDefault';
 
 const L2NoSession = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackground} container>
+    <Grid sx={commonBackground} container spacing={2}>
       <Grid item xs={12} justifySelf={'center'}>
         <Introduction
           title={'Ciao Mario!'}
@@ -20,20 +19,21 @@ const L2NoSession = (): React.ReactElement => (
           summaryColumns={{ xs: 12, md: 10 }}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={4} md={3}>
         <Link href={'/#'}>
-          <Button sx={{ mr: 2 }} variant="outlined" startIcon={<AppleIcon />}>
+          <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<AppleIcon />}>
             App Store
           </Button>
         </Link>
+      </Grid>
+      <Grid item xs={12} sm={4} md={3}>
         <Link href={'/#'}>
-          <Button sx={{ mr: 2 }} variant="outlined" startIcon={<AndroidIcon />}>
+          <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<AndroidIcon />}>
             Play Store
           </Button>
         </Link>
       </Grid>
     </Grid>
-    <FAQ />
   </>
 );
 

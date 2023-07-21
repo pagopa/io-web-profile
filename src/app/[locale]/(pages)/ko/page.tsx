@@ -14,7 +14,8 @@ const LoginKo = (): React.ReactElement => (
           title={'Qualcosa è andato storto'}
           summary={
             <span>
-              A causa di un errore del sistema non è possibile completare la richiesta. Se il problema persiste contatta l'assistenza.
+              A causa di un errore del sistema non è possibile completare la richiesta. Se il
+              problema persiste contatta l'assistenza.
             </span>
           }
           button={{

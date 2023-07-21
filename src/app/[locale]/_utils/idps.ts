@@ -75,7 +75,7 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
     },
     {
       identifier: 'test',
-      entityId: 'xx_validator',
+      entityId: 'xx_testenv2',
       name: 'test',
       imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Test-Logo.svg',
     },

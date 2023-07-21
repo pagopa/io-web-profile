@@ -1,6 +1,6 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
-import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
@@ -40,12 +40,12 @@ const ProfileBlock = (): React.ReactElement => {
             livello 2. Dopo aver messo in sicurezza la tua identità digitale potrai sbloccare
             l’accesso a IO.
           </Typography>
-          <Button href="/profileBlockSucces" variant="contained" size="medium">
+          <Button href="/profileBlockSuccess" variant="contained" size="medium">
             Blocca l’accesso a IO
           </Button>
         </Grid>
       </Grid>
-      <FAQDefault />
+      <FAQ />
     </>
   );
 };

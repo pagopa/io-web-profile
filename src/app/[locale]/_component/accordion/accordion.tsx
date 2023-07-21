@@ -40,7 +40,7 @@ export function AccordionCustom(props: StyledAccordionProps) {
               {summary}
             </Typography>
           </AccordionSummary>
-          <AccordionDetails sx={{ m: 0, p: 2 }} color={props.detailColor}>
+          <AccordionDetails sx={{ m: 0, p: 0 }} color={props.detailColor}>
             <Typography fontWeight={400} fontSize={16} color={props.detailColor}>
               {details}
             </Typography>

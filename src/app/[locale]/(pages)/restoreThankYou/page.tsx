@@ -3,13 +3,13 @@
 import { Grid, Button } from '@mui/material';
 import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/styles';
+import { commonBackgroundWithBack } from '../../_utils/styles';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 
 const RestoreThankYouPage = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackground}>
+    <Grid sx={commonBackgroundWithBack}>
       <BackButton />
       <Introduction
         title={"L'accesso a IO è stato ripristinato"}

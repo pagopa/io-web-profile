@@ -1,5 +1,5 @@
 'use client';
-import { HeaderAccount } from '@pagopa/mui-italia';
+import { HeaderAccount, HeaderProduct, LogoIOApp } from '@pagopa/mui-italia';
 import React from 'react';
 import { IconButton } from '@mui/material';
 import useLogin from '../../_hooks/useLogin';
@@ -46,6 +46,17 @@ const Header = (): React.ReactElement => {
               console.log('User logged out');
             },
             icon: <IconButton />,
+          },
+        ]}
+      />
+      <HeaderProduct
+        productsList={[
+          {
+            id: '1',
+            title: ``,
+            productUrl: '#io-web',
+            linkType: 'internal',
+            icon: <LogoIOApp size={32} title="io" color="default" />,
           },
         ]}
       />

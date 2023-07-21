@@ -98,8 +98,8 @@ export function FAQ({ flow = 'DEFAULT' }: FAQProps) {
           </Typography>
           <AccordionCustom
             entries={getEntriesByFlow(flow)}
-            summaryColor={'pagoPA.main'}
-            detailColor={'action.active'}
+            summaryColor={'text.primary'}
+            detailColor={'text.primary'}
           />{' '}
         </Grid>
         <Grid item xs={1} />
