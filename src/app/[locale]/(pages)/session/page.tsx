@@ -6,6 +6,7 @@ import { IllusSms } from '@pagopa/mui-italia';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
 import { FAQDefault } from '../../_component/accordion/faqDefault';
+import { ROUTES } from '../../_utils/routes';
 
 const Session = (): React.ReactElement => (
   <>
@@ -72,7 +73,7 @@ const Session = (): React.ReactElement => (
       </Grid>
 
       <Grid item xs={12} mt={4}>
-        <Link href={'/thankyou'}>
+        <Link href={ROUTES.THANK_YOU}>
           <Button sx={{ mr: 2 }} variant="contained">
             Esci da IO
           </Button>

@@ -4,6 +4,7 @@ import { Grid, Button } from '@mui/material';
 import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
+import { ROUTES } from '../../_utils/routes';
 
 const ThankYouPage = (): React.ReactElement => (
   <>
@@ -16,7 +17,7 @@ const ThankYouPage = (): React.ReactElement => (
         />
       </Grid>
       <Grid item xs={12} pt={2}>
-        <Link href={'/access'}>
+        <Link href={ROUTES.LOGIN}>
           <Button sx={{ mr: 2 }} variant="outlined">
             Torna alla home
           </Button>

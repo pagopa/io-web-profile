@@ -33,7 +33,7 @@ const RootLayoutWithLocaleAndTheme = async ({
             <ThemeProviderComponent>
               <Header />
               {children}
-              <Footer loggedUser={false} />
+              <Footer />
             </ThemeProviderComponent>
           </NextIntlClientProvider>
         </Providers>

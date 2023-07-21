@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { commonBackground } from '../../../_utils/styles';
 import { FAQDefault } from '../../../_component/accordion/faqDefault';
+import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const L1NoSession = (): React.ReactElement => (
   <>
@@ -19,7 +20,7 @@ const L1NoSession = (): React.ReactElement => (
         />
       </Grid>
       <Grid item xs={12}>
-        <Link href={'/access'}>
+        <Link href={ROUTES.LOGIN}>
           <Button sx={{ mr: 2 }} variant="outlined">
             Torna alla home
           </Button>

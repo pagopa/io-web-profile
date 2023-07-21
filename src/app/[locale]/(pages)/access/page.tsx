@@ -4,9 +4,11 @@ import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { ROUTES } from '../../_utils/routes';
 
 const Access = (): React.ReactElement => {
   const t = useTranslations('access');
+
   return (
     <Grid
       container
@@ -33,7 +35,7 @@ const Access = (): React.ReactElement => {
           </Typography>
         </Grid>
         <Grid item mb={2}>
-          <Link href="/logoutInit">
+          <Link href={ROUTES.LOGOUT_INIT}>
             <Button
               variant="outlined"
               sx={{

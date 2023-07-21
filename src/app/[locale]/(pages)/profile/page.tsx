@@ -8,6 +8,7 @@ import { Introduction } from '../../_component/introduction/introduction';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
 import { commonBackground } from '../../_utils/styles';
+import { ROUTES } from '../../_utils/routes';
 
 const Profile = () => {
   const bgColor = 'background.paper';
@@ -101,7 +102,7 @@ const Profile = () => {
                 Non hai più il tuo dispositivo ed era collegato all’app IO? Tieni al sicuro i tuoi
                 dati e scollega il tuo account.
               </Typography>
-              <Link href={'/session'}>
+              <Link href={ROUTES.SESSION}>
                 <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
                   Esci da IO
                 </ButtonNaked>
