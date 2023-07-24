@@ -1,5 +1,5 @@
 export const renderSummary = (isIDPKnown: boolean) => {
-  if (isIDPKnown === true) {
+  if (isIDPKnown) {
     return (
       <>
         Hai effettuato l’accesso in app IO con le seguenti identità, se sospetti che una di queste

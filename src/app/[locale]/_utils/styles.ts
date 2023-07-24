@@ -43,7 +43,7 @@ export const commonBackgroundWithBack = {
     xs: 4,
     sm: 3,
     md: 3,
-    lg: 20,
+    lg: 17.5,
   },
 };
 
