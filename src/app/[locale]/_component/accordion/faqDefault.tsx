@@ -11,7 +11,7 @@ interface FAQEntries {
   details: string;
 }
 
-export function FAQ({ flow = 'DEFAULT' }: FAQProps) {
+export const FAQ = ({ flow = 'DEFAULT' }: FAQProps) => {
   // #region entries
   const defaultEntries: FAQEntries[] = [
     {
@@ -106,4 +106,4 @@ export function FAQ({ flow = 'DEFAULT' }: FAQProps) {
       </Grid>
     </>
   );
-}
+};

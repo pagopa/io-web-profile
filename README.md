@@ -40,9 +40,16 @@ To run the webapp locally:
 # to run in dev mode
 yarn run dev
 
+```
+The application will be running in development mode, you can access it locally by visiting: http://localhost:3000
+ in your web browser.
+
+```bash
 # to build
 yarn run build
 
 #to run build solution
 yarn run start
+
 ```
+You can access the application in production mode by visiting: http://localhost:3000 in your web browser.

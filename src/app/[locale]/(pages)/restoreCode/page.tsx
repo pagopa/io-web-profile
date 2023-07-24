@@ -11,13 +11,13 @@ import { commonBackground } from '../../_utils/styles';
 const ReactivateCode = (): React.ReactElement => {
   const { push } = useRouter();
   const [restoreCode, setRestoreCode] = useState('');
-  const [notValidCode, setNotValidCode] = useState(false);
+  const [isCodeNotValid, setIsCodeNotValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   // const reactivationCodePattern: string = '[0-9]{3}[ -]*[0-9]{3}[ -]*[0-9]{3}';
   // const t = useTranslations('logout');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // input only numeric characters
     setRestoreCode(e.target.value.replace(/\D/g, ''));
   };
@@ -25,11 +25,11 @@ const ReactivateCode = (): React.ReactElement => {
   const handleClick = () => {
     // TODO: remove mocked logic
     if (restoreCode === '123456789') {
-      setNotValidCode(false);
+      setIsCodeNotValid(false);
       setErrorMessage('');
       void push('/restoreThankYou');
     } else {
-      setNotValidCode(true);
+      setIsCodeNotValid(true);
       setErrorMessage('Codice non valido, controlla e riprova');
     }
   };
@@ -60,9 +60,9 @@ const ReactivateCode = (): React.ReactElement => {
             value={restoreCode}
             fullWidth={true}
             inputProps={{ maxLength: 9, pattern: '[0-9]*' }}
-            onChange={handleChange}
+            onChange={handleRestoreCodeChange}
             sx={{ maxWidth: '317px', pb: { xs: 6, sm: 0 } }}
-            error={notValidCode}
+            error={isCodeNotValid}
             helperText={errorMessage}
           />
         </Grid>

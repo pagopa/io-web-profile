@@ -1023,7 +1023,7 @@
     eslint-plugin-sonarjs "^0.13.0"
     prettier "^2.6.2"
 
-"@pagopa/mui-italia@0.10.0":
+"@pagopa/mui-italia@^0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.10.0.tgz#8851c4ffe0c6a12f58bc07145685067a5194ea0a"
   integrity sha512-jC90D4vCI9/xU7Ru/vACenMEn2hyHGhu4Tdp7CDPPq1eZ0o/VWUrqaNb6WzLQQkfZ43UEH2wKakQzVuMyaGDVQ==
