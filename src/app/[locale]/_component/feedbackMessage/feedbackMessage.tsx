@@ -36,7 +36,7 @@ export function FeedbackMessage({ topIcon, title, summary, button }: Introductio
               {title}
             </Typography>
           </Grid>
-          <Grid item xs={12} pb={2}>
+          <Grid item xs={12} pb={4}>
             <Typography
               variant="subtitle1"
               fontSize={18}

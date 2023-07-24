@@ -3,13 +3,13 @@
 import { Grid, Button } from '@mui/material';
 import Link from 'next/link';
 import { Introduction } from '../../../_component/introduction/introduction';
-import { commonBackground } from '../../../_utils/styles';
-import { FAQDefault } from '../../../_component/accordion/faqDefault';
+import { commonBackgroundLight } from '../../../_utils/styles';
+import { FAQ } from '../../../_component/accordion/faqDefault';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const L1NoSession = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackground} container>
+    <Grid sx={commonBackgroundLight} container>
       <Grid item xs={12} justifySelf={'center'}>
         <Introduction
           title={'Ciao Mario!'}
@@ -27,7 +27,7 @@ const L1NoSession = (): React.ReactElement => (
         </Link>
       </Grid>
     </Grid>
-    <FAQDefault />
+    <FAQ />
   </>
 );
 

@@ -1023,10 +1023,10 @@
     eslint-plugin-sonarjs "^0.13.0"
     prettier "^2.6.2"
 
-"@pagopa/mui-italia@^0.9.10":
-  version "0.9.10"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.9.10.tgz#61f1af9b62a6f0478f613700f66b5e66f5b42037"
-  integrity sha512-l29RUNILS14FpsQhO7Iq4dwO6Bhz4E3tSF8HP41wJ3MDlAE8t4amt/d+qUtTOewI+F1+P6u/2t/0LRJg4usPpQ==
+"@pagopa/mui-italia@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.10.0.tgz#8851c4ffe0c6a12f58bc07145685067a5194ea0a"
+  integrity sha512-jC90D4vCI9/xU7Ru/vACenMEn2hyHGhu4Tdp7CDPPq1eZ0o/VWUrqaNb6WzLQQkfZ43UEH2wKakQzVuMyaGDVQ==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
@@ -4460,6 +4460,13 @@ react-is@^18.0.0, react-is@^18.2.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-md-spinner@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-md-spinner/-/react-md-spinner-1.0.0.tgz#14159e21b167af64bc9fb70c2558b5d9a5003820"
+  integrity sha512-W3akCl5v/qBKhsrRsIxMl+hNQojj+SiN0+wdMAsXDfoYhQhtyg9LAdsC7P/1r3bYAJsjDmi4f5qz0N5lh26FiQ==
+  dependencies:
+    stylis "^3.5.4"
+
 react-redux@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.1.1.tgz#8e740f3fd864a4cd0de5ba9cdc8ad39cc9e7c81a"
@@ -4471,13 +4478,6 @@ react-redux@^8.1.1:
     hoist-non-react-statics "^3.3.2"
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
-
-react-md-spinner@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-md-spinner/-/react-md-spinner-1.0.0.tgz#14159e21b167af64bc9fb70c2558b5d9a5003820"
-  integrity sha512-W3akCl5v/qBKhsrRsIxMl+hNQojj+SiN0+wdMAsXDfoYhQhtyg9LAdsC7P/1r3bYAJsjDmi4f5qz0N5lh26FiQ==
-  dependencies:
-    stylis "^3.5.4"
 
 react-transition-group@^4.4.5:
   version "4.4.5"

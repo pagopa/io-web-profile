@@ -3,7 +3,7 @@ import { User } from '../_model/User';
 
 export const extractToken = (): string => {
   const URL = window.location.href;
-  const tokenIndex = URL.indexOf('#Token=');
+  const tokenIndex = URL.indexOf('#token=');
   if (tokenIndex !== -1) {
     return URL.substring(tokenIndex + 7);
   } else {
