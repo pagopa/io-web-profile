@@ -26,7 +26,7 @@ const Init = (): React.ReactElement => {
           />
         </Grid>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4} md={3}>
+          <Grid item xs={12} sm={5} md={4} lg={3} xl={2}>
             <Button
               fullWidth
               sx={{
@@ -46,7 +46,7 @@ const Init = (): React.ReactElement => {
               Entra con SPID
             </Button>
           </Grid>
-          <Grid item xs={12} sm={4} md={3}>
+          <Grid item xs={12} sm={5} md={4} lg={3} xl={2}>
             <Button
               fullWidth
               sx={{

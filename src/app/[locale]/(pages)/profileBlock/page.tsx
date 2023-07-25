@@ -5,12 +5,12 @@ import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { isIDPKnown } from '../../_utils/idps';
-import { commonBackgroundWithBack } from '../../_utils/styles';
+import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { renderSummary } from './utils';
 
 const ProfileBlock = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackgroundWithBack}>
+    <Grid sx={commonBackgroundLightWithBack}>
       <BackButton />
       <Introduction
         title={'Vuoi bloccare l’accesso a IO?'}

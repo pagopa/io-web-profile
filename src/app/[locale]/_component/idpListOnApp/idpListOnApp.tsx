@@ -27,7 +27,15 @@ export const IdpListOnApp = () => {
       <Typography variant="overline" color={'textSecondary'}>
         Le tue identitÀ SU APP IO:
       </Typography>
-      <Paper elevation={2} sx={{ marginTop: '22px', marginBottom: '60px', maxWidth: '550px' }}>
+      <Paper
+        elevation={2}
+        variant="outlined"
+        sx={{
+          marginTop: '22px',
+          marginBottom: '60px',
+          maxWidth: '550px',
+        }}
+      >
         {mockedIdentityProviders &&
           mockedIdentityProviders.map((item) => (
             <>
