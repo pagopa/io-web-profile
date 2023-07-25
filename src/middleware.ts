@@ -2,7 +2,6 @@ import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
 
 export default async function middleware(request: NextRequest) {
-  // const isLogged = request.cookies.get('token') ? true : false;
   const defaultLocale = request.headers.get('x-default-locale') || 'en';
 
   const handleI18nRouting = createIntlMiddleware({

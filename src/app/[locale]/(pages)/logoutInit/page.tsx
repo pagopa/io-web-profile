@@ -66,6 +66,7 @@ const Init = (): React.ReactElement => {
       <FAQ />
       <SelectIdp
         open={openDialog}
+        spidLevel="L1"
         onClose={(opn) => {
           setOpenDialog(opn);
         }}

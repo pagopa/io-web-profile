@@ -1,20 +1,37 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { storageTokenOps } from '../_utils/storage';
+import { storageTokenOps, storageUserOps } from '../_utils/storage';
 
-interface Token {
+interface IToken {
   token: string;
+  isTokenValid: () => boolean | undefined;
+  removeToken: () => void;
 }
 
-const useToken = (): Token => {
+const useToken = (): IToken => {
   const [token, setToken] = useState<string>('');
 
   useEffect(() => {
-    setToken(storageTokenOps.read());
+    if (typeof window !== 'undefined') {
+      setToken(storageTokenOps.read());
+    }
   }, []);
+
+  const isTokenValid = () => {
+    if (typeof window !== 'undefined') {
+      return !!storageTokenOps.read();
+    }
+  };
+
+  const removeToken = () => {
+    storageTokenOps.delete();
+    storageUserOps.delete();
+  };
 
   return {
     token,
+    isTokenValid,
+    removeToken,
   };
 };
 

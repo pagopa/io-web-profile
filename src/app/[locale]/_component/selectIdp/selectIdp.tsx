@@ -4,10 +4,11 @@ import { IdpList } from './idpList';
 
 interface IDialog {
   open: boolean;
+  spidLevel: 'L1' | 'L2' | 'L3';
   onClose: (open: boolean, event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function SelectIdp({ open, onClose }: IDialog) {
+export function SelectIdp({ open, spidLevel, onClose }: IDialog) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export function SelectIdp({ open, onClose }: IDialog) {
         >
           {'Scegli il tuo Identity Provider'}
         </Typography>
-        <IdpList />
+        <IdpList spidLevel={spidLevel} />
         <Box p={4}>
           <Button onClick={(e) => onClose(false, e)} fullWidth variant="outlined">
             Annulla
