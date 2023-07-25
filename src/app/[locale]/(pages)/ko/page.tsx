@@ -15,7 +15,7 @@ const LoginKo = (): React.ReactElement => (
           summary={
             <span>
               A causa di un errore del sistema non è possibile completare la richiesta. Se il
-              problema persiste contatta l'assistenza.
+              problema persiste contatta l&apos;assistenza.
             </span>
           }
           button={{

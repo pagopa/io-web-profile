@@ -23,8 +23,8 @@ const RestoreProfile = (): React.ReactElement => (
         <IdpListOnApp />
         <Grid item sm={10} md={7}>
           <Typography mb={5} fontSize={'20px'}>
-            Per ripristinare l'accesso all'app IO ti serve il <b>codice sblocco</b> fornito in fase
-            di blocco.
+            Per ripristinare l&apos;accesso all&apos;app IO ti serve il <b>codice sblocco</b>
+            fornito in fase di blocco.
           </Typography>
         </Grid>
         <Link href="/restoreCode">

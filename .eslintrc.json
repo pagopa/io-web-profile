@@ -17,8 +17,6 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "extends": [
-    "@pagopa/eslint-config/recommended"
-  ],
+  "extends": ["@pagopa/eslint-config/recommended", "next", "prettier"],
   "rules": {}
 }
