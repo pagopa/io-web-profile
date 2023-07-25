@@ -1,15 +1,19 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Alert, Card, CardContent, Grid, Snackbar, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
+import { useState } from 'react';
 
 interface CopyCardProps {
   code: string;
 }
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
+  const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
+
   const copyTextToClipboard = (text: string | undefined) => {
     if (typeof text === 'string') {
       void navigator.clipboard.writeText(text);
+      setOpenSnackBar(true);
     }
   };
 
@@ -46,6 +50,9 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
           </ButtonNaked>
         </Grid>
       </CardContent>
+      <Snackbar open={openSnackBar} onClose={() => setOpenSnackBar(false)} autoHideDuration={2000}>
+        <Alert severity="success">Codice copiato</Alert>
+      </Snackbar>
     </Card>
   );
 };

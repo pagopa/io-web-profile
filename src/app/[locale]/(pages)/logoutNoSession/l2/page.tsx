@@ -3,9 +3,9 @@
 import { Grid, Button } from '@mui/material';
 import Link from 'next/link';
 import AppleIcon from '@mui/icons-material/Apple';
-import AndroidIcon from '@mui/icons-material/Android';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { commonBackground } from '../../../_utils/styles';
+import PlayStoreIcon from '@/app/[locale]/_icons/playstore';
 
 const L2NoSession = (): React.ReactElement => (
   <>
@@ -28,7 +28,7 @@ const L2NoSession = (): React.ReactElement => (
       </Grid>
       <Grid item xs={12} sm={4} md={3}>
         <Link href={'/#'}>
-          <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<AndroidIcon />}>
+          <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<PlayStoreIcon />}>
             Play Store
           </Button>
         </Link>

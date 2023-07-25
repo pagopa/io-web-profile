@@ -47,6 +47,21 @@ export const commonBackgroundWithBack = {
   },
 };
 
+export const commonBackgroundLightWithBack = {
+  backgroundColor: 'primary.paper',
+  paddingTop: '34px',
+  paddingBottom: {
+    xs: 5,
+    sm: 8,
+  },
+  paddingX: {
+    xs: 4,
+    sm: 3,
+    md: 3,
+    lg: 17.5,
+  },
+};
+
 export const commonBackgroundDark = {
   backgroundColor: 'primary.dark',
   pt: COMMON_PADDING_HERO.pt,
