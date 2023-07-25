@@ -42,7 +42,7 @@ const ReactivateCode = (): React.ReactElement => {
             title="Inserisci il codice di ripristino"
             summary={
               <>
-                Ha 9 cifre, ti è stato fornito in fase di blocco dell'accesso a IO.
+                Ha 9 cifre, ti è stato fornito in fase di blocco dell&apos;accesso a IO.
                 <br />
                 Non lo trovi?{' '}
                 <Link href="#" fontWeight={600}>

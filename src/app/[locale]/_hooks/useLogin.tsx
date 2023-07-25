@@ -12,16 +12,17 @@ interface LoginData {
 const useLogin = (): LoginData => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userLogged, setUserLogged] = useState<User | undefined>(undefined);
+  const cookieTokenRead = cookieTokenOps.read();
 
   useEffect(() => {
-    if (cookieTokenOps.read()) {
+    if (cookieTokenRead) {
       setIsLoggedIn(true);
       setUserLogged(cookieUserOps.read());
     } else {
       setIsLoggedIn(false);
       setUserLogged(undefined);
     }
-  }, [cookieTokenOps.read()]);
+  }, [cookieTokenRead]);
 
   const logOut = () => {
     setIsLoggedIn(false);
