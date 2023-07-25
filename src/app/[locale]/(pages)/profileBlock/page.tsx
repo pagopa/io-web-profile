@@ -7,6 +7,7 @@ import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { isIDPKnown } from '../../_utils/idps';
 import { commonBackgroundWithBack } from '../../_utils/styles';
+import { Flows } from '../../_enums/Flows';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -35,7 +36,7 @@ const ProfileBlock = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ />
+      <FAQ flow={Flows.BLOCK} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { Flows } from '../_enums/Flows';
+import { Flows } from '../../_enums/Flows';
 import { AccordionCustom } from './accordion';
 
 interface FAQProps {

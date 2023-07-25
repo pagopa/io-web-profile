@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
+import { Flows } from '../../_enums/Flows';
 
 const ReactivateCode = (): React.ReactElement => {
   const { push } = useRouter();
@@ -86,7 +87,7 @@ const ReactivateCode = (): React.ReactElement => {
           </Link>
         </Grid>
       </Grid>
-      <FAQ flow="RESTORE" />
+      <FAQ flow={Flows.RESTORE} />
     </>
   );
 };

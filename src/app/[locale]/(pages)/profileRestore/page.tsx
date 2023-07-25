@@ -6,6 +6,7 @@ import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundWithBack } from '../../_utils/styles';
+import { Flows } from '../../_enums/Flows';
 
 const RestoreProfile = (): React.ReactElement => (
   <>
@@ -34,7 +35,7 @@ const RestoreProfile = (): React.ReactElement => (
         </Link>
       </Grid>
     </Grid>
-    <FAQ flow="RESTORE" />
+    <FAQ flow={Flows.RESTORE} />
   </>
 );
 
