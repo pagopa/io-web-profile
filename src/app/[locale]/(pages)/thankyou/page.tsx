@@ -1,30 +1,34 @@
 'use client';
 
-import { Grid, Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackground } from '../../_utils/styles';
 import { ROUTES } from '../../_utils/routes';
+import { commonBackground } from '../../_utils/styles';
 
-const ThankYouPage = (): React.ReactElement => (
-  <>
-    <Grid sx={commonBackground} container>
-      <Grid item xs={12} justifySelf={'center'} maxWidth="100%">
-        <Introduction
-          title={'Hai effettuato il logout da IO!'}
-          summary={'Per entrare nuovamente su IO, utilizza le tue credenziali SPID o CIE.'}
-          summaryColumns={{ xs: 12, md: 10 }}
-        />
+const ThankYouPage = (): React.ReactElement => {
+  const t = useTranslations('ioesco');
+  return (
+    <>
+      <Grid sx={commonBackground} container>
+        <Grid item xs={12} justifySelf={'center'} maxWidth="100%">
+          <Introduction
+            title={t('common.iologouttitle')}
+            summary={t('thankyoupage.enterbackio')}
+            summaryColumns={{ xs: 12, md: 10 }}
+          />
+        </Grid>
+        <Grid item xs={12} pt={2}>
+          <Link href={ROUTES.LOGIN}>
+            <Button sx={{ mr: 2 }} variant="outlined">
+              {t('common.backtohome')}
+            </Button>
+          </Link>
+        </Grid>
       </Grid>
-      <Grid item xs={12} pt={2}>
-        <Link href={ROUTES.LOGIN}>
-          <Button sx={{ mr: 2 }} variant="outlined">
-            Torna alla home
-          </Button>
-        </Link>
-      </Grid>
-    </Grid>
-  </>
-);
+    </>
+  );
+};
 
 export default ThankYouPage;
