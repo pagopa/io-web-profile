@@ -1,6 +1,12 @@
-import React from 'react';
 import { Grid, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { AccordionCustom } from './accordion';
+
+const enum Flows {
+  DEFAULT = 'DEFAULT',
+  BLOCK = 'BLOCK',
+  RESTORE = 'RESTORE',
+}
 
 interface FAQProps {
   flow?: string;
@@ -11,32 +17,57 @@ interface FAQEntries {
   details: string;
 }
 
-export const FAQ = ({ flow = 'DEFAULT' }: FAQProps) => {
+export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
+  const t = useTranslations('commonfaq');
   // #region entries
   const defaultEntries: FAQEntries[] = [
     {
-      summary: 'Cosa vuol dire uscire da app IO?',
-      details:
-        'Lorem ipsum dolor sit amet, consectur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      summary: t('firstquestion'),
+      details: t('firstresponse'),
     },
     {
-      summary: 'A che cosa serve effettuare il logout da web?',
-      details:
-        'Lorem ipsum dolor sit amet, consectetur apiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      summary: t('secondquestion'),
+      details: t('firstresponse'),
     },
     {
-      summary: 'Come posso rientrare in app IO?',
-      details:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      summary: t('thirdquestion'),
+      details: t('firstresponse'),
     },
     {
-      summary: 'Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?',
-      details:
-        'Lorem ipsum dolor sit amet, conasectetur adipiscing lit, sed do eiusmod tempor incidisdunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      summary: t('fourthquestion'),
+      details: t('firstresponse'),
+    },
+  ];
+
+  const blockEntries: FAQEntries[] = [
+    {
+      summary: t('meanlockio'),
+      details: t('firstresponse'),
+    },
+    {
+      summary: t('utilitylockprofile'),
+      details: t('firstresponse'),
+    },
+    {
+      summary: t('lockaccessmessage'),
+      details: t('firstresponse'),
+    },
+    {
+      summary: t('loginafterlock'),
+      details: t('firstresponse'),
+    },
+    {
+      summary: t('securityidentity'),
+      details: t('firstresponse'),
+    },
+    {
+      summary: t('unlockprofile'),
+      details: t('firstresponse'),
     },
   ];
 
   const restoreEntries: FAQEntries[] = [
+    // TODO: implement translation keys
     {
       summary: "Cosa vuol dire ripristinare l'accesso a IO?",
       details:
@@ -65,11 +96,16 @@ export const FAQ = ({ flow = 'DEFAULT' }: FAQProps) => {
   ];
 
   function getEntriesByFlow(flow: string): FAQEntries[] {
-    if (flow === 'RESTORE') {
-      return restoreEntries;
+    switch (flow) {
+      case Flows.BLOCK:
+        return blockEntries;
+      case Flows.RESTORE:
+        return restoreEntries;
+      default:
+        return defaultEntries;
     }
-    return defaultEntries;
   }
+  // #endregion
 
   return (
     <>
@@ -94,7 +130,7 @@ export const FAQ = ({ flow = 'DEFAULT' }: FAQProps) => {
               pb: 5,
             }}
           >
-            {'Dubbi o domande?'}
+            {t('faqtitle')}
           </Typography>
           <AccordionCustom
             entries={getEntriesByFlow(flow)}

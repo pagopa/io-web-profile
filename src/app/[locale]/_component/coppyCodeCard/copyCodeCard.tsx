@@ -1,12 +1,15 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
+import { useTranslations } from 'next-intl';
 
 interface CopyCardProps {
   code: string;
 }
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
+  const t = useTranslations('common');
+
   const copyTextToClipboard = (text: string | undefined) => {
     if (typeof text === 'string') {
       void navigator.clipboard.writeText(text);
@@ -31,7 +34,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
         }}
       >
         <Grid>
-          <Typography variant="caption">Codice di ripristino</Typography>
+          <Typography variant="caption">{t('resetcode')}</Typography>
           <Typography fontWeight={600} fontSize="32px">
             {code}
           </Typography>
@@ -42,7 +45,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
             onClick={() => copyTextToClipboard(code)}
             color="primary"
           >
-            Copia
+            {t('copy')}
           </ButtonNaked>
         </Grid>
       </CardContent>
