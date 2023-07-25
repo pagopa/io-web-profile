@@ -1,12 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { Flows } from '../_enums/Flows';
 import { AccordionCustom } from './accordion';
-
-const enum Flows {
-  DEFAULT = 'DEFAULT',
-  BLOCK = 'BLOCK',
-  RESTORE = 'RESTORE',
-}
 
 interface FAQProps {
   flow?: string;
@@ -18,7 +13,7 @@ interface FAQEntries {
 }
 
 export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
-  const t = useTranslations('commonfaq');
+  const t = useTranslations('ioesco.commonfaq');
   // #region entries
   const defaultEntries: FAQEntries[] = [
     {

@@ -10,7 +10,7 @@ interface BackButtonProps extends ButtonProps {
 }
 
 export function BackButton({ href = '/profile', text, ...props }: BackButtonProps) {
-  const t = useTranslations('common');
+  const t = useTranslations('ioesco.common');
   return (
     <Link href={href}>
       <ButtonNaked

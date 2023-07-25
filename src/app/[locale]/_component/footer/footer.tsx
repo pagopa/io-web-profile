@@ -18,7 +18,7 @@ export default function Footer({
   productsJsonUrl,
   onExit = (exitAction) => exitAction(),
 }: IOFooterProps) {
-  const t = useTranslations('commonfooter');
+  const t = useTranslations('ioesco.commonfooter');
 
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
@@ -64,7 +64,7 @@ export default function Footer({
           linkType: 'internal',
         },
         {
-          label: t('informationsecurity'),
+          label: t('informationssecurity'),
           href: 'link',
           ariaLabel: ariaLabel('informationsecurity'),
           linkType: 'internal',

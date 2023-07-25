@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { ROUTES } from '../../_utils/routes';
 
 const Access = (): React.ReactElement => {
-  const t = useTranslations('access');
+  const t = useTranslations('ioesco');
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
@@ -21,7 +21,7 @@ const Access = (): React.ReactElement => {
             }}
             mb={2}
           >
-            Entra con SPID o CIE
+            {t('common.loginspidorcie')}
           </Typography>
 
           <Grid item justifyContent="center">
@@ -34,8 +34,7 @@ const Access = (): React.ReactElement => {
               mb={{ xs: 4, md: 6 }}
               maxWidth={{ xs: '327px', sm: '330px', md: '480px' }}
             >
-              Seleziona la modalità di accesso che preferisci e inizia il processo di adesione al
-              prodotto nomeProdotto.
+              {t('common.selectauthmethod')}
             </Typography>
           </Grid>
 
@@ -58,7 +57,7 @@ const Access = (): React.ReactElement => {
                   component="h6"
                   variant="h6"
                 >
-                  Accedi
+                  {t('common.login')}
                 </Typography>
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
@@ -72,7 +71,7 @@ const Access = (): React.ReactElement => {
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
-                    Entra con SPID
+                    {t('common.loginspid')}
                   </Button>
                 </Box>
                 <Box display="flex" justifyContent="center" alignItems="center">
@@ -87,7 +86,7 @@ const Access = (): React.ReactElement => {
                     startIcon={<CieIcon />}
                     // onClick={() => goCIE()}
                   >
-                    Entra con CIE
+                    {t('common.logincie')}
                   </Button>
                 </Box>
                 <Divider sx={{ my: { xs: 2, md: 4 } }} variant="fullWidth" />
@@ -98,9 +97,9 @@ const Access = (): React.ReactElement => {
                   alignItems={'baseline'}
                   justifyContent={'center'}
                 >
-                  <Typography variant="body1"> Non hai SPID o CIE?</Typography>
+                  <Typography variant="body1">{t('common.nothavespid')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link href={'#'}>Scopri di più</Link>
+                    <Link href={'#'}>{t('common.more')}</Link>
                   </Typography>
                 </Grid>
               </CardContent>
@@ -120,7 +119,7 @@ const Access = (): React.ReactElement => {
       >
         <Grid item mb={2}>
           <Typography variant="h5" pt={{ md: 20, sm: 8 }} color="primary.contrastText">
-            {t('title')}
+            {t('common.lostdevice')}
           </Typography>
         </Grid>
         <Grid item>
@@ -132,7 +131,7 @@ const Access = (): React.ReactElement => {
             mb={4}
             color={'primary.contrastText'}
           >
-            Esci da IO per mantenere al sicuro i tuoi dati e i contenuti a te dedicati
+            {t('lpaccess.logout')}
           </Typography>
         </Grid>
         <Grid item mb={2}>
@@ -149,7 +148,7 @@ const Access = (): React.ReactElement => {
                 color: 'primary',
               }}
             >
-              Esci da IO
+              {t('common.logout')}
             </Button>
           </Link>
         </Grid>

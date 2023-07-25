@@ -28,7 +28,7 @@ const ProfileBlock = (): React.ReactElement => (
         </Button>
       </Grid>
     </Grid>
-    <FAQ />
+    <FAQ flow={Flows}/>
   </>
 );
 

@@ -11,12 +11,13 @@ import { FAQ } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 
 const Init = (): React.ReactElement => {
-  const t = useTranslations('logout');
+  const t = useTranslations('ioesco');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   return (
     <>
       <Grid sx={commonBackgroundDark} container>
         <Grid item xs={12} justifySelf={'center'}>
+          {/* TODO: title and description from tl file */}
           <Introduction
             title={t('title')}
             summary={t('description')}
@@ -43,7 +44,7 @@ const Init = (): React.ReactElement => {
               startIcon={<CieIcon />}
               variant="outlined"
             >
-              Entra con SPID
+              {t('common.loginspid')}
             </Button>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
@@ -58,7 +59,7 @@ const Init = (): React.ReactElement => {
               startIcon={<SpidIcon />}
               variant="outlined"
             >
-              Entra con CIE
+              {t('common.logincie')}
             </Button>
           </Grid>
         </Grid>

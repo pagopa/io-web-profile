@@ -8,7 +8,7 @@ interface CopyCardProps {
 }
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
-  const t = useTranslations('common');
+  const t = useTranslations('ioesco.common');
 
   const copyTextToClipboard = (text: string | undefined) => {
     if (typeof text === 'string') {

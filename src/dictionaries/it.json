@@ -3,7 +3,7 @@
     "common": {
       "abled": "Abilitato",
       "accessibilitydeclaration": "Dichiarazione di accessibilità",
-      "activeduedate": "Attiva fino al {{date}}",
+      "activeduedate": "Attiva fino al {date}",
       "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione degli accessi in app.",
       "appaccess": "Accesso in app",
       "appsession": "Sessione in app",
@@ -14,7 +14,7 @@
       "cieid": "CIE ID",
       "emailaddress": "Indirizzo email",
       "findwhatdo": "Scopri cosa fare",
-      "hello": "Ciao {{Nome}}!",
+      "hello": "Ciao {nome}!",
       "howrestoreprofile": "Come posso ripristinare l’accesso a IO?",
       "iologouttitle": "Hai effettuato il logout da IO!",
       "identitysecurityrestore": "Hai messo in sicurezza la tua identità digitale? Ripristina l’accesso all’app IO.",
@@ -59,7 +59,7 @@
       "faqtitle": "Dubbi o domande?",
       "firstquestion": "Cosa vuol dire uscire da app IO?",
       "firstresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "fouthquestion": "Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?",
+      "fourthquestion": "Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?",
       "lockaccessmessage": "Con l’accessi bloccato continuerò a ricevere i messaggi da IO?",
       "loginafterlock": "Posso entrare in app IO anche se ho bloccato l’accesso?",
       "meanlockio": "Cosa vuol dire bloccare l’accesso a IO?",
@@ -140,7 +140,7 @@
       "enterbackonio": "Per entrare nuovamente in app IO, al primo ingresso con qualsiasi dispositivo dovrai accedere con le tue credenziali SPID o CIE."
     },
     "tooltip": {
-      "accesswithoutidp": "Fino al 08/06/2023 accedi a IO senza login SPID o CIE",
+      "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Abilitato perché prevede il massimo livello di sicurezza (L3)",
       "nosession": "Non c’è nessuna sessione di IO attiva"
     }
