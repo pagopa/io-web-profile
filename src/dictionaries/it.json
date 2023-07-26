@@ -2,27 +2,31 @@
   "ioesco": {
     "common": {
       "abled": "Abilitato",
+      "accessabled": "Accesso abilitato",
       "accessibilitydeclaration": "Dichiarazione di accessibilità",
       "activeduedate": "Attiva fino al {date}",
-      "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione degli accessi in app.",
-      "appaccess": "Accesso in app",
+      "anagraphicinfo": "Qui trovi i dati del tuo profilo, presenti sull’app IO, e le informazioni sugli accessi in app.",
+      "appaccess": "Accesso a IO",
       "appsession": "Sessione in app",
       "appstore": "App Store",
+      "assistence": "Assistenza",
       "backtohome": "Torna alla home",
       "backtoprofile": "Torna al profilo",
       "beta": "BETA",
+      "cancel": "Annulla",
       "cieid": "CIE ID",
       "emailaddress": "Indirizzo email",
       "findwhatdo": "Scopri cosa fare",
       "hello": "Ciao {nome}!",
       "howrestoreprofile": "Come posso ripristinare l’accesso a IO?",
-      "iologouttitle": "Hai effettuato il logout da IO!",
+      "iologouttitle": "Fatto!",
       "identitysecurityrestore": "Hai messo in sicurezza la tua identità digitale? Ripristina l’accesso all’app IO.",
       "infocert": "InfoCert ID",
       "legalnotes": "Note legali",
+      "lockaccess": "Accesso bloccato",
       "lockaccessinfo": "Bloccando l’accesso non potrai più entrare in app IO con tutte le tue identità di livello 2. Dopo aver messo in sicurezza la tua identità digitale potrai sbloccare l’accesso a IO.",
       "lockappaccess": "Sospetti che la tua identità digitale sia stata compromessa? Blocca l’accesso all’app IO.",
-      "lockio": "Blocca accesso a IO",
+      "lockio": "Blocca l’accesso a IO",
       "lockioaccess": "Vuoi bloccare l’accesso a IO?",
       "locked": "Bloccato con L2",
       "lockedioaccess": "L’accesso a IO è stato bloccato",
@@ -40,6 +44,7 @@
       "noprofile": "Non risulta nessun profilo IO associato alla tua identità, per accedere a tutte le funzionalità scarica l’app IO sul tuo smartphone.",
       "norestorecode": "Non hai il codice di ripristino?",
       "nothavespid": "Non hai SPID?",
+      "pagopaspa": "PagoPA S.p.A.",
       "playstore": "Play Store",
       "posteid": "Poste ID",
       "privacypolicy": "Privacy Policy",
@@ -53,21 +58,29 @@
       "whatdo": "Cosa devi fare?",
       "youridentityonio": "Le tue identitÀ SU APP IO:",
       "yourprofile": "Il tuo profilo",
-      "copy": "Copia"
+      "copy": "Copia",
+      "devicemodel": "{deviceModel}",
+      "email-1": "{email}",
+      "namesurnamevariables": "{nome} {cognome}"
     },
     "commonfaq": {
+      "canrestorefromio": "Posso ripristinare l’accesso direttamente dall’app IO?",
       "faqtitle": "Dubbi o domande?",
       "firstquestion": "Cosa vuol dire uscire da app IO?",
       "firstresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "fourthquestion": "Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?",
+      "fouthquestion": "Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?",
       "lockaccessmessage": "Con l’accessi bloccato continuerò a ricevere i messaggi da IO?",
       "loginafterlock": "Posso entrare in app IO anche se ho bloccato l’accesso?",
       "meanlockio": "Cosa vuol dire bloccare l’accesso a IO?",
+      "meanrestoreaccess": "Cosa vuol dire ripristinare l’accesso a IO?",
       "secondquestion": "A cosa serve effettuare il logout da web?",
       "securityidentity": "Come posso mettere in sicurezza la mia identità?",
       "thirdquestion": "Come posso rientrare in app IO?",
       "unlockprofile": "Potrò sbloccare l’accesso a IO una volta messa in sicurezza la mia identità?",
-      "utilitylockprofile": "A cosa serve bloccare l’accesso a IO?"
+      "utilitylockprofile": "A cosa serve bloccare l’accesso a IO?",
+      "whatdonocode": "Cosa posso fare se non trovo il codice di ripristino?",
+      "whatrestorecode": "Cos’è il codice di ripristino?",
+      "whenrestore": "Quando è opportuno ripristinare l’accesso a IO?"
     },
     "commonfooter": {
       "231model": "Modello 231",
@@ -98,45 +111,74 @@
       "workwithus": "Lavora con noi"
     },
     "error": {
+      "cancellogin": "Hai annullato l'operazione di login: puoi riprovare quando vuoi.",
+      "credentialerror": "Hai inserito troppe volte un nome utente o una password non corretti: riprova fra qualche minuto o contatta il tuo fornitore di identità SPID per cambiare le tue credenziali.",
+      "linkexpired": "Il link è scaduto",
+      "lockiolog": "Per bloccare l’accesso a IO è necessario accedere al portale con le tue credenziali SPID o CIE.",
+      "loginerror": "Errore nel login",
+      "loginerrorretry": "Si è verificato un errore durante il login, si prega di riprovare!",
+      "minage": "Accesso negato: non hai l'età minima richiesta.",
+      "portalconsents": "Per accedere al portale, devi acconsentire all’invio di alcuni dati. Entra di nuovo e dai il tuo consenso.",
       "retry": "Riprova",
+      "sessionexpired": "È passato troppo tempo da quando hai iniziato l'accesso: per piacere riparti dall'inizio.",
       "somewrong": "Qualcosa è andato storto",
-      "systemerror": "A causa di un errore del sistema non è possibile accedere. Ti chiediamo di riprovare più tardi.",
+      "spidrevoked": "La tua identità SPID risulta sospesa o revocata. Per riattivare il tuo account, contatta il tuo fornitore di identità SPID.",
+      "systemerror": "A causa di un errore del sistema, al momento non è possibile accedere. Riprova più tardi.",
       "systemerrorcontactassistence": "A causa di un errore del sistema non è possibile completare la richiesta. Se il problema persiste contatta l’assistenza.",
-      "systemerrorlogout": "A causa di un errore del sistema non è possibile completare la richiesta. Se il problema persiste contatta l’assistenza.\n\nPer effettuare il logout puoi anche accedere ad app IO con le tue credenziali SPID o CIE da un altro dispositivo, in questo modo la sessione in app sul dispositivo precedente verrà terminata."
+      "systemerrorlogout": "A causa di un errore del sistema non è possibile completare la richiesta. Se il problema persiste, contatta l’assistenza.\n\nPer effettuare il logout puoi anche accedere ad app IO con le tue credenziali SPID o CIE da un altro dispositivo. In questo modo, la sessione in app sul dispositivo precedente verrà terminata.",
+      "twofactorneed": "Per motivi di sicurezza è richiesto un login con un secondo fattore di autenticazione: contatta il tuo fornitore di identità SPID per capire come si usa."
     },
     "lockaccess": {
       "accessidentity": "Hai effettuato l’accesso in app IO con le seguenti identità, se sospetti che una di queste sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al sicuro. ",
       "accessidentitycompromise": "Se sospetti che la tua identità digitale sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al sicuro.",
-      "lastaccess": "Ultimo accesso il 06 ott 2022 alle 16:43",
+      "lastaccess": "Ultimo accesso il {date} alle {hour}",
       "lockaccess": "Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di livello 2. Per ripristinare l’accesso ti verrà richiesto il codice di ripristino, assicurati di salvarlo e tenerlo al sicuro!"
     },
     "lpaccess": {
-      "logout": "Esci da IO per mantenere al sicuro i tuoi dati e i contenuti a te dedicati",
+      "logout": "Esci da IO per mantenere al sicuro i tuoi dati, i messaggi e i metodi di pagamento",
       "nodevice": "Non hai più il tuo dispositivo?",
       "nospidorcie": "Non hai SPID o CIE?",
       "selectauthmethod": "Seleziona la modalità di autenticazione che preferisci ed effettua l’acceso per gestire il tuo profilo IO."
     },
     "lplogout": {
-      "lostdevice": "Se hai perso il tuo dispositivo, termina la sessione attiva sull’app IO per mantenere i tuoi dati al sicuro. Accedi con SPID o CIE e segui i passaggi indicati."
+      "lostdevice": "Se non hai più il tuo dispositivo per accedere a IO, termina la sessione attiva e mantieni i tuoi dati al sicuro. Accedi con SPID o CIE e segui i passaggi indicati."
     },
     "lplogoutpostlogin": {
-      "activesession": "Al momento hai attiva una sessione su app IO con il dispositivo {{DeviceModel}}, se lo hai perso o non lo riconosci esci dal tuo account. Potrai accedere nuovamente da qualsiasi dispositivo.",
-      "lastdateactivation": "Sessione attiva fino al {{date}}",
-      "noactivesession": "Al momento non hai attiva nessuna sessione su app IO, se hai perso lo smartphone i tuoi dati sono al sicuro! Puoi accedere nuovamente in app con le tue credenziali SPID o CIE da qualsiasi dispositivo."
+      "activesession": "Al momento hai attiva una sessione sull’app IO con il dispositivo {deviceModel}. Se lo hai perso o non è il tuo dispositivo, esci dal tuo account. Potrai accedere da qualsiasi dispositivo.",
+      "lastdateactivation": "Sessione valida fino al {date}",
+      "noactivesession": "Al momento non hai attiva nessuna sessione su IO. Se non hai più il tuo dispositivo i tuoi dati sono al sicuro. \nPuoi accedere nuovamente con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },
     "profile": {
       "activesession": "Sessione attiva in app",
       "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione e accesso al tuo profilo in app.",
       "lockaccess": "Blocca l’accesso a IO",
       "lostdevicelogout": "Hai perso il dispositivo collegato all’app IO? Tieni al sicuro i tuoi dati effettuando il logout.",
-      "nodevicelogout": "Non hai più il tuo dispositivo ed era collegato all’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account."
+      "nodevicelogout": "Non hai più il tuo dispositivo era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account."
     },
     "profilelogout": {
       "logout": "Vuoi uscire da app IO?"
     },
+    "restore": {
+      "accessrestored": "L’accesso a IO è stato ripristinato",
+      "accessrestoredsuccess": "Accesso ripristinato",
+      "explanationrestorecode": "Ha 9 cifre, ti è stato fornito in fase di blocco dell’accesso a IO.\nNon lo trovi? Scopri cosa fare",
+      "insertrestorecode": "Inserisci il codice di ripristino",
+      "l3identity": "Hai un’identità SPID o CIE di livello 3?",
+      "l3norestorecode": "Se hai un’identità SPID o CIE di livello 3 puoi effettuare il ripristino senza codice di ripristino.",
+      "logagainio": "Da questo momento puoi entrare di nuovo in app IO con tutte le tue identità SPID o CIE.",
+      "norestorecodefound": "Non trovi il codice di ripristino?",
+      "notvalidcode": "Codice non valido, controlla e riprova",
+      "restorecodecopied": "Codice di ripristino copiato",
+      "restoredaccess": "Accesso ripristinato",
+      "whatisl3": "Cos’è un’identità di livello 3?",
+      "login-1": "Se hai messo in sicurezza la tua identità digitale puoi ripristinare l’accesso a IO e entrare nuovamente in app con tutte le tue identità.",
+      "restoreprofile": "Ripristina profilo IO",
+      "insertcode": "Per ripristinare l’accesso all’app IO ti serve il codice sblocco fornito in fase di blocco.",
+      "restoreaccess": "Vuoi ripristinare l’accesso a IO?"
+    },
     "thankyoupage": {
       "accesslocked": "Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di livello 2. \r\n\r\nPer ripristinare l’accesso ti verrà richiesto il codice di ripristino, assicurati di salvarlo e tenerlo al sicuro!",
-      "enterbackio": "Per entrare nuovamente su IO, utilizza le tue credenziali SPID o CIE.",
+      "enterbackio": "Il dispositivo non è più connesso a IO. Per entrare nuovamente in app, utilizza le tue credenziali SPID o CIE.",
       "enterbackonio": "Per entrare nuovamente in app IO, al primo ingresso con qualsiasi dispositivo dovrai accedere con le tue credenziali SPID o CIE."
     },
     "tooltip": {

@@ -160,7 +160,7 @@ export default function Footer({
     },
   ];
 
-  // TODO: handle <strong> and <br/>
+  // TODO: [TL] tags
   const companyLegalInfo = <>{t('pagopalegal')}</>;
   // const companyLegalInfo = (
   //   <>

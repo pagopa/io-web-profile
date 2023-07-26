@@ -14,12 +14,14 @@ const ProfileBlock = (): React.ReactElement => {
     <Grid sx={commonBackgroundWithBack}>
       <BackButton />
       <Introduction
-        title={'L’accesso a IO è stato bloccato'}
+        title={t('common.lockedioaccess')}
+        // TODO: [TL] tags
         summary={
           <>
-            Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di
+            {t('lockaccess.lockaccess')}
+            {/* Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di
             livello 2. <br /> <br /> Per ripristinare l’accesso ti verrà richiesto il
-            <strong> codice di ripristino</strong>, assicurati di salvarlo e tenerlo al sicuro!
+            <strong> codice di ripristino</strong>, assicurati di salvarlo e tenerlo al sicuro! */}
           </>
         }
         summaryColumns={{ xs: 12, md: 8 }}
@@ -31,6 +33,8 @@ const ProfileBlock = (): React.ReactElement => {
       <Typography variant="h6" my={3}>
         {t('common.howrestoreprofile')}
       </Typography>
+      {/* TODO: [TL] unlockioaccess must have separate list items keys
+       * or different formatting, see here: https://next-intl-docs.vercel.app/docs/usage/messages#arrays-of-messages */}
       <Typography>Per sbloccare l’accesso in app IO segui questi passaggi:</Typography>
       <List
         sx={{

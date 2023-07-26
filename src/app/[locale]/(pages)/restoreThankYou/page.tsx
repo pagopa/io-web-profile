@@ -15,11 +15,8 @@ const RestoreThankYouPage = (): React.ReactElement => {
       <Grid sx={commonBackgroundWithBack}>
         <BackButton />
         <Introduction
-          // TODO: translation text missing
-          title={"L'accesso a IO è stato ripristinato"}
-          summary={
-            'Da questo momento puoi entrare di nuovo in app IO con tutte le tue identità SPID o CIE.'
-          }
+          title={t('restore.accessrestored')}
+          summary={t('restore.logagainio')}
           summaryColumns={{ xs: 12, sm: 10, md: 7.5 }}
         />
 

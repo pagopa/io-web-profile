@@ -16,14 +16,15 @@ const Session = (): React.ReactElement => {
       <Grid sx={commonBackgroundLight} container>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
-            title={t('common.hello', { Nome: 'Mario' })}
-            // TODO add tag with variable in translation file
+            title={t('common.hello', { nome: 'Mario' })}
+            // TODO: [TL] tags
             summary={
               <>
                 <span>
-                  Al momento hai attiva una sessione su app IO con il dispositivo{' '}
+                  {t('lplogoutpostlogin.activesession', { deviceModel: 'iPhone 12 Pro' })}
+                  {/* Al momento hai attiva una sessione su app IO con il dispositivo{' '}
                   <strong>iPhone 12 Pro</strong>, se lo hai perso o non lo riconosci esci dal tuo
-                  account. Potrai accedere nuovamente da qualsiasi dispositivo.
+                  account. Potrai accedere nuovamente da qualsiasi dispositivo. */}
                 </span>
               </>
             }
@@ -53,7 +54,7 @@ const Session = (): React.ReactElement => {
                     textAlign: 'left',
                   }}
                 >
-                  <strong>Iphone 12 Pro</strong>
+                  <strong>{t('common.devicemodel', { deviceModel: 'iPhone 12 Pro' })}</strong>
                 </Typography>
               </Box>
               <Box>
