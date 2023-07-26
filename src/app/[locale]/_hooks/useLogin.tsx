@@ -12,7 +12,7 @@ interface LoginData {
 const useLogin = (): LoginData => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userLogged, setUserLogged] = useState<User | undefined>(undefined);
-  const cookieTokenRead = typeof window != 'undefined' ? storageTokenOps.read() : null;
+  const cookieTokenRead = isBrowser() ? storageTokenOps.read() : null;
 
   useEffect(() => {
     if (cookieTokenRead) {
