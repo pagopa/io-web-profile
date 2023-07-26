@@ -158,7 +158,7 @@ const Access = (): React.ReactElement => {
         </Grid>
       </Grid>
       <SelectIdp
-        open={openDialog}
+        isOpen={openDialog}
         spidLevel="L2"
         onClose={(opn) => {
           setOpenDialog(opn);
