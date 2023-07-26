@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
 import useToken from '../_hooks/useToken';
@@ -8,41 +8,43 @@ import Loader from './loader/loader';
 import Header from './header/header';
 import Footer from './footer/footer';
 
-type LoginStatus =
-  | { status: ELogin.IDLE }
-  | { status: ELogin.AUTHORIZED }
-  | { status: ELogin.NOT_AUTHORIZED };
-
-const enum ELogin {
-  IDLE = 'IDLE',
-  AUTHORIZED = 'AUTHORIZED',
-  NOT_AUTHORIZED = 'NOT_AUTHORIZED',
+interface LoginStatusIdle {
+  status: 'IDLE';
 }
+interface LoginStatusAuthorized {
+  status: 'AUTHORIZED';
+}
+interface LoginStatusNotAuthorized {
+  status: 'NOT_AUTHORIZED';
+}
+
+export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusNotAuthorized;
+
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
-  const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: ELogin.IDLE });
+  const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
   const { isTokenValid, removeToken } = useToken();
   const router = useRouter();
+  const pathName = usePathname();
   const cleanPath = (path: string): string => path.replace(/^(\/(en|it))\/(.*)$/, '');
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (LOGIN_ROUTES.includes(cleanPath(window.location.pathname))) {
-        removeToken();
-      }
-      if (PUBBLIC_ROUTES.includes(cleanPath(window.location.pathname))) {
-        setLoginStatus({ status: ELogin.AUTHORIZED });
-      }
-      if (!PUBBLIC_ROUTES.includes(cleanPath(window.location.pathname)) && isTokenValid()) {
-        setLoginStatus({ status: ELogin.AUTHORIZED });
-      }
-      if (!PUBBLIC_ROUTES.includes(cleanPath(window.location.pathname)) && !isTokenValid()) {
-        setLoginStatus({ status: ELogin.AUTHORIZED });
-        router.push(ROUTES.LOGIN);
-      }
+    if (LOGIN_ROUTES.includes(cleanPath(pathName))) {
+      removeToken();
     }
-  }, [isTokenValid, removeToken, router]);
+    if (PUBBLIC_ROUTES.includes(cleanPath(pathName))) {
+      setLoginStatus({ status: 'AUTHORIZED' });
+    }
+    if (!PUBBLIC_ROUTES.includes(cleanPath(pathName)) && isTokenValid()) {
+      setLoginStatus({ status: 'AUTHORIZED' });
+    }
+    if (!PUBBLIC_ROUTES.includes(cleanPath(pathName)) && !isTokenValid()) {
+      setLoginStatus({ status: 'NOT_AUTHORIZED' });
+      router.push(ROUTES.LOGIN);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathName]);
 
-  if (loginStatus.status === ELogin.IDLE || loginStatus.status === ELogin.NOT_AUTHORIZED) {
+  if (loginStatus.status === 'IDLE' || loginStatus.status === 'NOT_AUTHORIZED') {
     return (
       <>
         <Header />
