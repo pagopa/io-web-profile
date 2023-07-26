@@ -67,9 +67,8 @@ const Init = (): React.ReactElement => {
       <SelectIdp
         open={openDialog}
         spidLevel="L1"
-        onClose={(opn) => {
-          setOpenDialog(opn);
-        }}
+        onClose={setOpenDialog}
+     }
       />
     </>
   );
