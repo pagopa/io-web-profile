@@ -1,19 +1,23 @@
 import { Box, Button, Dialog, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { IdpList } from './idpList';
+import { IdpList, SpidLevels } from './idpList';
 
 interface IDialog {
-  open: boolean;
-  spidLevel: 'L1' | 'L2' | 'L3';
+  isOpen: boolean;
+  spidLevel: SpidLevels;
   onClose: (open: boolean, event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function SelectIdp({ open, spidLevel, onClose }: IDialog) {
+export function SelectIdp({ isOpen, spidLevel, onClose }: IDialog) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {
-    setOpenDialog(open);
-  }, [open]);
+    setOpenDialog(isOpen);
+  }, [isOpen]);
+
+  const level: SpidLevels = {
+    type: spidLevel.type,
+  };
 
   return (
     <>
@@ -30,7 +34,7 @@ export function SelectIdp({ open, spidLevel, onClose }: IDialog) {
         >
           {'Scegli il tuo Identity Provider'}
         </Typography>
-        <IdpList spidLevel />
+        <IdpList spidLevel={level} />
         <Box p={4}>
           <Button onClick={(e) => onClose(false, e)} fullWidth variant="outlined">
             Annulla

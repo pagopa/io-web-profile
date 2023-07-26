@@ -7,10 +7,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { ROUTES } from '../../_utils/routes';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
+import { SpidLevels } from '../../_component/selectIdp/idpList';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const t = useTranslations('access');
+  const spidLevel: SpidLevels = {
+    type: 'L2',
+  };
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
@@ -159,7 +163,7 @@ const Access = (): React.ReactElement => {
       </Grid>
       <SelectIdp
         isOpen={openDialog}
-        spidLevel="L2"
+        spidLevel={spidLevel}
         onClose={(opn) => {
           setOpenDialog(opn);
         }}

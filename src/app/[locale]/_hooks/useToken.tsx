@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { storageTokenOps, storageUserOps } from '../_utils/storage';
+import { isBrowser } from '../_utils/common';
 
 interface IToken {
   token: string;
@@ -10,15 +11,16 @@ interface IToken {
 
 const useToken = (): IToken => {
   const [token, setToken] = useState<string>('');
+  const windowAvailable = isBrowser();
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (windowAvailable) {
       setToken(storageTokenOps.read());
     }
   }, []);
 
   const isTokenValid = () => {
-    if (typeof window !== 'undefined') {
+    if (windowAvailable) {
       return !!storageTokenOps.read();
     }
   };

@@ -27,8 +27,7 @@ const useLogin = (): LoginData => {
   const logOut = () => {
     setIsLoggedIn(false);
     setUserLogged(undefined);
-    storageTokenOps.delete();
-    storageUserOps.delete();
+    sessionStorage.clear();
   };
 
   return {

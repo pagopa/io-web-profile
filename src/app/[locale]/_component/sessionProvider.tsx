@@ -8,13 +8,18 @@ import Loader from './loader/loader';
 import Header from './header/header';
 import Footer from './footer/footer';
 
+type LoginStatus =
+  | { status: ELogin.IDLE }
+  | { status: ELogin.AUTHORIZED }
+  | { status: ELogin.NOT_AUTHORIZED };
+
 const enum ELogin {
   IDLE = 'IDLE',
   AUTHORIZED = 'AUTHORIZED',
   NOT_AUTHORIZED = 'NOT_AUTHORIZED',
 }
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
-  const [loginStatus, setLoginStatus] = useState<ELogin>(ELogin.IDLE);
+  const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: ELogin.IDLE });
   const { isTokenValid, removeToken } = useToken();
   const router = useRouter();
   const cleanPath = (path: string): string => path.replace(/^(\/(en|it))\/(.*)$/, '');
@@ -25,19 +30,19 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
         removeToken();
       }
       if (PUBBLIC_ROUTES.includes(cleanPath(window.location.pathname))) {
-        setLoginStatus(ELogin.AUTHORIZED);
+        setLoginStatus({ status: ELogin.AUTHORIZED });
       }
       if (!PUBBLIC_ROUTES.includes(cleanPath(window.location.pathname)) && isTokenValid()) {
-        setLoginStatus(ELogin.AUTHORIZED);
+        setLoginStatus({ status: ELogin.AUTHORIZED });
       }
       if (!PUBBLIC_ROUTES.includes(cleanPath(window.location.pathname)) && !isTokenValid()) {
-        setLoginStatus(ELogin.NOT_AUTHORIZED);
+        setLoginStatus({ status: ELogin.AUTHORIZED });
         router.push(ROUTES.LOGIN);
       }
     }
   }, [isTokenValid, removeToken, router]);
 
-  if (loginStatus === ELogin.IDLE || loginStatus === ELogin.NOT_AUTHORIZED) {
+  if (loginStatus.status === ELogin.IDLE || loginStatus.status === ELogin.NOT_AUTHORIZED) {
     return (
       <>
         <Header />
