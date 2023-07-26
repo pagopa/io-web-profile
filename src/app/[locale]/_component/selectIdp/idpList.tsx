@@ -8,14 +8,17 @@ interface IIdpList {
 
 interface ISpidLevelL1 {
   type: 'L1';
+  valueInJwt?: '';
 }
 
 interface ISpidLevelL2 {
   type: 'L2';
+  valueInJwt?: '';
 }
 
 interface ISpidLevelL3 {
   type: 'L3';
+  valueInJwt?: '';
 }
 
 export type SpidLevels = ISpidLevelL1 | ISpidLevelL2 | ISpidLevelL3;

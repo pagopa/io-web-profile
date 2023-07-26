@@ -1,10 +1,12 @@
 export const ROUTES = {
   LOGIN: `/access`,
+  LOGIN_L3: `/accessL3`,
   LOGOUT_INIT: `/logoutInit`,
   SESSION: `/session`,
   PROFILE: `/profile`,
   PROFILE_BLOCK: `/profileBlock`,
   PROFILE_RESTORE: `/profileRestore`,
+  PROFILE_RESTORE_L3: `/profileRestoreL3`,
   RESTORE_CODE: `/restoreCode`,
   RESTORE_THANK_YOU: `/restoreThankYou`,
   PROFILE_BLOCK_SUCCESS: `/profileBlockSuccess`,
