@@ -30,7 +30,7 @@ export function SelectIdp({ open, spidLevel, onClose }: IDialog) {
         >
           {'Scegli il tuo Identity Provider'}
         </Typography>
-        <IdpList spidLevel={spidLevel} />
+        <IdpList spidLevel />
         <Box p={4}>
           <Button onClick={(e) => onClose(false, e)} fullWidth variant="outlined">
             Annulla
