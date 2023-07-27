@@ -4,40 +4,41 @@ import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { ROUTES } from '../../_utils/routes';
+import { isBrowser } from '../../_utils/common';
 
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
-  const t = useTranslations('ioesco.error');
+  const t = useTranslations('ioesco');
   const errorCode = searchParams.get('errorCode');
-  const ERROR_TITLE = t('loginerror');
+  const ERROR_TITLE = t('error.loginerror');
 
   const renderErrorSummary = (errorCode: string | null) => {
     if (errorCode == null) {
-      return t('loginerrorretry'); // Generic error
+      return t('error.loginerrorretry'); // Generic error
     }
 
     switch (errorCode) {
       case '19':
-        return t('credentialerror');
+        return t('error.credentialerror');
       case '20':
-        return t('twofactorneed');
+        return t('error.twofactorneed');
       case '21':
-        return t('sessionexpired');
+        return t('error.sessionexpired');
       case '22':
-        return t('portalconsents');
+        return t('error.portalconsents');
       case '23':
-        return t('spidrevoked');
+        return t('error.spidrevoked');
       case '25':
-        return t('cancellogin');
+        return t('error.cancellogin');
       case '1001':
-        return t('minage');
+        return t('error.minage');
       default:
-        return t('loginerrorretry');
+        return t('error.loginerrorretry');
     }
   };
 
   const handleCancelBtn = () => {
-    if (typeof window !== 'undefined') {
+    if (isBrowser()) {
       history?.back();
     }
   };
@@ -60,7 +61,6 @@ const LoginErrorPage = () => {
       <Grid item xs={12} sm={4} justifySelf={'center'}>
         <Grid container justifyContent="center">
           <Grid item xs={12} textAlign={'center'} pb={4}>
-            {/* Replace the IllusError component with your actual illustration/error message */}
             {<IllusError />}
           </Grid>
           <Grid item xs={12} pb={1}>
@@ -91,7 +91,7 @@ const LoginErrorPage = () => {
           </Grid>
           {typeof errorCode === 'string' && errorCode === '1001' ? (
             <Grid item xs={12} textAlign={'center'}>
-              <Link href={'https://io.italia.it/'}>
+              <Link href={process.env.NEXT_PUBLIC_URL_IO}>
                 <Button variant="contained">Torna alla home</Button>
               </Link>
             </Grid>
@@ -100,12 +100,12 @@ const LoginErrorPage = () => {
               <Grid item xs={12} container justifyContent="center">
                 <Grid item xs={6} justifySelf="center" pr={3}>
                   <Button variant="outlined" onClick={handleCancelBtn}>
-                    Annulla
+                    {t('common.cancel')}
                   </Button>
                 </Grid>
                 <Grid item xs={6} justifySelf="center">
                   <Link href={ROUTES.LOGIN}>
-                    <Button variant="contained">Riprova</Button>
+                    <Button variant="contained">{t('error.retry')}</Button>
                   </Link>
                 </Grid>
               </Grid>
