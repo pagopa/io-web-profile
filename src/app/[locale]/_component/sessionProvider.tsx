@@ -8,15 +8,17 @@ import Loader from './loader/loader';
 import Header from './header/header';
 import Footer from './footer/footer';
 
-interface LoginStatusIdle {
+type LoginStatusIdle = {
   status: 'IDLE';
-}
-interface LoginStatusAuthorized {
+};
+
+type LoginStatusAuthorized = {
   status: 'AUTHORIZED';
-}
-interface LoginStatusNotAuthorized {
+};
+
+type LoginStatusNotAuthorized = {
   status: 'NOT_AUTHORIZED';
-}
+};
 
 export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusNotAuthorized;
 
