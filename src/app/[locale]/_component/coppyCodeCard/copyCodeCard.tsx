@@ -3,9 +3,9 @@ import { Alert, Card, CardContent, Grid, Snackbar, Typography } from '@mui/mater
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useState } from 'react';
 
-interface CopyCardProps {
+type CopyCardProps = {
   code: string;
-}
+};
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
   const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);

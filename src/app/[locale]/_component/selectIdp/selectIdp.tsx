@@ -2,13 +2,13 @@ import { Box, Button, Dialog, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { IdpList, SpidLevels } from './idpList';
 
-interface IDialog {
+type Dialog = {
   isOpen: boolean;
   spidLevel: SpidLevels;
   onClose: (open: boolean, event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};
 
-export function SelectIdp({ isOpen, spidLevel, onClose }: IDialog) {
+export function SelectIdp({ isOpen, spidLevel, onClose }: Dialog) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {

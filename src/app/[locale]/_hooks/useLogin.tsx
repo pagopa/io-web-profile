@@ -4,11 +4,11 @@ import { User } from '../_model/User';
 import { storageTokenOps, storageUserOps } from '../_utils/storage';
 import { isBrowser } from '../_utils/common';
 
-interface LoginData {
+type LoginData = {
   isLoggedIn: boolean;
   userLogged?: User;
   logOut: () => void;
-}
+};
 
 const useLogin = (): LoginData => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

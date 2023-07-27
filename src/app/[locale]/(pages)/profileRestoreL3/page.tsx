@@ -1,16 +1,16 @@
 'use client';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import Link from 'next/link';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackgroundWithBack } from '../../_utils/styles';
+import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { ROUTES } from '../../_utils/routes';
 
 const RestoreProfile = (): React.ReactElement => (
   <>
-    <Grid sx={commonBackgroundWithBack} xs={12} sm={12}>
+    <Grid sx={commonBackgroundLightWithBack} xs={12} sm={12}>
       <BackButton />
       <Introduction
         title={"Vuoi ripristinare l'accesso a IO?"}
@@ -22,13 +22,8 @@ const RestoreProfile = (): React.ReactElement => (
 
       <Grid container flexDirection={'column'}>
         <IdpListOnApp />
-        <Grid item sm={10} md={7}>
-          <Typography mb={5} fontSize={'20px'}>
-            Per ripristinare l&apos;accesso all&apos;app IO ti serve il <b>codice sblocco</b>
-            fornito in fase di blocco.
-          </Typography>
-        </Grid>
-        <Link href={ROUTES.RESTORE_CODE}>
+        <Grid item sm={10} md={7} />
+        <Link href={ROUTES.RESTORE_THANK_YOU}>
           <Button variant="contained" size="medium">
             Ripristina accesso a IO
           </Button>

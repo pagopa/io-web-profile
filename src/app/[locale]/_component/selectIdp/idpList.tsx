@@ -2,25 +2,25 @@ import React from 'react';
 import { Grid, Button, Icon } from '@mui/material';
 import { IDPS, IdentityProvider } from '../../_utils/idps';
 
-interface IIdpList {
+type IdpList = {
   spidLevel: SpidLevels;
-}
+};
 
-interface ISpidLevelL1 {
+type SpidLevelL1 = {
   type: 'L1';
-}
+};
 
-interface ISpidLevelL2 {
+type SpidLevelL2 = {
   type: 'L2';
-}
+};
 
-interface ISpidLevelL3 {
+type SpidLevelL3 = {
   type: 'L3';
-}
+};
 
-export type SpidLevels = ISpidLevelL1 | ISpidLevelL2 | ISpidLevelL3;
+export type SpidLevels = SpidLevelL1 | SpidLevelL2 | SpidLevelL3;
 
-export function IdpList({ spidLevel }: IIdpList) {
+export function IdpList({ spidLevel }: IdpList) {
   const getSPID = (IDP: IdentityProvider) => {
     window.location.assign(
       `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}`

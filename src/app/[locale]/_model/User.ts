@@ -1,8 +1,10 @@
-export interface User {
+import { SpidValueInJWT } from './JWTUser';
+
+export type User = {
   uid: string;
   taxCode: string;
   name: string;
   surname: string;
   email: string;
-  authLevel: string;
-}
+  spidLevel: SpidValueInJWT;
+};

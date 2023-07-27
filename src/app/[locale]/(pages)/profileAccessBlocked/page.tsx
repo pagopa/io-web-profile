@@ -6,6 +6,7 @@ import { ButtonNaked } from '@pagopa/mui-italia';
 import { Introduction } from '../../_component/introduction/introduction';
 import Firework from '../../_icons/firework';
 import { commonBackground } from '../../_utils/styles';
+import { ROUTES } from '../../_utils/routes';
 
 const Profile = () => {
   const bgColor = 'background.paper';
@@ -100,7 +101,7 @@ const Profile = () => {
               </Typography>
 
               <ButtonNaked
-                href="/profileBlock"
+                href={ROUTES.PROFILE_RESTORE}
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"
@@ -113,7 +114,7 @@ const Profile = () => {
                 Non hai il codice di ripristino?
               </Typography>
               <ButtonNaked
-                href="/profileBlock"
+                href={ROUTES.LOGIN_L3}
                 color="primary"
                 size="medium"
                 sx={{ textDecorationLine: 'underline' }}
