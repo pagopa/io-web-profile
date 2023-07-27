@@ -9,7 +9,7 @@ import { SpidValueInJWT } from '../../_model/JWTUser';
 
 const Check = (): React.ReactElement => {
   const token = extractToken();
-  const userFromToken = userFromJwtToken(extractToken());
+  const userFromToken = userFromJwtToken(token);
   const parsedJWT = parseJwt(token);
 
   const L1_JWT_LEVEL: SpidValueInJWT = {
