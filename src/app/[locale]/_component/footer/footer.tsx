@@ -9,10 +9,10 @@ import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
-interface IOFooterProps {
+type IOFooterProps = {
   productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
-}
+};
 
 export default function Footer({
   productsJsonUrl,

@@ -3,14 +3,14 @@ import { useTranslations } from 'next-intl';
 import { Flows } from '../../_enums/Flows';
 import { AccordionCustom } from './accordion';
 
-interface FAQProps {
+type FAQProps = {
   flow?: string;
-}
+};
 
-interface FAQEntries {
+type FAQEntries = {
   summary: string;
   details: string;
-}
+};
 
 export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
   const t = useTranslations('ioesco.commonfaq');

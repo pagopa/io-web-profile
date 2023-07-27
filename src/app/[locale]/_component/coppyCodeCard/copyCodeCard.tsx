@@ -4,9 +4,9 @@ import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-interface CopyCardProps {
+type CopyCardProps = {
   code: string;
-}
+};
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
   const t = useTranslations('ioesco.common');

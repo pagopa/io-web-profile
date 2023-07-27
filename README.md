@@ -54,7 +54,7 @@ io-web-profile/
 
 ``/_icons/``: Here, you can find icon files (e.g., SVGs) that are specific to this project.
 
-``/_model/``: This folder contains data models or interfaces.
+``/_model/``: This folder contains data models or types.
 
 ``/_redux/``: This folder store Redux-related files, such as actions, reducers and store configurations.
 

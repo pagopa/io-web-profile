@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Grid } from '@mui/material';
 
-interface IntroductionObj {
+type IntroductionObj = {
   title: string;
   summaryColor?: string;
   titleColor?: string;
@@ -11,7 +11,7 @@ interface IntroductionObj {
     sm?: number;
     md: number;
   };
-}
+};
 
 export function Introduction({
   title,

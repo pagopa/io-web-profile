@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { storageTokenOps, storageUserOps } from '../_utils/storage';
 import { isBrowser } from '../_utils/common';
 
-interface IToken {
+type IToken = {
   token: string;
   isTokenValid: () => boolean | undefined;
   removeToken: () => void;
-}
+};
 
 const useToken = (): IToken => {
   const [token, setToken] = useState<string>('');

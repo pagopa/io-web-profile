@@ -1,10 +1,10 @@
 import { getTranslator } from 'next-intl/server';
 
-interface LocaleProps {
+type LocaleProps = {
   params: {
     readonly locale: string;
   };
-}
+};
 
 const Index = async ({ params: { locale } }: LocaleProps): Promise<React.ReactElement> => {
   const t = await getTranslator(locale, 'home');
