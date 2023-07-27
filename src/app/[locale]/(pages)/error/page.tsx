@@ -2,13 +2,12 @@
 import { Button, Grid, Link, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { ROUTES } from '../../_utils/routes';
 
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco.error');
-  const router = useRouter();
   const errorCode = searchParams.get('errorCode');
   const ERROR_TITLE = t('loginerror');
 
@@ -34,6 +33,12 @@ const LoginErrorPage = () => {
         return t('minage');
       default:
         return t('loginerrorretry');
+    }
+  };
+
+  const handleCancelBtn = () => {
+    if (typeof window !== 'undefined') {
+      history?.back();
     }
   };
   return (
@@ -94,7 +99,7 @@ const LoginErrorPage = () => {
             <Grid display={'flex'} justifyContent="space-around" flexDirection={'column'}>
               <Grid item xs={12} container justifyContent="center">
                 <Grid item xs={6} justifySelf="center" pr={3}>
-                  <Button variant="outlined" onClick={() => router.back()}>
+                  <Button variant="outlined" onClick={handleCancelBtn}>
                     Annulla
                   </Button>
                 </Grid>
