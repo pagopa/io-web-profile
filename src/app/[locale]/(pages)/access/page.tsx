@@ -4,10 +4,17 @@ import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useState } from 'react';
 import { ROUTES } from '../../_utils/routes';
+import { SelectIdp } from '../../_component/selectIdp/selectIdp';
+import { SpidLevels } from '../../_component/selectIdp/idpList';
 
 const Access = (): React.ReactElement => {
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const t = useTranslations('access');
+  const spidLevel: SpidLevels = {
+    type: 'L2',
+  };
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
@@ -68,7 +75,7 @@ const Access = (): React.ReactElement => {
                       width: '100%',
                       height: '50px',
                     }}
-                    // onClick={() => setShowIDPS(true)}
+                    onClick={() => setOpenDialog(true)}
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
@@ -154,6 +161,13 @@ const Access = (): React.ReactElement => {
           </Link>
         </Grid>
       </Grid>
+      <SelectIdp
+        isOpen={openDialog}
+        spidLevel={spidLevel}
+        onClose={(opn) => {
+          setOpenDialog(opn);
+        }}
+      />
     </Grid>
   );
 };

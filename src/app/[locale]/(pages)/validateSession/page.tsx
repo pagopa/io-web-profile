@@ -1,21 +1,20 @@
 'use client';
-import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
-import { ROUTES } from '../../_utils/routes';
-import useToken from '../../_hooks/useToken';
+import { redirect } from 'next/navigation';
 import Loader from '../../_component/loader/loader';
+import { extractToken, parseJwt, userFromJwtToken } from '../../_utils/jwt';
+import { storageTokenOps, storageUserOps } from '../../_utils/storage';
+import { ROUTES } from '../../_utils/routes';
 
 const Check = (): React.ReactElement => {
-  const { tokenError } = useToken();
-
   useEffect(() => {
-    if (tokenError === 'ERROR') {
-      redirect(ROUTES.LOGOUT_AUTH_KO);
-    }
-    if (tokenError === 'OK') {
+    if (parseJwt(extractToken())) {
+      // FIXME: Jira ticket number 521
+      storageTokenOps.write(extractToken());
+      storageUserOps.write(userFromJwtToken(extractToken()));
       redirect(ROUTES.SESSION);
     }
-  }, [tokenError]);
+  }, []);
 
   return (
     <>

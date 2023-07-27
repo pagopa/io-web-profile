@@ -9,10 +9,16 @@ import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundDark } from '../../_utils/styles';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
+import { SpidLevels } from '../../_component/selectIdp/idpList';
 
 const Init = (): React.ReactElement => {
   const t = useTranslations('logout');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+  const spidLevel: SpidLevels = {
+    type: 'L1',
+  };
+
   return (
     <>
       <Grid sx={commonBackgroundDark} container>
@@ -64,12 +70,7 @@ const Init = (): React.ReactElement => {
         </Grid>
       </Grid>
       <FAQ />
-      <SelectIdp
-        open={openDialog}
-        onClose={(opn) => {
-          setOpenDialog(opn);
-        }}
-      />
+      <SelectIdp isOpen={openDialog} spidLevel={spidLevel} onClose={setOpenDialog} />
     </>
   );
 };

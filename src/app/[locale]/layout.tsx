@@ -1,8 +1,9 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
-import ThemeProviderComponent from './_component/themeProvider/themeProvider';
-import Header from './_component/header/header';
 import Footer from './_component/footer/footer';
+import Header from './_component/header/header';
+import SessionProviderComponent from './_component/sessionProvider';
+import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
 
 export async function generateStaticParams() {
@@ -25,15 +26,18 @@ const RootLayoutWithLocaleAndTheme = async ({
   } catch (error) {
     notFound();
   }
+
   return (
     <html lang={locale}>
       <body style={{ margin: '0' }}>
         <Providers>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ThemeProviderComponent>
-              <Header />
-              {children}
-              <Footer />
+              <SessionProviderComponent>
+                <Header />
+                {children}
+                <Footer />
+              </SessionProviderComponent>
             </ThemeProviderComponent>
           </NextIntlClientProvider>
         </Providers>
