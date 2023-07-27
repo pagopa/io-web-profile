@@ -66,7 +66,7 @@ export default function Footer({
         {
           label: t('informationssecurity'),
           href: 'link',
-          ariaLabel: ariaLabel('informationsecurity'),
+          ariaLabel: ariaLabel('informationssecurity'),
           linkType: 'internal',
         },
         {
