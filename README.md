@@ -6,7 +6,6 @@
 This repository contains the code that composes the io-web-profile front-end.
 
 
-
 ## Technologies
 [![My Skills](https://skillicons.dev/icons?i=ts,react,next)](https://skillicons.dev)
 
