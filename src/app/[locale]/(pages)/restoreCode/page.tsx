@@ -3,9 +3,11 @@
 import { useState } from 'react';
 
 import { Button, Grid, Link, TextField } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { Introduction } from '../../_component/introduction/introduction';
+import { Flows } from '../../_enums/Flows';
 import { commonBackground } from '../../_utils/styles';
 
 const ReactivateCode = (): React.ReactElement => {
@@ -15,7 +17,7 @@ const ReactivateCode = (): React.ReactElement => {
   const [errorMessage, setErrorMessage] = useState('');
 
   // const reactivationCodePattern: string = '[0-9]{3}[ -]*[0-9]{3}[ -]*[0-9]{3}';
-  // const t = useTranslations('logout');
+  const t = useTranslations('ioesco');
 
   const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // input only numeric characters
@@ -30,7 +32,7 @@ const ReactivateCode = (): React.ReactElement => {
       void push('/restoreThankYou');
     } else {
       setIsCodeNotValid(true);
-      setErrorMessage('Codice non valido, controlla e riprova');
+      setErrorMessage(t('restore.notvalidcode'));
     }
   };
 
@@ -39,16 +41,18 @@ const ReactivateCode = (): React.ReactElement => {
       <Grid sx={commonBackground} container>
         <Grid item xs={12} justifySelf={'center'} sx={{ pb: { xs: 0, md: '10px' } }}>
           <Introduction
-            title="Inserisci il codice di ripristino"
+            title={t('restore.insertrestorecode')}
+            // TODO: [TL] tags
             summary={
-              <>
-                Ha 9 cifre, ti è stato fornito in fase di blocco dell&apos;accesso a IO.
-                <br />
-                Non lo trovi?{' '}
-                <Link href="#" fontWeight={600}>
-                  Scopri cosa fare
-                </Link>
-              </>
+              t('restore.explanationrestorecode')
+              // <>
+              //   Ha 9 cifre, ti è stato fornito in fase di blocco dell&apos;accesso a IO.
+              //   <br />
+              //   Non lo trovi?{' '}
+              //   <Link href="#" fontWeight={600}>
+              //     Scopri cosa fare
+              //   </Link>
+              // </>
             }
             summaryColumns={{ xs: 12, md: 8 }}
           />
@@ -56,7 +60,7 @@ const ReactivateCode = (): React.ReactElement => {
         <Grid item xs={12} sx={{ pb: { sm: 4, md: '60px' } }}>
           <TextField
             id="reactivationCode"
-            label="Codice di ripristino"
+            label={t('common.resetcode')}
             value={restoreCode}
             fullWidth={true}
             inputProps={{ maxLength: 9, pattern: '[0-9]*' }}
@@ -77,16 +81,16 @@ const ReactivateCode = (): React.ReactElement => {
             disabled={restoreCode.length !== 9}
             onClick={handleClick}
           >
-            Ripristina profilo IO
+            {t('restore.restoreprofile')}
           </Button>
           <Link href="/profile">
             <Button variant="outlined" sx={{ width: { xs: '100%', sm: 'auto' } }}>
-              Annulla
+              {t('common.cancel')}
             </Button>
           </Link>
         </Grid>
       </Grid>
-      <FAQ flow="RESTORE" />
+      <FAQ flow={Flows.RESTORE} />
     </>
   );
 };

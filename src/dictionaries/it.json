@@ -59,7 +59,7 @@
       "youridentityonio": "Le tue identitÀ SU APP IO:",
       "yourprofile": "Il tuo profilo",
       "copy": "Copia",
-      "devicemodel": "{DeviceModel}",
+      "devicemodel": "{deviceModel}",
       "email-1": "{email}",
       "namesurnamevariables": "{nome} {cognome}"
     },
@@ -144,7 +144,7 @@
       "lostdevice": "Se non hai più il tuo dispositivo per accedere a IO, termina la sessione attiva e mantieni i tuoi dati al sicuro. Accedi con SPID o CIE e segui i passaggi indicati."
     },
     "lplogoutpostlogin": {
-      "activesession": "Al momento hai attiva una sessione sull’app IO con il dispositivo {DeviceModel}. Se lo hai perso o non è il tuo dispositivo, esci dal tuo account. Potrai accedere da qualsiasi dispositivo.",
+      "activesession": "Al momento hai attiva una sessione sull’app IO con il dispositivo {deviceModel}. Se lo hai perso o non è il tuo dispositivo, esci dal tuo account. Potrai accedere da qualsiasi dispositivo.",
       "lastdateactivation": "Sessione valida fino al {date}",
       "noactivesession": "Al momento non hai attiva nessuna sessione su IO. Se non hai più il tuo dispositivo i tuoi dati sono al sicuro. \nPuoi accedere nuovamente con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },

@@ -1,35 +1,44 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { isIDPKnown } from '../../_utils/idps';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
-import { renderSummary } from './utils';
+import { Flows } from '../../_enums/Flows';
 
-const ProfileBlock = (): React.ReactElement => (
-  <>
-    <Grid sx={commonBackgroundLightWithBack}>
-      <BackButton />
-      <Introduction
-        title={'Vuoi bloccare l’accesso a IO?'}
-        summary={renderSummary(isIDPKnown)}
-        summaryColumns={{ xs: 12, md: 7.5 }}
-      />
-      <Grid sx={{ maxWidth: '576px' }}>
-        {isIDPKnown && <IdpListOnApp />}
-        <Typography mb={5}>
-          Bloccando l’accesso non potrai più entrare in app IO con tutte le tue identità di livello
-          2. Dopo aver messo in sicurezza la tua identità digitale potrai sbloccare l’accesso a IO.
-        </Typography>
-        <Button href="/profileBlockSuccess" variant="contained" size="medium">
-          Blocca l’accesso a IO
-        </Button>
+const ProfileBlock = (): React.ReactElement => {
+  const t = useTranslations('ioesco');
+
+  const renderSummary = (isIDPKnown: boolean) => {
+    if (isIDPKnown) {
+      return <>{t('lockaccess.accessidentity')}</>;
+    }
+    return <>{t('lockaccess.accessidentitycompromise')}</>;
+  };
+
+  return (
+    <>
+      <Grid sx={commonBackgroundLightWithBack}>
+        <BackButton />
+        <Introduction
+          title={'Vuoi bloccare l’accesso a IO?'}
+          summary={renderSummary(isIDPKnown)}
+          summaryColumns={{ xs: 12, md: 7.5 }}
+        />
+        <Grid sx={{ maxWidth: '576px' }}>
+          {isIDPKnown && <IdpListOnApp />}
+          <Typography mb={5}>{t('common.lockaccessinfo')}</Typography>
+          <Button href="/profileBlockSuccess" variant="contained" size="medium">
+            {t('profile.lockaccess')}
+          </Button>
+        </Grid>
       </Grid>
-    </Grid>
-    <FAQ />
-  </>
-);
+      <FAQ flow={Flows.BLOCK} />
+    </>
+  );
+};
 
 export default ProfileBlock;

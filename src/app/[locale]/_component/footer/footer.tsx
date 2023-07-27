@@ -1,10 +1,11 @@
 'use client';
 import {
-  Footer as MuiItaliaFooter,
   FooterLinksType,
+  Footer as MuiItaliaFooter,
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
 // import { CONFIG } from '../../config/env';
+import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
@@ -17,118 +18,122 @@ export default function Footer({
   productsJsonUrl,
   onExit = (exitAction) => exitAction(),
 }: IOFooterProps) {
+  const t = useTranslations('ioesco.commonfooter');
+
+  const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
+  const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
       title: undefined,
       links: [
         {
-          label: 'about',
+          label: t('aboutus'),
           href: 'link',
-          ariaLabel: 'Vai al link: Chi siamo',
+          ariaLabel: ariaLabel('aboutus'),
           linkType: 'internal',
         },
         {
-          label: 'media',
+          label: t('media'),
           href: 'link',
-          ariaLabel: 'Vai al link: Media',
+          ariaLabel: ariaLabel('media'),
           linkType: 'internal',
         },
         {
-          label: 'workwithus',
+          label: t('workwithus'),
           href: 'link',
-          ariaLabel: 'Vai al link: Lavora con noi',
+          ariaLabel: ariaLabel('workwithus'),
           linkType: 'internal',
         },
       ],
     },
     // Third column
     resources: {
-      title: 'tittle',
+      title: t('resources'),
       links: [
         {
-          label: 'privacy',
+          label: t('privacypolicy'),
           href: 'default link',
-          ariaLabel: 'Vai al link: Privacy Policy',
+          ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
         },
         {
-          label: 'certifications',
+          label: t('certifications'),
           href: 'link',
-          ariaLabel: 'Vai al link: Certificazioni',
+          ariaLabel: ariaLabel('certifications'),
           linkType: 'internal',
         },
         {
-          label: 'informationSecurity',
+          label: t('informationssecurity'),
           href: 'link',
-          ariaLabel: 'Vai al link: Sicurezza delle informazioni',
+          ariaLabel: ariaLabel('informationssecurity'),
           linkType: 'internal',
         },
         {
-          label: 'protectionofpersonaldata',
+          label: t('dataprotection'),
           href: 'link',
-          ariaLabel: 'Vai al link: Diritto alla protezione dei dati personali',
+          ariaLabel: ariaLabel('dataprotection'),
           linkType: 'internal',
         },
         {
-          label: 'cookie',
+          label: t('cookiesperefercies'),
           // onClick: () => window.OneTrust.ToggleInfoDisplay(),
-          ariaLabel: 'Vai al link: Preferenze Cookie',
+          ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
         },
         {
-          label: 'termsandconditions',
+          label: t('termsandcondition'),
           href: 'termini-di-servizio',
-          ariaLabel: 'Vai al link: Termini e Condizioni',
+          ariaLabel: ariaLabel('termsandcondition'),
           linkType: 'internal',
         },
         {
-          label: 'transparentcompany',
+          label: t('society'),
           href: 'link transparentcompany',
-          ariaLabel: 'Vai al link: Società trasparente',
+          ariaLabel: ariaLabel('society'),
           linkType: 'internal',
         },
         {
-          label: 'disclosurePolicy',
+          label: t('disclosurepolicy'),
           href: 'link disclosurePolicy',
-          ariaLabel: 'Vai al link: Responsible Disclosure Policy',
+          ariaLabel: ariaLabel('disclosurepolicy'),
           linkType: 'internal',
         },
         {
-          label: 'Model321',
+          label: t('231model'),
           href: 'Model321',
-          ariaLabel: 'Vai al link: Modello 321',
+          ariaLabel: ariaLabel('231model'),
           linkType: 'internal',
         },
       ],
     },
     // Fourth column
     followUs: {
-      title: 'title',
+      title: t('followus'),
       socialLinks: [
         {
           icon: 'linkedin',
           title: 'LinkedIn',
-          href: 'link linked in',
-          ariaLabel: 'Link: vai al sito LinkedIn di PagoPA S.p.A.',
+          href: 'link linkedin',
+          ariaLabel: socialAriaLabel('LinkedIn'),
         },
         {
           title: 'Twitter',
           icon: 'twitter',
           href: 'link twitter',
-          ariaLabel: 'Link: vai al sito Twitter di PagoPA S.p.A.',
+          ariaLabel: socialAriaLabel('Twitter'),
         },
         {
           icon: 'instagram',
           title: 'Instagram',
           href: 'link instagram',
-          ariaLabel: 'Link: vai al sito Instagram di PagoPA S.p.A.',
+          ariaLabel: socialAriaLabel('Instagram'),
         },
         {
           icon: 'medium',
           title: 'Medium',
           href: 'link medium',
-          ariaLabel: 'Link: vai al sito Medium di PagoPA S.p.A.',
+          ariaLabel: socialAriaLabel('Medium'),
         },
       ],
       links: [],
@@ -136,31 +141,35 @@ export default function Footer({
   };
   const postLoginLinks: FooterLinksType[] = [
     {
-      label: 'privacyPolicy',
+      label: t('privacypolicy'),
       href: 'CONFIG.FOOTER.LINK.PRIVACYPOLICY',
-      ariaLabel: 'Vai al link: Privacy policy',
+      ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
     },
     {
-      label: 'protectionofpersonaldata',
+      label: t('dataprotection'),
       href: 'CONFIG.FOOTER.LINK.PROTECTIONOFPERSONALDATA',
-      ariaLabel: 'Vai al link: Diritto alla protezione dei dati personali',
+      ariaLabel: ariaLabel('dataprotection'),
       linkType: 'internal',
     },
     {
-      label: 'termsandconditions',
+      label: t('termsandcondition'),
       href: 'CONFIG.FOOTER.LINK.TERMSANDCONDITIONS',
-      ariaLabel: 'Vai al link: Termini e condizioni',
+      ariaLabel: ariaLabel('termsandcondition'),
       linkType: 'internal',
     },
   ];
-  const companyLegalInfo = (
-    <>
-      <strong>PagoPA S.p.A.</strong> - Società per azioni con socio unico - Capitale sociale di euro
-      1,000,000 interamente versato - Sede legale in Roma, Piazza Colonna 370, <br />
-      CAP 00187 - N. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009
-    </>
-  );
+
+  // TODO: [TL] tags
+  const companyLegalInfo = <>{t('pagopalegal')}</>;
+  // const companyLegalInfo = (
+  //   <>
+  //     <strong>PagoPA S.p.A.</strong> - Società per azioni con socio unico - Capitale sociale di euro
+  //     1,000,000 interamente versato - Sede legale in Roma, Piazza Colonna 370, <br />
+  //     CAP 00187 - N. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009
+  //   </>
+  // );
+
   const { isLoggedIn } = useLogin();
 
   return (

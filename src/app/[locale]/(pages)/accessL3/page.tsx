@@ -2,12 +2,14 @@
 import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
-import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
+import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 
 const Access = (): React.ReactElement => {
+  const t = useTranslations('ioesco');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const spidLevel: SpidLevels = {
     type: 'L3',
@@ -24,7 +26,7 @@ const Access = (): React.ReactElement => {
             }}
             mb={2}
           >
-            Non trovi il codice di ripristino?
+            {t('restore.norestorecodefound')}
           </Typography>
 
           <Grid item justifyContent="center">
@@ -37,8 +39,7 @@ const Access = (): React.ReactElement => {
               mb={{ xs: 4, md: 6 }}
               maxWidth={{ xs: '327px', sm: '330px', md: '480px' }}
             >
-              Se hai un’identità SPID o CIE di livello 3 puoi effettuare il ripristino senza codice
-              di ripristino.
+              {t('restore.l3norestorecode')}
             </Typography>
           </Grid>
 
@@ -61,7 +62,7 @@ const Access = (): React.ReactElement => {
                   component="h6"
                   variant="h6"
                 >
-                  Hai un’identità SPID o CIE di livello 3?
+                  {t('restore.l3identity')}
                 </Typography>
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
@@ -75,7 +76,7 @@ const Access = (): React.ReactElement => {
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
-                    Entra con SPID
+                    {t('common.loginspid')}
                   </Button>
                 </Box>
                 <Box display="flex" justifyContent="center" alignItems="center">
@@ -90,7 +91,7 @@ const Access = (): React.ReactElement => {
                     startIcon={<CieIcon />}
                     // onClick={() => goCIE()}
                   >
-                    Entra con CIE
+                    {t('common.logincie')}
                   </Button>
                 </Box>
                 <Divider sx={{ my: { xs: 2, md: 4 } }} variant="fullWidth" />
@@ -101,9 +102,9 @@ const Access = (): React.ReactElement => {
                   alignItems={'baseline'}
                   justifyContent={'center'}
                 >
-                  <Typography variant="body1"> Cos’è un’identità di livello 3?</Typography>
+                  <Typography variant="body1"> {t('restore.whatisl3')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link href={'#'}>Scopri di più</Link>
+                    <Link href={'#'}>{t('common.more')}</Link>
                   </Typography>
                 </Grid>
               </CardContent>

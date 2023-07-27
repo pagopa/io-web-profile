@@ -3,20 +3,20 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Card, CardContent, Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
+import { useTranslations } from 'next-intl';
 import { Introduction } from '../../_component/introduction/introduction';
 import Firework from '../../_icons/firework';
 import { commonBackground } from '../../_utils/styles';
 import { ROUTES } from '../../_utils/routes';
 
 const Profile = () => {
+  const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
   return (
     <Grid sx={commonBackground}>
       <Introduction
-        title={'Ciao Mario!'}
-        summary={
-          'Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione degli accessi in app.'
-        }
+        title={t('common.hello', { Nome: 'Mario' })}
+        summary={t('common.anagraphicinfo')}
         summaryColumns={{
           xs: 12,
           md: 8,
@@ -29,12 +29,12 @@ const Profile = () => {
       <Grid container gap={2} mb={2} flexWrap={{ xs: 'wrap', sm: 'nowrap', md: 'nowrap' }}>
         <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
           <Grid padding={3}>
-            <Typography variant="body2">Nome e Cognome</Typography>
+            <Typography variant="body2">{t('common.namesurname')}</Typography>
             <Typography variant="sidenav">Mario Rossi</Typography>
           </Grid>
           <Divider />
           <Grid padding={3}>
-            <Typography variant="body2">Indirizzo email</Typography>
+            <Typography variant="body2">{t('common.emailaddress')}</Typography>
             <Typography variant="sidenav">mario.rossi@gmail.com</Typography>
           </Grid>
         </Grid>
@@ -42,15 +42,11 @@ const Profile = () => {
         <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
           <Grid container>
             <Grid item xs={10} padding={3}>
-              <Typography variant="body2">Accesso in app</Typography>
+              <Typography variant="body2">{t('common.appaccess')}</Typography>
               <Typography variant="sidenav">Abilitato</Typography>
             </Grid>
             <Grid item xs={2} textAlign={'center'} alignSelf={'center'}>
-              <Tooltip
-                title={'L’accesso a IO è abilitato con tutte le tue identità digitali'}
-                placement="top"
-                arrow
-              >
+              <Tooltip title={t('common.tooltipaccessabled')} placement="top" arrow>
                 <HelpOutlineIcon color="primary" />
               </Tooltip>
             </Grid>
@@ -60,15 +56,11 @@ const Profile = () => {
 
           <Grid container>
             <Grid xs={10} item padding={3}>
-              <Typography variant="body2">Sessione in app</Typography>
+              <Typography variant="body2">{t('common.appsession')}</Typography>
               <Typography variant="sidenav">Attiva fino al 08/06/2023</Typography>
             </Grid>
             <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
-              <Tooltip
-                title={'Fino al 08/06/2023 accedi a IO senza login SPID o CIE'}
-                placement="top"
-                arrow
-              >
+              <Tooltip title={t('tooltip.accesswithoutidp')} placement="top" arrow>
                 <HelpOutlineIcon color="primary" />
               </Tooltip>
             </Grid>
@@ -77,7 +69,7 @@ const Profile = () => {
       </Grid>
 
       <Grid item pb={3} mt={6} xs={12} md={12} textAlign={'center'}>
-        <Typography variant="h4">Cosa devi fare?</Typography>
+        <Typography variant="h4">{t('common.whatdo')}</Typography>
       </Grid>
 
       <Grid container flexDirection="column" justifyContent="center" alignItems="center">
@@ -94,10 +86,10 @@ const Profile = () => {
             <CardContent>
               <Firework />
               <Typography variant="h6" py={2}>
-                Ripristina accesso a IO
+                {t('common.restoreioaccess')}
               </Typography>
               <Typography variant="body2" textAlign="center" px={5}>
-                Hai messo in sicurezza la tua identità digitale? Ripristina l’accesso all’app IO.
+                {t('common.identitysecurityrestore')}
               </Typography>
 
               <ButtonNaked
@@ -107,11 +99,11 @@ const Profile = () => {
                 size="medium"
                 sx={{ py: '19px' }}
               >
-                Ripristina accesso a IO
+                {t('common.restoreioaccess')}
               </ButtonNaked>
               <Divider />
               <Typography variant="body2" padding={2}>
-                Non hai il codice di ripristino?
+                {t('common.norestorecode')}
               </Typography>
               <ButtonNaked
                 href={ROUTES.LOGIN_L3}
@@ -119,7 +111,7 @@ const Profile = () => {
                 size="medium"
                 sx={{ textDecorationLine: 'underline' }}
               >
-                Scopri cosa fare
+                {t('common.findwhatdo')}
               </ButtonNaked>
             </CardContent>
           </Card>

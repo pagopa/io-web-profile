@@ -1,6 +1,7 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Alert, Card, CardContent, Grid, Snackbar, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 type CopyCardProps = {
@@ -8,6 +9,7 @@ type CopyCardProps = {
 };
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
+  const t = useTranslations('ioesco.common');
   const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
 
   const copyTextToClipboard = (text: string | undefined) => {
@@ -35,7 +37,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
         }}
       >
         <Grid>
-          <Typography variant="caption">Codice di ripristino</Typography>
+          <Typography variant="caption">{t('resetcode')}</Typography>
           <Typography fontWeight={600} fontSize="32px">
             {code}
           </Typography>
@@ -46,7 +48,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
             onClick={() => copyTextToClipboard(code)}
             color="primary"
           >
-            Copia
+            {t('copy')}
           </ButtonNaked>
         </Grid>
       </CardContent>

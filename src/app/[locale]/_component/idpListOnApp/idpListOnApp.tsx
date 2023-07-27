@@ -1,6 +1,8 @@
 import { Divider, Grid, Icon, Paper, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 export const IdpListOnApp = () => {
+  const t = useTranslations('ioesco.common');
   const mockedIdentityProviders = [
     {
       identifier: 'Ultimo accesso il 06 ott 2022 alle 16:43',
@@ -25,7 +27,7 @@ export const IdpListOnApp = () => {
   return (
     <>
       <Typography variant="overline" color={'textSecondary'}>
-        Le tue identitÀ SU APP IO:
+        {t('youridentityonio')}
       </Typography>
       <Paper
         elevation={2}

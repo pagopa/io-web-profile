@@ -12,7 +12,7 @@ import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 
 const Init = (): React.ReactElement => {
-  const t = useTranslations('logout');
+  const t = useTranslations('ioesco');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const spidLevel: SpidLevels = {
@@ -23,6 +23,7 @@ const Init = (): React.ReactElement => {
     <>
       <Grid sx={commonBackgroundDark} container>
         <Grid item xs={12} justifySelf={'center'}>
+          {/* TODO: title and description from tl file */}
           <Introduction
             title={t('title')}
             summary={t('description')}
@@ -49,7 +50,7 @@ const Init = (): React.ReactElement => {
               startIcon={<CieIcon />}
               variant="outlined"
             >
-              Entra con SPID
+              {t('common.loginspid')}
             </Button>
           </Grid>
           <Grid item xs={12} sm={5} md={4} lg={3} xl={2}>
@@ -64,7 +65,7 @@ const Init = (): React.ReactElement => {
               startIcon={<SpidIcon />}
               variant="outlined"
             >
-              Entra con CIE
+              {t('common.logincie')}
             </Button>
           </Grid>
         </Grid>
