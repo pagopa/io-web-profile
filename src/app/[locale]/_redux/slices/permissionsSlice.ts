@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-export interface PermissionsProps {
+export type PermissionsProps = {
   role: string | undefined;
-}
+};
 const initialState: PermissionsProps = {
   role: '',
 };

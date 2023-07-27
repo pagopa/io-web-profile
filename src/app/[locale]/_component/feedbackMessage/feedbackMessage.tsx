@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Grid, Button, Box } from '@mui/material';
 import Link from 'next/link';
 
-interface IntroductionProps {
+type IntroductionProps = {
   topIcon?: JSX.Element;
   title: string;
   summary: string | JSX.Element;
@@ -12,7 +12,7 @@ interface IntroductionProps {
     variant: 'text' | 'outlined' | 'contained';
     text: string;
   };
-}
+};
 
 export function FeedbackMessage({ topIcon, title, summary, button }: IntroductionProps) {
   return (

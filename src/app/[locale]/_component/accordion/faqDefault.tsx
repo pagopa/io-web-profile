@@ -2,14 +2,14 @@ import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { AccordionCustom } from './accordion';
 
-interface FAQProps {
+type FAQProps = {
   flow?: string;
-}
+};
 
-interface FAQEntries {
+type FAQEntries = {
   summary: string;
   details: string;
-}
+};
 
 export const FAQ = ({ flow = 'DEFAULT' }: FAQProps) => {
   // #region entries

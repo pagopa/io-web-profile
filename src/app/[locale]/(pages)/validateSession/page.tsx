@@ -40,11 +40,7 @@ const Check = (): React.ReactElement => {
     }
   }, []);
 
-  return (
-    <>
-      <Loader />
-    </>
-  );
+  return <Loader />;
 };
 
 export default Check;
