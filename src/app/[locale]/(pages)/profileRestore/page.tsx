@@ -38,6 +38,11 @@ const RestoreProfile = (): React.ReactElement => {
             </Button>
           </Link>
         </Grid>
+        <Link href={ROUTES.RESTORE_CODE}>
+          <Button variant="contained" size="medium">
+            {t('common.restoreioaccess')}
+          </Button>
+        </Link>
       </Grid>
       <FAQ flow={Flows.RESTORE} />
     </>
