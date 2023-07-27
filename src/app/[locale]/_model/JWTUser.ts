@@ -4,5 +4,9 @@ export interface JWTUser {
   name: string;
   family_name: string;
   email: string;
-  level: string;
+  spid_level: SpidValueInJWT;
 }
+
+export type SpidValueInJWT = {
+  value?: string;
+};

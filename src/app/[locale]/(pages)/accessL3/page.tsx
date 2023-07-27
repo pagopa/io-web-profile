@@ -2,20 +2,16 @@
 import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
-import { ROUTES } from '../../_utils/routes';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const t = useTranslations('access');
   const spidLevel: SpidLevels = {
-    type: 'L2',
+    type: 'L3',
   };
-
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
       <Grid item xs={12} sm={7.2} md={8}>
@@ -28,7 +24,7 @@ const Access = (): React.ReactElement => {
             }}
             mb={2}
           >
-            Entra con SPID o CIE
+            Non trovi il codice di ripristino?
           </Typography>
 
           <Grid item justifyContent="center">
@@ -41,8 +37,8 @@ const Access = (): React.ReactElement => {
               mb={{ xs: 4, md: 6 }}
               maxWidth={{ xs: '327px', sm: '330px', md: '480px' }}
             >
-              Seleziona la modalità di accesso che preferisci e inizia il processo di adesione al
-              prodotto nomeProdotto.
+              Se hai un’identità SPID o CIE di livello 3 puoi effettuare il ripristino senza codice
+              di ripristino.
             </Typography>
           </Grid>
 
@@ -65,7 +61,7 @@ const Access = (): React.ReactElement => {
                   component="h6"
                   variant="h6"
                 >
-                  Accedi
+                  Hai un’identità SPID o CIE di livello 3?
                 </Typography>
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
@@ -105,7 +101,7 @@ const Access = (): React.ReactElement => {
                   alignItems={'baseline'}
                   justifyContent={'center'}
                 >
-                  <Typography variant="body1"> Non hai SPID o CIE?</Typography>
+                  <Typography variant="body1"> Cos’è un’identità di livello 3?</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
                     <Link href={'#'}>Scopri di più</Link>
                   </Typography>
@@ -116,51 +112,6 @@ const Access = (): React.ReactElement => {
         </Grid>
       </Grid>
 
-      <Grid
-        item
-        bgcolor={'primary.dark'}
-        xs={12}
-        sm={4.8}
-        md={4}
-        py={{ xs: 4, sm: 0 }}
-        px={{ xs: 3, md: 6 }}
-      >
-        <Grid item mb={2}>
-          <Typography variant="h5" pt={{ md: 20, sm: 8 }} color="primary.contrastText">
-            {t('title')}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography
-            variant="body1"
-            sx={{
-              textAlign: 'left',
-            }}
-            mb={4}
-            color={'primary.contrastText'}
-          >
-            Esci da IO per mantenere al sicuro i tuoi dati e i contenuti a te dedicati
-          </Typography>
-        </Grid>
-        <Grid item mb={2}>
-          <Link href={ROUTES.LOGOUT_INIT}>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              sx={{
-                backgroundColor: 'background.paper',
-                '&:hover': {
-                  backgroundColor: '#ffffff',
-                },
-                color: 'primary',
-              }}
-            >
-              Esci da IO
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
       <SelectIdp
         isOpen={openDialog}
         spidLevel={spidLevel}

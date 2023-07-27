@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { User } from '../_model/User';
-import { cookieTokenOps, cookieUserOps } from '../_utils/cookie';
+import { storageTokenOps, storageUserOps } from '../_utils/storage';
+import { isBrowser } from '../_utils/common';
 
 interface LoginData {
   isLoggedIn: boolean;
@@ -12,12 +13,12 @@ interface LoginData {
 const useLogin = (): LoginData => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userLogged, setUserLogged] = useState<User | undefined>(undefined);
-  const cookieTokenRead = cookieTokenOps.read();
+  const cookieTokenRead = isBrowser() ? storageTokenOps.read() : null;
 
   useEffect(() => {
     if (cookieTokenRead) {
       setIsLoggedIn(true);
-      setUserLogged(cookieUserOps.read());
+      setUserLogged(storageUserOps.read());
     } else {
       setIsLoggedIn(false);
       setUserLogged(undefined);
@@ -27,8 +28,7 @@ const useLogin = (): LoginData => {
   const logOut = () => {
     setIsLoggedIn(false);
     setUserLogged(undefined);
-    cookieTokenOps.delete();
-    cookieUserOps.delete();
+    sessionStorage.clear();
   };
 
   return {

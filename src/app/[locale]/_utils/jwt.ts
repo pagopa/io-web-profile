@@ -27,6 +27,6 @@ export const userFromJwtToken: (token: string) => User = function (token: string
     name: jwtUser.name,
     surname: jwtUser.family_name,
     email: jwtUser.email,
-    authLevel: jwtUser.level,
+    spidLevel: jwtUser.spid_level,
   };
 };
