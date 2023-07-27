@@ -8,6 +8,7 @@ import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { Flows } from '../../_enums/Flows';
 import { commonBackgroundWithBack } from '../../_utils/styles';
+import { ROUTES } from '../../_utils/routes';
 
 const RestoreProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -31,7 +32,7 @@ const RestoreProfile = (): React.ReactElement => {
             fornito in fase di blocco. */}
             </Typography>
           </Grid>
-          <Link href="/restoreCode">
+          <Link href={ROUTES.RESTORE_CODE}>
             <Button variant="contained" size="medium">
               {t('common.restoreioaccess')}
             </Button>

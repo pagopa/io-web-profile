@@ -2,20 +2,16 @@
 import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
-import { ROUTES } from '../../_utils/routes';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const t = useTranslations('ioesco');
   const spidLevel: SpidLevels = {
-    type: 'L2',
+    type: 'L3',
   };
-
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
       <Grid item xs={12} sm={7.2} md={8}>
@@ -28,7 +24,7 @@ const Access = (): React.ReactElement => {
             }}
             mb={2}
           >
-            {t('common.loginspidorcie')}
+            Non trovi il codice di ripristino?
           </Typography>
 
           <Grid item justifyContent="center">
@@ -41,7 +37,8 @@ const Access = (): React.ReactElement => {
               mb={{ xs: 4, md: 6 }}
               maxWidth={{ xs: '327px', sm: '330px', md: '480px' }}
             >
-              {t('common.selectauthmethod')}
+              Se hai un’identità SPID o CIE di livello 3 puoi effettuare il ripristino senza codice
+              di ripristino.
             </Typography>
           </Grid>
 
@@ -64,7 +61,7 @@ const Access = (): React.ReactElement => {
                   component="h6"
                   variant="h6"
                 >
-                  {t('common.login')}
+                  Hai un’identità SPID o CIE di livello 3?
                 </Typography>
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
@@ -78,7 +75,7 @@ const Access = (): React.ReactElement => {
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
-                    {t('common.loginspid')}
+                    Entra con SPID
                   </Button>
                 </Box>
                 <Box display="flex" justifyContent="center" alignItems="center">
@@ -93,7 +90,7 @@ const Access = (): React.ReactElement => {
                     startIcon={<CieIcon />}
                     // onClick={() => goCIE()}
                   >
-                    {t('common.logincie')}
+                    Entra con CIE
                   </Button>
                 </Box>
                 <Divider sx={{ my: { xs: 2, md: 4 } }} variant="fullWidth" />
@@ -104,9 +101,9 @@ const Access = (): React.ReactElement => {
                   alignItems={'baseline'}
                   justifyContent={'center'}
                 >
-                  <Typography variant="body1">{t('common.nothavespid')}</Typography>
+                  <Typography variant="body1"> Cos’è un’identità di livello 3?</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link href={'#'}>{t('common.more')}</Link>
+                    <Link href={'#'}>Scopri di più</Link>
                   </Typography>
                 </Grid>
               </CardContent>
@@ -115,51 +112,6 @@ const Access = (): React.ReactElement => {
         </Grid>
       </Grid>
 
-      <Grid
-        item
-        bgcolor={'primary.dark'}
-        xs={12}
-        sm={4.8}
-        md={4}
-        py={{ xs: 4, sm: 0 }}
-        px={{ xs: 3, md: 6 }}
-      >
-        <Grid item mb={2}>
-          <Typography variant="h5" pt={{ md: 20, sm: 8 }} color="primary.contrastText">
-            {t('common.lostdevice')}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography
-            variant="body1"
-            sx={{
-              textAlign: 'left',
-            }}
-            mb={4}
-            color={'primary.contrastText'}
-          >
-            {t('lpaccess.logout')}
-          </Typography>
-        </Grid>
-        <Grid item mb={2}>
-          <Link href={ROUTES.LOGOUT_INIT}>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              sx={{
-                backgroundColor: 'background.paper',
-                '&:hover': {
-                  backgroundColor: '#ffffff',
-                },
-                color: 'primary',
-              }}
-            >
-              {t('common.logout')}
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
       <SelectIdp
         isOpen={openDialog}
         spidLevel={spidLevel}

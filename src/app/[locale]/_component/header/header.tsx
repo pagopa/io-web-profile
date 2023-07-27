@@ -1,7 +1,6 @@
 'use client';
 import { HeaderAccount, HeaderProduct, LogoIOApp } from '@pagopa/mui-italia';
 import React from 'react';
-import { IconButton } from '@mui/material';
 import useLogin from '../../_hooks/useLogin';
 
 const Header = (): React.ReactElement => {
@@ -37,17 +36,6 @@ const Header = (): React.ReactElement => {
         }}
         enableLogin={isLoggedIn}
         enableAssistanceButton={true}
-        userActions={[
-          {
-            id: 'logout',
-            label: 'Esci',
-            onClick: () => {
-              // eslint-disable-next-line no-console
-              console.log('User logged out');
-            },
-            icon: <IconButton />,
-          },
-        ]}
       />
       <HeaderProduct
         productsList={[

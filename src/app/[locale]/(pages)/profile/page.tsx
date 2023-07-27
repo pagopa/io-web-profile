@@ -82,17 +82,18 @@ const Profile = () => {
 
       <Grid
         container
-        spacing={2}
+        spacing={4}
         flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
         textAlign={{ xs: 'left', sm: 'center' }}
       >
-        <Grid item xs={0} md={1}></Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
+        <Grid item xs={12} md={5} lg={4} xl={3}>
           <Card
             sx={{
               backgroundColor: bgColor,
               boxShadow: '0px 8px 38px 7px #002B551A',
               borderRadius: '16px',
+              height: '100%',
             }}
           >
             <CardContent sx={{ padding: '32px' }}>
@@ -111,11 +112,11 @@ const Profile = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={5} lg={4} xl={3}>
           <Card
             sx={{
               backgroundColor: bgColor,
-
+              height: '100%',
               boxShadow: '0px 8px 38px 7px #002B551A',
               borderRadius: '16px',
             }}
@@ -140,7 +141,7 @@ const Profile = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={0} md={1}></Grid>
+        <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
       </Grid>
     </Grid>
   );

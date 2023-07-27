@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Introduction } from '../../_component/introduction/introduction';
 import Firework from '../../_icons/firework';
 import { commonBackground } from '../../_utils/styles';
+import { ROUTES } from '../../_utils/routes';
 
 const Profile = () => {
   const t = useTranslations('ioesco');
@@ -92,7 +93,7 @@ const Profile = () => {
               </Typography>
 
               <ButtonNaked
-                href="/profileBlock"
+                href={ROUTES.PROFILE_RESTORE}
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"
@@ -105,7 +106,7 @@ const Profile = () => {
                 {t('common.norestorecode')}
               </Typography>
               <ButtonNaked
-                href="/profileBlock"
+                href={ROUTES.LOGIN_L3}
                 color="primary"
                 size="medium"
                 sx={{ textDecorationLine: 'underline' }}
