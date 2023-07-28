@@ -23,6 +23,7 @@ const Init = (): React.ReactElement => {
     <>
       <Grid sx={commonBackgroundDark} container>
         <Grid item xs={12} justifySelf={'center'}>
+          {/* TODO: title and description from tl file */}
           <Introduction
             title={t('common.logout')}
             summary={t('lplogout.lostdevice')}
