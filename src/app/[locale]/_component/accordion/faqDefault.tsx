@@ -29,7 +29,7 @@ export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
       details: t('firstresponse'),
     },
     {
-      summary: t('fouthquestion'),
+      summary: t('fourthquestion'),
       details: t('firstresponse'),
     },
   ];
