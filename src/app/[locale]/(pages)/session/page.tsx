@@ -17,14 +17,13 @@ const Session = (): React.ReactElement => {
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={t('common.hello', { nome: 'Mario' })}
-            // TODO: [TL] tags
             summary={
               <>
                 <span>
-                  {t('lplogoutpostlogin.activesession', { deviceModel: 'iPhone 12 Pro' })}
-                  {/* Al momento hai attiva una sessione su app IO con il dispositivo{' '}
-                  <strong>iPhone 12 Pro</strong>, se lo hai perso o non lo riconosci esci dal tuo
-                  account. Potrai accedere nuovamente da qualsiasi dispositivo. */}
+                  {t.rich('lplogoutpostlogin.activesession', {
+                    deviceModel: 'iPhone 12 Pro',
+                    strong: (chunks) => <strong>{chunks}</strong>,
+                  })}
                 </span>
               </>
             }

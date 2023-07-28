@@ -23,10 +23,9 @@ const Init = (): React.ReactElement => {
     <>
       <Grid sx={commonBackgroundDark} container>
         <Grid item xs={12} justifySelf={'center'}>
-          {/* TODO: title and description from tl file */}
           <Introduction
-            title={t('title')}
-            summary={t('description')}
+            title={t('common.logout')}
+            summary={t('lplogout.lostdevice')}
             summaryColumns={{ xs: 12, md: 8 }}
             summaryColor={'primary.contrastText'}
             titleColor={'primary.contrastText'}
