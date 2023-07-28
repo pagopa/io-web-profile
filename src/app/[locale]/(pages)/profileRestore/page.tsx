@@ -18,18 +18,17 @@ const RestoreProfile = (): React.ReactElement => {
         <BackButton />
         <Introduction
           title={t('restore.restoreaccess')}
-          summary={t('restore.login-1')}
+          summary={t('restore.login')}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
 
         <Grid container flexDirection={'column'}>
           <IdpListOnApp />
           <Grid item sm={10} md={7}>
-            {/* TODO: [TL] tags */}
             <Typography mb={5} fontSize={'20px'}>
-              {t('restore.insertcode')}
-              {/* Per ripristinare l&apos;accesso all&apos;app IO ti serve il <b>codice sblocco</b>
-            fornito in fase di blocco. */}
+              {t.rich('restore.insertcode', {
+                strong: (chunks) => <strong>{chunks}</strong>,
+              })}
             </Typography>
           </Grid>
           <Link href={ROUTES.RESTORE_CODE}>
@@ -38,11 +37,6 @@ const RestoreProfile = (): React.ReactElement => {
             </Button>
           </Link>
         </Grid>
-        <Link href={ROUTES.RESTORE_CODE}>
-          <Button variant="contained" size="medium">
-            {t('common.restoreioaccess')}
-          </Button>
-        </Link>
       </Grid>
       <FAQ flow={Flows.RESTORE} />
     </>

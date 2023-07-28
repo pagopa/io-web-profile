@@ -17,7 +17,7 @@ const RestoreProfile = (): React.ReactElement => {
         <BackButton />
         <Introduction
           title={t('restore.restoreaccess')}
-          summary={t('restore.login-1')}
+          summary={t('restore.login')}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
 

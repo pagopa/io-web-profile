@@ -8,6 +8,32 @@ import { Introduction } from '../../_component/introduction/introduction';
 import { isIDPKnown } from '../../_utils/idps';
 import { commonBackgroundWithBack } from '../../_utils/styles';
 
+const unlockioaccessRich = {
+  strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
+  ul: (chunks: React.ReactNode) => (
+    <List
+      sx={{
+        listStyleType: 'square',
+        marginBottom: '42px',
+        padding: '8px',
+      }}
+    >
+      {chunks}
+    </List>
+  ),
+  li: (chunks: React.ReactNode) => (
+    <ListItem>
+      <Typography sx={{ display: 'list-item' }}>{chunks}</Typography>
+    </ListItem>
+  ),
+  u: (chunks: React.ReactNode) => (
+    <Link href="#" color="textPrimary">
+      {chunks}
+    </Link>
+  ),
+  em: (chunks: React.ReactNode) => <em>{chunks}</em>,
+};
+
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   return (
@@ -15,13 +41,11 @@ const ProfileBlock = (): React.ReactElement => {
       <BackButton />
       <Introduction
         title={t('common.lockedioaccess')}
-        // TODO: [TL] tags
         summary={
           <>
-            {t('lockaccess.lockaccess')}
-            {/* Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di
-            livello 2. <br /> <br /> Per ripristinare l’accesso ti verrà richiesto il
-            <strong> codice di ripristino</strong>, assicurati di salvarlo e tenerlo al sicuro! */}
+            {t.rich('lockaccess.lockaccess', {
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </>
         }
         summaryColumns={{ xs: 12, md: 8 }}
@@ -33,40 +57,7 @@ const ProfileBlock = (): React.ReactElement => {
       <Typography variant="h6" my={3}>
         {t('common.howrestoreprofile')}
       </Typography>
-      {/* TODO: [TL] unlockioaccess must have separate list items keys
-       * or different formatting, see here: https://next-intl-docs.vercel.app/docs/usage/messages#arrays-of-messages */}
-      <Typography>Per sbloccare l’accesso in app IO segui questi passaggi:</Typography>
-      <List
-        sx={{
-          listStyleType: 'square',
-          marginBottom: '42px',
-          padding: '8px',
-        }}
-      >
-        <ListItem>
-          <Typography sx={{ display: 'list-item' }}>
-            Vai sul sito{' '}
-            <Link href="#" color="textPrimary">
-              io.italia.it
-            </Link>
-          </Typography>
-        </ListItem>
-        <ListItem>
-          <Typography sx={{ display: 'list-item' }}>
-            Accedi con le tue credenziali SPID o CIE
-          </Typography>
-        </ListItem>
-        <ListItem>
-          <Typography sx={{ display: 'list-item' }}>
-            Vai alla sezione <i>Ripristina accesso a IO</i>
-          </Typography>
-        </ListItem>
-        <ListItem>
-          <Typography sx={{ display: 'list-item' }}>
-            Segui i passaggi e quando richiesto inserisci il <strong>codice di ripristino</strong>
-          </Typography>
-        </ListItem>
-      </List>
+      <Typography>{t.rich('common.unlockioaccess', unlockioaccessRich)}</Typography>
 
       <Button href={'/profileAccessBlocked'} variant="outlined" size="medium">
         {t('common.backtoprofile')}

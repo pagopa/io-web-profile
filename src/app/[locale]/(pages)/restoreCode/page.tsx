@@ -24,6 +24,15 @@ const ReactivateCode = (): React.ReactElement => {
     setRestoreCode(e.target.value.replace(/\D/g, ''));
   };
 
+  const explanationrestorecodeRich = {
+    link: (chunks: React.ReactNode) => (
+      <Link href="#" fontWeight={600}>
+        {chunks}
+      </Link>
+    ),
+    br: () => <br />,
+  };
+
   const handleClick = () => {
     // TODO: remove mocked logic
     if (restoreCode === '123456789') {
@@ -42,18 +51,7 @@ const ReactivateCode = (): React.ReactElement => {
         <Grid item xs={12} justifySelf={'center'} sx={{ pb: { xs: 0, md: '10px' } }}>
           <Introduction
             title={t('restore.insertrestorecode')}
-            // TODO: [TL] tags
-            summary={
-              t('restore.explanationrestorecode')
-              // <>
-              //   Ha 9 cifre, ti è stato fornito in fase di blocco dell&apos;accesso a IO.
-              //   <br />
-              //   Non lo trovi?{' '}
-              //   <Link href="#" fontWeight={600}>
-              //     Scopri cosa fare
-              //   </Link>
-              // </>
-            }
+            summary={t.rich('restore.explanationrestorecode', explanationrestorecodeRich)}
             summaryColumns={{ xs: 12, md: 8 }}
           />
         </Grid>

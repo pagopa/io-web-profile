@@ -5,7 +5,7 @@ type IntroductionObj = {
   title: string;
   summaryColor?: string;
   titleColor?: string;
-  summary: string | JSX.Element;
+  summary: string | JSX.Element | React.ReactNodeArray | React.ReactNode;
   summaryColumns: {
     xs: number;
     sm?: number;
