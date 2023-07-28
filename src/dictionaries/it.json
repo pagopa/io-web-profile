@@ -7,7 +7,7 @@
       "activeduedate": "Attiva fino al {date}",
       "anagraphicinfo": "Qui trovi i dati del tuo profilo, presenti sull’app IO, e le informazioni sugli accessi in app.",
       "appaccess": "Accesso a IO",
-      "appsession": "Sessione in app",
+      "appsession": "Validità sessione",
       "appstore": "App Store",
       "assistence": "Assistenza",
       "backtohome": "Torna alla home",
@@ -25,7 +25,7 @@
       "legalnotes": "Note legali",
       "lockaccess": "Accesso bloccato",
       "lockaccessinfo": "Bloccando l’accesso non potrai più entrare in app IO con tutte le tue identità di livello 2. Dopo aver messo in sicurezza la tua identità digitale potrai sbloccare l’accesso a IO.",
-      "lockappaccess": "Sospetti che la tua identità digitale sia stata compromessa? Blocca l’accesso all’app IO.",
+      "lockappaccess": "Pensi che la tua identità digitale sia compromessa? Blocca l’accesso all’app IO.",
       "lockio": "Blocca l’accesso a IO",
       "lockioaccess": "Vuoi bloccare l’accesso a IO?",
       "locked": "Bloccato con L2",
@@ -41,7 +41,7 @@
       "more": "Scopri di più",
       "namesurname": "Nome e Cognome",
       "noactive": "Non attiva",
-      "noprofile": "Non risulta nessun profilo IO associato alla tua identità, per accedere a tutte le funzionalità scarica l’app IO sul tuo smartphone.",
+      "noprofile": "Non risulta nessun profilo IO associato alla tua identità. Per accedere a tutte le funzionalità scarica l’app IO sul tuo dispositivo.",
       "norestorecode": "Non hai il codice di ripristino?",
       "nothavespid": "Non hai SPID?",
       "pagopaspa": "PagoPA S.p.A.",
@@ -54,13 +54,13 @@
       "security": "Sicurezza",
       "selectauthmethod": "Seleziona la modalità di autenticazione che preferisci e accedi al tuo profilo IO in versione web.",
       "tooltipaccessabled": "L’accesso a IO è abilitato con tutte le tue identità digitali",
-      "unlockioaccess": "Per sbloccare l’accesso in app IO segui questi passaggi:\nVai sul sito io.italia.it\nAccedi con le tue credenziali SPID o CIE\nVai alla sezione Ripristina accesso a IO\nSegui i passaggi e quando richiesto inserisci il codice di ripristino",
-      "whatdo": "Cosa devi fare?",
+      "unlockioaccess": "<p>Per sbloccare l’accesso in app IO segui questi passaggi:</p><p>Vai sul sito <u>io.italia.it</u></p><p>Accedi con le tue credenziali SPID o CIE</p><p>Vai alla sezione <em>Ripristina accesso a IO</em></p><p>Segui i passaggi e quando richiesto inserisci il <strong>codice di ripristino</strong></p>",
+      "whatdo": "Cosa puoi fare?",
       "youridentityonio": "Le tue identitÀ SU APP IO:",
       "yourprofile": "Il tuo profilo",
       "copy": "Copia",
       "devicemodel": "{deviceModel}",
-      "email-1": "{email}",
+      "email": "{email}",
       "namesurnamevariables": "{nome} {cognome}"
     },
     "commonfaq": {
@@ -98,7 +98,7 @@
       "interoperability": "Piattaforma Digitale Nazionale Dati - Interoperabilità",
       "language": "Italiano",
       "media": "Media",
-      "pagopalegal": "PagoPA S.p.A. - Società per azioni con socio unico - Capitale sociale di euro 1,000,000 interamente versato - Sede legale in Roma, Piazza Colonna 370, CAP 00187 - N. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009",
+      "pagopalegal": "<p><strong>PagoPA S.p.A. </strong>- Società per azioni con socio unico - Capitale sociale di euro 1,000,000 interamente versato - Sede legale in Roma, Piazza Colonna 370, CAP 00187 - N. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009</p>",
       "pagopaplatform": "Piattaforma pagoPA",
       "pnrr": "PNRR",
       "privacypolicy": "Informativa Privacy",
@@ -132,7 +132,7 @@
       "accessidentity": "Hai effettuato l’accesso in app IO con le seguenti identità, se sospetti che una di queste sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al sicuro. ",
       "accessidentitycompromise": "Se sospetti che la tua identità digitale sia stata compromessa blocca l’accesso all’app per mantenere i tuoi dati al sicuro.",
       "lastaccess": "Ultimo accesso il {date} alle {hour}",
-      "lockaccess": "Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di livello 2. Per ripristinare l’accesso ti verrà richiesto il codice di ripristino, assicurati di salvarlo e tenerlo al sicuro!"
+      "lockaccess": "<p>Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di livello 2. Per ripristinare l’accesso ti verrà richiesto il <strong>codice di ripristino</strong>, assicurati di salvarlo e tenerlo al sicuro!</p>"
     },
     "lpaccess": {
       "logout": "Esci da IO per mantenere al sicuro i tuoi dati, i messaggi e i metodi di pagamento",
@@ -144,7 +144,7 @@
       "lostdevice": "Se non hai più il tuo dispositivo per accedere a IO, termina la sessione attiva e mantieni i tuoi dati al sicuro. Accedi con SPID o CIE e segui i passaggi indicati."
     },
     "lplogoutpostlogin": {
-      "activesession": "Al momento hai attiva una sessione sull’app IO con il dispositivo {deviceModel}. Se lo hai perso o non è il tuo dispositivo, esci dal tuo account. Potrai accedere da qualsiasi dispositivo.",
+      "activesession": "<p>Al momento hai attiva una sessione sull’app IO con il dispositivo <span data-type=\"variable\" data-grammarly-skip class=\"\" data-variable-id=\"64b645fd63aa6e966662a520\" data-name=\"deviceModel\" data-text=\"Iphone 14 Pro\" data-variable-type=\"string\">Iphone 14 Pro</span>. Se lo hai perso o non è il tuo dispositivo, scollega il tuo account. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.</p>",
       "lastdateactivation": "Sessione valida fino al {date}",
       "noactivesession": "Al momento non hai attiva nessuna sessione su IO. Se non hai più il tuo dispositivo i tuoi dati sono al sicuro. \nPuoi accedere nuovamente con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },
@@ -156,12 +156,12 @@
       "nodevicelogout": "Non hai più il tuo dispositivo era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account."
     },
     "profilelogout": {
-      "logout": "Vuoi uscire da app IO?"
+      "logout": "Vuoi uscire da IO?"
     },
     "restore": {
       "accessrestored": "L’accesso a IO è stato ripristinato",
       "accessrestoredsuccess": "Accesso ripristinato",
-      "explanationrestorecode": "Ha 9 cifre, ti è stato fornito in fase di blocco dell’accesso a IO.\nNon lo trovi? Scopri cosa fare",
+      "explanationrestorecode": "<p>Ha 9 cifre, ti è stato fornito in fase di blocco dell’accesso a IO.</p><p>Non lo trovi? <span data-type=\"variable\" data-grammarly-skip class=\"\" data-variable-id=\"64c0c87ea6003fc7bce6a515\" data-name=\"link\" data-text=\"Scopri cosa fare\" data-variable-type=\"hyperlink\">Scopri cosa fare</span></p>",
       "insertrestorecode": "Inserisci il codice di ripristino",
       "l3identity": "Hai un’identità SPID o CIE di livello 3?",
       "l3norestorecode": "Se hai un’identità SPID o CIE di livello 3 puoi effettuare il ripristino senza codice di ripristino.",
@@ -171,15 +171,15 @@
       "restorecodecopied": "Codice di ripristino copiato",
       "restoredaccess": "Accesso ripristinato",
       "whatisl3": "Cos’è un’identità di livello 3?",
-      "login-1": "Se hai messo in sicurezza la tua identità digitale puoi ripristinare l’accesso a IO e entrare nuovamente in app con tutte le tue identità.",
+      "login": "Se hai messo in sicurezza la tua identità digitale puoi ripristinare l’accesso a IO e entrare nuovamente in app con tutte le tue identità.",
       "restoreprofile": "Ripristina profilo IO",
-      "insertcode": "Per ripristinare l’accesso all’app IO ti serve il codice sblocco fornito in fase di blocco.",
+      "insertcode": "<p>Per ripristinare l’accesso all’app IO ti serve il <strong>codice sblocco</strong> fornito in fase di blocco.</p>",
       "restoreaccess": "Vuoi ripristinare l’accesso a IO?"
     },
     "thankyoupage": {
       "accesslocked": "Da questo momento è stato bloccato l’accesso in app IO con tutte le tue identità di livello 2. \r\n\r\nPer ripristinare l’accesso ti verrà richiesto il codice di ripristino, assicurati di salvarlo e tenerlo al sicuro!",
       "enterbackio": "Il dispositivo non è più connesso a IO. Per entrare nuovamente in app, utilizza le tue credenziali SPID o CIE.",
-      "enterbackonio": "Per entrare nuovamente in app IO, al primo ingresso con qualsiasi dispositivo dovrai accedere con le tue credenziali SPID o CIE."
+      "enterbackonio": "Per entrare nuovamente in app IO, basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },
     "tooltip": {
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
