@@ -3,9 +3,9 @@
 import { Grid } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
-import { ROUTES } from '../../_utils/routes';
-import { commonBackground } from '../../_utils/styles';
+import { FeedbackMessage } from '../../../_component/feedbackMessage/feedbackMessage';
+import { ROUTES } from '../../../_utils/routes';
+import { commonBackground } from '../../../_utils/styles';
 
 const LogOutKo = (): React.ReactElement => {
   const t = useTranslations('ioesco.error');

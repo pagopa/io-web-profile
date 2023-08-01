@@ -4,11 +4,11 @@ import AppleIcon from '@mui/icons-material/Apple';
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Introduction } from '../../../_component/introduction/introduction';
-import { commonBackground } from '../../../_utils/styles';
+import { Introduction } from '../_component/introduction/introduction';
+import { commonBackground } from '../_utils/styles';
 import PlayStoreIcon from '@/app/[locale]/_icons/playstore';
 
-const L2NoSession = (): React.ReactElement => {
+const L2NoProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   return (
     <>
@@ -20,6 +20,9 @@ const L2NoSession = (): React.ReactElement => {
             summaryColumns={{ xs: 12, md: 10 }}
           />
         </Grid>
+        {
+          // TODO hide icons based on spid lvl and change text
+        }
         <Grid item xs={12} sm={4} md={3}>
           <Link href={'/#'}>
             <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<AppleIcon />}>
@@ -39,4 +42,4 @@ const L2NoSession = (): React.ReactElement => {
   );
 };
 
-export default L2NoSession;
+export default L2NoProfile;

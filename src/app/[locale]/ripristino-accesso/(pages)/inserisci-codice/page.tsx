@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { Button, Grid, Link, TextField } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { FAQ } from '../../_component/accordion/faqDefault';
-import { Introduction } from '../../_component/introduction/introduction';
-import { Flows } from '../../_enums/Flows';
-import { commonBackground } from '../../_utils/styles';
+import { FAQ } from '../../../_component/accordion/faqDefault';
+import { Introduction } from '../../../_component/introduction/introduction';
+import { Flows } from '../../../_enums/Flows';
+import { commonBackground } from '../../../_utils/styles';
 
 const ReactivateCode = (): React.ReactElement => {
   const { push } = useRouter();

@@ -3,9 +3,9 @@
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Introduction } from '../../_component/introduction/introduction';
-import { ROUTES } from '../../_utils/routes';
-import { commonBackground } from '../../_utils/styles';
+import { Introduction } from '../../../_component/introduction/introduction';
+import { ROUTES } from '../../../_utils/routes';
+import { commonBackground } from '../../../_utils/styles';
 
 const ThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');

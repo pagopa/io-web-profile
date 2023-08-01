@@ -3,10 +3,10 @@
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { BackButton } from '../../_component/backButton/backButton';
-import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
-import { Introduction } from '../../_component/introduction/introduction';
-import { commonBackgroundWithBack } from '../../_utils/styles';
+import { BackButton } from '../../../_component/backButton/backButton';
+import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
+import { Introduction } from '../../../_component/introduction/introduction';
+import { commonBackgroundWithBack } from '../../../_utils/styles';
 
 const RestoreThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');

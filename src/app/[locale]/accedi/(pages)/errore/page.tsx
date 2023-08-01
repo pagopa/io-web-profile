@@ -3,8 +3,8 @@ import { Button, Grid, Link, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { ROUTES } from '../../_utils/routes';
-import { isBrowser } from '../../_utils/common';
+import { ROUTES } from '../../../_utils/routes';
+import { isBrowser } from '../../../_utils/common';
 
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();

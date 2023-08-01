@@ -4,10 +4,10 @@ import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import { IllusSms } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { FAQ } from '../../_component/accordion/faqDefault';
-import { Introduction } from '../../_component/introduction/introduction';
-import { ROUTES } from '../../_utils/routes';
-import { commonBackgroundLight } from '../../_utils/styles';
+import { FAQ } from '../../../_component/accordion/faqDefault';
+import { Introduction } from '../../../_component/introduction/introduction';
+import { ROUTES } from '../../../_utils/routes';
+import { commonBackgroundLight } from '../../../_utils/styles';
 
 const Session = (): React.ReactElement => {
   const t = useTranslations('ioesco');

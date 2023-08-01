@@ -1,12 +1,12 @@
 'use client';
 import { Button, Grid, Link, List, ListItem, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { BackButton } from '../../_component/backButton/backButton';
-import { CopyCodeCard } from '../../_component/coppyCodeCard/copyCodeCard';
-import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
-import { Introduction } from '../../_component/introduction/introduction';
-import { isIDPKnown } from '../../_utils/idps';
-import { commonBackgroundWithBack } from '../../_utils/styles';
+import { BackButton } from '../../../_component/backButton/backButton';
+import { CopyCodeCard } from '../../../_component/coppyCodeCard/copyCodeCard';
+import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
+import { Introduction } from '../../../_component/introduction/introduction';
+import { isIDPKnown } from '../../../_utils/idps';
+import { commonBackgroundWithBack } from '../../../_utils/styles';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,

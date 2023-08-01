@@ -5,8 +5,8 @@ import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
-import { SpidLevels } from '../../_component/selectIdp/idpList';
-import { SelectIdp } from '../../_component/selectIdp/selectIdp';
+import { SpidLevels } from '../../../_component/selectIdp/idpList';
+import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
 
 const Access = (): React.ReactElement => {
   const t = useTranslations('ioesco');
