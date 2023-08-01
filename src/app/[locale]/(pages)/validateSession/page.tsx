@@ -1,13 +1,14 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { redirect } from 'next/navigation';
 import Loader from '../../_component/loader/loader';
-import { extractToken, parseJwt, userFromJwtToken } from '../../_utils/jwt';
-import { storageTokenOps, storageUserOps } from '../../_utils/storage';
-import { ROUTES } from '../../_utils/routes';
 import { SpidValueInJWT } from '../../_model/JWTUser';
+import { extractToken, parseJwt, userFromJwtToken } from '../../_utils/jwt';
+import { ROUTES } from '../../_utils/routes';
+import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 
 const Check = (): React.ReactElement => {
+  const router = useRouter();
   const token = extractToken();
   const userFromToken = userFromJwtToken(token);
   const parsedJWT = parseJwt(token);
@@ -29,13 +30,13 @@ const Check = (): React.ReactElement => {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
       if (userFromToken?.spidLevel === L1_JWT_LEVEL.value) {
-        redirect(ROUTES.SESSION);
+        router.push(ROUTES.SESSION);
       }
       if (userFromToken?.spidLevel === L2_JWT_LEVEL.value) {
-        redirect(ROUTES.PROFILE);
+        router.push(ROUTES.PROFILE);
       }
       if (userFromToken?.spidLevel === L3_JWT_LEVEL.value) {
-        redirect(ROUTES.PROFILE_RESTORE_L3);
+        router.push(ROUTES.PROFILE_RESTORE_L3);
       }
     }
   }, []);

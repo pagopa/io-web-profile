@@ -6,8 +6,8 @@ import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { Introduction } from '../../_component/introduction/introduction';
 import Firework from '../../_icons/firework';
-import { commonBackground } from '../../_utils/styles';
 import { ROUTES } from '../../_utils/routes';
+import { commonBackground } from '../../_utils/styles';
 
 const Profile = () => {
   const t = useTranslations('ioesco');
@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <Grid sx={commonBackground}>
       <Introduction
-        title={t('common.hello', { Nome: 'Mario' })}
+        title={t('common.hello', { nome: 'Mario' })}
         summary={t('common.anagraphicinfo')}
         summaryColumns={{
           xs: 12,
