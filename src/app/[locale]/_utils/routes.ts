@@ -19,6 +19,7 @@ export const ROUTES = {
   LOGOUT_NO_SESSION_L1: '/logoutNoSession/l1',
   LOGOUT_NO_SESSION_L2: '/logoutNoSession/l2',
   ERROR: '/error',
+  EXPIRED_MAGIC_LINK: '/expiredMagicLink',
 };
 
 export const PUBBLIC_ROUTES = [
@@ -26,5 +27,6 @@ export const PUBBLIC_ROUTES = [
   ROUTES.LOGOUT_INIT,
   ROUTES.VALIDATE_SESSION,
   ROUTES.ERROR,
+  ROUTES.EXPIRED_MAGIC_LINK,
 ];
-export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
+export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT, ROUTES.EXPIRED_MAGIC_LINK];
