@@ -9,6 +9,7 @@ import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
 import { commonBackground } from '../../../_utils/styles';
+import { ROUTES } from '../../../_utils/routes';
 
 const ReactivateCode = (): React.ReactElement => {
   const { push } = useRouter();
@@ -38,7 +39,7 @@ const ReactivateCode = (): React.ReactElement => {
     if (restoreCode === '123456789') {
       setIsCodeNotValid(false);
       setErrorMessage('');
-      void push('/restoreThankYou');
+      void push(ROUTES.RESTORE_THANK_YOU);
     } else {
       setIsCodeNotValid(true);
       setErrorMessage(t('restore.notvalidcode'));
@@ -81,7 +82,7 @@ const ReactivateCode = (): React.ReactElement => {
           >
             {t('restore.restoreprofile')}
           </Button>
-          <Link href="/profile">
+          <Link href={ROUTES.PROFILE}>
             <Button variant="outlined" sx={{ width: { xs: '100%', sm: 'auto' } }}>
               {t('common.cancel')}
             </Button>

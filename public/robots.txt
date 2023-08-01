@@ -20,3 +20,25 @@ Disallow: /ko
 Disallow: /logoutNoSession/l1
 Disallow: /logoutNoSession/l2
 Disallow: /error
+
+Disallow: /
+Disallow: /accedi
+Disallow: /accedi/errore
+Disallow: /esci
+Disallow: /esci/sessione-attiva
+Disallow: /esci/nessuna-sessione-attiva
+Disallow: /esci/operazione-completata
+Disallow: /esci/errore
+Disallow: /esci/conferma
+Disallow: /nessun-profilo
+Disallow: /blocco-accesso
+Disallow: /blocco-accesso/operazione-completata
+Disallow: /blocco-accesso/errore
+Disallow: /ripristino-accesso
+Disallow: /ripristino-accesso/inserisci-codice
+Disallow: /ripristino-accesso/operazione-completata
+Disallow: /ripristino-accesso/errore
+Disallow: /ripristino-accesso/accedi-livello-3
+
+
+

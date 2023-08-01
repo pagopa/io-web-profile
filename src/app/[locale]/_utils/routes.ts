@@ -1,25 +1,25 @@
 export const ROUTES = {
-  LOGIN: `/access`,
-  LOGIN_L3: `/accessL3`,
-  LOGOUT_INIT: `/logoutInit`,
-  SESSION: `/session`,
-  PROFILE: `/profile`,
-  PROFILE_BLOCK: `/profileBlock`,
-  PROFILE_RESTORE: `/profileRestore`,
-  PROFILE_RESTORE_L3: `/profileRestoreL3`,
-  RESTORE_CODE: `/restoreCode`,
-  RESTORE_THANK_YOU: `/restoreThankYou`,
-  PROFILE_BLOCK_SUCCESS: `/profileBlockSuccess`,
-  PROFILE_ACCESS_BLOCK: `/profileAccessBlock`,
-  VALIDATE_SESSION: '/validateSession',
-  THANK_YOU: '/thankyou',
-  LOGOUT_AUTH_KO: '/logoutKoAuth',
-  LOGOUT_KO: '/logoutKo',
+  LOGIN: `/accedi`,
+  LOGIN_L3: `/ripristino-accesso/accedi-livello-3`,
+  LOGOUT_INIT: `/esci`,
+  SESSION: `/esci/sessione-attiva`,
+  PROFILE: `/`,
+  PROFILE_BLOCK: `/blocco-accesso`,
+  PROFILE_RESTORE: `/ripristino-accesso`,
+  PROFILE_RESTORE_L3: `/profileRestoreL3`, // DUPLICATE?
+  RESTORE_CODE: `/ripristino-accesso/inserisci-codice`, // ON JIRA, THEY EXPECT TWO PAGE FOR THIS?
+  RESTORE_THANK_YOU: `/ripristino-accesso/operazione-completata`,
+  PROFILE_BLOCK_SUCCESS: `/blocco-accesso/operazione-completata`,
+  PROFILE_ACCESS_BLOCK: `/profileAccessBlock`, // TO DELETE AND INTEGRATE INSIDE PROFILE (3 CARDS DYNAMIC)
+  VALIDATE_SESSION: '/validateSession', // MISSING ON JIRA
+  THANK_YOU: '/esci/operazione-completata',
+  LOGOUT_AUTH_KO: '/logoutKoAuth', // MISSING ON JIRA
+  LOGOUT_KO: '/esci/errore',
   KO: '/ko',
-  LOGOUT_NO_SESSION_L1: '/logoutNoSession/l1',
-  LOGOUT_NO_SESSION_L2: '/logoutNoSession/l2',
-  ERROR: '/error',
-  EXPIRED_MAGIC_LINK: '/expiredMagicLink',
+  LOGOUT_NO_SESSION_L1: '/esci/nessuna-sessione-attiva',
+  LOGOUT_NO_SESSION_L2: '/nessun-profilo',
+  ERROR: '/accedi/errore',
+  EXPIRED_MAGIC_LINK: '/expiredMagicLink', // MISSIN ON JIRA
 };
 
 export const PUBBLIC_ROUTES = [

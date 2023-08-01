@@ -8,6 +8,7 @@ import { Introduction } from '../../_component/introduction/introduction';
 import { isIDPKnown } from '../../_utils/idps';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { Flows } from '../../_enums/Flows';
+import { ROUTES } from '../../_utils/routes';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -31,7 +32,7 @@ const ProfileBlock = (): React.ReactElement => {
         <Grid sx={{ maxWidth: '576px' }}>
           {isIDPKnown && <IdpListOnApp />}
           <Typography mb={5}>{t('common.lockaccessinfo')}</Typography>
-          <Button href="/profileBlockSuccess" variant="contained" size="medium">
+          <Button href={ROUTES.PROFILE_BLOCK_SUCCESS} variant="contained" size="medium">
             {t('profile.lockaccess')}
           </Button>
         </Grid>

@@ -7,6 +7,7 @@ import { BackButton } from '../../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { commonBackgroundWithBack } from '../../../_utils/styles';
+import { ROUTES } from '../../../_utils/routes';
 
 const RestoreThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -22,7 +23,7 @@ const RestoreThankYouPage = (): React.ReactElement => {
 
         <IdpListOnApp />
 
-        <Link href="/profile">
+        <Link href={ROUTES.PROFILE}>
           <Button variant="outlined" sx={{ marginTop: { xs: 6, sm: 4, md: '60px' } }}>
             {t('common.backtoprofile')}
           </Button>

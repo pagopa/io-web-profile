@@ -18,7 +18,7 @@ const LoginKo = (): React.ReactElement => {
             title={t('somewrong')}
             summary={<span>{t('systemerrorcontactassistence')}</span>}
             button={{
-              href: '/profile',
+              href: '/',
               isVisible: true,
               variant: 'contained',
               text: t('retry'),

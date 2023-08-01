@@ -7,6 +7,7 @@ import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { isIDPKnown } from '../../../_utils/idps';
 import { commonBackgroundWithBack } from '../../../_utils/styles';
+import { ROUTES } from '../../../_utils/routes';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -59,7 +60,7 @@ const ProfileBlock = (): React.ReactElement => {
       </Typography>
       <Typography>{t.rich('common.unlockioaccess', unlockioaccessRich)}</Typography>
 
-      <Button href={'/profileAccessBlocked'} variant="outlined" size="medium">
+      <Button href={ROUTES.PROFILE} variant="outlined" size="medium">
         {t('common.backtoprofile')}
       </Button>
     </Grid>

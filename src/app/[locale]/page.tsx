@@ -131,7 +131,7 @@ const Profile = () => {
               </Typography>
 
               <ButtonNaked
-                href="/profileBlock"
+                href={ROUTES.PROFILE_BLOCK}
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"
