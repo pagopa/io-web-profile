@@ -34,7 +34,7 @@ const ExpiredMagicLink = () => {
                 textAlign: 'center',
               }}
             >
-              Il link è scaduto
+              {t('error.linkexpired')}
             </Typography>
           </Grid>
           <Grid item xs={12} pb={4}>
@@ -47,8 +47,7 @@ const ExpiredMagicLink = () => {
                 textAlign: 'center',
               }}
             >
-              Per bloccare l’accesso a IO è necessario accedere al portale con le tue credenziali
-              SPID o CIE.
+              {t('error.lockiolog')}
             </Typography>
           </Grid>
           <Grid container spacing={3} justifyContent="center">
