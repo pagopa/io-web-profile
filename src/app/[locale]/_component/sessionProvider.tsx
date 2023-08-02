@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { EXISTING_ROUTES, LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
+import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
 import useToken from '../_hooks/useToken';
 import CheckToken from './validateSession/checkToken';
 import Loader from './loader/loader';
