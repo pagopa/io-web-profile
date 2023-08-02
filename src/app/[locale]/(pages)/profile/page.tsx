@@ -5,15 +5,30 @@ import { Card, CardContent, Divider, Grid, Tooltip, Typography } from '@mui/mate
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { Introduction } from '../../_component/introduction/introduction';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackground } from '../../_utils/styles';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const Profile = () => {
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
+
+  useEffect(() => {
+    WebProfileApi.getUserSessionState({ unlockCode: 'unlockCode' })
+      .then((profile) => {
+        // eslint-disable-next-line no-console
+        console.log('profile', profile);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log('err', err);
+      });
+  }, []);
+
   return (
     <Grid sx={commonBackground}>
       <Introduction
