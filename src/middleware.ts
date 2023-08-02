@@ -1,6 +1,5 @@
 import createIntlMiddleware from 'next-intl/middleware';
-import { NextRequest, NextResponse } from 'next/server';
-import { EXISTING_ROUTES, ROUTES } from './app/[locale]/_utils/routes';
+import { NextRequest } from 'next/server';
 
 export default async function middleware(request: NextRequest) {
   const defaultLocale = request.headers.get('x-default-locale') || 'en';
@@ -14,9 +13,10 @@ export default async function middleware(request: NextRequest) {
 
   response.headers.set('x-default-locale', defaultLocale);
 
-  if (!EXISTING_ROUTES.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL(ROUTES.LOGIN, request.url));
-  }
+  // TO BE FIXED AFTER 404 MEETING
+  // if (!EXISTING_ROUTES.includes(request.nextUrl.pathname)) {
+  //   return NextResponse.redirect(new URL(ROUTES.LOGIN, request.url));
+  // }
 
   return response;
 }
