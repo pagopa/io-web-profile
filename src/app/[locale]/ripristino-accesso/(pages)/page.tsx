@@ -25,12 +25,14 @@ const RestoreProfile = (): React.ReactElement => {
         <Grid container flexDirection={'column'}>
           <IdpListOnApp />
           <Grid item sm={10} md={7}>
+            {/* IF SPID level from token is L3 hide Typography line 29-33 */}
             <Typography mb={5} fontSize={'20px'}>
               {t.rich('restore.insertcode', {
                 strong: (chunks) => <strong>{chunks}</strong>,
               })}
             </Typography>
           </Grid>
+          {/* IF SPID level from token is L3 link is different line 36 */}
           <Link href={ROUTES.RESTORE_CODE}>
             <Button variant="contained" size="medium">
               {t('common.restoreioaccess')}

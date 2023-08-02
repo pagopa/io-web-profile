@@ -2,8 +2,9 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
+import { EXISTING_ROUTES, LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
 import useToken from '../_hooks/useToken';
+import CheckToken from './validateSession/checkToken';
 import Loader from './loader/loader';
 import Header from './header/header';
 import Footer from './footer/footer';
@@ -49,6 +50,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   if (loginStatus.status === 'IDLE' || loginStatus.status === 'NOT_AUTHORIZED') {
     return (
       <>
+        <CheckToken />
         <Header />
         <Loader />
         <Footer />

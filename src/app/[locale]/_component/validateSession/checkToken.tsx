@@ -1,17 +1,15 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
-import Loader from '../../_component/loader/loader';
 import { SpidValueInJWT } from '../../_model/JWTUser';
-import { extractToken, parseJwt, userFromJwtToken } from '../../_utils/jwt';
+import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageTokenOps, storageUserOps } from '../../_utils/storage';
+import { isBrowser } from '../../_utils/common';
 
-const Check = (): React.ReactElement => {
-  const router = useRouter();
-  const token = extractToken();
-  const userFromToken = userFromJwtToken(token);
-  const parsedJWT = parseJwt(token);
+const CheckToken = (): React.ReactElement => {
+  const token = isBrowser() ? extractToken() : undefined;
+  const userFromToken = token ? userFromJwtToken(token) : undefined;
 
   const L1_JWT_LEVEL: SpidValueInJWT = {
     value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
@@ -26,22 +24,22 @@ const Check = (): React.ReactElement => {
   };
 
   useEffect(() => {
-    if (parsedJWT) {
+    if (token && userFromToken) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
       if (userFromToken?.spidLevel === L1_JWT_LEVEL.value) {
-        router.push(ROUTES.SESSION);
+        redirect(ROUTES.SESSION);
       }
       if (userFromToken?.spidLevel === L2_JWT_LEVEL.value) {
-        router.push(ROUTES.PROFILE);
+        redirect(ROUTES.PROFILE);
       }
       if (userFromToken?.spidLevel === L3_JWT_LEVEL.value) {
-        router.push(ROUTES.PROFILE_RESTORE_L3);
+        redirect(ROUTES.PROFILE_RESTORE);
       }
     }
   }, []);
 
-  return <Loader />;
+  return <></>;
 };
 
-export default Check;
+export default CheckToken;
