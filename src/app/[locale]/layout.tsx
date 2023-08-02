@@ -33,11 +33,9 @@ const RootLayoutWithLocaleAndTheme = async ({
         <Providers>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ThemeProviderComponent>
-              <SessionProviderComponent>
-                <Header />
-                {children}
-                <Footer />
-              </SessionProviderComponent>
+              <Header />
+              <SessionProviderComponent>{children}</SessionProviderComponent>
+              <Footer />
             </ThemeProviderComponent>
           </NextIntlClientProvider>
         </Providers>

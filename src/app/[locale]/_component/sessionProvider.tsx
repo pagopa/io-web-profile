@@ -4,10 +4,8 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
 import useToken from '../_hooks/useToken';
-import CheckToken from './validateSession/checkToken';
+import useSessionValidation from '../_hooks/useSessionValidation';
 import Loader from './loader/loader';
-import Header from './header/header';
-import Footer from './footer/footer';
 
 type LoginStatusIdle = {
   status: 'IDLE';
@@ -26,8 +24,10 @@ export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusN
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
   const { isTokenValid, removeToken } = useToken();
+  useSessionValidation();
   const router = useRouter();
   const pathName = usePathname();
+
   const cleanPath = (path: string): string => path.replace(/^(\/(en|it))\/(.*)$/, '');
 
   useEffect(() => {
@@ -50,10 +50,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   if (loginStatus.status === 'IDLE' || loginStatus.status === 'NOT_AUTHORIZED') {
     return (
       <>
-        <CheckToken />
-        <Header />
         <Loader />
-        <Footer />
       </>
     );
   }

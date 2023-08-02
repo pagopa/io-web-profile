@@ -32,7 +32,7 @@ const RestoreProfile = (): React.ReactElement => {
               })}
             </Typography>
           </Grid>
-          {/* IF SPID level from token is L3 link is different line 36 */}
+          {/* IF SPID level from token is L3 link is different */}
           <Link href={ROUTES.RESTORE_CODE}>
             <Button variant="contained" size="medium">
               {t('common.restoreioaccess')}

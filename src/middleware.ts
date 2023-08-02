@@ -13,7 +13,7 @@ export default async function middleware(request: NextRequest) {
 
   response.headers.set('x-default-locale', defaultLocale);
 
-  // TO BE FIXED AFTER 404 MEETING
+  // FIXME JIRA SUBTASK OF IOPID-597
   // if (!EXISTING_ROUTES.includes(request.nextUrl.pathname)) {
   //   return NextResponse.redirect(new URL(ROUTES.LOGIN, request.url));
   // }

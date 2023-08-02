@@ -7,9 +7,9 @@ import { useTranslations } from 'next-intl';
 import QuestionIcon from '../../_icons/question';
 import { ROUTES } from '../../_utils/routes';
 import HourglassIcon from '../../_icons/hourglass';
+import { commonCardStyle } from '../../_utils/styles';
 
 const ProfileCards = (): React.ReactElement => {
-  const bgColor = 'background.paper';
   const t = useTranslations('ioesco');
 
   return (
@@ -22,14 +22,7 @@ const ProfileCards = (): React.ReactElement => {
       >
         <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
         <Grid item xs={12} md={5} lg={4} xl={3}>
-          <Card
-            sx={{
-              backgroundColor: bgColor,
-              boxShadow: '0px 8px 38px 7px #002B551A',
-              borderRadius: '16px',
-              height: '100%',
-            }}
-          >
+          <Card sx={commonCardStyle}>
             <CardContent sx={{ padding: '32px' }}>
               <QuestionIcon />
               <Typography variant="h6" pt={2}>
@@ -47,14 +40,7 @@ const ProfileCards = (): React.ReactElement => {
           </Card>
         </Grid>
         <Grid item xs={12} md={5} lg={4} xl={3}>
-          <Card
-            sx={{
-              backgroundColor: bgColor,
-              height: '100%',
-              boxShadow: '0px 8px 38px 7px #002B551A',
-              borderRadius: '16px',
-            }}
-          >
+          <Card sx={commonCardStyle}>
             <CardContent sx={{ padding: '32px' }}>
               <HourglassIcon />
               <Typography variant="h6" pt={2}>

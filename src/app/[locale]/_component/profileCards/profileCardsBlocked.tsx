@@ -6,23 +6,15 @@ import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { ROUTES } from '../../_utils/routes';
 import Firework from '../../_icons/firework';
+import { commonCardStyle } from '../../_utils/styles';
 
 const ProfileCardsBlocked = (): React.ReactElement => {
-  const bgColor = 'background.paper';
   const t = useTranslations('ioesco');
 
   return (
     <Grid container flexDirection="column" justifyContent="center" alignItems="center">
       <Grid item textAlign={'center'}>
-        <Card
-          sx={{
-            backgroundColor: bgColor,
-            padding: '8px',
-            boxShadow: '0px 8px 38px 7px #002B551A',
-            borderRadius: '16px',
-            maxWidth: '364px',
-          }}
-        >
+        <Card sx={commonCardStyle}>
           <CardContent>
             <Firework />
             <Typography variant="h6" py={2}>
