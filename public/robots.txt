@@ -1,22 +1,25 @@
 User-agent: *
+
 Disallow: /
-Disallow: /access
-Disallow: /accessL3
-Disallow: /logoutInit
-Disallow: /session
-Disallow: /profile
-Disallow: /profileBlock
-Disallow: /profileRestore
-Disallow: /profileRestoreL3
-Disallow: /restoreCode
-Disallow: /restoreThankYou
-Disallow: /profileBlockSuccess
-Disallow: /profileAccessBlock
-Disallow: /validateSession
-Disallow: /thankyou
-Disallow: /logoutKoAuth
-Disallow: /logoutKo
-Disallow: /ko
-Disallow: /logoutNoSession/l1
-Disallow: /logoutNoSession/l2
-Disallow: /error
+Disallow: /accedi
+Disallow: /accedi/errore
+Disallow: /esci
+Disallow: /esci/sessione-attiva
+Disallow: /esci/nessuna-sessione-attiva
+Disallow: /esci/operazione-completata
+Disallow: /esci/errore
+Disallow: /esci/conferma
+Disallow: /nessun-profilo
+Disallow: /blocco-accesso
+Disallow: /blocco-accesso/operazione-completata
+Disallow: /blocco-accesso/errore
+Disallow: /ripristino-accesso
+Disallow: /ripristino-accesso/inserisci-codice
+Disallow: /ripristino-accesso/operazione-completata
+Disallow: /ripristino-accesso/errore
+Disallow: /ripristino-accesso/accedi-livello-3
+Disallow: /expiredMagicLink
+
+
+
+
