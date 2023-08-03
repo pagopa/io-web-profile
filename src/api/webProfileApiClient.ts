@@ -27,11 +27,7 @@ const onRedirectToLogin = () => console.log('redirect to login');
 
 export const WebProfileApi = {
   lockUserSession: async (unlockCode: LockSessionData): Promise<void> => {
-    // const body = { body: { ...unlockCode } };
-    // eslint-disable-next-line no-console
-    // console.log('unlockCode', unlockCode, 'body', body);
     const result = await webProfileApiClient.lockUserSession({ body: unlockCode });
-
     return extractResponse(result, 201, onRedirectToLogin);
   },
   unlockUserSession: async (unlockCode: LockSessionData): Promise<void> => {
@@ -50,10 +46,8 @@ export const WebProfileApi = {
     const result = await webProfileApiClient.getProfile({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
-  getUserSessionState: async (unlockCode: LockSessionData): Promise<SessionState> => {
-    const result = await webProfileApiClient.getUserSessionState({
-      body: { unlockCode },
-    });
+  getUserSessionState: async (): Promise<SessionState> => {
+    const result = await webProfileApiClient.getUserSessionState({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
   exchangeToken: async (): Promise<ExchangeToken> => {

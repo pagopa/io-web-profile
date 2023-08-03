@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "generate": "npm-run-all generate:*",
     "clean:api-web-profile": "rimraf src/api/generated/webProfile",
-    "generate:api-web-profile": "yarn run clean:api-web-profile && shx mkdir -p src/generated/webProfile && gen-api-models --api-spec ./openApi/external.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/webProfile"
+    "generate:api-web-profile": "yarn run clean:api-web-profile && shx mkdir -p src/api/generated/webProfile && gen-api-models --api-spec ./openApi/openapi.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/webProfile"
   },
   "dependencies": {
     "@emotion/react": "11.10.5",
@@ -42,7 +42,6 @@
   "devDependencies": {
     "@pagopa/eslint-config": "^3.0.0",
     "@pagopa/openapi-codegen-ts": "^13.1.0",
-    "api-spec-converter": "^2.12.0",
     "encoding": "^0.1.13",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.0",

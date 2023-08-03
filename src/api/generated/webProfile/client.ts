@@ -275,7 +275,13 @@ export function createClient<K extends ParamKeys>({
     response_decoder: lockUserSessionDefaultDecoder(),
     url: ({}) => `${basePath}/lock-session`,
 
-    body: () => "{}",
+    body: ({ ["body"]: body }) =>
+      body?.constructor?.name === "Readable" ||
+      body?.constructor?.name === "ReadableStream"
+        ? (body as ReadableStream)
+        : body?.constructor?.name === "Buffer"
+        ? (body as Buffer)
+        : JSON.stringify(body),
 
     query: () => withoutUndefinedValues({})
   };
@@ -288,7 +294,7 @@ export function createClient<K extends ParamKeys>({
     UnlockUserSessionT,
     RequestParams<UnlockUserSessionT>
   > = {
-    method: "delete",
+    method: "post",
 
     headers: ({ ["bearerAuth"]: bearerAuth }) => ({
       Authorization: `Bearer ${bearerAuth}`,
@@ -297,6 +303,14 @@ export function createClient<K extends ParamKeys>({
     }),
     response_decoder: unlockUserSessionDefaultDecoder(),
     url: ({}) => `${basePath}/unlock-session`,
+
+    body: ({ ["body"]: body }) =>
+      body?.constructor?.name === "Readable" ||
+      body?.constructor?.name === "ReadableStream"
+        ? (body as ReadableStream)
+        : body?.constructor?.name === "Buffer"
+        ? (body as Buffer)
+        : JSON.stringify(body),
 
     query: () => withoutUndefinedValues({})
   };

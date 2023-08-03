@@ -13,6 +13,8 @@ import { ProblemJson } from "./ProblemJson";
 
 import { ServiceStatus } from "./ServiceStatus";
 
+import { LockSessionData } from "./LockSessionData";
+
 import { BadRequest } from "./BadRequest";
 
 import { Unauthorized } from "./Unauthorized";
@@ -165,8 +167,11 @@ export const getServiceStatusDefaultDecoder = () => getServiceStatusDecoder();
 
 // Request type definition
 export type LockUserSessionT = r.IPostApiRequestType<
-  { readonly bearerAuth: string },
-  "Authorization",
+  {
+    readonly bearerAuth: string;
+    readonly body?: LockSessionData | ReadableStream<Uint8Array> | Buffer;
+  },
+  "Content-Type" | "Authorization",
   never,
   | r.IResponseType<201, undefined, never>
   | r.IResponseType<400, BadRequest, never>
@@ -370,9 +375,12 @@ export const lockUserSessionDefaultDecoder = () => lockUserSessionDecoder();
  */
 
 // Request type definition
-export type UnlockUserSessionT = r.IDeleteApiRequestType<
-  { readonly bearerAuth: string },
-  "Authorization",
+export type UnlockUserSessionT = r.IPostApiRequestType<
+  {
+    readonly bearerAuth: string;
+    readonly body?: LockSessionData | ReadableStream<Uint8Array> | Buffer;
+  },
+  "Content-Type" | "Authorization",
   never,
   | r.IResponseType<200, undefined, never>
   | r.IResponseType<400, BadRequest, never>

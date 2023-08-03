@@ -5,7 +5,7 @@ info:
   x-logo:
     url: https://io.italia.it/assets/img/io-logo-blue.svg
   description: |
-    Documentation of the IO Fast Login Function API here.
+    Documentation of the IO Web Profile Function API here.
 servers:
   - url: https://api.io.pagopa.it
 paths:
@@ -51,7 +51,10 @@ paths:
       security:
         - bearerAuth: []
       requestBody:
-        $ref: '#/components/requestBodies/LockSessionData'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LockSessionData'
       responses:
         '201':
           description: Created
@@ -80,14 +83,17 @@ paths:
         '504':
           description: Gateway Timeout
   /unlock-session:
-    delete:
+    post:
       operationId: unlockUserSession
       summary: UnlockUserSession
       description: Unlock user session on IO App
       security:
         - bearerAuth: []
       requestBody:
-        $ref: '#/components/requestBodies/LockSessionData'
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LockSessionData'
       responses:
         '200':
           description: Success
