@@ -211,7 +211,7 @@ export function createClient<K extends ParamKeys>({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fetchApi,
   withDefaults,
-  basePath = "/"
+  basePath = "/api/v1"
 }: {
   baseUrl: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

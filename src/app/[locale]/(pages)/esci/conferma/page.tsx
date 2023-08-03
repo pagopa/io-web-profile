@@ -3,14 +3,25 @@
 import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import { IllusSms } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const Session = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
+  const handleLogout = () => {
+    WebProfileApi.logoutFromIOApp()
+      .then(() => {
+        router.push(ROUTES.THANK_YOU);
+      })
+      .catch((_err) => {
+        router.push(ROUTES.LOGOUT_KO);
+      });
+  };
   return (
     <>
       <Grid sx={commonBackgroundLight} container>
@@ -75,11 +86,9 @@ const Session = (): React.ReactElement => {
         </Grid>
 
         <Grid item xs={12} mt={4}>
-          <Link href={ROUTES.THANK_YOU}>
-            <Button sx={{ mr: 2 }} variant="contained">
-              {t('common.logout')}
-            </Button>
-          </Link>
+          <Button sx={{ mr: 2 }} variant="contained" onClick={handleLogout}>
+            {t('common.logout')}
+          </Button>
         </Grid>
       </Grid>
       <FAQ />

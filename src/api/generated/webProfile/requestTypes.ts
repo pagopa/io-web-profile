@@ -21,7 +21,7 @@ import { Unauthorized } from "./Unauthorized";
 
 import { InternalServerError } from "./InternalServerError";
 
-import { Profile } from "./Profile";
+import { ProfileData } from "./ProfileData";
 
 import { SessionState } from "./SessionState";
 
@@ -869,7 +869,7 @@ export type GetProfileT = r.IGetApiRequestType<
   { readonly bearerAuth: string },
   "Authorization",
   never,
-  | r.IResponseType<200, Profile, never>
+  | r.IResponseType<200, ProfileData, never>
   | r.IResponseType<400, BadRequest, never>
   | r.IResponseType<401, undefined, never>
   | r.IResponseType<404, ProblemJson, never>
@@ -878,7 +878,7 @@ export type GetProfileT = r.IGetApiRequestType<
 >;
 
 export const getProfileDefaultResponses = {
-  200: Profile,
+  200: ProfileData,
   400: BadRequest,
   401: t.undefined,
   404: ProblemJson,
@@ -887,8 +887,8 @@ export const getProfileDefaultResponses = {
 };
 
 export type GetProfileResponsesT<
-  A0 = Profile,
-  C0 = Profile,
+  A0 = ProfileData,
+  C0 = ProfileData,
   A1 = BadRequest,
   C1 = BadRequest,
   A2 = undefined,
@@ -909,8 +909,8 @@ export type GetProfileResponsesT<
 };
 
 export function getProfileDecoder<
-  A0 = Profile,
-  C0 = Profile,
+  A0 = ProfileData,
+  C0 = ProfileData,
   A1 = BadRequest,
   C1 = BadRequest,
   A2 = undefined,

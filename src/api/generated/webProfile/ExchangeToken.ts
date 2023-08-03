@@ -15,7 +15,7 @@ const ExchangeTokenR = t.interface({});
 
 // optional attributes
 const ExchangeTokenO = t.partial({
-  token: t.string
+  jwt: t.string
 });
 
 export const ExchangeToken = t.intersection(

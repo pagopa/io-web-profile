@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 type CopyCardProps = {
-  code: string;
+  code: string | undefined;
 };
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {

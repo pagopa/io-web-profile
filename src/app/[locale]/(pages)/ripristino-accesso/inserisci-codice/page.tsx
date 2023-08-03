@@ -10,6 +10,7 @@ import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
 import { commonBackground } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ReactivateCode = (): React.ReactElement => {
   const { push } = useRouter();
@@ -35,15 +36,20 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
-    // TODO: remove mocked logic
-    if (restoreCode === '123456789') {
-      setIsCodeNotValid(false);
-      setErrorMessage('');
-      void push(ROUTES.RESTORE_THANK_YOU);
-    } else {
-      setIsCodeNotValid(true);
-      setErrorMessage(t('restore.notvalidcode'));
-    }
+    WebProfileApi.unlockUserSession(restoreCode)
+      .then(() => {
+        setIsCodeNotValid(false);
+        setErrorMessage('');
+        push(ROUTES.RESTORE_THANK_YOU);
+      })
+      .catch((err) => {
+        if (err.status === 410) {
+          setIsCodeNotValid(true);
+          setErrorMessage(t('restore.notvalidcode'));
+        } else {
+          push(ROUTES.PROFILE_BLOCK_KO);
+        }
+      });
   };
 
   return (

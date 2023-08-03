@@ -1,6 +1,6 @@
 import { ExchangeToken } from './generated/webProfile/ExchangeToken';
 import { LockSessionData } from './generated/webProfile/LockSessionData';
-import { Profile } from './generated/webProfile/Profile';
+import { ProfileData } from './generated/webProfile/ProfileData';
 import { SessionState } from './generated/webProfile/SessionState';
 import { WithDefaultsT, createClient } from './generated/webProfile/client';
 import { storageTokenOps } from '@/app/[locale]/_utils/storage';
@@ -17,7 +17,7 @@ const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation) => (params) =
 };
 const webProfileApiClient = createClient({
   baseUrl: 'http://localhost:9999',
-  basePath: '/v1',
+  basePath: '/api/v1',
   fetchApi: buildFetchApi(300000),
   withDefaults: withBearer,
 });
@@ -42,7 +42,7 @@ export const WebProfileApi = {
     const result = await webProfileApiClient.getSessionsList({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
-  getProfile: async (): Promise<Profile> => {
+  getProfile: async (): Promise<ProfileData> => {
     const result = await webProfileApiClient.getProfile({});
     return extractResponse(result, 200, onRedirectToLogin);
   },

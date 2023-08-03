@@ -12,13 +12,20 @@ import { EmailString } from "@pagopa/ts-commons/lib/strings";
  */
 
 // required attributes
-const ProfileR = t.interface({});
+const ProfileDataR = t.interface({
+  family_name: t.string,
+
+  name: t.string
+});
 
 // optional attributes
-const ProfileO = t.partial({
+const ProfileDataO = t.partial({
   email: EmailString
 });
 
-export const Profile = t.intersection([ProfileR, ProfileO], "Profile");
+export const ProfileData = t.intersection(
+  [ProfileDataR, ProfileDataO],
+  "ProfileData"
+);
 
-export type Profile = t.TypeOf<typeof Profile>;
+export type ProfileData = t.TypeOf<typeof ProfileData>;
