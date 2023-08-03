@@ -77,3 +77,10 @@ export const commonBackgroundLight = {
   pl: COMMON_PADDING_HERO.pl,
   pr: COMMON_PADDING_HERO.pr,
 };
+
+export const commonCardStyle = {
+  backgroundColor: 'background.paper',
+  height: '100%',
+  boxShadow: '0px 8px 38px 7px #002B551A',
+  borderRadius: '16px',
+};

@@ -15,9 +15,19 @@ In order to run the ``io-web-profile`` front-end locally you need the following 
 
 - ``Node.js 18.16.1``
 - ``yarn 1.22``
+
 In order to authenticate the login you need the hub-spid-login service provider. 
 
 https://github.com/pagopa/hub-spid-login-ms/tree/master
+
+Follow the documentation of hub-spid-login to properly run the service.
+
+To establish the authentication and error binding between SP and IO Web Profile, you need to modify the default values inside the hub-spid-login .env file as follows:
+
+ENDPOINT_ERROR=http://localhost:3000/accedi/errore
+ENDPOINT_SUCCESS=http://localhost:3000/
+
+Note: The port used here is the same one used to expose the web app.
 
 The preferred way to set up the local environment is using nodenv to manage Node.js installation and corepack (included with Node.js) to manage the installation of yarn.
 
@@ -27,9 +37,10 @@ io-web-profile/
 - src/
     -  middleware.ts
     -  dictionaries/
-    -  [locale]/
+    -  app/[locale]/
         - (pages)/
-        - _component
+        - _component/
+        - _enums/
         - _hooks/
         - _icons/
         - _model/
@@ -48,6 +59,8 @@ io-web-profile/
 ``/(pages)/``: Pages folder contains folders for different routes. 
 
 ``/_component/``: This folder is used to store shared global components. 
+
+``/_enums/``: This folder contains enum declarations or constant values that are used across different parts of the application.
 
 ``/_hooks/``: This folder contains custom hooks.
 

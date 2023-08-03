@@ -8,7 +8,7 @@ type BackButtonProps = {
   text?: string;
 };
 
-export function BackButton({ href = '/profile', text, ...props }: BackButtonProps) {
+export function BackButton({ href = '/', text, ...props }: BackButtonProps) {
   const t = useTranslations('ioesco.common');
   return (
     <Link href={href}>
