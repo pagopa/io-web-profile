@@ -2,9 +2,10 @@ import { ExchangeToken } from './generated/webProfile/ExchangeToken';
 import { LockSessionData } from './generated/webProfile/LockSessionData';
 import { ProfileData } from './generated/webProfile/ProfileData';
 import { SessionState } from './generated/webProfile/SessionState';
+import { UnlockSessionData } from './generated/webProfile/UnlockSessionData';
 import { WithDefaultsT, createClient } from './generated/webProfile/client';
-import { storageTokenOps } from '@/app/[locale]/_utils/storage';
 import { buildFetchApi, extractResponse } from '@/app/[locale]/_utils/api-utils';
+import { storageTokenOps } from '@/app/[locale]/_utils/storage';
 
 // with withDefaults
 const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation) => (params) => {
@@ -30,9 +31,9 @@ export const WebProfileApi = {
     const result = await webProfileApiClient.lockUserSession({ body: unlockCode });
     return extractResponse(result, 204, onRedirectToLogin);
   },
-  unlockUserSession: async (unlockCode: LockSessionData): Promise<void> => {
+  unlockUserSession: async (unlockCode: UnlockSessionData): Promise<void> => {
     const result = await webProfileApiClient.unlockUserSession({ body: unlockCode });
-    return extractResponse(result, 200, onRedirectToLogin);
+    return extractResponse(result, 204, onRedirectToLogin);
   },
   logoutFromIOApp: async (): Promise<void> => {
     const result = await webProfileApiClient.logoutFromIOApp({});

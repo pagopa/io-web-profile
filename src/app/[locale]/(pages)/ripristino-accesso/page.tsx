@@ -1,17 +1,36 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { Flows } from '../../_enums/Flows';
-import { commonBackgroundWithBack } from '../../_utils/styles';
 import { ROUTES } from '../../_utils/routes';
+import { storageUserOps } from '../../_utils/storage';
+import { commonBackgroundWithBack } from '../../_utils/styles';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const RestoreProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
+  const userFromStorage = storageUserOps.read();
+
+  const handleRestore = () => {
+    if (userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3) {
+      WebProfileApi.unlockUserSession({ unlock_code: undefined })
+        .then(() => {
+          router.push(ROUTES.RESTORE_THANK_YOU);
+        })
+        .catch((_err) => {
+          router.push(ROUTES.PROFILE_RESTORE_KO);
+        });
+    } else {
+      router.push(ROUTES.RESTORE_CODE);
+    }
+  };
+
   return (
     <>
       <Grid sx={commonBackgroundWithBack} xs={12} sm={12}>
@@ -33,11 +52,11 @@ const RestoreProfile = (): React.ReactElement => {
             </Typography>
           </Grid>
           {/* IF SPID level from token is L3 link is different */}
-          <Link href={ROUTES.RESTORE_CODE}>
-            <Button variant="contained" size="medium">
+          <Grid>
+            <Button variant="contained" size="medium" onClick={handleRestore}>
               {t('common.restoreioaccess')}
             </Button>
-          </Link>
+          </Grid>
         </Grid>
       </Grid>
       <FAQ flow={Flows.RESTORE} />

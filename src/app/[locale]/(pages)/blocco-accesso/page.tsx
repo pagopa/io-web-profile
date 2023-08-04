@@ -1,5 +1,6 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
+import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -8,10 +9,10 @@ import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { Flows } from '../../_enums/Flows';
+import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
 import { isIDPKnown } from '../../_utils/idps';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
-import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
@@ -21,7 +22,7 @@ const ProfileBlock = (): React.ReactElement => {
 
   const handleLockSession = () => {
     dispatch(createUnlockCode('123456789'));
-    WebProfileApi.lockUserSession({ unlock_code: '123456789' })
+    WebProfileApi.lockUserSession({ unlock_code: '123456789' as WithinRangeString<9, 10> })
       .then(() => {
         router.push(ROUTES.PROFILE_BLOCK_SUCCESS);
       })

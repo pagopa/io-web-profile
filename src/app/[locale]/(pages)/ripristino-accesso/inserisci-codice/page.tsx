@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
-import { commonBackground } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
+import { commonBackground } from '../../../_utils/styles';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ReactivateCode = (): React.ReactElement => {
@@ -36,7 +36,7 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
-    WebProfileApi.unlockUserSession({ unlock_code: restoreCode })
+    WebProfileApi.unlockUserSession({ unlock_code: undefined })
       .then(() => {
         setIsCodeNotValid(false);
         setErrorMessage('');
