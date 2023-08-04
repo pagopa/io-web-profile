@@ -2,7 +2,7 @@
 
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import Link from 'next-intl/link';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';

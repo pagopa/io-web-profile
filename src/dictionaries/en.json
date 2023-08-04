@@ -1,11 +1,7 @@
 {
-  "home": {
-    "template": "template"
-  },
-  "access": {
-    "title": "Hello Access"
-  },
-  "logout": {
-    "title": "Logout"
-  }
-}
+  "ioesco": {
+    "common": {
+      "hello": "Hello {nome}!" 
+      }
+      }
+    }

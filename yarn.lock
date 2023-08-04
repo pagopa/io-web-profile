@@ -3118,14 +3118,7 @@ husky@^8.0.0:
   resolved "https://registry.yarnpkg.com/husky/-/husky-8.0.3.tgz#4936d7212e46d1dea28fef29bb3a108872cd9184"
   integrity sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==
 
-i18next@^23.2.8:
-  version "23.2.8"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.2.8.tgz#dd54fab8f68c1ef2e0408249e042cf9cef683554"
-  integrity sha512-wU0pMlJ91ZbB89i77G3YQ11/pBQrzgWpxJYl7HFyA9aU9v3aHMI/oBKQmAJNURr0A8cLG4EHjgSMK8IqQTp4PQ==
-  dependencies:
-    "@babel/runtime" "^7.22.5"
-
-iconv-lite@0.6.3:
+iconv-lite@0.6.3, iconv-lite@^0.6.2:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
   integrity sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==
@@ -4187,15 +4180,14 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-intl@3.0.0-beta.8:
-  version "3.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.0.0-beta.8.tgz#006a956c583dfc31e9654154aaecd7ecb23435b0"
-  integrity sha512-5OMoYTREMbJdjK/pSwFmC5dc2Mo5SUvrPI/2wyl5CfCBM18IMmhcWiGjHPxolVpaxwAQ34/2wgym9uPlsyP7SQ==
+next-intl@2.19.1:
+  version "2.19.1"
+  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-2.19.1.tgz#4fd9bb8cc4bceff604a577352a84102f1764794a"
+  integrity sha512-fk+IGWXxA+UOk+3rIhQqSPYxka+Hk9qKaIpbeF3nNlf8dp1td0oT6srVrPw/uZl5Qoj8El3qQ2mVd3RTLA25cg==
   dependencies:
     "@formatjs/intl-localematcher" "^0.2.32"
     negotiator "^0.6.3"
-    server-only "0.0.1"
-    use-intl "^2.17.5"
+    use-intl "^2.19.1"
 
 next@13.4.9:
   version "13.4.9"
@@ -4822,10 +4814,17 @@ semver@^7.3.7, semver@^7.3.8, semver@^7.5.3:
   dependencies:
     lru-cache "^6.0.0"
 
-server-only@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/server-only/-/server-only-0.0.1.tgz#0f366bb6afb618c37c9255a314535dc412cd1c9e"
-  integrity sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==
+set-blocking@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
+  integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
+
+shebang-command@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
+  integrity sha512-EV3L1+UQWGor21OmnvojK36mhg+TyIKDh3iFBKBohr5xeXIhNBcx8oWdgkTEEQ+BEFFYdLRuqMfd5L84N1V5Vg==
+  dependencies:
+    shebang-regex "^1.0.0"
 
 shebang-command@^2.0.0:
   version "2.0.0"
@@ -5302,10 +5301,10 @@ url-parse@^1.5.3:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
 
-use-intl@^2.17.5:
-  version "2.17.5"
-  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-2.17.5.tgz#99b5fb375de9b841dad668edb48914cfe00236a4"
-  integrity sha512-pkTRoGZsOyHImBFgV23z7g/Hzt1auap+cWvsiWzHpc70NK7Rm9R3LNI3wm3FnYEWNF8N3+CZKV+SCTrHwcNK1w==
+use-intl@^2.19.1:
+  version "2.19.1"
+  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-2.19.1.tgz#4091a457342e3b90ca02aded0c0437766b6ccf9d"
+  integrity sha512-nPsXwwJeH+RuKe2ucN+xmRI7DdfjA7WezXYTJD0JZSPvyIyaledIBlVBbnkxanr+3fpIec3cVG6wvouGp9/lJQ==
   dependencies:
     "@formatjs/ecma402-abstract" "^1.11.4"
     intl-messageformat "^9.3.18"

@@ -1,13 +1,11 @@
 'use client';
 
-import { useRouter, usePathname, redirect } from 'next/navigation';
+import { useRouter, usePathname } from 'next-intl/client';
 import { useEffect, useState } from 'react';
+import { useLocale } from 'next-intl';
 import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
 import useToken from '../_hooks/useToken';
-import { isBrowser } from '../_utils/common';
-import { SpidValueInJWT } from '../_model/JWTUser';
-import { extractToken, userFromJwtToken } from '../_utils/jwt';
-import { storageTokenOps, storageUserOps } from '../_utils/storage';
+import { storageLocaleOps } from '../_utils/storage';
 import Loader from './loader/loader';
 
 type LoginStatusIdle = {
@@ -29,53 +27,25 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const { isTokenValid, removeToken } = useToken();
   const router = useRouter();
   const pathName = usePathname();
-
-  const cleanPath = (path: string): string => path.replace(/^(\/(en|it))\/(.*)$/, '');
-
-  const token = isBrowser() ? extractToken() : undefined;
-  const userFromToken = token ? userFromJwtToken(token) : undefined;
-
-  const L1_JWT_LEVEL: SpidValueInJWT = {
-    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
-  };
-
-  const L2_JWT_LEVEL: SpidValueInJWT = {
-    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2,
-  };
-
-  const L3_JWT_LEVEL: SpidValueInJWT = {
-    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3,
-  };
+  const locale = useLocale();
 
   useEffect(() => {
-    if (token && userFromToken) {
-      storageTokenOps.write(token);
-      storageUserOps.write(userFromToken);
-      switch (userFromToken?.spidLevel) {
-        case L1_JWT_LEVEL.value:
-          redirect(ROUTES.SESSION);
-          break;
-        case L2_JWT_LEVEL.value:
-          redirect(ROUTES.PROFILE);
-          break;
-        case L3_JWT_LEVEL.value:
-          redirect(ROUTES.PROFILE_RESTORE);
-          break;
-      }
+    if (!storageLocaleOps.read()) {
+      storageLocaleOps.write(locale);
     }
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
-    if (LOGIN_ROUTES.includes(cleanPath(pathName))) {
+    if (LOGIN_ROUTES.includes(pathName)) {
       removeToken();
     }
-    if (PUBBLIC_ROUTES.includes(cleanPath(pathName))) {
+    if (PUBBLIC_ROUTES.includes(pathName)) {
       setLoginStatus({ status: 'AUTHORIZED' });
     }
-    if (!PUBBLIC_ROUTES.includes(cleanPath(pathName)) && isTokenValid()) {
+    if (!PUBBLIC_ROUTES.includes(pathName) && isTokenValid()) {
       setLoginStatus({ status: 'AUTHORIZED' });
     }
-    if (!PUBBLIC_ROUTES.includes(cleanPath(pathName)) && !isTokenValid()) {
+    if (!PUBBLIC_ROUTES.includes(pathName) && !isTokenValid()) {
       setLoginStatus({ status: 'NOT_AUTHORIZED' });
       router.push(ROUTES.LOGIN);
     }

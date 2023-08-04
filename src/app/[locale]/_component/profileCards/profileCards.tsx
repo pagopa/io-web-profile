@@ -1,5 +1,6 @@
 'use client';
-import { Card, CardContent, Grid, Link, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
+import Link from 'next-intl/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import { ButtonNaked } from '@pagopa/mui-italia';

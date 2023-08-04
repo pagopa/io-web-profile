@@ -3,7 +3,7 @@
 import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import { IllusSms } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import Link from 'next-intl/link';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';

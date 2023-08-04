@@ -3,11 +3,16 @@ import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from 'next-intl/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next-intl/client';
 import { ROUTES } from '../../_utils/routes';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
+import { SpidValueInJWT } from '../../_model/JWTUser';
+import { isBrowser } from '../../_utils/common';
+import { extractToken, userFromJwtToken } from '../../_utils/jwt';
+import { storageLocaleOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -15,6 +20,41 @@ const Access = (): React.ReactElement => {
   const spidLevel: SpidLevels = {
     type: 'L2',
   };
+
+  const localeFromStorage = isBrowser() ? storageLocaleOps.read() : undefined;
+  const token = isBrowser() ? extractToken() : undefined;
+  const userFromToken = token ? userFromJwtToken(token) : undefined;
+  const router = useRouter();
+
+  const L1_JWT_LEVEL: SpidValueInJWT = {
+    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
+  };
+
+  const L2_JWT_LEVEL: SpidValueInJWT = {
+    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2,
+  };
+
+  const L3_JWT_LEVEL: SpidValueInJWT = {
+    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3,
+  };
+
+  useEffect(() => {
+    if (token && userFromToken && localeFromStorage) {
+      storageTokenOps.write(token);
+      storageUserOps.write(userFromToken);
+      switch (userFromToken?.spidLevel) {
+        case L1_JWT_LEVEL.value:
+          router.push(`${ROUTES.SESSION}`, { locale: localeFromStorage || 'it' });
+          break;
+        case L2_JWT_LEVEL.value:
+          router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage || 'it' });
+          break;
+        case L3_JWT_LEVEL.value:
+          router.push(`${ROUTES.PROFILE_RESTORE}`, { locale: localeFromStorage || 'it' });
+          break;
+      }
+    }
+  }, [localeFromStorage]);
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
