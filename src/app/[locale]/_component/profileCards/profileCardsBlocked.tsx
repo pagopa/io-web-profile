@@ -8,21 +8,26 @@ import { ROUTES } from '../../_utils/routes';
 import Firework from '../../_icons/firework';
 import { commonCardStyle } from '../../_utils/styles';
 
-const ProfileCardsBlocked = (): React.ReactElement => {
+const RestoreSessionCard = (): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   return (
-    <Grid container flexDirection="column" justifyContent="center" alignItems="center">
-      <Grid item textAlign={'center'}>
+    <Grid
+      container
+      spacing={4}
+      display={'flex'}
+      justifyContent={'center'}
+      flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
+      textAlign={{ xs: 'left', sm: 'center' }}
+    >
+      <Grid item xs={12} md={5} lg={4} xl={3}>
         <Card sx={commonCardStyle}>
           <CardContent>
             <Firework />
             <Typography variant="h6" py={2}>
               {t('common.restoreioaccess')}
             </Typography>
-            <Typography variant="body2" textAlign="center" px={5}>
-              {t('common.identitysecurityrestore')}
-            </Typography>
+            <Typography variant="body2">{t('common.identitysecurityrestore')}</Typography>
 
             <ButtonNaked
               href={ROUTES.PROFILE_RESTORE}
@@ -34,7 +39,7 @@ const ProfileCardsBlocked = (): React.ReactElement => {
               {t('common.restoreioaccess')}
             </ButtonNaked>
             <Divider />
-            <Typography variant="body2" padding={2}>
+            <Typography variant="body2" py={2}>
               {t('common.norestorecode')}
             </Typography>
             <ButtonNaked
@@ -51,4 +56,4 @@ const ProfileCardsBlocked = (): React.ReactElement => {
     </Grid>
   );
 };
-export default ProfileCardsBlocked;
+export default RestoreSessionCard;

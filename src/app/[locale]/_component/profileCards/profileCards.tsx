@@ -9,7 +9,11 @@ import { ROUTES } from '../../_utils/routes';
 import HourglassIcon from '../../_icons/hourglass';
 import { commonCardStyle } from '../../_utils/styles';
 
-const ProfileCards = (): React.ReactElement => {
+type ProfileCardsProps = {
+  sessionIsActive: boolean;
+};
+
+const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   return (
@@ -17,28 +21,32 @@ const ProfileCards = (): React.ReactElement => {
       <Grid
         container
         spacing={4}
+        display={'flex'}
+        justifyContent={'center'}
         flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
         textAlign={{ xs: 'left', sm: 'center' }}
       >
-        <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
-        <Grid item xs={12} md={5} lg={4} xl={3}>
-          <Card sx={commonCardStyle}>
-            <CardContent sx={{ padding: '32px' }}>
-              <QuestionIcon />
-              <Typography variant="h6" pt={2}>
-                {t('common.logout')}
-              </Typography>
-              <Typography variant="body2" py={2}>
-                {t('profile.nodevicelogout')}
-              </Typography>
-              <Link href={ROUTES.SESSION}>
-                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
+        {sessionIsActive && (
+          <Grid item xs={12} md={5} lg={4} xl={3}>
+            <Card sx={commonCardStyle}>
+              <CardContent sx={{ padding: '32px' }}>
+                <QuestionIcon />
+                <Typography variant="h6" pt={2}>
                   {t('common.logout')}
-                </ButtonNaked>
-              </Link>
-            </CardContent>
-          </Card>
-        </Grid>
+                </Typography>
+                <Typography variant="body2" py={2}>
+                  {t('profile.nodevicelogout')}
+                </Typography>
+                <Link href={ROUTES.SESSION}>
+                  <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
+                    {t('common.logout')}
+                  </ButtonNaked>
+                </Link>
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
+
         <Grid item xs={12} md={5} lg={4} xl={3}>
           <Card sx={commonCardStyle}>
             <CardContent sx={{ padding: '32px' }}>
@@ -61,7 +69,6 @@ const ProfileCards = (): React.ReactElement => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
       </Grid>
     </>
   );

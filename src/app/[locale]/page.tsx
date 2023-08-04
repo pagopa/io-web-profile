@@ -6,23 +6,24 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { ProfileData } from '../../api/generated/webProfile/ProfileData';
 import { Introduction } from './_component/introduction/introduction';
-import { commonBackground } from './_utils/styles';
 import ProfileCards from './_component/profileCards/profileCards';
+import RestoreSessionCard from './_component/profileCards/profileCardsBlocked';
+import { commonBackground } from './_utils/styles';
+import { storageUserOps } from './_utils/storage';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
-// import ProfileCardsBlocked from './_component/profileCards/profileCardsBlocked';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
+  const userFromStorage = storageUserOps.read();
 
   useEffect(() => {
     WebProfileApi.getProfile()
       .then((res) => {
         setProfileData(res);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +32,6 @@ const Profile = () => {
     WebProfileApi.getUserSessionState()
       .then((res) => {
         setSessionData(res);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +41,7 @@ const Profile = () => {
   return (
     <Grid sx={commonBackground}>
       <Introduction
-        title={t('common.hello', { nome: profileData?.name })}
+        title={t('common.hello', { nome: userFromStorage?.name })}
         summary={t('profile.anagraphicinfo')}
         summaryColumns={{
           xs: 12,
@@ -56,9 +56,7 @@ const Profile = () => {
         <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
           <Grid padding={3}>
             <Typography variant="body2">{t('common.namesurname')}</Typography>
-            <Typography variant="sidenav">
-              {`${profileData?.name} ${profileData?.family_name}`}
-            </Typography>
+            <Typography variant="sidenav">{`${userFromStorage?.name} ${userFromStorage?.surname}`}</Typography>
           </Grid>
           <Divider />
           <Grid padding={3}>
@@ -125,8 +123,10 @@ const Profile = () => {
       <Grid item pb={3} mt={6} xs={12} md={12} textAlign={'center'}>
         <Typography variant="h4">{t('common.whatdo')}</Typography>
       </Grid>
-      <ProfileCards />
-      {/* <ProfileCardsBlocked /> */}
+      {sessionData?.access_enabled === true && (
+        <ProfileCards sessionIsActive={sessionData?.session_info?.active} />
+      )}
+      {sessionData?.access_enabled === false && <RestoreSessionCard />}
     </Grid>
   );
 };
