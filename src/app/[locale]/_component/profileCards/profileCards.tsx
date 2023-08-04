@@ -1,19 +1,18 @@
 'use client';
-import { Card, CardContent, Grid, Link, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import { Card, CardContent, Grid, Link, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
+import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
 import { ROUTES } from '../../_utils/routes';
-import HourglassIcon from '../../_icons/hourglass';
 import { commonCardStyle } from '../../_utils/styles';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
 };
 
-const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
+export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   return (
@@ -73,5 +72,3 @@ const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElemen
     </>
   );
 };
-
-export default ProfileCards;

@@ -1,14 +1,13 @@
 'use client';
 import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { ROUTES } from '../../_utils/routes';
 import Firework from '../../_icons/firework';
 import { commonCardStyle } from '../../_utils/styles';
 
-const RestoreSessionCard = (): React.ReactElement => {
+export const RestoreSessionCard = (): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   return (
@@ -56,4 +55,3 @@ const RestoreSessionCard = (): React.ReactElement => {
     </Grid>
   );
 };
-export default RestoreSessionCard;
