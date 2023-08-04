@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button, Grid, Link, TextField } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
@@ -36,7 +37,7 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
-    WebProfileApi.unlockUserSession({ unlock_code: undefined })
+    WebProfileApi.unlockUserSession({ unlock_code: restoreCode as WithinRangeString<9, 10> })
       .then(() => {
         setIsCodeNotValid(false);
         setErrorMessage('');
