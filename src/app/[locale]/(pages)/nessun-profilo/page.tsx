@@ -5,17 +5,20 @@ import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
+import { storageUserOps } from '../../_utils/storage';
 import { commonBackground } from '../../_utils/styles';
 import PlayStoreIcon from '@/app/[locale]/_icons/playstore';
 
 const L2NoProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const userFromStorage = storageUserOps.read();
+
   return (
     <>
       <Grid sx={commonBackground} container spacing={2}>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
-            title={t('common.hello', { nome: 'Mario' })}
+            title={t('common.hello', { nome: userFromStorage?.name })}
             summary={t('common.noprofile')}
             summaryColumns={{ xs: 12, md: 10 }}
           />

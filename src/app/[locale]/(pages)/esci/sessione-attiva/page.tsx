@@ -9,10 +9,13 @@ import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
 import { WebProfileApi } from '@/api/webProfileApiClient';
+import { storageUserOps } from '@/app/[locale]/_utils/storage';
 
 const Session = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const router = useRouter();
+  const userFromStorage = storageUserOps.read();
+
   const handleLogout = () => {
     WebProfileApi.logoutFromIOApp()
       .then(() => {
@@ -27,7 +30,7 @@ const Session = (): React.ReactElement => {
       <Grid sx={commonBackgroundLight} container>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
-            title={t('profilelogout.logout')}
+            title={t('common.hello', { nome: userFromStorage?.name })}
             summary={
               <>
                 <span>

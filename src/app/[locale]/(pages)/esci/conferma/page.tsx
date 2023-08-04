@@ -27,7 +27,7 @@ const Session = (): React.ReactElement => {
       <Grid sx={commonBackgroundLight} container>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
-            title={t('common.hello', { nome: 'Mario' })}
+            title={t('profilelogout.logout')}
             summary={
               <>
                 <span>
