@@ -36,7 +36,7 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
-    WebProfileApi.unlockUserSession(restoreCode)
+    WebProfileApi.unlockUserSession({ unlock_code: restoreCode })
       .then(() => {
         setIsCodeNotValid(false);
         setErrorMessage('');

@@ -7,10 +7,6 @@ import * as t from "io-ts";
 
 import * as r from "@pagopa/ts-commons/lib/requests";
 
-import { ApplicationInfo } from "./ApplicationInfo";
-
-import { ProblemJson } from "./ProblemJson";
-
 import { ServiceStatus } from "./ServiceStatus";
 
 import { LockSessionData } from "./LockSessionData";
@@ -21,90 +17,15 @@ import { Unauthorized } from "./Unauthorized";
 
 import { InternalServerError } from "./InternalServerError";
 
+import { UnlockSessionData } from "./UnlockSessionData";
+
 import { ProfileData } from "./ProfileData";
+
+import { ProblemJson } from "./ProblemJson";
 
 import { SessionState } from "./SessionState";
 
 import { ExchangeToken } from "./ExchangeToken";
-
-/****************************************************************
- * getApplicationInfo
- */
-
-// Request type definition
-export type GetApplicationInfoT = r.IGetApiRequestType<
-  {},
-  never,
-  never,
-  | r.IResponseType<200, ApplicationInfo, never>
-  | r.IResponseType<500, ProblemJson, never>
->;
-
-export const getApplicationInfoDefaultResponses = {
-  200: ApplicationInfo,
-  500: ProblemJson
-};
-
-export type GetApplicationInfoResponsesT<
-  A0 = ApplicationInfo,
-  C0 = ApplicationInfo,
-  A1 = ProblemJson,
-  C1 = ProblemJson
-> = {
-  200: t.Type<A0, C0>;
-  500: t.Type<A1, C1>;
-};
-
-export function getApplicationInfoDecoder<
-  A0 = ApplicationInfo,
-  C0 = ApplicationInfo,
-  A1 = ProblemJson,
-  C1 = ProblemJson
->(
-  overrideTypes:
-    | Partial<GetApplicationInfoResponsesT<A0, C0, A1, C1>>
-    | t.Type<A0, C0>
-    | undefined = {}
-): r.ResponseDecoder<
-  r.IResponseType<200, A0, never> | r.IResponseType<500, A1, never>
-> {
-  const isDecoder = (d: any): d is t.Type<A0, C0> =>
-    typeof d["_A"] !== "undefined";
-
-  const type = {
-    ...((getApplicationInfoDefaultResponses as unknown) as GetApplicationInfoResponsesT<
-      A0,
-      C0,
-      A1,
-      C1
-    >),
-    ...(isDecoder(overrideTypes) ? { 200: overrideTypes } : overrideTypes)
-  };
-
-  const d200 = (type[200].name === "undefined"
-    ? r.constantResponseDecoder<undefined, 200, never>(200, undefined)
-    : r.ioResponseDecoder<
-        200,
-        typeof type[200]["_A"],
-        typeof type[200]["_O"],
-        never
-      >(200, type[200])) as r.ResponseDecoder<r.IResponseType<200, A0, never>>;
-
-  const d500 = (type[500].name === "undefined"
-    ? r.constantResponseDecoder<undefined, 500, never>(500, undefined)
-    : r.ioResponseDecoder<
-        500,
-        typeof type[500]["_A"],
-        typeof type[500]["_O"],
-        never
-      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A1, never>>;
-
-  return r.composeResponseDecoders(d200, d500);
-}
-
-// Decodes the success response with the type defined in the specs
-export const getApplicationInfoDefaultDecoder = () =>
-  getApplicationInfoDecoder();
 
 /****************************************************************
  * getServiceStatus
@@ -173,9 +94,10 @@ export type LockUserSessionT = r.IPostApiRequestType<
   },
   "Content-Type" | "Authorization",
   never,
-  | r.IResponseType<201, undefined, never>
+  | r.IResponseType<204, undefined, never>
   | r.IResponseType<400, BadRequest, never>
   | r.IResponseType<401, Unauthorized, never>
+  | r.IResponseType<403, undefined, never>
   | r.IResponseType<409, undefined, never>
   | r.IResponseType<500, InternalServerError, never>
   | r.IResponseType<502, undefined, never>
@@ -183,9 +105,10 @@ export type LockUserSessionT = r.IPostApiRequestType<
 >;
 
 export const lockUserSessionDefaultResponses = {
-  201: t.undefined,
+  204: t.undefined,
   400: BadRequest,
   401: Unauthorized,
+  403: t.undefined,
   409: t.undefined,
   500: InternalServerError,
   502: t.undefined,
@@ -201,20 +124,23 @@ export type LockUserSessionResponsesT<
   C2 = Unauthorized,
   A3 = undefined,
   C3 = undefined,
-  A4 = InternalServerError,
-  C4 = InternalServerError,
-  A5 = undefined,
-  C5 = undefined,
+  A4 = undefined,
+  C4 = undefined,
+  A5 = InternalServerError,
+  C5 = InternalServerError,
   A6 = undefined,
-  C6 = undefined
+  C6 = undefined,
+  A7 = undefined,
+  C7 = undefined
 > = {
-  201: t.Type<A0, C0>;
+  204: t.Type<A0, C0>;
   400: t.Type<A1, C1>;
   401: t.Type<A2, C2>;
-  409: t.Type<A3, C3>;
-  500: t.Type<A4, C4>;
-  502: t.Type<A5, C5>;
-  504: t.Type<A6, C6>;
+  403: t.Type<A3, C3>;
+  409: t.Type<A4, C4>;
+  500: t.Type<A5, C5>;
+  502: t.Type<A6, C6>;
+  504: t.Type<A7, C7>;
 };
 
 export function lockUserSessionDecoder<
@@ -226,12 +152,14 @@ export function lockUserSessionDecoder<
   C2 = Unauthorized,
   A3 = undefined,
   C3 = undefined,
-  A4 = InternalServerError,
-  C4 = InternalServerError,
-  A5 = undefined,
-  C5 = undefined,
+  A4 = undefined,
+  C4 = undefined,
+  A5 = InternalServerError,
+  C5 = InternalServerError,
   A6 = undefined,
-  C6 = undefined
+  C6 = undefined,
+  A7 = undefined,
+  C7 = undefined
 >(
   overrideTypes:
     | Partial<
@@ -249,19 +177,22 @@ export function lockUserSessionDecoder<
           A5,
           C5,
           A6,
-          C6
+          C6,
+          A7,
+          C7
         >
       >
     | t.Type<A0, C0>
     | undefined = {}
 ): r.ResponseDecoder<
-  | r.IResponseType<201, A0, never>
+  | r.IResponseType<204, A0, never>
   | r.IResponseType<400, A1, never>
   | r.IResponseType<401, A2, never>
-  | r.IResponseType<409, A3, never>
-  | r.IResponseType<500, A4, never>
-  | r.IResponseType<502, A5, never>
-  | r.IResponseType<504, A6, never>
+  | r.IResponseType<403, A3, never>
+  | r.IResponseType<409, A4, never>
+  | r.IResponseType<500, A5, never>
+  | r.IResponseType<502, A6, never>
+  | r.IResponseType<504, A7, never>
 > {
   const isDecoder = (d: any): d is t.Type<A0, C0> =>
     typeof d["_A"] !== "undefined";
@@ -281,19 +212,21 @@ export function lockUserSessionDecoder<
       A5,
       C5,
       A6,
-      C6
+      C6,
+      A7,
+      C7
     >),
-    ...(isDecoder(overrideTypes) ? { 201: overrideTypes } : overrideTypes)
+    ...(isDecoder(overrideTypes) ? { 204: overrideTypes } : overrideTypes)
   };
 
-  const d201 = (type[201].name === "undefined"
-    ? r.constantResponseDecoder<undefined, 201, never>(201, undefined)
+  const d204 = (type[204].name === "undefined"
+    ? r.constantResponseDecoder<undefined, 204, never>(204, undefined)
     : r.ioResponseDecoder<
-        201,
-        typeof type[201]["_A"],
-        typeof type[201]["_O"],
+        204,
+        typeof type[204]["_A"],
+        typeof type[204]["_O"],
         never
-      >(201, type[201])) as r.ResponseDecoder<r.IResponseType<201, A0, never>>;
+      >(204, type[204])) as r.ResponseDecoder<r.IResponseType<204, A0, never>>;
 
   const d400 = (type[400].name === "undefined"
     ? r.constantResponseDecoder<undefined, 400, never>(400, undefined)
@@ -313,6 +246,15 @@ export function lockUserSessionDecoder<
         never
       >(401, type[401])) as r.ResponseDecoder<r.IResponseType<401, A2, never>>;
 
+  const d403 = (type[403].name === "undefined"
+    ? r.constantResponseDecoder<undefined, 403, never>(403, undefined)
+    : r.ioResponseDecoder<
+        403,
+        typeof type[403]["_A"],
+        typeof type[403]["_O"],
+        never
+      >(403, type[403])) as r.ResponseDecoder<r.IResponseType<403, A3, never>>;
+
   const d409 = (type[409].name === "undefined"
     ? r.constantResponseDecoder<undefined, 409, never>(409, undefined)
     : r.ioResponseDecoder<
@@ -320,7 +262,7 @@ export function lockUserSessionDecoder<
         typeof type[409]["_A"],
         typeof type[409]["_O"],
         never
-      >(409, type[409])) as r.ResponseDecoder<r.IResponseType<409, A3, never>>;
+      >(409, type[409])) as r.ResponseDecoder<r.IResponseType<409, A4, never>>;
 
   const d500 = (type[500].name === "undefined"
     ? r.constantResponseDecoder<undefined, 500, never>(500, undefined)
@@ -329,7 +271,7 @@ export function lockUserSessionDecoder<
         typeof type[500]["_A"],
         typeof type[500]["_O"],
         never
-      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A4, never>>;
+      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A5, never>>;
 
   const d502 = (type[502].name === "undefined"
     ? r.constantResponseDecoder<undefined, 502, never>(502, undefined)
@@ -338,7 +280,7 @@ export function lockUserSessionDecoder<
         typeof type[502]["_A"],
         typeof type[502]["_O"],
         never
-      >(502, type[502])) as r.ResponseDecoder<r.IResponseType<502, A5, never>>;
+      >(502, type[502])) as r.ResponseDecoder<r.IResponseType<502, A6, never>>;
 
   const d504 = (type[504].name === "undefined"
     ? r.constantResponseDecoder<undefined, 504, never>(504, undefined)
@@ -347,15 +289,18 @@ export function lockUserSessionDecoder<
         typeof type[504]["_A"],
         typeof type[504]["_O"],
         never
-      >(504, type[504])) as r.ResponseDecoder<r.IResponseType<504, A6, never>>;
+      >(504, type[504])) as r.ResponseDecoder<r.IResponseType<504, A7, never>>;
 
   return r.composeResponseDecoders(
     r.composeResponseDecoders(
       r.composeResponseDecoders(
         r.composeResponseDecoders(
           r.composeResponseDecoders(
-            r.composeResponseDecoders(d201, d400),
-            d401
+            r.composeResponseDecoders(
+              r.composeResponseDecoders(d204, d400),
+              d401
+            ),
+            d403
           ),
           d409
         ),
@@ -378,7 +323,7 @@ export const lockUserSessionDefaultDecoder = () => lockUserSessionDecoder();
 export type UnlockUserSessionT = r.IPostApiRequestType<
   {
     readonly bearerAuth: string;
-    readonly body?: LockSessionData | ReadableStream<Uint8Array> | Buffer;
+    readonly body?: UnlockSessionData | ReadableStream<Uint8Array> | Buffer;
   },
   "Content-Type" | "Authorization",
   never,
@@ -783,84 +728,6 @@ export function logoutFromIOAppDecoder<
 export const logoutFromIOAppDefaultDecoder = () => logoutFromIOAppDecoder();
 
 /****************************************************************
- * getSessionsList
- */
-
-// Request type definition
-export type GetSessionsListT = r.IGetApiRequestType<
-  { readonly bearerAuth: string },
-  "Authorization",
-  never,
-  | r.IResponseType<200, undefined, never>
-  | r.IResponseType<404, undefined, never>
->;
-
-export const getSessionsListDefaultResponses = {
-  200: t.undefined,
-  404: t.undefined
-};
-
-export type GetSessionsListResponsesT<
-  A0 = undefined,
-  C0 = undefined,
-  A1 = undefined,
-  C1 = undefined
-> = {
-  200: t.Type<A0, C0>;
-  404: t.Type<A1, C1>;
-};
-
-export function getSessionsListDecoder<
-  A0 = undefined,
-  C0 = undefined,
-  A1 = undefined,
-  C1 = undefined
->(
-  overrideTypes:
-    | Partial<GetSessionsListResponsesT<A0, C0, A1, C1>>
-    | t.Type<A0, C0>
-    | undefined = {}
-): r.ResponseDecoder<
-  r.IResponseType<200, A0, never> | r.IResponseType<404, A1, never>
-> {
-  const isDecoder = (d: any): d is t.Type<A0, C0> =>
-    typeof d["_A"] !== "undefined";
-
-  const type = {
-    ...((getSessionsListDefaultResponses as unknown) as GetSessionsListResponsesT<
-      A0,
-      C0,
-      A1,
-      C1
-    >),
-    ...(isDecoder(overrideTypes) ? { 200: overrideTypes } : overrideTypes)
-  };
-
-  const d200 = (type[200].name === "undefined"
-    ? r.constantResponseDecoder<undefined, 200, never>(200, undefined)
-    : r.ioResponseDecoder<
-        200,
-        typeof type[200]["_A"],
-        typeof type[200]["_O"],
-        never
-      >(200, type[200])) as r.ResponseDecoder<r.IResponseType<200, A0, never>>;
-
-  const d404 = (type[404].name === "undefined"
-    ? r.constantResponseDecoder<undefined, 404, never>(404, undefined)
-    : r.ioResponseDecoder<
-        404,
-        typeof type[404]["_A"],
-        typeof type[404]["_O"],
-        never
-      >(404, type[404])) as r.ResponseDecoder<r.IResponseType<404, A1, never>>;
-
-  return r.composeResponseDecoders(d200, d404);
-}
-
-// Decodes the success response with the type defined in the specs
-export const getSessionsListDefaultDecoder = () => getSessionsListDecoder();
-
-/****************************************************************
  * getProfile
  */
 
@@ -871,7 +738,8 @@ export type GetProfileT = r.IGetApiRequestType<
   never,
   | r.IResponseType<200, ProfileData, never>
   | r.IResponseType<400, BadRequest, never>
-  | r.IResponseType<401, undefined, never>
+  | r.IResponseType<401, Unauthorized, never>
+  | r.IResponseType<403, undefined, never>
   | r.IResponseType<404, ProblemJson, never>
   | r.IResponseType<429, undefined, never>
   | r.IResponseType<500, InternalServerError, never>
@@ -880,7 +748,8 @@ export type GetProfileT = r.IGetApiRequestType<
 export const getProfileDefaultResponses = {
   200: ProfileData,
   400: BadRequest,
-  401: t.undefined,
+  401: Unauthorized,
+  403: t.undefined,
   404: ProblemJson,
   429: t.undefined,
   500: InternalServerError
@@ -891,21 +760,24 @@ export type GetProfileResponsesT<
   C0 = ProfileData,
   A1 = BadRequest,
   C1 = BadRequest,
-  A2 = undefined,
-  C2 = undefined,
-  A3 = ProblemJson,
-  C3 = ProblemJson,
-  A4 = undefined,
-  C4 = undefined,
-  A5 = InternalServerError,
-  C5 = InternalServerError
+  A2 = Unauthorized,
+  C2 = Unauthorized,
+  A3 = undefined,
+  C3 = undefined,
+  A4 = ProblemJson,
+  C4 = ProblemJson,
+  A5 = undefined,
+  C5 = undefined,
+  A6 = InternalServerError,
+  C6 = InternalServerError
 > = {
   200: t.Type<A0, C0>;
   400: t.Type<A1, C1>;
   401: t.Type<A2, C2>;
-  404: t.Type<A3, C3>;
-  429: t.Type<A4, C4>;
-  500: t.Type<A5, C5>;
+  403: t.Type<A3, C3>;
+  404: t.Type<A4, C4>;
+  429: t.Type<A5, C5>;
+  500: t.Type<A6, C6>;
 };
 
 export function getProfileDecoder<
@@ -913,18 +785,35 @@ export function getProfileDecoder<
   C0 = ProfileData,
   A1 = BadRequest,
   C1 = BadRequest,
-  A2 = undefined,
-  C2 = undefined,
-  A3 = ProblemJson,
-  C3 = ProblemJson,
-  A4 = undefined,
-  C4 = undefined,
-  A5 = InternalServerError,
-  C5 = InternalServerError
+  A2 = Unauthorized,
+  C2 = Unauthorized,
+  A3 = undefined,
+  C3 = undefined,
+  A4 = ProblemJson,
+  C4 = ProblemJson,
+  A5 = undefined,
+  C5 = undefined,
+  A6 = InternalServerError,
+  C6 = InternalServerError
 >(
   overrideTypes:
     | Partial<
-        GetProfileResponsesT<A0, C0, A1, C1, A2, C2, A3, C3, A4, C4, A5, C5>
+        GetProfileResponsesT<
+          A0,
+          C0,
+          A1,
+          C1,
+          A2,
+          C2,
+          A3,
+          C3,
+          A4,
+          C4,
+          A5,
+          C5,
+          A6,
+          C6
+        >
       >
     | t.Type<A0, C0>
     | undefined = {}
@@ -932,9 +821,10 @@ export function getProfileDecoder<
   | r.IResponseType<200, A0, never>
   | r.IResponseType<400, A1, never>
   | r.IResponseType<401, A2, never>
-  | r.IResponseType<404, A3, never>
-  | r.IResponseType<429, A4, never>
-  | r.IResponseType<500, A5, never>
+  | r.IResponseType<403, A3, never>
+  | r.IResponseType<404, A4, never>
+  | r.IResponseType<429, A5, never>
+  | r.IResponseType<500, A6, never>
 > {
   const isDecoder = (d: any): d is t.Type<A0, C0> =>
     typeof d["_A"] !== "undefined";
@@ -952,7 +842,9 @@ export function getProfileDecoder<
       A4,
       C4,
       A5,
-      C5
+      C5,
+      A6,
+      C6
     >),
     ...(isDecoder(overrideTypes) ? { 200: overrideTypes } : overrideTypes)
   };
@@ -984,6 +876,15 @@ export function getProfileDecoder<
         never
       >(401, type[401])) as r.ResponseDecoder<r.IResponseType<401, A2, never>>;
 
+  const d403 = (type[403].name === "undefined"
+    ? r.constantResponseDecoder<undefined, 403, never>(403, undefined)
+    : r.ioResponseDecoder<
+        403,
+        typeof type[403]["_A"],
+        typeof type[403]["_O"],
+        never
+      >(403, type[403])) as r.ResponseDecoder<r.IResponseType<403, A3, never>>;
+
   const d404 = (type[404].name === "undefined"
     ? r.constantResponseDecoder<undefined, 404, never>(404, undefined)
     : r.ioResponseDecoder<
@@ -991,7 +892,7 @@ export function getProfileDecoder<
         typeof type[404]["_A"],
         typeof type[404]["_O"],
         never
-      >(404, type[404])) as r.ResponseDecoder<r.IResponseType<404, A3, never>>;
+      >(404, type[404])) as r.ResponseDecoder<r.IResponseType<404, A4, never>>;
 
   const d429 = (type[429].name === "undefined"
     ? r.constantResponseDecoder<undefined, 429, never>(429, undefined)
@@ -1000,7 +901,7 @@ export function getProfileDecoder<
         typeof type[429]["_A"],
         typeof type[429]["_O"],
         never
-      >(429, type[429])) as r.ResponseDecoder<r.IResponseType<429, A4, never>>;
+      >(429, type[429])) as r.ResponseDecoder<r.IResponseType<429, A5, never>>;
 
   const d500 = (type[500].name === "undefined"
     ? r.constantResponseDecoder<undefined, 500, never>(500, undefined)
@@ -1009,12 +910,18 @@ export function getProfileDecoder<
         typeof type[500]["_A"],
         typeof type[500]["_O"],
         never
-      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A5, never>>;
+      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A6, never>>;
 
   return r.composeResponseDecoders(
     r.composeResponseDecoders(
       r.composeResponseDecoders(
-        r.composeResponseDecoders(r.composeResponseDecoders(d200, d400), d401),
+        r.composeResponseDecoders(
+          r.composeResponseDecoders(
+            r.composeResponseDecoders(d200, d400),
+            d401
+          ),
+          d403
+        ),
         d404
       ),
       d429
@@ -1031,13 +938,14 @@ export const getProfileDefaultDecoder = () => getProfileDecoder();
  */
 
 // Request type definition
-export type GetUserSessionStateT = r.IPostApiRequestType<
+export type GetUserSessionStateT = r.IGetApiRequestType<
   { readonly bearerAuth: string },
   "Authorization",
   never,
   | r.IResponseType<200, SessionState, never>
   | r.IResponseType<400, BadRequest, never>
   | r.IResponseType<401, Unauthorized, never>
+  | r.IResponseType<403, undefined, never>
   | r.IResponseType<500, InternalServerError, never>
   | r.IResponseType<502, undefined, never>
   | r.IResponseType<504, undefined, never>
@@ -1047,6 +955,7 @@ export const getUserSessionStateDefaultResponses = {
   200: SessionState,
   400: BadRequest,
   401: Unauthorized,
+  403: t.undefined,
   500: InternalServerError,
   502: t.undefined,
   504: t.undefined
@@ -1059,19 +968,22 @@ export type GetUserSessionStateResponsesT<
   C1 = BadRequest,
   A2 = Unauthorized,
   C2 = Unauthorized,
-  A3 = InternalServerError,
-  C3 = InternalServerError,
-  A4 = undefined,
-  C4 = undefined,
+  A3 = undefined,
+  C3 = undefined,
+  A4 = InternalServerError,
+  C4 = InternalServerError,
   A5 = undefined,
-  C5 = undefined
+  C5 = undefined,
+  A6 = undefined,
+  C6 = undefined
 > = {
   200: t.Type<A0, C0>;
   400: t.Type<A1, C1>;
   401: t.Type<A2, C2>;
-  500: t.Type<A3, C3>;
-  502: t.Type<A4, C4>;
-  504: t.Type<A5, C5>;
+  403: t.Type<A3, C3>;
+  500: t.Type<A4, C4>;
+  502: t.Type<A5, C5>;
+  504: t.Type<A6, C6>;
 };
 
 export function getUserSessionStateDecoder<
@@ -1081,12 +993,14 @@ export function getUserSessionStateDecoder<
   C1 = BadRequest,
   A2 = Unauthorized,
   C2 = Unauthorized,
-  A3 = InternalServerError,
-  C3 = InternalServerError,
-  A4 = undefined,
-  C4 = undefined,
+  A3 = undefined,
+  C3 = undefined,
+  A4 = InternalServerError,
+  C4 = InternalServerError,
   A5 = undefined,
-  C5 = undefined
+  C5 = undefined,
+  A6 = undefined,
+  C6 = undefined
 >(
   overrideTypes:
     | Partial<
@@ -1102,7 +1016,9 @@ export function getUserSessionStateDecoder<
           A4,
           C4,
           A5,
-          C5
+          C5,
+          A6,
+          C6
         >
       >
     | t.Type<A0, C0>
@@ -1111,9 +1027,10 @@ export function getUserSessionStateDecoder<
   | r.IResponseType<200, A0, never>
   | r.IResponseType<400, A1, never>
   | r.IResponseType<401, A2, never>
-  | r.IResponseType<500, A3, never>
-  | r.IResponseType<502, A4, never>
-  | r.IResponseType<504, A5, never>
+  | r.IResponseType<403, A3, never>
+  | r.IResponseType<500, A4, never>
+  | r.IResponseType<502, A5, never>
+  | r.IResponseType<504, A6, never>
 > {
   const isDecoder = (d: any): d is t.Type<A0, C0> =>
     typeof d["_A"] !== "undefined";
@@ -1131,7 +1048,9 @@ export function getUserSessionStateDecoder<
       A4,
       C4,
       A5,
-      C5
+      C5,
+      A6,
+      C6
     >),
     ...(isDecoder(overrideTypes) ? { 200: overrideTypes } : overrideTypes)
   };
@@ -1163,6 +1082,15 @@ export function getUserSessionStateDecoder<
         never
       >(401, type[401])) as r.ResponseDecoder<r.IResponseType<401, A2, never>>;
 
+  const d403 = (type[403].name === "undefined"
+    ? r.constantResponseDecoder<undefined, 403, never>(403, undefined)
+    : r.ioResponseDecoder<
+        403,
+        typeof type[403]["_A"],
+        typeof type[403]["_O"],
+        never
+      >(403, type[403])) as r.ResponseDecoder<r.IResponseType<403, A3, never>>;
+
   const d500 = (type[500].name === "undefined"
     ? r.constantResponseDecoder<undefined, 500, never>(500, undefined)
     : r.ioResponseDecoder<
@@ -1170,7 +1098,7 @@ export function getUserSessionStateDecoder<
         typeof type[500]["_A"],
         typeof type[500]["_O"],
         never
-      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A3, never>>;
+      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A4, never>>;
 
   const d502 = (type[502].name === "undefined"
     ? r.constantResponseDecoder<undefined, 502, never>(502, undefined)
@@ -1179,7 +1107,7 @@ export function getUserSessionStateDecoder<
         typeof type[502]["_A"],
         typeof type[502]["_O"],
         never
-      >(502, type[502])) as r.ResponseDecoder<r.IResponseType<502, A4, never>>;
+      >(502, type[502])) as r.ResponseDecoder<r.IResponseType<502, A5, never>>;
 
   const d504 = (type[504].name === "undefined"
     ? r.constantResponseDecoder<undefined, 504, never>(504, undefined)
@@ -1188,12 +1116,18 @@ export function getUserSessionStateDecoder<
         typeof type[504]["_A"],
         typeof type[504]["_O"],
         never
-      >(504, type[504])) as r.ResponseDecoder<r.IResponseType<504, A5, never>>;
+      >(504, type[504])) as r.ResponseDecoder<r.IResponseType<504, A6, never>>;
 
   return r.composeResponseDecoders(
     r.composeResponseDecoders(
       r.composeResponseDecoders(
-        r.composeResponseDecoders(r.composeResponseDecoders(d200, d400), d401),
+        r.composeResponseDecoders(
+          r.composeResponseDecoders(
+            r.composeResponseDecoders(d200, d400),
+            d401
+          ),
+          d403
+        ),
         d500
       ),
       d502
@@ -1218,6 +1152,7 @@ export type ExchangeTokenT = r.IPostApiRequestType<
   | r.IResponseType<200, ExchangeToken, never>
   | r.IResponseType<400, BadRequest, never>
   | r.IResponseType<401, Unauthorized, never>
+  | r.IResponseType<403, undefined, never>
   | r.IResponseType<500, InternalServerError, never>
   | r.IResponseType<502, undefined, never>
   | r.IResponseType<504, undefined, never>
@@ -1227,6 +1162,7 @@ export const exchangeTokenDefaultResponses = {
   200: ExchangeToken,
   400: BadRequest,
   401: Unauthorized,
+  403: t.undefined,
   500: InternalServerError,
   502: t.undefined,
   504: t.undefined
@@ -1239,19 +1175,22 @@ export type ExchangeTokenResponsesT<
   C1 = BadRequest,
   A2 = Unauthorized,
   C2 = Unauthorized,
-  A3 = InternalServerError,
-  C3 = InternalServerError,
-  A4 = undefined,
-  C4 = undefined,
+  A3 = undefined,
+  C3 = undefined,
+  A4 = InternalServerError,
+  C4 = InternalServerError,
   A5 = undefined,
-  C5 = undefined
+  C5 = undefined,
+  A6 = undefined,
+  C6 = undefined
 > = {
   200: t.Type<A0, C0>;
   400: t.Type<A1, C1>;
   401: t.Type<A2, C2>;
-  500: t.Type<A3, C3>;
-  502: t.Type<A4, C4>;
-  504: t.Type<A5, C5>;
+  403: t.Type<A3, C3>;
+  500: t.Type<A4, C4>;
+  502: t.Type<A5, C5>;
+  504: t.Type<A6, C6>;
 };
 
 export function exchangeTokenDecoder<
@@ -1261,16 +1200,33 @@ export function exchangeTokenDecoder<
   C1 = BadRequest,
   A2 = Unauthorized,
   C2 = Unauthorized,
-  A3 = InternalServerError,
-  C3 = InternalServerError,
-  A4 = undefined,
-  C4 = undefined,
+  A3 = undefined,
+  C3 = undefined,
+  A4 = InternalServerError,
+  C4 = InternalServerError,
   A5 = undefined,
-  C5 = undefined
+  C5 = undefined,
+  A6 = undefined,
+  C6 = undefined
 >(
   overrideTypes:
     | Partial<
-        ExchangeTokenResponsesT<A0, C0, A1, C1, A2, C2, A3, C3, A4, C4, A5, C5>
+        ExchangeTokenResponsesT<
+          A0,
+          C0,
+          A1,
+          C1,
+          A2,
+          C2,
+          A3,
+          C3,
+          A4,
+          C4,
+          A5,
+          C5,
+          A6,
+          C6
+        >
       >
     | t.Type<A0, C0>
     | undefined = {}
@@ -1278,9 +1234,10 @@ export function exchangeTokenDecoder<
   | r.IResponseType<200, A0, never>
   | r.IResponseType<400, A1, never>
   | r.IResponseType<401, A2, never>
-  | r.IResponseType<500, A3, never>
-  | r.IResponseType<502, A4, never>
-  | r.IResponseType<504, A5, never>
+  | r.IResponseType<403, A3, never>
+  | r.IResponseType<500, A4, never>
+  | r.IResponseType<502, A5, never>
+  | r.IResponseType<504, A6, never>
 > {
   const isDecoder = (d: any): d is t.Type<A0, C0> =>
     typeof d["_A"] !== "undefined";
@@ -1298,7 +1255,9 @@ export function exchangeTokenDecoder<
       A4,
       C4,
       A5,
-      C5
+      C5,
+      A6,
+      C6
     >),
     ...(isDecoder(overrideTypes) ? { 200: overrideTypes } : overrideTypes)
   };
@@ -1330,6 +1289,15 @@ export function exchangeTokenDecoder<
         never
       >(401, type[401])) as r.ResponseDecoder<r.IResponseType<401, A2, never>>;
 
+  const d403 = (type[403].name === "undefined"
+    ? r.constantResponseDecoder<undefined, 403, never>(403, undefined)
+    : r.ioResponseDecoder<
+        403,
+        typeof type[403]["_A"],
+        typeof type[403]["_O"],
+        never
+      >(403, type[403])) as r.ResponseDecoder<r.IResponseType<403, A3, never>>;
+
   const d500 = (type[500].name === "undefined"
     ? r.constantResponseDecoder<undefined, 500, never>(500, undefined)
     : r.ioResponseDecoder<
@@ -1337,7 +1305,7 @@ export function exchangeTokenDecoder<
         typeof type[500]["_A"],
         typeof type[500]["_O"],
         never
-      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A3, never>>;
+      >(500, type[500])) as r.ResponseDecoder<r.IResponseType<500, A4, never>>;
 
   const d502 = (type[502].name === "undefined"
     ? r.constantResponseDecoder<undefined, 502, never>(502, undefined)
@@ -1346,7 +1314,7 @@ export function exchangeTokenDecoder<
         typeof type[502]["_A"],
         typeof type[502]["_O"],
         never
-      >(502, type[502])) as r.ResponseDecoder<r.IResponseType<502, A4, never>>;
+      >(502, type[502])) as r.ResponseDecoder<r.IResponseType<502, A5, never>>;
 
   const d504 = (type[504].name === "undefined"
     ? r.constantResponseDecoder<undefined, 504, never>(504, undefined)
@@ -1355,12 +1323,18 @@ export function exchangeTokenDecoder<
         typeof type[504]["_A"],
         typeof type[504]["_O"],
         never
-      >(504, type[504])) as r.ResponseDecoder<r.IResponseType<504, A5, never>>;
+      >(504, type[504])) as r.ResponseDecoder<r.IResponseType<504, A6, never>>;
 
   return r.composeResponseDecoders(
     r.composeResponseDecoders(
       r.composeResponseDecoders(
-        r.composeResponseDecoders(r.composeResponseDecoders(d200, d400), d401),
+        r.composeResponseDecoders(
+          r.composeResponseDecoders(
+            r.composeResponseDecoders(d200, d400),
+            d401
+          ),
+          d403
+        ),
         d500
       ),
       d502

@@ -16,7 +16,7 @@ const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation) => (params) =
   });
 };
 const webProfileApiClient = createClient({
-  baseUrl: 'http://localhost:9999',
+  baseUrl: 'http://localhost:7071',
   basePath: '/api/v1',
   fetchApi: buildFetchApi(300000),
   withDefaults: withBearer,
@@ -28,7 +28,7 @@ const onRedirectToLogin = () => console.log('redirect to login');
 export const WebProfileApi = {
   lockUserSession: async (unlockCode: LockSessionData): Promise<void> => {
     const result = await webProfileApiClient.lockUserSession({ body: unlockCode });
-    return extractResponse(result, 201, onRedirectToLogin);
+    return extractResponse(result, 204, onRedirectToLogin);
   },
   unlockUserSession: async (unlockCode: LockSessionData): Promise<void> => {
     const result = await webProfileApiClient.unlockUserSession({ body: unlockCode });
@@ -38,10 +38,10 @@ export const WebProfileApi = {
     const result = await webProfileApiClient.logoutFromIOApp({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
-  getSessionsList: async (): Promise<void> => {
-    const result = await webProfileApiClient.getSessionsList({});
-    return extractResponse(result, 200, onRedirectToLogin);
-  },
+  // getSessionsList: async (): Promise<void> => {
+  //   const result = await webProfileApiClient.getSessionsList({});
+  //   return extractResponse(result, 200, onRedirectToLogin);
+  // },
   getProfile: async (): Promise<ProfileData> => {
     const result = await webProfileApiClient.getProfile({});
     return extractResponse(result, 200, onRedirectToLogin);

@@ -21,7 +21,7 @@ const ProfileBlock = (): React.ReactElement => {
 
   const handleLockSession = () => {
     dispatch(createUnlockCode('123456789'));
-    WebProfileApi.lockUserSession('123456789')
+    WebProfileApi.lockUserSession({ unlock_code: '123456789' })
       .then(() => {
         router.push(ROUTES.PROFILE_BLOCK_SUCCESS);
       })

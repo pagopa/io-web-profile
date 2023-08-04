@@ -12,11 +12,7 @@ import { EmailString } from "@pagopa/ts-commons/lib/strings";
  */
 
 // required attributes
-const ProfileDataR = t.interface({
-  family_name: t.string,
-
-  name: t.string
-});
+const ProfileDataR = t.interface({});
 
 // optional attributes
 const ProfileDataO = t.partial({

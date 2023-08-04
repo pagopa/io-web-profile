@@ -4,15 +4,16 @@
  */
 /* eslint-disable  */
 
+import { UnlockCode } from "./UnlockCode";
 import * as t from "io-ts";
 
 // required attributes
-const LockSessionDataR = t.interface({});
+const LockSessionDataR = t.interface({
+  unlock_code: UnlockCode
+});
 
 // optional attributes
-const LockSessionDataO = t.partial({
-  unlockCode: t.string
-});
+const LockSessionDataO = t.partial({});
 
 export const LockSessionData = t.intersection(
   [LockSessionDataR, LockSessionDataO],

@@ -15,8 +15,6 @@ import {
 import { identity } from "fp-ts/lib/function";
 
 import {
-  GetApplicationInfoT,
-  getApplicationInfoDefaultDecoder,
   GetServiceStatusT,
   getServiceStatusDefaultDecoder,
   LockUserSessionT,
@@ -25,8 +23,6 @@ import {
   unlockUserSessionDefaultDecoder,
   LogoutFromIOAppT,
   logoutFromIOAppDefaultDecoder,
-  GetSessionsListT,
-  getSessionsListDefaultDecoder,
   GetProfileT,
   getProfileDefaultDecoder,
   GetUserSessionStateT,
@@ -41,22 +37,18 @@ import {
 // We use this as a placeholder for type parameters indicating "no key"
 type __UNDEFINED_KEY = "_____";
 
-export type ApiOperation = TypeofApiCall<GetApplicationInfoT> &
-  TypeofApiCall<GetServiceStatusT> &
+export type ApiOperation = TypeofApiCall<GetServiceStatusT> &
   TypeofApiCall<LockUserSessionT> &
   TypeofApiCall<UnlockUserSessionT> &
   TypeofApiCall<LogoutFromIOAppT> &
-  TypeofApiCall<GetSessionsListT> &
   TypeofApiCall<GetProfileT> &
   TypeofApiCall<GetUserSessionStateT> &
   TypeofApiCall<ExchangeTokenT>;
 
-export type ParamKeys = keyof (TypeofApiParams<GetApplicationInfoT> &
-  TypeofApiParams<GetServiceStatusT> &
+export type ParamKeys = keyof (TypeofApiParams<GetServiceStatusT> &
   TypeofApiParams<LockUserSessionT> &
   TypeofApiParams<UnlockUserSessionT> &
   TypeofApiParams<LogoutFromIOAppT> &
-  TypeofApiParams<GetSessionsListT> &
   TypeofApiParams<GetProfileT> &
   TypeofApiParams<GetUserSessionStateT> &
   TypeofApiParams<ExchangeTokenT>);
@@ -83,12 +75,10 @@ export type OmitApiCallParams<
 export type WithDefaultsT<
   K extends ParamKeys | __UNDEFINED_KEY = __UNDEFINED_KEY
 > = OmitApiCallParams<
-  | GetApplicationInfoT
   | GetServiceStatusT
   | LockUserSessionT
   | UnlockUserSessionT
   | LogoutFromIOAppT
-  | GetSessionsListT
   | GetProfileT
   | GetUserSessionStateT
   | ExchangeTokenT,
@@ -103,8 +93,6 @@ export type Client<
   K extends ParamKeys | __UNDEFINED_KEY = __UNDEFINED_KEY
 > = K extends __UNDEFINED_KEY
   ? {
-      readonly getApplicationInfo: TypeofApiCall<GetApplicationInfoT>;
-
       readonly getServiceStatus: TypeofApiCall<GetServiceStatusT>;
 
       readonly lockUserSession: TypeofApiCall<LockUserSessionT>;
@@ -113,8 +101,6 @@ export type Client<
 
       readonly logoutFromIOApp: TypeofApiCall<LogoutFromIOAppT>;
 
-      readonly getSessionsList: TypeofApiCall<GetSessionsListT>;
-
       readonly getProfile: TypeofApiCall<GetProfileT>;
 
       readonly getUserSessionState: TypeofApiCall<GetUserSessionStateT>;
@@ -122,13 +108,6 @@ export type Client<
       readonly exchangeToken: TypeofApiCall<ExchangeTokenT>;
     }
   : {
-      readonly getApplicationInfo: TypeofApiCall<
-        ReplaceRequestParams<
-          GetApplicationInfoT,
-          Omit<RequestParams<GetApplicationInfoT>, K>
-        >
-      >;
-
       readonly getServiceStatus: TypeofApiCall<
         ReplaceRequestParams<
           GetServiceStatusT,
@@ -154,13 +133,6 @@ export type Client<
         ReplaceRequestParams<
           LogoutFromIOAppT,
           Omit<RequestParams<LogoutFromIOAppT>, K>
-        >
-      >;
-
-      readonly getSessionsList: TypeofApiCall<
-        ReplaceRequestParams<
-          GetSessionsListT,
-          Omit<RequestParams<GetSessionsListT>, K>
         >
       >;
 
@@ -211,7 +183,7 @@ export function createClient<K extends ParamKeys>({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fetchApi,
   withDefaults,
-  basePath = "/api/v1"
+  basePath = "/ioweb/backend/api/v1"
 }: {
   baseUrl: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -223,24 +195,6 @@ export function createClient<K extends ParamKeys>({
     baseUrl,
     fetchApi
   };
-
-  const getApplicationInfoT: ReplaceRequestParams<
-    GetApplicationInfoT,
-    RequestParams<GetApplicationInfoT>
-  > = {
-    method: "get",
-
-    headers: () => ({}),
-
-    response_decoder: getApplicationInfoDefaultDecoder(),
-    url: ({}) => `${basePath}/info`,
-
-    query: () => withoutUndefinedValues({})
-  };
-  const getApplicationInfo: TypeofApiCall<GetApplicationInfoT> = createFetchRequestForApi(
-    getApplicationInfoT,
-    options
-  );
 
   const getServiceStatusT: ReplaceRequestParams<
     GetServiceStatusT,
@@ -342,25 +296,6 @@ export function createClient<K extends ParamKeys>({
     options
   );
 
-  const getSessionsListT: ReplaceRequestParams<
-    GetSessionsListT,
-    RequestParams<GetSessionsListT>
-  > = {
-    method: "get",
-
-    headers: ({ ["bearerAuth"]: bearerAuth }) => ({
-      Authorization: `Bearer ${bearerAuth}`
-    }),
-    response_decoder: getSessionsListDefaultDecoder(),
-    url: ({}) => `${basePath}/sessions`,
-
-    query: () => withoutUndefinedValues({})
-  };
-  const getSessionsList: TypeofApiCall<GetSessionsListT> = createFetchRequestForApi(
-    getSessionsListT,
-    options
-  );
-
   const getProfileT: ReplaceRequestParams<
     GetProfileT,
     RequestParams<GetProfileT>
@@ -384,17 +319,13 @@ export function createClient<K extends ParamKeys>({
     GetUserSessionStateT,
     RequestParams<GetUserSessionStateT>
   > = {
-    method: "post",
+    method: "get",
 
     headers: ({ ["bearerAuth"]: bearerAuth }) => ({
-      Authorization: `Bearer ${bearerAuth}`,
-
-      "Content-Type": "application/json"
+      Authorization: `Bearer ${bearerAuth}`
     }),
     response_decoder: getUserSessionStateDefaultDecoder(),
     url: ({}) => `${basePath}/session-state`,
-
-    body: () => "{}",
 
     query: () => withoutUndefinedValues({})
   };
@@ -427,12 +358,10 @@ export function createClient<K extends ParamKeys>({
   );
 
   return {
-    getApplicationInfo: (withDefaults || identity)(getApplicationInfo),
     getServiceStatus: (withDefaults || identity)(getServiceStatus),
     lockUserSession: (withDefaults || identity)(lockUserSession),
     unlockUserSession: (withDefaults || identity)(unlockUserSession),
     logoutFromIOApp: (withDefaults || identity)(logoutFromIOApp),
-    getSessionsList: (withDefaults || identity)(getSessionsList),
     getProfile: (withDefaults || identity)(getProfile),
     getUserSessionState: (withDefaults || identity)(getUserSessionState),
     exchangeToken: (withDefaults || identity)(exchangeToken)
