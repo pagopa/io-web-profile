@@ -17,8 +17,9 @@ const RestoreProfile = (): React.ReactElement => {
   const router = useRouter();
   const userFromStorage = storageUserOps.read();
 
+  const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
   const handleRestore = () => {
-    if (userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3) {
+    if (isL3) {
       WebProfileApi.unlockUserSession({ unlock_code: undefined })
         .then(() => {
           router.push(ROUTES.RESTORE_THANK_YOU);
@@ -43,15 +44,15 @@ const RestoreProfile = (): React.ReactElement => {
 
         <Grid container flexDirection={'column'}>
           <IdpListOnApp />
-          <Grid item sm={10} md={7}>
-            {/* IF SPID level from token is L3 hide Typography line 29-33 */}
-            <Typography mb={5} fontSize={'20px'}>
-              {t.rich('restore.insertcode', {
-                strong: (chunks) => <strong>{chunks}</strong>,
-              })}
-            </Typography>
-          </Grid>
-          {/* IF SPID level from token is L3 link is different */}
+          {!isL3 && (
+            <Grid item sm={10} md={7}>
+              <Typography mb={5} fontSize={'20px'}>
+                {t.rich('restore.insertcode', {
+                  strong: (chunks) => <strong>{chunks}</strong>,
+                })}
+              </Typography>
+            </Grid>
+          )}
           <Grid>
             <Button variant="contained" size="medium" onClick={handleRestore}>
               {t('common.restoreioaccess')}

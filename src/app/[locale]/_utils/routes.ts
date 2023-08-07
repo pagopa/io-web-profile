@@ -6,6 +6,7 @@ export const ROUTES = {
   THANK_YOU: '/esci/operazione-completata',
   LOGOUT_NO_SESSION_L1: '/esci/nessuna-sessione-attiva',
   LOGOUT_KO: '/esci/errore',
+  LOGOUT_CONFIRM: 'esci/conferma',
   PROFILE: `/`,
   PROFILE_BLOCK: `/blocco-accesso`,
   PROFILE_BLOCK_KO: `/blocco-accesso/errore`,

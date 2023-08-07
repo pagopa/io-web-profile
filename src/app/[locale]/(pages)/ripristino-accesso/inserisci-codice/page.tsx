@@ -44,7 +44,7 @@ const ReactivateCode = (): React.ReactElement => {
         push(ROUTES.RESTORE_THANK_YOU);
       })
       .catch((err) => {
-        if (err.status === 410) {
+        if (err.status === 403) {
           setIsCodeNotValid(true);
           setErrorMessage(t('restore.notvalidcode'));
         } else {

@@ -36,7 +36,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                 <Typography variant="body2" py={2}>
                   {t('profile.nodevicelogout')}
                 </Typography>
-                <Link href={ROUTES.SESSION}>
+                <Link href={ROUTES.LOGOUT_CONFIRM}>
                   <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
                     {t('common.logout')}
                   </ButtonNaked>
