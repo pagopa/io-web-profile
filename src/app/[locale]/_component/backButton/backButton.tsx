@@ -1,7 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import Link from 'next-intl/link';
 
 type BackButtonProps = {
   href?: string;

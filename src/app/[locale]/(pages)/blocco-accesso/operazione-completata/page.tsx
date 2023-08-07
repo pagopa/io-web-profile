@@ -1,6 +1,7 @@
 'use client';
-import { Button, Grid, Link, List, ListItem, Typography } from '@mui/material';
+import { Button, Grid, List, ListItem, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import Link from 'next-intl/link';
 import { BackButton } from '../../../_component/backButton/backButton';
 import { CopyCodeCard } from '../../../_component/coppyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
@@ -59,10 +60,11 @@ const ProfileBlock = (): React.ReactElement => {
         {t('common.howrestoreprofile')}
       </Typography>
       <Typography>{t.rich('common.unlockioaccess', unlockioaccessRich)}</Typography>
-
-      <Button href={ROUTES.PROFILE} variant="outlined" size="medium">
-        {t('common.backtoprofile')}
-      </Button>
+      <Link href={ROUTES.PROFILE}>
+        <Button variant="outlined" size="medium">
+          {t('common.backtoprofile')}
+        </Button>
+      </Link>
     </Grid>
   );
 };

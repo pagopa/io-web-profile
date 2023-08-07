@@ -1,6 +1,7 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import Link from 'next-intl/link';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -32,9 +33,11 @@ const ProfileBlock = (): React.ReactElement => {
         <Grid sx={{ maxWidth: '576px' }}>
           {isIDPKnown && <IdpListOnApp />}
           <Typography mb={5}>{t('common.lockaccessinfo')}</Typography>
-          <Button href={ROUTES.PROFILE_BLOCK_SUCCESS} variant="contained" size="medium">
-            {t('profile.lockaccess')}
-          </Button>
+          <Link href={ROUTES.PROFILE_BLOCK_SUCCESS}>
+            <Button variant="contained" size="medium">
+              {t('profile.lockaccess')}
+            </Button>
+          </Link>
         </Grid>
       </Grid>
       <FAQ flow={Flows.BLOCK} />
