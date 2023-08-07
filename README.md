@@ -25,7 +25,7 @@ Follow the documentation of hub-spid-login to properly run the service.
 To establish the authentication and error binding between SP and IO Web Profile, you need to modify the default values inside the hub-spid-login .env file as follows:
 
 ENDPOINT_ERROR=http://localhost:3000/accedi/errore
-ENDPOINT_SUCCESS=http://localhost:3000/
+ENDPOINT_SUCCESS=http://localhost:3000/it/accedi
 
 Note: The port used here is the same one used to expose the web app.
 
@@ -35,7 +35,6 @@ The preferred way to set up the local environment is using nodenv to manage Node
 
 io-web-profile/
 - src/
-    -  middleware.ts
     -  dictionaries/
     -  app/[locale]/
         - (pages)/
@@ -49,8 +48,6 @@ io-web-profile/
 
 
 ``src/``: This is the root folder of the source code, where all the application code resides.
-
-``middleware.ts``: This is a TypeScript file that contains middleware logic. Middleware is a way to intercept and process requests or actions before they reach the main logic of the application.
 
 ``dictionaries/``: This folder contain files related to localization or dictionaries used to provide translations or language-specific content in the application.
 
