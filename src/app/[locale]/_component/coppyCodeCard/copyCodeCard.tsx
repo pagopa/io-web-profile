@@ -14,7 +14,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
 
   const copyTextToClipboard = (text: string | undefined) => {
     if (typeof text === 'string') {
-      void navigator.clipboard.writeText(text);
+      void navigator.clipboard.writeText(text.replaceAll(' ', ''));
       setOpenSnackBar(true);
     }
   };

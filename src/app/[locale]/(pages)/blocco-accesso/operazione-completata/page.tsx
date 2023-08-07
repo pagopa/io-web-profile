@@ -10,6 +10,7 @@ import { isIDPKnown } from '../../../_utils/idps';
 import { commonBackgroundWithBack } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
 import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
+import { addSpacesEvery3Chars } from '@/app/[locale]/_utils/common';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -40,6 +41,7 @@ const unlockioaccessRich = {
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const unlockCode = useSelector(unlockCodeSelector);
+
   return (
     <Grid sx={commonBackgroundWithBack}>
       <BackButton />
@@ -54,7 +56,7 @@ const ProfileBlock = (): React.ReactElement => {
         }
         summaryColumns={{ xs: 12, md: 8 }}
       />
-      <CopyCodeCard code={unlockCode} />
+      <CopyCodeCard code={addSpacesEvery3Chars(unlockCode)} />
 
       {isIDPKnown && <IdpListOnApp />}
 
