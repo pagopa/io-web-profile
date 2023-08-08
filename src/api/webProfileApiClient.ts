@@ -8,7 +8,8 @@ import { buildFetchApi, extractResponse } from '@/app/[locale]/_utils/api-utils'
 import { storageTokenOps } from '@/app/[locale]/_utils/storage';
 
 // with withDefaults
-const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation) => (params) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const token = storageTokenOps.read();
   // wrappedOperation and params are correctly inferred
   return wrappedOperation({
