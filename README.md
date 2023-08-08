@@ -85,6 +85,11 @@ Install the project (if you haven't already). Run from the root folder the follo
 # to install the dependencies
 yarn install
 ```
+
+```bash
+# to generate the client and types with openapi-codegen-ts
+yarn generate
+```
     
 ## Run
 
