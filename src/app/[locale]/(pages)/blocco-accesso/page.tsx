@@ -2,8 +2,8 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -13,6 +13,7 @@ import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
 import { isIDPKnown } from '../../_utils/idps';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
+import { localeFromStorage } from '../../_utils/common';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
@@ -24,10 +25,10 @@ const ProfileBlock = (): React.ReactElement => {
     dispatch(createUnlockCode('123456789'));
     WebProfileApi.lockUserSession({ unlock_code: '123456789' as WithinRangeString<9, 10> })
       .then(() => {
-        router.push(ROUTES.PROFILE_BLOCK_SUCCESS);
+        router.push(ROUTES.PROFILE_BLOCK_SUCCESS, { locale: localeFromStorage });
       })
       .catch((_err) => {
-        router.push(ROUTES.PROFILE_BLOCK_KO);
+        router.push(ROUTES.PROFILE_BLOCK_KO, { locale: localeFromStorage });
       });
   };
 

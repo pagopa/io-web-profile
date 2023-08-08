@@ -1,3 +1,5 @@
+import { storageLocaleOps } from './storage';
+
 export const isBrowser = () => typeof window !== 'undefined';
 
 export const addSpacesEvery3Chars = (input: string, startIndex = 0): string => {
@@ -12,3 +14,4 @@ export const addSpacesEvery3Chars = (input: string, startIndex = 0): string => {
 
   return chunk + (remainingFormatted === '' ? '' : ' ' + remainingFormatted);
 };
+export const localeFromStorage = isBrowser() ? storageLocaleOps.read() : 'it';

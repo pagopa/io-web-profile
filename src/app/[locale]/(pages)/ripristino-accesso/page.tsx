@@ -1,7 +1,7 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -10,6 +10,7 @@ import { Flows } from '../../_enums/Flows';
 import { ROUTES } from '../../_utils/routes';
 import { storageUserOps } from '../../_utils/storage';
 import { commonBackgroundWithBack } from '../../_utils/styles';
+import { localeFromStorage } from '../../_utils/common';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const RestoreProfile = (): React.ReactElement => {
@@ -22,13 +23,13 @@ const RestoreProfile = (): React.ReactElement => {
     if (isL3) {
       WebProfileApi.unlockUserSession({ unlock_code: undefined })
         .then(() => {
-          router.push(ROUTES.RESTORE_THANK_YOU);
+          router.push(ROUTES.RESTORE_THANK_YOU, { locale: localeFromStorage });
         })
         .catch((_err) => {
-          router.push(ROUTES.PROFILE_RESTORE_KO);
+          router.push(ROUTES.PROFILE_RESTORE_KO, { locale: localeFromStorage });
         });
     } else {
-      router.push(ROUTES.RESTORE_CODE);
+      router.push(ROUTES.RESTORE_CODE, { locale: localeFromStorage });
     }
   };
 

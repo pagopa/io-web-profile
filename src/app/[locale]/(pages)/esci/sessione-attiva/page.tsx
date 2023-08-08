@@ -3,13 +3,14 @@
 import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import { IllusSms } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
+import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const Session = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -19,10 +20,10 @@ const Session = (): React.ReactElement => {
   const handleLogout = () => {
     WebProfileApi.logoutFromIOApp()
       .then(() => {
-        router.push(ROUTES.THANK_YOU);
+        router.push(ROUTES.THANK_YOU, { locale: localeFromStorage });
       })
       .catch((_err) => {
-        router.push(ROUTES.LOGOUT_KO);
+        router.push(ROUTES.LOGOUT_KO, { locale: localeFromStorage });
       });
   };
   return (

@@ -3,7 +3,6 @@
 import AppleIcon from '@mui/icons-material/Apple';
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { Introduction } from '../../_component/introduction/introduction';
 import { storageUserOps } from '../../_utils/storage';
 import { commonBackground } from '../../_utils/styles';
@@ -27,18 +26,14 @@ const L2NoProfile = (): React.ReactElement => {
           // TODO hide icons based on spid lvl and change text
         }
         <Grid item xs={12} sm={4} md={3}>
-          <Link href={'/#'}>
-            <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<AppleIcon />}>
-              {t('common.appstore')}
-            </Button>
-          </Link>
+          <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<AppleIcon />}>
+            {t('common.appstore')}
+          </Button>
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
-          <Link href={'/#'}>
-            <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<PlayStoreIcon />}>
-              {t('common.playstore')}
-            </Button>
-          </Link>
+          <Button fullWidth sx={{ mr: 2 }} variant="outlined" startIcon={<PlayStoreIcon />}>
+            {t('common.playstore')}
+          </Button>
         </Grid>
       </Grid>
     </>
