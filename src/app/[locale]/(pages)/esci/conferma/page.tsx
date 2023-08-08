@@ -29,14 +29,12 @@ const Session = (): React.ReactElement => {
           <Introduction
             title={t('profilelogout.logout')}
             summary={
-              <>
-                <span>
-                  {t.rich('lplogoutpostlogin.activesession', {
-                    deviceModel: 'iPhone 12 Pro',
-                    strong: (chunks) => <strong>{chunks}</strong>,
-                  })}
-                </span>
-              </>
+              <span>
+                {t.rich('lplogoutpostlogin.activesession', {
+                  deviceModel: 'iPhone 12 Pro',
+                  strong: (chunks) => <strong>{chunks}</strong>,
+                })}
+              </span>
             }
             summaryColumns={{ xs: 12, md: 6 }}
           />
