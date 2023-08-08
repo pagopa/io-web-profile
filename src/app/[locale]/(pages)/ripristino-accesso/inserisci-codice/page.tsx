@@ -4,18 +4,20 @@ import { useState } from 'react';
 
 import { Button, Grid, Link, TextField } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
 import { commonBackground } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
+import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const ReactivateCode = (): React.ReactElement => {
   const { push } = useRouter();
   const [restoreCode, setRestoreCode] = useState('');
   const [isCodeNotValid, setIsCodeNotValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   // const reactivationCodePattern: string = '[0-9]{3}[ -]*[0-9]{3}[ -]*[0-9]{3}';
   const t = useTranslations('ioesco');
@@ -82,11 +84,13 @@ const ReactivateCode = (): React.ReactElement => {
           >
             {t('restore.restoreprofile')}
           </Button>
-          <Link href={ROUTES.PROFILE}>
-            <Button variant="outlined" sx={{ width: { xs: '100%', sm: 'auto' } }}>
-              {t('common.cancel')}
-            </Button>
-          </Link>
+          <Button
+            onClick={() => router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })}
+            variant="outlined"
+            sx={{ width: { xs: '100%', sm: 'auto' } }}
+          >
+            {t('common.cancel')}
+          </Button>
         </Grid>
       </Grid>
       <FAQ flow={Flows.RESTORE} />

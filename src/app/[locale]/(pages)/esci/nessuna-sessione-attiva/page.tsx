@@ -2,14 +2,16 @@
 
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { commonBackgroundLight } from '../../../_utils/styles';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
+import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const L1NoSession = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
   return (
     <>
       <Grid sx={commonBackgroundLight} container>
@@ -21,11 +23,13 @@ const L1NoSession = (): React.ReactElement => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Link href={ROUTES.LOGIN}>
-            <Button sx={{ mr: 2 }} variant="outlined">
-              {t('common.backtohome')}
-            </Button>
-          </Link>
+          <Button
+            onClick={() => router.push(`${ROUTES.LOGIN}`, { locale: localeFromStorage })}
+            sx={{ mr: 2 }}
+            variant="outlined"
+          >
+            {t('common.backtohome')}
+          </Button>
         </Grid>
       </Grid>
       <FAQ />

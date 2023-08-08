@@ -2,15 +2,17 @@
 
 import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import { IllusSms } from '@pagopa/mui-italia';
+import { useRouter } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
+import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const Session = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
   return (
     <>
       <Grid sx={commonBackgroundLight} container>
@@ -75,11 +77,13 @@ const Session = (): React.ReactElement => {
         </Grid>
 
         <Grid item xs={12} mt={4}>
-          <Link href={ROUTES.THANK_YOU}>
-            <Button sx={{ mr: 2 }} variant="contained">
-              {t('common.logout')}
-            </Button>
-          </Link>
+          <Button
+            onClick={() => router.push(`${ROUTES.THANK_YOU}`, { locale: localeFromStorage })}
+            sx={{ mr: 2 }}
+            variant="contained"
+          >
+            {t('common.logout')}
+          </Button>
         </Grid>
       </Grid>
       <FAQ />

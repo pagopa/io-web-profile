@@ -10,9 +10,9 @@ import { ROUTES } from '../../_utils/routes';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SpidValueInJWT } from '../../_model/JWTUser';
-import { isBrowser } from '../../_utils/common';
+import { isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
-import { storageLocaleOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
+import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -21,7 +21,6 @@ const Access = (): React.ReactElement => {
     type: 'L2',
   };
 
-  const localeFromStorage = isBrowser() ? storageLocaleOps.read() : undefined;
   const token = isBrowser() ? extractToken() : undefined;
   const userFromToken = token ? userFromJwtToken(token) : undefined;
   const router = useRouter();
@@ -44,13 +43,13 @@ const Access = (): React.ReactElement => {
       storageUserOps.write(userFromToken);
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
-          router.push(`${ROUTES.SESSION}`, { locale: localeFromStorage || 'it' });
+          router.push(`${ROUTES.SESSION}`, { locale: localeFromStorage });
           break;
         case L2_JWT_LEVEL.value:
-          router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage || 'it' });
+          router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage });
           break;
         case L3_JWT_LEVEL.value:
-          router.push(`${ROUTES.PROFILE_RESTORE}`, { locale: localeFromStorage || 'it' });
+          router.push(`${ROUTES.PROFILE_RESTORE}`, { locale: localeFromStorage });
           break;
       }
     }
@@ -182,22 +181,21 @@ const Access = (): React.ReactElement => {
           </Typography>
         </Grid>
         <Grid item mb={2}>
-          <Link href={ROUTES.LOGOUT_INIT}>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              sx={{
-                backgroundColor: 'background.paper',
-                '&:hover': {
-                  backgroundColor: '#ffffff',
-                },
-                color: 'primary',
-              }}
-            >
-              {t('common.logout')}
-            </Button>
-          </Link>
+          <Button
+            onClick={() => router.push(`${ROUTES.LOGOUT_INIT}`, { locale: localeFromStorage })}
+            variant="outlined"
+            color="primary"
+            size="large"
+            sx={{
+              backgroundColor: 'background.paper',
+              '&:hover': {
+                backgroundColor: '#ffffff',
+              },
+              color: 'primary',
+            }}
+          >
+            {t('common.logout')}
+          </Button>
         </Grid>
       </Grid>
       <SelectIdp

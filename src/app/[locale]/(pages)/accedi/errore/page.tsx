@@ -1,16 +1,17 @@
 'use client';
-import { Button, Grid, Link, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next-intl/client';
 import { useSearchParams } from 'next/navigation';
 import { ROUTES } from '../../../_utils/routes';
-import { isBrowser } from '../../../_utils/common';
-
+import { isBrowser, localeFromStorage } from '../../../_utils/common';
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco');
   const errorCode = searchParams.get('errorCode');
   const ERROR_TITLE = t('error.loginerror');
+  const router = useRouter();
 
   const renderErrorSummary = (errorCode: string | null) => {
     if (errorCode == null) {
@@ -91,9 +92,14 @@ const LoginErrorPage = () => {
           </Grid>
           {typeof errorCode === 'string' && errorCode === '1001' ? (
             <Grid item xs={12} textAlign={'center'}>
-              <Link href={process.env.NEXT_PUBLIC_URL_IO}>
-                <Button variant="contained">Torna alla home</Button>
-              </Link>
+              <Button
+                onClick={() =>
+                  router.push(`${process.env.NEXT_PUBLIC_URL_IO}`, { locale: localeFromStorage })
+                }
+                variant="contained"
+              >
+                Torna alla home
+              </Button>
             </Grid>
           ) : (
             <Grid display={'flex'} justifyContent="space-around" flexDirection={'column'}>
@@ -104,9 +110,12 @@ const LoginErrorPage = () => {
                   </Button>
                 </Grid>
                 <Grid item xs={6} justifySelf="center">
-                  <Link href={ROUTES.LOGIN}>
-                    <Button variant="contained">{t('error.retry')}</Button>
-                  </Link>
+                  <Button
+                    onClick={() => router.push(`${ROUTES.LOGIN}`, { locale: localeFromStorage })}
+                    variant="contained"
+                  >
+                    {t('error.retry')}
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>

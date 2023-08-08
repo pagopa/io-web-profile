@@ -8,7 +8,7 @@ type BackButtonProps = {
   text?: string;
 };
 
-export function BackButton({ href = '/', text, ...props }: BackButtonProps) {
+export const BackButton = ({ href = '/', text, ...props }: BackButtonProps) => {
   const t = useTranslations('ioesco.common');
   return (
     <Link href={href}>
@@ -22,4 +22,4 @@ export function BackButton({ href = '/', text, ...props }: BackButtonProps) {
       </ButtonNaked>
     </Link>
   );
-}
+};
