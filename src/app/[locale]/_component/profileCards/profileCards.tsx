@@ -1,5 +1,6 @@
 'use client';
-import { Card, CardContent, Grid, Link, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
+import Link from 'next-intl/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import { ButtonNaked } from '@pagopa/mui-italia';
@@ -49,15 +50,11 @@ const ProfileCards = (): React.ReactElement => {
               <Typography variant="body2" py={2}>
                 {t('common.lockappaccess')}
               </Typography>
-
-              <ButtonNaked
-                href={ROUTES.PROFILE_BLOCK}
-                color="primary"
-                endIcon={<ArrowForwardIcon />}
-                size="medium"
-              >
-                {t('profile.lockaccess')}
-              </ButtonNaked>
+              <Link href={ROUTES.PROFILE_BLOCK}>
+                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
+                  {t('profile.lockaccess')}
+                </ButtonNaked>
+              </Link>
             </CardContent>
           </Card>
         </Grid>

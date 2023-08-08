@@ -1,6 +1,8 @@
 'use client';
-import { Button, Grid, Link, List, ListItem, Typography } from '@mui/material';
+import { Button, Grid, List, ListItem, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import Link from 'next-intl/link';
+import { useRouter } from 'next-intl/client';
 import { BackButton } from '../../../_component/backButton/backButton';
 import { CopyCodeCard } from '../../../_component/coppyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
@@ -8,6 +10,7 @@ import { Introduction } from '../../../_component/introduction/introduction';
 import { isIDPKnown } from '../../../_utils/idps';
 import { commonBackgroundWithBack } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
+import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -37,6 +40,7 @@ const unlockioaccessRich = {
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
   return (
     <Grid sx={commonBackgroundWithBack}>
       <BackButton />
@@ -59,8 +63,11 @@ const ProfileBlock = (): React.ReactElement => {
         {t('common.howrestoreprofile')}
       </Typography>
       <Typography>{t.rich('common.unlockioaccess', unlockioaccessRich)}</Typography>
-
-      <Button href={ROUTES.PROFILE} variant="outlined" size="medium">
+      <Button
+        onClick={() => router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })}
+        variant="outlined"
+        size="medium"
+      >
         {t('common.backtoprofile')}
       </Button>
     </Grid>

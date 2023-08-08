@@ -1,6 +1,7 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -9,9 +10,11 @@ import { isIDPKnown } from '../../_utils/idps';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { Flows } from '../../_enums/Flows';
 import { ROUTES } from '../../_utils/routes';
+import { localeFromStorage } from '../../_utils/common';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
 
   const renderSummary = (isIDPKnown: boolean) => {
     if (isIDPKnown) {
@@ -32,7 +35,13 @@ const ProfileBlock = (): React.ReactElement => {
         <Grid sx={{ maxWidth: '576px' }}>
           {isIDPKnown && <IdpListOnApp />}
           <Typography mb={5}>{t('common.lockaccessinfo')}</Typography>
-          <Button href={ROUTES.PROFILE_BLOCK_SUCCESS} variant="contained" size="medium">
+          <Button
+            onClick={() =>
+              router.push(`${ROUTES.PROFILE_BLOCK_SUCCESS}`, { locale: localeFromStorage })
+            }
+            variant="contained"
+            size="medium"
+          >
             {t('profile.lockaccess')}
           </Button>
         </Grid>

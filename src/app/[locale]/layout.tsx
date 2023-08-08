@@ -1,31 +1,33 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { ReactNode } from 'react';
 import Footer from './_component/footer/footer';
 import Header from './_component/header/header';
 import SessionProviderComponent from './_component/sessionProvider';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
 
+type Props = {
+  children: ReactNode;
+  params: { locale: string };
+};
 export async function generateStaticParams() {
-  return [{ lang: 'it-IT' }, { lang: 'it' }];
+  return ['it', 'en'].map((locale) => ({ locale }));
 }
 
-const RootLayoutWithLocaleAndTheme = async ({
-  children,
-  params: { locale },
-}: {
-  readonly children: React.ReactNode;
-  readonly params: {
-    readonly locale: string;
-  };
-}): Promise<React.ReactElement> => {
-  // eslint-disable-next-line functional/no-let
-  let messages;
+async function getMessages(locale: string) {
   try {
-    messages = (await import(`../../dictionaries/${locale}.json`)).default;
+    return (await import(`../../dictionaries/${locale}.json`)).default;
   } catch (error) {
     notFound();
   }
+}
+
+export default async function RootLayoutWithLocaleAndTheme({
+  children,
+  params: { locale },
+}: Props) {
+  const messages = await getMessages(locale);
 
   return (
     <html lang={locale}>
@@ -42,6 +44,4 @@ const RootLayoutWithLocaleAndTheme = async ({
       </body>
     </html>
   );
-};
-
-export default RootLayoutWithLocaleAndTheme;
+}

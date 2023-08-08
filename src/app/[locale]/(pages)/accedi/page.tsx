@@ -3,11 +3,16 @@ import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from 'next-intl/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next-intl/client';
 import { ROUTES } from '../../_utils/routes';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
+import { SpidValueInJWT } from '../../_model/JWTUser';
+import { isBrowser, localeFromStorage } from '../../_utils/common';
+import { extractToken, userFromJwtToken } from '../../_utils/jwt';
+import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -15,6 +20,40 @@ const Access = (): React.ReactElement => {
   const spidLevel: SpidLevels = {
     type: 'L2',
   };
+
+  const token = isBrowser() ? extractToken() : undefined;
+  const userFromToken = token ? userFromJwtToken(token) : undefined;
+  const router = useRouter();
+
+  const L1_JWT_LEVEL: SpidValueInJWT = {
+    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
+  };
+
+  const L2_JWT_LEVEL: SpidValueInJWT = {
+    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2,
+  };
+
+  const L3_JWT_LEVEL: SpidValueInJWT = {
+    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3,
+  };
+
+  useEffect(() => {
+    if (token && userFromToken && localeFromStorage) {
+      storageTokenOps.write(token);
+      storageUserOps.write(userFromToken);
+      switch (userFromToken?.spidLevel) {
+        case L1_JWT_LEVEL.value:
+          router.push(`${ROUTES.SESSION}`, { locale: localeFromStorage });
+          break;
+        case L2_JWT_LEVEL.value:
+          router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage });
+          break;
+        case L3_JWT_LEVEL.value:
+          router.push(`${ROUTES.PROFILE_RESTORE}`, { locale: localeFromStorage });
+          break;
+      }
+    }
+  }, [localeFromStorage]);
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
@@ -142,22 +181,21 @@ const Access = (): React.ReactElement => {
           </Typography>
         </Grid>
         <Grid item mb={2}>
-          <Link href={ROUTES.LOGOUT_INIT}>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              sx={{
-                backgroundColor: 'background.paper',
-                '&:hover': {
-                  backgroundColor: '#ffffff',
-                },
-                color: 'primary',
-              }}
-            >
-              {t('common.logout')}
-            </Button>
-          </Link>
+          <Button
+            onClick={() => router.push(`${ROUTES.LOGOUT_INIT}`, { locale: localeFromStorage })}
+            variant="outlined"
+            color="primary"
+            size="large"
+            sx={{
+              backgroundColor: 'background.paper',
+              '&:hover': {
+                backgroundColor: '#ffffff',
+              },
+              color: 'primary',
+            }}
+          >
+            {t('common.logout')}
+          </Button>
         </Grid>
       </Grid>
       <SelectIdp

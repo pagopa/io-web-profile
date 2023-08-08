@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { Introduction } from './_component/introduction/introduction';
 import { commonBackground } from './_utils/styles';
 import ProfileCards from './_component/profileCards/profileCards';
-// import ProfileCardsBlocked from './_component/profileCards/profileCardsBlocked';
 
 const Profile = () => {
   const t = useTranslations('ioesco');
