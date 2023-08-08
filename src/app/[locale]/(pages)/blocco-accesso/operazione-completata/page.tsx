@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Link from 'next-intl/link';
 import { useRouter } from 'next-intl/client';
 import { BackButton } from '../../../_component/backButton/backButton';
-import { CopyCodeCard } from '../../../_component/coppyCodeCard/copyCodeCard';
+import { CopyCodeCard } from '../../../_component/copyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { isIDPKnown } from '../../../_utils/idps';

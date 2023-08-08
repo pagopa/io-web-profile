@@ -1,14 +1,14 @@
 'use client';
-import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next-intl/client';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
+import { localeFromStorage } from '../../_utils/common';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
-import { localeFromStorage } from '../../_utils/common';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
@@ -64,7 +64,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
               <Typography variant="body2" py={2}>
                 {t('common.lockappaccess')}
               </Typography>
-              <Button
+              <ButtonNaked
                 onClick={() =>
                   router.push(`${ROUTES.PROFILE_BLOCK}`, { locale: localeFromStorage })
                 }
@@ -73,7 +73,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                 size="medium"
               >
                 {t('profile.lockaccess')}
-              </Button>
+              </ButtonNaked>
             </CardContent>
           </Card>
         </Grid>
