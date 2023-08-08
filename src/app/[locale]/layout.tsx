@@ -12,7 +12,7 @@ type Props = {
   params: { locale: string };
 };
 export async function generateStaticParams() {
-  return ['it', 'en'].map((locale) => ({ locale }));
+  return ['it'].map((locale) => ({ locale }));
 }
 
 async function getMessages(locale: string) {
