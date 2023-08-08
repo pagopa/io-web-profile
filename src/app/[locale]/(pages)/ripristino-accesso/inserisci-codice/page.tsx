@@ -1,23 +1,21 @@
 'use client';
-import { useState } from 'react';
 import { Button, Grid, Link, TextField } from '@mui/material';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
 import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const ReactivateCode = (): React.ReactElement => {
-  const { push } = useRouter();
   const [restoreCode, setRestoreCode] = useState('');
   const [isCodeNotValid, setIsCodeNotValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
 
   const t = useTranslations('ioesco');
 
@@ -40,14 +38,14 @@ const ReactivateCode = (): React.ReactElement => {
       .then(() => {
         setIsCodeNotValid(false);
         setErrorMessage('');
-        push(ROUTES.RESTORE_THANK_YOU);
+        pushWithLocale(ROUTES.RESTORE_THANK_YOU);
       })
       .catch((err) => {
         if (err.status === 403) {
           setIsCodeNotValid(true);
           setErrorMessage(t('restore.notvalidcode'));
         } else {
-          push(ROUTES.PROFILE_BLOCK_KO);
+          pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
         }
       });
   };
@@ -89,7 +87,7 @@ const ReactivateCode = (): React.ReactElement => {
             {t('restore.restoreprofile')}
           </Button>
           <Button
-            onClick={() => router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })}
+            onClick={() => pushWithLocale(`${ROUTES.PROFILE}`)}
             variant="outlined"
             sx={{ width: { xs: '100%', sm: 'auto' } }}
           >

@@ -1,7 +1,5 @@
-import React from 'react';
-import { Typography, Grid, Button, Box } from '@mui/material';
-import { useRouter } from 'next-intl/client';
-import { localeFromStorage } from '../../_utils/common';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import useLocalePush from '../../_hooks/useLocalePush';
 
 type IntroductionProps = {
   topIcon?: JSX.Element;
@@ -16,7 +14,7 @@ type IntroductionProps = {
 };
 
 export function FeedbackMessage({ topIcon, title, summary, button }: IntroductionProps) {
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
   return (
     <>
       <Box sx={{ maxWidth: 448, margin: '0 auto' }}>
@@ -55,10 +53,7 @@ export function FeedbackMessage({ topIcon, title, summary, button }: Introductio
           </Grid>
           <Grid item xs={12} textAlign={'center'}>
             {button.isVisible && (
-              <Button
-                onClick={() => router.push(`${button.href}`, { locale: localeFromStorage })}
-                variant={button.variant}
-              >
+              <Button onClick={() => pushWithLocale(`${button.href}`)} variant={button.variant}>
                 {button.text || 'Missing Text'}
               </Button>
             )}

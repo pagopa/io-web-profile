@@ -5,25 +5,25 @@ import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next-intl/client';
-import { ROUTES } from '../../_utils/routes';
-import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
+import { SelectIdp } from '../../_component/selectIdp/selectIdp';
+import useLocalePush from '../../_hooks/useLocalePush';
 import { SpidValueInJWT } from '../../_model/JWTUser';
 import { isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
+import { ROUTES } from '../../_utils/routes';
 import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const t = useTranslations('ioesco');
+  const pushWithLocale = useLocalePush();
   const spidLevel: SpidLevels = {
     type: 'L2',
   };
 
   const token = isBrowser() ? extractToken() : undefined;
   const userFromToken = token ? userFromJwtToken(token) : undefined;
-  const router = useRouter();
 
   const L1_JWT_LEVEL: SpidValueInJWT = {
     value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
@@ -43,13 +43,13 @@ const Access = (): React.ReactElement => {
       storageUserOps.write(userFromToken);
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
-          router.push(`${ROUTES.SESSION}`, { locale: localeFromStorage });
+          pushWithLocale(ROUTES.SESSION);
           break;
         case L2_JWT_LEVEL.value:
-          router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage });
+          pushWithLocale(ROUTES.PROFILE);
           break;
         case L3_JWT_LEVEL.value:
-          router.push(`${ROUTES.PROFILE_RESTORE}`, { locale: localeFromStorage });
+          pushWithLocale(ROUTES.PROFILE_RESTORE);
           break;
       }
     }
@@ -182,7 +182,7 @@ const Access = (): React.ReactElement => {
         </Grid>
         <Grid item mb={2}>
           <Button
-            onClick={() => router.push(`${ROUTES.LOGOUT_INIT}`, { locale: localeFromStorage })}
+            onClick={() => pushWithLocale(ROUTES.LOGOUT_INIT)}
             variant="outlined"
             color="primary"
             size="large"

@@ -1,17 +1,16 @@
 'use client';
-import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
-import { ROUTES } from '../../_utils/routes';
+import useLocalePush from '../../_hooks/useLocalePush';
 import Firework from '../../_icons/firework';
+import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
-import { localeFromStorage } from '../../_utils/common';
 
 export const RestoreSessionCard = (): React.ReactElement => {
   const t = useTranslations('ioesco');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
 
   return (
     <Grid
@@ -31,9 +30,7 @@ export const RestoreSessionCard = (): React.ReactElement => {
             </Typography>
             <Typography variant="body2">{t('common.identitysecurityrestore')}</Typography>
             <ButtonNaked
-              onClick={() =>
-                router.push(`${ROUTES.PROFILE_RESTORE}`, { locale: localeFromStorage })
-              }
+              onClick={() => pushWithLocale(`${ROUTES.PROFILE_RESTORE}`)}
               color="primary"
               endIcon={<ArrowForwardIcon />}
               size="medium"
@@ -46,7 +43,7 @@ export const RestoreSessionCard = (): React.ReactElement => {
               {t('common.norestorecode')}
             </Typography>
             <ButtonNaked
-              onClick={() => router.push(`${ROUTES.LOGIN_L3}`, { locale: localeFromStorage })}
+              onClick={() => pushWithLocale(`${ROUTES.LOGIN_L3}`)}
               color="primary"
               size="medium"
               sx={{ textDecorationLine: 'underline' }}

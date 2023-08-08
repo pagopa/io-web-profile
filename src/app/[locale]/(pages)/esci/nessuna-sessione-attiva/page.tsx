@@ -2,18 +2,17 @@
 
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { commonBackgroundLight } from '../../../_utils/styles';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 
 const L1NoSession = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const userFromStorage = storageUserOps.read();
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
   return (
     <>
       <Grid sx={commonBackgroundLight} container>
@@ -26,7 +25,7 @@ const L1NoSession = (): React.ReactElement => {
         </Grid>
         <Grid item xs={12}>
           <Button
-            onClick={() => router.push(`${ROUTES.LOGIN}`, { locale: localeFromStorage })}
+            onClick={() => pushWithLocale(`${ROUTES.LOGIN}`)}
             sx={{ mr: 2 }}
             variant="outlined"
           >

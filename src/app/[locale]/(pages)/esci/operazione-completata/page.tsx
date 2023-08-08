@@ -2,18 +2,17 @@
 
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 
 const ThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const userFromToken = storageUserOps.read();
   const isL2 = userFromToken?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2;
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
   return (
     <>
       <Grid sx={commonBackground} container>
@@ -27,9 +26,7 @@ const ThankYouPage = (): React.ReactElement => {
         <Grid item xs={12} pt={2}>
           <Button
             onClick={() =>
-              isL2
-                ? router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })
-                : router.push(`${ROUTES.LOGIN}`, { locale: localeFromStorage })
+              isL2 ? pushWithLocale(`${ROUTES.PROFILE}`) : pushWithLocale(`${ROUTES.LOGIN}`)
             }
             sx={{ mr: 2 }}
             variant="outlined"

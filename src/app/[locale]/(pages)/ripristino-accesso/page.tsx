@@ -1,21 +1,20 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { Flows } from '../../_enums/Flows';
+import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { storageUserOps } from '../../_utils/storage';
 import { commonBackgroundWithBack } from '../../_utils/styles';
-import { localeFromStorage } from '../../_utils/common';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const RestoreProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
 
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
@@ -23,13 +22,13 @@ const RestoreProfile = (): React.ReactElement => {
     if (isL3) {
       WebProfileApi.unlockUserSession({ unlock_code: undefined })
         .then(() => {
-          router.push(ROUTES.RESTORE_THANK_YOU, { locale: localeFromStorage });
+          pushWithLocale(ROUTES.RESTORE_THANK_YOU);
         })
         .catch((_err) => {
-          router.push(ROUTES.PROFILE_RESTORE_KO, { locale: localeFromStorage });
+          pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
         });
     } else {
-      router.push(ROUTES.RESTORE_CODE, { locale: localeFromStorage });
+      pushWithLocale(ROUTES.RESTORE_CODE);
     }
   };
 

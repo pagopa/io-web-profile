@@ -3,10 +3,9 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
+import useLocalePush from '../../_hooks/useLocalePush';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
-import { localeFromStorage } from '../../_utils/common';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
 
@@ -16,7 +15,7 @@ type ProfileCardsProps = {
 
 export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
 
   return (
     <>
@@ -40,9 +39,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                   {t('profile.nodevicelogout')}
                 </Typography>
                 <ButtonNaked
-                  onClick={() =>
-                    router.push(`${ROUTES.LOGOUT_CONFIRM}`, { locale: localeFromStorage })
-                  }
+                  onClick={() => pushWithLocale(`${ROUTES.LOGOUT_CONFIRM}`)}
                   color="primary"
                   endIcon={<ArrowForwardIcon />}
                   size="medium"
@@ -65,9 +62,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                 {t('common.lockappaccess')}
               </Typography>
               <ButtonNaked
-                onClick={() =>
-                  router.push(`${ROUTES.PROFILE_BLOCK}`, { locale: localeFromStorage })
-                }
+                onClick={() => pushWithLocale(`${ROUTES.PROFILE_BLOCK}`)}
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"

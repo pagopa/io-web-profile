@@ -1,10 +1,11 @@
 'use client';
 
-import { useRouter, usePathname } from 'next-intl/client';
-import { useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
-import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
+import { usePathname } from 'next-intl/client';
+import { useEffect, useState } from 'react';
+import useLocalePush from '../_hooks/useLocalePush';
 import useToken from '../_hooks/useToken';
+import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
 import Loader from './loader/loader';
 
@@ -25,7 +26,7 @@ export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusN
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
   const { isTokenValid, removeToken } = useToken();
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
   const pathName = usePathname();
   const locale = useLocale();
 
@@ -47,7 +48,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
     }
     if (!PUBBLIC_ROUTES.includes(pathName) && !isTokenValid()) {
       setLoginStatus({ status: 'NOT_AUTHORIZED' });
-      router.push(ROUTES.LOGIN);
+      pushWithLocale(ROUTES.LOGIN);
     }
   }, [pathName]);
 

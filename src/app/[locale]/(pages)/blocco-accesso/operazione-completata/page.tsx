@@ -1,19 +1,18 @@
 'use client';
 import { Button, Grid, List, ListItem, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useSelector } from 'react-redux';
 import Link from 'next-intl/link';
-import { useRouter } from 'next-intl/client';
+import { useSelector } from 'react-redux';
 import { BackButton } from '../../../_component/backButton/backButton';
 import { CopyCodeCard } from '../../../_component/copyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { isIDPKnown } from '../../../_utils/idps';
-import { commonBackgroundWithBack } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
-import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
+import { commonBackgroundWithBack } from '../../../_utils/styles';
 import { addSpacesEvery3Chars } from '@/app/[locale]/_utils/common';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
+import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -44,8 +43,8 @@ const unlockioaccessRich = {
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const unlockCode = useSelector(unlockCodeSelector);
+  const pushWithLocale = useLocalePush();
 
-  const router = useRouter();
   return (
     <Grid sx={commonBackgroundWithBack}>
       <BackButton />
@@ -68,11 +67,7 @@ const ProfileBlock = (): React.ReactElement => {
         {t('common.howrestoreprofile')}
       </Typography>
       <Typography>{t.rich('common.unlockioaccess', unlockioaccessRich)}</Typography>
-      <Button
-        onClick={() => router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })}
-        variant="outlined"
-        size="medium"
-      >
+      <Button onClick={() => pushWithLocale(`${ROUTES.PROFILE}`)} variant="outlined" size="medium">
         {t('common.backtoprofile')}
       </Button>
     </Grid>

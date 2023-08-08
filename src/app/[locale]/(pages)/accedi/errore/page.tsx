@@ -2,16 +2,16 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
 import { useSearchParams } from 'next/navigation';
+import { isBrowser } from '../../../_utils/common';
 import { ROUTES } from '../../../_utils/routes';
-import { isBrowser, localeFromStorage } from '../../../_utils/common';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco');
   const errorCode = searchParams.get('errorCode');
   const ERROR_TITLE = t('error.loginerror');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
 
   const renderErrorSummary = (errorCode: string | null) => {
     if (errorCode == null) {
@@ -93,9 +93,7 @@ const LoginErrorPage = () => {
           {typeof errorCode === 'string' && errorCode === '1001' ? (
             <Grid item xs={12} textAlign={'center'}>
               <Button
-                onClick={() =>
-                  router.push(`${process.env.NEXT_PUBLIC_URL_IO}`, { locale: localeFromStorage })
-                }
+                onClick={() => pushWithLocale(`${process.env.NEXT_PUBLIC_URL_IO}`)}
                 variant="contained"
               >
                 Torna alla home
@@ -110,10 +108,7 @@ const LoginErrorPage = () => {
                   </Button>
                 </Grid>
                 <Grid item xs={6} justifySelf="center">
-                  <Button
-                    onClick={() => router.push(`${ROUTES.LOGIN}`, { locale: localeFromStorage })}
-                    variant="contained"
-                  >
+                  <Button onClick={() => pushWithLocale(`${ROUTES.LOGIN}`)} variant="contained">
                     {t('error.retry')}
                   </Button>
                 </Grid>
