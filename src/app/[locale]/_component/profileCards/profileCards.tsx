@@ -1,13 +1,14 @@
 'use client';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
-import Link from 'next-intl/link';
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next-intl/client';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
+import { localeFromStorage } from '../../_utils/common';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
@@ -15,6 +16,7 @@ type ProfileCardsProps = {
 
 export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const router = useRouter();
 
   return (
     <>
@@ -37,11 +39,16 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                 <Typography variant="body2" py={2}>
                   {t('profile.nodevicelogout')}
                 </Typography>
-                <Link href={ROUTES.LOGOUT_CONFIRM}>
-                  <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
-                    {t('common.logout')}
-                  </ButtonNaked>
-                </Link>
+                <ButtonNaked
+                  onClick={() =>
+                    router.push(`${ROUTES.LOGOUT_CONFIRM}`, { locale: localeFromStorage })
+                  }
+                  color="primary"
+                  endIcon={<ArrowForwardIcon />}
+                  size="medium"
+                >
+                  {t('common.logout')}
+                </ButtonNaked>
               </CardContent>
             </Card>
           </Grid>
@@ -57,11 +64,16 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
               <Typography variant="body2" py={2}>
                 {t('common.lockappaccess')}
               </Typography>
-              <Link href={ROUTES.PROFILE_BLOCK}>
-                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
-                  {t('profile.lockaccess')}
-                </ButtonNaked>
-              </Link>
+              <Button
+                onClick={() =>
+                  router.push(`${ROUTES.PROFILE_BLOCK}`, { locale: localeFromStorage })
+                }
+                color="primary"
+                endIcon={<ArrowForwardIcon />}
+                size="medium"
+              >
+                {t('profile.lockaccess')}
+              </Button>
             </CardContent>
           </Card>
         </Grid>
