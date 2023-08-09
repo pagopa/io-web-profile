@@ -24,11 +24,7 @@ const L1NoSession = (): React.ReactElement => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button
-            onClick={() => pushWithLocale(`${ROUTES.LOGIN}`)}
-            sx={{ mr: 2 }}
-            variant="outlined"
-          >
+          <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} sx={{ mr: 2 }} variant="outlined">
             {t('common.backtohome')}
           </Button>
         </Grid>

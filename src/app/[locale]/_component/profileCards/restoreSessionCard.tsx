@@ -30,7 +30,7 @@ export const RestoreSessionCard = (): React.ReactElement => {
             </Typography>
             <Typography variant="body2">{t('common.identitysecurityrestore')}</Typography>
             <ButtonNaked
-              onClick={() => pushWithLocale(`${ROUTES.PROFILE_RESTORE}`)}
+              onClick={() => pushWithLocale(ROUTES.PROFILE_RESTORE)}
               color="primary"
               endIcon={<ArrowForwardIcon />}
               size="medium"
@@ -43,7 +43,7 @@ export const RestoreSessionCard = (): React.ReactElement => {
               {t('common.norestorecode')}
             </Typography>
             <ButtonNaked
-              onClick={() => pushWithLocale(`${ROUTES.LOGIN_L3}`)}
+              onClick={() => pushWithLocale(ROUTES.LOGIN_L3)}
               color="primary"
               size="medium"
               sx={{ textDecorationLine: 'underline' }}

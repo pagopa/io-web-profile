@@ -87,7 +87,7 @@ const ReactivateCode = (): React.ReactElement => {
             {t('restore.restoreprofile')}
           </Button>
           <Button
-            onClick={() => pushWithLocale(`${ROUTES.PROFILE}`)}
+            onClick={() => pushWithLocale(ROUTES.PROFILE)}
             variant="outlined"
             sx={{ width: { xs: '100%', sm: 'auto' } }}
           >

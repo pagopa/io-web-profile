@@ -39,7 +39,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                   {t('profile.nodevicelogout')}
                 </Typography>
                 <ButtonNaked
-                  onClick={() => pushWithLocale(`${ROUTES.LOGOUT_CONFIRM}`)}
+                  onClick={() => pushWithLocale(ROUTES.LOGOUT_CONFIRM)}
                   color="primary"
                   endIcon={<ArrowForwardIcon />}
                   size="medium"
@@ -62,7 +62,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                 {t('common.lockappaccess')}
               </Typography>
               <ButtonNaked
-                onClick={() => pushWithLocale(`${ROUTES.PROFILE_BLOCK}`)}
+                onClick={() => pushWithLocale(ROUTES.PROFILE_BLOCK)}
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"

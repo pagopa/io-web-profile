@@ -93,7 +93,7 @@ const LoginErrorPage = () => {
           {typeof errorCode === 'string' && errorCode === '1001' ? (
             <Grid item xs={12} textAlign={'center'}>
               <Button
-                onClick={() => pushWithLocale(`${process.env.NEXT_PUBLIC_URL_IO}`)}
+                onClick={() => pushWithLocale(process.env.NEXT_PUBLIC_URL_IO || '')}
                 variant="contained"
               >
                 Torna alla home
@@ -108,7 +108,7 @@ const LoginErrorPage = () => {
                   </Button>
                 </Grid>
                 <Grid item xs={6} justifySelf="center">
-                  <Button onClick={() => pushWithLocale(`${ROUTES.LOGIN}`)} variant="contained">
+                  <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
                     {t('error.retry')}
                   </Button>
                 </Grid>

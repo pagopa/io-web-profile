@@ -25,7 +25,7 @@ const RestoreThankYouPage = (): React.ReactElement => {
         <IdpListOnApp />
 
         <Button
-          onClick={() => pushWithLocale(`${ROUTES.PROFILE}`)}
+          onClick={() => pushWithLocale(ROUTES.PROFILE)}
           variant="outlined"
           sx={{ marginTop: { xs: 6, sm: 4, md: '60px' } }}
         >

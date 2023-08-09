@@ -10,9 +10,16 @@ import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 
 const ThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const pushWithLocale = useLocalePush();
   const userFromToken = storageUserOps.read();
   const isL2 = userFromToken?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2;
-  const pushWithLocale = useLocalePush();
+
+  const handleSpidLevelRedirect = () => {
+    if (isL2) {
+      return pushWithLocale(ROUTES.PROFILE);
+    }
+    return pushWithLocale(ROUTES.LOGIN);
+  };
   return (
     <>
       <Grid sx={commonBackground} container>
@@ -24,13 +31,7 @@ const ThankYouPage = (): React.ReactElement => {
           />
         </Grid>
         <Grid item xs={12} pt={2}>
-          <Button
-            onClick={() =>
-              isL2 ? pushWithLocale(`${ROUTES.PROFILE}`) : pushWithLocale(`${ROUTES.LOGIN}`)
-            }
-            sx={{ mr: 2 }}
-            variant="outlined"
-          >
+          <Button onClick={handleSpidLevelRedirect} sx={{ mr: 2 }} variant="outlined">
             {isL2 ? t('common.backtoprofile') : t('common.backtohome')}
           </Button>
         </Grid>

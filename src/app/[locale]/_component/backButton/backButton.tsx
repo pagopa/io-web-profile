@@ -14,7 +14,7 @@ export const BackButton = ({ href = '/', text, ...props }: BackButtonProps) => {
 
   return (
     <ButtonNaked
-      onClick={() => pushWithLocale(`${href}`)}
+      onClick={() => pushWithLocale(href)}
       startIcon={<ArrowBackIcon />}
       color="primary"
       sx={{ marginBottom: '41px' }}
