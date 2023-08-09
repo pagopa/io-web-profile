@@ -2,17 +2,16 @@
 
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
 import { BackButton } from '../../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
-import { commonBackgroundWithBack } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
+import { commonBackgroundWithBack } from '../../../_utils/styles';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 
 const RestoreThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
   return (
     <>
       <Grid sx={commonBackgroundWithBack}>
@@ -26,7 +25,7 @@ const RestoreThankYouPage = (): React.ReactElement => {
         <IdpListOnApp />
 
         <Button
-          onClick={() => router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })}
+          onClick={() => pushWithLocale(ROUTES.PROFILE)}
           variant="outlined"
           sx={{ marginTop: { xs: 6, sm: 4, md: '60px' } }}
         >

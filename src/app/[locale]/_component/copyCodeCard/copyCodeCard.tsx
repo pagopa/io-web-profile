@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 type CopyCardProps = {
-  code: string;
+  code: string | undefined;
 };
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
@@ -14,7 +14,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
 
   const copyTextToClipboard = (text: string | undefined) => {
     if (typeof text === 'string') {
-      void navigator.clipboard.writeText(text);
+      void navigator.clipboard.writeText(text.replaceAll(' ', ''));
       setOpenSnackBar(true);
     }
   };

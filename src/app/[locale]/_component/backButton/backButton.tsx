@@ -1,7 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
+import useLocalePush from '../../_hooks/useLocalePush';
 
 type BackButtonProps = {
   href?: string;
@@ -10,16 +10,17 @@ type BackButtonProps = {
 
 export const BackButton = ({ href = '/', text, ...props }: BackButtonProps) => {
   const t = useTranslations('ioesco.common');
+  const pushWithLocale = useLocalePush();
+
   return (
-    <Link href={href}>
-      <ButtonNaked
-        startIcon={<ArrowBackIcon />}
-        color="primary"
-        sx={{ marginBottom: '41px' }}
-        {...props}
-      >
-        {text || t('backtoprofile')}
-      </ButtonNaked>
-    </Link>
+    <ButtonNaked
+      onClick={() => pushWithLocale(href)}
+      startIcon={<ArrowBackIcon />}
+      color="primary"
+      sx={{ marginBottom: '41px' }}
+      {...props}
+    >
+      {text || t('backtoprofile')}
+    </ButtonNaked>
   );
 };

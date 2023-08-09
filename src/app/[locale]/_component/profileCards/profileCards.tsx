@@ -1,45 +1,56 @@
 'use client';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
-import Link from 'next-intl/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
+import useLocalePush from '../../_hooks/useLocalePush';
+import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
 import { ROUTES } from '../../_utils/routes';
-import HourglassIcon from '../../_icons/hourglass';
 import { commonCardStyle } from '../../_utils/styles';
 
-const ProfileCards = (): React.ReactElement => {
+type ProfileCardsProps = {
+  sessionIsActive: boolean;
+};
+
+export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const pushWithLocale = useLocalePush();
 
   return (
     <>
       <Grid
         container
         spacing={4}
+        display={'flex'}
+        justifyContent={'center'}
         flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
         textAlign={{ xs: 'left', sm: 'center' }}
       >
-        <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
-        <Grid item xs={12} md={5} lg={4} xl={3}>
-          <Card sx={commonCardStyle}>
-            <CardContent sx={{ padding: '32px' }}>
-              <QuestionIcon />
-              <Typography variant="h6" pt={2}>
-                {t('common.logout')}
-              </Typography>
-              <Typography variant="body2" py={2}>
-                {t('profile.nodevicelogout')}
-              </Typography>
-              <Link href={ROUTES.SESSION}>
-                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
+        {sessionIsActive && (
+          <Grid item xs={12} md={5} lg={4} xl={3}>
+            <Card sx={commonCardStyle}>
+              <CardContent sx={{ padding: '32px' }}>
+                <QuestionIcon />
+                <Typography variant="h6" pt={2}>
+                  {t('common.logout')}
+                </Typography>
+                <Typography variant="body2" py={2}>
+                  {t('profile.nodevicelogout')}
+                </Typography>
+                <ButtonNaked
+                  onClick={() => pushWithLocale(ROUTES.LOGOUT_CONFIRM)}
+                  color="primary"
+                  endIcon={<ArrowForwardIcon />}
+                  size="medium"
+                >
                   {t('common.logout')}
                 </ButtonNaked>
-              </Link>
-            </CardContent>
-          </Card>
-        </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
+
         <Grid item xs={12} md={5} lg={4} xl={3}>
           <Card sx={commonCardStyle}>
             <CardContent sx={{ padding: '32px' }}>
@@ -50,18 +61,18 @@ const ProfileCards = (): React.ReactElement => {
               <Typography variant="body2" py={2}>
                 {t('common.lockappaccess')}
               </Typography>
-              <Link href={ROUTES.PROFILE_BLOCK}>
-                <ButtonNaked color="primary" endIcon={<ArrowForwardIcon />} size="medium">
-                  {t('profile.lockaccess')}
-                </ButtonNaked>
-              </Link>
+              <ButtonNaked
+                onClick={() => pushWithLocale(ROUTES.PROFILE_BLOCK)}
+                color="primary"
+                endIcon={<ArrowForwardIcon />}
+                size="medium"
+              >
+                {t('profile.lockaccess')}
+              </ButtonNaked>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={0} md={1} lg={2} xl={3}></Grid>
       </Grid>
     </>
   );
 };
-
-export default ProfileCards;

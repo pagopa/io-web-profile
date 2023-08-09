@@ -3,20 +3,34 @@
 import { Box, Button, Card, Grid, Typography } from '@mui/material';
 import { IllusSms } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
+import { storageUserOps } from '@/app/[locale]/_utils/storage';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const Session = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const pushWithLocale = useLocalePush();
+  const userFromStorage = storageUserOps.read();
+
+  const handleLogout = () => {
+    WebProfileApi.logoutFromIOApp()
+      .then(() => {
+        pushWithLocale(ROUTES.THANK_YOU);
+      })
+      .catch((_err) => {
+        pushWithLocale(ROUTES.LOGOUT_KO);
+      });
+  };
   return (
     <>
       <Grid sx={commonBackgroundLight} container>
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
-            title={t('common.hello', { nome: 'Mario' })}
+            title={t('common.hello', { nome: userFromStorage?.name })}
             summary={
               <>
                 <span>
@@ -75,11 +89,9 @@ const Session = (): React.ReactElement => {
         </Grid>
 
         <Grid item xs={12} mt={4}>
-          <Link href={ROUTES.THANK_YOU}>
-            <Button sx={{ mr: 2 }} variant="contained">
-              {t('common.logout')}
-            </Button>
-          </Link>
+          <Button sx={{ mr: 2 }} variant="contained" onClick={handleLogout}>
+            {t('common.logout')}
+          </Button>
         </Grid>
       </Grid>
       <FAQ />

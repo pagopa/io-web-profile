@@ -1,25 +1,22 @@
 'use client';
-
-import { useState } from 'react';
-
 import { Button, Grid, Link, TextField } from '@mui/material';
+import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
+import { useState } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
-import { commonBackground } from '../../../_utils/styles';
 import { ROUTES } from '../../../_utils/routes';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
+import { commonBackground } from '../../../_utils/styles';
+import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ReactivateCode = (): React.ReactElement => {
-  const { push } = useRouter();
   const [restoreCode, setRestoreCode] = useState('');
   const [isCodeNotValid, setIsCodeNotValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter();
+  const pushWithLocale = useLocalePush();
 
-  // const reactivationCodePattern: string = '[0-9]{3}[ -]*[0-9]{3}[ -]*[0-9]{3}';
   const t = useTranslations('ioesco');
 
   const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,15 +34,20 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
-    // TODO: remove mocked logic
-    if (restoreCode === '123456789') {
-      setIsCodeNotValid(false);
-      setErrorMessage('');
-      void push(ROUTES.RESTORE_THANK_YOU);
-    } else {
-      setIsCodeNotValid(true);
-      setErrorMessage(t('restore.notvalidcode'));
-    }
+    WebProfileApi.unlockUserSession({ unlock_code: restoreCode as WithinRangeString<9, 10> })
+      .then(() => {
+        setIsCodeNotValid(false);
+        setErrorMessage('');
+        pushWithLocale(ROUTES.RESTORE_THANK_YOU);
+      })
+      .catch((err) => {
+        if (err.status === 403) {
+          setIsCodeNotValid(true);
+          setErrorMessage(t('restore.notvalidcode'));
+        } else {
+          pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+        }
+      });
   };
 
   return (
@@ -85,7 +87,7 @@ const ReactivateCode = (): React.ReactElement => {
             {t('restore.restoreprofile')}
           </Button>
           <Button
-            onClick={() => router.push(`${ROUTES.PROFILE}`, { locale: localeFromStorage })}
+            onClick={() => pushWithLocale(ROUTES.PROFILE)}
             variant="outlined"
             sx={{ width: { xs: '100%', sm: 'auto' } }}
           >

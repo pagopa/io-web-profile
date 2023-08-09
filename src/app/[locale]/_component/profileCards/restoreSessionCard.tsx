@@ -1,31 +1,36 @@
 'use client';
-import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import { Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { ROUTES } from '../../_utils/routes';
+import useLocalePush from '../../_hooks/useLocalePush';
 import Firework from '../../_icons/firework';
+import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
 
-const ProfileCardsBlocked = (): React.ReactElement => {
+export const RestoreSessionCard = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const pushWithLocale = useLocalePush();
 
   return (
-    <Grid container flexDirection="column" justifyContent="center" alignItems="center">
-      <Grid item textAlign={'center'}>
+    <Grid
+      container
+      spacing={4}
+      display={'flex'}
+      justifyContent={'center'}
+      flexWrap={{ xs: 'wrap', sm: 'nowrap' }}
+      textAlign={{ xs: 'left', sm: 'center' }}
+    >
+      <Grid item xs={12} md={5} lg={4} xl={3}>
         <Card sx={commonCardStyle}>
           <CardContent>
             <Firework />
             <Typography variant="h6" py={2}>
               {t('common.restoreioaccess')}
             </Typography>
-            <Typography variant="body2" textAlign="center" px={5}>
-              {t('common.identitysecurityrestore')}
-            </Typography>
-
+            <Typography variant="body2">{t('common.identitysecurityrestore')}</Typography>
             <ButtonNaked
-              href={ROUTES.PROFILE_RESTORE}
+              onClick={() => pushWithLocale(ROUTES.PROFILE_RESTORE)}
               color="primary"
               endIcon={<ArrowForwardIcon />}
               size="medium"
@@ -34,11 +39,11 @@ const ProfileCardsBlocked = (): React.ReactElement => {
               {t('common.restoreioaccess')}
             </ButtonNaked>
             <Divider />
-            <Typography variant="body2" padding={2}>
+            <Typography variant="body2" py={2}>
               {t('common.norestorecode')}
             </Typography>
             <ButtonNaked
-              href={ROUTES.LOGIN_L3}
+              onClick={() => pushWithLocale(ROUTES.LOGIN_L3)}
               color="primary"
               size="medium"
               sx={{ textDecorationLine: 'underline' }}
@@ -51,4 +56,3 @@ const ProfileCardsBlocked = (): React.ReactElement => {
     </Grid>
   );
 };
-export default ProfileCardsBlocked;

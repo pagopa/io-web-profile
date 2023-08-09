@@ -1,20 +1,35 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
+import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next-intl/client';
+import { useDispatch } from 'react-redux';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
-import { isIDPKnown } from '../../_utils/idps';
-import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { Flows } from '../../_enums/Flows';
+import useLocalePush from '../../_hooks/useLocalePush';
+import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
+import { isIDPKnown } from '../../_utils/idps';
 import { ROUTES } from '../../_utils/routes';
-import { localeFromStorage } from '../../_utils/common';
+import { commonBackgroundLightWithBack } from '../../_utils/styles';
+import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const pushWithLocale = useLocalePush();
+
+  const handleLockSession = () => {
+    dispatch(createUnlockCode('123456789'));
+    WebProfileApi.lockUserSession({ unlock_code: '123456789' as WithinRangeString<9, 10> })
+      .then(() => {
+        pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
+      })
+      .catch((_err) => {
+        pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+      });
+  };
 
   const renderSummary = (isIDPKnown: boolean) => {
     if (isIDPKnown) {
@@ -35,13 +50,7 @@ const ProfileBlock = (): React.ReactElement => {
         <Grid sx={{ maxWidth: '576px' }}>
           {isIDPKnown && <IdpListOnApp />}
           <Typography mb={5}>{t('common.lockaccessinfo')}</Typography>
-          <Button
-            onClick={() =>
-              router.push(`${ROUTES.PROFILE_BLOCK_SUCCESS}`, { locale: localeFromStorage })
-            }
-            variant="contained"
-            size="medium"
-          >
+          <Button variant="contained" size="medium" onClick={handleLockSession}>
             {t('profile.lockaccess')}
           </Button>
         </Grid>
