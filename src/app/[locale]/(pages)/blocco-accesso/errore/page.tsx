@@ -18,7 +18,7 @@ const LoginKo = (): React.ReactElement => {
           title={t('error.somewrong')}
           summary={<span>{t('error.systemerrorcontactassistence')}</span>}
           firstButton={{
-            href: ROUTES.SESSION,
+            href: ROUTES.PROFILE_BLOCK,
             variant: 'contained',
             text: t('error.retry'),
           }}

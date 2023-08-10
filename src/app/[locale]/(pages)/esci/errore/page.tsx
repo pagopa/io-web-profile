@@ -18,7 +18,7 @@ const LogOutKo = (): React.ReactElement => {
             title={t('error.somewrong')}
             summary={<span>{t('error.systemerrorlogout')}</span>}
             firstButton={{
-              href: ROUTES.SESSION,
+              href: ROUTES.LOGOUT_CONFIRM,
               variant: 'contained',
               text: t('error.retry'),
             }}

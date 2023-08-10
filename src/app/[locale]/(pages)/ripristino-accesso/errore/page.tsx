@@ -8,17 +8,17 @@ import { commonBackground } from '../../../_utils/styles';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const LoginKo = (): React.ReactElement => {
-  const t = useTranslations('ioesco.error');
+  const t = useTranslations('ioesco');
 
   return (
     <Grid sx={commonBackground} container>
       <Grid item xs={12} justifySelf={'center'}>
         <FeedbackMessage
           topIcon={<IllusError />}
-          title={t('somewrong')}
-          summary={<span>{t('systemerrorcontactassistence')}</span>}
+          title={t('error.somewrong')}
+          summary={<span>{t('error.systemerrorcontactassistence')}</span>}
           firstButton={{
-            href: ROUTES.SESSION,
+            href: ROUTES.PROFILE_RESTORE,
             variant: 'contained',
             text: t('error.retry'),
           }}
