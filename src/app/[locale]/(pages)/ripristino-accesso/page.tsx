@@ -2,9 +2,7 @@
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FAQ } from '../../_component/accordion/faqDefault';
-import { BackButton } from '../../_component/backButton/backButton';
-import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
-import { Introduction } from '../../_component/introduction/introduction';
+import CommonLayoutRestore from '../../_component/commonLayoutRestore/commonLayoutRestore';
 import { Flows } from '../../_enums/Flows';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
@@ -34,30 +32,21 @@ const RestoreProfile = (): React.ReactElement => {
 
   return (
     <>
-      <Grid sx={commonBackgroundWithBack} xs={12} sm={12}>
-        <BackButton />
-        <Introduction
-          title={t('restore.restoreaccess')}
-          summary={t('restore.login')}
-          summaryColumns={{ xs: 12, md: 7.5 }}
-        />
-
-        <Grid container flexDirection={'column'}>
-          <IdpListOnApp />
-          {!isL3 && (
-            <Grid item sm={10} md={7}>
-              <Typography mb={5} fontSize={'20px'}>
-                {t.rich('restore.insertcode', {
-                  strong: (chunks) => <strong>{chunks}</strong>,
-                })}
-              </Typography>
-            </Grid>
-          )}
-          <Grid>
-            <Button variant="contained" size="medium" onClick={handleRestore}>
-              {t('common.restoreioaccess')}
-            </Button>
+      <Grid sx={commonBackgroundWithBack} item xs={12} sm={12}>
+        <CommonLayoutRestore title={t('restore.restoreaccess')} summary={t('restore.login')} />
+        {!isL3 && (
+          <Grid item sm={10} md={7}>
+            <Typography mb={5} fontSize={'20px'}>
+              {t.rich('restore.insertcode', {
+                strong: (chunks) => <strong>{chunks}</strong>,
+              })}
+            </Typography>
           </Grid>
+        )}
+        <Grid>
+          <Button variant="contained" size="medium" onClick={handleRestore}>
+            {t('common.restoreioaccess')}
+          </Button>
         </Grid>
       </Grid>
       <FAQ flow={Flows.RESTORE} />
