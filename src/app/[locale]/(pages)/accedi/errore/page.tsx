@@ -96,7 +96,7 @@ const LoginErrorPage = () => {
                 onClick={() => pushWithLocale(process.env.NEXT_PUBLIC_URL_IO || '')}
                 variant="contained"
               >
-                Torna alla home
+                {t('common.backtohome')}
               </Button>
             </Grid>
           ) : (
