@@ -88,7 +88,7 @@ describe('test suite for Accedi Errore ', () => {
     expect(mockHistoryBack).toHaveBeenCalled();
   });
 
-  test('should render "Cancel Login" for errorCode 1001 and click on button back to home', async () => {
+  test('should render "Min Age" for errorCode 1001 and click on button back to home', async () => {
     mockSearchParams.get.mockReturnValue('1001');
     await renderWithProviders(<LoginErrorPage />);
 
