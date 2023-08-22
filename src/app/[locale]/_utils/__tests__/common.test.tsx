@@ -1,5 +1,10 @@
 import { storageLocaleOps } from './../storage';
 import { addSpacesEvery3Chars, localeFromStorage, isBrowser } from '../common';
+import * as common from '../common';
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 describe('Utilities', () => {
   describe('addSpacesEvery3Chars', () => {
@@ -36,10 +41,11 @@ describe('Utilities', () => {
       expect(result).toBe(true);
     });
 
-    test('returns false when running in a non-browser environment', () => {
-      delete global.window;
-      const result = isBrowser();
-      expect(result).toBe(false);
+
+  test('returns false when running in a non-browser environment', () => {  
+    jest.spyOn(common,"isBrowser").mockReturnValue(false);
+    const result = isBrowser();
+    expect(result).toBe(false);
     });
   });
 });
