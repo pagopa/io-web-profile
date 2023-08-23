@@ -1,5 +1,5 @@
 'use client';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, Link, Typography } from '@mui/material';
 import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useDispatch } from 'react-redux';
@@ -45,6 +45,10 @@ const ProfileBlock = (): React.ReactElement => {
     return <>{t('lockaccess.accessidentitycompromise')}</>;
   };
 
+  const explanationIdentetyLevelRich = {
+    link: (chunks: React.ReactNode) => <Link href="#">{chunks}</Link>,
+  };
+
   return (
     <>
       <Grid sx={commonBackgroundLightWithBack}>
@@ -56,7 +60,9 @@ const ProfileBlock = (): React.ReactElement => {
         />
         <Grid sx={{ maxWidth: '576px' }}>
           {isIDPKnown && <IdpListOnApp />}
-          <Typography mb={5}>{t('common.lockaccessinfo')}</Typography>
+          <Typography mb={5}>
+            {t.rich('common.lockaccessinfo', explanationIdentetyLevelRich)}
+          </Typography>
           <Button variant="contained" size="medium" onClick={handleLockSession}>
             {t('profile.lockaccess')}
           </Button>

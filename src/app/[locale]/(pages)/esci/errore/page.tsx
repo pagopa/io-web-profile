@@ -8,20 +8,24 @@ import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';
 
 const LogOutKo = (): React.ReactElement => {
-  const t = useTranslations('ioesco.error');
+  const t = useTranslations('ioesco');
   return (
     <>
       <Grid sx={commonBackground} container>
         <Grid item xs={12} justifySelf={'center'}>
           <FeedbackMessage
             topIcon={<IllusError />}
-            title={t('somewrong')}
-            summary={<span>{t('systemerrorlogout')}</span>}
-            button={{
-              href: ROUTES.SESSION,
-              isVisible: true,
+            title={t('error.somewrong')}
+            summary={<span>{t('error.systemerrorlogout')}</span>}
+            firstButton={{
+              href: ROUTES.LOGOUT_CONFIRM,
               variant: 'contained',
-              text: t('retry'),
+              text: t('error.retry'),
+            }}
+            secondButton={{
+              variant: 'outlined',
+              href: ROUTES.PROFILE,
+              text: t('common.backtoprofile'),
             }}
           />
         </Grid>
