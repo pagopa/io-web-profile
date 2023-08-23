@@ -7,13 +7,13 @@ afterEach(() => {
 });
 
 describe('Utilities', () => {
-  describe('addSpacesEvery3Chars', () => {
-    test('adds spaces correctly', () => {
+  describe('addSpacesEvery3Chars function', () => {
+    test('given a string of digits, should insert spaces at every group of 3 characters, resulting in a formatted string', () => {
       const result = addSpacesEvery3Chars('1234567890');
       expect(result).toBe('123 456 789 0');
     });
 
-    test('handles empty string', () => {
+    test('given a empty string, should return empty string', () => {
       const result = addSpacesEvery3Chars('');
       expect(result).toBe('');
     });

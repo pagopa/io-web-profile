@@ -1,4 +1,3 @@
-/* eslint-disable functional/immutable-data */
 import { fireEvent, screen } from '@testing-library/react';
 import Access from '../page';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';

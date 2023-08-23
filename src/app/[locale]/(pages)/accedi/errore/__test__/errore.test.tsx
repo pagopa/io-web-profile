@@ -17,7 +17,7 @@ const mockSearchParams = {
 
 (useSearchParams as jest.Mock).mockReturnValue(mockSearchParams);
 
-describe('test suite for Accedi Errore ', () => {
+describe('test suite for access error', () => {
   test('should render "Generic error" when errorCode is null', async () => {
     mockSearchParams.get.mockReturnValue(null);
     await renderWithProviders(<LoginErrorPage />);

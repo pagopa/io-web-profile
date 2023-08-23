@@ -15,7 +15,7 @@ import {
       sessionStorage.clear();
     });
   
-    test('storageDelete deletes the correct key', () => {
+    test('storageDelete should delete the item corresponding to the passed key', () => {
       localStorage.setItem(key, value);
       storageDelete(key, true);
       expect(localStorage.getItem(key)).toBeNull();
