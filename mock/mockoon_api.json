@@ -1,0 +1,1179 @@
+{
+  "uuid": "73afdc1b-9f6f-4d04-bf87-4b0c81f76ebd",
+  "lastMigration": 28,
+  "name": "IO Web Profile Function API",
+  "endpointPrefix": "api/v1",
+  "latency": 0,
+  "port": 7071,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "46dea5eb-41af-40fe-b2eb-602b6621f8f2",
+      "type": "http",
+      "documentation": "GetServiceStatus",
+      "method": "get",
+      "endpoint": "ping",
+      "responses": [
+        {
+          "uuid": "cf2ed1b8-0ede-4ebf-be45-548b31be2573",
+          "body": "{\n  \"message\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Service is running",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "94a2fbdd-69a3-4389-876e-4d5e881e9053",
+      "type": "http",
+      "documentation": "LockUserSession",
+      "method": "post",
+      "endpoint": "lock-session",
+      "responses": [
+        {
+          "uuid": "fad0a8e1-bfb5-4fe5-8b33-875dd97fb4a5",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "No Content",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c62e72a6-0e7c-44e5-9f76-5216c3e4a92d",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "305cc1cf-ee8d-439c-ad71-29697fa1d8fa",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "800e8cbd-74df-4447-b911-ed831ce56c11",
+          "body": "",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "fafb8052-8dcb-4200-98f0-22d96e507fb8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 409,
+          "label": "Conflict",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "8bb0c9f4-1e0f-4761-a9aa-35b465605596",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d9a67598-f762-4f5c-86ed-024e2cb3d70d",
+          "body": "",
+          "latency": 0,
+          "statusCode": 502,
+          "label": "Bad Gateway",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "a2cf5869-c7fc-4989-af7d-33e7140f5f59",
+          "body": "",
+          "latency": 0,
+          "statusCode": 504,
+          "label": "Gateway Timeout",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "760c2def-434d-47d6-89b2-75b0b533ad5a",
+      "type": "http",
+      "documentation": "UnlockUserSession",
+      "method": "post",
+      "endpoint": "unlock-session",
+      "responses": [
+        {
+          "uuid": "c75f776d-bde0-4776-b930-0b83fa5893e1",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "No Content",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "9e0edc83-dbe5-4d98-b855-e9eae9cd2a09",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "1d457ab8-38a3-408e-8017-0f743cc40596",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "6ef37e9b-28f9-4509-83be-c47a3a3f2cb3",
+          "body": "",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "be675818-e4ab-4a3f-879e-d92713fb77fe",
+          "body": "",
+          "latency": 0,
+          "statusCode": 409,
+          "label": "Conflict",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "21d676a9-1e5e-4704-b45f-961c0e61e2b5",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "4c4024b0-48a4-4945-96ca-8bbbe2f29075",
+          "body": "",
+          "latency": 0,
+          "statusCode": 502,
+          "label": "Bad Gateway",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "3176a8b2-7838-4dad-9190-1d839cd5eda8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 504,
+          "label": "Gateway Timeout",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "5d5cf1b6-f423-4f91-a177-1cdeef901cb0",
+      "type": "http",
+      "documentation": "LogoutFromIOApp",
+      "method": "post",
+      "endpoint": "logout",
+      "responses": [
+        {
+          "uuid": "d1d3a608-4dff-43d5-8c60-c562578e12d1",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "0a5c7ab4-1867-4c6f-9cb9-e56af71fe068",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "ee0228f8-7782-463b-b052-cf771d7c06e4",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "1af941c7-25b0-44bb-a766-9593f49b4015",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "59e5d576-7aed-4a0f-b026-1a823d511b6a",
+          "body": "",
+          "latency": 0,
+          "statusCode": 502,
+          "label": "Bad Gateway",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "b629ab8b-ed9b-4e81-bcb6-63ef9bd2103d",
+          "body": "",
+          "latency": 0,
+          "statusCode": 504,
+          "label": "Gateway Timeout",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "7002b62c-8a8f-41b3-93d6-8e6b09957a92",
+      "type": "http",
+      "documentation": "GetProfile",
+      "method": "get",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "f7cb97e2-5ddb-4317-afbb-e81ce06bb27d",
+          "body": "{\n  \"email\": \"foobar@example.com\"\n}",
+          "latency": 6000,
+          "statusCode": 204,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "ddc1a6ea-53f2-4895-a36e-daf58530fcdf",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Invalid request.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d5c03ab1-9867-4eda-b66e-f562367f8952",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "269defb0-3d27-4ddd-99de-69d8c50d44f1",
+          "body": "",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "d413d6e7-4e4e-4d8d-82f6-23d85ac8005d",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Not Found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "57bad9cd-0f59-453a-9735-dc5406dd2ff0",
+          "body": "",
+          "latency": 0,
+          "statusCode": 429,
+          "label": "Too Many Requests",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "34565f27-1c0d-46ce-a213-a851369673ac",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "8537cd03-046e-4bc1-94e7-4e4cee6b8273",
+      "type": "http",
+      "documentation": "GetUserSessionState",
+      "method": "get",
+      "endpoint": "session-state",
+      "responses": [
+        {
+          "uuid": "5ce51fb4-5c36-4485-b8d8-e5018a8f4490",
+          "body": "{\n  \"access_enabled\": true,\n  \"session_info\": {\n    \"active\": true,\n    \"expiration_date\":\"2025-10-13\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "427a958d-01b6-4b3d-aede-a5c34287911a",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "353505ba-02cf-4f5d-b713-fbd9baecbeea",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "532d2a29-8272-4019-8d1b-89e7bca4280b",
+          "body": "",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "7bb32b59-5142-42b8-9781-d686a37eaa4e",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "b43229c8-392b-46f7-919b-accb06df45a4",
+          "body": "",
+          "latency": 0,
+          "statusCode": 502,
+          "label": "Bad Gateway",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "813b3c0d-c43e-41cb-a49f-331933055e4a",
+          "body": "",
+          "latency": 0,
+          "statusCode": 504,
+          "label": "Gateway Timeout",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "dd8962ad-9abb-4943-b519-888f808597ab",
+      "type": "http",
+      "documentation": "ExchangeToken",
+      "method": "post",
+      "endpoint": "exchange",
+      "responses": [
+        {
+          "uuid": "be219bcd-778c-4bc2-842f-9f8f9fc04ec8",
+          "body": "{\n  \"jwt\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "f143132c-74a1-4072-9f81-b43aa2e6ada6",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "3b28e519-6720-4b97-9ea9-4721375df06c",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "3690d7f1-44a5-48fe-969e-8909b146e95a",
+          "body": "",
+          "latency": 0,
+          "statusCode": 403,
+          "label": "Forbidden",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "5d034b6e-8495-46dc-800a-834a40df23f7",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "dbfc54a3-a5a8-474d-912b-8d2943fb3cf2",
+          "body": "",
+          "latency": 0,
+          "statusCode": 502,
+          "label": "Bad Gateway",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "725fbd07-50d7-4e93-9e2f-c91d46dd518a",
+          "body": "",
+          "latency": 0,
+          "statusCode": 504,
+          "label": "Gateway Timeout",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "46dea5eb-41af-40fe-b2eb-602b6621f8f2"
+    },
+    {
+      "type": "route",
+      "uuid": "94a2fbdd-69a3-4389-876e-4d5e881e9053"
+    },
+    {
+      "type": "route",
+      "uuid": "760c2def-434d-47d6-89b2-75b0b533ad5a"
+    },
+    {
+      "type": "route",
+      "uuid": "5d5cf1b6-f423-4f91-a177-1cdeef901cb0"
+    },
+    {
+      "type": "route",
+      "uuid": "7002b62c-8a8f-41b3-93d6-8e6b09957a92"
+    },
+    {
+      "type": "route",
+      "uuid": "8537cd03-046e-4bc1-94e7-4e4cee6b8273"
+    },
+    {
+      "type": "route",
+      "uuid": "dd8962ad-9abb-4943-b519-888f808597ab"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}

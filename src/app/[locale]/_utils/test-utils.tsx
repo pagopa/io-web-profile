@@ -1,9 +1,12 @@
 import { render, RenderResult } from '@testing-library/react';
 import { AbstractIntlMessages, NextIntlProvider } from 'next-intl';
+import { Provider } from 'react-redux';
+import { store } from '../_redux/store';
 
 export const renderWithProviders = async (
   component: React.ReactElement,
-  locale: string = 'it'
+  locale: string = 'it',
+  mockDispatch = true
 ): Promise<RenderResult> => {
   async function loadMessages(locale: string): Promise<AbstractIntlMessages | undefined> {
     try {
@@ -19,9 +22,14 @@ export const renderWithProviders = async (
 
   const messages = await loadMessages(locale);
 
+  if (mockDispatch) {
+    // eslint-disable-next-line functional/immutable-data
+    store.dispatch = jest.fn();
+  }
+
   return render(
     <NextIntlProvider messages={messages} locale={locale}>
-      {component}
+      <Provider store={store}>{component}</Provider>
     </NextIntlProvider>
   );
 };

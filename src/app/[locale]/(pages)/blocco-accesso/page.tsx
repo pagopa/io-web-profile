@@ -3,6 +3,7 @@ import { Button, Grid, Link, Typography } from '@mui/material';
 import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useDispatch } from 'react-redux';
+import generator from 'generate-password-ts';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -19,10 +20,16 @@ const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const dispatch = useDispatch();
   const pushWithLocale = useLocalePush();
+  const unlockCode = generator.generate({
+    length: 9,
+    numbers: true,
+    lowercase: false,
+    uppercase: false,
+  });
 
   const handleLockSession = () => {
-    dispatch(createUnlockCode('123456789'));
-    WebProfileApi.lockUserSession({ unlock_code: '123456789' as WithinRangeString<9, 10> })
+    dispatch(createUnlockCode(unlockCode));
+    WebProfileApi.lockUserSession({ unlock_code: unlockCode as WithinRangeString<9, 10> })
       .then(() => {
         pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
       })
@@ -47,7 +54,7 @@ const ProfileBlock = (): React.ReactElement => {
       <Grid sx={commonBackgroundLightWithBack}>
         <BackButton />
         <Introduction
-          title={'Vuoi bloccare l’accesso a IO?'}
+          title={t('common.lockioaccess')}
           summary={renderSummary(isIDPKnown)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
