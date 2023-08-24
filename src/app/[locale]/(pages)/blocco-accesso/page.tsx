@@ -54,7 +54,7 @@ const ProfileBlock = (): React.ReactElement => {
       <Grid sx={commonBackgroundLightWithBack}>
         <BackButton />
         <Introduction
-          title={'Vuoi bloccare l’accesso a IO?'}
+          title={t('common.lockioaccess')}
           summary={renderSummary(isIDPKnown)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
