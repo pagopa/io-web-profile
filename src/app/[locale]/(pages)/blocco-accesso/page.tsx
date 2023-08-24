@@ -28,7 +28,7 @@ const ProfileBlock = (): React.ReactElement => {
   });
 
   const handleLockSession = () => {
-    dispatch(createUnlockCode(password));
+    dispatch(createUnlockCode(unlockCode));
     WebProfileApi.lockUserSession({ unlock_code: password as WithinRangeString<9, 10> })
       .then(() => {
         pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
