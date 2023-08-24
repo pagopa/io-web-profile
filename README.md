@@ -45,7 +45,7 @@ Once it's launched, click on:
 
 File -> Open Environment
 
-and select the api mock file located in mock/mockoon_api.json
+and select the api mock file (mockoon_api.json) located in /mock folder.
 
 Once the environment is loaded, press the "play icon" to start the Mockoon server.
 
