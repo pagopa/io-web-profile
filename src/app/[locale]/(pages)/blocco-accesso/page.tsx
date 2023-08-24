@@ -20,7 +20,7 @@ const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const dispatch = useDispatch();
   const pushWithLocale = useLocalePush();
-  const password = generator.generate({
+  const unlockCode = generator.generate({
     length: 9,
     numbers: true,
     lowercase: false,
