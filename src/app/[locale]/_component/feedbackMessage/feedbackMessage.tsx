@@ -12,7 +12,7 @@ type IntroductionProps = {
   title: string;
   summary: string | JSX.Element;
   firstButton: CustomMaterialButtonProps;
-  secondButton: CustomMaterialButtonProps;
+  secondButton?: CustomMaterialButtonProps;
 };
 
 export function FeedbackMessage({
@@ -63,19 +63,20 @@ export function FeedbackMessage({
             <Button
               onClick={() => pushWithLocale(firstButton.href || '/')}
               variant={firstButton.variant}
-              sx={{
-                marginRight: 2,
-              }}
             >
               {firstButton.text}
             </Button>
-
-            <Button
-              onClick={() => pushWithLocale(secondButton.href || '')}
-              variant={secondButton.variant}
-            >
-              {secondButton.text}
-            </Button>
+            {secondButton && (
+              <Button
+                sx={{
+                  marginLeft: 2,
+                }}
+                onClick={() => pushWithLocale(secondButton.href || '')}
+                variant={secondButton.variant}
+              >
+                {secondButton.text}
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Grid>
