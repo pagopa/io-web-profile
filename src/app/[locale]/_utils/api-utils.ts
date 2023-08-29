@@ -24,13 +24,12 @@ const API_TIMEOUT = Number(`${process.env.NEXT_PUBLIC_API_FETCH_TIMEOUT}`) as Mi
 const API_MAX_RETRY = Number(`${process.env.NEXT_PUBLIC_API_FETCH_MAX_RETRY}`);
 
 /** Return the implementation of fetch configured with a timeout */
-export const buildFetchApi = (): ((
-  input: RequestInfo | URL,
-  init?: RequestInit | undefined
-) => Promise<Response>) => {
+export const buildFetchApi = (
+  timeoutMs: number = API_TIMEOUT
+): ((input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>) => {
   // Must be an https endpoint so we use an https agent
   const abortableFetch = AbortableFetch(agent.getHttpFetch(process.env));
-  const fetchWithTimeout = toFetch(setFetchTimeout(API_TIMEOUT, abortableFetch));
+  const fetchWithTimeout = toFetch(setFetchTimeout(timeoutMs as Millisecond, abortableFetch));
   // tslint:disable-next-line: no-any
   return fetchWithTimeout as (
     input: RequestInfo | URL,
@@ -90,10 +89,19 @@ export const extractResponse = async <R>(
   }
 };
 
-export function retryingFetch(): (
-  input: RequestInfo | URL,
-  init?: RequestInit | undefined
-) => Promise<Response> {
+/**
+ * Retries a fetch request in case of timeout or response with a specific status code.
+ * @param maxRetries ( Default ENV API_MAX_RETRY ) - Maximum number of retry attempts for the request.
+ * @param statusCodeRetry ( Default 500 ) - HTTP status code that should trigger the retry.
+ * @param backOff ( Default 3000 ) - Waiting interval between retry attempts in milliseconds, this parameter represents the waiting time between each attempt with exponential growth.
+ * @returns A function that performs the fetch request with retries.
+ */
+
+export function retryingFetch(
+  maxRetries: number = API_MAX_RETRY,
+  statusCodeRetry: number = 500,
+  backOff: Millisecond = 3000 as Millisecond
+): (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response> {
   // a fetch that can be aborted and that gets cancelled after fetchTimeoutMs
   const abortableFetch = AbortableFetch(agent.getHttpFetch(process.env));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -102,9 +110,15 @@ export function retryingFetch(): (
   );
   // configure retry logic with default exponential backoff
   // @see https://github.com/pagopa/io-ts-commons/blob/master/src/backoff.ts
-  const exponentialBackoff = calculateExponentialBackoffInterval();
-  const retryLogic = withRetries<Error, Response>(API_MAX_RETRY, exponentialBackoff);
-  const retryWithError = retryLogicForResponseError((_: Response) => _.status === 500, retryLogic);
+  // const exponentialBackoff = calculateExponentialBackoffInterval();
+  const retryLogic = withRetries<Error, Response>(
+    maxRetries,
+    calculateExponentialBackoffInterval(backOff)
+  );
+  const retryWithError = retryLogicForResponseError(
+    (_: Response) => _.status === statusCodeRetry,
+    retryLogic
+  );
   return retriableFetch(retryWithError)(timeoutFetch);
 }
 
