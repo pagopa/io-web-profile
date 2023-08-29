@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
 import { commonBackground } from '../../_utils/styles';
 
-const LoginKo = (): React.ReactElement => {
+const NotFoundPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   return (
@@ -27,4 +27,4 @@ const LoginKo = (): React.ReactElement => {
   );
 };
 
-export default LoginKo;
+export default NotFoundPage;
