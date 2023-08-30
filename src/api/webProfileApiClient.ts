@@ -4,9 +4,8 @@ import { ProfileData } from './generated/webProfile/ProfileData';
 import { SessionState } from './generated/webProfile/SessionState';
 import { UnlockSessionData } from './generated/webProfile/UnlockSessionData';
 import { WithDefaultsT, createClient } from './generated/webProfile/client';
-import { buildFetchApi, extractResponse } from '@/app/[locale]/_utils/api-utils';
+import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageTokenOps } from '@/app/[locale]/_utils/storage';
-
 // with withDefaults
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
@@ -17,10 +16,11 @@ const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (para
     bearerAuth: token,
   });
 };
+
 const webProfileApiClient = createClient({
-  baseUrl: 'http://localhost:7071',
-  basePath: '/api/v1',
-  fetchApi: buildFetchApi(300000),
+  baseUrl: `${process.env.NEXT_PUBLIC_API_BASE_URL}`,
+  basePath: `${process.env.NEXT_PUBLIC_API_BASE_PATH}`,
+  fetchApi: retryingFetch(),
   withDefaults: withBearer,
 });
 
