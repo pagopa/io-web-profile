@@ -100,7 +100,7 @@ export const extractResponse = async <R>(
 export function retryingFetch(
   maxRetries: number = API_MAX_RETRY,
   statusCodeRetry: number = 500,
-  backOff: Millisecond = 3000 as Millisecond
+  backoffBaseInterval: Millisecond = 3000 as Millisecond
 ): (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response> {
   // a fetch that can be aborted and that gets cancelled after fetchTimeoutMs
   const abortableFetch = AbortableFetch(agent.getHttpFetch(process.env));
