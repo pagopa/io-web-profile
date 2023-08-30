@@ -77,6 +77,8 @@ export default function Footer({
         },
         {
           label: t('cookiesperefercies'),
+          href: '',
+          // FIXME IOPID-566
           // onClick: () => window.OneTrust.ToggleInfoDisplay(),
           ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
