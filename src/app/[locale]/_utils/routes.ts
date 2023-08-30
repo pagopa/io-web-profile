@@ -19,6 +19,7 @@ export const ROUTES = {
   LOGOUT_NO_SESSION_L2: '/nessun-profilo',
   ERROR: '/accedi/errore',
   EXPIRED_MAGIC_LINK: '/expiredMagicLink',
+  NOT_FOUND_PAGE: '/404',
 };
 
 // Get an array of values from the ROUTES object
@@ -29,6 +30,7 @@ export const PUBBLIC_ROUTES = [
   ROUTES.LOGOUT_INIT,
   ROUTES.ERROR,
   ROUTES.EXPIRED_MAGIC_LINK,
+  ROUTES.NOT_FOUND_PAGE,
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
