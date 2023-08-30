@@ -93,14 +93,14 @@ export const extractResponse = async <R>(
  * Retries a fetch request in case of timeout or response with a specific status code.
  * @param maxRetries ( Default ENV API_MAX_RETRY ) - Maximum number of retry attempts for the request.
  * @param statusCodeRetry ( Default 500 ) - HTTP status code that should trigger the retry.
- * @param backOff ( Default 3000 ) - Waiting interval between retry attempts in milliseconds, this parameter represents the waiting time between each attempt with exponential growth.
+ * @param backoffBaseInterval ( Default 500 ) - Waiting interval between retry attempts in milliseconds, this parameter represents the waiting time between each attempt with exponential growth.
  * @returns A function that performs the fetch request with retries.
  */
 
 export function retryingFetch(
   maxRetries: number = API_MAX_RETRY,
   statusCodeRetry: number = 500,
-  backoffBaseInterval: Millisecond = 3000 as Millisecond
+  backoffBaseInterval: Millisecond = 500 as Millisecond
 ): (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response> {
   // a fetch that can be aborted and that gets cancelled after fetchTimeoutMs
   const abortableFetch = AbortableFetch(agent.getHttpFetch(process.env));
@@ -113,7 +113,7 @@ export function retryingFetch(
   // const exponentialBackoff = calculateExponentialBackoffInterval();
   const retryLogic = withRetries<Error, Response>(
     maxRetries,
-    calculateExponentialBackoffInterval(backOff)
+    calculateExponentialBackoffInterval(backoffBaseInterval)
   );
   const retryWithError = retryLogicForResponseError(
     (_: Response) => _.status === statusCodeRetry,
