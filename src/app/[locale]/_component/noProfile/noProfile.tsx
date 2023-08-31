@@ -4,12 +4,12 @@ import AppleIcon from '@mui/icons-material/Apple';
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { Introduction } from '../../_component/introduction/introduction';
-import { storageUserOps } from '../../_utils/storage';
 import { commonBackground } from '../../_utils/styles';
 import useLocalePush from '../../_hooks/useLocalePush';
+import { storageUserOps } from '../../_utils/storage';
 import PlayStoreIcon from '@/app/[locale]/_icons/playstore';
 
-const L2NoProfile = (): React.ReactElement => {
+export const NoProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
@@ -44,5 +44,3 @@ const L2NoProfile = (): React.ReactElement => {
     </Grid>
   );
 };
-
-export default L2NoProfile;
