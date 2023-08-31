@@ -66,7 +66,9 @@ const ProfileBlock = (): React.ReactElement => {
       <Typography variant="h6" my={3}>
         {t('common.howrestoreprofile')}
       </Typography>
-      <Typography>{t.rich('common.unlockioaccess', unlockioaccessRich)}</Typography>
+      <Typography variant="subtitle2" fontSize={18}>
+        {t.rich('common.unlockioaccess', unlockioaccessRich)}
+      </Typography>
       <Button onClick={() => pushWithLocale(ROUTES.PROFILE)} variant="outlined" size="medium">
         {t('common.backtoprofile')}
       </Button>
