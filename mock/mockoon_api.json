@@ -599,8 +599,8 @@
         {
           "uuid": "f7cb97e2-5ddb-4317-afbb-e81ce06bb27d",
           "body": "{\n  \"email\": \"foobar@example.com\"\n}",
-          "latency": 6000,
-          "statusCode": 204,
+          "latency": 0,
+          "statusCode": 200,
           "label": "Success",
           "headers": [
             {
