@@ -1,10 +1,42 @@
 'use client';
 import { HeaderAccount, HeaderProduct, LogoIOApp } from '@pagopa/mui-italia';
 import React from 'react';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import useLogin from '../../_hooks/useLogin';
+import useLocalePush from '../../_hooks/useLocalePush';
+import { ROUTES } from '../../_utils/routes';
 
 const Header = (): React.ReactElement => {
-  const { userLogged, isLoggedIn } = useLogin();
+  const { userLogged, isLoggedIn, logOut } = useLogin();
+  const pushWithLocale = useLocalePush();
+  const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
+
+  const userMenuActionsBasic = [
+    {
+      id: 'logout',
+      label: 'Esci dal portale',
+      onClick: () => {
+        logOut();
+      },
+      icon: <ExitToAppIcon fontSize="small" color="inherit" />,
+    },
+  ];
+
+  const userMenuActions =
+    isLoggedIn && userLogged?.spidLevel !== JWT_SPID_LEVEL_L1
+      ? [
+          {
+            id: 'profile',
+            label: 'Vai al profilo',
+            onClick: () => {
+              pushWithLocale(ROUTES.PROFILE);
+            },
+            icon: <ManageAccountsIcon fontSize="small" color="inherit" />,
+          },
+          ...userMenuActionsBasic,
+        ]
+      : userMenuActionsBasic;
 
   return (
     <>
@@ -36,6 +68,7 @@ const Header = (): React.ReactElement => {
         }}
         enableLogin={isLoggedIn}
         enableAssistanceButton={true}
+        userActions={userMenuActions}
       />
       <HeaderProduct
         productsList={[

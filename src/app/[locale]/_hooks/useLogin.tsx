@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { User } from '../_model/User';
 import { storageTokenOps, storageUserOps } from '../_utils/storage';
 import { isBrowser } from '../_utils/common';
+import { ROUTES } from '../_utils/routes';
+import useLocalePush from './useLocalePush';
 
 type LoginData = {
   isLoggedIn: boolean;
@@ -13,22 +15,24 @@ type LoginData = {
 const useLogin = (): LoginData => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userLogged, setUserLogged] = useState<User | undefined>(undefined);
-  const cookieTokenRead = isBrowser() ? storageTokenOps.read() : null;
+  const storageTokenRead = isBrowser() ? storageTokenOps.read() : null;
+  const pushWithLocale = useLocalePush();
 
   useEffect(() => {
-    if (cookieTokenRead) {
+    if (storageTokenRead) {
       setIsLoggedIn(true);
       setUserLogged(storageUserOps.read());
     } else {
       setIsLoggedIn(false);
       setUserLogged(undefined);
     }
-  }, [cookieTokenRead]);
+  }, [storageTokenRead]);
 
   const logOut = () => {
     setIsLoggedIn(false);
     setUserLogged(undefined);
     sessionStorage.clear();
+    pushWithLocale(ROUTES.LOGIN);
   };
 
   return {
