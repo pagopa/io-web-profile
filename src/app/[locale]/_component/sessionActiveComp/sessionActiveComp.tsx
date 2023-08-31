@@ -16,7 +16,7 @@ type SessionProps = {
   showArrowBackBtn: boolean;
 };
 
-const SessionExistingComp = ({ title, showArrowBackBtn }: SessionProps): React.ReactElement => {
+const SessionActiveComp = ({ title, showArrowBackBtn }: SessionProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
 
@@ -106,4 +106,4 @@ const SessionExistingComp = ({ title, showArrowBackBtn }: SessionProps): React.R
   );
 };
 
-export default SessionExistingComp;
+export default SessionActiveComp;

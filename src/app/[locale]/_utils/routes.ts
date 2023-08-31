@@ -4,7 +4,6 @@ export const ROUTES = {
   LOGOUT_INIT: `/esci`,
   SESSION: `/esci/sessione-attiva`,
   THANK_YOU: '/esci/operazione-completata',
-  LOGOUT_NO_SESSION_L1: '/esci/nessuna-sessione-attiva',
   LOGOUT_KO: '/esci/errore',
   LOGOUT_CONFIRM: '/esci/conferma',
   PROFILE: `/`,
