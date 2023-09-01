@@ -16,7 +16,6 @@ export const ROUTES = {
   RESTORE_THANK_YOU: `/ripristino-accesso/operazione-completata`,
   PROFILE_BLOCK_SUCCESS: `/blocco-accesso/operazione-completata`,
   KO: '/ko',
-  LOGOUT_NO_SESSION_L2: '/nessun-profilo',
   ERROR: '/accedi/errore',
   EXPIRED_MAGIC_LINK: '/expiredMagicLink',
   NOT_FOUND_PAGE: '/404',
