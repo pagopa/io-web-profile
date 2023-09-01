@@ -40,7 +40,7 @@ const SessionActiveComp = ({
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={title}
-            summary={`Al momento hai una sessione attiva sull’app IO, valida fino al ${expirationDate.toLocaleDateString()} Se hai perso il dispositivo, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.`}
+            summary={`Al momento hai una sessione attiva sull’app IO, valida fino al ${expirationDate.toLocaleDateString()}. Se hai perso il dispositivo, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.`}
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>
