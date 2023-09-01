@@ -13,9 +13,14 @@ import { WebProfileApi } from '@/api/webProfileApiClient';
 type SessionProps = {
   title: string;
   showArrowBackBtn: boolean;
+  expirationDate: Date;
 };
 
-const SessionActiveComp = ({ title, showArrowBackBtn }: SessionProps): React.ReactElement => {
+const SessionActiveComp = ({
+  title,
+  showArrowBackBtn,
+  expirationDate,
+}: SessionProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
 
@@ -35,16 +40,7 @@ const SessionActiveComp = ({ title, showArrowBackBtn }: SessionProps): React.Rea
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={title}
-            summary={
-              <>
-                <span>
-                  {t.rich('lplogoutpostlogin.activesession', {
-                    deviceModel: 'iPhone 12 Pro',
-                    strong: (chunks) => <strong>{chunks}</strong>,
-                  })}
-                </span>
-              </>
-            }
+            summary={`Al momento hai una sessione attiva sull’app IO, valida fino al ${expirationDate.toLocaleDateString()} Se hai perso il dispositivo, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.`}
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>

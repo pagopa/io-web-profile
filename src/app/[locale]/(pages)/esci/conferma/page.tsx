@@ -33,6 +33,7 @@ const LogoutConfirm = (): React.ReactElement => {
             isL1 ? t('common.hello', { nome: userFromStorage?.name }) : t('profilelogout.logout')
           }
           showArrowBackBtn={isL1 ? false : true}
+          expirationDate={sessionData.session_info?.expiration_date}
         />
       );
     }
