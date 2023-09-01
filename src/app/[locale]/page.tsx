@@ -17,7 +17,7 @@ import { SessionState } from '@/api/generated/webProfile/SessionState';
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
-  const [profileIsAvailable, setProfileIsAvailable] = useState<boolean>(false);
+  const [isProfileAvailable, setIsProfileAvailable] = useState<boolean>(false);
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
   const userFromStorage = storageUserOps.read();
