@@ -27,9 +27,9 @@ const Profile = () => {
       .then((res) => {
         setProfileData(res);
         if (res === 404) {
-          setProfileIsAvailable(false);
+          setIsProfileAvailable(false);
         } else {
-          setProfileIsAvailable(true);
+          setIsProfileAvailable(true);
         }
       })
       .catch((err) => {
@@ -38,7 +38,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    if (profileIsAvailable) {
+    if (isProfileAvailable) {
       WebProfileApi.getUserSessionState()
         .then((res) => {
           setSessionData(res);
@@ -47,11 +47,11 @@ const Profile = () => {
           console.log(err);
         });
     }
-  }, [profileIsAvailable]);
+  }, [isProfileAvailable]);
 
   return (
     <>
-      {profileIsAvailable === false ? (
+      {!isProfileAvailable ? (
         <NoProfile />
       ) : (
         <Grid sx={commonBackground}>
