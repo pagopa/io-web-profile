@@ -2,7 +2,6 @@ export const ROUTES = {
   LOGIN: `/accedi`,
   LOGIN_L3: `/ripristino-accesso/accedi-livello-3`,
   LOGOUT_INIT: `/esci`,
-  SESSION: `/esci/sessione-attiva`,
   THANK_YOU: '/esci/operazione-completata',
   LOGOUT_KO: '/esci/errore',
   LOGOUT_CONFIRM: '/esci/conferma',

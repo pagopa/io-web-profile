@@ -43,7 +43,7 @@ const Access = (): React.ReactElement => {
       storageUserOps.write(userFromToken);
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
-          pushWithLocale(ROUTES.SESSION);
+          pushWithLocale(ROUTES.LOGOUT_CONFIRM);
           break;
         case L2_JWT_LEVEL.value:
           pushWithLocale(ROUTES.PROFILE);
