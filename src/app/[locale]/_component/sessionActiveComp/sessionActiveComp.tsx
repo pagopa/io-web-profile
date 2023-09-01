@@ -1,14 +1,13 @@
 'use client';
 
-import { Box, Button, Card, Grid, Typography } from '@mui/material';
-import { IllusSms } from '@pagopa/mui-italia';
+import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLight, commonBackgroundLightWithBack } from '../../_utils/styles';
 import { FAQ } from '../accordion/faqDefault';
-import { Introduction } from '../introduction/introduction';
 import { BackButton } from '../backButton/backButton';
+import { Introduction } from '../introduction/introduction';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 type SessionProps = {
@@ -49,7 +48,7 @@ const SessionActiveComp = ({ title, showArrowBackBtn }: SessionProps): React.Rea
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>
-
+        {/*
         <Grid item xs={12} sm={6} md={4} justifySelf={'center'}>
           <Card
             sx={{
@@ -94,7 +93,7 @@ const SessionActiveComp = ({ title, showArrowBackBtn }: SessionProps): React.Rea
             </Box>
           </Card>
         </Grid>
-
+        */}
         <Grid item xs={12} mt={4}>
           <Button sx={{ mr: 2 }} variant="contained" onClick={handleLogout}>
             {t('common.logout')}
