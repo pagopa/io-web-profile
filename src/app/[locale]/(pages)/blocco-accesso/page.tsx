@@ -38,8 +38,8 @@ const ProfileBlock = (): React.ReactElement => {
       });
   };
 
-  const renderSummary = (isIDPKnown: boolean) => {
-    if (isIDPKnown) {
+  const renderSummary = (isIDPKnown?: string) => {
+    if (isIDPKnown === 'true') {
       return <>{t('lockaccess.accessidentity')}</>;
     }
     return <>{t('lockaccess.accessidentitycompromise')}</>;
@@ -59,7 +59,7 @@ const ProfileBlock = (): React.ReactElement => {
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
-          {isIDPKnown && <IdpListOnApp />}
+          {isIDPKnown === 'true' && <IdpListOnApp />}
           <Typography mb={5}>
             {t.rich('common.lockaccessinfo', explanationIdentetyLevelRich)}
           </Typography>

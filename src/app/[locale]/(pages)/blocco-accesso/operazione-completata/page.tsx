@@ -61,7 +61,7 @@ const ProfileBlock = (): React.ReactElement => {
       />
       <CopyCodeCard code={addSpacesEvery3Chars(unlockCode)} />
 
-      {isIDPKnown && <IdpListOnApp />}
+      {isIDPKnown === 'true' && <IdpListOnApp />}
 
       <Typography variant="h6" my={3}>
         {t('common.howrestoreprofile')}

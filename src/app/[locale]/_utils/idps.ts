@@ -85,4 +85,5 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
 
 export { IDPS };
 
-export const isIDPKnown = true;
+// TODO remove this temporary flag isIDPKnown after getSessionsList API is ready in a future version
+export const isIDPKnown = process.env.NEXT_PUBLIC_FEATURE_FLAG;
