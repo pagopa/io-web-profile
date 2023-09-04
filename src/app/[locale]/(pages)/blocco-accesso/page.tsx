@@ -11,7 +11,7 @@ import { Introduction } from '../../_component/introduction/introduction';
 import { Flows } from '../../_enums/Flows';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
-import { isIDPKnown } from '../../_utils/idps';
+import { isIdpKnown } from '../../_utils/idps';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { WebProfileApi } from '@/api/webProfileApiClient';
@@ -38,8 +38,8 @@ const ProfileBlock = (): React.ReactElement => {
       });
   };
 
-  const renderSummary = (isIDPKnown?: string) => {
-    if (isIDPKnown === 'true') {
+  const renderSummary = (isIDPKnown: boolean) => {
+    if (isIDPKnown) {
       return <>{t('lockaccess.accessidentity')}</>;
     }
     return <>{t('lockaccess.accessidentitycompromise')}</>;
@@ -55,11 +55,11 @@ const ProfileBlock = (): React.ReactElement => {
         <BackButton />
         <Introduction
           title={t('common.lockioaccess')}
-          summary={renderSummary(isIDPKnown)}
+          summary={renderSummary(isIdpKnown())}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
-          {isIDPKnown === 'true' && <IdpListOnApp />}
+          {isIdpKnown() && <IdpListOnApp />}
           <Typography mb={5}>
             {t.rich('common.lockaccessinfo', explanationIdentetyLevelRich)}
           </Typography>
