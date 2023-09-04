@@ -1,22 +1,26 @@
 'use client';
 
-import { Box, Button, Card, Grid, Typography } from '@mui/material';
-import { IllusSms } from '@pagopa/mui-italia';
+import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLight, commonBackgroundLightWithBack } from '../../_utils/styles';
 import { FAQ } from '../accordion/faqDefault';
-import { Introduction } from '../introduction/introduction';
 import { BackButton } from '../backButton/backButton';
+import { Introduction } from '../introduction/introduction';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 type SessionProps = {
   title: string;
   showArrowBackBtn: boolean;
+  expirationDate: Date;
 };
 
-const SessionExistingComp = ({ title, showArrowBackBtn }: SessionProps): React.ReactElement => {
+const SessionActiveComp = ({
+  title,
+  showArrowBackBtn,
+  expirationDate,
+}: SessionProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
 
@@ -36,20 +40,12 @@ const SessionExistingComp = ({ title, showArrowBackBtn }: SessionProps): React.R
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={title}
-            summary={
-              <>
-                <span>
-                  {t.rich('lplogoutpostlogin.activesession', {
-                    deviceModel: 'iPhone 12 Pro',
-                    strong: (chunks) => <strong>{chunks}</strong>,
-                  })}
-                </span>
-              </>
-            }
+            // FIXME: https://pagopa.atlassian.net/browse/IOPID-717
+            summary={`Al momento hai una sessione attiva sull’app IO, valida fino al ${expirationDate.toLocaleDateString()}. Se hai perso il dispositivo, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.`}
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>
-
+        {/* FIXME: https://pagopa.atlassian.net/browse/IOPID-710
         <Grid item xs={12} sm={6} md={4} justifySelf={'center'}>
           <Card
             sx={{
@@ -94,7 +90,7 @@ const SessionExistingComp = ({ title, showArrowBackBtn }: SessionProps): React.R
             </Box>
           </Card>
         </Grid>
-
+        */}
         <Grid item xs={12} mt={4}>
           <Button sx={{ mr: 2 }} variant="contained" onClick={handleLogout}>
             {t('common.logout')}
@@ -106,4 +102,4 @@ const SessionExistingComp = ({ title, showArrowBackBtn }: SessionProps): React.R
   );
 };
 
-export default SessionExistingComp;
+export default SessionActiveComp;
