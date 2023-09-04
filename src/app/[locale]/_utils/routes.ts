@@ -17,6 +17,7 @@ export const ROUTES = {
   ERROR: '/accedi/errore',
   EXPIRED_MAGIC_LINK: '/expiredMagicLink',
   NOT_FOUND_PAGE: '/404',
+  INTERNAL_ERROR: '/500',
 };
 
 // Get an array of values from the ROUTES object
@@ -28,6 +29,7 @@ export const PUBBLIC_ROUTES = [
   ROUTES.ERROR,
   ROUTES.EXPIRED_MAGIC_LINK,
   ROUTES.NOT_FOUND_PAGE,
+  ROUTES.INTERNAL_ERROR,
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
