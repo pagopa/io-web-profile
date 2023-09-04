@@ -9,6 +9,6 @@ jest.mock('next-intl/client', () => ({
     },
   }));
 
-test('render hook', () => {
+test('should call router.back function when usePushBack hook is invoked', () => {
   renderHook(() => usePushBack());
 });
