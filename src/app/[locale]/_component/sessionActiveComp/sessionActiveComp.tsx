@@ -44,7 +44,7 @@ const SessionActiveComp = ({
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>
-        {/*
+        {/* FIXME: https://pagopa.atlassian.net/browse/IOPID-710
         <Grid item xs={12} sm={6} md={4} justifySelf={'center'}>
           <Card
             sx={{
