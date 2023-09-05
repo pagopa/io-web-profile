@@ -1,6 +1,6 @@
 'use client';
 import { HeaderAccount, HeaderProduct, LogoIOApp } from '@pagopa/mui-italia';
-import React from 'react';
+import React, { useMemo } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import useLogin from '../../_hooks/useLogin';
@@ -14,7 +14,7 @@ const Header = (): React.ReactElement => {
 
   const userMenuActionsBasic = [
     {
-      id: 'logout',
+      id: '2',
       label: 'Esci dal portale',
       onClick: () => {
         logOut();
@@ -23,20 +23,27 @@ const Header = (): React.ReactElement => {
     },
   ];
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const userMenuActions =
     isLoggedIn && userLogged?.spidLevel !== JWT_SPID_LEVEL_L1
       ? [
+          ...userMenuActionsBasic,
           {
-            id: 'profile',
+            id: '1',
             label: 'Vai al profilo',
             onClick: () => {
               pushWithLocale(ROUTES.PROFILE);
             },
             icon: <ManageAccountsIcon fontSize="small" color="inherit" />,
           },
-          ...userMenuActionsBasic,
         ]
       : userMenuActionsBasic;
+
+  const sortedUserMenuActions = useMemo(
+    // eslint-disable-next-line functional/immutable-data
+    () => userMenuActions.sort((a, b) => Number(a.id) - Number(b.id)),
+    [userMenuActions]
+  );
 
   return (
     <>
@@ -68,7 +75,8 @@ const Header = (): React.ReactElement => {
         }}
         enableLogin={isLoggedIn}
         enableAssistanceButton={true}
-        userActions={userMenuActions}
+        // eslint-disable-next-line functional/immutable-data
+        userActions={sortedUserMenuActions}
       />
       <HeaderProduct
         productsList={[
