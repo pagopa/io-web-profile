@@ -8,6 +8,7 @@ import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import Timeout from '../../_icons/timeout';
 import { COMMON_PADDING_HERO } from '../../_utils/styles';
+import { goCIE } from '../../_utils/idps';
 
 const ExpiredMagicLink = () => {
   const t = useTranslations('ioesco');
@@ -83,7 +84,12 @@ const ExpiredMagicLink = () => {
               display={'flex'}
               justifyContent={{ xs: 'center', sm: 'left' }}
             >
-              <Button variant="contained" fullWidth startIcon={<CieIcon />}>
+              <Button
+                variant="contained"
+                fullWidth
+                startIcon={<CieIcon />}
+                onClick={() => goCIE(spidLevel.type)}
+              >
                 {t('common.logincie')}
               </Button>
             </Grid>
