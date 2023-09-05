@@ -13,6 +13,7 @@ import { isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageTokenOps, storageUserOps } from '../../_utils/storage';
+import { goCIE } from '../../_utils/idps';
 
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -130,7 +131,7 @@ const Access = (): React.ReactElement => {
                     }}
                     variant="contained"
                     startIcon={<CieIcon />}
-                    // onClick={() => goCIE()}
+                    onClick={() => goCIE(spidLevel.type)}
                   >
                     {t('common.logincie')}
                   </Button>

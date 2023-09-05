@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
+import { goCIE } from '@/app/[locale]/_utils/idps';
 
 const Access = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -89,7 +90,7 @@ const Access = (): React.ReactElement => {
                     }}
                     variant="contained"
                     startIcon={<CieIcon />}
-                    // onClick={() => goCIE()}
+                    onClick={() => goCIE(spidLevel.type)}
                   >
                     {t('common.logincie')}
                   </Button>
