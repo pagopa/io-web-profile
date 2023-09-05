@@ -38,8 +38,7 @@ const Header = (): React.ReactElement => {
             },
           ]
         : userMenuActionsBasic,
-    [isLoggedIn, userLogged]
-  );
+    [JWT_SPID_LEVEL_L1, isLoggedIn, pushWithLocale, userLogged?.spidLevel, userMenuActionsBasic]
 
   const sortedUserMenuActions = useMemo(
     () => userMenuActions.slice().sort((a, b) => Number(a.id) - Number(b.id)),
