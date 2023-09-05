@@ -23,25 +23,26 @@ const Header = (): React.ReactElement => {
     },
   ];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const userMenuActions =
-    isLoggedIn && userLogged?.spidLevel !== JWT_SPID_LEVEL_L1
-      ? [
-          ...userMenuActionsBasic,
-          {
-            id: '1',
-            label: 'Vai al profilo',
-            onClick: () => {
-              pushWithLocale(ROUTES.PROFILE);
+  const userMenuActions = useMemo(
+    () =>
+      isLoggedIn && userLogged?.spidLevel !== JWT_SPID_LEVEL_L1
+        ? [
+            ...userMenuActionsBasic,
+            {
+              id: '1',
+              label: 'Vai al profilo',
+              onClick: () => {
+                pushWithLocale(ROUTES.PROFILE);
+              },
+              icon: <ManageAccountsIcon fontSize="small" color="inherit" />,
             },
-            icon: <ManageAccountsIcon fontSize="small" color="inherit" />,
-          },
-        ]
-      : userMenuActionsBasic;
+          ]
+        : userMenuActionsBasic,
+    [isLoggedIn, userLogged]
+  );
 
   const sortedUserMenuActions = useMemo(
-    // eslint-disable-next-line functional/immutable-data
-    () => userMenuActions.sort((a, b) => Number(a.id) - Number(b.id)),
+    () => userMenuActions.slice().sort((a, b) => Number(a.id) - Number(b.id)),
     [userMenuActions]
   );
 
