@@ -12,6 +12,7 @@ const Header = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const userMenuActionsBasic = [
     {
       id: '2',
@@ -39,6 +40,7 @@ const Header = (): React.ReactElement => {
           ]
         : userMenuActionsBasic,
     [JWT_SPID_LEVEL_L1, isLoggedIn, pushWithLocale, userLogged?.spidLevel, userMenuActionsBasic]
+  );
 
   const sortedUserMenuActions = useMemo(
     () => userMenuActions.slice().sort((a, b) => Number(a.id) - Number(b.id)),
