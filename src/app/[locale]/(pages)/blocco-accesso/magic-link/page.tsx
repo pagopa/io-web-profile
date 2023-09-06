@@ -1,8 +1,8 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { COMMON_PADDING_HERO } from '../../_utils/styles';
-import HourglassIcon from '../../_icons/hourglass';
+import { COMMON_PADDING_HERO } from '../../../_utils/styles';
+import HourglassIcon from '../../../_icons/hourglass';
 
 const ExpiredMagicLink = () => {
   const t = useTranslations('ioesco');

@@ -15,8 +15,8 @@ export const ROUTES = {
   PROFILE_BLOCK_SUCCESS: `/blocco-accesso/operazione-completata`,
   KO: '/ko',
   ERROR: '/accedi/errore',
-  EXPIRED_MAGIC_LINK: '/link-scaduto',
-  MAGIC_LINK: '/magic-link',
+  EXPIRED_MAGIC_LINK: '/blocco-accesso/link-scaduto',
+  MAGIC_LINK: '/blocco-accesso/magic-link',
   NOT_FOUND_PAGE: '/404',
   INTERNAL_ERROR: '/500',
 };
