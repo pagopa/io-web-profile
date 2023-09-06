@@ -37,9 +37,23 @@ This will help align the necessary settings for successful integration.
 
 Note: The port used here is the same one used to expose the web app.
 
+### BackEnd API Mock
+
+In order to simulate the backend, we can use Mockoon as a service to mock the backend. Install Mockoon (or start the portable version) downloadable from the website: https://mockoon.com/download/
+
+Once it's launched, click on:
+
+File -> Open Environment
+
+and select the api mock file (mockoon_api.json) located in /mock folder.
+
+Once the environment is loaded, press the "play icon" to start the Mockoon server.
+
 # Structure
 
 io-web-profile/
+- mock/
+- openApi/
 - src/
     -  dictionaries/
     -  app/[locale]/
@@ -52,6 +66,9 @@ io-web-profile/
         - _redux/
         - _utils/ 
 
+``mock/``: This folder contains files related to mocking or simulating different parts of the application.
+
+``openApi/``: This folder contains files related to OpenAPI specification.
 
 ``src/``: This is the root folder of the source code, where all the application code resides.
 

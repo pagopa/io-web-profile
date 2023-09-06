@@ -2,9 +2,7 @@ export const ROUTES = {
   LOGIN: `/accedi`,
   LOGIN_L3: `/ripristino-accesso/accedi-livello-3`,
   LOGOUT_INIT: `/esci`,
-  SESSION: `/esci/sessione-attiva`,
   THANK_YOU: '/esci/operazione-completata',
-  LOGOUT_NO_SESSION_L1: '/esci/nessuna-sessione-attiva',
   LOGOUT_KO: '/esci/errore',
   LOGOUT_CONFIRM: '/esci/conferma',
   PROFILE: `/`,
@@ -16,9 +14,11 @@ export const ROUTES = {
   RESTORE_THANK_YOU: `/ripristino-accesso/operazione-completata`,
   PROFILE_BLOCK_SUCCESS: `/blocco-accesso/operazione-completata`,
   KO: '/ko',
-  LOGOUT_NO_SESSION_L2: '/nessun-profilo',
   ERROR: '/accedi/errore',
-  EXPIRED_MAGIC_LINK: '/expiredMagicLink',
+  EXPIRED_MAGIC_LINK: '/blocco-accesso/link-scaduto',
+  MAGIC_LINK: '/blocco-accesso/magic-link',
+  NOT_FOUND_PAGE: '/404',
+  INTERNAL_ERROR: '/500',
 };
 
 // Get an array of values from the ROUTES object
@@ -29,6 +29,9 @@ export const PUBBLIC_ROUTES = [
   ROUTES.LOGOUT_INIT,
   ROUTES.ERROR,
   ROUTES.EXPIRED_MAGIC_LINK,
+  ROUTES.MAGIC_LINK,
+  ROUTES.NOT_FOUND_PAGE,
+  ROUTES.INTERNAL_ERROR,
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];

@@ -1,10 +1,12 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import useLocalePush from '../../_hooks/useLocalePush';
+import usePushBack from '../../_hooks/usePushBack';
 
 type CustomMaterialButtonProps = {
   href?: string;
   text: string;
   variant: 'outlined' | 'contained' | 'text' | 'naked';
+  goBack?: boolean;
 };
 
 type IntroductionProps = {
@@ -12,7 +14,7 @@ type IntroductionProps = {
   title: string;
   summary: string | JSX.Element;
   firstButton: CustomMaterialButtonProps;
-  secondButton: CustomMaterialButtonProps;
+  secondButton?: CustomMaterialButtonProps;
 };
 
 export function FeedbackMessage({
@@ -23,8 +25,10 @@ export function FeedbackMessage({
   secondButton,
 }: IntroductionProps) {
   const pushWithLocale = useLocalePush();
+  const pushBack = usePushBack();
+
   return (
-    <Box sx={{ maxWidth: 448, margin: '0 auto' }}>
+    <Box sx={{ maxWidth: 500, margin: '0 auto' }}>
       <Grid container>
         <Grid item xs={12} textAlign={'center'} pb={2}>
           {topIcon}
@@ -61,21 +65,26 @@ export function FeedbackMessage({
         <Grid item xs={12} textAlign={'center'}>
           <Grid display={'flex'} justifyContent="center">
             <Button
-              onClick={() => pushWithLocale(firstButton.href || '/')}
+              onClick={
+                firstButton?.goBack
+                  ? () => pushBack()
+                  : () => pushWithLocale(firstButton.href || '/')
+              }
               variant={firstButton.variant}
-              sx={{
-                marginRight: 2,
-              }}
             >
               {firstButton.text}
             </Button>
-
-            <Button
-              onClick={() => pushWithLocale(secondButton.href || '')}
-              variant={secondButton.variant}
-            >
-              {secondButton.text}
-            </Button>
+            {secondButton && (
+              <Button
+                sx={{
+                  marginLeft: 2,
+                }}
+                onClick={() => pushWithLocale(secondButton.href || '')}
+                variant={secondButton.variant}
+              >
+                {secondButton.text}
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Grid>

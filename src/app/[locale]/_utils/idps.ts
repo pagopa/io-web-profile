@@ -85,4 +85,11 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
 
 export { IDPS };
 
-export const isIDPKnown = true;
+// TODO remove this temporary flag isIdpKnownafter getSessionsList API is ready in a future version
+export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true';
+
+export const goCIE = (spidLevel: string) => {
+  window.location.assign(
+    `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${process.env.NEXT_PUBLIC_SPID_CIE_ENTITY_ID}&authLevel=Spid${spidLevel}`
+  );
+};

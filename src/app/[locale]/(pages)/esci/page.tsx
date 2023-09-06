@@ -10,6 +10,7 @@ import { commonBackgroundDark } from '../../_utils/styles';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
+import { goCIE } from '../../_utils/idps';
 
 const Init = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -63,6 +64,7 @@ const Init = (): React.ReactElement => {
               }}
               startIcon={<SpidIcon />}
               variant="outlined"
+              onClick={() => goCIE(spidLevel.type)}
             >
               {t('common.logincie')}
             </Button>
