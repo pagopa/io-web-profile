@@ -4,11 +4,11 @@ import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { SpidLevels } from '../../_component/selectIdp/idpList';
-import { SelectIdp } from '../../_component/selectIdp/selectIdp';
-import Timeout from '../../_icons/timeout';
-import { COMMON_PADDING_HERO } from '../../_utils/styles';
-import { goCIE } from '../../_utils/idps';
+import { SpidLevels } from '../../../_component/selectIdp/idpList';
+import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
+import Timeout from '../../../_icons/timeout';
+import { COMMON_PADDING_HERO } from '../../../_utils/styles';
+import { goCIE } from '../../../_utils/idps';
 
 const ExpiredMagicLink = () => {
   const t = useTranslations('ioesco');
