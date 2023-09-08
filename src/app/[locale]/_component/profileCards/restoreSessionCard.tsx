@@ -7,10 +7,13 @@ import useLocalePush from '../../_hooks/useLocalePush';
 import Firework from '../../_icons/firework';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
+import { storageUserOps } from '../../_utils/storage';
 
 export const RestoreSessionCard = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
+  const userFromStorage = storageUserOps.read();
+  const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
 
   return (
     <Grid
@@ -38,18 +41,22 @@ export const RestoreSessionCard = (): React.ReactElement => {
             >
               {t('common.restoreioaccess')}
             </ButtonNaked>
-            <Divider />
-            <Typography variant="body2" py={2}>
-              {t('common.norestorecode')}
-            </Typography>
-            <ButtonNaked
-              onClick={() => pushWithLocale(ROUTES.LOGIN_L3)}
-              color="primary"
-              size="medium"
-              sx={{ textDecorationLine: 'underline' }}
-            >
-              {t('common.findwhatdo')}
-            </ButtonNaked>
+            {!isL3 ? (
+              <>
+                <Divider />
+                <Typography variant="body2" py={2}>
+                  {t('common.norestorecode')}
+                </Typography>
+                <ButtonNaked
+                  onClick={() => pushWithLocale(ROUTES.LOGIN_L3)}
+                  color="primary"
+                  size="medium"
+                  sx={{ textDecorationLine: 'underline' }}
+                >
+                  {t('common.findwhatdo')}
+                </ButtonNaked>
+              </>
+            ) : null}
           </CardContent>
         </Card>
       </Grid>

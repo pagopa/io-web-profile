@@ -1,3 +1,4 @@
+import { isIdpKnown } from '../../_utils/idps';
 import { BackButton } from '../backButton/backButton';
 import { IdpListOnApp } from '../idpListOnApp/idpListOnApp';
 import { Introduction } from '../introduction/introduction';
@@ -21,7 +22,7 @@ const CommonLayoutRestore = ({
     <BackButton />
     <Introduction title={title} summary={summary} summaryColumns={summaryColumns} />
 
-    <IdpListOnApp />
+    {isIdpKnown() && <IdpListOnApp />}
   </>
 );
 
