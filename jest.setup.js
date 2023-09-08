@@ -5,6 +5,7 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 import { useRouter } from 'next-intl/client';
+import * as storageUtils from './src/app/[locale]/_utils/storage';
 
 jest.mock('next-intl/client', () => ({
   useRouter: jest.fn(),
@@ -70,10 +71,15 @@ beforeAll(() => {
   jest.spyOn(window, 'localStorage', 'get').mockImplementation(() => localStorageMock);
   // Mock SessionStorage
   jest.spyOn(window, 'sessionStorage', 'get').mockImplementation(() => sessionStorageMock);
+
+  // Mock token for tests
+  const mockToken = 'testToken';
+    jest.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(mockToken);
 });
 
 afterEach(() => {
   // Clear All mocks before each test
+  jest.clearAllMocks();
   localStorageMock.clear();
   sessionStorageMock.clear();
 });

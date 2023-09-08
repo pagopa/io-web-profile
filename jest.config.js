@@ -14,7 +14,10 @@ const customJestConfig = {
 
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
   },
-  testEnvironment: 'jest-environment-jsdom'
+  testEnvironment: 'jest-environment-jsdom',
+  coveragePathIgnorePatterns: [
+    'src/api/generated/webProfile', // Ignore generated models from tests
+  ],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
