@@ -942,7 +942,7 @@
       "responses": [
         {
           "uuid": "be219bcd-778c-4bc2-842f-9f8f9fc04ec8",
-          "body": "{\n  \"jwt\": \"\"\n}",
+          "body": "{\n  \"jwt\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImtleS1pZC1mb3IteW91ci1qd3Qta2V5In0.eyJlbWFpbCI6ImNpdHRhZGluYW56YWRpZ2l0YWxlQHRlYW1kaWdpdGFsZS5nb3Zlcm5vLml0IiwiZmFtaWx5X25hbWUiOiJSb3NzaSIsImZpc2NhbF9udW1iZXIiOiJJU1BYTkIzMlI4Mlk3NjZEIiwibmFtZSI6IkNhcmxhIiwic3BpZF9sZXZlbCI6Imh0dHBzOi8vd3d3LnNwaWQuZ292Lml0L1NwaWRMMiIsImZyb21fYWEiOmZhbHNlLCJsZXZlbCI6IkwyIiwiaWF0IjoxNjk0NDM5NTYxLCJleHAiOjE2OTQ0NDMxNjEsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0IiwiaXNzIjoiU1BJRCIsImp0aSI6Il9lMGYzODUxNmQ0NzJmZjUwNmU0ZSJ9.AWbBCDBi0siGroOtdu5Oxy3Bt1MaAI4jc0Ty-rtmpgBR4pJzuimOfBdiAXtCF5Sw9zfHp4awnIeeOUACTpj1KxBkhaZnYdZwAbsv9tEGL20HSR0GTA7QRjXE8fR1qOz81yXpLDUG77slo1mGcx8xSTUqBHl3z4gH9QZqcRh5nvcFkB691unSJ4p1fO3fMTT_XWGEX5XbiOcWkh3nV8fB2BSG-MaaKi3_CQeSD6WrPi5aWfWcsoY9RnaEAhUTfeqUnZxRNm623dxhun6SQbVajQnhFLnGlWFYaPgSqah3TyTGEgBZbmb0k71ESjvQqXK3xfLvaRQdY8QAeuTiiKlUHA\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
