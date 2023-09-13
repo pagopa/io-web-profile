@@ -15,8 +15,8 @@ const mockSearchParams = {
 
 (useSearchParams as jest.Mock).mockReturnValue(mockSearchParams);
 
-describe('test suite for access error', () => {
-  test('should render "Generic error" when errorCode is null', async () => {
+describe('IdpListOnApp', () => {
+  test('should render IdpListOnApp component correctly', async () => {
     mockSearchParams.get.mockReturnValue(null);
     await renderWithProviders(<IdpListOnApp />);
     const errorSummary = screen.getByText(it.ioesco.common.youridentityonio);
