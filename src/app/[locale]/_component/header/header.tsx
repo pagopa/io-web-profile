@@ -3,11 +3,13 @@ import { HeaderAccount, HeaderProduct, LogoIOApp } from '@pagopa/mui-italia';
 import React, { useMemo } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 
 const Header = (): React.ReactElement => {
+  const t = useTranslations('ioesco');
   const { userLogged, isLoggedIn, logOut } = useLogin();
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
@@ -16,7 +18,7 @@ const Header = (): React.ReactElement => {
   const userMenuActionsBasic = [
     {
       id: '2',
-      label: 'Esci dal portale',
+      label: t('common.logoutprofile'),
       onClick: () => {
         logOut();
       },
@@ -31,7 +33,7 @@ const Header = (): React.ReactElement => {
             ...userMenuActionsBasic,
             {
               id: '1',
-              label: 'Vai al profilo',
+              label: t('common.profile'),
               onClick: () => {
                 pushWithLocale(ROUTES.PROFILE);
               },

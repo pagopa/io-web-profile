@@ -72,20 +72,13 @@ const ExpiredMagicLink = () => {
                 textAlign: 'center',
               }}
             >
-              {
-                // FIXME: https://pagopa.atlassian.net/browse/IOPID-717
-              }
-              Premi su continua e segui le istruzioni per bloccare <br /> l’accesso a IO con la tua
-              identità digitale.
+              {t('lockaccess.continuetolock')}
             </Typography>
           </Grid>
           <Grid item xs={12} textAlign={'center'}>
             <Grid display={'flex'} justifyContent="center">
               <Button variant={'contained'} onClick={() => handleContinue()}>
-                {
-                  // FIXME: https://pagopa.atlassian.net/browse/IOPID-717
-                  'Continua'
-                }
+                {t('common.continue')}
               </Button>
             </Grid>
           </Grid>
