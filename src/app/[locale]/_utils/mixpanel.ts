@@ -1,15 +1,12 @@
-import mixpanel, { Mixpanel } from 'mixpanel-browser';
+import mixpanel from 'mixpanel-browser';
 
-const ANALYTICS_ENABLE = true;
-const ANALYTICS_MOCK = false;
-
-const ANALYTICS_TOKEN = '';
-
-const ANALYTICS_API_HOST = '';
-const ANALYTICS_PERSISTENCE = '';
-const ANALYTICS_LOG_IP = true;
-const ANALYTICS_PROPERTY_BLACKLIST = [''];
-const ANALYTICS_DEBUG = true;
+const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
+const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK;
+const ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_ANALYTICS_TOKEN || '';
+const ANALYTICS_API_HOST = process.env.NEXT_PUBLIC_ANALYTICS_API_HOST;
+const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;
+const ANALYTICS_LOG_IP = process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP === 'true' ? true : false;
+const ANALYTICS_DEBUG = process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' ? true : false;
 
 /** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
@@ -24,15 +21,7 @@ export const initAnalytics = (): void => {
         api_host: ANALYTICS_API_HOST,
         persistence: ANALYTICS_PERSISTENCE as 'cookie' | 'localStorage',
         ip: ANALYTICS_LOG_IP,
-        property_blacklist: ANALYTICS_PROPERTY_BLACKLIST,
         debug: ANALYTICS_DEBUG,
-        loaded(mixpanel: Mixpanel) {
-          // this is useful to obtain a new distinct_id every session
-          // the distinct_id is the user identifier that mixpanel automatically assign
-          if (sessionStorage.getItem('user') === null) {
-            mixpanel.reset();
-          }
-        },
       });
     }
   }
