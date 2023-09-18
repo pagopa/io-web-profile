@@ -8,6 +8,10 @@ const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;
 const ANALYTICS_LOG_IP = process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP === 'true' ? true : false;
 const ANALYTICS_DEBUG = process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' ? true : false;
 
+export interface EventProperties {
+  [key: string]: unknown;
+}
+
 /** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
   if (ANALYTICS_ENABLE) {
@@ -34,7 +38,11 @@ export const initAnalytics = (): void => {
  * @property callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const trackEvent = (event_name: string, properties?: any, callback?: () => void): void => {
+export const trackEvent = (
+  event_name: string,
+  properties?: EventProperties,
+  callback?: () => void
+): void => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (ANALYTICS_ENABLE) {
     if (ANALYTICS_MOCK) {
@@ -55,8 +63,8 @@ export const trackEvent = (event_name: string, properties?: any, callback?: () =
 
 const trackEventThroughAnalyticTool = (
   event_name: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  properties?: any,
+  // eslint-disable-next-line
+  properties?: EventProperties,
   callback?: () => void
 ): void => {
   // eslint-disable-next-line functional/no-let

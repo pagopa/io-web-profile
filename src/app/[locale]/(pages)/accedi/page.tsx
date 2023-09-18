@@ -14,7 +14,7 @@ import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 import { goCIE } from '../../_utils/idps';
-import { initAnalytics, trackEvent } from '../../_utils/mixpanel';
+import { trackEvent } from '../../_utils/mixpanel';
 
 // eslint-disable-next-line max-lines-per-function
 const Access = (): React.ReactElement => {
@@ -42,7 +42,6 @@ const Access = (): React.ReactElement => {
 
   useEffect(() => {
     if (isBrowser()) {
-      initAnalytics();
       trackEvent('IO_LOGIN');
     }
   }, [isBrowser()]);
@@ -123,9 +122,7 @@ const Access = (): React.ReactElement => {
                       width: '100%',
                       height: '50px',
                     }}
-                    onClick={() => {
-                      setOpenDialog(true);
-                    }}
+                    onClick={() => setOpenDialog(true)}
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
@@ -142,9 +139,7 @@ const Access = (): React.ReactElement => {
                     }}
                     variant="contained"
                     startIcon={<CieIcon />}
-                    onClick={() => {
-                      goCIE(spidLevel.type);
-                    }}
+                    onClick={() => goCIE(spidLevel.type)}
                   >
                     {t('common.logincie')}
                   </Button>
