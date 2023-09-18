@@ -144,7 +144,7 @@ const Access = (): React.ReactElement => {
                   alignItems={'baseline'}
                   justifyContent={'center'}
                 >
-                  <Typography variant="body1">{t('common.nospidorcie')}</Typography>
+                  <Typography variant="body1">{t('lpaccess.nospidorcie')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
                     <Link href={'#'}>{t('common.more')}</Link>
                   </Typography>
