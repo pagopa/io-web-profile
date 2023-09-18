@@ -13,74 +13,74 @@ type FAQEntries = {
 };
 
 export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
-  const t = useTranslations('ioesco.commonfaq');
+  const t = useTranslations('ioesco');
   // #region entries
   const defaultEntries: FAQEntries[] = [
     {
-      summary: t('firstquestion'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.firstquestion'),
+      details: t('commonfaq.firstresponse'),
     },
     {
-      summary: t('secondquestion'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.secondquestion'),
+      details: t('commonfaq.secondresponse'),
     },
     {
-      summary: t('thirdquestion'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.thirdquestion'),
+      details: t('commonfaq.thirdresponse'),
     },
     {
-      summary: t('fourthquestion'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.fourthquestion'),
+      details: t('commonfaq.fourthresponse'),
     },
   ];
 
   const blockEntries: FAQEntries[] = [
     {
-      summary: t('meanlockio'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.utilitylockprofile'),
+      details: t('commonfaq.utilitylockprofileresponse'),
     },
     {
-      summary: t('utilitylockprofile'),
-      details: t('firstresponse'),
+      summary: t('common.lockioaccess'),
+      details: t('common.lockioaccessresponse'),
     },
     {
-      summary: t('lockaccessmessage'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.lockaccessmessage'),
+      details: t('commonfaq.lockaccessmessageresponse'),
     },
     {
-      summary: t('loginafterlock'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.loginafterlock'),
+      details: t('commonfaq.loginafterlockresponse'),
     },
     {
-      summary: t('securityidentity'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.securityidentity'),
+      details: t('commonfaq.securityidentityresponse'),
     },
     {
-      summary: t('unlockprofile'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.unlockprofile'),
+      details: t('commonfaq.unlockprofileresponse'),
     },
   ];
 
   const restoreEntries: FAQEntries[] = [
     {
-      summary: t('meanrestoreaccess'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.firstquestion'),
+      details: t('commonfaq.firstresponse'),
     },
     {
-      summary: t('whenrestore'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.whenrestore'),
+      details: t('commonfaq.whenrestoreresponse'),
     },
     {
-      summary: t('whatrestorecode'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.whatrestorecode'),
+      details: t('commonfaq.whatrestorecoderesponse'),
     },
     {
-      summary: t('whatdonocode'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.whatdonocode'),
+      details: t('commonfaq.whatdonocoderesponse'),
     },
     {
-      summary: t('canrestorefromio'),
-      details: t('firstresponse'),
+      summary: t('commonfaq.canrestorefromio'),
+      details: t('commonfaq.canrestorefromioresponse'),
     },
   ];
 
@@ -119,7 +119,7 @@ export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
               pb: 5,
             }}
           >
-            {t('faqtitle')}
+            {t('commonfaq.faqtitle')}
           </Typography>
           <AccordionCustom
             entries={getEntriesByFlow(flow)}
