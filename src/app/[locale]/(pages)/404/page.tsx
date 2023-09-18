@@ -18,7 +18,7 @@ const NotFoundPage = (): React.ReactElement => {
         <FeedbackMessage
           topIcon={<IllusError />}
           title={'Qui non c’è nulla!'}
-          summary={<span>Questa pagina non esiste o non c’è più.</span>}
+          summary={<span>{t('error.notlogged404')}</span>}
           firstButton={{
             href: isLoggedIn ? ROUTES.PROFILE : process.env.NEXT_PUBLIC_URL_IO,
             variant: 'contained',

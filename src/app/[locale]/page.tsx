@@ -57,7 +57,7 @@ const Profile = () => {
         <Grid sx={commonBackground}>
           <Introduction
             title={t('common.hello', { nome: userFromStorage?.name })}
-            summary={t('profile.anagraphicinfo')}
+            summary={t('common.anagraphicinfo')}
             summaryColumns={{
               xs: 12,
               md: 8,
@@ -92,7 +92,7 @@ const Profile = () => {
                     title={
                       sessionData?.access_enabled
                         ? t('common.tooltipaccessabled')
-                        : 'L’accesso a IO è bloccato con livello di sicurezza 2'
+                        : t('lockaccess.tooltiplockaccess')
                     }
                     placement="top"
                     arrow
