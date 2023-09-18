@@ -7,6 +7,8 @@ import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
+import { isBrowser } from '../../_utils/common';
+import { initAnalytics } from '../../_utils/mixpanel';
 
 const Header = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -48,6 +50,12 @@ const Header = (): React.ReactElement => {
     () => userMenuActions.slice().sort((a, b) => Number(a.id) - Number(b.id)),
     [userMenuActions]
   );
+
+  useMemo(() => {
+    if (isBrowser()) {
+      return initAnalytics();
+    }
+  }, []);
 
   return (
     <>
