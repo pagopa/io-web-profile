@@ -41,7 +41,7 @@ export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
     },
     {
       summary: t('common.lockioaccess'),
-      details: t('common.lockioaccessresponse'),
+      details: t('commonfaq.lockioaccessresponse'),
     },
     {
       summary: t('commonfaq.lockaccessmessage'),
