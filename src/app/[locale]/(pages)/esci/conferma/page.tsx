@@ -7,12 +7,21 @@ import { WebProfileApi } from '@/api/webProfileApiClient';
 import NoSessionActiveComp from '@/app/[locale]/_component/noSessionActiveComp/noSessionActiveComp';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const LogoutConfirm = (): React.ReactElement => {
   const [sessionData, setSessionData] = useState<SessionState>();
   const t = useTranslations('ioesco');
   const userFromStorage = storageUserOps.read();
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
+
+  useEffect(() => {
+    if (sessionData) {
+      trackEvent(isL1 ? 'IO_SESSION_EXIT_STATUS_PAGE' : 'IO_PROFILE_SESSION_EXIT_STATUS_PAGE', {
+        session_status: sessionData.session_info.active ? 'on' : 'off',
+      });
+    }
+  }, [isL1, sessionData]);
 
   useEffect(() => {
     WebProfileApi.getUserSessionState()
