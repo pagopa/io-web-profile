@@ -18,3 +18,4 @@ export const checkElevationIntegrity = () => {
     MD5(currentTaxCode).toString() === previousPrivileges.identity;
   storagePrivilegeOps.delete();
   return isPrivilegeElevation;
+};
