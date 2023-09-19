@@ -9,10 +9,10 @@ import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { SpidValueInJWT } from '../../_model/JWTUser';
-import { isBrowser, localeFromStorage } from '../../_utils/common';
+import { getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
-import { storageTokenOps, storageUserOps } from '../../_utils/storage';
+import { storageLoginInfoOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
 import { goCIE } from '../../_utils/idps';
 import { checkElevationIntegrity } from '../../_utils/integrity';
 import { trackEvent } from '../../_utils/mixpanel';
@@ -28,6 +28,7 @@ const Access = (): React.ReactElement => {
 
   const token = isBrowser() ? extractToken() : undefined;
   const userFromToken = token ? userFromJwtToken(token) : undefined;
+  const loginInfo = storageLoginInfoOps.read();
 
   const L1_JWT_LEVEL: SpidValueInJWT = {
     value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
@@ -51,29 +52,19 @@ const Access = (): React.ReactElement => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
+      trackEvent('IO_LOGIN_SUCCESS', {
+        SPID_IDP_ID: loginInfo.idpId,
+        SPID_IDP_NAME: loginInfo.idpName,
+        Flow: getLoginFlow(loginInfo),
+      });
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
-          trackEvent('IO_LOGIN_SUCCESS', {
-            SPID_IDP_ID: '',
-            SPID_IDP_NAME: '',
-            Flow: 'login_to_SessionExit',
-          });
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
           break;
         case L2_JWT_LEVEL.value:
-          trackEvent('IO_LOGIN_SUCCESS', {
-            SPID_IDP_ID: '',
-            SPID_IDP_NAME: '',
-            Flow: 'login_to_Profile',
-          });
           pushWithLocale(ROUTES.PROFILE);
           break;
         case L3_JWT_LEVEL.value:
-          trackEvent('IO_LOGIN_SUCCESS', {
-            SPID_IDP_ID: '',
-            SPID_IDP_NAME: '',
-            Flow: 'login_to_UnlockAccessL3',
-          });
           pushWithLocale(ROUTES.PROFILE_RESTORE);
           if (checkElevationIntegrity()) {
             pushWithLocale(ROUTES.PROFILE_RESTORE);

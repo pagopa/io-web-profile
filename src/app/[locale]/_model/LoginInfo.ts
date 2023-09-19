@@ -1,6 +1,6 @@
 import { SpidLevels } from '../_component/selectIdp/idpList';
 
-export type LoginAttempt = {
+export type LoginInfo = {
   idpSecurityLevel: SpidLevels;
   idpId: string;
   idpName: string;

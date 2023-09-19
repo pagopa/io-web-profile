@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Button, Icon } from '@mui/material';
 import MD5 from 'crypto-js/md5';
 import { IDPS, IdentityProvider } from '../../_utils/idps';
-import { storageLoginAttemptOps, storagePrivilegeOps, storageTokenOps } from '../../_utils/storage';
+import { storageLoginInfoOps, storagePrivilegeOps, storageTokenOps } from '../../_utils/storage';
 import { userFromJwtToken } from '../../_utils/jwt';
 import useLogin from '../../_hooks/useLogin';
 import { trackEvent } from '../../_utils/mixpanel';
@@ -40,7 +40,7 @@ export function IdpList({ spidLevel }: IdpList) {
   };
 
   const getSPID = (IDP: IdentityProvider) => {
-    storageLoginAttemptOps.write({
+    storageLoginInfoOps.write({
       idpId: IDP.entityId,
       idpName: IDP.name,
       idpSecurityLevel: spidLevel,

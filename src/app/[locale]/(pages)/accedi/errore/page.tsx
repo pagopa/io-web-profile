@@ -4,16 +4,18 @@ import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { isBrowser } from '../../../_utils/common';
+import { getLoginFlow, isBrowser } from '../../../_utils/common';
 import { ROUTES } from '../../../_utils/routes';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import { storageLoginInfoOps } from '@/app/[locale]/_utils/storage';
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco');
   const errorCode = searchParams.get('errorCode');
   const ERROR_TITLE = t('error.loginerror');
   const pushWithLocale = useLocalePush();
+  const loginInfo = storageLoginInfoOps.read();
 
   const renderErrorSummary = (errorCode: string | null) => {
     if (errorCode == null) {
@@ -42,7 +44,7 @@ const LoginErrorPage = () => {
 
   useEffect(() => {
     if (errorCode) {
-      trackEvent('IO_LOGIN_ERROR', { reason: errorCode });
+      trackEvent('IO_LOGIN_ERROR', { reason: errorCode, Flow: getLoginFlow(loginInfo) });
     }
   }, [errorCode]);
 
