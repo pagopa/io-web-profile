@@ -13,7 +13,7 @@ const previousPrivileges = isBrowser() ? storagePrivilegeOps.read() : undefined;
 export const checkElevationIntegrity = () => {
   if (
     previousPrivileges &&
-    previousPrivileges.previous === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2 &&
+    previousPrivileges.previousSecurityLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2 &&
     currentTaxCode &&
     MD5(currentTaxCode).toString() === previousPrivileges.identity
   ) {
