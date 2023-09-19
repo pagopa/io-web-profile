@@ -8,6 +8,7 @@ import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
+import { trackEvent } from '../../_utils/mixpanel';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
@@ -16,6 +17,11 @@ type ProfileCardsProps = {
 export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
+
+  const handleLogOutCardBtn = () => {
+    trackEvent('IO_PROFILE_SESSION_EXIT_START');
+    pushWithLocale(ROUTES.LOGOUT_CONFIRM);
+  };
 
   return (
     <>
@@ -39,7 +45,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                   {t('profile.nodevicelogout')}
                 </Typography>
                 <ButtonNaked
-                  onClick={() => pushWithLocale(ROUTES.LOGOUT_CONFIRM)}
+                  onClick={() => handleLogOutCardBtn()}
                   color="primary"
                   endIcon={<ArrowForwardIcon />}
                   size="medium"

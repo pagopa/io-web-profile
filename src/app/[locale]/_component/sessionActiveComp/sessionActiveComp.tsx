@@ -8,6 +8,7 @@ import { commonBackgroundLight, commonBackgroundLightWithBack } from '../../_uti
 import { FAQ } from '../accordion/faqDefault';
 import { BackButton } from '../backButton/backButton';
 import { Introduction } from '../introduction/introduction';
+import { trackEvent } from '../../_utils/mixpanel';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 type SessionProps = {
@@ -25,6 +26,7 @@ const SessionActiveComp = ({
   const pushWithLocale = useLocalePush();
 
   const handleLogout = () => {
+    trackEvent('IO_SESSION_EXIT_UX_CONVERSION');
     WebProfileApi.logoutFromIOApp()
       .then(() => {
         pushWithLocale(ROUTES.THANK_YOU);
@@ -40,8 +42,7 @@ const SessionActiveComp = ({
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={title}
-            // FIXME: https://pagopa.atlassian.net/browse/IOPID-717
-            summary={`Al momento hai una sessione attiva sull’app IO, valida fino al ${expirationDate.toLocaleDateString()}. Se hai perso il dispositivo, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.`}
+            summary={t('lplogout.activesession', { date: expirationDate?.toLocaleDateString() })}
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>

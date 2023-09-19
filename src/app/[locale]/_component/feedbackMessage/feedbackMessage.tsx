@@ -7,6 +7,7 @@ type CustomMaterialButtonProps = {
   text: string;
   variant: 'outlined' | 'contained' | 'text' | 'naked';
   goBack?: boolean;
+  onClick?: () => void;
 };
 
 type IntroductionProps = {
@@ -67,8 +68,18 @@ export function FeedbackMessage({
             <Button
               onClick={
                 firstButton?.goBack
-                  ? () => pushBack()
-                  : () => pushWithLocale(firstButton.href || '/')
+                  ? () => {
+                      pushBack();
+                      if (firstButton.onClick) {
+                        firstButton.onClick();
+                      }
+                    }
+                  : () => {
+                      pushWithLocale(firstButton.href || '/');
+                      if (firstButton.onClick) {
+                        firstButton.onClick();
+                      }
+                    }
               }
               variant={firstButton.variant}
             >
@@ -79,7 +90,12 @@ export function FeedbackMessage({
                 sx={{
                   marginLeft: 2,
                 }}
-                onClick={() => pushWithLocale(secondButton.href || '')}
+                onClick={() => {
+                  pushWithLocale(secondButton.href || '');
+                  if (secondButton.onClick) {
+                    secondButton.onClick();
+                  }
+                }}
                 variant={secondButton.variant}
               >
                 {secondButton.text}
