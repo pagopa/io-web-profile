@@ -25,7 +25,7 @@ export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 
   sessionData?.access_enabled ? 'unlocked' : 'locked';
 
 export const getLoginFlow = (loginInfo: LoginInfo): string => {
-  if (loginInfo.idpSecurityLevel) {
+  if (loginInfo) {
     storageLoginInfoOps.delete();
     switch (loginInfo.idpSecurityLevel.type) {
       case 'L1':
