@@ -1,5 +1,6 @@
 import { LoginInfo } from '../_model/LoginInfo';
-import { storageLocaleOps, storageLoginInfoOps } from './storage';
+import { MagicLink } from '../_model/MagicLink';
+import { storageLocaleOps, storageLoginInfoOps, storageMagicLinkOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
 export const isBrowser = () => typeof window !== 'undefined';
@@ -39,5 +40,14 @@ export const getLoginFlow = (loginInfo: LoginInfo): string => {
     }
   } else {
     return '';
+  }
+};
+
+export const getReferralLockProfile = (isMagicLink: MagicLink): string => {
+  storageMagicLinkOps.delete();
+  if (isMagicLink && isMagicLink.value) {
+    return 'email';
+  } else {
+    return 'profile';
   }
 };
