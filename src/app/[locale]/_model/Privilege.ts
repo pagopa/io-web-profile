@@ -1,6 +1,6 @@
 import { SpidValueInJWT } from './JWTUser';
 
 export type Privilege = {
-  previous: SpidValueInJWT | undefined;
+  previousSecurityLevel: SpidValueInJWT | undefined;
   identity: string;
 };
