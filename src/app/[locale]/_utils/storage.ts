@@ -1,3 +1,4 @@
+import { LoginAttempt } from '../_model/LoginAttempt';
 import { Privilege } from '../_model/Privilege';
 import { User } from '../_model/User';
 import { storageOpsBuilder } from './storage-utils';
@@ -11,6 +12,12 @@ export const storageLocaleOps = storageOpsBuilder<string>('locale', 'string', tr
 /** This object contain a complete set of operations related to addressing cases where the user attempts to elevate privileges */
 export const storagePrivilegeOps = storageOpsBuilder<Privilege>(
   'previousSecurityLevel',
+  'object',
+  true
+);
+/** This object contain a complete set of operations related to addressing cases where the user attempts to login using idp */
+export const storageLoginAttemptOps = storageOpsBuilder<LoginAttempt>(
+  'loginAttemptInfo',
   'object',
   true
 );

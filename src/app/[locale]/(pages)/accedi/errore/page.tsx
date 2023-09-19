@@ -3,9 +3,11 @@ import { Button, Grid, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { isBrowser } from '../../../_utils/common';
 import { ROUTES } from '../../../_utils/routes';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco');
@@ -37,6 +39,12 @@ const LoginErrorPage = () => {
         return t('error.loginerrorretry');
     }
   };
+
+  useEffect(() => {
+    if (errorCode) {
+      trackEvent('IO_LOGIN_ERROR', { reason: errorCode });
+    }
+  }, [errorCode]);
 
   const handleCancelBtn = () => {
     if (isBrowser()) {

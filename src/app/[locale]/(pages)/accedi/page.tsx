@@ -52,17 +52,47 @@ const Access = (): React.ReactElement => {
       storageUserOps.write(userFromToken);
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
+          trackEvent('IO_LOGIN_SUCCESS', {
+            SPID_IDP_ID: '',
+            SPID_IDP_NAME: '',
+            Flow: 'login_to_SessionExit',
+          });
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
           break;
         case L2_JWT_LEVEL.value:
+          trackEvent('IO_LOGIN_SUCCESS', {
+            SPID_IDP_ID: '',
+            SPID_IDP_NAME: '',
+            Flow: 'login_to_Profile',
+          });
           pushWithLocale(ROUTES.PROFILE);
           break;
         case L3_JWT_LEVEL.value:
+          trackEvent('IO_LOGIN_SUCCESS', {
+            SPID_IDP_ID: '',
+            SPID_IDP_NAME: '',
+            Flow: 'login_to_UnlockAccessL3',
+          });
           pushWithLocale(ROUTES.PROFILE_RESTORE);
           break;
       }
     }
   }, [localeFromStorage]);
+
+  const handleLogoutBtn = () => {
+    trackEvent('IO_SESSION_EXIT_START');
+    pushWithLocale(ROUTES.LOGOUT_INIT);
+  };
+
+  const handleCIELogin = () => {
+    trackEvent('IO_PROFILE_LOGIN_CIE');
+    goCIE(spidLevel.type);
+  };
+
+  const handleSPIDLogin = () => {
+    trackEvent('IO_PROFILE_LOGIN_SPID');
+    setOpenDialog(true);
+  };
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
@@ -122,7 +152,7 @@ const Access = (): React.ReactElement => {
                       width: '100%',
                       height: '50px',
                     }}
-                    onClick={() => setOpenDialog(true)}
+                    onClick={() => handleSPIDLogin()}
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
@@ -139,7 +169,7 @@ const Access = (): React.ReactElement => {
                     }}
                     variant="contained"
                     startIcon={<CieIcon />}
-                    onClick={() => goCIE(spidLevel.type)}
+                    onClick={() => handleCIELogin()}
                   >
                     {t('common.logincie')}
                   </Button>
@@ -191,7 +221,7 @@ const Access = (): React.ReactElement => {
         </Grid>
         <Grid item mb={2}>
           <Button
-            onClick={() => pushWithLocale(ROUTES.LOGOUT_INIT)}
+            onClick={() => handleLogoutBtn()}
             variant="outlined"
             color="primary"
             size="large"
