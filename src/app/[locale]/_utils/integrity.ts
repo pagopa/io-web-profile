@@ -11,18 +11,10 @@ const currentTaxCode = isBrowser()
 const previousPrivileges = isBrowser() ? storagePrivilegeOps.read() : undefined;
 
 export const checkElevationIntegrity = () => {
-  if (
+  const isPrivilegeElevation =
     previousPrivileges &&
     previousPrivileges.previousSecurityLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2 &&
     currentTaxCode &&
-    MD5(currentTaxCode).toString() === previousPrivileges.identity
-  ) {
-    storagePrivilegeOps.delete();
-
-    return true;
-  } else {
-    storagePrivilegeOps.delete();
-
-    return false;
-  }
-};
+    MD5(currentTaxCode).toString() === previousPrivileges.identity;
+  storagePrivilegeOps.delete();
+  return isPrivilegeElevation;
