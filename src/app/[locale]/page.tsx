@@ -11,6 +11,8 @@ import { RestoreSessionCard } from './_component/profileCards/restoreSessionCard
 import { commonBackground } from './_utils/styles';
 import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
+import { trackEvent } from './_utils/mixpanel';
+import { getAccessStatus, getSessionStatus } from './_utils/common';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
@@ -21,6 +23,15 @@ const Profile = () => {
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
   const userFromStorage = storageUserOps.read();
+
+  useEffect(() => {
+    if (sessionData) {
+      trackEvent('IO_PROFILE', {
+        session_status: getSessionStatus(sessionData),
+        access_status: getAccessStatus(sessionData),
+      });
+    }
+  }, [profileData, sessionData]);
 
   useEffect(() => {
     WebProfileApi.getProfile()
