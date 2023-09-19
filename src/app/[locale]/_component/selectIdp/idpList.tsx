@@ -32,7 +32,7 @@ export function IdpList({ spidLevel }: IdpList) {
   const savePrivilegesData = () => {
     if (taxCode) {
       storagePrivilegeOps.write({
-        previous: userLogged?.spidLevel || undefined,
+        previousSecurityLevel: userLogged?.spidLevel || undefined,
         identity: MD5(taxCode).toString(),
       });
     }
