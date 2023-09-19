@@ -14,7 +14,9 @@ import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 import { goCIE } from '../../_utils/idps';
+import { trackEvent } from '../../_utils/mixpanel';
 
+// eslint-disable-next-line max-lines-per-function
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const t = useTranslations('ioesco');
@@ -37,6 +39,12 @@ const Access = (): React.ReactElement => {
   const L3_JWT_LEVEL: SpidValueInJWT = {
     value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3,
   };
+
+  useEffect(() => {
+    if (isBrowser()) {
+      trackEvent('IO_LOGIN');
+    }
+  }, [isBrowser()]);
 
   useEffect(() => {
     if (token && userFromToken && localeFromStorage) {
@@ -144,7 +152,7 @@ const Access = (): React.ReactElement => {
                   alignItems={'baseline'}
                   justifyContent={'center'}
                 >
-                  <Typography variant="body1">{t('common.nospidorcie')}</Typography>
+                  <Typography variant="body1">{t('lpaccess.nospidorcie')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
                     <Link href={'#'}>{t('common.more')}</Link>
                   </Typography>
