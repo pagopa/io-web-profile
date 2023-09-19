@@ -12,6 +12,7 @@ import { commonBackground } from './_utils/styles';
 import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
+import { getAccessStatus, getSessionStatus } from './_utils/common';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
@@ -26,8 +27,8 @@ const Profile = () => {
   useEffect(() => {
     if (sessionData) {
       trackEvent('IO_PROFILE', {
-        session_status: sessionData?.session_info.active ? 'on' : 'off',
-        access_status: sessionData?.access_enabled ? 'unlocked' : 'locked',
+        session_status: getSessionStatus(sessionData),
+        access_status: getAccessStatus(sessionData),
       });
     }
   }, [profileData, sessionData]);

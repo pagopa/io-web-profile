@@ -8,6 +8,7 @@ import NoSessionActiveComp from '@/app/[locale]/_component/noSessionActiveComp/n
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import { getSessionStatus } from '@/app/[locale]/_utils/common';
 
 const LogoutConfirm = (): React.ReactElement => {
   const [sessionData, setSessionData] = useState<SessionState>();
@@ -18,7 +19,7 @@ const LogoutConfirm = (): React.ReactElement => {
   useEffect(() => {
     if (sessionData) {
       trackEvent(isL1 ? 'IO_SESSION_EXIT_STATUS_PAGE' : 'IO_PROFILE_SESSION_EXIT_STATUS_PAGE', {
-        session_status: sessionData.session_info.active ? 'on' : 'off',
+        session_status: getSessionStatus(sessionData),
       });
     }
   }, [isL1, sessionData]);
