@@ -8,12 +8,18 @@ import Firework from '../../_icons/firework';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
 import { storageUserOps } from '../../_utils/storage';
+import { trackEvent } from '../../_utils/mixpanel';
 
 export const RestoreSessionCard = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
+
+  const handleUnlockButton = () => {
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_START');
+    pushWithLocale(ROUTES.PROFILE_RESTORE);
+  };
 
   return (
     <Grid
@@ -33,7 +39,7 @@ export const RestoreSessionCard = (): React.ReactElement => {
             </Typography>
             <Typography variant="body2">{t('common.identitysecurityrestore')}</Typography>
             <ButtonNaked
-              onClick={() => pushWithLocale(ROUTES.PROFILE_RESTORE)}
+              onClick={() => handleUnlockButton()}
               color="primary"
               endIcon={<ArrowForwardIcon />}
               size="medium"

@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
 import { goCIE } from '@/app/[locale]/_utils/idps';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const Access = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -15,6 +16,17 @@ const Access = (): React.ReactElement => {
   const spidLevel: SpidLevels = {
     type: 'L3',
   };
+
+  const handleCIELogin = () => {
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_CIE');
+    goCIE(spidLevel.type);
+  };
+
+  const handleSPIDLogin = () => {
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_SPID');
+    setOpenDialog(true);
+  };
+
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
       <Grid item xs={12} sm={7.2} md={8}>
@@ -73,7 +85,7 @@ const Access = (): React.ReactElement => {
                       width: '100%',
                       height: '50px',
                     }}
-                    onClick={() => setOpenDialog(true)}
+                    onClick={() => handleSPIDLogin()}
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
@@ -90,7 +102,7 @@ const Access = (): React.ReactElement => {
                     }}
                     variant="contained"
                     startIcon={<CieIcon />}
-                    onClick={() => goCIE(spidLevel.type)}
+                    onClick={() => handleCIELogin()}
                   >
                     {t('common.logincie')}
                   </Button>

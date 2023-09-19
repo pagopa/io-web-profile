@@ -2,7 +2,7 @@
 import { Button, Grid, Link, TextField } from '@mui/material';
 import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
@@ -10,6 +10,7 @@ import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const ReactivateCode = (): React.ReactElement => {
   const [restoreCode, setRestoreCode] = useState('');
@@ -18,6 +19,10 @@ const ReactivateCode = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
 
   const t = useTranslations('ioesco');
+
+  useEffect(() => {
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_INSERT_CODE');
+  }, []);
 
   const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // input only numeric characters
@@ -34,6 +39,7 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_CONVERSION');
     WebProfileApi.unlockUserSession({ unlock_code: restoreCode as WithinRangeString<9, 10> })
       .then(() => {
         setIsCodeNotValid(false);
@@ -42,6 +48,7 @@ const ReactivateCode = (): React.ReactElement => {
       })
       .catch((err) => {
         if (err.status === 403) {
+          trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR_CODE');
           setIsCodeNotValid(true);
           setErrorMessage(t('restore.notvalidcode'));
         } else {

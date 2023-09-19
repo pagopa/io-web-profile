@@ -3,6 +3,8 @@ import { Button, Grid, List, ListItem, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 import { useSelector } from 'react-redux';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { BackButton } from '../../../_component/backButton/backButton';
 import { CopyCodeCard } from '../../../_component/copyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
@@ -13,6 +15,7 @@ import { commonBackgroundWithBack } from '../../../_utils/styles';
 import { addSpacesEvery3Chars } from '@/app/[locale]/_utils/common';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -44,6 +47,16 @@ const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const unlockCode = useSelector(unlockCodeSelector);
   const pushWithLocale = useLocalePush();
+  const pathName = usePathname();
+
+  useEffect(() => {
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_SUCCESS');
+  }, []);
+
+  const handleGoProfileBtn = () => {
+    trackEvent('IO_BACK_TO_PROFILE', { page_name: pathName });
+    pushWithLocale(ROUTES.PROFILE);
+  };
 
   return (
     <Grid sx={commonBackgroundWithBack}>
@@ -69,7 +82,7 @@ const ProfileBlock = (): React.ReactElement => {
       <Typography variant="subtitle2" fontSize={18}>
         {t.rich('common.unlockioaccess', unlockioaccessRich)}
       </Typography>
-      <Button onClick={() => pushWithLocale(ROUTES.PROFILE)} variant="outlined" size="medium">
+      <Button onClick={() => handleGoProfileBtn()} variant="outlined" size="medium">
         {t('common.backtoprofile')}
       </Button>
     </Grid>
