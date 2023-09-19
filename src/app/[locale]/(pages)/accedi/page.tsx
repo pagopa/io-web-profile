@@ -14,6 +14,7 @@ import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageTokenOps, storageUserOps } from '../../_utils/storage';
 import { goCIE } from '../../_utils/idps';
+import { checkElevationIntegrity } from '../../_utils/integrity';
 import { trackEvent } from '../../_utils/mixpanel';
 
 // eslint-disable-next-line max-lines-per-function
@@ -74,6 +75,11 @@ const Access = (): React.ReactElement => {
             Flow: 'login_to_UnlockAccessL3',
           });
           pushWithLocale(ROUTES.PROFILE_RESTORE);
+          if (checkElevationIntegrity()) {
+            pushWithLocale(ROUTES.PROFILE_RESTORE);
+          } else {
+            pushWithLocale(ROUTES.PROFILE);
+          }
           break;
       }
     }

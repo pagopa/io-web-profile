@@ -2,19 +2,27 @@
 
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const ThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const userFromToken = storageUserOps.read();
   const isL2 = userFromToken?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2;
+  const isL1 = userFromToken?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
+
+  useEffect(() => {
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_SUCCESS' : 'IO_PROFILE_SESSION_EXIT_UX_SUCCESS');
+  }, []);
 
   const handleSpidLevelRedirect = () => {
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_BACK_TO_PROFILE');
     if (isL2) {
       return pushWithLocale(ROUTES.PROFILE);
     }
