@@ -57,6 +57,7 @@ const Access = (): React.ReactElement => {
         SPID_IDP_NAME: loginInfo.idpName,
         Flow: getLoginFlow(loginInfo),
       });
+      storageLoginInfoOps.delete();
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);

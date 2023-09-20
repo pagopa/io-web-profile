@@ -1,5 +1,5 @@
 import { LoginInfo } from '../_model/LoginInfo';
-import { storageLocaleOps, storageLoginInfoOps } from './storage';
+import { storageLocaleOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
 export const isBrowser = () => typeof window !== 'undefined';
@@ -26,7 +26,6 @@ export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 
 
 export const getLoginFlow = (loginInfo: LoginInfo): string => {
   if (loginInfo) {
-    storageLoginInfoOps.delete();
     switch (loginInfo.idpSecurityLevel.type) {
       case 'L1':
         return 'login_to_SessionExit';
