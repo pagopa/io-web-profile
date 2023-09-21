@@ -5,7 +5,6 @@ import { IDPS, IdentityProvider } from '../../_utils/idps';
 
 import { storageLoginInfoOps, storagePrivilegeOps, storageTokenOps } from '../../_utils/storage';
 import { userFromJwtToken } from '../../_utils/jwt';
-import useLogin from '../../_hooks/useLogin';
 import { trackEvent } from '../../_utils/mixpanel';
 import { getLoginFlow } from '../../_utils/common';
 
