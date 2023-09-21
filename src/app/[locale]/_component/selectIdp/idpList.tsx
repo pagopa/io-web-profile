@@ -48,7 +48,7 @@ export function IdpList({ spidLevel }: IdpList) {
     });
     savePrivilegesData();
     trackEvent(
-      spidLevel.type === SpidLevelL1
+      spidLevel.type === 'L1'
         ? 'IO_SESSION_EXIT_LOGIN_IDP_SELECTED'
         : 'IO_PROFILE_LOGIN_IDP_SELECTED',
       {
