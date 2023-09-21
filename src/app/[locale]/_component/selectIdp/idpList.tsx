@@ -1,7 +1,8 @@
-import React from 'react';
-import { Grid, Button, Icon } from '@mui/material';
-import MD5 from 'crypto-js/md5';
+import { Button, Grid, Icon } from '@mui/material';
+import { SHA256 } from 'crypto-js';
+import useLogin from '../../_hooks/useLogin';
 import { IDPS, IdentityProvider } from '../../_utils/idps';
+
 import { storageLoginInfoOps, storagePrivilegeOps, storageTokenOps } from '../../_utils/storage';
 import { userFromJwtToken } from '../../_utils/jwt';
 import useLogin from '../../_hooks/useLogin';
@@ -35,7 +36,7 @@ export function IdpList({ spidLevel }: IdpList) {
     if (taxCode) {
       storagePrivilegeOps.write({
         previousSecurityLevel: userLogged?.spidLevel || undefined,
-        identity: MD5(taxCode).toString(),
+        identity: SHA256(taxCode).toString(),
       });
     }
   };
