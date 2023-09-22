@@ -9,10 +9,10 @@ import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { SpidValueInJWT } from '../../_model/JWTUser';
-import { isBrowser, localeFromStorage } from '../../_utils/common';
+import { getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
-import { storageTokenOps, storageUserOps } from '../../_utils/storage';
+import { storageLoginInfoOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
 import { goCIE } from '../../_utils/idps';
 import { checkElevationIntegrity } from '../../_utils/integrity';
 import { trackEvent } from '../../_utils/mixpanel';
@@ -28,6 +28,7 @@ const Access = (): React.ReactElement => {
 
   const token = isBrowser() ? extractToken() : undefined;
   const userFromToken = token ? userFromJwtToken(token) : undefined;
+  const loginInfo = storageLoginInfoOps.read();
 
   const L1_JWT_LEVEL: SpidValueInJWT = {
     value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
@@ -51,6 +52,12 @@ const Access = (): React.ReactElement => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
+      trackEvent('IO_LOGIN_SUCCESS', {
+        SPID_IDP_ID: loginInfo.idpId,
+        SPID_IDP_NAME: loginInfo.idpName,
+        Flow: getLoginFlow(loginInfo),
+      });
+      storageLoginInfoOps.delete();
       switch (userFromToken?.spidLevel) {
         case L1_JWT_LEVEL.value:
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
@@ -59,6 +66,7 @@ const Access = (): React.ReactElement => {
           pushWithLocale(ROUTES.PROFILE);
           break;
         case L3_JWT_LEVEL.value:
+          pushWithLocale(ROUTES.PROFILE_RESTORE);
           if (checkElevationIntegrity()) {
             pushWithLocale(ROUTES.PROFILE_RESTORE);
           } else {
@@ -68,6 +76,22 @@ const Access = (): React.ReactElement => {
       }
     }
   }, [localeFromStorage]);
+
+  const handleLogoutBtn = () => {
+    trackEvent('IO_SESSION_EXIT_START');
+    pushWithLocale(ROUTES.LOGOUT_INIT);
+  };
+
+  const handleCIELogin = () => {
+    trackEvent('IO_PROFILE_LOGIN_CIE');
+    trackEvent('IO_LOGIN_START');
+    goCIE(spidLevel.type);
+  };
+
+  const handleSPIDLogin = () => {
+    trackEvent('IO_PROFILE_LOGIN_SPID');
+    setOpenDialog(true);
+  };
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
@@ -127,7 +151,7 @@ const Access = (): React.ReactElement => {
                       width: '100%',
                       height: '50px',
                     }}
-                    onClick={() => setOpenDialog(true)}
+                    onClick={() => handleSPIDLogin()}
                     variant="contained"
                     startIcon={<SpidIcon />}
                   >
@@ -144,7 +168,7 @@ const Access = (): React.ReactElement => {
                     }}
                     variant="contained"
                     startIcon={<CieIcon />}
-                    onClick={() => goCIE(spidLevel.type)}
+                    onClick={() => handleCIELogin()}
                   >
                     {t('common.logincie')}
                   </Button>
@@ -196,7 +220,7 @@ const Access = (): React.ReactElement => {
         </Grid>
         <Grid item mb={2}>
           <Button
-            onClick={() => pushWithLocale(ROUTES.LOGOUT_INIT)}
+            onClick={() => handleLogoutBtn()}
             variant="outlined"
             color="primary"
             size="large"
