@@ -4,13 +4,14 @@ import { Grid, Button } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundDark } from '../../_utils/styles';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { goCIE } from '../../_utils/idps';
+import { trackEvent } from '../../_utils/mixpanel';
 
 const Init = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -18,6 +19,21 @@ const Init = (): React.ReactElement => {
 
   const spidLevel: SpidLevels = {
     type: 'L1',
+  };
+
+  useEffect(() => {
+    trackEvent('IO_SESSION_EXIT_LOGIN');
+  }, []);
+
+  const handleCIELogin = () => {
+    trackEvent('IO_SESSION_EXIT_LOGIN_CIE');
+    trackEvent('IO_LOGIN_START');
+    goCIE(spidLevel.type);
+  };
+
+  const handleSPIDLogin = () => {
+    trackEvent('IO_SESSION_EXIT_LOGIN_SPID');
+    setOpenDialog(true);
   };
 
   return (
@@ -45,7 +61,7 @@ const Init = (): React.ReactElement => {
               }}
               onClick={(event) => {
                 event.preventDefault();
-                setOpenDialog(true);
+                handleSPIDLogin();
               }}
               startIcon={<CieIcon />}
               variant="outlined"
@@ -64,7 +80,7 @@ const Init = (): React.ReactElement => {
               }}
               startIcon={<SpidIcon />}
               variant="outlined"
-              onClick={() => goCIE(spidLevel.type)}
+              onClick={() => handleCIELogin()}
             >
               {t('common.logincie')}
             </Button>

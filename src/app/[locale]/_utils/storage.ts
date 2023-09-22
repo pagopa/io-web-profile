@@ -1,3 +1,4 @@
+import { LoginInfo } from '../_model/LoginInfo';
 import { Privilege } from '../_model/Privilege';
 import { User } from '../_model/User';
 import { storageOpsBuilder } from './storage-utils';
@@ -14,3 +15,5 @@ export const storagePrivilegeOps = storageOpsBuilder<Privilege>(
   'object',
   true
 );
+/** This object contain a complete set of operations related to addressing cases where the user attempts to login using idp */
+export const storageLoginInfoOps = storageOpsBuilder<LoginInfo>('loginInfo', 'object', true);
