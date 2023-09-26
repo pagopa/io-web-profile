@@ -1,4 +1,5 @@
 import { LoginInfo } from '../_model/LoginInfo';
+import { MagicLink } from '../_model/MagicLink';
 import { Privilege } from '../_model/Privilege';
 import { User } from '../_model/User';
 import { storageOpsBuilder } from './storage-utils';
@@ -17,3 +18,5 @@ export const storagePrivilegeOps = storageOpsBuilder<Privilege>(
 );
 /** This object contain a complete set of operations related to addressing cases where the user attempts to login using idp */
 export const storageLoginInfoOps = storageOpsBuilder<LoginInfo>('loginInfo', 'object', true);
+/** This object contain a complete set of operations related to addressing cases where the user attempts to login using magic-link */
+export const storageMagicLinkOps = storageOpsBuilder<MagicLink>('magicLink', 'object', true);

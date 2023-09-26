@@ -4,6 +4,7 @@ import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useDispatch } from 'react-redux';
 import generator from 'generate-password-ts';
+import { useEffect } from 'react';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -14,12 +15,18 @@ import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
 import { isIdpKnown } from '../../_utils/idps';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
+import { trackEvent } from '../../_utils/mixpanel';
+import { getReferralLockProfile } from '../../_utils/common';
+import { storageMagicLinkOps } from '../../_utils/storage';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const dispatch = useDispatch();
   const pushWithLocale = useLocalePush();
+  const isFromMagicLink = storageMagicLinkOps.read();
+  const referral = getReferralLockProfile(isFromMagicLink);
+
   const unlockCode = generator.generate({
     length: 9,
     numbers: true,
@@ -27,7 +34,13 @@ const ProfileBlock = (): React.ReactElement => {
     uppercase: false,
   });
 
+  useEffect(() => {
+    trackEvent('IO_PROFILE_LOCK_ACCESS_CONFIRM');
+  }, []);
+
   const handleLockSession = () => {
+    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', { referral });
+    storageMagicLinkOps.delete();
     dispatch(createUnlockCode(unlockCode));
     WebProfileApi.lockUserSession({ unlock_code: unlockCode as WithinRangeString<9, 10> })
       .then(() => {
