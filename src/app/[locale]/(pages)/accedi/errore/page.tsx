@@ -45,6 +45,7 @@ const LoginErrorPage = () => {
   useEffect(() => {
     if (errorCode) {
       trackEvent('IO_LOGIN_ERROR', { reason: errorCode, Flow: getLoginFlow(loginInfo) });
+      storageLoginInfoOps.delete();
     }
   }, [errorCode]);
 

@@ -1,11 +1,12 @@
-import React from 'react';
-import { Grid, Button, Icon } from '@mui/material';
-import MD5 from 'crypto-js/md5';
+import { Button, Grid, Icon } from '@mui/material';
+import { SHA256 } from 'crypto-js';
+import useLogin from '../../_hooks/useLogin';
 import { IDPS, IdentityProvider } from '../../_utils/idps';
+
 import { storageLoginInfoOps, storagePrivilegeOps, storageTokenOps } from '../../_utils/storage';
 import { userFromJwtToken } from '../../_utils/jwt';
-import useLogin from '../../_hooks/useLogin';
 import { trackEvent } from '../../_utils/mixpanel';
+import { getLoginFlow } from '../../_utils/common';
 
 type IdpList = {
   spidLevel: SpidLevels;
@@ -34,7 +35,7 @@ export function IdpList({ spidLevel }: IdpList) {
     if (taxCode) {
       storagePrivilegeOps.write({
         previousSecurityLevel: userLogged?.spidLevel || undefined,
-        identity: MD5(taxCode).toString(),
+        identity: SHA256(taxCode).toString(),
       });
     }
   };
@@ -46,11 +47,20 @@ export function IdpList({ spidLevel }: IdpList) {
       idpSecurityLevel: spidLevel,
     });
     savePrivilegesData();
-    trackEvent('IO_SESSION_EXIT_LOGIN_IDP_SELECTED', {
+    trackEvent(
+      spidLevel.type === 'L1'
+        ? 'IO_SESSION_EXIT_LOGIN_IDP_SELECTED'
+        : 'IO_PROFILE_LOGIN_IDP_SELECTED',
+      {
+        SPID_IDP_ID: IDP.entityId,
+        SPID_IDP_NAME: IDP.name,
+      }
+    );
+    trackEvent('IO_LOGIN_START', {
       SPID_IDP_ID: IDP.entityId,
       SPID_IDP_NAME: IDP.name,
+      Flow: getLoginFlow(storageLoginInfoOps.read()),
     });
-    trackEvent('IO_LOGIN_START');
     window.location.assign(
       `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}`
     );
