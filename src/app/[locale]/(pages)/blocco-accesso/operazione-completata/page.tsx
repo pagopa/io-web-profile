@@ -58,6 +58,10 @@ const ProfileBlock = (): React.ReactElement => {
     pushWithLocale(ROUTES.PROFILE);
   };
 
+  useEffect(() => {
+    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_SUCCESS');
+  }, []);
+
   return (
     <Grid sx={commonBackgroundWithBack}>
       <BackButton />

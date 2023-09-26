@@ -4,17 +4,19 @@ import React, { useMemo } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next-intl/client';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { isBrowser } from '../../_utils/common';
-import { initAnalytics } from '../../_utils/mixpanel';
+import { initAnalytics, trackEvent } from '../../_utils/mixpanel';
 
 const Header = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const { userLogged, isLoggedIn, logOut } = useLogin();
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
+  const pathName = usePathname();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const userMenuActionsBasic = [
@@ -22,6 +24,7 @@ const Header = (): React.ReactElement => {
       id: '2',
       label: t('common.logoutprofile'),
       onClick: () => {
+        trackEvent('IO_LOGOUT');
         logOut();
       },
       icon: <ExitToAppIcon fontSize="small" color="inherit" />,
@@ -37,6 +40,7 @@ const Header = (): React.ReactElement => {
               id: '1',
               label: t('common.profile'),
               onClick: () => {
+                trackEvent('IO_BACK_TO_PROFILE', { page_name: pathName });
                 pushWithLocale(ROUTES.PROFILE);
               },
               icon: <ManageAccountsIcon fontSize="small" color="inherit" />,
