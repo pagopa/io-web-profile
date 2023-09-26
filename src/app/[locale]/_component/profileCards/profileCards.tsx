@@ -23,6 +23,11 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
     pushWithLocale(ROUTES.LOGOUT_CONFIRM);
   };
 
+  const handleLockCardBtn = () => {
+    trackEvent('IO_PROFILE_LOCK_ACCESS_START');
+    pushWithLocale(ROUTES.PROFILE_BLOCK);
+  };
+
   return (
     <>
       <Grid
@@ -68,7 +73,7 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
                 {t('common.lockappaccess')}
               </Typography>
               <ButtonNaked
-                onClick={() => pushWithLocale(ROUTES.PROFILE_BLOCK)}
+                onClick={() => handleLockCardBtn()}
                 color="primary"
                 endIcon={<ArrowForwardIcon />}
                 size="medium"

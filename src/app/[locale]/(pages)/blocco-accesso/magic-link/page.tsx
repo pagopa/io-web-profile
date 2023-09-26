@@ -9,7 +9,11 @@ import { isBrowser } from '@/app/[locale]/_utils/common';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
-import { storageTokenOps, storageUserOps } from '@/app/[locale]/_utils/storage';
+import {
+  storageMagicLinkOps,
+  storageTokenOps,
+  storageUserOps,
+} from '@/app/[locale]/_utils/storage';
 
 const ExpiredMagicLink = () => {
   const token = isBrowser() ? extractToken() : undefined;
@@ -21,6 +25,7 @@ const ExpiredMagicLink = () => {
       pushWithLocale(ROUTES.INTERNAL_ERROR);
     } else {
       storageTokenOps.write(token);
+      storageMagicLinkOps.write({ value: true });
     }
   }, [pushWithLocale, token]);
 

@@ -3,12 +3,13 @@ import { Button, Grid, Typography } from '@mui/material';
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
 import Timeout from '../../../_icons/timeout';
 import { COMMON_PADDING_HERO } from '../../../_utils/styles';
 import { goCIE } from '../../../_utils/idps';
+import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const ExpiredMagicLink = () => {
   const t = useTranslations('ioesco');
@@ -17,6 +18,10 @@ const ExpiredMagicLink = () => {
   const spidLevel: SpidLevels = {
     type: 'L2',
   };
+
+  useEffect(() => {
+    trackEvent('IO_LOCK_ACCESS_EXPIRED_LINK');
+  }, []);
 
   return (
     <Grid sx={COMMON_PADDING_HERO} container bgcolor="background.default">
