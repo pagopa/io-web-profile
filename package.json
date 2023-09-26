@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "copy .env .env.local && next build",
+    "build:prod": "copy .env.production .env.local && next build",
     "start": "next start",
     "start-static": "npx serve@latest out",
     "test": "jest",

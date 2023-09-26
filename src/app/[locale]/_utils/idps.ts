@@ -73,16 +73,19 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
       name: 'InfoCamere S.C.p.A.',
       imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-infocamereid.png',
     },
-    {
-      identifier: 'test',
-      entityId: 'xx_testenv2',
-      name: 'test',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Test-Logo.svg',
-    },
   ].sort(() => 0.5 - Math.random()),
   richiediSpid: 'https://www.spid.gov.it/cos-e-spid/come-attivare-spid/',
 };
 
+if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED) {
+  // eslint-disable-next-line functional/immutable-data
+  IDPS.identityProviders.push({
+    identifier: 'test',
+    entityId: 'xx_testenv2',
+    name: 'test',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Test-Logo.svg',
+  });
+}
 export { IDPS };
 
 // TODO remove this temporary flag isIdpKnownafter getSessionsList API is ready in a future version
