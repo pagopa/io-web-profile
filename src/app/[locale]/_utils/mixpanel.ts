@@ -44,7 +44,7 @@ export const trackEvent = (
   callback?: () => void
 ): void => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (ANALYTICS_ENABLE) {
+  if (ANALYTICS_ENABLE && (window as any).initMixPanel) {
     if (ANALYTICS_MOCK) {
       // eslint-disable-next-line no-console
       console.log(event_name, properties);
