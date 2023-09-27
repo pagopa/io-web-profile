@@ -59,7 +59,7 @@ const Header = (): React.ReactElement => {
     if (isBrowser()) {
       return initAnalytics();
     }
-  }, []);
+  }, [isBrowser()]);
 
   return (
     <>
