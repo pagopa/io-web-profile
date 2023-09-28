@@ -10,18 +10,16 @@ import useLogin from '../../_hooks/useLogin';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
-  productsJsonUrl?: string;
   onExit?: (exitAction: () => void) => void;
 };
 
-export default function Footer({
-  productsJsonUrl,
-  onExit = (exitAction) => exitAction(),
-}: IOFooterProps) {
+export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
 
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
+  const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
+
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -31,6 +29,12 @@ export default function Footer({
           label: t('aboutus'),
           href: 'https://www.pagopa.it/it/societa/chi-siamo/',
           ariaLabel: ariaLabel('aboutus'),
+          linkType: 'internal',
+        },
+        {
+          label: t('pnrr'),
+          href: 'https://www.pagopa.it/it/opportunita/pnrr/progetti/',
+          ariaLabel: ariaLabel('pnrr'),
           linkType: 'internal',
         },
         {
@@ -73,20 +77,6 @@ export default function Footer({
           label: t('dataprotection'),
           href: 'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
           ariaLabel: ariaLabel('dataprotection'),
-          linkType: 'internal',
-        },
-        {
-          label: t('cookiesperefercies'),
-          href: '',
-          // FIXME IOPID-566
-          // onClick: () => window.OneTrust.ToggleInfoDisplay(),
-          ariaLabel: ariaLabel('cookiesperefercies'),
-          linkType: 'internal',
-        },
-        {
-          label: t('termsandcondition'),
-          href: 'https://www.pagopa.it/it/termini-e-condizioni-di-utilizzo-del-sito/',
-          ariaLabel: ariaLabel('termsandcondition'),
           linkType: 'internal',
         },
         {
@@ -138,7 +128,14 @@ export default function Footer({
           ariaLabel: socialAriaLabel('Medium'),
         },
       ],
-      links: [],
+      links: [
+        {
+          label: t('accessibility'),
+          href: 'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
+          ariaLabel: ariaLabel('accessibility'),
+          linkType: 'internal',
+        },
+      ],
     },
   };
   const postLoginLinks: FooterLinksType[] = [
@@ -149,15 +146,15 @@ export default function Footer({
       linkType: 'internal',
     },
     {
-      label: t('dataprotection'),
-      href: 'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
-      ariaLabel: ariaLabel('dataprotection'),
-      linkType: 'internal',
-    },
-    {
       label: t('termsandcondition'),
       href: 'https://www.pagopa.it/it/termini-e-condizioni-di-utilizzo-del-sito/',
       ariaLabel: ariaLabel('termsandcondition'),
+      linkType: 'internal',
+    },
+    {
+      label: t('accessibility'),
+      href: 'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
+      ariaLabel: ariaLabel('accessibility'),
       linkType: 'internal',
     },
   ];
@@ -184,7 +181,7 @@ export default function Footer({
       // eslint-disable-next-line no-console
       onLanguageChanged={(language: string) => console.log(language)}
       currentLangCode="it"
-      productsJsonUrl={productsJsonUrl}
+      productsJsonUrl={productListUrl || undefined}
     />
   );
 }
