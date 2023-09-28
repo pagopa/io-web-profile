@@ -90,7 +90,7 @@ const Header = (): React.ReactElement => {
           console.log('User login');
         }}
         enableLogin={isLoggedIn}
-        enableAssistanceButton={true}
+        enableAssistanceButton={isLoggedIn}
         // eslint-disable-next-line functional/immutable-data
         userActions={sortedUserMenuActions}
       />
