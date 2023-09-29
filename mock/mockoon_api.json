@@ -451,8 +451,8 @@
           "uuid": "d1d3a608-4dff-43d5-8c60-c562578e12d1",
           "body": "",
           "latency": 0,
-          "statusCode": 200,
-          "label": "Success",
+          "statusCode": 204,
+          "label": "No Content",
           "headers": [
             {
               "key": "Content-Type",
