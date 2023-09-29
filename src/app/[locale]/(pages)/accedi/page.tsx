@@ -183,7 +183,7 @@ const Access = (): React.ReactElement => {
                 >
                   <Typography variant="body1">{t('lpaccess.nospidorcie')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link href={'#'}>{t('common.more')}</Link>
+                    <Link href={'https://identitadigitale.gov.it'}>{t('common.more')}</Link>
                   </Typography>
                 </Grid>
               </CardContent>
