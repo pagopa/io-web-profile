@@ -8,7 +8,7 @@ import { usePathname } from 'next-intl/client';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
-import { decodeObfuschedEmail, isBrowser } from '../../_utils/common';
+import { decodeObfuscatedEmail, isBrowser } from '../../_utils/common';
 import { initAnalytics, trackEvent } from '../../_utils/mixpanel';
 
 const Header = (): React.ReactElement => {
@@ -20,7 +20,7 @@ const Header = (): React.ReactElement => {
   const encodedEmail =
     '&#@!105;&#@!111;&#@!64;assi%73ten&#@!37;7&#@!65;a&#@!46;&#@!112;%&#@!54;&#@!49;g&#@!111;p%6&#@!49;%&#@!50;&#@!69;it';
 
-  const email = decodeObfuschedEmail(encodedEmail);
+  const email = decodeObfuscatedEmail(encodedEmail);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const userMenuActionsBasic = [
     {

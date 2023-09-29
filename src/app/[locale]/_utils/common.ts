@@ -50,7 +50,7 @@ export const getReferralLockProfile = (isMagicLink: MagicLink): string => {
   }
 };
 
-export const decodeObfuschedEmail = (encodedEmail: string): string =>
+export const decodeObfuscatedEmail = (encodedEmail: string): string =>
   encodedEmail.replace(/&#@!(\d+);/g, function (match, dec) {
     return String.fromCharCode(dec);
   });
