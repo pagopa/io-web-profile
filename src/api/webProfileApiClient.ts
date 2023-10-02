@@ -38,7 +38,7 @@ export const WebProfileApi = {
   },
   logoutFromIOApp: async (): Promise<void> => {
     const result = await webProfileApiClient.logoutFromIOApp({});
-    return extractResponse(result, 200, onRedirectToLogin);
+    return extractResponse(result, 204, onRedirectToLogin);
   },
   // getSessionsList: async (): Promise<void> => {
   //   const result = await webProfileApiClient.getSessionsList({});
