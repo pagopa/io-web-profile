@@ -23,6 +23,10 @@ import { ROUTES } from './routes';
 const API_TIMEOUT = Number(`${process.env.NEXT_PUBLIC_API_FETCH_TIMEOUT}`) as Millisecond;
 const API_MAX_RETRY = Number(`${process.env.NEXT_PUBLIC_API_FETCH_MAX_RETRY}`);
 
+type MaxRetry = 'max-retries';
+type RetryAborted = 'retry-aborted';
+export type TransientErrorType = MaxRetry | RetryAborted;
+
 /** Return the implementation of fetch configured with a timeout */
 export const buildFetchApi = (
   timeoutMs: number = API_TIMEOUT
@@ -130,7 +134,7 @@ function retryLogicForResponseError(
   retryLogic: (
     t: RetriableTask<Error, Response>,
     shouldAbort?: Promise<boolean>
-  ) => TE.TaskEither<Error | 'max-retries' | 'retry-aborted', Response>
+  ) => TE.TaskEither<Error | MaxRetry | RetryAborted, Response>
 ): typeof retryLogic {
   return (t: RetriableTask<Error, Response>, shouldAbort?: Promise<boolean>) =>
     retryLogic(
