@@ -5,7 +5,7 @@ steps:
     echo 'NEXT_PUBLIC_API_BASE_URL: $NEXT_PUBLIC_API_BASE_URL'
     echo 'NEXT_PUBLIC_API_BASE_PATH: $NEXT_PUBLIC_API_BASE_PATH'
     yarn run generate
-    yarn run build
+    yarn run build:prod
   env:
     NEXT_PUBLIC_URL_SPID_LOGIN: $(TF_PUBLIC_URL_SPID_LOGIN)
     NEXT_PUBLIC_URL_IO: $(TF_PUBLIC_URL_IO)
