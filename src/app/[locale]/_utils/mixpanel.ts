@@ -1,7 +1,7 @@
 import mixpanel from 'mixpanel-browser';
 
 const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
-const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK;
+const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK === 'true' ? true : false;
 const ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_ANALYTICS_TOKEN || '';
 const ANALYTICS_API_HOST = process.env.NEXT_PUBLIC_ANALYTICS_API_HOST;
 const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;
