@@ -77,7 +77,7 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
   richiediSpid: 'https://www.spid.gov.it/cos-e-spid/come-attivare-spid/',
 };
 
-if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED) {
+if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED === 'true') {
   // eslint-disable-next-line functional/immutable-data
   IDPS.identityProviders.push({
     identifier: 'test',
