@@ -30,6 +30,11 @@ resources:
       name: pagopa/azure-pipeline-templates
       ref: refs/tags/v5.2.1
       endpoint: 'azure-devops-github-ro-ioweb'
+    - repository: pagopaCommonsRelease
+      type: github
+      name: pagopa/azure-pipeline-templates
+      ref: refs/tags/v2.2.0
+      endpoint: 'azure-devops-github-ro-ioweb'
 
 stages:
   # Create a relase
@@ -54,7 +59,7 @@ stages:
           - template: templates/node-job-setup/template.yaml@pagopaCommons
             parameters:
               persistCredentials: true
-          - template: templates/node-github-release/template.yaml@pagopaCommons
+          - template: templates/node-github-release/template.yaml@pagopaCommonsRelease
             parameters:
               release_branch: '$(DEFAULT_BRANCH)'
               semver: '${{ parameters.RELEASE_SEMVER }}'
