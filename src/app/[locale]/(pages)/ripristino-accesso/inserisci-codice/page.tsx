@@ -8,6 +8,7 @@ import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackground } from '../../../_utils/styles';
+import { TransientErrorType } from '../../../_utils/api-utils';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
@@ -20,6 +21,8 @@ const ReactivateCode = (): React.ReactElement => {
 
   const t = useTranslations('ioesco');
 
+  const MAXRETRY_ERROR: TransientErrorType = 'max-retries';
+
   useEffect(() => {
     trackEvent('IO_PROFILE_UNLOCK_ACCESS_INSERT_CODE');
   }, []);
@@ -27,6 +30,7 @@ const ReactivateCode = (): React.ReactElement => {
   const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // input only numeric characters
     setRestoreCode(e.target.value.replace(/\D/g, ''));
+    setIsCodeNotValid(false);
   };
 
   const explanationrestorecodeRich = {
@@ -47,12 +51,12 @@ const ReactivateCode = (): React.ReactElement => {
         pushWithLocale(ROUTES.RESTORE_THANK_YOU);
       })
       .catch((err) => {
-        if (err.status === 403) {
+        if (err === MAXRETRY_ERROR) {
+          pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
+        } else {
           trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR_CODE');
           setIsCodeNotValid(true);
           setErrorMessage(t('restore.notvalidcode'));
-        } else {
-          pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
         }
       });
   };
