@@ -30,6 +30,7 @@ const ReactivateCode = (): React.ReactElement => {
   const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // input only numeric characters
     setRestoreCode(e.target.value.replace(/\D/g, ''));
+    setIsCodeNotValid(false);
   };
 
   const explanationrestorecodeRich = {
