@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://api-web.pagopa.it" ID="https___api_web_pagopa_it" xmlns:spid="https://spid.gov.it/saml-extensions" xmlns:cie="https://www.cartaidentita.interno.gov.it/saml-extensions"><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><Reference URI="#https___api_web_pagopa_it"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>OUn2QhPzJVAuns7q6cfS3lW1CHcNQoDsUdWP13s2z6w=</DigestValue></Reference></SignedInfo><SignatureValue>T4kYwXiONUt6TNJVp9xoyAEanXVWGp9miYPLaglIvrGQdokCzRtMdJDsZDMIDGJW9E3rM1lO7B8TTv4Cpu9nyzLu9zzIiXMhSHzubo+J5PbB58zLih4wXdSMr0ytt7r4SQMyqK0TDiLZ7QZDRvSxsVZNZKgHLfKOIaP0cr3LXenZRj4cdSMec97wL0Ka4qZkf8RtvYkyPzNqjfMULSsy8OdIXusMsq/sFnUa9CR1QDWjsc3ENpkie3vQ9NiJy1ZKfVxNwIYAnkBlPZJ5uulPRwkSLiwVb2lkobA+k5s1iE2lTwXyLA0X1cIEMgLiUCRDfKM9G2kTLRDHx1Rc5E23Dg==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIESDCCAzCgAwIBAgIUBjIZn4GdQcKFf0Bq+FjoJ4cSy6wwDQYJKoZIhvcNAQEN
+BQAwgZMxDzANBgNVBAMMBlBhZ29QQTELMAkGA1UEBhMCSVQxDTALBgNVBAcMBFJv
+bWExFzAVBgNVBGEMDlBBOklULTVOMlRSNTU3MRYwFAYDVQQKDA1QQUdPUEEgUy5Q
+LkEuMTMwMQYDVQRTDCpodHRwczovL2FwaS13ZWIuaW8ucGFnb3BhLml0L2lvd2Vi
+L2F1dGgvdjEwHhcNMjMwODA4MTQxODQ3WhcNMzMwODA1MTQxODQ3WjCBkzEPMA0G
+A1UEAwwGUGFnb1BBMQswCQYDVQQGEwJJVDENMAsGA1UEBwwEUm9tYTEXMBUGA1UE
+YQwOUEE6SVQtNU4yVFI1NTcxFjAUBgNVBAoMDVBBR09QQSBTLlAuQS4xMzAxBgNV
+BFMMKmh0dHBzOi8vYXBpLXdlYi5pby5wYWdvcGEuaXQvaW93ZWIvYXV0aC92MTCC
+ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANKbnH6QFkIsPpP5Sl+tcEYU
+rhHWpBUOT2sUFBm5zNFeDij05QjP+9tr/9P/yZCu5EgvJlEu100tr1+lC69/O/bl
+KEUazoMSylwJNWY8l4oU7A4pVzuZoIKP7fWP1YxjBtNMRPIiY30A2hlkM822+4El
+Iv6sOpjdPo/nVmQGJgwx/dCqbBneaW5OB1ybP8c+1exHq+LZfPyi8Ix0KMKQ2zSq
+zr8rKM/G7hAnQSvOIDgakNCFW57IsCorv8djPIyUkPuEbEUu8L1NuvSSeTfXxNIj
+KYZyaXmgHfFQYJYStjCWoed/RnTdeO5c+hiPmKUinJFLYFtAabZxtaMl0RXTEOcC
+AwEAAaOBkTCBjjAJBgNVHRMEAjAAMA4GA1UdDwEB/wQEAwIGwDBSBgNVHSAESzBJ
+MCAGBCtMEAYwGDAWBggrBgEFBQcCAjAKGghhZ0lEY2VydDAlBgYrTBAEAgEwGzAZ
+BggrBgEFBQcCAjANGgtjZXJ0X1NQX1B1YjAdBgNVHQ4EFgQUprmdm0WIAU30Czcb
+5RYyr3PfAQMwDQYJKoZIhvcNAQENBQADggEBAMnIiLMyNr5Cgzmysz5wxgD5wxI7
+xzWYFMUjpyF7U1zIGMhjNFgIPsjKr54UgRrrAaoztVUO3HJTgHch0AezZkcdXeMs
+BPquc8K8EBJxxkr3qUuK2Hj3nh09wXKMLMMcYQ7GJ/rv9mQZEZz0TMP1hs9ke0il
+qy4xSTpCGgm6cKgvV0cYDR0l51pOzl+1fnzskadPQx7ffokZPvycIm5Mb4J4owBD
++c49NUQLCoa6AjnXF+BQyb8btiU8AVlhsDGiRvzJqFHZkzB9KJjh1ehyvylteRqY
+1PjumHNS4ANDMjnERBfGCQsKzQ7luEMhHRK6UYSYOYJkwxMP+pQh+vU+7aM=
+</X509Certificate></X509Data></KeyInfo></Signature>
+  <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" AuthnRequestsSigned="true" WantAssertionsSigned="true" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+    <KeyDescriptor use="signing">
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIESDCCAzCgAwIBAgIUBjIZn4GdQcKFf0Bq+FjoJ4cSy6wwDQYJKoZIhvcNAQEN
+BQAwgZMxDzANBgNVBAMMBlBhZ29QQTELMAkGA1UEBhMCSVQxDTALBgNVBAcMBFJv
+bWExFzAVBgNVBGEMDlBBOklULTVOMlRSNTU3MRYwFAYDVQQKDA1QQUdPUEEgUy5Q
+LkEuMTMwMQYDVQRTDCpodHRwczovL2FwaS13ZWIuaW8ucGFnb3BhLml0L2lvd2Vi
+L2F1dGgvdjEwHhcNMjMwODA4MTQxODQ3WhcNMzMwODA1MTQxODQ3WjCBkzEPMA0G
+A1UEAwwGUGFnb1BBMQswCQYDVQQGEwJJVDENMAsGA1UEBwwEUm9tYTEXMBUGA1UE
+YQwOUEE6SVQtNU4yVFI1NTcxFjAUBgNVBAoMDVBBR09QQSBTLlAuQS4xMzAxBgNV
+BFMMKmh0dHBzOi8vYXBpLXdlYi5pby5wYWdvcGEuaXQvaW93ZWIvYXV0aC92MTCC
+ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANKbnH6QFkIsPpP5Sl+tcEYU
+rhHWpBUOT2sUFBm5zNFeDij05QjP+9tr/9P/yZCu5EgvJlEu100tr1+lC69/O/bl
+KEUazoMSylwJNWY8l4oU7A4pVzuZoIKP7fWP1YxjBtNMRPIiY30A2hlkM822+4El
+Iv6sOpjdPo/nVmQGJgwx/dCqbBneaW5OB1ybP8c+1exHq+LZfPyi8Ix0KMKQ2zSq
+zr8rKM/G7hAnQSvOIDgakNCFW57IsCorv8djPIyUkPuEbEUu8L1NuvSSeTfXxNIj
+KYZyaXmgHfFQYJYStjCWoed/RnTdeO5c+hiPmKUinJFLYFtAabZxtaMl0RXTEOcC
+AwEAAaOBkTCBjjAJBgNVHRMEAjAAMA4GA1UdDwEB/wQEAwIGwDBSBgNVHSAESzBJ
+MCAGBCtMEAYwGDAWBggrBgEFBQcCAjAKGghhZ0lEY2VydDAlBgYrTBAEAgEwGzAZ
+BggrBgEFBQcCAjANGgtjZXJ0X1NQX1B1YjAdBgNVHQ4EFgQUprmdm0WIAU30Czcb
+5RYyr3PfAQMwDQYJKoZIhvcNAQENBQADggEBAMnIiLMyNr5Cgzmysz5wxgD5wxI7
+xzWYFMUjpyF7U1zIGMhjNFgIPsjKr54UgRrrAaoztVUO3HJTgHch0AezZkcdXeMs
+BPquc8K8EBJxxkr3qUuK2Hj3nh09wXKMLMMcYQ7GJ/rv9mQZEZz0TMP1hs9ke0il
+qy4xSTpCGgm6cKgvV0cYDR0l51pOzl+1fnzskadPQx7ffokZPvycIm5Mb4J4owBD
++c49NUQLCoa6AjnXF+BQyb8btiU8AVlhsDGiRvzJqFHZkzB9KJjh1ehyvylteRqY
+1PjumHNS4ANDMjnERBfGCQsKzQ7luEMhHRK6UYSYOYJkwxMP+pQh+vU+7aM=
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api-web.io.pagopa.it/ioweb/auth/v1/slo"/>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <AssertionConsumerService index="0" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api-web.io.pagopa.it/ioweb/auth/v1/acs"/>
+    <AttributeConsumingService index="0">
+      <ServiceName xml:lang="it">IO Web Onboarding Portal</ServiceName>
+      <RequestedAttribute FriendlyName="Nome" Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+      <RequestedAttribute FriendlyName="Cognome" Name="familyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+      <RequestedAttribute FriendlyName="Codice fiscale" Name="fiscalNumber" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+    </AttributeConsumingService>
+  </SPSSODescriptor>
+  <Organization>
+    <OrganizationName xml:lang="it">PagoPA</OrganizationName>
+    <OrganizationDisplayName xml:lang="it">PagoPA S.p.A</OrganizationDisplayName>
+    <OrganizationURL xml:lang="it">https://www.pagopa.it</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="administrative">
+    <Extensions>
+      <cie:Private/>
+      <cie:VATNumber>IT15376371009</cie:VATNumber>
+      <cie:FiscalCode>15376371009</cie:FiscalCode>
+      <cie:NACE2Code>62.09.09</cie:NACE2Code>
+      <cie:Municipality>H501</cie:Municipality>
+    </Extensions>
+    <Company>PagoPA</Company>
+    <EmailAddress>pagopa@pec.governo.it</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>
