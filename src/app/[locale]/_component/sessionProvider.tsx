@@ -10,7 +10,7 @@ import {
   EXISTING_ROUTES,
   LOGIN_ROUTES,
   PRIVATE_ROUTES,
-  PUBBLIC_ROUTES,
+  PUBLIC_ROUTES,
   ROUTES,
 } from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
@@ -49,7 +49,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
         if (LOGIN_ROUTES.includes(pathName)) {
           removeToken();
         }
-        if (PUBBLIC_ROUTES.includes(pathName)) {
+        if (PUBLIC_ROUTES.includes(pathName)) {
           setLoginStatus({ status: 'AUTHORIZED' });
         }
         if (PRIVATE_ROUTES.includes(pathName)) {

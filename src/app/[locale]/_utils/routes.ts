@@ -24,7 +24,7 @@ export const ROUTES = {
 // Get an array of values from the ROUTES object
 export const EXISTING_ROUTES: string[] = Object.values(ROUTES);
 
-export const PUBBLIC_ROUTES = [
+export const PUBLIC_ROUTES = [
   ROUTES.LOGIN,
   ROUTES.LOGOUT_INIT,
   ROUTES.ERROR,
@@ -36,4 +36,4 @@ export const PUBBLIC_ROUTES = [
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
 
-export const PRIVATE_ROUTES = EXISTING_ROUTES.filter((route) => !PUBBLIC_ROUTES.includes(route));
+export const PRIVATE_ROUTES = EXISTING_ROUTES.filter((route) => !PUBLIC_ROUTES.includes(route));
