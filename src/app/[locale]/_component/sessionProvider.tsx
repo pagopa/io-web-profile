@@ -1,12 +1,20 @@
 'use client';
+import { useRouter } from 'next-intl/client';
 
 import { useLocale } from 'next-intl';
 import { usePathname } from 'next-intl/client';
 import { useEffect, useState } from 'react';
 import useLocalePush from '../_hooks/useLocalePush';
 import useToken from '../_hooks/useToken';
-import { LOGIN_ROUTES, PUBBLIC_ROUTES, ROUTES } from '../_utils/routes';
+import {
+  EXISTING_ROUTES,
+  LOGIN_ROUTES,
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES,
+  ROUTES,
+} from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
+import { defaultLocale, localeList } from '../layout';
 import Loader from './loader/loader';
 
 type LoginStatusIdle = {
@@ -29,28 +37,36 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const pushWithLocale = useLocalePush();
   const pathName = usePathname();
   const locale = useLocale();
+  const router = useRouter();
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
-    if (!storageLocaleOps.read()) {
-      storageLocaleOps.write(locale);
+    if (localeList.includes(locale)) {
+      if (!storageLocaleOps.read()) {
+        storageLocaleOps.write(locale);
+      }
+      if (EXISTING_ROUTES.includes(pathName)) {
+        if (LOGIN_ROUTES.includes(pathName)) {
+          removeToken();
+        }
+        if (PUBLIC_ROUTES.includes(pathName)) {
+          setLoginStatus({ status: 'AUTHORIZED' });
+        }
+        if (PRIVATE_ROUTES.includes(pathName)) {
+          if (isTokenValid()) {
+            setLoginStatus({ status: 'AUTHORIZED' });
+          } else {
+            setLoginStatus({ status: 'NOT_AUTHORIZED' });
+            pushWithLocale(ROUTES.LOGIN);
+          }
+        }
+      } else {
+        pushWithLocale(ROUTES.NOT_FOUND_PAGE);
+      }
+    } else {
+      router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
     }
-  }, [locale]);
-
-  useEffect(() => {
-    if (LOGIN_ROUTES.includes(pathName)) {
-      removeToken();
-    }
-    if (PUBBLIC_ROUTES.includes(pathName)) {
-      setLoginStatus({ status: 'AUTHORIZED' });
-    }
-    if (!PUBBLIC_ROUTES.includes(pathName) && isTokenValid()) {
-      setLoginStatus({ status: 'AUTHORIZED' });
-    }
-    if (!PUBBLIC_ROUTES.includes(pathName) && !isTokenValid()) {
-      setLoginStatus({ status: 'NOT_AUTHORIZED' });
-      pushWithLocale(ROUTES.LOGIN);
-    }
-  }, [pathName]);
+  }, [locale, pathName]);
 
   if (loginStatus.status === 'IDLE' || loginStatus.status === 'NOT_AUTHORIZED') {
     return <Loader />;

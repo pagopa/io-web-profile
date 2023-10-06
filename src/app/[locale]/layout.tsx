@@ -1,25 +1,27 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
+import SessionProviderComponent from '../[locale]/_component/sessionProvider';
 import Footer from './_component/footer/footer';
 import Header from './_component/header/header';
-import SessionProviderComponent from './_component/sessionProvider';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
+
+export const localeList = ['it'];
+export const defaultLocale = 'it';
 
 type Props = {
   children: ReactNode;
   params: { locale: string };
 };
 export async function generateStaticParams() {
-  return ['it'].map((locale) => ({ locale }));
+  return localeList.map((locale) => ({ locale }));
 }
 
 async function getMessages(locale: string) {
   try {
     return (await import(`../../dictionaries/${locale}.json`)).default;
   } catch (error) {
-    notFound();
+    return (await import(`../../dictionaries/${defaultLocale}.json`)).default;
   }
 }
 

@@ -1,7 +1,0 @@
-{
-  "ioesco": {
-    "common": {
-      "hello": "Hello {nome}!" 
-      }
-      }
-    }
