@@ -8,22 +8,22 @@ import { useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
 import { goCIE } from '@/app/[locale]/_utils/idps';
-// import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import useToken from '@/app/[locale]/_hooks/useToken';
 
 const Access = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const { removeToken } = useToken();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const spidLevel: SpidLevels = {
     type: 'L2',
   };
 
   const handleCIELogin = () => {
-    // trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_CIE');
+    removeToken();
     goCIE(spidLevel.type);
   };
 
   const handleSPIDLogin = () => {
-    // trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_SPID');
     setOpenDialog(true);
   };
 
