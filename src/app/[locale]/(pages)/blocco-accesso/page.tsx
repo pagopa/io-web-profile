@@ -40,7 +40,6 @@ const ProfileBlock = (): React.ReactElement => {
 
   const handleLockSession = () => {
     trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', { referral });
-    storageMagicLinkOps.delete();
     dispatch(createUnlockCode(unlockCode));
     WebProfileApi.lockUserSession({ unlock_code: unlockCode as WithinRangeString<9, 10> })
       .then(() => {
