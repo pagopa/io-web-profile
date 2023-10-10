@@ -87,7 +87,7 @@ if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED === 'true') {
   });
 }
 
-if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_2_ENABLED === 'true') {
+if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_UAT_ENABLED === 'true') {
   // eslint-disable-next-line functional/immutable-data
   IDPS.identityProviders.push({
     identifier: 'test',
