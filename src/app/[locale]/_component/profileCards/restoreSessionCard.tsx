@@ -7,7 +7,7 @@ import useLocalePush from '../../_hooks/useLocalePush';
 import Firework from '../../_icons/firework';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
-import { storageUserOps } from '../../_utils/storage';
+import { storageMagicLinkOps, storageUserOps } from '../../_utils/storage';
 import { trackEvent } from '../../_utils/mixpanel';
 
 export const RestoreSessionCard = (): React.ReactElement => {
@@ -15,10 +15,17 @@ export const RestoreSessionCard = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
+  const isMagicLink: boolean = storageMagicLinkOps.read()
+    ? storageMagicLinkOps.read().value
+    : false;
 
   const handleUnlockButton = () => {
     trackEvent('IO_PROFILE_UNLOCK_ACCESS_START');
-    pushWithLocale(ROUTES.PROFILE_RESTORE);
+    if (isMagicLink) {
+      pushWithLocale(ROUTES.LOGIN_L2);
+    } else {
+      pushWithLocale(ROUTES.PROFILE_RESTORE);
+    }
   };
 
   return (
