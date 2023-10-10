@@ -52,8 +52,7 @@ const Access = (): React.ReactElement => {
               mb={{ xs: 4, md: 6 }}
               maxWidth={{ xs: '327px', sm: '330px', md: '480px' }}
             >
-              Se vuoi ripristinare l’accesso all’app IO, accedi con le tue credenziali SPID o CIE e
-              segui i passaggi indicati.
+              {t('magiclink.restore')}
             </Typography>
           </Grid>
 
