@@ -1,6 +1,6 @@
 'use client';
 import { Button, Grid, Link, Typography } from '@mui/material';
-import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
+import { IPatternStringTag } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useDispatch } from 'react-redux';
 import generator from 'generate-password-ts';
@@ -40,9 +40,10 @@ const ProfileBlock = (): React.ReactElement => {
 
   const handleLockSession = () => {
     trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', { referral });
-    storageMagicLinkOps.delete();
     dispatch(createUnlockCode(unlockCode));
-    WebProfileApi.lockUserSession({ unlock_code: unlockCode as WithinRangeString<9, 10> })
+    WebProfileApi.lockUserSession({
+      unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,
+    })
       .then(() => {
         pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
       })

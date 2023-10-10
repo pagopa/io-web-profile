@@ -7,6 +7,7 @@ import { storageLoginInfoOps, storagePrivilegeOps, storageTokenOps } from '../..
 import { userFromJwtToken } from '../../_utils/jwt';
 import { trackEvent } from '../../_utils/mixpanel';
 import { getLoginFlow } from '../../_utils/common';
+import useToken from '../../_hooks/useToken';
 
 type IdpList = {
   spidLevel: SpidLevels;
@@ -28,6 +29,7 @@ export type SpidLevels = SpidLevelL1 | SpidLevelL2 | SpidLevelL3;
 
 export function IdpList({ spidLevel }: IdpList) {
   const { userLogged } = useLogin();
+  const { removeToken } = useToken();
   const token = storageTokenOps.read();
   const taxCode = token ? userFromJwtToken(storageTokenOps.read()).taxCode : undefined;
 
@@ -61,6 +63,7 @@ export function IdpList({ spidLevel }: IdpList) {
       SPID_IDP_NAME: IDP.name,
       Flow: getLoginFlow(storageLoginInfoOps.read()),
     });
+    removeToken();
     window.location.assign(
       `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}`
     );
