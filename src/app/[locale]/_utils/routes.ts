@@ -1,5 +1,6 @@
 export const ROUTES = {
   LOGIN: `/accedi/`,
+  LOGIN_L2: `/ripristino-accesso/accedi-livello-2/`,
   LOGIN_L3: `/ripristino-accesso/accedi-livello-3/`,
   LOGOUT_INIT: `/esci/`,
   THANK_YOU: '/esci/operazione-completata/',

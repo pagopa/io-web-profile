@@ -1,6 +1,6 @@
 'use client';
 import { Button, Grid, Link, TextField } from '@mui/material';
-import { WithinRangeString } from '@pagopa/ts-commons/lib/strings';
+import { IPatternStringTag } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
@@ -44,7 +44,9 @@ const ReactivateCode = (): React.ReactElement => {
 
   const handleClick = () => {
     trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_CONVERSION');
-    WebProfileApi.unlockUserSession({ unlock_code: restoreCode as WithinRangeString<9, 10> })
+    WebProfileApi.unlockUserSession({
+      unlock_code: restoreCode as string & IPatternStringTag<'^\\d{9}$'>,
+    })
       .then(() => {
         setIsCodeNotValid(false);
         setErrorMessage('');

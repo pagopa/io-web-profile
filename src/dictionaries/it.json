@@ -222,6 +222,9 @@
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
       "nosession": "Non c’è nessuna sessione di IO attiva"
-    }
+    },
+    "magiclink": {
+      "restore": "Se vuoi ripristinare l’accesso all’app IO, accedi con le tue credenziali SPID o CIE e segui i passaggi indicati."
+     }
   }
 }
