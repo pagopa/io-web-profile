@@ -9,6 +9,7 @@ import { commonBackground } from '../../_utils/styles';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { storageUserOps } from '../../_utils/storage';
 import { trackEvent } from '../../_utils/mixpanel';
+import { ROUTES } from '../../_utils/routes';
 import PlayStoreIcon from '@/app/[locale]/_icons/playstore';
 
 export const NoProfile = (): React.ReactElement => {
@@ -21,7 +22,7 @@ export const NoProfile = (): React.ReactElement => {
   }, []);
 
   const handleBtnContinue = () => {
-    pushWithLocale(process.env.NEXT_PUBLIC_URL_IO || '');
+    pushWithLocale(ROUTES.LOGIN);
     trackEvent('IO_NO_PROFILE_AVAILABLE_USER_EXIT', { cta_type: 'back_to_home' });
   };
 

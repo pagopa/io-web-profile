@@ -29,7 +29,7 @@ const NotFoundPage = (): React.ReactElement => {
           title={'Qui non c’è nulla!'}
           summary={<span>{t('error.notlogged404')}</span>}
           firstButton={{
-            href: isLoggedIn ? ROUTES.PROFILE : process.env.NEXT_PUBLIC_URL_IO,
+            href: isLoggedIn ? ROUTES.PROFILE : 'https://ioapp.it',
             variant: 'contained',
             text: isLoggedIn ? t('common.backtoprofile') : t('common.backtohome'),
           }}
