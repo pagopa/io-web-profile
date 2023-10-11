@@ -103,10 +103,7 @@ const LoginErrorPage = () => {
           </Grid>
           {typeof errorCode === 'string' && errorCode === '1001' ? (
             <Grid item xs={12} textAlign={'center'}>
-              <Button
-                onClick={() => pushWithLocale(process.env.NEXT_PUBLIC_URL_IO || '')}
-                variant="contained"
-              >
+              <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
                 {t('common.backtohome')}
               </Button>
             </Grid>
