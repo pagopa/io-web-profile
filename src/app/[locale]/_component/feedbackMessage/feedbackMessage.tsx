@@ -13,7 +13,7 @@ type CustomMaterialButtonProps = {
 type IntroductionProps = {
   topIcon?: JSX.Element;
   title: string;
-  summary: string | JSX.Element;
+  summary: string | JSX.Element | React.ReactNode;
   firstButton: CustomMaterialButtonProps;
   secondButton?: CustomMaterialButtonProps;
 };
