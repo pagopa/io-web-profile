@@ -1,3 +1,5 @@
+import { isEnvConfigEnabled } from './common';
+
 export type IdentityProvider = {
   identifier: string;
   entityId: string;
@@ -77,7 +79,7 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
   richiediSpid: 'https://www.spid.gov.it/cos-e-spid/come-attivare-spid/',
 };
 
-if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED === 'true') {
+if (isEnvConfigEnabled(process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED)) {
   // eslint-disable-next-line functional/immutable-data
   IDPS.identityProviders.push({
     identifier: 'test',
@@ -87,13 +89,23 @@ if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_ENABLED === 'true') {
   });
 }
 
-if (process.env.NEXT_PUBLIC_SPID_TEST_ENV_UAT_ENABLED === 'true') {
+if (isEnvConfigEnabled(process.env.NEXT_PUBLIC_SPID_TEST_ENV_UAT_ENABLED)) {
   // eslint-disable-next-line functional/immutable-data
   IDPS.identityProviders.push({
     identifier: 'test',
     entityId: 'xx_validator',
     name: 'test',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Test-Logo.svg',
+  });
+}
+
+if (isEnvConfigEnabled(process.env.NEXT_PUBLIC_CIE_UAT_LOGIN_ENABLED)) {
+  // eslint-disable-next-line functional/immutable-data
+  IDPS.identityProviders.push({
+    identifier: 'test',
+    entityId: 'xx_servizicie_test',
+    name: 'test_cie',
+    imageUrl: 'https://idserver.servizicie.interno.gov.it/idp/images/cielogo.png',
   });
 }
 
