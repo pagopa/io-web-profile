@@ -105,7 +105,7 @@ if (isEnvConfigEnabled(process.env.NEXT_PUBLIC_CIE_UAT_LOGIN_ENABLED)) {
     identifier: 'test',
     entityId: 'xx_servizicie_test',
     name: 'test_cie',
-    imageUrl: 'https://www.istruzione.it/spid-cie/imgs/logo-spid-cie.png',
+    imageUrl: 'https://idserver.servizicie.interno.gov.it/idp/images/cielogo.png',
   });
 }
 
