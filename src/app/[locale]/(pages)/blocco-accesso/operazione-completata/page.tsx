@@ -5,7 +5,6 @@ import Link from 'next-intl/link';
 import { useSelector } from 'react-redux';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
-import { BackButton } from '../../../_component/backButton/backButton';
 import { CopyCodeCard } from '../../../_component/copyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
@@ -64,7 +63,6 @@ const ProfileBlock = (): React.ReactElement => {
 
   return (
     <Grid sx={commonBackgroundWithBack}>
-      <BackButton />
       <Introduction
         title={t('common.lockedioaccess')}
         summary={
