@@ -18,6 +18,7 @@ export const ROUTES = {
   ERROR: '/accedi/errore/',
   EXPIRED_MAGIC_LINK: '/blocco-accesso/link-scaduto/',
   MAGIC_LINK: '/blocco-accesso/magic-link/',
+  ALREADY_LOCKED: '/accesso-bloccato/',
   NOT_FOUND_PAGE: '/404/',
   INTERNAL_ERROR: '/500/',
 };
