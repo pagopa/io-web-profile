@@ -1,15 +1,14 @@
-import { Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Flows } from '../../_enums/Flows';
-import { AccordionCustom } from './accordion';
 
 type FAQProps = {
   flow?: string;
 };
 
 type FAQEntries = {
-  summary: string;
-  details: string;
+  header: string;
+  content: string;
 };
 
 export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
@@ -17,70 +16,70 @@ export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
   // #region entries
   const defaultEntries: FAQEntries[] = [
     {
-      summary: t('commonfaq.firstquestion'),
-      details: t('commonfaq.firstresponse'),
+      header: t('commonfaq.firstquestion'),
+      content: t('commonfaq.firstresponse'),
     },
     {
-      summary: t('commonfaq.secondquestion'),
-      details: t('commonfaq.secondresponse'),
+      header: t('commonfaq.secondquestion'),
+      content: t('commonfaq.secondresponse'),
     },
     {
-      summary: t('commonfaq.thirdquestion'),
-      details: t('commonfaq.thirdresponse'),
+      header: t('commonfaq.thirdquestion'),
+      content: t('commonfaq.thirdresponse'),
     },
     {
-      summary: t('commonfaq.fourthquestion'),
-      details: t('commonfaq.fourthresponse'),
+      header: t('commonfaq.fourthquestion'),
+      content: t('commonfaq.fourthresponse'),
     },
   ];
 
   const blockEntries: FAQEntries[] = [
     {
-      summary: t('commonfaq.utilitylockprofile'),
-      details: t('commonfaq.utilitylockprofileresponse'),
+      header: t('commonfaq.utilitylockprofile'),
+      content: t('commonfaq.utilitylockprofileresponse'),
     },
     {
-      summary: t('common.lockioaccess'),
-      details: t('commonfaq.lockioaccessresponse'),
+      header: t('common.lockioaccess'),
+      content: t('commonfaq.lockioaccessresponse'),
     },
     {
-      summary: t('commonfaq.lockaccessmessage'),
-      details: t('commonfaq.lockaccessmessageresponse'),
+      header: t('commonfaq.lockaccessmessage'),
+      content: t('commonfaq.lockaccessmessageresponse'),
     },
     {
-      summary: t('commonfaq.loginafterlock'),
-      details: t('commonfaq.loginafterlockresponse'),
+      header: t('commonfaq.loginafterlock'),
+      content: t('commonfaq.loginafterlockresponse'),
     },
     {
-      summary: t('commonfaq.securityidentity'),
-      details: t('commonfaq.securityidentityresponse'),
+      header: t('commonfaq.securityidentity'),
+      content: t('commonfaq.securityidentityresponse'),
     },
     {
-      summary: t('commonfaq.unlockprofile'),
-      details: t('commonfaq.unlockprofileresponse'),
+      header: t('commonfaq.unlockprofile'),
+      content: t('commonfaq.unlockprofileresponse'),
     },
   ];
 
   const restoreEntries: FAQEntries[] = [
     {
-      summary: t('commonfaq.firstquestion'),
-      details: t('commonfaq.firstresponse'),
+      header: t('commonfaq.firstquestion'),
+      content: t('commonfaq.firstresponse'),
     },
     {
-      summary: t('commonfaq.whenrestore'),
-      details: t('commonfaq.whenrestoreresponse'),
+      header: t('commonfaq.whenrestore'),
+      content: t('commonfaq.whenrestoreresponse'),
     },
     {
-      summary: t('commonfaq.whatrestorecode'),
-      details: t('commonfaq.whatrestorecoderesponse'),
+      header: t('commonfaq.whatrestorecode'),
+      content: t('commonfaq.whatrestorecoderesponse'),
     },
     {
-      summary: t('commonfaq.whatdonocode'),
-      details: t('commonfaq.whatdonocoderesponse'),
+      header: t('commonfaq.whatdonocode'),
+      content: t('commonfaq.whatdonocoderesponse'),
     },
     {
-      summary: t('commonfaq.canrestorefromio'),
-      details: t('commonfaq.canrestorefromioresponse'),
+      header: t('commonfaq.canrestorefromio'),
+      content: t('commonfaq.canrestorefromioresponse'),
     },
   ];
 
@@ -98,37 +97,12 @@ export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
 
   return (
     <>
-      <Grid
-        sx={{
-          backgroundColor: 'background.default',
-          pt: { xs: 4, sm: 4, md: 0 },
-          pb: { xs: 4, sm: 4, md: 0 },
-        }}
-        container
-      >
-        <Grid item xs={1} />
-        <Grid item xs={10} p={{ xs: 0, sm: 0, md: 10 }}>
-          <Typography
-            fontSize={32}
-            fontWeight={700}
-            py={0}
-            px={0}
-            color="text.primary"
-            sx={{
-              textAlign: 'center',
-              pb: 5,
-            }}
-          >
-            {t('commonfaq.faqtitle')}
-          </Typography>
-          <AccordionCustom
-            entries={getEntriesByFlow(flow)}
-            summaryColor={'text.primary'}
-            detailColor={'text.primary'}
-          />{' '}
-        </Grid>
-        <Grid item xs={1} />
-      </Grid>
+      <Accordion
+        accordionItems={getEntriesByFlow(flow)}
+        theme="light"
+        layout="center"
+        title={t('commonfaq.faqtitle')}
+      />
     </>
   );
 };
