@@ -213,7 +213,7 @@
       "restoreaccess": "Vuoi sbloccare l’accesso a IO?"
     },
     "thankyoupage": {
-      "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo codice di ripristino. Salvalo e tienilo al sicuro!",
+      "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
       "enterbackio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo.",
       "enterbackonio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },

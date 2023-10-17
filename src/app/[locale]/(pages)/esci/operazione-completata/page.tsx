@@ -40,7 +40,7 @@ const ThankYouPage = (): React.ReactElement => {
         </Grid>
         <Grid item xs={12} pt={2}>
           <Button onClick={handleSpidLevelRedirect} sx={{ mr: 2 }} variant="outlined">
-            {isL2 ? t('common.backtoprofile') : t('common.backtohome')}
+            {isL2 ? t('common.backtoprofile') : t('common.close')}
           </Button>
         </Grid>
       </Grid>

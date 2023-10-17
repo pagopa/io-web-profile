@@ -9,7 +9,7 @@ type CopyCardProps = {
 };
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
-  const t = useTranslations('ioesco.common');
+  const t = useTranslations('ioesco');
   const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
 
   const copyTextToClipboard = (text: string | undefined) => {
@@ -37,7 +37,7 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
         }}
       >
         <Grid>
-          <Typography variant="caption">{t('resetcode')}</Typography>
+          <Typography variant="caption">{t('common.resetcode')}</Typography>
           <Typography fontWeight={600} fontSize="32px">
             {code}
           </Typography>
@@ -48,12 +48,17 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
             onClick={() => copyTextToClipboard(code)}
             color="primary"
           >
-            {t('copy')}
+            {t('common.copy')}
           </ButtonNaked>
         </Grid>
       </CardContent>
-      <Snackbar open={openSnackBar} onClose={() => setOpenSnackBar(false)} autoHideDuration={2000}>
-        <Alert severity="success">Codice copiato</Alert>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={openSnackBar}
+        onClose={() => setOpenSnackBar(false)}
+        autoHideDuration={2000}
+      >
+        <Alert severity="success">{t('restore.restorecodecopied')}</Alert>
       </Snackbar>
     </Card>
   );

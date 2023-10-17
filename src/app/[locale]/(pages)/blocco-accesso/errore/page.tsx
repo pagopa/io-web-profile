@@ -26,16 +26,16 @@ const LoginKo = (): React.ReactElement => {
           title={t('error.somewrong')}
           summary={<span>{t('error.systemerrorcontactassistence')}</span>}
           firstButton={{
-            href: ROUTES.PROFILE_BLOCK,
-            variant: 'contained',
-            text: t('error.retry'),
-            onClick: () => trackEvent('IO_PROFILE_LOCK_ACCESS_TRY_AGAIN'),
-          }}
-          secondButton={{
             variant: 'outlined',
             href: ROUTES.PROFILE,
             text: t('common.backtoprofile'),
             onClick: () => trackEvent('IO_BACK_TO_PROFILE', { page_name: pathName }),
+          }}
+          secondButton={{
+            href: ROUTES.PROFILE_BLOCK,
+            variant: 'contained',
+            text: t('error.retry'),
+            onClick: () => trackEvent('IO_PROFILE_LOCK_ACCESS_TRY_AGAIN'),
           }}
         />
       </Grid>

@@ -10,13 +10,14 @@ import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { isIdpKnown } from '../../../_utils/idps';
 import { ROUTES } from '../../../_utils/routes';
-import { commonBackgroundWithBack } from '../../../_utils/styles';
+import { commonBackgroundLight } from '../../../_utils/styles';
 import { addSpacesEvery3Chars } from '@/app/[locale]/_utils/common';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const unlockioaccessRich = {
+  link: (chunks: React.ReactNode) => <Link href="#">{chunks}</Link>,
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
   ul: (chunks: React.ReactNode) => (
     <List
@@ -35,7 +36,7 @@ const unlockioaccessRich = {
     </ListItem>
   ),
   u: (chunks: React.ReactNode) => (
-    <Link href="#" color="textPrimary">
+    <Link target="blank" href="https://io.italia.it/" color="textPrimary">
       {chunks}
     </Link>
   ),
@@ -62,13 +63,23 @@ const ProfileBlock = (): React.ReactElement => {
   }, []);
 
   return (
-    <Grid sx={commonBackgroundWithBack}>
+    <Grid sx={commonBackgroundLight}>
       <Introduction
         title={t('common.lockedioaccess')}
         summary={
           <>
-            {t.rich('lockaccess.lockaccess', {
+            {
+              // LINK HREF - FIX ME JIRA TICKET IOPID-982
+            }
+            {t.rich('thankyoupage.accesslocked', {
               strong: (chunks) => <strong>{chunks}</strong>,
+              link: (chunks) => <Link href={'#'}>{chunks}</Link>,
+              br: () => (
+                <>
+                  <br />
+                  <br />
+                </>
+              ),
             })}
           </>
         }
