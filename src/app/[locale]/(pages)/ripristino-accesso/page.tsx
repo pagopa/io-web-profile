@@ -8,7 +8,7 @@ import { Flows } from '../../_enums/Flows';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { storageUserOps } from '../../_utils/storage';
-import { commonBackgroundWithBack } from '../../_utils/styles';
+import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { trackEvent } from '../../_utils/mixpanel';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
@@ -43,7 +43,7 @@ const RestoreProfile = (): React.ReactElement => {
 
   return (
     <>
-      <Grid sx={commonBackgroundWithBack} item xs={12} sm={12}>
+      <Grid sx={commonBackgroundLightWithBack} item xs={12} sm={12}>
         <CommonLayoutRestore title={t('restore.restoreaccess')} summary={t('restore.login')} />
         {!isL3 && (
           <Grid item sm={10} md={7}>

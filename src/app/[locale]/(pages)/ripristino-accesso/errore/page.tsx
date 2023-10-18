@@ -18,14 +18,14 @@ const LoginKo = (): React.ReactElement => {
           title={t('error.somewrong')}
           summary={<span>{t('error.systemerrorcontactassistence')}</span>}
           firstButton={{
-            href: ROUTES.PROFILE_RESTORE,
-            variant: 'contained',
-            text: t('error.retry'),
-          }}
-          secondButton={{
             variant: 'outlined',
             href: ROUTES.PROFILE,
             text: t('common.backtoprofile'),
+          }}
+          secondButton={{
+            href: ROUTES.PROFILE_RESTORE,
+            variant: 'contained',
+            text: t('error.retry'),
           }}
         />
       </Grid>

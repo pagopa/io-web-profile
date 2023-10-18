@@ -157,7 +157,7 @@
       "thereisnothing": "Qui non c’è nulla!",
       "toomanytries": "Hai effettuato troppi tentativi di accesso",
       "toomuchtime": "È passato troppo tempo",
-      "twofactorneed": "Per motivi di sicurezza è richiesto l’accesso con un secondo fattore di autenticazione. Per avere più informazioni contatta il tuo fornitore di identità SPID."
+      "twofactorneed": "Per motivi di sicurezza, devi utilizzare un’identità con un livello di sicurezza superiore. Per avere più informazioni, contatta il tuo fornitore di identità SPID."
     },
     "lockaccess": {
       "accessidentity": "Qui trovi le identità digitali che hai utilizzato per entrare su IO. Se non hai effettuato tu l’accesso, puoi bloccarlo e mantenere i tuoi dati al sicuro. ",
@@ -213,7 +213,7 @@
       "restoreaccess": "Vuoi sbloccare l’accesso a IO?"
     },
     "thankyoupage": {
-      "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo codice di ripristino. Salvalo e tienilo al sicuro!",
+      "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
       "enterbackio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo.",
       "enterbackonio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },

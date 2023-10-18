@@ -28,6 +28,12 @@ const LogOutKo = (): React.ReactElement => {
             title={t('error.somewrong')}
             summary={<span>{t('error.systemerrorlogout')}</span>}
             firstButton={{
+              variant: 'outlined',
+              href: isL1 ? ROUTES.LOGIN : ROUTES.PROFILE,
+              text: isL1 ? t('common.close') : t('common.backtoprofile'),
+              onClick: () => trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_BACK_TO_PROFILE'),
+            }}
+            secondButton={{
               href: ROUTES.LOGOUT_CONFIRM,
               variant: 'contained',
               text: t('error.retry'),
@@ -35,12 +41,6 @@ const LogOutKo = (): React.ReactElement => {
                 trackEvent(
                   isL1 ? 'IO_SESSION_EXIT_TRY_AGAIN' : 'IO_PROFILE_SESSION_EXIT_TRY_AGAIN'
                 ),
-            }}
-            secondButton={{
-              variant: 'outlined',
-              href: isL1 ? ROUTES.LOGIN : ROUTES.PROFILE,
-              text: isL1 ? t('common.close') : t('common.backtoprofile'),
-              onClick: () => trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_BACK_TO_PROFILE'),
             }}
           />
         </Grid>

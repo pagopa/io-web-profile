@@ -7,17 +7,20 @@ import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
 import { Flows } from '../../../_enums/Flows';
 import { ROUTES } from '../../../_utils/routes';
-import { commonBackground } from '../../../_utils/styles';
+import { commonBackgroundLight } from '../../../_utils/styles';
 import { TransientErrorType } from '../../../_utils/api-utils';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import { storageLocaleOps } from '@/app/[locale]/_utils/storage';
 
 const ReactivateCode = (): React.ReactElement => {
   const [restoreCode, setRestoreCode] = useState('');
   const [isCodeNotValid, setIsCodeNotValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const pushWithLocale = useLocalePush();
+  const baseUrl = window.location.origin;
+  const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
   const t = useTranslations('ioesco');
 
@@ -35,7 +38,7 @@ const ReactivateCode = (): React.ReactElement => {
 
   const explanationrestorecodeRich = {
     link: (chunks: React.ReactNode) => (
-      <Link href="#" fontWeight={600}>
+      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
         {chunks}
       </Link>
     ),
@@ -65,7 +68,7 @@ const ReactivateCode = (): React.ReactElement => {
 
   return (
     <>
-      <Grid sx={commonBackground} container>
+      <Grid sx={commonBackgroundLight} container>
         <Grid item xs={12} justifySelf={'center'} sx={{ pb: { xs: 0, md: '10px' } }}>
           <Introduction
             title={t('restore.insertrestorecode')}

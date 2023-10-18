@@ -117,7 +117,12 @@ const Access = (): React.ReactElement => {
                 >
                   <Typography variant="body1"> {t('restore.whatisl3')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link href={'#'}>{t('common.more')}</Link>
+                    <Link href={'#'} target="blank">
+                      {t('common.more')}
+                    </Link>
+                    {
+                      // LINK HREF - FIX ME JIRA TICKET IOPID-982
+                    }
                   </Typography>
                 </Grid>
               </CardContent>
