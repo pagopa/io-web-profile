@@ -1,24 +1,28 @@
 User-agent: *
 
+Allow: /it/accedi/
 Disallow: /
-Disallow: /accedi
-Disallow: /accedi/errore
-Disallow: /esci
-Disallow: /esci/sessione-attiva
-Disallow: /esci/nessuna-sessione-attiva
-Disallow: /esci/operazione-completata
-Disallow: /esci/errore
-Disallow: /esci/conferma
-Disallow: /nessun-profilo
-Disallow: /blocco-accesso
-Disallow: /blocco-accesso/operazione-completata
-Disallow: /blocco-accesso/errore
-Disallow: /ripristino-accesso
-Disallow: /ripristino-accesso/inserisci-codice
-Disallow: /ripristino-accesso/operazione-completata
-Disallow: /ripristino-accesso/errore
-Disallow: /ripristino-accesso/accedi-livello-3
-Disallow: /expiredMagicLink
+Disallow: /it/
+Disallow: /it/ripristino-accesso/accedi-livello-2/
+Disallow: /it/ripristino-accesso/accedi-livello-3/
+Disallow: /it/esci/
+Disallow: /it/esci/operazione-completata/
+Disallow: /it/esci/errore/
+Disallow: /it/esci/conferma/
+Disallow: /it/blocco-accesso/
+Disallow: /it/blocco-accesso/errore/
+Disallow: /it/ripristino-accesso/
+Disallow: /it/ripristino-accesso/errore/
+Disallow: /it/ripristino-accesso/inserisci-codice/
+Disallow: /it/ripristino-accesso/operazione-completata/
+Disallow: /it/blocco-accesso/operazione-completata/
+Disallow: /it/ko/
+Disallow: /it/accedi/errore/
+Disallow: /it/blocco-accesso/link-scaduto/
+Disallow: /it/blocco-accesso/magic-link/
+Disallow: /it/accesso-bloccato/
+Disallow: /it/404/
+Disallow: /it/500/
 
 
 
