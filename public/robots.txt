@@ -23,6 +23,7 @@ Disallow: /it/blocco-accesso/magic-link/
 Disallow: /it/accesso-bloccato/
 Disallow: /it/404/
 Disallow: /it/500/
+Disallow: /it/informativa-privacy/
 
 
 
