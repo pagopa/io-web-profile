@@ -22,16 +22,16 @@ const IDPS: { identityProviders: IdentityProvider[]; richiediSpid: string } = {
       imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-posteid.png',
     },
     {
-      identifier: 'IntesiGroup',
-      entityId: 'intesiid',
-      name: 'Intesi Group SPID',
-      imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-intesigroupspid.png',
-    },
-    {
       identifier: 'Infocert',
       entityId: 'infocertid',
       name: 'Infocert ID',
       imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-infocertid.png',
+    },
+    {
+      identifier: 'IntesiGroup',
+      entityId: 'intesiid',
+      name: 'Intesi Group SPID',
+      imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-intesigroupspid.png',
     },
     {
       identifier: 'Register',
