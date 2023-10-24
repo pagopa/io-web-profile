@@ -21,6 +21,7 @@ export const ROUTES = {
   ALREADY_LOCKED: '/accesso-bloccato/',
   NOT_FOUND_PAGE: '/404/',
   INTERNAL_ERROR: '/500/',
+  PRIVACY_POLICY: '/informativa-privacy/',
 };
 
 // Get an array of values from the ROUTES object
@@ -34,6 +35,7 @@ export const PUBLIC_ROUTES = [
   ROUTES.MAGIC_LINK,
   ROUTES.NOT_FOUND_PAGE,
   ROUTES.INTERNAL_ERROR,
+  ROUTES.PRIVACY_POLICY,
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
