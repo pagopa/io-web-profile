@@ -115,6 +115,15 @@ export { IDPS };
 export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true';
 
 export const goCIE = (spidLevel: string) => {
+  // MANDATORY !!
+  // TO BE FIXED WHEN CIE WILL BE AVAILABLE
+  // MISSING LOGIN INFO ON loginInfo VAR for MIXPANEL LOGIN TECH EVENT
+  //
+  // storageLoginInfoOps.write({
+  //   idpId: 'CIE',
+  //   idpName: 'CIE',
+  //   idpSecurityLevel: spidLevel,
+  // });
   window.location.assign(
     `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${process.env.NEXT_PUBLIC_SPID_CIE_ENTITY_ID}&authLevel=Spid${spidLevel}`
   );
