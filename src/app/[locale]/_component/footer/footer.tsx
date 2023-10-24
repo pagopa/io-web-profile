@@ -4,7 +4,6 @@ import {
   Footer as MuiItaliaFooter,
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
-// import { CONFIG } from '../../config/env';
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { storageLocaleOps } from '../../_utils/storage';
