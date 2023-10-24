@@ -116,7 +116,7 @@ export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG ==
 
 export const goCIE = (spidLevel: string) => {
   // MANDATORY !!
-  // TO BE FIXED WHEN CIE WILL BE AVAILABLE
+  // FIX ME WHEN CIE WILL BE AVAILABLE
   // MISSING LOGIN INFO ON loginInfo VAR for MIXPANEL LOGIN TECH EVENT
   //
   // storageLoginInfoOps.write({

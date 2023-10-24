@@ -94,6 +94,7 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
         },
         {
           label: t('cookiesperefercies'),
+          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
           onClick: handleCookiePreferencies,
           ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
