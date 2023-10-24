@@ -25,6 +25,12 @@ async function getMessages(locale: string) {
   }
 }
 
+export const metadata = {
+  title: 'Il tuo profilo su IO',
+  description:
+    'In questa pagina trovi i dati del tuo profilo su IO e le informazioni sull’accesso all’app.',
+};
+
 export default async function RootLayoutWithLocaleAndTheme({
   children,
   params: { locale },
