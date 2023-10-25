@@ -3,7 +3,7 @@ import { useRouter } from 'next-intl/client';
 
 import { useLocale } from 'next-intl';
 import { usePathname } from 'next-intl/client';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useLocalePush from '../_hooks/useLocalePush';
 import useToken from '../_hooks/useToken';
 import {
@@ -15,7 +15,10 @@ import {
 } from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
 import { defaultLocale, localeList } from '../layout';
+import { initOneTrust } from '../_utils/onetrust';
+import { isBrowser } from '../_utils/common';
 import Loader from './loader/loader';
+import '../_styles/cookieBanner.css';
 
 type LoginStatusIdle = {
   status: 'IDLE';
@@ -38,6 +41,12 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const pathName = usePathname();
   const locale = useLocale();
   const router = useRouter();
+
+  useMemo(() => {
+    if (isBrowser()) {
+      return initOneTrust();
+    }
+  }, [isBrowser()]);
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {

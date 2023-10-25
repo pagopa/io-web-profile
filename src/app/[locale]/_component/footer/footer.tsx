@@ -15,8 +15,16 @@ type IOFooterProps = {
   onExit?: (exitAction: () => void) => void;
 };
 
+declare const OneTrust: {
+  ToggleInfoDisplay: () => void;
+};
+
 export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
+
+  const handleCookiePreferencies = () => {
+    OneTrust.ToggleInfoDisplay();
+  };
 
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
@@ -81,6 +89,13 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           label: t('dataprotection'),
           href: 'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
           ariaLabel: ariaLabel('dataprotection'),
+          linkType: 'internal',
+        },
+        {
+          label: t('cookiesperefercies'),
+          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
+          onClick: handleCookiePreferencies,
+          ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
         },
         {

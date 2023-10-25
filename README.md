@@ -54,7 +54,12 @@ Once the environment is loaded, press the "play icon" to start the Mockoon serve
 io-web-profile/
 - mock/
 - openApi/
+- public/
+    - assets/
+    - login/
+    - onetrust/
 - src/
+    -  api/
     -  dictionaries/
     -  app/[locale]/
         - (pages)/
@@ -70,7 +75,11 @@ io-web-profile/
 
 ``openApi/``: This folder contains files related to OpenAPI specification.
 
+``public/``:  This folder contains publicly accessible files added during the package build (CIE/SPID metadata, OneTrust SDK for cookies consent banner and the product list for the footer)
+
 ``src/``: This is the root folder of the source code, where all the application code resides.
+
+``api/``: This folder contains API clients
 
 ``dictionaries/``: This folder contain files related to localization or dictionaries used to provide translations or language-specific content in the application.
 
@@ -109,6 +118,9 @@ yarn generate
 ```
     
 ## Run
+
+Make sure that the environment variables in the nev files are filled in, refer to the example file (.env.example). 
+If you are in development mode, remember to add ```NEXT_PUBLIC_DEV_MODE=true```
 
 To run the webapp locally:
 
