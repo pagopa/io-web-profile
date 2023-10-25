@@ -4,22 +4,34 @@ import {
   Footer as MuiItaliaFooter,
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
-// import { CONFIG } from '../../config/env';
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
+import { storageLocaleOps } from '../../_utils/storage';
+import { ROUTES } from '../../_utils/routes';
+import { isBrowser, isDevMode } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
   onExit?: (exitAction: () => void) => void;
 };
 
+declare const OneTrust: {
+  ToggleInfoDisplay: () => void;
+};
+
 export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
+
+  const handleCookiePreferencies = () => {
+    OneTrust.ToggleInfoDisplay();
+  };
 
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
+  const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
+  const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -57,7 +69,7 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       links: [
         {
           label: t('privacypolicy'),
-          href: 'https://www.pagopa.it/it/privacy-policy/',
+          href: `${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`,
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
         },
@@ -77,6 +89,13 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           label: t('dataprotection'),
           href: 'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
           ariaLabel: ariaLabel('dataprotection'),
+          linkType: 'internal',
+        },
+        {
+          label: t('cookiesperefercies'),
+          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
+          onClick: handleCookiePreferencies,
+          ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
         },
         {

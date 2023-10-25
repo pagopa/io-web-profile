@@ -8,8 +8,9 @@ import { usePathname } from 'next-intl/client';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
-import { decodeObfuscatedEmail, isBrowser } from '../../_utils/common';
-import { initAnalytics, trackEvent } from '../../_utils/mixpanel';
+import { decodeObfuscatedEmail } from '../../_utils/common';
+import { trackEvent } from '../../_utils/mixpanel';
+import { useConsent } from '../../_hooks/useConsent';
 
 const Header = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -58,11 +59,13 @@ const Header = (): React.ReactElement => {
     [userMenuActions]
   );
 
-  useMemo(() => {
-    if (isBrowser()) {
-      return initAnalytics();
-    }
-  }, [isBrowser()]);
+  // useMemo(() => {
+  //   if (isBrowser()) {
+  //     return initAnalytics();
+  //   }
+  // }, [isBrowser()]);
+
+  useConsent();
 
   return (
     <>

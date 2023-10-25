@@ -36,8 +36,20 @@ const ExpiredMagicLink = () => {
           if (res.jwt) {
             storageTokenOps.write(res.jwt);
             storageUserOps.write(userFromJwtToken(res.jwt));
-            pushWithLocale(ROUTES.PROFILE_BLOCK);
           }
+        })
+        .then(() => {
+          WebProfileApi.getUserSessionState()
+            .then((res) => {
+              if (!res.access_enabled) {
+                pushWithLocale(ROUTES.ALREADY_LOCKED);
+              } else {
+                pushWithLocale(ROUTES.PROFILE_BLOCK);
+              }
+            })
+            .catch(() => {
+              pushWithLocale(ROUTES.INTERNAL_ERROR);
+            });
         })
         .catch(() => {
           pushWithLocale(ROUTES.EXPIRED_MAGIC_LINK);

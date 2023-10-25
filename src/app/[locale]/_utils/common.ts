@@ -54,3 +54,8 @@ export const decodeObfuscatedEmail = (encodedEmail: string): string =>
   encodedEmail.replace(/&#@!(\d+);/g, function (match, dec) {
     return String.fromCharCode(dec);
   });
+
+export const isEnvConfigEnabled = (envVariable: string | undefined): boolean =>
+  envVariable === 'true' ? true : false;
+
+export const isDevMode = (): boolean => process.env.NEXT_PUBLIC_DEV_MODE === 'true';

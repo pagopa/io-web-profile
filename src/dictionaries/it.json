@@ -157,7 +157,7 @@
       "thereisnothing": "Qui non c’è nulla!",
       "toomanytries": "Hai effettuato troppi tentativi di accesso",
       "toomuchtime": "È passato troppo tempo",
-      "twofactorneed": "Per motivi di sicurezza è richiesto l’accesso con un secondo fattore di autenticazione. Per avere più informazioni contatta il tuo fornitore di identità SPID."
+      "twofactorneed": "Per motivi di sicurezza, devi utilizzare un’identità con un livello di sicurezza superiore. Per avere più informazioni, contatta il tuo fornitore di identità SPID."
     },
     "lockaccess": {
       "accessidentity": "Qui trovi le identità digitali che hai utilizzato per entrare su IO. Se non hai effettuato tu l’accesso, puoi bloccarlo e mantenere i tuoi dati al sicuro. ",
@@ -181,7 +181,7 @@
     "lplogoutpostlogin": {
       "activesession": "Al momento hai una sessione attiva sull’app IO con <strong>{deviceModel}</strong>. Se hai perso il dispositivo o non lo riconosci, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.",
       "lastdateactivation": "Sessione valida fino al {date}",
-      "noactivesession": "Al momento non hai attiva nessuna sessione su IO. Se non hai più il tuo dispositivo i tuoi dati sono al sicuro. \nPuoi accedere nuovamente con le tue credenziali SPID o CIE da qualsiasi dispositivo."
+      "noactivesession": "Al momento non hai nessuna sessione attiva. Anche se non hai più il tuo dispositivo, le informazioni su IO sono al sicuro. \nPuoi accedere nuovamente con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },
     "profile": {
       "activesession": "Sessione attiva in app",
@@ -205,8 +205,7 @@
       "notvalidcode": "Codice non valido, controlla e riprova",
       "restorecodecopied": "Codice di ripristino copiato",
       "restoredaccess": "Accesso ripristinato",
-      "unlockaccessl2": "Sblocca l’accesso con livello 2",
-      "unlockl3app": "Se hai bloccato l’accesso a IO con il livello di sicurezza 3, ripristina l’accesso all’app. ",
+      "unlockl3app": "Per poter usare l'app, devi prima sbloccare l'accesso a IO. ",
       "whatisl3": "Cos’è un’identità di livello 3?",
       "login": "Se hai bloccato l’accesso all’app IO per ragioni di sicurezza, ripristina l’accesso seguendo le indicazioni.\n\nQui trovi le identità digitali che hai utilizzato per entrare su IO e verificare se sono abilitate. ",
       "restoreprofile": "Sblocca l’accesso",
@@ -214,7 +213,7 @@
       "restoreaccess": "Vuoi sbloccare l’accesso a IO?"
     },
     "thankyoupage": {
-      "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un livello di sicurezza 3.\n\nIn alternativa, puoi sbloccare l’accesso all’app attraverso questo codice di ripristino. Salvalo e tienilo al sicuro!",
+      "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
       "enterbackio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo.",
       "enterbackonio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },
@@ -224,7 +223,9 @@
       "nosession": "Non c’è nessuna sessione di IO attiva"
     },
     "magiclink": {
-      "restore": "Se vuoi ripristinare l’accesso all’app IO, accedi con le tue credenziali SPID o CIE e segui i passaggi indicati."
-     }
+      "restore": "Se vuoi ripristinare l’accesso all’app IO, accedi con le tue credenziali SPID o CIE e segui i passaggi indicati.",
+      "errorlockedaccess": "L’accesso a IO è già bloccato",
+      "errorlockedaccessl3": "Puoi entrare in app solo con la tua identità digitale con un <link>livello di sicurezza 3</link>."
+    }
   }
 }

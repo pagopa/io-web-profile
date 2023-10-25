@@ -65,7 +65,7 @@ export function IdpList({ spidLevel }: IdpList) {
     });
     removeToken();
     window.location.assign(
-      `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}`
+      `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
     );
   };
 

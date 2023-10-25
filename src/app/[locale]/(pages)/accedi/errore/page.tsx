@@ -13,32 +13,77 @@ const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco');
   const errorCode = searchParams.get('errorCode');
-  const ERROR_TITLE = t('error.loginerror');
   const pushWithLocale = useLocalePush();
   const loginInfo = storageLoginInfoOps.read();
+  const DEFAULT_ERROR_TITLE = 'common.noaccesspossible';
 
-  const renderErrorSummary = (errorCode: string | null) => {
+  type errorMessage = {
+    title: string;
+    message: string;
+    hasClose: boolean;
+    hasRetry: boolean;
+  };
+
+  const renderErrorMessage = (errorCode: string | null): errorMessage => {
     if (errorCode == null) {
-      return t('error.loginerrorretry'); // Generic error
+      return {
+        title: t(DEFAULT_ERROR_TITLE),
+        message: t('error.loginerrorretry'),
+        hasClose: true,
+        hasRetry: true,
+      }; // Generic error
     }
 
     switch (errorCode) {
       case '19':
-        return t('error.credentialerror');
+        return {
+          title: t('error.toomanytries'),
+          message: t('error.credentialerror'),
+          hasClose: true,
+          hasRetry: true,
+        };
       case '20':
-        return t('error.twofactorneed');
+        return {
+          title: t(DEFAULT_ERROR_TITLE),
+          message: t('error.twofactorneed'),
+          hasClose: true,
+          hasRetry: false,
+        };
       case '21':
-        return t('error.sessionexpired');
+        return {
+          title: t('error.toomuchtime'),
+          message: t('error.sessionexpired'),
+          hasClose: true,
+          hasRetry: true,
+        };
       case '22':
-        return t('error.portalconsents');
+        return {
+          title: t('error.noconsents'),
+          message: t('error.portalconsents'),
+          hasClose: true,
+          hasRetry: true,
+        };
       case '23':
-        return t('error.spidrevoked');
+        return {
+          title: t('error.identityrevoked'),
+          message: t('error.spidrevoked'),
+          hasClose: false,
+          hasRetry: true,
+        };
       case '25':
-        return t('error.cancellogin');
-      case '1001':
-        return t('error.minage');
+        return {
+          title: t('error.cancelaccess'),
+          message: t('error.cancellogin'),
+          hasClose: true,
+          hasRetry: true,
+        };
       default:
-        return t('error.loginerrorretry');
+        return {
+          title: t(DEFAULT_ERROR_TITLE),
+          message: t('error.loginerrorretry'),
+          hasClose: true,
+          hasRetry: true,
+        };
     }
   };
 
@@ -85,7 +130,7 @@ const LoginErrorPage = () => {
                 textAlign: 'center',
               }}
             >
-              {ERROR_TITLE}
+              {renderErrorMessage(errorCode).title}
             </Typography>
           </Grid>
           <Grid item xs={12} pb={4}>
@@ -98,7 +143,7 @@ const LoginErrorPage = () => {
                 textAlign: 'center',
               }}
             >
-              {renderErrorSummary(errorCode)}
+              {renderErrorMessage(errorCode).message}
             </Typography>
           </Grid>
           {typeof errorCode === 'string' && errorCode === '1001' ? (
@@ -109,18 +154,33 @@ const LoginErrorPage = () => {
             </Grid>
           ) : (
             <Grid display={'flex'} justifyContent="space-around" flexDirection={'column'}>
-              <Grid item xs={12} container justifyContent="center">
-                <Grid item xs={6} justifySelf="center" pr={3}>
-                  <Button variant="outlined" onClick={handleCancelBtn}>
-                    {t('common.cancel')}
-                  </Button>
-                </Grid>
+              {renderErrorMessage(errorCode).hasRetry && !renderErrorMessage(errorCode).hasClose ? (
                 <Grid item xs={6} justifySelf="center">
                   <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
                     {t('error.retry')}
                   </Button>
                 </Grid>
-              </Grid>
+              ) : !renderErrorMessage(errorCode).hasRetry &&
+                renderErrorMessage(errorCode).hasClose ? (
+                <Grid item xs={6} justifySelf="center">
+                  <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
+                    {t('common.close')}
+                  </Button>
+                </Grid>
+              ) : (
+                <Grid item xs={12} container justifyContent="center">
+                  <Grid item xs={6} justifySelf="center" pr={3}>
+                    <Button variant="outlined" onClick={handleCancelBtn}>
+                      {t('common.close')}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6} justifySelf="center">
+                    <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
+                      {t('error.retry')}
+                    </Button>
+                  </Grid>
+                </Grid>
+              )}
             </Grid>
           )}
         </Grid>
