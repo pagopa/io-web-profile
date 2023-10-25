@@ -74,6 +74,13 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           linkType: 'internal',
         },
         {
+          label: t('cookiesperefercies'),
+          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
+          onClick: handleCookiePreferencies,
+          ariaLabel: ariaLabel('cookiesperefercies'),
+          linkType: 'internal',
+        },
+        {
           label: t('certifications'),
           href: 'https://www.pagopa.it/it/certificazioni/',
           ariaLabel: ariaLabel('certifications'),
@@ -89,13 +96,6 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           label: t('dataprotection'),
           href: 'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
           ariaLabel: ariaLabel('dataprotection'),
-          linkType: 'internal',
-        },
-        {
-          label: t('cookiesperefercies'),
-          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
-          onClick: handleCookiePreferencies,
-          ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
         },
         {
@@ -162,6 +162,13 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       label: t('privacypolicy'),
       href: 'https://www.pagopa.it/it/privacy-policy/',
       ariaLabel: ariaLabel('privacypolicy'),
+      linkType: 'internal',
+    },
+    {
+      label: t('cookiesperefercies'),
+      href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
+      onClick: handleCookiePreferencies,
+      ariaLabel: ariaLabel('cookiesperefercies'),
       linkType: 'internal',
     },
     {
