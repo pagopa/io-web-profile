@@ -4,9 +4,11 @@ import {
   Footer as MuiItaliaFooter,
   PreLoginFooterLinksType,
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
-// import { CONFIG } from '../../config/env';
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
+import { storageLocaleOps } from '../../_utils/storage';
+import { ROUTES } from '../../_utils/routes';
+import { isBrowser, isDevMode } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
@@ -20,6 +22,8 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
+  const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
+  const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -57,7 +61,7 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       links: [
         {
           label: t('privacypolicy'),
-          href: 'https://www.pagopa.it/it/privacy-policy/',
+          href: `${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`,
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
         },
