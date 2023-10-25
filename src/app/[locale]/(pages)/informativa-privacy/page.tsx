@@ -7,6 +7,9 @@ import { onLoadPrivacyPolicy } from '../../_utils/onetrust';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 
+// eslint-disable-next-line sonarjs/no-duplicate-string
+const addImportanttoCssProp = (property: string) => property + ' !important';
+
 const OneTrustPrivacyNotice = styled('div')(() => ({
   padding: theme.spacing(2),
   fontFamily: theme.typography.fontFamily,
@@ -14,15 +17,22 @@ const OneTrustPrivacyNotice = styled('div')(() => ({
   a: {
     color: theme.palette.primary.main,
   },
+  button: {
+    backgroundColor: addImportanttoCssProp(theme.palette.primary.dark),
+    borderColor: addImportanttoCssProp(theme.palette.primary.dark),
+    color: addImportanttoCssProp(theme.palette.background.paper),
+    fontFamily: theme.typography.fontFamily,
+    fontSize: theme.typography.fontSize,
+  },
   backgroundColor: 'transparent',
   '.otnotice-menu': {
     border: 'none',
     position: 'absolute',
     background: 'none',
-    'box-shadow': 'none',
+    boxShadow: 'none',
   },
   '.otnotice-menu-section': {
-    'font-size': 'large !important',
+    fontSize: addImportanttoCssProp('large'),
   },
 }));
 
@@ -38,7 +48,7 @@ export default function PolicyPage() {
     <>
       <OneTrustPrivacyNotice id={`otnotice-${POLICY_ID}`} className="otnotice" />
       <Script
-        src="https://privacyportalde-cdn.onetrust.com/privacy-notice-scripts/otnotice-1.0.min.js"
+        src="/onetrust/otnotice-1.0.min.js"
         type="text/javascript"
         id="otprivacy-notice-script"
         onLoad={() => handleLoadPrivacyPolicy()}
