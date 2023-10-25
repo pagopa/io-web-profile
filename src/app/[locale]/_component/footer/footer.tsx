@@ -15,8 +15,16 @@ type IOFooterProps = {
   onExit?: (exitAction: () => void) => void;
 };
 
+declare const OneTrust: {
+  ToggleInfoDisplay: () => void;
+};
+
 export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
+
+  const handleCookiePreferencies = () => {
+    OneTrust.ToggleInfoDisplay();
+  };
 
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
@@ -63,6 +71,13 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           label: t('privacypolicy'),
           href: `${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`,
           ariaLabel: ariaLabel('privacypolicy'),
+          linkType: 'internal',
+        },
+        {
+          label: t('cookiesperefercies'),
+          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
+          onClick: handleCookiePreferencies,
+          ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
         },
         {
@@ -147,6 +162,13 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       label: t('privacypolicy'),
       href: 'https://www.pagopa.it/it/privacy-policy/',
       ariaLabel: ariaLabel('privacypolicy'),
+      linkType: 'internal',
+    },
+    {
+      label: t('cookiesperefercies'),
+      href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
+      onClick: handleCookiePreferencies,
+      ariaLabel: ariaLabel('cookiesperefercies'),
       linkType: 'internal',
     },
     {

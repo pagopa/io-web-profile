@@ -1,4 +1,5 @@
 import mixpanel from 'mixpanel-browser';
+import { hasConsent } from '../_hooks/useConsent';
 
 const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
 const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK === 'true' ? true : false;
@@ -44,7 +45,7 @@ export const trackEvent = (
   callback?: () => void
 ): void => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (ANALYTICS_ENABLE && (window as any).initMixPanel) {
+  if (ANALYTICS_ENABLE && (window as any).initMixPanel && hasConsent()) {
     if (ANALYTICS_MOCK) {
       // eslint-disable-next-line no-console
       console.log(event_name, properties);
