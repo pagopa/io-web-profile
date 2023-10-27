@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Non è stato possibile uscire da IO',
-  description:
-    'C’è un problema sui nostri sistemi, non è possibile uscire da IO in questo momento. Riprova ad uscire tra poco.',
-};
+  return {
+    title: messages.ioesco.metadati.erroretitle,
+    description: messages.ioesco.metadati.erroredescription,
+  };
+}
 export default function LogOutErrorLayout({ children }: Props) {
   return children;
 }

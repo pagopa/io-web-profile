@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { Props } from '../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Sblocca l’accesso a IO',
-  description:
-    'Se hai bloccato l’accesso all’app IO per ragioni di sicurezza, puoi ripristinare l’accesso seguendo le indicazioni in questa pagina.',
-};
+  return {
+    title: messages.ioesco.metadati.ripristinoaccessol2title,
+    description: messages.ioesco.metadati.ripristinoaccessol2description,
+  };
+}
 export default function RestoreAccessLayout({ children }: Props) {
   return children;
 }

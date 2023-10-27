@@ -1,14 +1,15 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Sblocca l’accesso a IO senza il codice di ripristino',
-  description:
-    'Se hai un’identità SPID o CIE con un livello di sicurezza 3, non è necessario inserire il codice di ripristino per sbloccare l’app IO.',
-};
+  return {
+    title: messages.ioesco.metadati.ripristinoaccessol3title,
+    description: messages.ioesco.metadati.ripristinoaccessol3description,
+  };
+}
+
 export default function RestoreAccessAccessL3Layout({ children }: Props) {
   return children;
 }

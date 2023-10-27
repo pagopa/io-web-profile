@@ -1,14 +1,15 @@
-import { ReactNode } from 'react';
+import { Props } from '../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Esci da IO',
-  description:
-    'Se hai perso o hanno rubato il tuo dispositivo e hai una sessione attiva su IO, esci dall’app per mantenere i tuoi dati al sicuro.',
-};
+  return {
+    title: messages.ioesco.metadati.escititle,
+    description: messages.ioesco.metadati.escidescription,
+  };
+}
+
 export default function LogOutLayout({ children }: Props) {
   return children;
 }

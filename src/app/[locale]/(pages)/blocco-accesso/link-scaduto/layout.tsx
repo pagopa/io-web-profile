@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Il link per bloccare l’accesso a IO è scaduto',
-  description:
-    'Il link per bloccare l’accesso a IO non è più valido. Per bloccare l’accesso a IO, accedi con le tue credenziali SPID o CIE.',
-};
+  return {
+    title: messages.ioesco.metadati.bloccoaccessomagiclinkscadutotitle,
+    description: messages.ioesco.metadati.bloccoaccessomagiclinkscadutodescription,
+  };
+}
 export default function MagicLinkExpiredLayout({ children }: Props) {
   return children;
 }

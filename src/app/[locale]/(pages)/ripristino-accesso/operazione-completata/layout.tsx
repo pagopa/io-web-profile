@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Hai sbloccato l’accesso a IO',
-  description:
-    'L’accesso all’app IO è sbloccato. Puoi entrare di nuovo in app con tutte le tue identità SPID o CIE.',
-};
+  return {
+    title: messages.ioesco.metadati.ripristinoacessoopcompletatatitle,
+    description: messages.ioesco.metadati.ripristinoacessoopcompletatadescription,
+  };
+}
 export default function RestoreAccessCompletedLayout({ children }: Props) {
   return children;
 }

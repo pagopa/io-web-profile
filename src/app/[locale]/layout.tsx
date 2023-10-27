@@ -9,10 +9,11 @@ import { Providers } from './_redux/provider';
 export const localeList = ['it'];
 export const defaultLocale = 'it';
 
-type Props = {
+export type Props = {
   children: ReactNode;
   params: { locale: string };
 };
+
 export async function generateStaticParams() {
   return localeList.map((locale) => ({ locale }));
 }
@@ -25,11 +26,15 @@ async function getMessages(locale: string) {
   }
 }
 
-export const metadata = {
-  title: 'Il tuo profilo su IO',
-  description:
-    'In questa pagina trovi i dati del tuo profilo su IO e le informazioni sull’accesso all’app.',
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../dictionaries/${locale}.json`)).default;
+
+  return {
+    title: messages.ioesco.metadati.profilotitle,
+    description: messages.ioesco.metadati.profilodescription,
+  };
+}
 
 export default async function RootLayoutWithLocaleAndTheme({
   children,

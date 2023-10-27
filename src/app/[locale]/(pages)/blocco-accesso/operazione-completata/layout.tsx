@@ -1,14 +1,15 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Hai bloccato l’accesso all’app IO',
-  description:
-    'Hai bloccato l’accesso all’app IO. Puoi sbloccarlo entrando in app con un’identità digitale con un livello di sicurezza 3 o con il codice di ripristino.',
-};
+  return {
+    title: messages.ioesco.metadati.bloccoaccessoopcompletatatitle,
+    description: messages.ioesco.metadati.bloccoaccessoopcompletatadescription,
+  };
+}
+
 export default function LockAccessCompleteLayout({ children }: Props) {
   return children;
 }

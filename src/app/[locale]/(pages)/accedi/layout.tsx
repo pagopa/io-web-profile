@@ -1,14 +1,15 @@
-import { ReactNode } from 'react';
+import { Props } from '../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Entra su IO, l’app dei servizi pubblici',
-  description:
-    'Entra nel tuo profilo di IO per vedere i tuoi dati e ottenere le informazioni sull’accesso all’app',
-};
+  return {
+    title: messages.ioesco.metadati.accedititle,
+    description: messages.ioesco.metadati.accedidescription,
+  };
+}
+
 export default function AccessLayout({ children }: Props) {
   return children;
 }

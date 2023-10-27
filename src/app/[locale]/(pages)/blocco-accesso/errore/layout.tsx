@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'Non è possibile bloccare l’app IO',
-  description:
-    'C’è un problema sui nostri sistemi, non è possibile bloccare l’accesso a IO in questo momento. Riprova più tardi o contatta l’assistenza.',
-};
+  return {
+    title: messages.ioesco.metadati.bloccoaccessoerroretitle,
+    description: messages.ioesco.metadati.bloccoaccessoerroredescription,
+  };
+}
 export default function LockAccessErrorLayout({ children }: Props) {
   return children;
 }

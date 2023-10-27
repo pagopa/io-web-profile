@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
+import { Props } from '../../../layout';
 
-type Props = {
-  children: ReactNode;
-};
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
-export const metadata = {
-  title: 'C’è un problema temporaneo',
-  description:
-    'C’è un problema sui nostri sistemi, non è possibile sbloccare l’app IO in questo momento. Riprova tra poco.',
-};
+  return {
+    title: messages.ioesco.metadati.ripristinoaccessoerroretitle,
+    description: messages.ioesco.metadati.ripristinoaccessoerroredescription,
+  };
+}
 export default function RestoreAccessErrorLayout({ children }: Props) {
   return children;
 }
