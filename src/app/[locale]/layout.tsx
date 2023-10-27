@@ -5,14 +5,13 @@ import Footer from './_component/footer/footer';
 import Header from './_component/header/header';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
+import { localeList, defaultLocale } from './_utils/common';
 
-export const localeList = ['it'];
-export const defaultLocale = 'it';
-
-type Props = {
+export type Props = {
   children: ReactNode;
   params: { locale: string };
 };
+
 export async function generateStaticParams() {
   return localeList.map((locale) => ({ locale }));
 }
@@ -23,6 +22,16 @@ async function getMessages(locale: string) {
   } catch (error) {
     return (await import(`../../dictionaries/${defaultLocale}.json`)).default;
   }
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../dictionaries/${locale}.json`)).default;
+
+  return {
+    title: messages.ioesco.metadati.profilotitle,
+    description: messages.ioesco.metadati.profilodescription,
+  };
 }
 
 export default async function RootLayoutWithLocaleAndTheme({
