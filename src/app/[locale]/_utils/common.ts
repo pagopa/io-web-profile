@@ -3,6 +3,9 @@ import { MagicLink } from '../_model/MagicLink';
 import { storageLocaleOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
+export const localeList = ['it'];
+export const defaultLocale = 'it';
+
 export const isBrowser = () => typeof window !== 'undefined';
 
 export const addSpacesEvery3Chars = (input: string, startIndex = 0): string => {

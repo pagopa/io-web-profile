@@ -14,9 +14,9 @@ import {
   ROUTES,
 } from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
-import { defaultLocale, localeList } from '../layout';
+
 import { initOneTrust } from '../_utils/onetrust';
-import { isBrowser } from '../_utils/common';
+import { defaultLocale, isBrowser, localeList } from '../_utils/common';
 import Loader from './loader/loader';
 import '../_styles/cookieBanner.css';
 

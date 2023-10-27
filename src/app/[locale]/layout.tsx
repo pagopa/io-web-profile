@@ -5,9 +5,7 @@ import Footer from './_component/footer/footer';
 import Header from './_component/header/header';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
-
-export const localeList = ['it'];
-export const defaultLocale = 'it';
+import { localeList, defaultLocale } from './_utils/common';
 
 export type Props = {
   children: ReactNode;
