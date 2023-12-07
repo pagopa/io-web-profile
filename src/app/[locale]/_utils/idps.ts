@@ -1,4 +1,6 @@
+import { SpidLevels } from '../_component/selectIdp/idpList';
 import { isEnvConfigEnabled } from './common';
+import { storageLoginInfoOps } from './storage';
 
 export type IdentityProvider = {
   identifier: string;
@@ -120,17 +122,17 @@ export { IDPS };
 // TODO remove this temporary flag isIdpKnownafter getSessionsList API is ready in a future version
 export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true';
 
-export const goCIE = (spidLevel: string) => {
+export const goCIE = (spidLevel: SpidLevels) => {
   // MANDATORY !!
   // FIX ME WHEN CIE WILL BE AVAILABLE
   // MISSING LOGIN INFO ON loginInfo VAR for MIXPANEL LOGIN TECH EVENT
   //
-  // storageLoginInfoOps.write({
-  //   idpId: 'CIE',
-  //   idpName: 'CIE',
-  //   idpSecurityLevel: spidLevel,
-  // });
+  storageLoginInfoOps.write({
+    idpId: 'cie',
+    idpName: 'CIE',
+    idpSecurityLevel: spidLevel,
+  });
   window.location.assign(
-    `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${process.env.NEXT_PUBLIC_SPID_CIE_ENTITY_ID}&authLevel=Spid${spidLevel}&RelayState=ioapp`
+    `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${process.env.NEXT_PUBLIC_SPID_CIE_ENTITY_ID}&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
   );
 };

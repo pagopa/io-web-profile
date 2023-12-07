@@ -28,7 +28,7 @@ const Init = (): React.ReactElement => {
   const handleCIELogin = () => {
     trackEvent('IO_SESSION_EXIT_LOGIN_CIE');
     trackEvent('IO_LOGIN_START');
-    goCIE(spidLevel.type);
+    goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {

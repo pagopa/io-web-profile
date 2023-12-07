@@ -19,7 +19,7 @@ const Access = (): React.ReactElement => {
 
   const handleCIELogin = () => {
     trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_CIE');
-    goCIE(spidLevel.type);
+    goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {

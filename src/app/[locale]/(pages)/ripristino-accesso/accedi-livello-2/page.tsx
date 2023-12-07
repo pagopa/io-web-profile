@@ -20,7 +20,7 @@ const Access = (): React.ReactElement => {
 
   const handleCIELogin = () => {
     removeToken();
-    goCIE(spidLevel.type);
+    goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {
