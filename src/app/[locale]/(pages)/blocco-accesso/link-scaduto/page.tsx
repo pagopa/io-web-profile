@@ -93,7 +93,7 @@ const ExpiredMagicLink = () => {
                 variant="contained"
                 fullWidth
                 startIcon={<CieIcon />}
-                onClick={() => goCIE(spidLevel.type)}
+                onClick={() => goCIE(spidLevel)}
               >
                 {t('common.logincie')}
               </Button>

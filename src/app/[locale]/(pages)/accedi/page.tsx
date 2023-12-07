@@ -85,7 +85,7 @@ const Access = (): React.ReactElement => {
   const handleCIELogin = () => {
     trackEvent('IO_PROFILE_LOGIN_CIE');
     trackEvent('IO_LOGIN_START');
-    goCIE(spidLevel.type);
+    goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {
