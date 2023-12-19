@@ -99,7 +99,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
         accordionItems={getEntriesByFlow(flow)}
         theme="light"
         layout="center"
-        title={t('commonfaq.faqtitle')}
+        title={t('common.faqtitle')}
       />
     </>
   );
