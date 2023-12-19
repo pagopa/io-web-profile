@@ -1,5 +1,6 @@
 export const enum Flows {
-  DEFAULT = 'DEFAULT',
+  LOGOUT = 'LOGOUT',
   BLOCK = 'BLOCK',
   RESTORE = 'RESTORE',
+  RESTOREL3 = 'RESTOREL3',
 }

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Flows } from '../../_enums/Flows';
@@ -11,75 +12,70 @@ type FAQEntries = {
   content: string;
 };
 
-export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
+export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
   const t = useTranslations('ioesco');
   // #region entries
-  const defaultEntries: FAQEntries[] = [
+  const logoutEntries: FAQEntries[] = [
     {
-      header: t('commonfaq.firstquestion'),
-      content: t('commonfaq.firstresponse'),
+      header: t('logoutfaq.firstquestion'),
+      content: t('logoutfaq.firstresponse'),
     },
     {
-      header: t('commonfaq.secondquestion'),
-      content: t('commonfaq.secondresponse'),
+      header: t('logoutfaq.secondquestion'),
+      content: t('logoutfaq.secondresponse'),
     },
     {
-      header: t('commonfaq.thirdquestion'),
-      content: t('commonfaq.thirdresponse'),
-    },
-    {
-      header: t('commonfaq.fourthquestion'),
-      content: t('commonfaq.fourthresponse'),
+      header: t('logoutfaq.thirdquestion'),
+      content: t('logoutfaq.thirdresponse'),
     },
   ];
 
   const blockEntries: FAQEntries[] = [
     {
-      header: t('commonfaq.utilitylockprofile'),
-      content: t('commonfaq.utilitylockprofileresponse'),
+      header: t('blockfaq.firstquestion'),
+      content: t('blockfaq.firstresponse'),
     },
     {
-      header: t('common.lockioaccess'),
-      content: t('commonfaq.lockioaccessresponse'),
+      header: t('blockfaq.secondquestion'),
+      content: t('blockfaq.secondresponse'),
     },
     {
-      header: t('commonfaq.lockaccessmessage'),
-      content: t('commonfaq.lockaccessmessageresponse'),
+      header: t('blockfaq.thirdquestion'),
+      content: t('blockfaq.thirdresponse'),
     },
     {
-      header: t('commonfaq.loginafterlock'),
-      content: t('commonfaq.loginafterlockresponse'),
+      header: t('blockfaq.fourthquestion'),
+      content: t('blockfaq.fourthresponse'),
     },
     {
-      header: t('commonfaq.securityidentity'),
-      content: t('commonfaq.securityidentityresponse'),
-    },
-    {
-      header: t('commonfaq.unlockprofile'),
-      content: t('commonfaq.unlockprofileresponse'),
+      header: t('blockfaq.fifthquestion'),
+      content: t('blockfaq.fifthresponse'),
     },
   ];
 
   const restoreEntries: FAQEntries[] = [
     {
-      header: t('commonfaq.firstquestion'),
-      content: t('commonfaq.firstresponse'),
+      header: t('restorefaq.firstquestion'),
+      content: t('restorefaq.firstresponse'),
     },
     {
-      header: t('commonfaq.whenrestore'),
-      content: t('commonfaq.whenrestoreresponse'),
+      header: t('restorefaq.secondquestion'),
+      content: t('restorefaq.secondresponse'),
     },
     {
-      header: t('commonfaq.whatrestorecode'),
-      content: t('commonfaq.whatrestorecoderesponse'),
+      header: t('blockfaq.thirdquestion'),
+      content: t('blockfaq.thirdresponse'),
+    },
+  ];
+
+  const restoreEntriesL3: FAQEntries[] = [
+    {
+      header: t('restorefaq.firstquestion'),
+      content: t('restorefaq.firstresponse'),
     },
     {
-      header: t('commonfaq.whatdonocode'),
-      content: t('commonfaq.whatdonocoderesponse'),
-    },
-    {
-      header: t('commonfaq.canrestorefromio'),
-      content: t('commonfaq.canrestorefromioresponse'),
+      header: t('blockfaq.thirdquestion'),
+      content: t('blockfaq.thirdresponse'),
     },
   ];
 
@@ -89,8 +85,10 @@ export const FAQ = ({ flow = Flows.DEFAULT }: FAQProps) => {
         return blockEntries;
       case Flows.RESTORE:
         return restoreEntries;
+      case Flows.RESTOREL3:
+        return restoreEntriesL3;
       default:
-        return defaultEntries;
+        return logoutEntries;
     }
   }
   // #endregion

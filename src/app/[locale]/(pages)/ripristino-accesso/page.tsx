@@ -60,7 +60,7 @@ const RestoreProfile = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.RESTORE} />
+      <FAQ flow={isL3 ? Flows.RESTOREL3 : Flows.RESTORE} />
     </>
   );
 };
