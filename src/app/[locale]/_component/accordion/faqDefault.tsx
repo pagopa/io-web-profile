@@ -4,8 +4,10 @@ import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
 import { Flows } from '../../_enums/Flows';
-import { assistenceEmail } from '../../_utils/common';
+import { assistenceEmail, isBrowser, isDevMode } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
+import { storageLocaleOps } from '../../_utils/storage';
+import { ROUTES } from '../../_utils/routes';
 
 type FAQProps = {
   flow?: string;
@@ -24,13 +26,12 @@ type FAQEntries = {
   content: any;
 };
 
+const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
+const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
+
 const restoreSecondRich = {
   link: (chunks: React.ReactNode) => (
-    <Link
-      target="_blank"
-      href="https://ioapp.it/it/ripristino-accesso/accedi-livello-3/"
-      fontWeight={600}
-    >
+    <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
       {chunks}
     </Link>
   ),
