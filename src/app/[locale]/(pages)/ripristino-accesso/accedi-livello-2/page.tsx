@@ -1,9 +1,8 @@
 'use client';
-import { Box, Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Divider, Grid, Typography, Link } from '@mui/material';
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
@@ -106,7 +105,7 @@ const Access = (): React.ReactElement => {
                 >
                   <Typography variant="body1">{t('lpaccess.nospidorcie')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link target="blank" href={'https://identitadigitale.gov.it'}>
+                    <Link target="_blank" fontWeight={600} href={'https://identitadigitale.gov.it'}>
                       {t('common.more')}
                     </Link>
                   </Typography>

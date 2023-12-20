@@ -8,7 +8,7 @@ import { usePathname } from 'next-intl/client';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
-import { decodeObfuscatedEmail } from '../../_utils/common';
+import { assistenceEmail } from '../../_utils/common';
 import { trackEvent } from '../../_utils/mixpanel';
 import { useConsent } from '../../_hooks/useConsent';
 
@@ -18,10 +18,6 @@ const Header = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
   const pathName = usePathname();
-  const encodedEmail =
-    '&#@!105;&#@!111;&#@!64;assi%73ten&#@!37;7&#@!65;a&#@!46;&#@!112;%&#@!54;&#@!49;g&#@!111;p%6&#@!49;%&#@!50;&#@!69;it';
-
-  const email = decodeObfuscatedEmail(encodedEmail);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const userMenuActionsBasic = [
     {
@@ -88,7 +84,7 @@ const Header = (): React.ReactElement => {
             : false
         }
         onAssistanceClick={(): void => {
-          window.location.assign(`mailto:${email}`);
+          window.location.assign(`mailto:${assistenceEmail}`);
         }}
         onLogin={(): void => {
           // eslint-disable-next-line no-console

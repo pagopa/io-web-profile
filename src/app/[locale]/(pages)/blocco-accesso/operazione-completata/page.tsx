@@ -1,7 +1,6 @@
 'use client';
-import { Button, Grid, List, ListItem, Typography } from '@mui/material';
+import { Button, Grid, Typography, Link } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
 import { useSelector } from 'react-redux';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
@@ -15,28 +14,17 @@ import { addSpacesEvery3Chars } from '@/app/[locale]/_utils/common';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import {
+  ListComponent,
+  ListItemComponent,
+} from '@/app/[locale]/_component/listComponents/ListComponents';
 
 const unlockioaccessRich = {
-  link: (chunks: React.ReactNode) => <Link href="#">{chunks}</Link>,
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
-  ul: (chunks: React.ReactNode) => (
-    <List
-      sx={{
-        listStyleType: 'square',
-        marginBottom: '42px',
-        padding: '8px',
-      }}
-    >
-      {chunks}
-    </List>
-  ),
-  li: (chunks: React.ReactNode) => (
-    <ListItem>
-      <Typography sx={{ display: 'list-item' }}>{chunks}</Typography>
-    </ListItem>
-  ),
+  ul: (chunks: React.ReactNode) => <ListComponent chunks={chunks} marginBottom="40px" />,
+  li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
   u: (chunks: React.ReactNode) => (
-    <Link target="blank" href="https://io.italia.it/" color="textPrimary">
+    <Link target="_blank" fontWeight={600} href="https://io.italia.it/" color="textPrimary">
       {chunks}
     </Link>
   ),
@@ -73,7 +61,11 @@ const ProfileBlock = (): React.ReactElement => {
             }
             {t.rich('thankyoupage.accesslocked', {
               strong: (chunks) => <strong>{chunks}</strong>,
-              link: (chunks) => <Link href={'#'}>{chunks}</Link>,
+              link: (chunks) => (
+                <Link href={'#'} fontWeight={600}>
+                  {chunks}
+                </Link>
+              ),
               br: () => (
                 <>
                   <br />

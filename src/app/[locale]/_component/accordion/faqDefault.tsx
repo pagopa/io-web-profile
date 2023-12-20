@@ -1,7 +1,10 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
+import { Link, Typography } from '@mui/material';
 import { Flows } from '../../_enums/Flows';
+import { assistenceEmail } from '../../_utils/common';
+import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 
 type FAQProps = {
   flow?: string;
@@ -9,7 +12,51 @@ type FAQProps = {
 
 type FAQEntries = {
   header: string;
-  content: string;
+  content: unknown | string;
+};
+
+const restoreSecondRich = {
+  link: (chunks: React.ReactNode) => (
+    <Link
+      target="_blank"
+      href="https://ioapp.it/ripristino-accesso/accedi-livello-3"
+      fontWeight={600}
+    >
+      {chunks}
+    </Link>
+  ),
+  u: (chunks: React.ReactNode) => (
+    <Link target="_blank" fontWeight={600} href={`mailto:${assistenceEmail}`}>
+      {chunks}
+    </Link>
+  ),
+};
+
+const thirdBlockRich = {
+  link: (chunks: React.ReactNode) => (
+    <Link
+      target="_blank"
+      fontWeight={600}
+      href="https://ioapp.it/ripristino-accesso/accedi-livello-3"
+    >
+      {chunks}
+    </Link>
+  ),
+  br: () => <br />,
+  ul: (chunks: React.ReactNode) => <ListComponent chunks={chunks} marginBottom="unset" />,
+  li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
+};
+
+const fifthBlockFaqRick = {
+  link: (chunks: React.ReactNode) => (
+    <Link
+      target="_blank"
+      fontWeight={600}
+      href="https://www.cartaidentita.interno.gov.it/info-utili/identificazione-digitale/#:~:text=livello%201%3A%20accesso%20mediante%20una,per%20la%20lettura%20della%20CIE"
+    >
+      {chunks}
+    </Link>
+  ),
 };
 
 export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
@@ -41,7 +88,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
     {
       header: t('blockfaq.thirdquestion'),
-      content: t('blockfaq.thirdresponse'),
+      content: t.rich('blockfaq.thirdresponse', thirdBlockRich),
     },
     {
       header: t('blockfaq.fourthquestion'),
@@ -49,7 +96,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
     {
       header: t('blockfaq.fifthquestion'),
-      content: t('blockfaq.fifthresponse'),
+      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRick),
     },
   ];
 
@@ -60,11 +107,11 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
     {
       header: t('restorefaq.secondquestion'),
-      content: t('restorefaq.secondresponse'),
+      content: t.rich('restorefaq.secondresponse', restoreSecondRich),
     },
     {
       header: t('blockfaq.thirdquestion'),
-      content: t('blockfaq.thirdresponse'),
+      content: t.rich('blockfaq.thirdresponse', thirdBlockRich),
     },
   ];
 
@@ -75,7 +122,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
     {
       header: t('blockfaq.thirdquestion'),
-      content: t('blockfaq.thirdresponse'),
+      content: t.rich('blockfaq.thirdresponse', thirdBlockRich),
     },
   ];
 
@@ -95,12 +142,14 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
 
   return (
     <>
-      <Accordion
-        accordionItems={getEntriesByFlow(flow)}
-        theme="light"
-        layout="center"
-        title={t('common.faqtitle')}
-      />
+      <Typography>
+        <Accordion
+          accordionItems={getEntriesByFlow(flow)}
+          theme="light"
+          layout="center"
+          title={t('common.faqtitle')}
+        />
+      </Typography>
     </>
   );
 };
