@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
@@ -9,10 +10,18 @@ import { ListComponent, ListItemComponent } from '../listComponents/ListComponen
 type FAQProps = {
   flow?: string;
 };
-
+// the 'content' property is set to any because
+// the library from which we imported the accordion
+// does not accept the type we need.
+// string | ReactElement<any, string |
+// JSXElementConstructor<any>> | ReactNodeArray
+// We use a different type because we have t.rich which
+// allows us to create a React node
+// FIXME => Add correct type to the @pagopa/pagopa-editorial-components
+// into AccordionItemProps type, into the "content" prop
 type FAQEntries = {
   header: string;
-  content: unknown | string;
+  content: any;
 };
 
 const restoreSecondRich = {
