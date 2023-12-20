@@ -28,7 +28,7 @@ const restoreSecondRich = {
   link: (chunks: React.ReactNode) => (
     <Link
       target="_blank"
-      href="https://ioapp.it/ripristino-accesso/accedi-livello-3"
+      href="https://ioapp.it/it/ripristino-accesso/accedi-livello-3/"
       fontWeight={600}
     >
       {chunks}
