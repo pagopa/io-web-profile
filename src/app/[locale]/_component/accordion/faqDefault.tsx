@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
 import { Flows } from '../../_enums/Flows';
-import { assistenceEmail, isBrowser, isDevMode } from '../../_utils/common';
+import { assistenceEmail, isBrowser } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { storageLocaleOps } from '../../_utils/storage';
 import { ROUTES } from '../../_utils/routes';
@@ -26,7 +26,7 @@ type FAQEntries = {
   content: any;
 };
 
-const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
+const baseUrl = window.location.origin;
 const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
 const restoreSecondRich = {
