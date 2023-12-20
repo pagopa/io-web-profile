@@ -1,5 +1,17 @@
 {
   "ioesco": {
+    "blockfaq": {
+      "fifthquestion": "Come posso mettere in sicurezza la mia identità digitale?",
+      "fifthresponse": "Per mettere in sicurezza SPID, modifica le credenziali di accesso o contatta il tuo fornitore. Se vuoi invece modificare la password della tua CIE, <link>visita questo sito</link>.",
+      "firstquestion": "Cosa succede se blocco l’accesso a IO?",
+      "firstresponse": "Nessuno potrà accedere al tuo account IO. Per sbloccare l’accesso, usa il codice di ripristino che ti verrà fornito durante il blocco. In alternativa, usa un’identità digitale con un livello di sicurezza 3.",
+      "fourthquestion": "Se blocco l’accesso a IO continuerò a ricevere i messaggi?",
+      "fourthresponse": "Sì. Per leggerli dovrai però sbloccare l’accesso o autenticarti con SPID o CIE con livello di sicurezza 3.",
+      "secondquestion": "Posso entrare su IO anche se ho bloccato l’accesso?",
+      "secondresponse": "Sì, autenticandoti con un’identità digitale con livello di sicurezza 3.",
+      "thirdquestion": "Cosa sono i livelli di sicurezza di un’identità digitale?",
+      "thirdresponse": "<div></div>Ogni identità digitale, come SPID e CIE, è associata a uno o più livelli di sicurezza. Esistono tre livelli di sicurezza: <br></br> <ul><li>livello di sicurezza 1: richiede un nome utente e una password; </li> <li>livello di sicurezza 2: richiede un nome utente e una password, ma si aggiunge un ulteriore passaggio di verifica (per esempio un codice OTP o l’accesso tramite app se il fornitore di identità digitale lo prevede);</li> <li> livello di sicurezza 3: nel caso della CIE richiede un nome utente, una password e un supporto fisico; nel caso dello SPID richiede un nome utente, una password, l’accesso tramite app se il fornitore di identità digitale lo prevede e un ulteriore PIN. </li> </ul> Per le informazioni sui livelli di sicurezza di SPID, visita il sito del tuo Identity Provider. Per maggiori informazioni sui livelli di sicurezza della CIE, <link>visita questo sito</link>."
+    },
     "common": {
       "abled": "Abilitato",
       "accessabled": "Accesso abilitato",
@@ -10,7 +22,6 @@
       "appsession": "Validità sessione",
       "appstore": "App Store",
       "assistence": "Assistenza",
-      "backtohome": "Torna alla home",
       "backtoprofile": "Torna al profilo",
       "beta": "BETA",
       "cancel": "Annulla",
@@ -18,6 +29,7 @@
       "close": "Chiudi",
       "continue": "Continua",
       "emailaddress": "Indirizzo e-mail",
+      "faqtitle": "Dubbi o domande?",
       "findwhatdo": "Scopri cosa fare",
       "hello": "Ciao {nome}!",
       "howrestoreprofile": "Come posso sbloccare l’accesso a IO?",
@@ -26,7 +38,7 @@
       "infocert": "InfoCert ID",
       "legalnotes": "Note legali",
       "lockaccess": "Accesso bloccato",
-      "lockaccessinfo": "Se blocchi l’accesso, non potrai entrare con tutte le tue <link>identità di livello 2</link>. Potrai sbloccare l’accesso dopo aver messo in sicurezza la tua identità digitale.",
+      "lockaccessinfo": "Se blocchi l’accesso, non potrai entrare con tutte le tue <link>identità con un livello di sicurezza 2</link>. Potrai sbloccare l’accesso dopo aver messo in sicurezza la tua identità digitale.",
       "lockappaccess": "Pensi che la tua identità digitale sia compromessa? Blocca l’accesso all’app IO.",
       "lockio": "Blocca l’accesso a IO",
       "lockioaccess": "Vuoi bloccare l’accesso a IO?",
@@ -47,7 +59,7 @@
       "noactive": "Non attiva",
       "noprofile": "Non risulta nessun profilo IO associato alla tua identità. Per accedere a tutte le funzionalità, scarica l’app IO sul tuo dispositivo.",
       "norestorecode": "Non hai il codice di ripristino?",
-      "nothavespid": "Non hai SPID?",
+      "nothavespid": "Non hai SPID o CIE?",
       "pagopaspa": "PagoPA S.p.A.",
       "playstore": "Play Store",
       "posteid": "Poste ID",
@@ -64,44 +76,11 @@
       "whatmean": "Cosa significa?",
       "youridentityonio": "Le tue identitÀ Sull’ APP IO:",
       "yourprofile": "Il tuo profilo",
+      "backtohome": "Torna alla home",
       "copy": "Copia",
       "devicemodel": "{deviceModel}",
       "email": "{email}",
       "namesurnamevariables": "{nome} {cognome}"
-    },
-    "commonfaq": {
-      "canrestorefromio": "Posso ripristinare l’accesso direttamente dall’app IO?",
-      "canrestorefromioresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "faqtitle": "Dubbi o domande?",
-      "firstquestion": "Cosa vuol dire uscire dall’app IO?",
-      "firstresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "fourthquestion": "Sospetto che qualcuno possa accedere al mio account IO, cosa posso fare?",
-      "fourthresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "lockaccessmessage": "Con l’accessi bloccato continuerò a ricevere i messaggi da IO?",
-      "lockaccessmessageresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "lockioaccessresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "loginafterlock": "Posso entrare in app IO anche se ho bloccato l’accesso?",
-      "loginafterlockresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "meanlockio": "Cosa vuol dire bloccare l’accesso a IO?",
-      "meanlockioresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "meanrestoreaccess": "Cosa vuol dire ripristinare l’accesso a IO?",
-      "meanrestoreaccessresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "secondquestion": "A cosa serve effettuare il logout da web?",
-      "secondresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "securityidentity": "Come posso mettere in sicurezza la mia identità?",
-      "securityidentityresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "thirdquestion": "Come posso rientrare in app IO?",
-      "thirdresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "unlockprofile": "Potrò sbloccare l’accesso a IO una volta messa in sicurezza la mia identità?",
-      "unlockprofileresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "utilitylockprofile": "A cosa serve bloccare l’accesso a IO?",
-      "utilitylockprofileresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "whatdonocode": "Cosa posso fare se non trovo il codice di ripristino?",
-      "whatdonocoderesponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "whatrestorecode": "Cos’è il codice di ripristino?",
-      "whatrestorecoderesponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "whenrestore": "Quando è opportuno ripristinare l’accesso a IO?",
-      "whenrestoreresponse": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },
     "commonfooter": {
       "231model": "Modello 231",
@@ -142,12 +121,12 @@
       "loginerrorretry": "Si è verificato un problema durante l’accesso. Riprova tra qualche minuto.",
       "minage": "Per accedere, devi avere almeno {numero} anni",
       "noconsents": "Non hai dato il consenso all’invio dei dati",
-      "nominage": "Non hai l'età minima richiesta",
+      "nominage": "Non hai l’età minima richiesta",
       "notlogged404": "Questa pagina non esiste o non c’è più.",
       "pagenotfound": "Questa pagina non è disponibile, riprova tra qualche minuto. Se il problema persiste, contatta l’assistenza.",
       "portalconsents": "Per accedere, devi acconsentire all’invio di alcuni dati. Entra di nuovo e dai il tuo consenso.",
       "retry": "Riprova",
-      "sessionexpired": "È passato troppo tempo da quando hai iniziato l'accesso: riparti dall'inizio.",
+      "sessionexpired": "È passato troppo tempo da quando hai iniziato l’accesso: riparti dall’inizio.",
       "somewrong": "C’è un problema sui nostri sistemi",
       "somethingwrong": "Qualcosa non ha funzionato",
       "spidrevoked": "La tua identità SPID risulta sospesa o revocata. Per maggiori informazioni, contatta il tuo fornitore di identità SPID.",
@@ -164,9 +143,16 @@
       "accessidentitycompromise": "Se pensi che la tua identità digitale possa essere compromessa, blocca l’accesso all’app IO.",
       "continuetolock": "Premi su continua e segui le istruzioni per bloccare l’accesso a IO con la tua identità digitale.",
       "lastaccess": "Ultimo accesso il {date} alle {hour}",
-      "lockaccess": "Da questo momento l’accesso a IO è bloccato. Potrai accedere solo con un’identità digitale di livello 3. Puoi anche ripristinare l’accesso utilizzando il <strong>codice di ripristino</strong> che trovi di seguito. Salvalo e tienilo al sicuro!",
       "tooltiplockaccess": "L’accesso a IO è bloccato con livello di sicurezza 2",
       "l2identity": "identità di livello 2"
+    },
+    "logoutfaq": {
+      "firstquestion": "Qualcuno ha utilizzato l’app IO al mio posto. Cosa posso fare?",
+      "firstresponse": "Se temi un utilizzo improprio di IO da parte di altre persone, puoi proteggerti terminando la sessione attiva. Potrai accedere di nuovo in qualsiasi momento con SPID o CIE.",
+      "secondquestion": "Cosa vuol dire che ho una sessione attiva?",
+      "secondresponse": "Vuol dire che hai fatto l’accesso all’app da un dispositivo. Quindi, puoi usarla senza dover autenticarti con SPID o CIE.",
+      "thirdquestion": "Se esco da IO, come posso rientrare?",
+      "thirdresponse": "Ti basterà autenticarti con SPID o CIE da qualsiasi dispositivo."
     },
     "lpaccess": {
       "logout": "Esci da IO per mantenere al sicuro i tuoi dati, messaggi e metodi di pagamento.",
@@ -182,6 +168,11 @@
       "activesession": "Al momento hai una sessione attiva sull’app IO con <strong>{deviceModel}</strong>. Se hai perso il dispositivo o non lo riconosci, termina la sessione. Potrai poi accedere nuovamente da qualsiasi altro dispositivo.",
       "lastdateactivation": "Sessione valida fino al {date}",
       "noactivesession": "Al momento non hai nessuna sessione attiva. Anche se non hai più il tuo dispositivo, le informazioni su IO sono al sicuro. \nPuoi accedere nuovamente con le tue credenziali SPID o CIE da qualsiasi dispositivo."
+    },
+    "magiclink": {
+      "errorlockedaccess": "L’accesso a IO è già bloccato",
+      "errorlockedaccessl3": "Puoi entrare in app solo con la tua identità digitale con un <link>livello di sicurezza 3</link>.",
+      "restore": "Se vuoi ripristinare l’accesso all’app IO, accedi con le tue credenziali SPID o CIE e segui i passaggi indicati."
     },
     "metadati": {
       "accedierroredescription": "Si è verificato un problema con il tuo Identity Provider durante l’accesso a IO",
@@ -251,12 +242,19 @@
       "notvalidcode": "Codice non valido, controlla e riprova",
       "restorecodecopied": "Codice di ripristino copiato",
       "restoredaccess": "Accesso ripristinato",
-      "unlockl3app": "Per poter usare l'app, devi prima sbloccare l'accesso a IO. ",
+      "unlockaccessl2": "Sblocca l’accesso",
+      "unlockl3app": "Per poter usare l’app, devi prima sbloccare l’accesso a IO. ",
       "whatisl3": "Cos’è un’identità di livello 3?",
       "login": "Se hai bloccato l’accesso all’app IO per ragioni di sicurezza, ripristina l’accesso seguendo le indicazioni.\n\nQui trovi le identità digitali che hai utilizzato per entrare su IO e verificare se sono abilitate. ",
       "restoreprofile": "Sblocca l’accesso",
       "insertcode": "Ripristina l’accesso all’app IO con il <strong>codice di ripristino</strong> fornito in fase di blocco.",
       "restoreaccess": "Vuoi sbloccare l’accesso a IO?"
+    },
+    "restorefaq": {
+      "firstquestion": "Cosa vuol dire sbloccare l’accesso a IO?",
+      "firstresponse": "Se sblocchi l’accesso a IO, potrai tornare ad utilizzare l’app come sempre.",
+      "secondquestion": "Cosa posso fare se non ho più il codice di ripristino?",
+      "secondresponse": "Puoi accedere autenticandoti<link> da questa pagina</link> con SPID o CIE con livello di sicurezza 3 o puoi chiedere <u>supporto all’assistenza</u>."
     },
     "thankyoupage": {
       "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
@@ -267,11 +265,6 @@
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
       "nosession": "Non c’è nessuna sessione di IO attiva"
-    },
-    "magiclink": {
-      "restore": "Se vuoi ripristinare l’accesso all’app IO, accedi con le tue credenziali SPID o CIE e segui i passaggi indicati.",
-      "errorlockedaccess": "L’accesso a IO è già bloccato",
-      "errorlockedaccessl3": "Puoi entrare in app solo con la tua identità digitale con un <link>livello di sicurezza 3</link>."
     }
   }
 }

@@ -17,7 +17,7 @@ const AlreadyLocked = (): React.ReactElement => {
 
   const explanationrestorecodeRich = {
     link: (chunks: React.ReactNode) => (
-      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
+      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} target="_blank" fontWeight={600}>
         {chunks}
       </Link>
     ),

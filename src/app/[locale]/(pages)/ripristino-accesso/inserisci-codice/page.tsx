@@ -12,7 +12,7 @@ import { TransientErrorType } from '../../../_utils/api-utils';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
-import { storageLocaleOps } from '@/app/[locale]/_utils/storage';
+import { storageLocaleOps, storageUserOps } from '@/app/[locale]/_utils/storage';
 
 const ReactivateCode = (): React.ReactElement => {
   const [restoreCode, setRestoreCode] = useState('');
@@ -21,6 +21,8 @@ const ReactivateCode = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const baseUrl = window.location.origin;
   const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
+  const userFromStorage = storageUserOps.read();
+  const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
 
   const t = useTranslations('ioesco');
 
@@ -38,7 +40,7 @@ const ReactivateCode = (): React.ReactElement => {
 
   const explanationrestorecodeRich = {
     link: (chunks: React.ReactNode) => (
-      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
+      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} target="_blank" fontWeight={600}>
         {chunks}
       </Link>
     ),
@@ -111,7 +113,7 @@ const ReactivateCode = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.RESTORE} />
+      <FAQ flow={isL3 ? Flows.RESTOREL3 : Flows.RESTORE} />
     </>
   );
 };

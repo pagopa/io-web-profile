@@ -60,7 +60,11 @@ const ProfileBlock = (): React.ReactElement => {
   };
 
   const explanationIdentetyLevelRich = {
-    link: (chunks: React.ReactNode) => <Link href="#">{chunks}</Link>,
+    link: (chunks: React.ReactNode) => (
+      <Link href="#digital_identity" fontWeight={600}>
+        {chunks}
+      </Link>
+    ),
   };
 
   return (
