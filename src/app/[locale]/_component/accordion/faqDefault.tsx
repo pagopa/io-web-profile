@@ -2,7 +2,6 @@
 import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
-import { AccordionItemProps } from '@pagopa/pagopa-editorial-components/dist/components/Accordion/AccordionItem';
 import { Flows } from '../../_enums/Flows';
 import { assistenceEmail } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
@@ -128,7 +127,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
   ];
 
-  function getEntriesByFlow(flow: string): AccordionItemProps[] {
+  function getEntriesByFlow(flow: string): FAQEntries[] {
     switch (flow) {
       case Flows.BLOCK:
         return blockEntries;
