@@ -46,7 +46,7 @@ const thirdBlockRich = {
     <Link
       target="_blank"
       fontWeight={600}
-      href="https://ioapp.it/ripristino-accesso/accedi-livello-3"
+      href="https://www.cartaidentita.interno.gov.it/info-utili/identificazione-digitale/#:~:text=livello%201%3A%20accesso%20mediante%20una,per%20la%20lettura%20della%20CIE"
     >
       {chunks}
     </Link>
@@ -62,7 +62,7 @@ const fifthBlockFaqRick = {
     <Link
       target="_blank"
       fontWeight={600}
-      href="https://www.cartaidentita.interno.gov.it/info-utili/identificazione-digitale/#:~:text=livello%201%3A%20accesso%20mediante%20una,per%20la%20lettura%20della%20CIE"
+      href="https://www.cartaidentita.interno.gov.it/pgic/login/recupera-password"
     >
       {chunks}
     </Link>
