@@ -6,7 +6,7 @@ import { IDPS, IdentityProvider } from '../../_utils/idps';
 import { storageLoginInfoOps, storagePrivilegeOps, storageTokenOps } from '../../_utils/storage';
 import { userFromJwtToken } from '../../_utils/jwt';
 import { trackEvent } from '../../_utils/mixpanel';
-import { getLoginFlow } from '../../_utils/common';
+import { getLoginFlow, isBrowser } from '../../_utils/common';
 import useToken from '../../_hooks/useToken';
 
 type IdpList = {
@@ -64,9 +64,11 @@ export function IdpList({ spidLevel }: IdpList) {
       Flow: getLoginFlow(storageLoginInfoOps.read()),
     });
     removeToken();
-    window.location.assign(
-      `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
-    );
+    if (isBrowser()) {
+      window.location.assign(
+        `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${IDP.entityId}&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
+      );
+    }
   };
 
   return (

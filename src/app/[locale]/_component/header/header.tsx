@@ -8,7 +8,7 @@ import { usePathname } from 'next-intl/client';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
-import { assistenceEmail } from '../../_utils/common';
+import { assistenceEmail, isBrowser } from '../../_utils/common';
 import { trackEvent } from '../../_utils/mixpanel';
 import { useConsent } from '../../_hooks/useConsent';
 
@@ -84,7 +84,9 @@ const Header = (): React.ReactElement => {
             : false
         }
         onAssistanceClick={(): void => {
-          window.location.assign(`mailto:${assistenceEmail}`);
+          if (isBrowser()) {
+            window.location.assign(`mailto:${assistenceEmail}`);
+          }
         }}
         onLogin={(): void => {
           // eslint-disable-next-line no-console

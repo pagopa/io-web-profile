@@ -10,11 +10,12 @@ import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
 import { trackEvent } from '../../_utils/mixpanel';
 import { storageLocaleOps } from '../../_utils/storage';
+import { isBrowser } from '../../_utils/common';
 
 const NotFoundPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const { isLoggedIn } = useLogin();
-  const baseUrl = window.location.origin;
+  const baseUrl = isBrowser() && window.location.origin;
   const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
   useEffect(() => {
