@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
 import { commonBackground } from '../../_utils/styles';
 import { storageLocaleOps } from '../../_utils/storage';
+import { isBrowser } from '../../_utils/common';
 import Firework from '@/app/[locale]/_icons/firework';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
@@ -12,7 +13,7 @@ import { ROUTES } from '@/app/[locale]/_utils/routes';
 const AlreadyLocked = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
-  const baseUrl = window.location.origin;
+  const baseUrl = isBrowser() && window.location.origin;
   const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
   const explanationrestorecodeRich = {

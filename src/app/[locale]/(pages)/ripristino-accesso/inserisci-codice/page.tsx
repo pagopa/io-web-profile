@@ -13,13 +13,14 @@ import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { storageLocaleOps, storageUserOps } from '@/app/[locale]/_utils/storage';
+import { isBrowser } from '@/app/[locale]/_utils/common';
 
 const ReactivateCode = (): React.ReactElement => {
   const [restoreCode, setRestoreCode] = useState('');
   const [isCodeNotValid, setIsCodeNotValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const pushWithLocale = useLocalePush();
-  const baseUrl = window.location.origin;
+  const baseUrl = isBrowser() && window.location.origin;
   const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;

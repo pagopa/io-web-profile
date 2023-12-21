@@ -26,7 +26,7 @@ type FAQEntries = {
   content: any;
 };
 
-const baseUrl = window.location.origin;
+const baseUrl = isBrowser() && window.location.origin;
 const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
 const restoreSecondRich = {
