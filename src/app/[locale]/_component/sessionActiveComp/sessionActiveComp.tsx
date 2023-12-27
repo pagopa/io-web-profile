@@ -9,6 +9,7 @@ import { FAQ } from '../accordion/faqDefault';
 import { BackButton } from '../backButton/backButton';
 import { Introduction } from '../introduction/introduction';
 import { trackEvent } from '../../_utils/mixpanel';
+import { storageUserOps } from '../../_utils/storage';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 
 type SessionProps = {
@@ -24,9 +25,11 @@ const SessionActiveComp = ({
 }: SessionProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
+  const userFromStorage = storageUserOps.read();
+  const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 
   const handleLogout = () => {
-    trackEvent('IO_SESSION_EXIT_UX_CONVERSION', { event_category: 'UX', event_type: 'action' });
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_CONVERSION' : 'IO_PROFILE_SESSION_EXIT_UX_CONVERSION');
     WebProfileApi.logoutFromIOApp()
       .then(() => {
         pushWithLocale(ROUTES.THANK_YOU);
