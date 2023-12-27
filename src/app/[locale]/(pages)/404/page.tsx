@@ -22,6 +22,7 @@ const NotFoundPage = (): React.ReactElement => {
     trackEvent('IO_ERROR', {
       reason: 'error_404',
       login_status: isLoggedIn ? 'logged_in' : 'logged_out',
+      event_category: 'KO',
     });
   }, []);
 

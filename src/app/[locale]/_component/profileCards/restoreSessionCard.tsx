@@ -20,7 +20,10 @@ export const RestoreSessionCard = (): React.ReactElement => {
     : false;
 
   const handleUnlockButton = () => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_START');
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_START', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
     if (isMagicLink) {
       pushWithLocale(ROUTES.LOGIN_L2);
     } else {

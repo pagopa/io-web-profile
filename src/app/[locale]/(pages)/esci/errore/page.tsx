@@ -16,7 +16,10 @@ const LogOutKo = (): React.ReactElement => {
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 
   useEffect(() => {
-    trackEvent(isL1 ? 'IO_SESSION_EXIT_ERROR' : 'IO_PROFILE_SESSION_EXIT_ERROR', { reason: '' });
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_ERROR' : 'IO_PROFILE_SESSION_EXIT_ERROR', {
+      reason: '',
+      event_category: 'KO',
+    });
   }, []);
 
   return (
@@ -31,7 +34,13 @@ const LogOutKo = (): React.ReactElement => {
               variant: 'outlined',
               href: isL1 ? ROUTES.LOGIN : ROUTES.PROFILE,
               text: isL1 ? t('common.close') : t('common.backtoprofile'),
-              onClick: () => trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_BACK_TO_PROFILE'),
+              onClick: () =>
+                isL1
+                  ? trackEvent('IO_SESSION_EXIT_USER_EXIT', {
+                      event_category: 'UX',
+                      event_type: 'action',
+                    })
+                  : trackEvent('IO_BACK_TO_PROFILE', { event_category: 'UX', event_type: 'exit' }),
             }}
             secondButton={{
               href: ROUTES.LOGOUT_CONFIRM,
@@ -39,7 +48,8 @@ const LogOutKo = (): React.ReactElement => {
               text: t('error.retry'),
               onClick: () =>
                 trackEvent(
-                  isL1 ? 'IO_SESSION_EXIT_TRY_AGAIN' : 'IO_PROFILE_SESSION_EXIT_TRY_AGAIN'
+                  isL1 ? 'IO_SESSION_EXIT_TRY_AGAIN' : 'IO_PROFILE_SESSION_EXIT_TRY_AGAIN',
+                  { event_category: 'UX', event_type: 'action' }
                 ),
             }}
           />

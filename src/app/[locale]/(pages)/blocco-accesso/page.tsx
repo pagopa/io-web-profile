@@ -35,11 +35,18 @@ const ProfileBlock = (): React.ReactElement => {
   });
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_CONFIRM');
+    trackEvent('IO_PROFILE_LOCK_ACCESS_CONFIRM', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, []);
 
   const handleLockSession = () => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', { referral });
+    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', {
+      referral,
+      event_category: 'UX',
+      event_type: 'action',
+    });
     dispatch(createUnlockCode(unlockCode));
     WebProfileApi.lockUserSession({
       unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,

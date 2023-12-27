@@ -15,7 +15,7 @@ const LoginKo = (): React.ReactElement => {
   const pathName = usePathname();
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_ERROR');
+    trackEvent('IO_PROFILE_LOCK_ACCESS_ERROR', { event_category: 'KO' });
   }, []);
 
   return (
@@ -29,13 +29,22 @@ const LoginKo = (): React.ReactElement => {
             variant: 'outlined',
             href: ROUTES.PROFILE,
             text: t('common.backtoprofile'),
-            onClick: () => trackEvent('IO_BACK_TO_PROFILE', { page_name: pathName }),
+            onClick: () =>
+              trackEvent('IO_BACK_TO_PROFILE', {
+                page_name: pathName,
+                event_category: 'UX',
+                event_type: 'exit',
+              }),
           }}
           secondButton={{
             href: ROUTES.PROFILE_BLOCK,
             variant: 'contained',
             text: t('error.retry'),
-            onClick: () => trackEvent('IO_PROFILE_LOCK_ACCESS_TRY_AGAIN'),
+            onClick: () =>
+              trackEvent('IO_PROFILE_LOCK_ACCESS_TRY_AGAIN', {
+                event_category: 'UX',
+                event_type: 'action',
+              }),
           }}
         />
       </Grid>

@@ -19,11 +19,10 @@ const RestoreProfile = (): React.ReactElement => {
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
 
   useEffect(() => {
-    if (isL3) {
-      trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_CONFIRM');
-    } else {
-      trackEvent('IO_PROFILE_UNLOCK_ACCESS_CONFIRM');
-    }
+    trackEvent(isL3 ? 'IO_PROFILE_UNLOCK_ACCESS_L3_CONFIRM' : 'IO_PROFILE_UNLOCK_ACCESS_CONFIRM', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, [isL3]);
 
   const handleRestore = () => {
@@ -36,7 +35,10 @@ const RestoreProfile = (): React.ReactElement => {
           pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
         });
     } else {
-      trackEvent('IO_PROFILE_UNLOCK_ACCESS_CONFIRMED');
+      trackEvent('IO_PROFILE_UNLOCK_ACCESS_CONFIRMED', {
+        event_category: 'UX',
+        event_type: 'action',
+      });
       pushWithLocale(ROUTES.RESTORE_CODE);
     }
   };

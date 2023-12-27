@@ -30,7 +30,10 @@ const ReactivateCode = (): React.ReactElement => {
   const MAXRETRY_ERROR: TransientErrorType = 'max-retries';
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_INSERT_CODE');
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_INSERT_CODE', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, []);
 
   const handleRestoreCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +52,10 @@ const ReactivateCode = (): React.ReactElement => {
   };
 
   const handleClick = () => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_CONVERSION');
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_CONVERSION', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
     WebProfileApi.unlockUserSession({
       unlock_code: restoreCode as string & IPatternStringTag<'^\\d{9}$'>,
     })
@@ -62,7 +68,10 @@ const ReactivateCode = (): React.ReactElement => {
         if (err === MAXRETRY_ERROR) {
           pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
         } else {
-          trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR_CODE');
+          trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR_CODE', {
+            event_category: 'UX',
+            event_type: 'error',
+          });
           setIsCodeNotValid(true);
           setErrorMessage(t('restore.notvalidcode'));
         }

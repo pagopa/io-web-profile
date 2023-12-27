@@ -32,6 +32,8 @@ const Profile = () => {
       trackEvent('IO_PROFILE', {
         session_status: getSessionStatus(sessionData),
         access_status: getAccessStatus(sessionData),
+        event_category: 'UX',
+        event_type: 'screen_view',
       });
     }
   }, [profileData, sessionData]);

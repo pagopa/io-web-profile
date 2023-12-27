@@ -26,7 +26,7 @@ const SessionActiveComp = ({
   const pushWithLocale = useLocalePush();
 
   const handleLogout = () => {
-    trackEvent('IO_SESSION_EXIT_UX_CONVERSION');
+    trackEvent('IO_SESSION_EXIT_UX_CONVERSION', { event_category: 'UX', event_type: 'action' });
     WebProfileApi.logoutFromIOApp()
       .then(() => {
         pushWithLocale(ROUTES.THANK_YOU);
