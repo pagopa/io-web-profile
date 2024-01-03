@@ -21,7 +21,7 @@ import { SessionState } from '@/api/generated/webProfile/SessionState';
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
-  const [isProfileAvailable, setIsProfileAvailable] = useState<boolean>(false);
+  const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
   const userFromStorage = storageUserOps.read();
@@ -69,7 +69,7 @@ const Profile = () => {
 
   return (
     <>
-      {!isProfileAvailable ? (
+      {isProfileAvailable === false ? (
         <NoProfile />
       ) : (
         <Grid sx={commonBackground}>
