@@ -133,6 +133,6 @@ export const goCIE = (spidLevel: SpidLevels) => {
     idpSecurityLevel: spidLevel,
   });
   window.location.assign(
-    `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=xx_testenv2&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
+    `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${process.env.NEXT_PUBLIC_SPID_CIE_ENTITY_ID}&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
   );
 };
