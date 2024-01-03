@@ -172,12 +172,6 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       linkType: 'internal',
     },
     {
-      label: t('termsandcondition'),
-      href: 'https://www.pagopa.it/it/termini-e-condizioni-di-utilizzo-del-sito/',
-      ariaLabel: ariaLabel('termsandcondition'),
-      linkType: 'internal',
-    },
-    {
       label: t('accessibility'),
       href: 'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
       ariaLabel: ariaLabel('accessibility'),
