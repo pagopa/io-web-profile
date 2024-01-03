@@ -9,7 +9,21 @@ const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;
 const ANALYTICS_LOG_IP = process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP === 'true' ? true : false;
 const ANALYTICS_DEBUG = process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' ? true : false;
 
+type EventCategory = 'KO' | 'TECH' | 'UX';
+
+type EventType =
+  | 'action'
+  | 'control'
+  | 'exit'
+  | 'micro_action'
+  | 'screen_view'
+  | 'confirm'
+  | 'error'
+  | undefined;
+
 export interface EventProperties {
+  event_type?: EventType;
+  event_category?: EventCategory;
   [key: string]: unknown;
 }
 

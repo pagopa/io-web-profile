@@ -24,7 +24,10 @@ const Header = (): React.ReactElement => {
       id: '2',
       label: t('common.logoutprofile'),
       onClick: () => {
-        trackEvent('IO_LOGOUT');
+        trackEvent('IO_LOGOUT', {
+          event_category: 'UX',
+          event_type: 'action',
+        });
         logOut();
       },
       icon: <ExitToAppIcon fontSize="small" color="inherit" />,
@@ -40,7 +43,11 @@ const Header = (): React.ReactElement => {
               id: '1',
               label: t('common.profile'),
               onClick: () => {
-                trackEvent('IO_BACK_TO_PROFILE', { page_name: pathName });
+                trackEvent('IO_BACK_TO_PROFILE', {
+                  page_name: pathName,
+                  event_category: 'UX',
+                  event_type: 'exit',
+                });
                 pushWithLocale(ROUTES.PROFILE);
               },
               icon: <ManageAccountsIcon fontSize="small" color="inherit" />,

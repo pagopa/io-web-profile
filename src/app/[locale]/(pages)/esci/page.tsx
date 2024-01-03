@@ -22,17 +22,20 @@ const Init = (): React.ReactElement => {
   };
 
   useEffect(() => {
-    trackEvent('IO_SESSION_EXIT_LOGIN');
+    trackEvent('IO_SESSION_EXIT_LOGIN', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, []);
 
   const handleCIELogin = () => {
-    trackEvent('IO_SESSION_EXIT_LOGIN_CIE');
-    trackEvent('IO_LOGIN_START');
+    trackEvent('IO_SESSION_EXIT_LOGIN_CIE', { event_category: 'UX', event_type: 'action' });
+    trackEvent('IO_LOGIN_START', { event_category: 'TECH' });
     goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {
-    trackEvent('IO_SESSION_EXIT_LOGIN_SPID');
+    trackEvent('IO_SESSION_EXIT_LOGIN_SPID', { event_category: 'UX', event_type: 'action' });
     setOpenDialog(true);
   };
 

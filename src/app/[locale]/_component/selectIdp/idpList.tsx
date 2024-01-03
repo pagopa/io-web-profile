@@ -49,19 +49,25 @@ export function IdpList({ spidLevel }: IdpList) {
       idpSecurityLevel: spidLevel,
     });
     savePrivilegesData();
-    trackEvent(
-      spidLevel.type === 'L1'
-        ? 'IO_SESSION_EXIT_LOGIN_IDP_SELECTED'
-        : 'IO_PROFILE_LOGIN_IDP_SELECTED',
-      {
+    if (spidLevel.type === 'L1') {
+      trackEvent('IO_SESSION_EXIT_LOGIN_IDP_SELECTED', {
+        event_category: 'UX',
+        event_type: 'action',
+      });
+    } else {
+      trackEvent('IO_PROFILE_LOGIN_IDP_SELECTED', {
         SPID_IDP_ID: IDP.entityId,
         SPID_IDP_NAME: IDP.name,
-      }
-    );
+        event_category: 'UX',
+        event_type: 'action',
+      });
+    }
+
     trackEvent('IO_LOGIN_START', {
       SPID_IDP_ID: IDP.entityId,
       SPID_IDP_NAME: IDP.name,
       Flow: getLoginFlow(storageLoginInfoOps.read()),
+      event_category: 'TECH',
     });
     removeToken();
     if (isBrowser()) {

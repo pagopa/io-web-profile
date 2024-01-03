@@ -21,7 +21,10 @@ const NoSessionActiveComp = ({ title }: NoSessionProps): React.ReactElement => {
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 
   const handleCloseBtn = () => {
-    trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_PROFILE_SESSION_EXIT_UX_CONVERSION');
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_PROFILE_SESSION_EXIT_UX_CONVERSION', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
     pushWithLocale(ROUTES.LOGIN);
   };
 

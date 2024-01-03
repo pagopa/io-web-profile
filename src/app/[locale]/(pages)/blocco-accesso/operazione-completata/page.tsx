@@ -38,16 +38,26 @@ const ProfileBlock = (): React.ReactElement => {
   const pathName = usePathname();
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_SUCCESS');
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_UX_SUCCESS', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, []);
 
   const handleGoProfileBtn = () => {
-    trackEvent('IO_BACK_TO_PROFILE', { page_name: pathName });
+    trackEvent('IO_BACK_TO_PROFILE', {
+      page_name: pathName,
+      event_category: 'UX',
+      event_type: 'exit',
+    });
     pushWithLocale(ROUTES.PROFILE);
   };
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_SUCCESS');
+    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_SUCCESS', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, []);
 
   return (

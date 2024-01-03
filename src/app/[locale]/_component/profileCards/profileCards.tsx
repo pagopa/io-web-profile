@@ -19,12 +19,12 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
   const pushWithLocale = useLocalePush();
 
   const handleLogOutCardBtn = () => {
-    trackEvent('IO_PROFILE_SESSION_EXIT_START');
+    trackEvent('IO_PROFILE_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.LOGOUT_CONFIRM);
   };
 
   const handleLockCardBtn = () => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_START');
+    trackEvent('IO_PROFILE_LOCK_ACCESS_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.PROFILE_BLOCK);
   };
 

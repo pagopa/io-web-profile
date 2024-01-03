@@ -43,7 +43,7 @@ const Access = (): React.ReactElement => {
 
   useEffect(() => {
     if (isBrowser()) {
-      trackEvent('IO_LOGIN');
+      trackEvent('IO_LOGIN', { event_category: 'UX', event_type: 'screen_view' });
     }
   }, [isBrowser()]);
 
@@ -55,6 +55,7 @@ const Access = (): React.ReactElement => {
         SPID_IDP_ID: loginInfo.idpId,
         SPID_IDP_NAME: loginInfo.idpName,
         Flow: getLoginFlow(loginInfo),
+        event_category: 'TECH',
       });
       storageLoginInfoOps.delete();
       switch (userFromToken?.spidLevel) {
@@ -77,18 +78,18 @@ const Access = (): React.ReactElement => {
   }, [localeFromStorage]);
 
   const handleLogoutBtn = () => {
-    trackEvent('IO_SESSION_EXIT_START');
+    trackEvent('IO_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.LOGOUT_INIT);
   };
 
   const handleCIELogin = () => {
-    trackEvent('IO_PROFILE_LOGIN_CIE');
-    trackEvent('IO_LOGIN_START');
+    trackEvent('IO_PROFILE_LOGIN_CIE', { event_category: 'UX', event_type: 'action' });
+    trackEvent('IO_LOGIN_START', { event_category: 'TECH' });
     goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {
-    trackEvent('IO_PROFILE_LOGIN_SPID');
+    trackEvent('IO_PROFILE_LOGIN_SPID', { event_category: 'UX', event_type: 'action' });
     setOpenDialog(true);
   };
 

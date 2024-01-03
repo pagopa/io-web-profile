@@ -19,6 +19,8 @@ const LogoutConfirm = (): React.ReactElement => {
   useEffect(() => {
     if (sessionData) {
       trackEvent(isL1 ? 'IO_SESSION_EXIT_STATUS_PAGE' : 'IO_PROFILE_SESSION_EXIT_STATUS_PAGE', {
+        event_category: 'UX',
+        event_type: 'screen_view',
         session_status: getSessionStatus(sessionData),
       });
     }
