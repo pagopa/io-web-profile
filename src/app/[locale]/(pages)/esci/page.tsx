@@ -66,7 +66,7 @@ const Init = (): React.ReactElement => {
                 event.preventDefault();
                 handleSPIDLogin();
               }}
-              startIcon={<CieIcon />}
+              startIcon={<SpidIcon />}
               variant="outlined"
             >
               {t('common.loginspid')}
@@ -81,7 +81,7 @@ const Init = (): React.ReactElement => {
                   backgroundColor: '#ffffff',
                 },
               }}
-              startIcon={<SpidIcon />}
+              startIcon={<CieIcon />}
               variant="outlined"
               onClick={() => handleCIELogin()}
             >
