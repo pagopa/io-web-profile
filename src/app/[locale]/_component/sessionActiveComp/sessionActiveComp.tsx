@@ -29,7 +29,10 @@ const SessionActiveComp = ({
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 
   const handleLogout = () => {
-    trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_CONVERSION' : 'IO_PROFILE_SESSION_EXIT_UX_CONVERSION', { event_category: 'UX', event_type: 'action' });
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_CONVERSION' : 'IO_PROFILE_SESSION_EXIT_UX_CONVERSION', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
     WebProfileApi.logoutFromIOApp()
       .then(() => {
         pushWithLocale(ROUTES.THANK_YOU);
