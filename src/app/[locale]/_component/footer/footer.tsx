@@ -160,7 +160,7 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
   const postLoginLinks: FooterLinksType[] = [
     {
       label: t('privacypolicy'),
-      href: 'https://www.pagopa.it/it/privacy-policy/',
+      href: `${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`,
       ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
     },
