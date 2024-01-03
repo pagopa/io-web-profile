@@ -1,5 +1,6 @@
 import { SpidLevels } from '../_component/selectIdp/idpList';
-import { isEnvConfigEnabled } from './common';
+import { getLoginFlow, isEnvConfigEnabled } from './common';
+import { trackEvent } from './mixpanel';
 import { storageLoginInfoOps } from './storage';
 
 export type IdentityProvider = {
@@ -123,14 +124,16 @@ export { IDPS };
 export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true';
 
 export const goCIE = (spidLevel: SpidLevels) => {
-  // MANDATORY !!
-  // FIX ME WHEN CIE WILL BE AVAILABLE
-  // MISSING LOGIN INFO ON loginInfo VAR for MIXPANEL LOGIN TECH EVENT
-  //
   storageLoginInfoOps.write({
     idpId: 'cie',
     idpName: 'CIE',
     idpSecurityLevel: spidLevel,
+  });
+  trackEvent('IO_LOGIN_START', {
+    SPID_IDP_ID: 'cie',
+    SPID_IDP_NAME: 'CIE',
+    Flow: getLoginFlow(storageLoginInfoOps.read()),
+    event_category: 'TECH',
   });
   window.location.assign(
     `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${process.env.NEXT_PUBLIC_SPID_CIE_ENTITY_ID}&authLevel=Spid${spidLevel.type}&RelayState=ioapp`
