@@ -13,11 +13,14 @@ const LoginKo = (): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR', { event_category: 'KO', reason: 'UNLOCK_ERROR' });
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR', { event_category: 'KO' });
   }, []);
 
   const handleRetryBtn = () => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_TRY_AGAIN', { event_category: 'UX', event_type: 'action' });
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_TRY_AGAIN', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
   };
 
   return (
