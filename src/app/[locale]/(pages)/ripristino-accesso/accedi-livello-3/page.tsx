@@ -17,12 +17,18 @@ const Access = (): React.ReactElement => {
   };
 
   const handleCIELogin = () => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_CIE');
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_CIE', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
     goCIE(spidLevel);
   };
 
   const handleSPIDLogin = () => {
-    trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_SPID');
+    trackEvent('IO_PROFILE_UNLOCK_ACCESS_L3_SPID', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
     setOpenDialog(true);
   };
 

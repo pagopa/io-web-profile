@@ -18,11 +18,18 @@ const ThankYouPage = (): React.ReactElement => {
   const isL1 = userFromToken?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 
   useEffect(() => {
-    trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_SUCCESS' : 'IO_PROFILE_SESSION_EXIT_UX_SUCCESS');
+    trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_SUCCESS' : 'IO_PROFILE_SESSION_EXIT_UX_SUCCESS', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+    });
   }, []);
 
   const handleSpidLevelRedirect = () => {
-    trackEvent(isL1 ? 'IO_SESSION_EXIT_USER_EXIT' : 'IO_BACK_TO_PROFILE');
+    if (isL1) {
+      trackEvent('IO_SESSION_EXIT_USER_EXIT', { event_category: 'UX', event_type: 'action' });
+    } else {
+      trackEvent('IO_BACK_TO_PROFILE', { event_category: 'UX', event_type: 'exit' });
+    }
     if (isL2) {
       return pushWithLocale(ROUTES.PROFILE);
     }

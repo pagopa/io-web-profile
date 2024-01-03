@@ -20,7 +20,7 @@ const ExpiredMagicLink = () => {
   };
 
   useEffect(() => {
-    trackEvent('IO_LOCK_ACCESS_EXPIRED_LINK');
+    trackEvent('IO_LOCK_ACCESS_EXPIRED_LINK', { event_category: 'UX', event_type: 'screen_view' });
   }, []);
 
   return (

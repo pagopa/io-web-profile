@@ -18,12 +18,16 @@ export const NoProfile = (): React.ReactElement => {
   const userFromStorage = storageUserOps.read();
 
   useEffect(() => {
-    trackEvent('IO_NO_PROFILE_AVAILABLE');
+    trackEvent('IO_NO_PROFILE_AVAILABLE', { event_category: 'UX', event_type: 'screen_view' });
   }, []);
 
   const handleBtnContinue = () => {
     pushWithLocale(ROUTES.LOGIN);
-    trackEvent('IO_NO_PROFILE_AVAILABLE_USER_EXIT', { cta_type: 'back_to_home' });
+    trackEvent('IO_NO_PROFILE_AVAILABLE_USER_EXIT', {
+      cta_type: 'back_to_home',
+      event_category: 'UX',
+      event_type: 'exit',
+    });
   };
 
   return (
