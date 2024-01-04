@@ -5,6 +5,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next-intl/client';
+import Link from 'next/link';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
@@ -109,9 +110,13 @@ const Header = (): React.ReactElement => {
           {
             id: '1',
             title: ``,
-            productUrl: '#io-web',
+            productUrl: 'https://io.italia.it/',
             linkType: 'internal',
-            icon: <LogoIOApp size={32} title="io" color="default" />,
+            icon: (
+              <Link href={'https://io.italia.it/'}>
+                <LogoIOApp size={32} title="io" color="default" />
+              </Link>
+            ),
           },
         ]}
       />
