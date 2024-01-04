@@ -248,7 +248,8 @@
       "login": "Se hai bloccato l’accesso all’app IO per ragioni di sicurezza, ripristina l’accesso seguendo le indicazioni.\n\nQui trovi le identità digitali che hai utilizzato per entrare su IO e verificare se sono abilitate. ",
       "restoreprofile": "Sblocca l’accesso",
       "insertcode": "Ripristina l’accesso all’app IO con il <strong>codice di ripristino</strong> fornito in fase di blocco.",
-      "restoreaccess": "Vuoi sbloccare l’accesso a IO?"
+      "restoreaccess": "Vuoi sbloccare l’accesso a IO?",
+      "needrestorecode": "Ti servirà il <strong>codice di ripristino</strong> fornito in fase di blocco."
     },
     "restorefaq": {
       "firstquestion": "Cosa vuol dire sbloccare l’accesso a IO?",

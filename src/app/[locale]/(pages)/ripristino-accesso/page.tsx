@@ -46,11 +46,14 @@ const RestoreProfile = (): React.ReactElement => {
   return (
     <>
       <Grid sx={commonBackgroundLightWithBack} item xs={12} sm={12}>
-        <CommonLayoutRestore title={t('restore.restoreaccess')} summary={t('restore.login')} />
+        <CommonLayoutRestore
+          title={t('restore.restoreaccess')}
+          summary={t('common.identitysecurityrestore')}
+        />
         {!isL3 && (
           <Grid item sm={10} md={7}>
             <Typography mb={5} fontSize={'20px'}>
-              {t.rich('restore.insertcode', {
+              {t.rich('restore.needrestorecode', {
                 strong: (chunks) => <strong>{chunks}</strong>,
               })}
             </Typography>
