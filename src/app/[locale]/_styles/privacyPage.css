@@ -1,0 +1,14 @@
+.otnotice-sections>.otnotice-section>h2.otnotice-section-header {
+    color: #000000 !important;
+    font-size: 20px !important;
+}
+
+ul.otnotice-menu {
+    padding-left: 23px;
+    margin: 0px;
+    padding-top: 10px;
+}
+
+li.otnotice-menu-section a {
+    font-size: 14px;
+}
