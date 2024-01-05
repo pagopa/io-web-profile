@@ -19,6 +19,7 @@ import { initOneTrust } from '../_utils/onetrust';
 import { defaultLocale, isBrowser, localeList } from '../_utils/common';
 import Loader from './loader/loader';
 import '../_styles/cookieBanner.css';
+import '../_styles/privacyPage.css';
 
 type LoginStatusIdle = {
   status: 'IDLE';
