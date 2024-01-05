@@ -12,6 +12,7 @@ import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { goCIE } from '../../_utils/idps';
 import { trackEvent } from '../../_utils/mixpanel';
+import { ROUTES } from '../../_utils/routes';
 
 const Init = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -31,7 +32,7 @@ const Init = (): React.ReactElement => {
   const handleCIELogin = () => {
     trackEvent('IO_SESSION_EXIT_LOGIN_CIE', { event_category: 'UX', event_type: 'action' });
     trackEvent('IO_LOGIN_START', { event_category: 'TECH' });
-    goCIE(spidLevel);
+    goCIE(spidLevel, ROUTES.LOGOUT_INIT);
   };
 
   const handleSPIDLogin = () => {
@@ -91,7 +92,12 @@ const Init = (): React.ReactElement => {
         </Grid>
       </Grid>
       <FAQ />
-      <SelectIdp isOpen={openDialog} spidLevel={spidLevel} onClose={setOpenDialog} />
+      <SelectIdp
+        isOpen={openDialog}
+        spidLevel={spidLevel}
+        onClose={setOpenDialog}
+        currentPage={ROUTES.LOGOUT_INIT}
+      />
     </>
   );
 };

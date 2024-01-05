@@ -123,11 +123,12 @@ export { IDPS };
 // TODO remove this temporary flag isIdpKnownafter getSessionsList API is ready in a future version
 export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true';
 
-export const goCIE = (spidLevel: SpidLevels) => {
+export const goCIE = (spidLevel: SpidLevels, page: string) => {
   storageLoginInfoOps.write({
     idpId: 'cie',
     idpName: 'CIE',
     idpSecurityLevel: spidLevel,
+    loginPage: page,
   });
   trackEvent('IO_LOGIN_START', {
     SPID_IDP_ID: 'cie',

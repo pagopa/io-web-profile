@@ -8,6 +8,7 @@ import { SpidLevels } from '../../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../../_component/selectIdp/selectIdp';
 import { goCIE } from '@/app/[locale]/_utils/idps';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const Access = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -21,7 +22,7 @@ const Access = (): React.ReactElement => {
       event_category: 'UX',
       event_type: 'action',
     });
-    goCIE(spidLevel);
+    goCIE(spidLevel, ROUTES.LOGIN_L3);
   };
 
   const handleSPIDLogin = () => {
@@ -142,6 +143,7 @@ const Access = (): React.ReactElement => {
         onClose={(opn) => {
           setOpenDialog(opn);
         }}
+        currentPage={ROUTES.LOGIN_L3}
       />
     </Grid>
   );
