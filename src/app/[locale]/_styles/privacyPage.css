@@ -1,14 +1,37 @@
-.otnotice-sections>.otnotice-section>h2.otnotice-section-header {
-    color: #000000 !important;
-    font-size: 20px !important;
-}
-
 ul.otnotice-menu {
+    color: #000000 !important;
     padding-left: 23px;
     margin: 0px;
     padding-top: 10px;
+    overflow: hidden;
 }
 
 li.otnotice-menu-section a {
     font-size: 14px;
+}
+
+.otnotice-sections {
+    margin-left: 290px !important;
+    margin-right: 50px;
+}
+
+.otnotice-content {
+    margin-top: 40px !important;
+}
+
+.otnotice .otnotice-content .otnotice-section:first-child h2 {
+    font-size: 28px;
+    color: #17324d!important;
+}
+
+.otnotice .otnotice-content .otnotice-section:not(:first-child) h2 {
+    font-size: 21px;
+    color: #17324d;
+}
+
+.otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile a, .otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-selected, .otnotice .otnotice-content .otnotice-menu>.otnotice-menu-section a {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #17324d!important;
 }
