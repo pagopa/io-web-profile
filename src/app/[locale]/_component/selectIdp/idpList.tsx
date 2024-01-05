@@ -11,6 +11,7 @@ import useToken from '../../_hooks/useToken';
 
 type IdpList = {
   spidLevel: SpidLevels;
+  loginPage: string;
 };
 
 type SpidLevelL1 = {
@@ -27,7 +28,7 @@ type SpidLevelL3 = {
 
 export type SpidLevels = SpidLevelL1 | SpidLevelL2 | SpidLevelL3;
 
-export function IdpList({ spidLevel }: IdpList) {
+export function IdpList({ spidLevel, loginPage }: IdpList) {
   const { userLogged } = useLogin();
   const { removeToken } = useToken();
   const token = storageTokenOps.read();
@@ -42,11 +43,12 @@ export function IdpList({ spidLevel }: IdpList) {
     }
   };
 
-  const getSPID = (IDP: IdentityProvider) => {
+  const getSPID = (IDP: IdentityProvider, page: string) => {
     storageLoginInfoOps.write({
       idpId: IDP.entityId,
       idpName: IDP.name,
       idpSecurityLevel: spidLevel,
+      loginPage: page,
     });
     savePrivilegesData();
     if (spidLevel.type === 'L1') {
@@ -91,7 +93,7 @@ export function IdpList({ spidLevel }: IdpList) {
               sx={{ minWidth: '100px' }}
             >
               <Button
-                onClick={() => getSPID(IDP)}
+                onClick={() => getSPID(IDP, loginPage)}
                 sx={{ backgroundColor: 'background.default', alignItems: 'center' }}
                 aria-label={IDP.name}
                 id={IDP.entityId}

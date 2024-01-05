@@ -1,7 +1,14 @@
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
+import { ROUTES } from './routes';
 import { storageLocaleOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
+
+export type LoginTypes =
+  | 'login_to_SessionExit'
+  | 'login_to_Profile'
+  | 'login_to_UnlockAccessL3'
+  | '';
 
 export const localeList = ['it'];
 export const defaultLocale = 'it';
@@ -28,14 +35,14 @@ export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off'
 export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 'locked' =>
   sessionData?.access_enabled ? 'unlocked' : 'locked';
 
-export const getLoginFlow = (loginInfo: LoginInfo): string => {
+export const getLoginFlow = (loginInfo: LoginInfo): LoginTypes => {
   if (loginInfo) {
-    switch (loginInfo.idpSecurityLevel.type) {
-      case 'L1':
+    switch (loginInfo.loginPage) {
+      case ROUTES.LOGOUT_INIT:
         return 'login_to_SessionExit';
-      case 'L2':
+      case ROUTES.LOGIN || ROUTES.EXPIRED_MAGIC_LINK:
         return 'login_to_Profile';
-      case 'L3':
+      case ROUTES.LOGIN_L3:
         return 'login_to_UnlockAccessL3';
       default:
         return '';

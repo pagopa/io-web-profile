@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
-import { SpidValueInJWT } from '../../_model/JWTUser';
 import { getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
@@ -29,18 +28,6 @@ const Access = (): React.ReactElement => {
   const userFromToken = token ? userFromJwtToken(token) : undefined;
   const loginInfo = storageLoginInfoOps.read();
 
-  const L1_JWT_LEVEL: SpidValueInJWT = {
-    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1,
-  };
-
-  const L2_JWT_LEVEL: SpidValueInJWT = {
-    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2,
-  };
-
-  const L3_JWT_LEVEL: SpidValueInJWT = {
-    value: process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3,
-  };
-
   useEffect(() => {
     if (isBrowser()) {
       trackEvent('IO_LOGIN', { event_category: 'UX', event_type: 'screen_view' });
@@ -57,15 +44,14 @@ const Access = (): React.ReactElement => {
         Flow: getLoginFlow(loginInfo),
         event_category: 'TECH',
       });
-      storageLoginInfoOps.delete();
-      switch (userFromToken?.spidLevel) {
-        case L1_JWT_LEVEL.value:
+      switch (getLoginFlow(loginInfo)) {
+        case 'login_to_SessionExit':
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
           break;
-        case L2_JWT_LEVEL.value:
+        case 'login_to_Profile':
           pushWithLocale(ROUTES.PROFILE);
           break;
-        case L3_JWT_LEVEL.value:
+        case 'login_to_UnlockAccessL3':
           pushWithLocale(ROUTES.PROFILE_RESTORE);
           if (checkElevationIntegrity()) {
             pushWithLocale(ROUTES.PROFILE_RESTORE);
@@ -74,6 +60,7 @@ const Access = (): React.ReactElement => {
           }
           break;
       }
+      storageLoginInfoOps.delete();
     }
   }, [localeFromStorage]);
 
@@ -85,7 +72,7 @@ const Access = (): React.ReactElement => {
   const handleCIELogin = () => {
     trackEvent('IO_PROFILE_LOGIN_CIE', { event_category: 'UX', event_type: 'action' });
     trackEvent('IO_LOGIN_START', { event_category: 'TECH' });
-    goCIE(spidLevel);
+    goCIE(spidLevel, ROUTES.LOGIN);
   };
 
   const handleSPIDLogin = () => {
@@ -244,6 +231,7 @@ const Access = (): React.ReactElement => {
         onClose={(opn) => {
           setOpenDialog(opn);
         }}
+        currentPage={ROUTES.LOGIN}
       />
     </Grid>
   );
