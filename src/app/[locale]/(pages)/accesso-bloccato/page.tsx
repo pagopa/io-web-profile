@@ -4,8 +4,6 @@ import { Grid, Link } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { FeedbackMessage } from '../../_component/feedbackMessage/feedbackMessage';
 import { commonBackground } from '../../_utils/styles';
-import { storageLocaleOps } from '../../_utils/storage';
-import { isBrowser } from '../../_utils/common';
 import Firework from '@/app/[locale]/_icons/firework';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
@@ -13,12 +11,15 @@ import { ROUTES } from '@/app/[locale]/_utils/routes';
 const AlreadyLocked = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
-  const baseUrl = isBrowser() && window.location.origin;
-  const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
   const explanationrestorecodeRich = {
     link: (chunks: React.ReactNode) => (
-      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} target="_blank" fontWeight={600}>
+      <Link
+        // FIX ME IOPID-1231 - REMOVE COMMENT WHEN SECTION WILL BE AVAILABLE
+        // href={'https://io.italia.it/faq#n1_6'}
+        fontWeight={600}
+        target="_blank"
+      >
         {chunks}
       </Link>
     ),
