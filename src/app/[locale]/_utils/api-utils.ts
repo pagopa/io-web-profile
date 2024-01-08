@@ -17,6 +17,7 @@ import {
 } from '@pagopa/ts-commons/lib/fetch';
 import { RetriableTask, TransientError, withRetries } from '@pagopa/ts-commons/lib/tasks';
 import { ROUTES } from './routes';
+import { storageLocaleOps, storageTokenOps, storageUserOps } from './storage';
 //
 // Returns a fetch wrapped with timeout and retry logic
 //
@@ -68,6 +69,17 @@ export const extractResponse = async <R>(
       notAuthorizedTokenHttpStatus &&
       response.right.status === notAuthorizedTokenHttpStatus
     ) {
+      storageTokenOps.delete();
+      storageUserOps.delete();
+      window.setTimeout(
+        () =>
+          window.location.assign(
+            `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}/${
+              ROUTES.LOGIN
+            }`
+          ),
+        2000
+      );
       throw new Error(`Operation not allowed!`);
     } else if (emptyResponseHttpStatus && response.right.status === emptyResponseHttpStatus) {
       return new Promise((resolve) => resolve(response.right.status));
