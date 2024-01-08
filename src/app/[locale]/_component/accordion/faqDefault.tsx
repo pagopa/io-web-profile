@@ -2,7 +2,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
-import { Link, Typography } from '@mui/material';
+import { Link } from '@mui/material';
 import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
@@ -153,14 +153,13 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
 
   return (
     <>
-      <Typography>
-        <Accordion
-          accordionItems={getEntriesByFlow(flow)}
-          theme="light"
-          layout="center"
-          title={t('common.faqtitle')}
-        />
-      </Typography>
+      <Accordion
+        open={false}
+        accordionItems={getEntriesByFlow(flow)}
+        theme="light"
+        layout="center"
+        title={t('common.faqtitle')}
+      />
     </>
   );
 };
