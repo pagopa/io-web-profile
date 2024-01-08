@@ -152,15 +152,13 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
   // #endregion
 
   return (
-    <>
-      <Typography>
-        <Accordion
-          accordionItems={getEntriesByFlow(flow)}
-          theme="light"
-          layout="center"
-          title={t('common.faqtitle')}
-        />
-      </Typography>
-    </>
+    <Typography>
+      <Accordion
+        accordionItems={getEntriesByFlow(flow)}
+        theme="light"
+        layout="center"
+        title={t('common.faqtitle')}
+      />
+    </Typography>
   );
 };
