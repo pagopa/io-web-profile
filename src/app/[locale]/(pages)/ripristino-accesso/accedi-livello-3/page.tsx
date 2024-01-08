@@ -61,7 +61,7 @@ const Access = (): React.ReactElement => {
             </Typography>
           </Grid>
 
-          <Grid item justifyContent="center" maxWidth="500px" mb={{ xs: 6, sm: 8, md: 16 }}>
+          <Grid item justifyContent="center" maxWidth="500px" mb={{ xs: 6, sm: 8, md: 16 }} m={5}>
             <Card
               sx={{
                 boxShadow:
