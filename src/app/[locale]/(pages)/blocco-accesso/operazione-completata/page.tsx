@@ -66,13 +66,15 @@ const ProfileBlock = (): React.ReactElement => {
         title={t('common.lockedioaccess')}
         summary={
           <>
-            {
-              // LINK HREF - FIX ME JIRA TICKET IOPID-982
-            }
             {t.rich('thankyoupage.accesslocked', {
               strong: (chunks) => <strong>{chunks}</strong>,
               link: (chunks) => (
-                <Link href={'#'} fontWeight={600}>
+                <Link
+                  // FIX ME IOPID-1231 - REMOVE COMMENT WHEN SECTION WILL BE AVAILABLE
+                  // href={'https://io.italia.it/faq#n1_6'}
+                  target="_blank"
+                  fontWeight={600}
+                >
                   {chunks}
                 </Link>
               ),
