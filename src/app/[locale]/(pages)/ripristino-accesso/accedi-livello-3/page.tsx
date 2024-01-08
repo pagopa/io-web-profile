@@ -62,7 +62,7 @@ const Access = (): React.ReactElement => {
             </Typography>
           </Grid>
 
-          <Grid item justifyContent="center" maxWidth="500px" mb={{ xs: 6, sm: 8, md: 16 }}>
+          <Grid item justifyContent="center" maxWidth="500px" mb={{ xs: 6, sm: 8, md: 16 }} m={5}>
             <Card
               sx={{
                 boxShadow:
@@ -123,12 +123,14 @@ const Access = (): React.ReactElement => {
                 >
                   <Typography variant="body1"> {t('restore.whatisl3')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link href={'#'} fontWeight={600}>
+                    <Link
+                      // FIX ME IOPID-1231 - REMOVE COMMENT WHEN SECTION WILL BE AVAILABLE
+                      // href={'https://io.italia.it/faq#n1_6'}
+                      target="_blank"
+                      fontWeight={600}
+                    >
                       {t('common.more')}
                     </Link>
-                    {
-                      // LINK HREF - FIX ME JIRA TICKET IOPID-982
-                    }
                   </Typography>
                 </Grid>
               </CardContent>
