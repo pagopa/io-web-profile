@@ -3,12 +3,14 @@ import { Alert, Card, CardContent, Grid, Snackbar, Typography } from '@mui/mater
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import useIsMobile from '../../_hooks/useMobile';
 
 type CopyCardProps = {
   code: string | undefined;
 };
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
+  const { isMobile } = useIsMobile();
   const t = useTranslations('ioesco');
   const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
 
@@ -58,7 +60,18 @@ export const CopyCodeCard = ({ code }: CopyCardProps) => {
         onClose={() => setOpenSnackBar(false)}
         autoHideDuration={2000}
       >
-        <Alert severity="success">{t('restore.restorecodecopied')}</Alert>
+        <Alert
+          sx={
+            isMobile
+              ? {
+                  width: '100%',
+                }
+              : null
+          }
+          severity="success"
+        >
+          {t('restore.restorecodecopied')}
+        </Alert>
       </Snackbar>
     </Card>
   );
