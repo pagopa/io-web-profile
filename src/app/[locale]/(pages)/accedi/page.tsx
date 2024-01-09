@@ -34,16 +34,18 @@ const Access = (): React.ReactElement => {
 
   const token = isBrowser() ? extractToken() : undefined;
   const userFromToken = token ? userFromJwtToken(token) : undefined;
-  const [loginInfo] = useState(storageLoginInfoOps.read());
+  const loginInfo = storageLoginInfoOps.read();
 
   useEffect(() => {
     if (isBrowser()) {
       trackEvent('IO_LOGIN', { event_category: 'UX', event_type: 'screen_view' });
     }
-  }, [isBrowser()]);
+  }, []);
 
   useEffect(() => {
     if (token && userFromToken && localeFromStorage) {
+      // eslint-disable-next-line no-console
+      console.log('#########');
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
       try {
@@ -74,7 +76,7 @@ const Access = (): React.ReactElement => {
       }
       storageLoginInfoOps.delete();
     }
-  }, [localeFromStorage]);
+  }, [loginInfo, pushWithLocale, token, userFromToken]);
 
   const handleLogoutBtn = () => {
     trackEvent('IO_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });
