@@ -7,7 +7,15 @@ import { useEffect, useState } from 'react';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
-import { getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
+import {
+  FLOW_PROFILE,
+  FLOW_SESSION_EXIT,
+  FLOW_UNLOCK_ACCESS_L2,
+  FLOW_UNLOCK_ACCESS_L3,
+  getLoginFlow,
+  isBrowser,
+  localeFromStorage,
+} from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageLoginInfoOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
@@ -44,15 +52,16 @@ const Access = (): React.ReactElement => {
         Flow: getLoginFlow(loginInfo),
         event_category: 'TECH',
       });
+      // eslint-disable-next-line no-console
+      console.log('getLoginFlow(loginInfo)', getLoginFlow(loginInfo));
       switch (getLoginFlow(loginInfo)) {
-        case 'login_to_SessionExit':
+        case FLOW_SESSION_EXIT:
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
           break;
-        case 'login_to_Profile':
+        case FLOW_PROFILE:
           pushWithLocale(ROUTES.PROFILE);
           break;
-        case 'login_to_UnlockAccessL3':
-          pushWithLocale(ROUTES.PROFILE_RESTORE);
+        case FLOW_UNLOCK_ACCESS_L3 || FLOW_UNLOCK_ACCESS_L2:
           if (checkElevationIntegrity()) {
             pushWithLocale(ROUTES.PROFILE_RESTORE);
           } else {
