@@ -44,8 +44,6 @@ const Access = (): React.ReactElement => {
 
   useEffect(() => {
     if (token && userFromToken && localeFromStorage) {
-      // eslint-disable-next-line no-console
-      console.log('#########');
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
       try {
