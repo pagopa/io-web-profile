@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
-import { getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
+import { FLOW_PARAMS, getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
 import { extractToken, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageLoginInfoOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
@@ -32,27 +32,31 @@ const Access = (): React.ReactElement => {
     if (isBrowser()) {
       trackEvent('IO_LOGIN', { event_category: 'UX', event_type: 'screen_view' });
     }
-  }, [isBrowser()]);
+  }, []);
 
   useEffect(() => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
-      trackEvent('IO_LOGIN_SUCCESS', {
-        SPID_IDP_ID: loginInfo.idpId,
-        SPID_IDP_NAME: loginInfo.idpName,
-        Flow: getLoginFlow(loginInfo),
-        event_category: 'TECH',
-      });
+      try {
+        trackEvent('IO_LOGIN_SUCCESS', {
+          SPID_IDP_ID: loginInfo.idpId,
+          SPID_IDP_NAME: loginInfo.idpName,
+          Flow: getLoginFlow(loginInfo),
+          event_category: 'TECH',
+        });
+      } catch {
+        pushWithLocale(ROUTES.LOGIN);
+      }
       switch (getLoginFlow(loginInfo)) {
-        case 'login_to_SessionExit':
+        case FLOW_PARAMS.FLOW_SESSION_EXIT:
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
           break;
-        case 'login_to_Profile':
+        case FLOW_PARAMS.FLOW_PROFILE:
           pushWithLocale(ROUTES.PROFILE);
           break;
-        case 'login_to_UnlockAccessL3':
-          pushWithLocale(ROUTES.PROFILE_RESTORE);
+        case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
+        case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
           if (checkElevationIntegrity()) {
             pushWithLocale(ROUTES.PROFILE_RESTORE);
           } else {
@@ -62,7 +66,7 @@ const Access = (): React.ReactElement => {
       }
       storageLoginInfoOps.delete();
     }
-  }, [localeFromStorage]);
+  }, [loginInfo, pushWithLocale, token, userFromToken]);
 
   const handleLogoutBtn = () => {
     trackEvent('IO_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });

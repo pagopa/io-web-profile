@@ -256,7 +256,7 @@
           "uuid": "c75f776d-bde0-4776-b930-0b83fa5893e1",
           "body": "",
           "latency": 0,
-          "statusCode": 500,
+          "statusCode": 204,
           "label": "No Content",
           "headers": [
             {
@@ -770,7 +770,7 @@
       "responses": [
         {
           "uuid": "5ce51fb4-5c36-4485-b8d8-e5018a8f4490",
-          "body": "{\n  \"access_enabled\": false,\n  \"session_info\": {\n    \"active\": true,\n    \"expiration_date\":\"2025-10-13\",\n    \"type\":\"LEGACY\"\n  }\n}",
+          "body": "{\n  \"access_enabled\": true,\n  \"session_info\": {\n    \"active\": true,\n    \"expiration_date\":\"2025-10-13\",\n    \"type\":\"LEGACY\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",

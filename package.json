@@ -1,10 +1,11 @@
 {
   "name": "io-web-test",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "copy .env .env.local && next build",
+    "build:macos": "cp .env .env.local && next build",
     "build:prod": "next build && cp -f out/it/404/index.* out/404/ && cp -f out/it/404/index.html out/404.html && cp -f out/it/404/index.txt out/404.txt",
     "start": "next start",
     "start-static": "npx serve@latest out",
