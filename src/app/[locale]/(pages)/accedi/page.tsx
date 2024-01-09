@@ -34,7 +34,7 @@ const Access = (): React.ReactElement => {
 
   const token = isBrowser() ? extractToken() : undefined;
   const userFromToken = token ? userFromJwtToken(token) : undefined;
-  const loginInfo = storageLoginInfoOps.read();
+  const [loginInfo] = useState(storageLoginInfoOps.read());
 
   useEffect(() => {
     if (isBrowser()) {
@@ -46,14 +46,16 @@ const Access = (): React.ReactElement => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
-      trackEvent('IO_LOGIN_SUCCESS', {
-        SPID_IDP_ID: loginInfo.idpId,
-        SPID_IDP_NAME: loginInfo.idpName,
-        Flow: getLoginFlow(loginInfo),
-        event_category: 'TECH',
-      });
-      // eslint-disable-next-line no-console
-      console.log('getLoginFlow(loginInfo)', getLoginFlow(loginInfo));
+      try {
+        trackEvent('IO_LOGIN_SUCCESS', {
+          SPID_IDP_ID: loginInfo.idpId,
+          SPID_IDP_NAME: loginInfo.idpName,
+          Flow: getLoginFlow(loginInfo),
+          event_category: 'TECH',
+        });
+      } catch {
+        pushWithLocale(ROUTES.LOGIN);
+      }
       switch (getLoginFlow(loginInfo)) {
         case FLOW_SESSION_EXIT:
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
@@ -61,7 +63,8 @@ const Access = (): React.ReactElement => {
         case FLOW_PROFILE:
           pushWithLocale(ROUTES.PROFILE);
           break;
-        case FLOW_UNLOCK_ACCESS_L3 || FLOW_UNLOCK_ACCESS_L2:
+        case FLOW_UNLOCK_ACCESS_L3:
+        case FLOW_UNLOCK_ACCESS_L2:
           if (checkElevationIntegrity()) {
             pushWithLocale(ROUTES.PROFILE_RESTORE);
           } else {

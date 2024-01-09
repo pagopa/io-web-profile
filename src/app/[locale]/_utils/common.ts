@@ -45,7 +45,8 @@ export const getLoginFlow = (loginInfo: LoginInfo): LoginTypes | undefined => {
     switch (loginInfo.loginPage) {
       case ROUTES.LOGOUT_INIT:
         return FLOW_SESSION_EXIT;
-      case ROUTES.LOGIN || ROUTES.EXPIRED_MAGIC_LINK:
+      case ROUTES.LOGIN:
+      case ROUTES.EXPIRED_MAGIC_LINK:
         return FLOW_PROFILE;
       case ROUTES.LOGIN_L2:
         return FLOW_UNLOCK_ACCESS_L2;
