@@ -4,16 +4,12 @@ import { ROUTES } from './routes';
 import { storageLocaleOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
-export type LoginTypes =
-  | 'login_to_SessionExit'
-  | 'login_to_Profile'
-  | 'login_to_UnlockAccessL2'
-  | 'login_to_UnlockAccessL3';
-
-export const FLOW_SESSION_EXIT = 'login_to_SessionExit';
-export const FLOW_PROFILE = 'login_to_Profile';
-export const FLOW_UNLOCK_ACCESS_L2 = 'login_to_UnlockAccessL2';
-export const FLOW_UNLOCK_ACCESS_L3 = 'login_to_UnlockAccessL3';
+export const FLOW_PARAMS = {
+  FLOW_SESSION_EXIT: `login_to_SessionExit`,
+  FLOW_PROFILE: `login_to_Profile`,
+  FLOW_UNLOCK_ACCESS_L2: `login_to_UnlockAccessL2`,
+  FLOW_UNLOCK_ACCESS_L3: `login_to_UnlockAccessL3`,
+};
 
 export const localeList = ['it'];
 export const defaultLocale = 'it';
@@ -40,18 +36,18 @@ export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off'
 export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 'locked' =>
   sessionData?.access_enabled ? 'unlocked' : 'locked';
 
-export const getLoginFlow = (loginInfo: LoginInfo): LoginTypes | undefined => {
+export const getLoginFlow = (loginInfo: LoginInfo): string | undefined => {
   if (loginInfo) {
     switch (loginInfo.loginPage) {
       case ROUTES.LOGOUT_INIT:
-        return FLOW_SESSION_EXIT;
+        return FLOW_PARAMS.FLOW_SESSION_EXIT;
       case ROUTES.LOGIN:
       case ROUTES.EXPIRED_MAGIC_LINK:
-        return FLOW_PROFILE;
+        return FLOW_PARAMS.FLOW_PROFILE;
       case ROUTES.LOGIN_L2:
-        return FLOW_UNLOCK_ACCESS_L2;
+        return FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2;
       case ROUTES.LOGIN_L3:
-        return FLOW_UNLOCK_ACCESS_L3;
+        return FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3;
       default:
         return undefined;
     }
