@@ -199,7 +199,7 @@ const LoginErrorPage = () => {
               {renderErrorMessage(errorCode).hasRetry && !renderErrorMessage(errorCode).hasClose ? (
                 <Grid item xs={6} justifySelf="center">
                   <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
-                    {t('error.retry1')}
+                    {t('error.retry')}
                   </Button>
                 </Grid>
               ) : !renderErrorMessage(errorCode).hasRetry &&
