@@ -75,7 +75,6 @@ const Access = (): React.ReactElement => {
 
   const handleCIELogin = () => {
     trackEvent('IO_PROFILE_LOGIN_CIE', { event_category: 'UX', event_type: 'action' });
-    trackEvent('IO_LOGIN_START', { event_category: 'TECH' });
     goCIE(spidLevel, ROUTES.LOGIN);
   };
 

@@ -31,7 +31,6 @@ const Init = (): React.ReactElement => {
 
   const handleCIELogin = () => {
     trackEvent('IO_SESSION_EXIT_LOGIN_CIE', { event_category: 'UX', event_type: 'action' });
-    trackEvent('IO_LOGIN_START', { event_category: 'TECH' });
     goCIE(spidLevel, ROUTES.LOGOUT_INIT);
   };
 
