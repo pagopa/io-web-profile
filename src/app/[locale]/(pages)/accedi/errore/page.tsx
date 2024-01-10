@@ -4,14 +4,13 @@ import { Button, Grid, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { getLoginFlow } from '../../../_utils/common';
+import { useEffect } from 'react';
+import { FLOW_PARAMS, getLoginFlow } from '../../../_utils/common';
 import { ROUTES } from '../../../_utils/routes';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { storageLoginInfoOps } from '@/app/[locale]/_utils/storage';
 import { goCIE } from '@/app/[locale]/_utils/idps';
-import { LoginInfo } from '@/app/[locale]/_model/LoginInfo';
 
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
@@ -20,7 +19,7 @@ const LoginErrorPage = () => {
   const pushWithLocale = useLocalePush();
   const loginInfo = storageLoginInfoOps.read();
   const DEFAULT_ERROR_TITLE = 'common.noaccesspossible';
-  const [prevLoginInfo] = useState<LoginInfo>(storageLoginInfoOps.read());
+  const prevLoginInfo = storageLoginInfoOps.read();
 
   type errorMessage = {
     title: string;
@@ -101,17 +100,20 @@ const LoginErrorPage = () => {
       });
       storageLoginInfoOps.delete();
     }
-  }, [errorCode]);
+  }, [errorCode, loginInfo]);
 
   const handleCancelBtn = () => {
     switch (getLoginFlow(prevLoginInfo)) {
-      case 'login_to_SessionExit':
+      case FLOW_PARAMS.FLOW_SESSION_EXIT:
         pushWithLocale(ROUTES.LOGOUT_INIT);
         break;
-      case 'login_to_Profile':
+      case FLOW_PARAMS.FLOW_PROFILE:
         pushWithLocale(ROUTES.LOGIN);
         break;
-      case 'login_to_UnlockAccessL3':
+      case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
+        pushWithLocale(ROUTES.LOGIN_L2);
+        break;
+      case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
         pushWithLocale(ROUTES.LOGIN_L3);
         break;
       default:
@@ -124,6 +126,12 @@ const LoginErrorPage = () => {
       if (prevLoginInfo.idpId === 'cie') {
         goCIE(prevLoginInfo.idpSecurityLevel, prevLoginInfo.loginPage);
       } else {
+        storageLoginInfoOps.write({
+          idpId: prevLoginInfo.idpId,
+          idpName: prevLoginInfo.idpName,
+          idpSecurityLevel: prevLoginInfo.idpSecurityLevel,
+          loginPage: prevLoginInfo.loginPage,
+        });
         window.location.assign(
           `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${prevLoginInfo.idpId}&authLevel=Spid${prevLoginInfo.idpSecurityLevel.type}&RelayState=ioapp`
         );
