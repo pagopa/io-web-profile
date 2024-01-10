@@ -115,6 +115,7 @@ const Profile = () => {
                     placement="top"
                     arrow
                     enterTouchDelay={0}
+                    leaveTouchDelay={10000}
                   >
                     <HelpOutlineIcon color="primary" />
                   </Tooltip>
@@ -146,6 +147,7 @@ const Profile = () => {
                     placement="top"
                     arrow
                     enterTouchDelay={0}
+                    leaveTouchDelay={10000}
                   >
                     <HelpOutlineIcon color="primary" />
                   </Tooltip>

@@ -1,14 +1,17 @@
+/* eslint-disable max-lines-per-function */
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { getLoginFlow, isBrowser } from '../../../_utils/common';
+import { FLOW_PARAMS, getLoginFlow } from '../../../_utils/common';
 import { ROUTES } from '../../../_utils/routes';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { storageLoginInfoOps } from '@/app/[locale]/_utils/storage';
+import { goCIE } from '@/app/[locale]/_utils/idps';
+
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
   const t = useTranslations('ioesco');
@@ -16,6 +19,7 @@ const LoginErrorPage = () => {
   const pushWithLocale = useLocalePush();
   const loginInfo = storageLoginInfoOps.read();
   const DEFAULT_ERROR_TITLE = 'common.noaccesspossible';
+  const prevLoginInfo = storageLoginInfoOps.read();
 
   type errorMessage = {
     title: string;
@@ -96,13 +100,47 @@ const LoginErrorPage = () => {
       });
       storageLoginInfoOps.delete();
     }
-  }, [errorCode]);
+  }, [errorCode, loginInfo]);
 
   const handleCancelBtn = () => {
-    if (isBrowser()) {
-      history?.back();
+    switch (getLoginFlow(prevLoginInfo)) {
+      case FLOW_PARAMS.FLOW_SESSION_EXIT:
+        pushWithLocale(ROUTES.LOGOUT_INIT);
+        break;
+      case FLOW_PARAMS.FLOW_PROFILE:
+        pushWithLocale(ROUTES.LOGIN);
+        break;
+      case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
+        pushWithLocale(ROUTES.LOGIN_L2);
+        break;
+      case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
+        pushWithLocale(ROUTES.LOGIN_L3);
+        break;
+      default:
+        pushWithLocale(ROUTES.LOGIN);
     }
   };
+
+  const handleRetryLogin = () => {
+    if (prevLoginInfo && prevLoginInfo.idpSecurityLevel && prevLoginInfo.idpId) {
+      if (prevLoginInfo.idpId === 'cie') {
+        goCIE(prevLoginInfo.idpSecurityLevel, prevLoginInfo.loginPage);
+      } else {
+        storageLoginInfoOps.write({
+          idpId: prevLoginInfo.idpId,
+          idpName: prevLoginInfo.idpName,
+          idpSecurityLevel: prevLoginInfo.idpSecurityLevel,
+          loginPage: prevLoginInfo.loginPage,
+        });
+        window.location.assign(
+          `${process.env.NEXT_PUBLIC_URL_SPID_LOGIN}?entityID=${prevLoginInfo.idpId}&authLevel=Spid${prevLoginInfo.idpSecurityLevel.type}&RelayState=ioapp`
+        );
+      }
+    } else {
+      pushWithLocale(ROUTES.LOGIN);
+    }
+  };
+
   return (
     <Grid
       sx={{
@@ -174,12 +212,12 @@ const LoginErrorPage = () => {
               ) : (
                 <Grid item xs={12} container justifyContent="center">
                   <Grid item xs={6} justifySelf="center" pr={3}>
-                    <Button variant="outlined" onClick={handleCancelBtn}>
+                    <Button variant="outlined" onClick={() => handleCancelBtn()}>
                       {t('common.close')}
                     </Button>
                   </Grid>
                   <Grid item xs={6} justifySelf="center">
-                    <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
+                    <Button onClick={() => handleRetryLogin()} variant="contained">
                       {t('error.retry')}
                     </Button>
                   </Grid>
