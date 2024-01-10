@@ -74,7 +74,7 @@ export const extractResponse = async <R>(
       window.setTimeout(
         () =>
           window.location.assign(
-            `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}/${
+            `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}${
               ROUTES.LOGIN
             }`
           ),
