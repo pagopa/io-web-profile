@@ -1,7 +1,15 @@
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
+import { ROUTES } from './routes';
 import { storageLocaleOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
+
+export const FLOW_PARAMS = {
+  FLOW_SESSION_EXIT: `login_to_SessionExit`,
+  FLOW_PROFILE: `login_to_Profile`,
+  FLOW_UNLOCK_ACCESS_L2: `login_to_UnlockAccessL2`,
+  FLOW_UNLOCK_ACCESS_L3: `login_to_UnlockAccessL3`,
+};
 
 export const localeList = ['it'];
 export const defaultLocale = 'it';
@@ -28,20 +36,23 @@ export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off'
 export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 'locked' =>
   sessionData?.access_enabled ? 'unlocked' : 'locked';
 
-export const getLoginFlow = (loginInfo: LoginInfo): string => {
+export const getLoginFlow = (loginInfo: LoginInfo): string | undefined => {
   if (loginInfo) {
-    switch (loginInfo.idpSecurityLevel.type) {
-      case 'L1':
-        return 'login_to_SessionExit';
-      case 'L2':
-        return 'login_to_Profile';
-      case 'L3':
-        return 'login_to_UnlockAccessL3';
+    switch (loginInfo.loginPage) {
+      case ROUTES.LOGOUT_INIT:
+        return FLOW_PARAMS.FLOW_SESSION_EXIT;
+      case ROUTES.LOGIN:
+      case ROUTES.EXPIRED_MAGIC_LINK:
+        return FLOW_PARAMS.FLOW_PROFILE;
+      case ROUTES.LOGIN_L2:
+        return FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2;
+      case ROUTES.LOGIN_L3:
+        return FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3;
       default:
-        return '';
+        return undefined;
     }
   } else {
-    return '';
+    return undefined;
   }
 };
 

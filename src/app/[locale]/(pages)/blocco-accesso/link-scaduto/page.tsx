@@ -10,6 +10,7 @@ import Timeout from '../../../_icons/timeout';
 import { COMMON_PADDING_HERO } from '../../../_utils/styles';
 import { goCIE } from '../../../_utils/idps';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
+import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const ExpiredMagicLink = () => {
   const t = useTranslations('ioesco');
@@ -93,7 +94,7 @@ const ExpiredMagicLink = () => {
                 variant="contained"
                 fullWidth
                 startIcon={<CieIcon />}
-                onClick={() => goCIE(spidLevel)}
+                onClick={() => goCIE(spidLevel, ROUTES.EXPIRED_MAGIC_LINK)}
               >
                 {t('common.logincie')}
               </Button>
@@ -108,6 +109,7 @@ const ExpiredMagicLink = () => {
         onClose={(open) => {
           setOpenDialog(open);
         }}
+        currentPage={ROUTES.EXPIRED_MAGIC_LINK}
       />
     </Grid>
   );

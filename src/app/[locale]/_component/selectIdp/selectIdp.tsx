@@ -6,9 +6,10 @@ type Dialog = {
   isOpen: boolean;
   spidLevel: SpidLevels;
   onClose: (open: boolean, event: React.MouseEvent<HTMLButtonElement>) => void;
+  currentPage: string;
 };
 
-export function SelectIdp({ isOpen, spidLevel, onClose }: Dialog) {
+export function SelectIdp({ isOpen, spidLevel, onClose, currentPage }: Dialog) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export function SelectIdp({ isOpen, spidLevel, onClose }: Dialog) {
         >
           {'Scegli il tuo Identity Provider'}
         </Typography>
-        <IdpList spidLevel={level} />
+        <IdpList spidLevel={level} loginPage={currentPage} />
         <Box p={4}>
           <Button onClick={(e) => onClose(false, e)} fullWidth variant="outlined">
             Annulla

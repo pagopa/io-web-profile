@@ -4,4 +4,5 @@ export type LoginInfo = {
   idpSecurityLevel: SpidLevels;
   idpId: string;
   idpName: string;
+  loginPage: string;
 };

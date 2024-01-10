@@ -3,14 +3,14 @@ import { isBrowser } from './common';
 import { userFromJwtToken } from './jwt';
 import { storagePrivilegeOps, storageTokenOps } from './storage';
 
-const currentTaxCode = isBrowser()
-  ? storageTokenOps.read()
-    ? userFromJwtToken(storageTokenOps.read()).taxCode
-    : undefined
-  : undefined;
-const previousPrivileges = isBrowser() ? storagePrivilegeOps.read() : undefined;
-
 export const checkElevationIntegrity = () => {
+  const currentTaxCode = isBrowser()
+    ? storageTokenOps.read()
+      ? userFromJwtToken(storageTokenOps.read()).taxCode
+      : undefined
+    : undefined;
+  const previousPrivileges = isBrowser() ? storagePrivilegeOps.read() : undefined;
+
   const isPrivilegeElevation =
     previousPrivileges &&
     previousPrivileges.previousSecurityLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2 &&
