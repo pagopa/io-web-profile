@@ -1,7 +1,7 @@
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
 import { ROUTES } from './routes';
-import { storageLocaleOps } from './storage';
+import { storageLocaleOps, storageTokenOps, storageUserOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
 export const FLOW_PARAMS = {
@@ -78,3 +78,19 @@ const encodedEmail =
   '&#@!105;&#@!111;&#@!64;assi%73ten&#@!37;7&#@!65;a&#@!46;&#@!112;%&#@!54;&#@!49;g&#@!111;p%6&#@!49;%&#@!50;&#@!69;it';
 
 export const assistenceEmail = decodeObfuscatedEmail(encodedEmail);
+
+export const goToLogin = () => {
+  storageTokenOps.delete();
+  storageUserOps.delete();
+  goTo(ROUTES.LOGIN, 5000);
+};
+
+export const goTo = (route: string, timeout: number): void => {
+  window.setTimeout(
+    () =>
+      window.location.assign(
+        `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}${route}`
+      ),
+    timeout
+  );
+};

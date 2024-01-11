@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import { ExchangeToken } from './generated/webProfile/ExchangeToken';
 import { LockSessionData } from './generated/webProfile/LockSessionData';
 import { ProfileData } from './generated/webProfile/ProfileData';
 import { SessionState } from './generated/webProfile/SessionState';
 import { UnlockSessionData } from './generated/webProfile/UnlockSessionData';
 import { WithDefaultsT, createClient } from './generated/webProfile/client';
+import { goToLogin } from '@/app/[locale]/_utils/common';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageTokenOps } from '@/app/[locale]/_utils/storage';
 // with withDefaults
@@ -25,7 +27,7 @@ const webProfileApiClient = createClient({
 });
 
 // eslint-disable-next-line no-console
-const onRedirectToLogin = () => console.log('redirect to login');
+const onRedirectToLogin = () => goToLogin();
 
 export const WebProfileApi = {
   lockUserSession: async (unlockCode: LockSessionData): Promise<void> => {

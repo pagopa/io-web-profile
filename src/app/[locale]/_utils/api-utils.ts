@@ -1,9 +1,10 @@
+/* eslint-disable functional/immutable-data */
 /* eslint-disable no-console */
 import { URL } from 'url';
 import { agent } from '@pagopa/ts-commons';
 import { ApiRequestType, IResponseType, TypeofApiResponse } from '@pagopa/ts-commons/lib/requests';
 import { Millisecond } from '@pagopa/ts-commons/lib/units';
-import { isRight, toError } from 'fp-ts/lib/Either';
+import { isRight } from 'fp-ts/lib/Either';
 import * as t from 'io-ts';
 import * as E from 'fp-ts/Either';
 import * as TE from 'fp-ts/TaskEither';
@@ -16,8 +17,7 @@ import {
   toFetch,
 } from '@pagopa/ts-commons/lib/fetch';
 import { RetriableTask, TransientError, withRetries } from '@pagopa/ts-commons/lib/tasks';
-import { ROUTES } from './routes';
-import { storageLocaleOps, storageTokenOps, storageUserOps } from './storage';
+
 //
 // Returns a fetch wrapped with timeout and retry logic
 //
@@ -56,46 +56,43 @@ export const extractResponse = async <R>(
   onRedirectToLogin: () => void,
   notAuthorizedTokenHttpStatus: number | null = 403,
   emptyResponseHttpStatus: number | null = 404
+  // internalServerError: number | null = 500
 ): Promise<R> => {
+  // successHttpStatus | 404 | 403
   if (isRight(response)) {
-    if (response.right.status === successHttpStatus) {
-      return response.right.value;
-    } else if (
-      notAuthorizedTokenHttpStatus &&
-      response.right.status === notAuthorizedTokenHttpStatus
-    ) {
-      storageTokenOps.delete();
-      storageUserOps.delete();
-      goTo(ROUTES.LOGIN, 500);
-      throw new Error(`Operation not allowed!`);
-    } else if (emptyResponseHttpStatus && response.right.status === emptyResponseHttpStatus) {
-      return new Promise((resolve) => resolve(response.right.status));
-    } else {
-      console.error(JSON.stringify(response.right));
-      const error = new Error(
-        `Unexpected HTTP status! Expected ${successHttpStatus} obtained ${response.right.status}`
-      );
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      // eslint-disable-next-line functional/immutable-data
-      error.httpStatus = response.right.status;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      // eslint-disable-next-line functional/immutable-data
-      error.httpBody = response.right.value;
-      throw error;
+    switch (response.right.status) {
+      case successHttpStatus:
+        return response.right.value;
+      case notAuthorizedTokenHttpStatus:
+        onRedirectToLogin();
+        throw new Error(`Operation not allowed!`);
+      case emptyResponseHttpStatus:
+        return new Promise((resolve) => resolve(response.right.status));
+      default:
+        console.error(JSON.stringify(response.right));
+        const error = new Error(
+          `Unexpected HTTP status! Expected ${successHttpStatus} obtained ${response.right.status}`
+        );
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        error.httpStatus = response.right.status;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        error.httpBody = response.right.value;
+        throw error;
     }
   } else {
+    console.log(response.left);
     console.error('Something gone wrong while fetching data');
     console.error(JSON.stringify(response.left));
-    throw toError(response.left);
+    throw response.left[0].value;
   }
 };
 
 /**
  * Retries a fetch request in case of timeout or response with a specific status code.
  * @param maxRetries ( Default ENV API_MAX_RETRY ) - Maximum number of retry attempts for the request.
- * @param statusCodeRetry ( Default 500 ) - HTTP status code that should trigger the retry.
+ * @param statusCodeRetry - HTTP status code that should trigger the retry.
  * @param backoffBaseInterval ( Default 500 ) - Waiting interval between retry attempts in milliseconds, this parameter represents the waiting time between each attempt with exponential growth.
  * @returns A function that performs the fetch request with retries.
  */
@@ -147,21 +144,8 @@ function retryLogicForResponseError(
         shouldAbort
       ),
       TE.fold(
-        (error) => {
-          goTo(ROUTES.INTERNAL_ERROR, 500);
-          return TE.left(error);
-        },
-        (result) => TE.right(result)
+        (error) => TE.right(error as unknown as Response),
+        (response) => TE.right(response)
       )
     );
 }
-
-export const goTo = (route: string, timeout: number): void => {
-  window.setTimeout(
-    () =>
-      window.location.assign(
-        `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}${route}`
-      ),
-    timeout
-  );
-};

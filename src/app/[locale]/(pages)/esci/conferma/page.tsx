@@ -27,14 +27,9 @@ const LogoutConfirm = (): React.ReactElement => {
   }, [isL1, sessionData]);
 
   useEffect(() => {
-    WebProfileApi.getUserSessionState()
-      .then((res) => {
-        setSessionData(res);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
+    void WebProfileApi.getUserSessionState().then((res) => {
+      setSessionData(res);
+    });
   }, []);
 
   const renderSessionActive = (): React.ReactElement => {
