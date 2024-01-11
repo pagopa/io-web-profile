@@ -13,8 +13,6 @@ import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
 import { getAccessStatus, getSessionStatus } from './_utils/common';
-import { ROUTES } from './_utils/routes';
-import useLocalePush from './_hooks/useLocalePush';
 import { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
@@ -25,7 +23,6 @@ const Profile = () => {
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
   const userFromStorage = storageUserOps.read();
-  const pushWithLocale = useLocalePush();
 
   useEffect(() => {
     if (sessionData) {
@@ -39,31 +36,21 @@ const Profile = () => {
   }, [profileData, sessionData]);
 
   useEffect(() => {
-    WebProfileApi.getProfile()
-      .then((res) => {
-        setProfileData(res);
-        if (res === 404) {
-          setIsProfileAvailable(false);
-        } else {
-          setIsProfileAvailable(true);
-        }
-      })
-      .catch((err) => {
-        console.log('status', err);
-        pushWithLocale(ROUTES.INTERNAL_ERROR);
-      });
+    void WebProfileApi.getProfile().then((res) => {
+      setProfileData(res);
+      if (res === 404) {
+        setIsProfileAvailable(false);
+      } else {
+        setIsProfileAvailable(true);
+      }
+    });
   }, []);
 
   useEffect(() => {
     if (isProfileAvailable) {
-      WebProfileApi.getUserSessionState()
-        .then((res) => {
-          setSessionData(res);
-        })
-        .catch((err) => {
-          console.log(err);
-          pushWithLocale(ROUTES.INTERNAL_ERROR);
-        });
+      void WebProfileApi.getUserSessionState().then((res) => {
+        setSessionData(res);
+      });
     }
   }, [isProfileAvailable]);
 

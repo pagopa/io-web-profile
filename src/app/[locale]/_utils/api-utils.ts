@@ -63,7 +63,7 @@ export const extractResponse = async <R>(
       return response.right.value;
     } else if (notValidTokenHttpStatus && response.right.status === notValidTokenHttpStatus) {
       onRedirectToLogin();
-      window.setTimeout(() => window.location.assign(ROUTES.LOGIN), 2000);
+      goTo(ROUTES.LOGIN, 500);
       return new Promise(() => null);
     } else if (
       notAuthorizedTokenHttpStatus &&
@@ -71,15 +71,7 @@ export const extractResponse = async <R>(
     ) {
       storageTokenOps.delete();
       storageUserOps.delete();
-      window.setTimeout(
-        () =>
-          window.location.assign(
-            `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}${
-              ROUTES.LOGIN
-            }`
-          ),
-        2000
-      );
+      goTo(ROUTES.LOGIN, 500);
       throw new Error(`Operation not allowed!`);
     } else if (emptyResponseHttpStatus && response.right.status === emptyResponseHttpStatus) {
       return new Promise((resolve) => resolve(response.right.status));
@@ -149,13 +141,32 @@ function retryLogicForResponseError(
   ) => TE.TaskEither<Error | MaxRetry | RetryAborted, Response>
 ): typeof retryLogic {
   return (t: RetriableTask<Error, Response>, shouldAbort?: Promise<boolean>) =>
-    retryLogic(
-      // when the result of the task is a Response that satisfies
-      // the predicate p, map it to a transient error
-      pipe(
-        t,
-        TE.chain((r: Response) => TE.fromEither(p(r) ? E.left(TransientError) : E.right(r)))
+    pipe(
+      retryLogic(
+        // when the result of the task is a Response that satisfies
+        // the predicate p, map it to a transient error
+        pipe(
+          t,
+          TE.chain((r: Response) => TE.fromEither(p(r) ? E.left(TransientError) : E.right(r)))
+        ),
+        shouldAbort
       ),
-      shouldAbort
+      TE.fold(
+        (error) => {
+          goTo(ROUTES.INTERNAL_ERROR, 500);
+          return TE.left(error);
+        },
+        (result) => TE.right(result)
+      )
     );
 }
+
+export const goTo = (route: string, timeout: number): void => {
+  window.setTimeout(
+    () =>
+      window.location.assign(
+        `${window.location.protocol}//${window.location.host}/${storageLocaleOps.read()}${route}`
+      ),
+    timeout
+  );
+};
