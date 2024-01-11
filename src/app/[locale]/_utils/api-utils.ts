@@ -54,17 +54,12 @@ export const extractResponse = async <R>(
   >,
   successHttpStatus: number,
   onRedirectToLogin: () => void,
-  notValidTokenHttpStatus: number | null = 401,
   notAuthorizedTokenHttpStatus: number | null = 403,
   emptyResponseHttpStatus: number | null = 404
 ): Promise<R> => {
   if (isRight(response)) {
     if (response.right.status === successHttpStatus) {
       return response.right.value;
-    } else if (notValidTokenHttpStatus && response.right.status === notValidTokenHttpStatus) {
-      onRedirectToLogin();
-      goTo(ROUTES.LOGIN, 500);
-      return new Promise(() => null);
     } else if (
       notAuthorizedTokenHttpStatus &&
       response.right.status === notAuthorizedTokenHttpStatus
@@ -107,7 +102,7 @@ export const extractResponse = async <R>(
 
 export function retryingFetch(
   maxRetries: number = API_MAX_RETRY,
-  statusCodeRetry: number = 500,
+  statusCodeRetry: number[] = [500, 502, 504, 400, 409],
   backoffBaseInterval: Millisecond = 500 as Millisecond
 ): (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response> {
   // a fetch that can be aborted and that gets cancelled after fetchTimeoutMs
@@ -124,7 +119,7 @@ export function retryingFetch(
     calculateExponentialBackoffInterval(backoffBaseInterval)
   );
   const retryWithError = retryLogicForResponseError(
-    (_: Response) => _.status === statusCodeRetry,
+    (_: Response) => statusCodeRetry.includes(_.status),
     retryLogic
   );
   return retriableFetch(retryWithError)(timeoutFetch);
