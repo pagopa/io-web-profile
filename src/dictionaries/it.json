@@ -132,7 +132,7 @@
       "spidrevoked": "La tua identità SPID risulta sospesa o revocata. Per maggiori informazioni, contatta il tuo fornitore di identità SPID.",
       "systemerror": "A causa di un errore del sistema, al momento non è possibile accedere. Riprova più tardi.",
       "systemerrorcontactassistence": "Riprova tra qualche minuto. Se si ripete, contatta l’assistenza.",
-      "systemerrorlogout": "Riprova tra qualche minuto.\n\nIn alternativa, usa le tue credenziali SPID o CIE per accedere all'app IO da un altro dispositivo. In questo modo terminerai la sessione su tutti gli altri dispositivi.",
+      "systemerrorlogout": "Riprova tra qualche minuto.<br></br><br></br>In alternativa, usa le tue credenziali SPID o CIE per accedere all'app IO da un altro dispositivo. In questo modo terminerai la sessione su tutti gli altri dispositivi.",
       "thereisnothing": "Qui non c’è nulla!",
       "toomanytries": "Hai effettuato troppi tentativi di accesso",
       "toomuchtime": "È passato troppo tempo",

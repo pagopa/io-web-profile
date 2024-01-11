@@ -21,7 +21,9 @@ const LogOutKo = (): React.ReactElement => {
       event_category: 'KO',
     });
   }, []);
-
+  const richText = {
+    br: () => <br />,
+  };
   return (
     <>
       <Grid sx={commonBackground} container>
@@ -29,7 +31,7 @@ const LogOutKo = (): React.ReactElement => {
           <FeedbackMessage
             topIcon={<IllusError />}
             title={t('error.somewrong')}
-            summary={<span>{t('error.systemerrorlogout')}</span>}
+            summary={t.rich('error.systemerrorlogout', richText)}
             firstButton={{
               variant: 'outlined',
               href: isL1 ? ROUTES.LOGIN : ROUTES.PROFILE,
