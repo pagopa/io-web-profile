@@ -1155,10 +1155,10 @@
     eslint-plugin-sonarjs "^0.13.0"
     prettier "^2.6.2"
 
-"@pagopa/mui-italia@^0.8.12":
-  version "0.8.12"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.8.12.tgz#e53e7ce965fe44d509b63c34ec45deeb7dbb8cf3"
-  integrity sha512-Qz0fMf5T3GHp/5g0VLyMR3kUtYnXpjtM3H9Hy5Co776Bi9BSiNLEPgP1svupIyW+RX8xpQD5fohyAmCNhP4qRw==
+"@pagopa/mui-italia@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-1.1.0.tgz#9ab59503a061f04d98f473234b29a9dbac6575e2"
+  integrity sha512-j3QjBC0Bermmbzxpr/DdGZ4BBrIRMjHM13Ho0xOFiRPn/PEw/BafsXsQfeedUWrQlYMvX6uEzg4tXOEnx43zHw==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
@@ -1166,10 +1166,10 @@
     fp-ts "^2.12.3"
     io-ts "^2.2.18"
 
-"@pagopa/mui-italia@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-1.0.1.tgz#04f5142fa8cfd0ce9af8ced5448e2ccd4d1fe299"
-  integrity sha512-wMlzppZaOSECDmghVJjkrM3SQiCNWU9RDou42DCN22gjBT3r59QXIxp1TJQdb3fcJbB/I3hb1f0gPbiXUk25sQ==
+"@pagopa/mui-italia@^0.8.12":
+  version "0.8.12"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.8.12.tgz#e53e7ce965fe44d509b63c34ec45deeb7dbb8cf3"
+  integrity sha512-Qz0fMf5T3GHp/5g0VLyMR3kUtYnXpjtM3H9Hy5Co776Bi9BSiNLEPgP1svupIyW+RX8xpQD5fohyAmCNhP4qRw==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
