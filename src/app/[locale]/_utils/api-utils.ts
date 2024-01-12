@@ -47,41 +47,18 @@ If notValidTokenHttpStatus is not null and the returned status is equal to notVa
 If notAuthorizedTokenHttpStatus is  not null and the returned status is equal to notAuthorizedTokenHttpStatus, it will throw an Error with message "Operation not allowed".
 If emptyResponseHttpStatus is  not null and the returned status is equal to emptyResponseHttpStatus, it will return a promise that resolve to null value.
 Other statuses will return will throw a generic error. */
-export const extractResponse = async <R>(
+export const extractResponse = async (
   response: t.Validation<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TypeofApiResponse<ApiRequestType<any, any, any, IResponseType<any, any, any>>>
-  >,
-  successHttpStatus: number,
-  onRedirectToLogin: () => void,
-  notAuthorizedTokenHttpStatus: number | null = 403,
-  emptyResponseHttpStatus: number | null = 404
-  // internalServerError: number | null = 500
-): Promise<R> => {
+  >
+) => {
   // successHttpStatus | 404 | 403
   if (isRight(response)) {
-    switch (response.right.status) {
-      case successHttpStatus:
-        return response.right.value;
-      case notAuthorizedTokenHttpStatus:
-        onRedirectToLogin();
-        throw new Error(`Operation not allowed!`);
-      case emptyResponseHttpStatus:
-        return new Promise((resolve) => resolve(response.right.status));
-      default:
-        console.error(JSON.stringify(response.right));
-        const error = new Error(
-          `Unexpected HTTP status! Expected ${successHttpStatus} obtained ${response.right.status}`
-        );
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        error.httpStatus = response.right.status;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        error.httpBody = response.right.value;
-        throw error;
-    }
+    return response;
   } else {
+    // here we come if we have an error status code not mampped in the response field on our openAPI spec,
+    // and different from the ones used in the retry logic.
     console.log(response.left);
     console.error('Something gone wrong while fetching data');
     console.error(JSON.stringify(response.left));
@@ -99,7 +76,7 @@ export const extractResponse = async <R>(
 
 export function retryingFetch(
   maxRetries: number = API_MAX_RETRY,
-  statusCodeRetry: number[] = [500, 502, 504, 400, 409],
+  statusCodeRetry: number[] = [429],
   backoffBaseInterval: Millisecond = 500 as Millisecond
 ): (input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response> {
   // a fetch that can be aborted and that gets cancelled after fetchTimeoutMs
@@ -142,10 +119,6 @@ function retryLogicForResponseError(
           TE.chain((r: Response) => TE.fromEither(p(r) ? E.left(TransientError) : E.right(r)))
         ),
         shouldAbort
-      ),
-      TE.fold(
-        (error) => TE.right(error as unknown as Response),
-        (response) => TE.right(response)
       )
     );
 }

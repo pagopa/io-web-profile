@@ -13,7 +13,7 @@ import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
 import { getAccessStatus, getSessionStatus } from './_utils/common';
-import { WebProfileApi } from '@/api/webProfileApiClient';
+import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
 const Profile = () => {
@@ -36,14 +36,16 @@ const Profile = () => {
   }, [profileData, sessionData]);
 
   useEffect(() => {
-    void WebProfileApi.getProfile().then((res) => {
-      setProfileData(res);
-      if (res === 404) {
-        setIsProfileAvailable(false);
-      } else {
+    callFetchWithRetries(WebProfileApi, 'getProfile', [], 3, [504], 1000, () => {
+      console.log('retrying getProfile');
+    })
+      .then((res) => {
+        setProfileData(res);
         setIsProfileAvailable(true);
-      }
-    });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   useEffect(() => {
