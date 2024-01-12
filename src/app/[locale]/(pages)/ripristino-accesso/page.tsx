@@ -10,7 +10,7 @@ import { ROUTES } from '../../_utils/routes';
 import { storageUserOps } from '../../_utils/storage';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { trackEvent } from '../../_utils/mixpanel';
-import { WebProfileApi } from '@/api/webProfileApiClient';
+import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 
 const RestoreProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -27,7 +27,7 @@ const RestoreProfile = (): React.ReactElement => {
 
   const handleRestore = () => {
     if (isL3) {
-      WebProfileApi.unlockUserSession({ unlock_code: undefined })
+      callFetchWithRetries(WebProfileApi, 'unlockUserSession', { unlock_code: undefined }, [500])
         .then(() => {
           pushWithLocale(ROUTES.RESTORE_THANK_YOU);
         })

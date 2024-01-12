@@ -6,7 +6,7 @@ import { COMMON_PADDING_HERO } from '../../../_utils/styles';
 import HourglassIcon from '../../../_icons/hourglass';
 import { extractToken, userFromJwtToken } from '@/app/[locale]/_utils/jwt';
 import { isBrowser } from '@/app/[locale]/_utils/common';
-import { WebProfileApi } from '@/api/webProfileApiClient';
+import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 import {
@@ -31,7 +31,7 @@ const ExpiredMagicLink = () => {
 
   const handleContinue = () => {
     if (token) {
-      WebProfileApi.exchangeToken()
+      callFetchWithRetries(WebProfileApi, 'exchangeToken', [], [500])
         .then((res) => {
           if (res.jwt) {
             storageTokenOps.write(res.jwt);
@@ -39,7 +39,7 @@ const ExpiredMagicLink = () => {
           }
         })
         .then(() => {
-          WebProfileApi.getUserSessionState()
+          callFetchWithRetries(WebProfileApi, 'getUserSessionState', [], [500])
             .then((res) => {
               if (!res.access_enabled) {
                 pushWithLocale(ROUTES.ALREADY_LOCKED);

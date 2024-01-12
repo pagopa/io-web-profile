@@ -18,7 +18,7 @@ import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { trackEvent } from '../../_utils/mixpanel';
 import { getReferralLockProfile } from '../../_utils/common';
 import { storageMagicLinkOps } from '../../_utils/storage';
-import { WebProfileApi } from '@/api/webProfileApiClient';
+import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -48,9 +48,15 @@ const ProfileBlock = (): React.ReactElement => {
       event_type: 'action',
     });
     dispatch(createUnlockCode(unlockCode));
-    WebProfileApi.lockUserSession({
-      unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,
-    })
+
+    callFetchWithRetries(
+      WebProfileApi,
+      'lockUserSession',
+      {
+        unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,
+      },
+      [500]
+    )
       .then(() => {
         pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
       })
