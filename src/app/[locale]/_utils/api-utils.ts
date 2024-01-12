@@ -53,16 +53,15 @@ export const extractResponse = async (
     TypeofApiResponse<ApiRequestType<any, any, any, IResponseType<any, any, any>>>
   >
 ) => {
-  // successHttpStatus | 404 | 403
+  // eslint-disable-next-line sonarjs/no-all-duplicated-branches
   if (isRight(response)) {
     return response;
   } else {
     // here we come if we have an error status code not mampped in the response field on our openAPI spec,
     // and different from the ones used in the retry logic.
-    console.log(response.left);
     console.error('Something gone wrong while fetching data');
     console.error(JSON.stringify(response.left));
-    throw response.left[0].value;
+    throw response;
   }
 };
 

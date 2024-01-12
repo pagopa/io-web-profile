@@ -33,11 +33,11 @@ export async function callFetchWithRetries<
   apiName: N,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: any,
-  maxRetries = 3,
   retryStatusCodes = [500],
-  retryDelay = 1000,
   errorHandlers?: () => void
 ) {
+  const maxRetries = 3;
+  const retryDelay = 1000;
   try {
     // eslint-disable-next-line functional/no-let
     let retryCount = 0;
@@ -73,7 +73,7 @@ export async function callFetchWithRetries<
       }
     }
   } catch (e) {
-    console.error(e);
+    throw new Error(`Unexpected status code: ${e}`);
   }
 }
 
