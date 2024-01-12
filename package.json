@@ -23,7 +23,7 @@
     "@mui/lab": "^5.0.0-alpha.142",
     "@mui/material": "^5.14.5",
     "@mui/system": "^5.14.5",
-    "@pagopa/mui-italia": "^1.0.1",
+    "@pagopa/mui-italia": "1.1.0",
     "@pagopa/pagopa-editorial-components": "^2.1.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",

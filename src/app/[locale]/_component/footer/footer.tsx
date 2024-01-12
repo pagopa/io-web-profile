@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 'use client';
 import {
   FooterLinksType,
@@ -39,27 +40,28 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       links: [
         {
           label: t('aboutus'),
-          href: 'https://www.pagopa.it/it/societa/chi-siamo/',
           ariaLabel: ariaLabel('aboutus'),
           linkType: 'internal',
+          onClick: () => window.open('https://www.pagopa.it/it/societa/chi-siamo/', '_blank'),
         },
         {
           label: t('pnrr'),
-          href: 'https://www.pagopa.it/it/opportunita/pnrr/progetti/',
           ariaLabel: ariaLabel('pnrr'),
           linkType: 'internal',
+          onClick: () =>
+            window.open('https://www.pagopa.it/it/opportunita/pnrr/progetti/', '_blank'),
         },
         {
           label: t('media'),
-          href: 'https://www.pagopa.it/it/',
           ariaLabel: ariaLabel('media'),
           linkType: 'internal',
+          onClick: () => window.open('https://www.pagopa.it/it/', '_blank'),
         },
         {
           label: t('workwithus'),
-          href: 'https://www.pagopa.it/it/lavora-con-noi/',
           ariaLabel: ariaLabel('workwithus'),
           linkType: 'internal',
+          onClick: () => window.open('https://www.pagopa.it/it/lavora-con-noi/', '_blank'),
         },
       ],
     },
@@ -75,46 +77,59 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
         },
         {
           label: t('cookiesperefercies'),
-          href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
           onClick: handleCookiePreferencies,
           ariaLabel: ariaLabel('cookiesperefercies'),
           linkType: 'internal',
         },
         {
           label: t('certifications'),
-          href: 'https://www.pagopa.it/it/certificazioni/',
           ariaLabel: ariaLabel('certifications'),
           linkType: 'internal',
+          onClick: () => window.open('https://www.pagopa.it/it/certificazioni/', '_blank'),
         },
         {
           label: t('informationssecurity'),
-          href: 'https://www.pagopa.it/it/politiche-per-la-sicurezza-delle-informazioni/',
           ariaLabel: ariaLabel('informationssecurity'),
           linkType: 'internal',
+          onClick: () =>
+            window.open(
+              'https://www.pagopa.it/it/politiche-per-la-sicurezza-delle-informazioni/',
+              '_blank'
+            ),
         },
         {
           label: t('dataprotection'),
-          href: 'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
           ariaLabel: ariaLabel('dataprotection'),
           linkType: 'internal',
+          onClick: () =>
+            window.open(
+              'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
+              '_blank'
+            ),
         },
         {
           label: t('society'),
-          href: 'https://pagopa.portaleamministrazionetrasparente.it/',
           ariaLabel: ariaLabel('society'),
           linkType: 'internal',
+          onClick: () =>
+            window.open('https://pagopa.portaleamministrazionetrasparente.it/', '_blank'),
         },
         {
           label: t('disclosurepolicy'),
-          href: 'https://www.pagopa.it/it/responsible-disclosure-policy/',
           ariaLabel: ariaLabel('disclosurepolicy'),
           linkType: 'internal',
+          onClick: () =>
+            window.open('https://www.pagopa.it/it/responsible-disclosure-policy/', '_blank'),
         },
         {
           label: t('231model'),
-          href: 'https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html',
           ariaLabel: ariaLabel('231model'),
           linkType: 'internal',
+          onClick: () =>
+            window.open(
+              'https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html',
+              '_blank'
+            ),
         },
       ],
     },
@@ -125,34 +140,38 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
         {
           icon: 'linkedin',
           title: 'LinkedIn',
-          href: 'https://www.linkedin.com/company/pagopa/',
           ariaLabel: socialAriaLabel('LinkedIn'),
+          onClick: () => window.open('https://www.linkedin.com/company/pagopa/', '_blank'),
         },
         {
           title: 'Twitter',
           icon: 'twitter',
-          href: 'https://twitter.com/pagopa',
           ariaLabel: socialAriaLabel('Twitter'),
+          onClick: () => window.open('https://twitter.com/pagopa', '_blank'),
         },
         {
           icon: 'instagram',
           title: 'Instagram',
-          href: 'https://www.instagram.com/pagopaspa/',
           ariaLabel: socialAriaLabel('Instagram'),
+          onClick: () => window.open('https://www.instagram.com/pagopaspa/', '_blank'),
         },
         {
           icon: 'medium',
           title: 'Medium',
-          href: 'https://medium.com/pagopa-spa',
           ariaLabel: socialAriaLabel('Medium'),
+          onClick: () => window.open('https://medium.com/pagopa-spa', '_blank'),
         },
       ],
       links: [
         {
           label: t('accessibility'),
-          href: 'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
           ariaLabel: ariaLabel('accessibility'),
           linkType: 'internal',
+          onClick: () =>
+            window.open(
+              'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
+              '_blank'
+            ),
         },
       ],
     },
@@ -166,16 +185,20 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
     },
     {
       label: t('cookiesperefercies'),
-      href: '', // FIX ME, WITHOUT HREF IT WILL GENERATE CONSOLE WARNING ON FOOTER COMPONENT (MUI ITALIA)
-      onClick: handleCookiePreferencies,
       ariaLabel: ariaLabel('cookiesperefercies'),
       linkType: 'internal',
+      onClick: handleCookiePreferencies,
     },
     {
       label: t('accessibility'),
-      href: 'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
       ariaLabel: ariaLabel('accessibility'),
       linkType: 'internal',
+      // eslint-disable-next-line sonarjs/no-identical-functions
+      onClick: () =>
+        window.open(
+          'https://form.agid.gov.it/view/eca3487c-f3cb-40be-a590-212eafc70058/',
+          '_blank'
+        ),
     },
   ];
 
