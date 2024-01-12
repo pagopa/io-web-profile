@@ -66,25 +66,10 @@ describe('test suite for access error', () => {
     const errorSummary = screen.getByText(it.ioesco.error.cancellogin);
     expect(errorSummary).toBeInTheDocument();
 
-    const mockHistoryBack = jest.spyOn(window.history, 'back');
-
-    const cancelBtn = screen.getByText('Annulla');
-    fireEvent.click(cancelBtn);
+    const cancelBtn = screen.getByText(it.ioesco.common.close);
     expect(cancelBtn).toBeInTheDocument();
-    expect(mockHistoryBack).toHaveBeenCalled();
-  });
-
-  test('should render "Min Age" for errorCode 1001 and click on button back to home', async () => {
-    mockSearchParams.get.mockReturnValue('1001');
-    await renderWithProviders(<LoginErrorPage />);
-
-    const errorSummary = screen.getByText(it.ioesco.error.minage);
-    expect(errorSummary).toBeInTheDocument();
-
-    const backToHomeBtn = screen.getByText(it.ioesco.common.backtohome);
-    fireEvent.click(backToHomeBtn);
-    expect(backToHomeBtn).toBeInTheDocument();
-    expect(pushMock).toHaveBeenCalledWith(process.env.NEXT_PUBLIC_URL_IO, { locale: 'it' });
+    fireEvent.click(cancelBtn);
+    expect(pushMock).toHaveBeenCalledWith(ROUTES.LOGIN, { locale: 'it' });
   });
 
   test('should render "Login Error Retry" in case of not recognized code and click on button retry', async () => {
@@ -94,8 +79,8 @@ describe('test suite for access error', () => {
     expect(errorSummary).toBeInTheDocument();
 
     const retryBtn = screen.getByText(it.ioesco.error.retry);
-    fireEvent.click(retryBtn);
     expect(retryBtn).toBeInTheDocument();
+    fireEvent.click(retryBtn);
     expect(pushMock).toHaveBeenCalledWith(ROUTES.LOGIN, { locale: 'it' });
   });
 });

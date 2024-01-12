@@ -188,13 +188,7 @@ const LoginErrorPage = () => {
               {renderErrorMessage(errorCode).message}
             </Typography>
           </Grid>
-          {typeof errorCode === 'string' && errorCode === '1001' ? (
-            <Grid item xs={12} textAlign={'center'}>
-              <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
-                {t('common.backtohome')}
-              </Button>
-            </Grid>
-          ) : (
+          {
             <Grid display={'flex'} justifyContent="space-around" flexDirection={'column'}>
               {renderErrorMessage(errorCode).hasRetry && !renderErrorMessage(errorCode).hasClose ? (
                 <Grid item xs={6} justifySelf="center">
@@ -224,7 +218,7 @@ const LoginErrorPage = () => {
                 </Grid>
               )}
             </Grid>
-          )}
+          }
         </Grid>
       </Grid>
       <Grid item sm={4} />
