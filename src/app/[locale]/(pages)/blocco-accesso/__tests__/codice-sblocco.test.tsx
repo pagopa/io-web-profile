@@ -5,6 +5,14 @@ import { WebProfileApi } from '@/api/webProfileApiClient';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
 import * as it from '../../../../../dictionaries/it.json';
 
+jest.mock('../../../_component/accordion/faqDefault.tsx', () => ({
+  FAQ: () => (
+    <div data-testid="mocked-faq">
+      Mocked FAQ to avoid SyntaxError: Cannot use import statement outside a module
+    </div>
+  ),
+}));
+
 describe('lock profile with code', () => {
   test('should render the component ProfileBlock', async () => {
     await renderWithProviders(<ProfileBlock />);
@@ -18,9 +26,10 @@ describe('lock profile with code', () => {
     const lockAccessButton = screen.getByText(it.ioesco.profile.lockaccess);
     fireEvent.click(lockAccessButton);
     await waitFor(() => {
-      expect(lockUserSessionSpy).toHaveBeenCalledWith({ unlock_code: expect.stringMatching(/^\d{9}$/) });
+      expect(lockUserSessionSpy).toHaveBeenCalledWith({
+        unlock_code: expect.stringMatching(/^\d{9}$/),
+      });
     });
     lockUserSessionSpy.mockRestore();
   });
-
 });
