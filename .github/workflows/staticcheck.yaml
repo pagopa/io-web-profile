@@ -16,8 +16,5 @@ jobs:
         run: yarn tsc --noemit
       - id: run-lint
         run: yarn lint --fix
-      # TODO: uncomment when there are tests
-      # - id: run-test
-      #   run: yarn test:ci
-      # - id: codecov-script
-      #   run: ./scripts/codecov.sh
+      - id: test
+        run: yarn test
