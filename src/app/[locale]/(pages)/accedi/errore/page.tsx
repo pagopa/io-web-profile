@@ -188,37 +188,35 @@ const LoginErrorPage = () => {
               {renderErrorMessage(errorCode).message}
             </Typography>
           </Grid>
-          {
-            <Grid display={'flex'} justifyContent="space-around" flexDirection={'column'}>
-              {renderErrorMessage(errorCode).hasRetry && !renderErrorMessage(errorCode).hasClose ? (
-                <Grid item xs={6} justifySelf="center">
-                  <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
-                    {t('error.retry')}
-                  </Button>
-                </Grid>
-              ) : !renderErrorMessage(errorCode).hasRetry &&
-                renderErrorMessage(errorCode).hasClose ? (
-                <Grid item xs={6} justifySelf="center">
-                  <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
+          <Grid display={'flex'} justifyContent="space-around" flexDirection={'column'}>
+            {renderErrorMessage(errorCode).hasRetry && !renderErrorMessage(errorCode).hasClose ? (
+              <Grid item xs={6} justifySelf="center">
+                <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
+                  {t('error.retry')}
+                </Button>
+              </Grid>
+            ) : !renderErrorMessage(errorCode).hasRetry &&
+              renderErrorMessage(errorCode).hasClose ? (
+              <Grid item xs={6} justifySelf="center">
+                <Button onClick={() => pushWithLocale(ROUTES.LOGIN)} variant="contained">
+                  {t('common.close')}
+                </Button>
+              </Grid>
+            ) : (
+              <Grid item xs={12} container justifyContent="center">
+                <Grid item xs={6} justifySelf="center" pr={3}>
+                  <Button variant="outlined" onClick={() => handleCancelBtn()}>
                     {t('common.close')}
                   </Button>
                 </Grid>
-              ) : (
-                <Grid item xs={12} container justifyContent="center">
-                  <Grid item xs={6} justifySelf="center" pr={3}>
-                    <Button variant="outlined" onClick={() => handleCancelBtn()}>
-                      {t('common.close')}
-                    </Button>
-                  </Grid>
-                  <Grid item xs={6} justifySelf="center">
-                    <Button onClick={() => handleRetryLogin()} variant="contained">
-                      {t('error.retry')}
-                    </Button>
-                  </Grid>
+                <Grid item xs={6} justifySelf="center">
+                  <Button onClick={() => handleRetryLogin()} variant="contained">
+                    {t('error.retry')}
+                  </Button>
                 </Grid>
-              )}
-            </Grid>
-          }
+              </Grid>
+            )}
+          </Grid>
         </Grid>
       </Grid>
       <Grid item sm={4} />
