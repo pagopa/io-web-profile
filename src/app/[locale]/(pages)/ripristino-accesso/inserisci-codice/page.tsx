@@ -10,7 +10,7 @@ import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
 import { TransientErrorType } from '../../../_utils/api-utils';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
-import { WebProfileApi } from '@/api/webProfileApiClient';
+import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { storageLocaleOps, storageUserOps } from '@/app/[locale]/_utils/storage';
 import { isBrowser } from '@/app/[locale]/_utils/common';
@@ -56,9 +56,14 @@ const ReactivateCode = (): React.ReactElement => {
       event_category: 'UX',
       event_type: 'action',
     });
-    WebProfileApi.unlockUserSession({
-      unlock_code: restoreCode as string & IPatternStringTag<'^\\d{9}$'>,
-    })
+    callFetchWithRetries(
+      WebProfileApi,
+      'unlockUserSession',
+      {
+        unlock_code: restoreCode as string & IPatternStringTag<'^\\d{9}$'>,
+      },
+      [500]
+    )
       .then(() => {
         setIsCodeNotValid(false);
         setErrorMessage('');

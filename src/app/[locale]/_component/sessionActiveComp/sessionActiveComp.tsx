@@ -10,7 +10,7 @@ import { BackButton } from '../backButton/backButton';
 import { Introduction } from '../introduction/introduction';
 import { trackEvent } from '../../_utils/mixpanel';
 import { storageUserOps } from '../../_utils/storage';
-import { WebProfileApi } from '@/api/webProfileApiClient';
+import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 
 type SessionProps = {
   title: string;
@@ -33,13 +33,12 @@ const SessionActiveComp = ({
       event_category: 'UX',
       event_type: 'action',
     });
-    WebProfileApi.logoutFromIOApp()
+
+    callFetchWithRetries(WebProfileApi, 'logoutFromIOApp', [], [500])
       .then(() => {
         pushWithLocale(ROUTES.THANK_YOU);
       })
-      .catch((_err) => {
-        pushWithLocale(ROUTES.LOGOUT_KO);
-      });
+      .catch(() => pushWithLocale(ROUTES.LOGOUT_KO));
   };
   return (
     <>
