@@ -51,7 +51,7 @@ const NoSessionActiveComp = ({ title }: NoSessionProps): React.ReactElement => {
         </Grid>
         <Grid item xs={12}>
           <Button onClick={() => handleCloseBtn()} sx={{ mr: 2 }} variant="outlined">
-            {isL1 ? t('common.close') : t('common.backtohome')}
+            {isL1 ? t('common.close') : t('common.backtoprofile')}
           </Button>
         </Grid>
       </Grid>

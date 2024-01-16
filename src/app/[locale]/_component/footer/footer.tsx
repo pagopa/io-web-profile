@@ -71,9 +71,9 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       links: [
         {
           label: t('privacypolicy'),
-          href: `${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`,
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
+          onClick: () => window.open(`${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`, '_blank'),
         },
         {
           label: t('cookiesperefercies'),
@@ -179,9 +179,9 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
   const postLoginLinks: FooterLinksType[] = [
     {
       label: t('privacypolicy'),
-      href: `${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`,
       ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
+      onClick: () => window.open(`${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`, '_blank'),
     },
     {
       label: t('cookiesperefercies'),
