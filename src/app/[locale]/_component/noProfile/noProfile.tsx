@@ -51,7 +51,7 @@ export const NoProfile = (): React.ReactElement => {
       </Grid>
       <Grid item xs={12} sm={4} md={3} display={{ xs: 'none', sm: 'block' }}>
         <Button variant="outlined" onClick={() => handleBtnContinue()}>
-          {t('common.backtohome')}
+          {t('common.close')}
         </Button>
       </Grid>
     </Grid>
