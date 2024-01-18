@@ -29,6 +29,10 @@ type FAQEntries = {
 const baseUrl = isBrowser() && window.location.origin;
 const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
+const firstBlockRich = {
+  br: () => <br />,
+};
+
 const restoreSecondRich = {
   link: (chunks: React.ReactNode) => (
     <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
@@ -92,7 +96,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
   const blockEntries: FAQEntries[] = [
     {
       header: t('blockfaq.firstquestion'),
-      content: t('blockfaq.firstresponse'),
+      content: t.rich('blockfaq.firstresponse', firstBlockRich),
     },
     {
       header: t('blockfaq.secondquestion'),
