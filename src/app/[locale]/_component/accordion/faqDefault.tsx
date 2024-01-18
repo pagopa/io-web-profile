@@ -52,6 +52,7 @@ const thirdBlockRich = {
       {chunks}
     </Link>
   ),
+  strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
   div: () => <div id="digital_identity" />,
   br: () => <br />,
   ul: (chunks: React.ReactNode) => <ListComponent chunks={chunks} marginBottom="unset" />,
