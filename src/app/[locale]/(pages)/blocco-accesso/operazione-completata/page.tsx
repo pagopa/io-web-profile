@@ -24,7 +24,7 @@ const unlockioaccessRich = {
   ul: (chunks: React.ReactNode) => <ListComponent chunks={chunks} marginBottom="40px" />,
   li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
   u: (chunks: React.ReactNode) => (
-    <Link target="_blank" fontWeight={600} href="https://io.italia.it/" color="textPrimary">
+    <Link target="_blank" fontWeight={600} href="https://ioapp.it/" color="textPrimary">
       {chunks}
     </Link>
   ),

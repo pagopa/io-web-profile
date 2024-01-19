@@ -4,13 +4,13 @@
       "fifthquestion": "Come posso mettere in sicurezza la mia identità digitale?",
       "fifthresponse": "Per mettere in sicurezza SPID, modifica le credenziali di accesso o contatta il tuo fornitore. Se vuoi invece modificare la password della tua CIE, <link>visita questo sito</link>.",
       "firstquestion": "Cosa succede se blocco l’accesso a IO?",
-      "firstresponse": "Nessuno potrà accedere al tuo account IO. Per sbloccare l’accesso, usa il codice di ripristino che ti verrà fornito durante il blocco. In alternativa, usa un’identità digitale con un livello di sicurezza 3.",
+      "firstresponse": "Nessuno potrà accedere al tuo account IO con la tua identità digitale. Se hai già effettuato l’accesso da un dispositivo, la sessione terminerà automaticamente. <br></br> Se vuoi sbloccare l’accesso, usa il codice di ripristino che ti verrà fornito durante il blocco. In alternativa, usa un’identità digitale con un livello di sicurezza 3.",
       "fourthquestion": "Se blocco l’accesso a IO continuerò a ricevere i messaggi?",
       "fourthresponse": "Sì. Per leggerli dovrai però sbloccare l’accesso o autenticarti con SPID o CIE con livello di sicurezza 3.",
       "secondquestion": "Posso entrare su IO anche se ho bloccato l’accesso?",
-      "secondresponse": "Sì, autenticandoti con un’identità digitale con livello di sicurezza 3.",
+      "secondresponse": "No, a meno che tu non disponga di un’identità digitale con livello di sicurezza 3 per autenticarti. Al momento, l'unico modo per accedere all'app IO con il massimo livello di sicurezza è utilizzando la Carta di Identità Elettronica (CIE).",
       "thirdquestion": "Cosa sono i livelli di sicurezza di un’identità digitale?",
-      "thirdresponse": "<div></div>Ogni identità digitale, come SPID e CIE, è associata a uno o più livelli di sicurezza. Esistono tre livelli di sicurezza: <br></br> <ul><li>livello di sicurezza 1: richiede un nome utente e una password; </li> <li>livello di sicurezza 2: richiede un nome utente e una password, ma si aggiunge un ulteriore passaggio di verifica (per esempio un codice OTP o l’accesso tramite app se il fornitore di identità digitale lo prevede);</li> <li> livello di sicurezza 3: nel caso della CIE richiede un nome utente, una password e un supporto fisico; nel caso dello SPID richiede un nome utente, una password, l’accesso tramite app se il fornitore di identità digitale lo prevede e un ulteriore PIN. </li> </ul> Per le informazioni sui livelli di sicurezza di SPID, visita il sito del tuo Identity Provider. Per maggiori informazioni sui livelli di sicurezza della CIE, <link>visita questo sito</link>."
+      "thirdresponse": "<div></div>Ogni identità digitale, come SPID e CIE, è associata a uno o più livelli di sicurezza. Esistono tre livelli di sicurezza: <br></br> <ul><li> <strong>livello di sicurezza 1:</strong> richiede un nome utente e una password;</li> <li> <strong>livello di sicurezza 2:</strong> richiede un nome utente e una password, ma si aggiunge un ulteriore passaggio di verifica (per esempio un codice OTP via SMS), oppure l’accesso tramite app se il fornitore di identità digitale lo prevede;</li> <li> <strong>livello di sicurezza 3:</strong> richiede l'utilizzo fisico della Carta di Identità Elettronica e un dispositivo capace di leggerla, come ad esempio uno smartphone con tecnologia NFC. Per SPID, richiede un ulteriore passaggio di sicurezza rispetto al livello di sicurezza 2, come ad esempio l’inserimento di un PIN. Non tutti i fornitori di identità digitale SPID supportano il livello di sicurezza 3.</li> </ul> Per conoscere il tuo livello di sicurezza SPID, chiedi al tuo Identity Provider. <br></br> Per maggiori informazioni sui livelli di sicurezza della CIE, <link>visita questo sito</link>"
     },
     "common": {
       "abled": "Abilitato",
@@ -71,7 +71,7 @@
       "security": "Sicurezza",
       "selectauthmethod": "Seleziona la modalità di autenticazione che preferisci ed effettua l’acceso per gestire il tuo profilo IO.",
       "tooltipaccessabled": "L’accesso a IO è abilitato con tutte le tue identità digitali",
-      "unlockioaccess": "Segui questi passaggi:<ul><li>Vai sul sito <u>io.italia.it</u></li><li>Accedi con le tue credenziali SPID o CIE</li><li>Vai alla sezione <em>Sblocca accesso a IO</em></li><li>Segui i passaggi e, quando richiesto, inserisci il <strong>codice di ripristino</strong></li></ul>",
+      "unlockioaccess": "Segui questi passaggi:<ul><li>Vai sul sito <u>ioapp.it</u></li><li>Accedi con le tue credenziali SPID o CIE</li><li>Vai alla sezione <em>Sblocca accesso a IO</em></li><li>Segui i passaggi e, quando richiesto, inserisci il <strong>codice di ripristino</strong></li></ul>",
       "whatdo": "Cosa puoi fare?",
       "whatmean": "Cosa significa?",
       "youridentityonio": "Le tue identitÀ Sull’ APP IO:",
@@ -150,7 +150,7 @@
       "firstquestion": "Qualcuno ha utilizzato l’app IO al mio posto. Cosa posso fare?",
       "firstresponse": "Se temi un utilizzo improprio di IO da parte di altre persone, puoi proteggerti terminando la sessione attiva. Potrai accedere di nuovo in qualsiasi momento con SPID o CIE.",
       "secondquestion": "Cosa vuol dire che ho una sessione attiva?",
-      "secondresponse": "Vuol dire che hai fatto l'accesso all'app da un dispositivo. Quindi, puoi usarla senza dover autenticarti con SPID o CIE.",
+      "secondresponse": "Vuol dire che hai già effettuato l'accesso all'app da un dispositivo. Quindi, puoi usarla senza dover autenticarti con SPID o CIE.",
       "thirdquestion": "Se esco da IO, come posso rientrare?",
       "thirdresponse": "Ti basterà autenticarti con SPID o CIE da qualsiasi dispositivo."
     },
@@ -255,7 +255,7 @@
       "firstquestion": "Cosa vuol dire sbloccare l’accesso a IO?",
       "firstresponse": "Se sblocchi l’accesso a IO, potrai tornare ad utilizzare l'app come sempre.",
       "secondquestion": "Cosa posso fare se non ho più il codice di ripristino?",
-      "secondresponse": "Puoi accedere autenticandoti<link> da questa pagina</link> con SPID o CIE con livello di sicurezza 3 o puoi chiedere <u>supporto all’assistenza</u>."
+      "secondresponse": "Puoi accedere autenticandoti<link> da questa pagina</link> con CIE o SPID con livello di sicurezza 3 o puoi chiedere <u>supporto all’assistenza</u>."
     },
     "thankyoupage": {
       "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
