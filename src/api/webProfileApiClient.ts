@@ -50,7 +50,7 @@ export async function callFetchWithRetries<
             return response.right.value;
           case 403:
             onRedirectToLogin();
-            throw new Error(`Operation not allowed!`);
+            return;
           case 404:
             return new Promise((resolve) => resolve(response.right.status));
           default:
