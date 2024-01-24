@@ -10,9 +10,12 @@ li.otnotice-menu-section a {
     font-size: 14px;
 }
 
-.otnotice-sections {
-    margin-left: 290px !important;
-    margin-right: 50px;
+
+@media only screen and (min-width: 766px) {
+    .otnotice-sections {
+        margin-left: 290px !important;
+        margin-right: 50px;
+    }
 }
 
 .otnotice-content {
@@ -21,7 +24,7 @@ li.otnotice-menu-section a {
 
 .otnotice .otnotice-content .otnotice-section:first-child h2 {
     font-size: 28px;
-    color: #17324d!important;
+    color: #17324d !important;
 }
 
 .otnotice .otnotice-content .otnotice-section:not(:first-child) h2 {
@@ -29,18 +32,20 @@ li.otnotice-menu-section a {
     color: #17324d;
 }
 
-.otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile a, .otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-selected, .otnotice .otnotice-content .otnotice-menu>.otnotice-menu-section a {
+.otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-section-mobile a,
+.otnotice .otnotice-content .otnotice-menu-mobile .otnotice-menu-selected,
+.otnotice .otnotice-content .otnotice-menu>.otnotice-menu-section a {
     font-size: 14px;
     font-weight: 600;
     line-height: 1.5;
-    color: #17324d!important;
+    color: #17324d !important;
 }
 
-.otnotice-menu-section:hover{
+.otnotice-menu-section:hover {
     background-color: #f2f2f2;
 }
 
-.otnotice-menu>.otnotice-menu-section{
+.otnotice-menu>.otnotice-menu-section {
     margin-bottom: 0px !important;
     padding: 15px;
 }
