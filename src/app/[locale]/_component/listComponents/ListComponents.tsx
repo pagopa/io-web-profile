@@ -1,12 +1,15 @@
 import React from 'react';
 import { List, ListItem, Typography } from '@mui/material';
+import { theme } from '@pagopa/mui-italia';
 
 type ListItemComponentProps = {
   chunks: React.ReactNode;
 };
 export const ListItemComponent = ({ chunks }: ListItemComponentProps) => (
   <ListItem>
-    <Typography sx={{ display: 'list-item' }}>{chunks}</Typography>
+    <Typography sx={{ display: 'list-item', fontSize: theme.typography.body2.fontSize }}>
+      {chunks}
+    </Typography>
   </ListItem>
 );
 

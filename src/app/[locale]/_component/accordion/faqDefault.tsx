@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
+import { theme } from '@pagopa/mui-italia';
 import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
@@ -142,16 +143,24 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
   ];
 
+  const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
+    const updatedEntries: FAQEntries[] = entries.map((entry) => ({
+      ...entry,
+      content: <span style={{ fontSize: theme.typography.body2.fontSize }}>{entry.content}</span>,
+    }));
+    return updatedEntries;
+  };
+
   function getEntriesByFlow(flow: string): FAQEntries[] {
     switch (flow) {
       case Flows.BLOCK:
-        return blockEntries;
+        return wrappingFaqContent(blockEntries);
       case Flows.RESTORE:
-        return restoreEntries;
+        return wrappingFaqContent(restoreEntries);
       case Flows.RESTOREL3:
-        return restoreEntriesL3;
+        return wrappingFaqContent(restoreEntriesL3);
       default:
-        return logoutEntries;
+        return wrappingFaqContent(logoutEntries);
     }
   }
   // #endregion
