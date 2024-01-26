@@ -14,12 +14,7 @@ const AlreadyLocked = (): React.ReactElement => {
 
   const explanationrestorecodeRich = {
     link: (chunks: React.ReactNode) => (
-      <Link
-        // FIX ME IOPID-1231 - REMOVE COMMENT WHEN SECTION WILL BE AVAILABLE
-        // href={'https://io.italia.it/faq#n1_6'}
-        fontWeight={600}
-        target="_blank"
-      >
+      <Link href={'https://io.italia.it/faq#n1_6'} fontWeight={600} target="_blank">
         {chunks}
       </Link>
     ),

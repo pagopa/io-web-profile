@@ -123,12 +123,7 @@ const Access = (): React.ReactElement => {
                 >
                   <Typography variant="body1"> {t('restore.whatisl3')}</Typography>
                   <Typography variant="body1" color={'primary.dark'}>
-                    <Link
-                      // FIX ME IOPID-1231 - REMOVE COMMENT WHEN SECTION WILL BE AVAILABLE
-                      // href={'https://io.italia.it/faq#n1_6'}
-                      target="_blank"
-                      fontWeight={600}
-                    >
+                    <Link href={'https://io.italia.it/faq#n1_6'} target="_blank" fontWeight={600}>
                       {t('common.more')}
                     </Link>
                   </Typography>
