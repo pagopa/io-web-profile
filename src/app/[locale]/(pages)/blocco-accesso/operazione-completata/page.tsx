@@ -69,12 +69,7 @@ const ProfileBlock = (): React.ReactElement => {
             {t.rich('thankyoupage.accesslocked', {
               strong: (chunks) => <strong>{chunks}</strong>,
               link: (chunks) => (
-                <Link
-                  // FIX ME IOPID-1231 - REMOVE COMMENT WHEN SECTION WILL BE AVAILABLE
-                  // href={'https://io.italia.it/faq#n1_6'}
-                  target="_blank"
-                  fontWeight={600}
-                >
+                <Link href={'https://io.italia.it/faq#n1_6'} target="_blank" fontWeight={600}>
                   {chunks}
                 </Link>
               ),
