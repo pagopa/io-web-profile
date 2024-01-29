@@ -108,7 +108,7 @@ const Access = (): React.ReactElement => {
               mb={{ xs: 4, md: 6 }}
               maxWidth={{ xs: '327px', sm: '330px', md: '480px' }}
             >
-              {t('lpaccess.selectauthmethod')}
+              {t('common.selectauthmethod')}
             </Typography>
           </Grid>
 
