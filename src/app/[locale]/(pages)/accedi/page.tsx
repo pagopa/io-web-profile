@@ -122,17 +122,6 @@ const Access = (): React.ReactElement => {
               }}
             >
               <CardContent sx={{ p: { xs: 3, md: 4 }, width: { sm: '276px', md: '416px' } }}>
-                <Typography
-                  color="textPrimary"
-                  mb={{ xs: 2, md: 4 }}
-                  sx={{
-                    textAlign: 'center',
-                  }}
-                  component="h6"
-                  variant="h6"
-                >
-                  {t('common.login')}
-                </Typography>
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
                     id="spidButton"
