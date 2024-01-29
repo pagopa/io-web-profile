@@ -47,7 +47,7 @@
       "login": "Accedi",
       "logincie": "Entra con CIE",
       "loginspid": "Entra con SPID",
-      "loginspidorcie": "Entra con SPID o CIE",
+      "loginspidorcie": "Gestisci l’accesso a IO",
       "logout": "Esci da IO",
       "logoutexplain": "Esci da IO per mantenere al sicuro i tuoi dati, i messaggi e i metodi di pagamento",
       "logoutprofile": "Esci dal profilo",
@@ -158,7 +158,7 @@
       "logout": "Esci da IO per mantenere al sicuro i tuoi dati, messaggi e metodi di pagamento.",
       "nodevice": "Non hai più il tuo dispositivo?",
       "nospidorcie": "Non hai SPID o CIE?",
-      "selectauthmethod": "Seleziona la modalità di autenticazione che preferisci ed entra per gestire il tuo profilo IO."
+      "selectauthmethod": "Entra con SPID o CIE per vedere informazioni del tuo profilo e gestire l’accesso all’app."
     },
     "lplogout": {
       "activesession": "Al momento hai una sessione attiva sull’app IO, valida fino al {date}. Se non hai più il dispositivo, termina la sessione.\nPotrai accedere in qualsiasi momento da un altro dispositivo.",
