@@ -1,7 +1,7 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { COMMON_PADDING_HERO } from '../../../_utils/styles';
 import HourglassIcon from '../../../_icons/hourglass';
 import { extractToken, userFromJwtToken } from '@/app/[locale]/_utils/jwt';
@@ -19,6 +19,7 @@ const ExpiredMagicLink = () => {
   const token = isBrowser() ? extractToken() : undefined;
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -30,6 +31,7 @@ const ExpiredMagicLink = () => {
   }, [pushWithLocale, token]);
 
   const handleContinue = () => {
+    setIsButtonDisabled(true);
     if (token) {
       callFetchWithRetries(WebProfileApi, 'exchangeToken', [], [500])
         .then((res) => {
@@ -94,7 +96,11 @@ const ExpiredMagicLink = () => {
           </Grid>
           <Grid item xs={12} textAlign={'center'}>
             <Grid display={'flex'} justifyContent="center">
-              <Button variant={'contained'} onClick={() => handleContinue()}>
+              <Button
+                variant={'contained'}
+                onClick={() => handleContinue()}
+                disabled={isButtonDisabled}
+              >
                 {t('common.continue')}
               </Button>
             </Grid>

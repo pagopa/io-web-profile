@@ -4,7 +4,7 @@ import { IPatternStringTag } from '@pagopa/ts-commons/lib/strings';
 import { useTranslations } from 'next-intl';
 import { useDispatch } from 'react-redux';
 import generator from 'generate-password-ts';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
@@ -26,6 +26,7 @@ const ProfileBlock = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const isFromMagicLink = storageMagicLinkOps.read();
   const referral = getReferralLockProfile(isFromMagicLink);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const unlockCode = generator.generate({
     length: 9,
@@ -42,6 +43,7 @@ const ProfileBlock = (): React.ReactElement => {
   }, []);
 
   const handleLockSession = () => {
+    setIsButtonDisabled(true);
     trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', {
       referral,
       event_category: 'UX',
@@ -94,7 +96,12 @@ const ProfileBlock = (): React.ReactElement => {
           <Typography mb={5}>
             {t.rich('common.lockaccessinfo', explanationIdentetyLevelRich)}
           </Typography>
-          <Button variant="contained" size="medium" onClick={handleLockSession}>
+          <Button
+            variant="contained"
+            size="medium"
+            onClick={handleLockSession}
+            disabled={isButtonDisabled}
+          >
             {t('profile.lockaccess')}
           </Button>
         </Grid>
