@@ -28,7 +28,8 @@ export const addSpacesEvery3Chars = (input: string, startIndex = 0): string => {
 
   return chunk + (remainingFormatted === '' ? '' : ' ' + remainingFormatted);
 };
-export const localeFromStorage = isBrowser() ? storageLocaleOps.read() : 'it';
+export const localeFromStorage =
+  isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : defaultLocale;
 
 export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off' =>
   sessionData?.session_info.active ? 'on' : 'off';
