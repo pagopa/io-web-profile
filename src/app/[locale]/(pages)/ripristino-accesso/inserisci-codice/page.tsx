@@ -12,8 +12,8 @@ import { TransientErrorType } from '../../../_utils/api-utils';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
-import { storageLocaleOps, storageUserOps } from '@/app/[locale]/_utils/storage';
-import { isBrowser } from '@/app/[locale]/_utils/common';
+import { storageUserOps } from '@/app/[locale]/_utils/storage';
+import { isBrowser, localeFromStorage } from '@/app/[locale]/_utils/common';
 
 const ReactivateCode = (): React.ReactElement => {
   const [restoreCode, setRestoreCode] = useState('');
@@ -21,7 +21,6 @@ const ReactivateCode = (): React.ReactElement => {
   const [errorMessage, setErrorMessage] = useState('');
   const pushWithLocale = useLocalePush();
   const baseUrl = isBrowser() && window.location.origin;
-  const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
 
@@ -44,7 +43,7 @@ const ReactivateCode = (): React.ReactElement => {
 
   const explanationrestorecodeRich = {
     link: (chunks: React.ReactNode) => (
-      <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
+      <Link href={`${baseUrl}/${localeFromStorage}${ROUTES.LOGIN_L3}`} fontWeight={600}>
         {chunks}
       </Link>
     ),

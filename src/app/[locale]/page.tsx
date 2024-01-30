@@ -12,7 +12,7 @@ import { commonBackground } from './_utils/styles';
 import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
-import { getAccessStatus, getSessionStatus } from './_utils/common';
+import { getAccessStatus, getSessionStatus, localeFromStorage } from './_utils/common';
 import useLocalePush from './_hooks/useLocalePush';
 import { ROUTES } from './_utils/routes';
 import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
@@ -124,7 +124,9 @@ const Profile = () => {
                   <Typography variant="sidenav">
                     {sessionData?.session_info.active
                       ? t('common.activeduedate', {
-                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(),
+                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                            localeFromStorage
+                          ),
                         })
                       : t('common.noactive')}
                   </Typography>
@@ -134,7 +136,9 @@ const Profile = () => {
                     title={
                       sessionData?.session_info.active
                         ? t('tooltip.accesswithoutidp', {
-                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(),
+                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                              localeFromStorage
+                            ),
                           })
                         : t('tooltip.nosession')
                     }

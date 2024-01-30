@@ -10,6 +10,7 @@ import { BackButton } from '../backButton/backButton';
 import { Introduction } from '../introduction/introduction';
 import { trackEvent } from '../../_utils/mixpanel';
 import { storageUserOps } from '../../_utils/storage';
+import { localeFromStorage } from '../../_utils/common';
 import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
 
 type SessionProps = {
@@ -47,7 +48,9 @@ const SessionActiveComp = ({
         <Grid item xs={12} justifySelf={'center'}>
           <Introduction
             title={title}
-            summary={t('lplogout.activesession', { date: expirationDate?.toLocaleDateString() })}
+            summary={t('lplogout.activesession', {
+              date: expirationDate?.toLocaleDateString(localeFromStorage),
+            })}
             summaryColumns={{ xs: 12, md: 6 }}
           />
         </Grid>
