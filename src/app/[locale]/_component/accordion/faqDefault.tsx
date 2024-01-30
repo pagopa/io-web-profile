@@ -5,9 +5,8 @@ import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
 import { Flows } from '../../_enums/Flows';
-import { assistenceEmail, isBrowser } from '../../_utils/common';
+import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
-import { storageLocaleOps } from '../../_utils/storage';
 import { ROUTES } from '../../_utils/routes';
 
 type FAQProps = {
@@ -28,7 +27,6 @@ type FAQEntries = {
 };
 
 const baseUrl = isBrowser() && window.location.origin;
-const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
 const firstBlockRich = {
   br: () => <br />,
@@ -36,7 +34,7 @@ const firstBlockRich = {
 
 const restoreSecondRich = {
   link: (chunks: React.ReactNode) => (
-    <Link href={`${baseUrl}/${locale}${ROUTES.LOGIN_L3}`} fontWeight={600}>
+    <Link href={`${baseUrl}/${localeFromStorage}${ROUTES.LOGIN_L3}`} fontWeight={600}>
       {chunks}
     </Link>
   ),
