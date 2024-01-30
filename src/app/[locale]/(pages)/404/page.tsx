@@ -9,14 +9,12 @@ import { commonBackground } from '../../_utils/styles';
 import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
 import { trackEvent } from '../../_utils/mixpanel';
-import { storageLocaleOps } from '../../_utils/storage';
-import { isBrowser } from '../../_utils/common';
+import { isBrowser, localeFromStorage } from '../../_utils/common';
 
 const NotFoundPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const { isLoggedIn } = useLogin();
   const baseUrl = isBrowser() && window.location.origin;
-  const locale = storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
 
   useEffect(() => {
     trackEvent('IO_ERROR', {
@@ -34,7 +32,7 @@ const NotFoundPage = (): React.ReactElement => {
           title={'Qui non c’è nulla!'}
           summary={<span>{t('error.notlogged404')}</span>}
           firstButton={{
-            href: isLoggedIn ? ROUTES.PROFILE : `${baseUrl}/${locale}${ROUTES.LOGIN}`,
+            href: isLoggedIn ? ROUTES.PROFILE : `${baseUrl}/${localeFromStorage}${ROUTES.LOGIN}`,
             variant: 'contained',
             text: isLoggedIn ? t('common.backtoprofile') : t('common.backtohome'),
           }}

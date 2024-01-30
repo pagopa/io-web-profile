@@ -7,9 +7,8 @@ import {
 } from '@pagopa/mui-italia/dist/components/Footer/Footer';
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
-import { storageLocaleOps } from '../../_utils/storage';
 import { ROUTES } from '../../_utils/routes';
-import { isBrowser, isDevMode } from '../../_utils/common';
+import { isDevMode, localeFromStorage } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
@@ -32,7 +31,6 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
   const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
-  const locale = isBrowser() && storageLocaleOps.read() ? storageLocaleOps.read() : 'it';
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -73,7 +71,8 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           label: t('privacypolicy'),
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
-          onClick: () => window.open(`${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+          onClick: () =>
+            window.open(`${baseUrl}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
         },
         {
           label: t('cookiesperefercies'),
@@ -181,7 +180,8 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       label: t('privacypolicy'),
       ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
-      onClick: () => window.open(`${baseUrl}/${locale}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+      onClick: () =>
+        window.open(`${baseUrl}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
     },
     {
       label: t('cookiesperefercies'),
