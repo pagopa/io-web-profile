@@ -22,9 +22,7 @@ const ExpiredMagicLink = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
-    if (!token) {
-      pushWithLocale(ROUTES.INTERNAL_ERROR);
-    } else {
+    if (token) {
       storageTokenOps.write(token);
       storageMagicLinkOps.write({ value: true });
     }
