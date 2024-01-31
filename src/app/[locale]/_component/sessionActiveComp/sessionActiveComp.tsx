@@ -11,7 +11,8 @@ import { Introduction } from '../introduction/introduction';
 import { trackEvent } from '../../_utils/mixpanel';
 import { storageUserOps } from '../../_utils/storage';
 import { localeFromStorage } from '../../_utils/common';
-import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
+import Loader from '../loader/loader';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 
 type SessionProps = {
   title: string;
@@ -28,6 +29,7 @@ const SessionActiveComp = ({
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
+  const { callFetchWithRetries, isLoading } = useFetch();
 
   const handleLogout = () => {
     trackEvent(isL1 ? 'IO_SESSION_EXIT_UX_CONVERSION' : 'IO_PROFILE_SESSION_EXIT_UX_CONVERSION', {
@@ -41,6 +43,10 @@ const SessionActiveComp = ({
       })
       .catch(() => pushWithLocale(ROUTES.LOGOUT_KO));
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <Grid sx={showArrowBackBtn ? commonBackgroundLightWithBack : commonBackgroundLight} container>

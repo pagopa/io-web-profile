@@ -10,14 +10,15 @@ import { ROUTES } from '../../_utils/routes';
 import { storageUserOps } from '../../_utils/storage';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { trackEvent } from '../../_utils/mixpanel';
-import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
+import Loader from '../../_component/loader/loader';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 
 const RestoreProfile = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
-
+  const { callFetchWithRetries, isLoading } = useFetch();
   useEffect(() => {
     trackEvent(isL3 ? 'IO_PROFILE_UNLOCK_ACCESS_L3_CONFIRM' : 'IO_PROFILE_UNLOCK_ACCESS_CONFIRM', {
       event_category: 'UX',
@@ -42,6 +43,10 @@ const RestoreProfile = (): React.ReactElement => {
       pushWithLocale(ROUTES.RESTORE_CODE);
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

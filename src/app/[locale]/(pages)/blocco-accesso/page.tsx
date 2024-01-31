@@ -18,7 +18,8 @@ import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import { trackEvent } from '../../_utils/mixpanel';
 import { getReferralLockProfile } from '../../_utils/common';
 import { storageMagicLinkOps } from '../../_utils/storage';
-import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
+import Loader from '../../_component/loader/loader';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -27,6 +28,7 @@ const ProfileBlock = (): React.ReactElement => {
   const isFromMagicLink = storageMagicLinkOps.read();
   const referral = getReferralLockProfile(isFromMagicLink);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const { callFetchWithRetries, isLoading } = useFetch();
 
   const unlockCode = generator.generate({
     length: 9,
@@ -81,6 +83,10 @@ const ProfileBlock = (): React.ReactElement => {
       </Link>
     ),
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
