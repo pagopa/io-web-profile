@@ -39,10 +39,6 @@ const LogoutConfirm = (): React.ReactElement => {
       .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
   }, []);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   const renderSessionActive = (): React.ReactElement => {
     if (sessionData?.session_info.active) {
       return (
@@ -59,6 +55,9 @@ const LogoutConfirm = (): React.ReactElement => {
     return <NoSessionActiveComp title={t('common.hello', { nome: userFromStorage?.name })} />;
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return renderSessionActive();
 };
 

@@ -19,14 +19,16 @@ export const parseJwt = (token: string) => {
   }
 };
 
-export const userFromJwtToken: (token: string) => User = function (token: string) {
+export const userFromJwtToken: (token: string) => User | undefined = function (token: string) {
   const jwtUser: JWTUser = parseJwt(token);
-  return {
-    uid: jwtUser.uid,
-    taxCode: jwtUser.fiscal_number,
-    name: jwtUser.name,
-    surname: jwtUser.family_name,
-    email: jwtUser.email,
-    spidLevel: jwtUser.spid_level,
-  };
+  if (jwtUser)
+    return {
+      uid: jwtUser.uid,
+      taxCode: jwtUser.fiscal_number,
+      name: jwtUser.name,
+      surname: jwtUser.family_name,
+      email: jwtUser.email,
+      spidLevel: jwtUser.spid_level,
+    };
+  return undefined;
 };

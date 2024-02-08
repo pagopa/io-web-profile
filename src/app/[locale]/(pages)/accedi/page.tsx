@@ -14,6 +14,7 @@ import { storageLoginInfoOps, storageTokenOps, storageUserOps } from '../../_uti
 import { goCIE } from '../../_utils/idps';
 import { checkElevationIntegrity } from '../../_utils/integrity';
 import { trackEvent } from '../../_utils/mixpanel';
+import Loader from '../../_component/loader/loader';
 
 // eslint-disable-next-line max-lines-per-function
 const Access = (): React.ReactElement => {
@@ -38,16 +39,14 @@ const Access = (): React.ReactElement => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
-      try {
-        trackEvent('IO_LOGIN_SUCCESS', {
-          SPID_IDP_ID: loginInfo.idpId,
-          SPID_IDP_NAME: loginInfo.idpName,
-          Flow: getLoginFlow(loginInfo),
-          event_category: 'TECH',
-        });
-      } catch {
-        pushWithLocale(ROUTES.LOGIN);
-      }
+
+      trackEvent('IO_LOGIN_SUCCESS', {
+        SPID_IDP_ID: loginInfo.idpId,
+        SPID_IDP_NAME: loginInfo.idpName,
+        Flow: getLoginFlow(loginInfo),
+        event_category: 'TECH',
+      });
+
       switch (getLoginFlow(loginInfo)) {
         case FLOW_PARAMS.FLOW_SESSION_EXIT:
           pushWithLocale(ROUTES.LOGOUT_CONFIRM);
@@ -82,6 +81,10 @@ const Access = (): React.ReactElement => {
     trackEvent('IO_PROFILE_LOGIN_SPID', { event_category: 'UX', event_type: 'action' });
     setOpenDialog(true);
   };
+
+  if (token && userFromToken && localeFromStorage) {
+    return <Loader />;
+  }
 
   return (
     <Grid container justifyContent="center" bgcolor="background.default">
