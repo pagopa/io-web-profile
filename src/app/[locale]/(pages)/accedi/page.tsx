@@ -8,7 +8,7 @@ import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { FLOW_PARAMS, getLoginFlow, isBrowser, localeFromStorage } from '../../_utils/common';
-import { extractToken, userFromJwtToken } from '../../_utils/jwt';
+import { extractToken, parseJwt, userFromJwtToken } from '../../_utils/jwt';
 import { ROUTES } from '../../_utils/routes';
 import { storageLoginInfoOps, storageTokenOps, storageUserOps } from '../../_utils/storage';
 import { goCIE } from '../../_utils/idps';
@@ -26,7 +26,7 @@ const Access = (): React.ReactElement => {
   };
 
   const token = isBrowser() ? extractToken() : undefined;
-  const userFromToken = token ? userFromJwtToken(token) : undefined;
+  const userFromToken = token && parseJwt(token) ? userFromJwtToken(token) : undefined;
   const loginInfo = storageLoginInfoOps.read();
 
   useEffect(() => {
