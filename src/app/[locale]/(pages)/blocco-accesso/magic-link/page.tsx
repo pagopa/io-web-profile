@@ -6,7 +6,7 @@ import { COMMON_PADDING_HERO } from '../../../_utils/styles';
 import HourglassIcon from '../../../_icons/hourglass';
 import { extractToken, userFromJwtToken } from '@/app/[locale]/_utils/jwt';
 import { isBrowser } from '@/app/[locale]/_utils/common';
-import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 import {
@@ -14,12 +14,14 @@ import {
   storageTokenOps,
   storageUserOps,
 } from '@/app/[locale]/_utils/storage';
+import Loader from '@/app/[locale]/_component/loader/loader';
 
 const ExpiredMagicLink = () => {
   const token = isBrowser() ? extractToken() : undefined;
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const { callFetchWithRetries, isLoading } = useFetch();
 
   useEffect(() => {
     if (token) {
@@ -58,6 +60,10 @@ const ExpiredMagicLink = () => {
       pushWithLocale(ROUTES.INTERNAL_ERROR);
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Grid sx={COMMON_PADDING_HERO} container bgcolor="background.default">

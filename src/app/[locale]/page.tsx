@@ -15,7 +15,8 @@ import { trackEvent } from './_utils/mixpanel';
 import { getAccessStatus, getSessionStatus, localeFromStorage } from './_utils/common';
 import useLocalePush from './_hooks/useLocalePush';
 import { ROUTES } from './_utils/routes';
-import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
+import Loader from './_component/loader/loader';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
 const Profile = () => {
@@ -26,6 +27,7 @@ const Profile = () => {
   const bgColor = 'background.paper';
   const userFromStorage = storageUserOps.read();
   const pushWithLocale = useLocalePush();
+  const { callFetchWithRetries, isLoading } = useFetch();
 
   useEffect(() => {
     if (sessionData) {
@@ -61,6 +63,9 @@ const Profile = () => {
     }
   }, [isProfileAvailable]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       {isProfileAvailable === false ? (

@@ -10,10 +10,11 @@ import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
 import { TransientErrorType } from '../../../_utils/api-utils';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
-import { WebProfileApi, callFetchWithRetries } from '@/api/webProfileApiClient';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
 import { isBrowser, localeFromStorage } from '@/app/[locale]/_utils/common';
+import Loader from '@/app/[locale]/_component/loader/loader';
 
 const ReactivateCode = (): React.ReactElement => {
   const [restoreCode, setRestoreCode] = useState('');
@@ -23,6 +24,7 @@ const ReactivateCode = (): React.ReactElement => {
   const baseUrl = isBrowser() && window.location.origin;
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
+  const { callFetchWithRetries, isLoading } = useFetch();
 
   const t = useTranslations('ioesco');
 
@@ -81,6 +83,10 @@ const ReactivateCode = (): React.ReactElement => {
         }
       });
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
