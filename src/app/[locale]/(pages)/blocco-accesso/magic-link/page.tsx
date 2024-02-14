@@ -28,7 +28,7 @@ const ExpiredMagicLink = () => {
       storageTokenOps.write(token);
       storageMagicLinkOps.write({ value: true });
     }
-  }, [pushWithLocale, token]);
+  }, [token]);
 
   const handleContinue = () => {
     setIsButtonDisabled(true);
