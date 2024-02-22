@@ -7,10 +7,12 @@ import { UnlockSessionData } from './generated/webProfile/UnlockSessionData';
 import { WithDefaultsT, createClient } from './generated/webProfile/client';
 import { goToLogin } from '@/app/[locale]/_utils/common';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
-import { storageTokenOps } from '@/app/[locale]/_utils/storage';
+import { storageJweOps, storageTokenOps } from '@/app/[locale]/_utils/storage';
 // with withDefaults
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
+const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
+const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const token = storageTokenOps.read();
   // wrappedOperation and params are correctly inferred
   return wrappedOperation({
@@ -19,11 +21,27 @@ const withBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (para
   });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const withJweBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
+  const jwe = storageJweOps.read();
+  return wrappedOperation({
+    ...params,
+    bearerAuth: jwe,
+  });
+};
+
 const webProfileApiClient = createClient({
-  baseUrl: `${process.env.NEXT_PUBLIC_API_BASE_URL}`,
-  basePath: `${process.env.NEXT_PUBLIC_API_BASE_PATH}`,
+  baseUrl: BASE_URL,
+  basePath: BASE_PATH,
   fetchApi: retryingFetch(),
-  withDefaults: withBearer,
+  withDefaults: withJwtBearer,
+});
+
+const webProfileApiClientExchange = createClient({
+  baseUrl: BASE_URL,
+  basePath: BASE_PATH,
+  fetchApi: retryingFetch(),
+  withDefaults: withJweBearer,
 });
 
 const useFetch = () => {
@@ -124,7 +142,7 @@ export const WebProfileApi = {
     return extractResponse(result);
   },
   exchangeToken: async () => {
-    const result = await webProfileApiClient.exchangeToken({});
+    const result = await webProfileApiClientExchange.exchangeToken({});
     return extractResponse(result);
   },
 };

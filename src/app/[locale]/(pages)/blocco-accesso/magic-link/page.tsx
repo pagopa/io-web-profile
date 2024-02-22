@@ -10,6 +10,7 @@ import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 import {
+  storageJweOps,
   storageMagicLinkOps,
   storageTokenOps,
   storageUserOps,
@@ -17,25 +18,26 @@ import {
 import Loader from '@/app/[locale]/_component/loader/loader';
 
 const ExpiredMagicLink = () => {
-  const token = isBrowser() ? extractToken() : undefined;
+  const jwe = isBrowser() ? extractToken() : undefined;
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { callFetchWithRetries, isLoading } = useFetch();
 
   useEffect(() => {
-    if (token) {
-      storageTokenOps.write(token);
+    if (jwe) {
+      storageJweOps.write(jwe);
       storageMagicLinkOps.write({ value: true });
     }
-  }, [token]);
+  }, [jwe]);
 
   const handleContinue = () => {
     setIsButtonDisabled(true);
-    if (token) {
+    if (jwe) {
       callFetchWithRetries(WebProfileApi, 'exchangeToken', [], [500])
         .then((res) => {
           if (res.jwt) {
+            storageJweOps.delete();
             storageTokenOps.write(res.jwt);
             storageUserOps.write(userFromJwtToken(res.jwt));
           }
