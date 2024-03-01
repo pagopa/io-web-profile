@@ -1,6 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { storageMagicLinkOps, storageTokenOps, storageUserOps } from '../_utils/storage';
+import {
+  storageJweOps,
+  storageMagicLinkOps,
+  storageTokenOps,
+  storageUserOps,
+} from '../_utils/storage';
 import { isBrowser } from '../_utils/common';
 
 type Token = {
@@ -29,6 +34,7 @@ const useToken = (): Token => {
     storageTokenOps.delete();
     storageUserOps.delete();
     storageMagicLinkOps.delete();
+    storageJweOps.delete();
   };
 
   return {
