@@ -11,7 +11,7 @@ import useToken from '@/app/[locale]/_hooks/useToken';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const Access = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const { removeToken } = useToken();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const spidLevel: SpidLevels = {

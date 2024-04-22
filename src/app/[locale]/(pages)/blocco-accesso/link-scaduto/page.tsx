@@ -13,7 +13,7 @@ import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const ExpiredMagicLink = () => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const spidLevel: SpidLevels = {

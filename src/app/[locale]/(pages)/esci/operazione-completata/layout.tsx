@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.escioperazionecompletatatitle,
-    description: messages.ioesco.metadati.escioperazionecompletatadescription,
+    title: messages.ioweb.metadati.escioperazionecompletatatitle,
+    description: messages.ioweb.metadati.escioperazionecompletatadescription,
   };
 }
 export default function LogOutCompletedLayout({ children }: Props) {

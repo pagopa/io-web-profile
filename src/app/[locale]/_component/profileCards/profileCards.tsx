@@ -15,7 +15,7 @@ type ProfileCardsProps = {
 };
 
 export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
 
   const handleLogOutCardBtn = () => {

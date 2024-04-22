@@ -19,7 +19,7 @@ import Loader from '../../_component/loader/loader';
 // eslint-disable-next-line max-lines-per-function
 const Access = (): React.ReactElement => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   const spidLevel: SpidLevels = {
     type: 'L2',

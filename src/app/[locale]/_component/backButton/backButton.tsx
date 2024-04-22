@@ -9,7 +9,7 @@ type BackButtonProps = {
 };
 
 export const BackButton = ({ href = '/', text, ...props }: BackButtonProps) => {
-  const t = useTranslations('ioesco.common');
+  const t = useTranslations('ioweb.common');
   const pushWithLocale = useLocalePush();
 
   return (

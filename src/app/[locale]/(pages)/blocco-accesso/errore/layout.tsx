@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.bloccoaccessoerroretitle,
-    description: messages.ioesco.metadati.bloccoaccessoerroredescription,
+    title: messages.ioweb.metadati.bloccoaccessoerroretitle,
+    description: messages.ioweb.metadati.bloccoaccessoerroredescription,
   };
 }
 export default function LockAccessErrorLayout({ children }: Props) {

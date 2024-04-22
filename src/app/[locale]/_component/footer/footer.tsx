@@ -20,7 +20,7 @@ declare const OneTrust: {
 };
 
 export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
-  const t = useTranslations('ioesco.commonfooter');
+  const t = useTranslations('ioweb.commonfooter');
 
   const handleCookiePreferencies = () => {
     OneTrust.ToggleInfoDisplay();

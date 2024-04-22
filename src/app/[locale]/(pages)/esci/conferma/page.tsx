@@ -15,7 +15,7 @@ import Loader from '@/app/[locale]/_component/loader/loader';
 
 const LogoutConfirm = (): React.ReactElement => {
   const [sessionData, setSessionData] = useState<SessionState>();
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const userFromStorage = storageUserOps.read();
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
   const pushWithLocale = useLocalePush();

@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.bloccoaccessomagiclinktitle,
-    description: messages.ioesco.metadati.bloccoaccessomagiclinkdescription,
+    title: messages.ioweb.metadati.bloccoaccessomagiclinktitle,
+    description: messages.ioweb.metadati.bloccoaccessomagiclinkdescription,
   };
 }
 export default function MagicLinkLayout({ children }: Props) {

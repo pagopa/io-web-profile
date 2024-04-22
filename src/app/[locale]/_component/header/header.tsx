@@ -14,7 +14,7 @@ import { trackEvent } from '../../_utils/mixpanel';
 import { useConsent } from '../../_hooks/useConsent';
 
 const Header = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const { userLogged, isLoggedIn, logOut } = useLogin();
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;

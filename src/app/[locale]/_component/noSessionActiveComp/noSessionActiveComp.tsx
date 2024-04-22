@@ -18,7 +18,7 @@ type NoSessionProps = {
 
 const NoSessionActiveComp = ({ title }: NoSessionProps): React.ReactElement => {
   const { logOut } = useLogin();
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
   // const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;

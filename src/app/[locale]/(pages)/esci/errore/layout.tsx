@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.erroretitle,
-    description: messages.ioesco.metadati.erroredescription,
+    title: messages.ioweb.metadati.erroretitle,
+    description: messages.ioweb.metadati.erroredescription,
   };
 }
 export default function LogOutErrorLayout({ children }: Props) {

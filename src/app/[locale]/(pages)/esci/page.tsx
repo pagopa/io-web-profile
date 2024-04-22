@@ -15,7 +15,7 @@ import { trackEvent } from '../../_utils/mixpanel';
 import { ROUTES } from '../../_utils/routes';
 
 const Init = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const spidLevel: SpidLevels = {

@@ -19,7 +19,7 @@ describe('IdpListOnApp', () => {
   test('should render IdpListOnApp component correctly', async () => {
     mockSearchParams.get.mockReturnValue(null);
     await renderWithProviders(<IdpListOnApp />);
-    const component = screen.getByText(it.ioesco.common.youridentityonio);
+    const component = screen.getByText(it.ioweb.common.youridentityonio);
     expect(component).toBeInTheDocument();
   });
 });

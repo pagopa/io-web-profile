@@ -16,14 +16,14 @@ jest.mock('../../../_component/accordion/faqDefault.tsx', () => ({
 describe('lock profile with code', () => {
   test('should render the component ProfileBlock', async () => {
     await renderWithProviders(<ProfileBlock />);
-    const errorSummary = screen.getByText(it.ioesco.common.lockioaccess);
+    const errorSummary = screen.getByText(it.ioweb.common.lockioaccess);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('on lock session button click, should call lockUserSession passing lock code', async () => {
     const lockUserSessionSpy = jest.spyOn(WebProfileApi, 'lockUserSession');
     await renderWithProviders(<ProfileBlock />);
-    const lockAccessButton = screen.getByText(it.ioesco.profile.lockaccess);
+    const lockAccessButton = screen.getByText(it.ioweb.profile.lockaccess);
     fireEvent.click(lockAccessButton);
     await waitFor(() => {
       expect(lockUserSessionSpy).toHaveBeenCalledWith({

@@ -11,7 +11,7 @@ import { ROUTES } from '@/app/[locale]/_utils/routes';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const LoginKo = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pathName = usePathname();
 
   useEffect(() => {

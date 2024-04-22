@@ -23,7 +23,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const bgColor = 'background.paper';
   const userFromStorage = storageUserOps.read();
   const pushWithLocale = useLocalePush();

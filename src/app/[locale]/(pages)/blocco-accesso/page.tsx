@@ -22,7 +22,7 @@ import Loader from '../../_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 
 const ProfileBlock = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const dispatch = useDispatch();
   const pushWithLocale = useLocalePush();
   const isFromMagicLink = storageMagicLinkOps.read();

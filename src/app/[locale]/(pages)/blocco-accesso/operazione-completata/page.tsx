@@ -32,7 +32,7 @@ const unlockioaccessRich = {
 };
 
 const ProfileBlock = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const unlockCode = useSelector(unlockCodeSelector);
   const pushWithLocale = useLocalePush();
   const pathName = usePathname();

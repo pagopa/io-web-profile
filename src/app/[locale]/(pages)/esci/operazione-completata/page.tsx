@@ -11,7 +11,7 @@ import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const ThankYouPage = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   const userFromToken = storageUserOps.read();
   const isL2 = userFromToken?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2;

@@ -11,7 +11,7 @@ import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 import { storageUserOps } from '@/app/[locale]/_utils/storage';
 
 const LogOutKo = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const userFromStorage = storageUserOps.read();
   const isL1 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
 

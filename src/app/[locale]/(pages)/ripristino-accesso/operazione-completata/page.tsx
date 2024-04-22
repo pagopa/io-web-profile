@@ -8,7 +8,7 @@ import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import CommonLayoutRestore from '@/app/[locale]/_component/commonLayoutRestore/commonLayoutRestore';
 
 const RestoreThankYouPage = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   return (
     <>

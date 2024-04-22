@@ -11,7 +11,7 @@ type CopyCardProps = {
 
 export const CopyCodeCard = ({ code }: CopyCardProps) => {
   const { isMobile } = useIsMobile();
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
 
   const copyTextToClipboard = (text: string | undefined) => {

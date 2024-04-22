@@ -13,7 +13,7 @@ import { ROUTES } from '../../_utils/routes';
 import PlayStoreIcon from '@/app/[locale]/_icons/playstore';
 
 export const NoProfile = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
 

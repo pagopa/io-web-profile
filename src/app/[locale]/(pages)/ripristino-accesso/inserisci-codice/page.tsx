@@ -26,7 +26,7 @@ const ReactivateCode = (): React.ReactElement => {
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;
   const { callFetchWithRetries, isLoading } = useFetch();
 
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
 
   const MAXRETRY_ERROR: TransientErrorType = 'max-retries';
 

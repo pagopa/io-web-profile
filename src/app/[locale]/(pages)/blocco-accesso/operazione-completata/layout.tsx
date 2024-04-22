@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.bloccoaccessoopcompletatatitle,
-    description: messages.ioesco.metadati.bloccoaccessoopcompletatadescription,
+    title: messages.ioweb.metadati.bloccoaccessoopcompletatatitle,
+    description: messages.ioweb.metadati.bloccoaccessoopcompletatadescription,
   };
 }
 

@@ -14,7 +14,7 @@ import { goCIE } from '@/app/[locale]/_utils/idps';
 
 const LoginErrorPage = () => {
   const searchParams = useSearchParams();
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const errorCode = searchParams.get('errorCode');
   const pushWithLocale = useLocalePush();
   const loginInfo = storageLoginInfoOps.read();

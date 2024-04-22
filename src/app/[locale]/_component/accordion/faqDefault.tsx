@@ -75,7 +75,7 @@ const fifthBlockFaqRick = {
 };
 
 export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   // #region entries
   const logoutEntries: FAQEntries[] = [
     {

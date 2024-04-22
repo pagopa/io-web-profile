@@ -19,7 +19,7 @@ import Loader from '@/app/[locale]/_component/loader/loader';
 
 const ExpiredMagicLink = () => {
   const jwe = isBrowser() ? extractToken() : undefined;
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { callFetchWithRetries, isLoading } = useFetch();

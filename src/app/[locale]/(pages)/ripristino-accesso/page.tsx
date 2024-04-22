@@ -14,7 +14,7 @@ import Loader from '../../_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 
 const RestoreProfile = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const pushWithLocale = useLocalePush();
   const userFromStorage = storageUserOps.read();
   const isL3 = userFromStorage?.spidLevel === process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3;

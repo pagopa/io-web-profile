@@ -10,7 +10,7 @@ import { ROUTES } from '@/app/[locale]/_utils/routes';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
 
 const LoginKo = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
 
   useEffect(() => {
     trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR', { event_category: 'KO' });

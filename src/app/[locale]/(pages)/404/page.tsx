@@ -12,7 +12,7 @@ import { trackEvent } from '../../_utils/mixpanel';
 import { isBrowser, localeFromStorage } from '../../_utils/common';
 
 const NotFoundPage = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const { isLoggedIn } = useLogin();
   const baseUrl = isBrowser() && window.location.origin;
 

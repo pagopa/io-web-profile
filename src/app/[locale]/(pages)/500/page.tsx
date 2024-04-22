@@ -10,7 +10,7 @@ import { trackEvent } from '../../_utils/mixpanel';
 import useLogin from '../../_hooks/useLogin';
 
 const InternalErrordPage = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
+  const t = useTranslations('ioweb');
   const { isLoggedIn } = useLogin();
 
   useEffect(() => {
