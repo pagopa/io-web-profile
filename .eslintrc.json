@@ -24,5 +24,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:sonarjs/recommended"
   ],
-  "rules": {}
+  "rules": {
+    "functional/immutable-data": "error"
+  }
 }
