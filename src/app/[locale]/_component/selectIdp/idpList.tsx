@@ -101,6 +101,7 @@ export function IdpList({ spidLevel, loginPage }: IdpList) {
                 <Icon
                   sx={{ width: '100px', height: '48px', display: 'flex', alignItems: ' center' }}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img width="100px" src={IDP.imageUrl} alt={IDP.name} />
                 </Icon>
               </Button>

@@ -22,7 +22,7 @@ const useToken = (): Token => {
     if (windowAvailable) {
       setToken(storageTokenOps.read());
     }
-  }, []);
+  }, [windowAvailable]);
 
   const isTokenValid = () => {
     if (windowAvailable) {

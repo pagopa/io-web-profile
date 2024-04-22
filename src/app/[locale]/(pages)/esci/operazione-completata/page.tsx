@@ -22,7 +22,7 @@ const ThankYouPage = (): React.ReactElement => {
       event_category: 'UX',
       event_type: 'screen_view',
     });
-  }, []);
+  }, [isL1]);
 
   const handleSpidLevelRedirect = () => {
     if (isL1) {
