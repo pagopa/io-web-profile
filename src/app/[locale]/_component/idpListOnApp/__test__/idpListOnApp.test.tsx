@@ -1,19 +1,21 @@
+import { test, vi, type Mock } from 'vitest';
 import { useSearchParams } from 'next/navigation';
 import { screen } from '@testing-library/react';
 import * as it from '../../../../../dictionaries/it.json';
 import { IdpListOnApp } from '../idpListOnApp';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
+
 // Mock the useSearchParams function
-jest.mock('next/navigation', () => ({
-  useSearchParams: jest.fn(),
+vi.mock('next/navigation', () => ({
+  useSearchParams: vi.fn(),
 }));
 
 // Mock the behavior of useSearchParams
 const mockSearchParams = {
-  get: jest.fn(),
+  get: vi.fn(),
 };
 
-(useSearchParams as jest.Mock).mockReturnValue(mockSearchParams);
+(useSearchParams as Mock).mockReturnValue(mockSearchParams);
 
 describe('IdpListOnApp', () => {
   test('should render IdpListOnApp component correctly', async () => {
