@@ -18,10 +18,12 @@ import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
+import { WalletData } from '@/api/generated/webProfile/WalletData';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
+  const [walletData, setWalletData] = useState<WalletData>();
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
@@ -63,6 +65,16 @@ const Profile = () => {
     }
   }, [isProfileAvailable]);
 
+  useEffect(() => {
+    if (isProfileAvailable) {
+      callFetchWithRetries(WebProfileApi, 'readInfo', [], [500])
+        .then((res) => {
+          setWalletData(res);
+        })
+        .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
+    }
+  }, [isProfileAvailable]);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -84,7 +96,7 @@ const Profile = () => {
             {t('common.yourprofile')}
           </Typography>
           <Grid container gap={2} mb={2} flexWrap={{ xs: 'wrap', sm: 'nowrap', md: 'nowrap' }}>
-            <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
+            <Grid item xs={12} sm={6} md={6} bgcolor={bgColor} height="max-content">
               <Grid padding={3}>
                 <Typography variant="body2">{t('common.namesurname')}</Typography>
                 <Typography variant="sidenav">{`${userFromStorage?.name} ${userFromStorage?.surname}`}</Typography>
@@ -156,6 +168,33 @@ const Profile = () => {
                   </Tooltip>
                 </Grid>
               </Grid>
+              <Divider />
+              {(walletData?.status === 'valid' || walletData?.status === 'deactivated') && (
+                <Grid container>
+                  <Grid xs={10} item padding={3}>
+                    <Typography variant="body2">{t('common.wallettitle')}</Typography>
+                    <Typography variant="sidenav">
+                      {walletData?.status === 'valid' && t('common.walletactive')}
+                      {walletData?.status === 'deactivated' && t('common.walletinactive')}
+                    </Typography>
+                  </Grid>
+                  <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
+                    <Tooltip
+                      title={
+                        walletData?.status === 'valid'
+                          ? t('tooltip.activewallet')
+                          : t('tooltip.inactivewallet')
+                      }
+                      placement="top"
+                      arrow
+                      enterTouchDelay={0}
+                      leaveTouchDelay={10000}
+                    >
+                      <HelpOutlineIcon color="primary" />
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              )}
             </Grid>
           </Grid>
           <Grid item pb={3} mt={6} xs={12} md={12} textAlign={'center'}>
@@ -163,7 +202,10 @@ const Profile = () => {
           </Grid>
 
           {sessionData?.access_enabled === true && (
-            <ProfileCards sessionIsActive={sessionData?.session_info?.active} />
+            <ProfileCards
+              sessionIsActive={sessionData?.session_info?.active}
+              walletIsActive={walletData?.status === 'valid'}
+            />
           )}
           {sessionData?.access_enabled === false && <RestoreSessionCard />}
         </Grid>
