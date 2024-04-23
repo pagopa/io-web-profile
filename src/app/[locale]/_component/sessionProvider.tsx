@@ -78,7 +78,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
     } else {
       router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
     }
-  }, [isTokenValid, locale, pathName, pushWithLocale, removeToken, router]);
+  }, [isTokenValid, locale, pushWithLocale, removeToken, router]);
 
   if (loginStatus.status === 'IDLE' || loginStatus.status === 'NOT_AUTHORIZED') {
     return <Loader />;
