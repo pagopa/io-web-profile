@@ -37,7 +37,7 @@ const LogoutConfirm = (): React.ReactElement => {
         setSessionData(res);
       })
       .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
-  }, [callFetchWithRetries, pushWithLocale]);
+  }, [pushWithLocale]);
 
   const renderSessionActive = (): React.ReactElement => {
     if (sessionData?.session_info.active) {
