@@ -17,7 +17,7 @@
       "accessabled": "Accesso abilitato",
       "accessibilitydeclaration": "Dichiarazione di accessibilità",
       "activeduedate": "Attiva fino al {date}",
-      "anagraphicinfo": "Qui trovi i dati del tuo profilo su IO e le informazioni sull’accesso all’app.",
+      "anagraphicinfo": "Qui trovi i dati del tuo profilo su IO, le informazioni sull’accesso all’app e le funzionalità di blocco e disattivazione a distanza",
       "appaccess": "Accesso a IO",
       "appsession": "Validità sessione",
       "appstore": "App Store",
@@ -28,6 +28,7 @@
       "cieid": "CIE ID",
       "close": "Chiudi",
       "continue": "Continua",
+      "disablewallet": "Vuoi rimuovere i documenti digitali presenti nel Portafoglio?",
       "emailaddress": "Indirizzo e-mail",
       "faqtitle": "Dubbi o domande?",
       "findwhatdo": "Scopri cosa fare",
@@ -71,6 +72,9 @@
       "security": "Sicurezza",
       "tooltipaccessabled": "L’accesso a IO è abilitato con tutte le tue identità digitali",
       "unlockioaccess": "Segui questi passaggi:<ul><li>Vai sul sito <u>ioapp.it</u></li><li>Accedi con le tue credenziali SPID o CIE</li><li>Vai alla sezione <em>Sblocca accesso a IO</em></li><li>Segui i passaggi e, quando richiesto, inserisci il <strong>codice di ripristino</strong></li></ul>",
+      "wallettitle": "IT Wallet",
+      "walletactive": "Attivo",
+      "walletinactive": "Non attivo",
       "whatdo": "Cosa puoi fare?",
       "whatmean": "Cosa significa?",
       "youridentityonio": "Le tue identitÀ Sull’ APP IO:",
@@ -222,6 +226,7 @@
     "profile": {
       "activesession": "Sessione attiva in app",
       "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione e accesso al tuo profilo in app.",
+      "disablewallet": "Disattiva IT Wallet",
       "lockaccess": "Blocca l’accesso a IO",
       "lostdevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account.",
       "nodevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e termina la sessiona attiva."
@@ -264,7 +269,9 @@
     "tooltip": {
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
-      "nosession": "Non c’è nessuna sessione di IO attiva"
+      "nosession": "Non c’è nessuna sessione di IO attiva",
+      "activewallet": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
+      "inactivewallet": "IT Wallet non è attivo, puoi attivarlo in qualsiasi momento dall'app IO"
     }
   }
 }
