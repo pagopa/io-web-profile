@@ -51,7 +51,7 @@ const Profile = () => {
         }
       })
       .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
-  }, [pushWithLocale]);
+  }, [callFetchWithRetries, pushWithLocale]);
 
   useEffect(() => {
     if (isProfileAvailable) {
@@ -61,7 +61,7 @@ const Profile = () => {
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
-  }, [isProfileAvailable, pushWithLocale]);
+  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
   if (isLoading) {
     return <Loader />;
