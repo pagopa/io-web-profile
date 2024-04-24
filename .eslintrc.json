@@ -18,6 +18,14 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "extends": ["@pagopa/eslint-config/recommended", "next", "prettier"],
-  "rules": {}
+  "plugins": ["@typescript-eslint", "functional", "sonarjs"],
+  "extends": [
+    "next",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:sonarjs/recommended"
+  ],
+  "rules": {
+    "functional/immutable-data": "error"
+  }
 }

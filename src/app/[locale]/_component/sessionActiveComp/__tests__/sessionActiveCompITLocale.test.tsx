@@ -42,6 +42,6 @@ describe('SessionActiveComp', () => {
       // We expect an error to be thrown
       expect(error).toBeDefined();
     }
-    expect(getByText(/31\/1\/2022./i)).toBeInTheDocument();
+    expect(getByText(/31\/01\/2022./i)).toBeInTheDocument();
   });
 });
