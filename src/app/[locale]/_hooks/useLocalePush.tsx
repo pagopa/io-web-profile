@@ -1,6 +1,6 @@
+import { useCallback } from 'react';
 import { useRouter } from 'next-intl/client';
 import { localeFromStorage } from '../_utils/common';
-import { useCallback } from 'react';
 
 const useLocalePush = () => {
   const router = useRouter();
