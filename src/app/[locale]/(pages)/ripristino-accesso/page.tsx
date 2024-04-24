@@ -32,7 +32,7 @@ const RestoreProfile = (): React.ReactElement => {
         .then(() => {
           pushWithLocale(ROUTES.RESTORE_THANK_YOU);
         })
-        .catch((_err) => {
+        .catch(() => {
           pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
         });
     } else {
