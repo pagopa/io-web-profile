@@ -22,7 +22,7 @@ const NotFoundPage = (): React.ReactElement => {
       login_status: isLoggedIn ? 'logged_in' : 'logged_out',
       event_category: 'KO',
     });
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <Grid sx={commonBackground} container>
