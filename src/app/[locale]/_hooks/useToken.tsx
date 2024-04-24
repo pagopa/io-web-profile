@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   storageJweOps,
   storageMagicLinkOps,
@@ -22,20 +22,20 @@ const useToken = (): Token => {
     if (windowAvailable) {
       setToken(storageTokenOps.read());
     }
-  }, []);
+  }, [windowAvailable]);
 
-  const isTokenValid = () => {
+  const isTokenValid = useCallback(() => {
     if (windowAvailable) {
       return !!storageTokenOps.read();
     }
-  };
+  }, [windowAvailable]);
 
-  const removeToken = () => {
+  const removeToken = useCallback(() => {
     storageTokenOps.delete();
     storageUserOps.delete();
     storageMagicLinkOps.delete();
     storageJweOps.delete();
-  };
+  }, []);
 
   return {
     token,

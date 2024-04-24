@@ -20,7 +20,8 @@ const LogOutKo = (): React.ReactElement => {
       reason: '',
       event_category: 'KO',
     });
-  }, []);
+  }, [isL1]);
+
   const richText = {
     br: () => <br />,
   };

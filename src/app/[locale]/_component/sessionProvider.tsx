@@ -43,11 +43,13 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const locale = useLocale();
   const router = useRouter();
 
+  const windowAvailable = isBrowser();
+
   useMemo(() => {
-    if (isBrowser()) {
+    if (windowAvailable) {
       return initOneTrust();
     }
-  }, [isBrowser()]);
+  }, [windowAvailable]);
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
@@ -76,7 +78,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
     } else {
       router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
     }
-  }, [locale, pathName]);
+  }, [isTokenValid, locale, pathName, pushWithLocale, removeToken, router]);
 
   if (loginStatus.status === 'IDLE' || loginStatus.status === 'NOT_AUTHORIZED') {
     return <Loader />;
