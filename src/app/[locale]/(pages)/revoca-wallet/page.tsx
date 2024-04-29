@@ -1,89 +1,122 @@
 'use client';
-import { Button, Grid, Typography } from '@mui/material';
-import { IPatternStringTag } from '@pagopa/ts-commons/lib/strings';
+import { Box, Button, Dialog, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useDispatch } from 'react-redux';
-import generator from 'generate-password-ts';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
-// import { IdpListOnApp } from '../../_component/idpListOnApp/idpListOnApp';
 import { Introduction } from '../../_component/introduction/introduction';
 import { Flows } from '../../_enums/Flows';
 import useLocalePush from '../../_hooks/useLocalePush';
-import { createUnlockCode } from '../../_redux/slices/blockAccessSlice';
-import { isIdpKnown } from '../../_utils/idps';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
-import { trackEvent } from '../../_utils/mixpanel';
-import { getReferralLockProfile } from '../../_utils/common';
-import { storageMagicLinkOps } from '../../_utils/storage';
 import Loader from '../../_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 
+const unlockioaccessRich = {
+  strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
+};
+
 const WalletInstanceRevoke = (): React.ReactElement => {
   const t = useTranslations('ioesco');
-  const dispatch = useDispatch();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // const dispatch = useDispatch();
   const pushWithLocale = useLocalePush();
-  const isFromMagicLink = storageMagicLinkOps.read();
-  const referral = getReferralLockProfile(isFromMagicLink);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  // const isFromMagicLink = storageMagicLinkOps.read();
+  // const referral = getReferralLockProfile(isFromMagicLink);
+  const [isRemovingWallet, setIsRemovingWallet] = useState(false);
   const { callFetchWithRetries, isLoading } = useFetch();
 
-  const unlockCode = generator.generate({
-    length: 9,
-    numbers: true,
-    lowercase: false,
-    uppercase: false,
-  });
-
-  useEffect(() => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_CONFIRM', {
-      event_category: 'UX',
-      event_type: 'screen_view',
-    });
-  }, []);
+  // const unlockCode = generator.generate({
+  //   length: 9,
+  //   numbers: true,
+  //   lowercase: false,
+  //   uppercase: false,
+  // });
 
   const handleLockSession = () => {
-    setIsButtonDisabled(true);
-    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', {
-      referral,
-      event_category: 'UX',
-      event_type: 'action',
-    });
-    dispatch(createUnlockCode(unlockCode));
+    pushWithLocale(ROUTES.PROFILE_BLOCK);
+  };
+  // const handleLockSession = () => {
+  //   setIsButtonDisabled(true);
+  //   trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', {
+  //     referral,
+  //     event_category: 'UX',
+  //     event_type: 'action',
+  //   });
+  //   dispatch(createUnlockCode(unlockCode));
 
-    callFetchWithRetries(
-      WebProfileApi,
-      'lockUserSession',
-      {
-        unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,
-      },
-      [500]
-    )
+  //   callFetchWithRetries(
+  //     WebProfileApi,
+  //     'lockUserSession',
+  //     {
+  //       unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,
+  //     },
+  //     [500]
+  //   )
+  //     .then(() => {
+  //       pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
+  //     })
+  //     .catch((_err) => {
+  //       pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+  //     });
+  // };
+
+  const handleDisableWallet = () => {
+    setIsDialogOpen(true);
+  };
+
+  const renderSummary = useCallback(
+    (hasLostDevice: boolean) => {
+      if (hasLostDevice) {
+        return <>{t.rich('common.lostdevicewallet', unlockioaccessRich)}</>;
+      }
+      return <>{t('revokewallet.revokewalletinstanceinfo')}</>;
+    },
+    [t]
+  );
+
+  const handleDisableWalletConfirm = useCallback(() => {
+    setIsRemovingWallet(true);
+    callFetchWithRetries(WebProfileApi, 'revoke', [], [500])
       .then(() => {
-        pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
+        pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
-      .catch((_err) => {
-        pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+      .catch(() => {
+        pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
+      })
+      .finally(() => {
+        setIsRemovingWallet(false);
       });
-  };
+  }, [callFetchWithRetries, pushWithLocale]);
 
-  const renderSummary = (isIDPKnown: boolean) => {
-    if (isIDPKnown) {
-      return <>{t('lockaccess.accessidentity')}</>;
-    }
-    return <>{t('lockaccess.accessidentitycompromise')}</>;
-  };
-
-  //   const explanationIdentetyLevelRich = {
-  //     link: (chunks: React.ReactNode) => (
-  //       <Link href="#digital_identity" fontWeight={600}>
-  //         {chunks}
-  //       </Link>
-  //     ),
-  //   };
+  const renderRevokeWalletDialog = useCallback(
+    () => (
+      <Dialog open={isDialogOpen}>
+        <Box p={4} display="flex" flexDirection="column" gap={2}>
+          <Typography fontSize={24} fontWeight={700} color="textPrimary">
+            {t('common.disablewalletconfirm')}
+          </Typography>
+          <Typography fontSize={16} fontWeight={400} color="textPrimary">
+            {t('common.disablewalletpopup')}
+          </Typography>
+          <Box display="flex" justifyContent="end" columnGap={2}>
+            <Button onClick={() => setIsDialogOpen(false)} variant="outlined">
+              {t('common.disablewalletcancel')}
+            </Button>
+            <Button
+              onClick={handleDisableWalletConfirm}
+              variant="contained"
+              disabled={isRemovingWallet}
+            >
+              {t('common.disablewalletconfirmbutton')}
+            </Button>
+          </Box>
+        </Box>
+      </Dialog>
+    ),
+    [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t]
+  );
 
   if (isLoading) {
     return <Loader />;
@@ -95,17 +128,11 @@ const WalletInstanceRevoke = (): React.ReactElement => {
         <BackButton />
         <Introduction
           title={t('revokewallet.revokewalletinstance')}
-          summary={renderSummary(isIdpKnown())}
+          summary={renderSummary(false)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
-          <Typography mb={5}>{t('revokewallet.revokewalletinstanceinfo')}</Typography>
-          <Button
-            variant="contained"
-            size="medium"
-            onClick={handleLockSession}
-            disabled={isButtonDisabled}
-          >
+          <Button variant="contained" size="medium" onClick={handleDisableWallet}>
             {t('revokewallet.revokewallet')}
           </Button>
         </Grid>
@@ -113,16 +140,14 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       <Grid sx={commonBackgroundLightWithBack}>
         <Introduction
           title={t('common.lostdevice')}
-          summary={renderSummary(isIdpKnown())}
+          summary={renderSummary(true)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
-          <Typography mb={5}>{t('common.lostdevicewallet')}</Typography>
           <Button
             variant="outlined"
             size="medium"
             onClick={handleLockSession}
-            disabled={isButtonDisabled}
             endIcon={<ArrowForwardIcon />}
           >
             {t('revokewallet.lockaccess')}
@@ -130,6 +155,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
         </Grid>
       </Grid>
       <FAQ flow={Flows.REVOKEWALLET} />
+      {renderRevokeWalletDialog()}
     </>
   );
 };

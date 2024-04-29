@@ -23,6 +23,8 @@ export const ROUTES = {
   INTERNAL_ERROR: '/500/',
   PRIVACY_POLICY: '/informativa-privacy/',
   REVOKE_WALLET: '/revoca-wallet/',
+  WALLET_THANK_YOU: '/revoca-wallet/operazione-completata/',
+  WALLET_REVOKE_ERROR: '/revoca-wallet/errore/',
 };
 
 // Get an array of values from the ROUTES object
