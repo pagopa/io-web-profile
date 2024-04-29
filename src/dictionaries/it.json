@@ -217,7 +217,9 @@
       "ripristinoacessoopcompletatatitle": "Hai sbloccato l’accesso a IO",
       "accedidescription": "Entra nel tuo profilo di IO per vedere i tuoi dati e ottenere le informazioni sull’accesso all’app",
       "accedierroretitle": "Errore di accesso",
-      "accedititle": "Entra su IO, l’app dei servizi pubblici"
+      "accedititle": "Entra su IO, l’app dei servizi pubblici",
+      "revokewalletthankyoutitle": "Thankyou page",
+      "revokewalletthankyoudescription": "Wallet Instance è stata revocata. I documenti non sono più validi/presentabili. eID è stato revocato."
     },
     "profile": {
       "activesession": "Sessione attiva in app",
@@ -265,6 +267,13 @@
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
       "nosession": "Non c’è nessuna sessione di IO attiva"
+    },
+    "revokewallet": {
+      "instanceclosed": "Hai disattivato IT Wallet",
+      "instancecloseddescription": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. Se cambi idea, potrai riaggiungerli direttamente dall’app IO.",
+      "instanceclosedconfirm": "Ti abbiamo inviato una mail di conferma.",
+      "lostdevice": "Hai perso il tuo dispositivo o ti è stato sottratto?",
+      "lockaccess": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento."
     }
   }
 }

@@ -22,6 +22,7 @@ export const ROUTES = {
   NOT_FOUND_PAGE: '/404/',
   INTERNAL_ERROR: '/500/',
   PRIVACY_POLICY: '/informativa-privacy/',
+  WALLET_THANK_YOU: '/revoca-wallet/operazione-completata/',
 };
 
 // Get an array of values from the ROUTES object
