@@ -27,6 +27,7 @@ const Profile = () => {
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
+  const isWalletActive = walletData?.status === 'valid' || walletData?.status === 'operational';
   const userFromStorage = storageUserOps.read();
   const pushWithLocale = useLocalePush();
   const { callFetchWithRetries, isLoading } = useFetch();
@@ -169,21 +170,19 @@ const Profile = () => {
                 </Grid>
               </Grid>
               <Divider />
-              {(walletData?.status === 'valid' || walletData?.status === 'deactivated') && (
+              {walletData?.status !== 'installed' && (
                 <Grid container>
                   <Grid xs={10} item padding={3}>
                     <Typography variant="body2">{t('common.wallettitle')}</Typography>
                     <Typography variant="sidenav">
-                      {walletData?.status === 'valid' && t('common.walletactive')}
+                      {isWalletActive && t('common.walletactive')}
                       {walletData?.status === 'deactivated' && t('common.walletinactive')}
                     </Typography>
                   </Grid>
                   <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
                     <Tooltip
                       title={
-                        walletData?.status === 'valid'
-                          ? t('tooltip.activewallet')
-                          : t('tooltip.inactivewallet')
+                        isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet')
                       }
                       placement="top"
                       arrow
@@ -204,7 +203,7 @@ const Profile = () => {
           {sessionData?.access_enabled === true && (
             <ProfileCards
               sessionIsActive={sessionData?.session_info?.active}
-              walletIsActive={walletData?.status === 'valid'}
+              walletIsActive={isWalletActive}
             />
           )}
           {sessionData?.access_enabled === false && <RestoreSessionCard />}
