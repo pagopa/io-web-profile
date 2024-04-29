@@ -3,17 +3,17 @@ import { Alert, Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useCallback, useEffect } from 'react';
-import { FAQ } from '../../_component/accordion/faqDefault';
-import { Introduction } from '../../_component/introduction/introduction';
-import { Flows } from '../../_enums/Flows';
-import useLocalePush from '../../_hooks/useLocalePush';
-import { isIdpKnown } from '../../_utils/idps';
-import { ROUTES } from '../../_utils/routes';
-import { commonBackgroundLightWithBack } from '../../_utils/styles';
-import { trackEvent } from '../../_utils/mixpanel';
-import { getReferralLockProfile } from '../../_utils/common';
-import { storageMagicLinkOps } from '../../_utils/storage';
-import Loader from '../../_component/loader/loader';
+import { FAQ } from '../../../_component/accordion/faqDefault';
+import { Introduction } from '../../../_component/introduction/introduction';
+import { Flows } from '../../../_enums/Flows';
+import useLocalePush from '../../../_hooks/useLocalePush';
+import { isIdpKnown } from '../../../_utils/idps';
+import { ROUTES } from '../../../_utils/routes';
+import { commonBackgroundLightWithBack } from '../../../_utils/styles';
+import { trackEvent } from '../../../_utils/mixpanel';
+import { getReferralLockProfile } from '../../../_utils/common';
+import { storageMagicLinkOps } from '../../../_utils/storage';
+import Loader from '../../../_component/loader/loader';
 import useFetch from '@/api/webProfileApiClient';
 
 const ThankYouPage = (): React.ReactElement => {
@@ -21,6 +21,9 @@ const ThankYouPage = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const isFromMagicLink = storageMagicLinkOps.read();
   const referral = getReferralLockProfile(isFromMagicLink);
+  const unlockioaccessRich = {
+    br: () => <br></br>,
+  };
   const { isLoading } = useFetch();
 
   useEffect(() => {
@@ -48,9 +51,9 @@ const ThankYouPage = (): React.ReactElement => {
       if (isIDPKnown) {
         return <>{t('revokewallet.instanceclosed')}</>;
       }
-      return <>{t('revokewallet.instancecloseddescription')}</>;
+      return <>{t.rich('revokewallet.instancecloseddescription', unlockioaccessRich)}</>;
     },
-    [t]
+    [t, unlockioaccessRich]
   );
 
   if (isLoading) {
@@ -88,7 +91,7 @@ const ThankYouPage = (): React.ReactElement => {
             </Button>
           }
         >
-          <Typography fontWeight={600}>{t('revokewallet.lostdevice')}</Typography>
+          <Typography fontWeight={600}>{t('revokewallet.lostdeviceshort')}</Typography>
           <Typography>{t('revokewallet.lockaccess')}</Typography>
         </Alert>
       </Grid>

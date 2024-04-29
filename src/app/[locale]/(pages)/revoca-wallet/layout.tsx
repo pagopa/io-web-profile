@@ -5,11 +5,11 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.revokewalletthankyoutitle,
-    description: messages.ioesco.metadati.revokewalletthankyoudescription,
+    title: messages.ioesco.metadati.revocawalletinstancetitle,
+    description: messages.ioesco.metadati.revocawalletinstancedescription,
   };
 }
 
-export default function WalletInstanceRevokeThankyouLayout({ children }: Props) {
+export default function WalletInstanceRevokeLayout({ children }: Props) {
   return children;
 }
