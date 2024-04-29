@@ -141,6 +141,29 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
   ];
 
+  const revokeWallet: FAQEntries[] = [
+    {
+      header: t('revokewalletfaq.firstquestion'),
+      content: t('revokewalletfaq.firstresponse'),
+    },
+    {
+      header: t('revokewalletfaq.secondquestion'),
+      content: t('revokewalletfaq.secondresponse'),
+    },
+    {
+      header: t('revokewalletfaq.thirdquestion'),
+      content: t('revokewalletfaq.thirdresponse'),
+    },
+    {
+      header: t('revokewalletfaq.fourthquestion'),
+      content: t('revokewalletfaq.fourthresponse'),
+    },
+    {
+      header: t('revokewalletfaq.fifthquestion'),
+      content: t('revokewalletfaq.fifthresponse'),
+    },
+  ];
+
   const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
     const updatedEntries: FAQEntries[] = entries.map((entry) => ({
       ...entry,
@@ -157,6 +180,8 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
         return wrappingFaqContent(restoreEntries);
       case Flows.RESTOREL3:
         return wrappingFaqContent(restoreEntriesL3);
+      case Flows.REVOKEWALLET:
+        return wrappingFaqContent(revokeWallet);
       default:
         return wrappingFaqContent(logoutEntries);
     }

@@ -145,4 +145,12 @@ export const WebProfileApi = {
     const result = await webProfileApiClientExchange.exchangeToken({});
     return extractResponse(result);
   },
+  readInfo: async () => {
+    const result = await webProfileApiClient.readInfo({});
+    return extractResponse(result);
+  },
+  revoke: async () => {
+    const result = await webProfileApiClient.revoke({});
+    return extractResponse(result);
+  },
 };

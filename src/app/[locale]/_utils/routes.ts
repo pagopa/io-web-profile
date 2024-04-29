@@ -22,6 +22,9 @@ export const ROUTES = {
   NOT_FOUND_PAGE: '/404/',
   INTERNAL_ERROR: '/500/',
   PRIVACY_POLICY: '/informativa-privacy/',
+  REVOKE_WALLET: '/revoca-wallet/',
+  WALLET_THANK_YOU: '/revoca-wallet/operazione-completata/',
+  WALLET_REVOKE_ERROR: '/revoca-wallet/errore/',
 };
 
 // Get an array of values from the ROUTES object
@@ -36,6 +39,7 @@ export const PUBLIC_ROUTES = [
   ROUTES.NOT_FOUND_PAGE,
   ROUTES.INTERNAL_ERROR,
   ROUTES.PRIVACY_POLICY,
+  ROUTES.REVOKE_WALLET,
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
