@@ -265,9 +265,7 @@
       "instancecloseddescription": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br>Se cambi idea, potrai riaggiungerli direttamente dall’app IO.",
       "instanceclosedconfirm": "Ti abbiamo inviato una mail di conferma.",
       "lostdeviceshort": "Hai perso il tuo dispositivo o ti è stato sottratto?",
-      "lockaccess": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
-      "activewallet": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
-      "inactivewallet": "IT Wallet non è attivo, puoi attivarlo in qualsiasi momento dall'app IO"
+      "lockaccess": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento."
     },
     "restore": {
       "accessrestored": "Hai sbloccato l’accesso a IO",
@@ -304,7 +302,9 @@
     "tooltip": {
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
-      "nosession": "Non c’è nessuna sessione di IO attiva"
+      "nosession": "Non c’è nessuna sessione di IO attiva",
+      "activewallet": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
+      "inactivewallet": "IT Wallet non è attivo, puoi attivarlo in qualsiasi momento dall'app IO"
     }
   }
 }
