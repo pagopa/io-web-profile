@@ -80,6 +80,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
     setIsRemovingWallet(true);
     callFetchWithRetries(WebProfileApi, 'revoke', [], [500])
       .then(() => {
+        localStorage.setItem("walletStatus", "deactivated") // todo: simula la disattivazione del wallet
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
       .catch(() => {

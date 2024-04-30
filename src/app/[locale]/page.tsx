@@ -3,7 +3,7 @@
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ProfileData } from '../../api/generated/webProfile/ProfileData';
 import { Introduction } from './_component/introduction/introduction';
 import { ProfileCards } from './_component/profileCards/profileCards';
@@ -20,6 +20,8 @@ import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 import { WalletData } from '@/api/generated/webProfile/WalletData';
 
+const mockWalletStatus = localStorage.getItem("walletStatus") // todo: rimuovere una volta che sarà funzionante l'api di revoke
+
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
@@ -27,7 +29,7 @@ const Profile = () => {
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
-  const isWalletActive = walletData?.status === 'valid' || walletData?.status === 'operational';
+
   const userFromStorage = storageUserOps.read();
   const pushWithLocale = useLocalePush();
   const { callFetchWithRetries, isLoading } = useFetch();
@@ -70,11 +72,23 @@ const Profile = () => {
     if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'readInfo', [], [500])
         .then((res) => {
-          setWalletData(res);
+          setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res); // todo: rimuovere una volta che sarà funzionante l'api di revoke
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
   }, [isProfileAvailable]);
+
+
+  const isWalletActive = useMemo(() =>  walletData?.status === 'valid' || walletData?.status === 'operational', [walletData?.status])
+
+  const walletCardTitle = useMemo(() => {
+    if (isWalletActive) return t('common.walletactive')
+    if (walletData?.status === 'deactivated') return t('common.walletinactive')
+  }, [isWalletActive, t, walletData?.status])
+
+  const walletCardTooltip = useMemo(() => {
+    return isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet')
+  }, [isWalletActive, t])
 
   if (isLoading) {
     return <Loader />;
@@ -142,10 +156,10 @@ const Profile = () => {
                   <Typography variant="sidenav">
                     {sessionData?.session_info.active
                       ? t('common.activeduedate', {
-                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                            localeFromStorage
-                          ),
-                        })
+                        date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                          localeFromStorage
+                        ),
+                      })
                       : t('common.noactive')}
                   </Typography>
                 </Grid>
@@ -154,10 +168,10 @@ const Profile = () => {
                     title={
                       sessionData?.session_info.active
                         ? t('tooltip.accesswithoutidp', {
-                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                              localeFromStorage
-                            ),
-                          })
+                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                            localeFromStorage
+                          ),
+                        })
                         : t('tooltip.nosession')
                     }
                     placement="top"
@@ -175,15 +189,12 @@ const Profile = () => {
                   <Grid xs={10} item padding={3}>
                     <Typography variant="body2">{t('common.wallettitle')}</Typography>
                     <Typography variant="sidenav">
-                      {isWalletActive && t('common.walletactive')}
-                      {walletData?.status === 'deactivated' && t('common.walletinactive')}
+                      {walletCardTitle}
                     </Typography>
                   </Grid>
                   <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
                     <Tooltip
-                      title={
-                        isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet')
-                      }
+                      title={walletCardTooltip}
                       placement="top"
                       arrow
                       enterTouchDelay={0}
