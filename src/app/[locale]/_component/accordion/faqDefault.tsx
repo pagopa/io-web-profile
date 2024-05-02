@@ -8,9 +8,13 @@ import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { ROUTES } from '../../_utils/routes';
+import { useParams } from 'next/navigation'
+import { useCallback, useEffect, useRef } from 'react';
+
 
 type FAQProps = {
   flow?: string;
+  onOpenFAQ?: (element: number) => void;
 };
 // the 'content' property is set to any because
 // the library from which we imported the accordion
@@ -73,8 +77,47 @@ const fifthBlockFaqRick = {
     </Link>
   ),
 };
+const fifthRevokeWalletFaqRick = {
+  Link: (chunks: React.ReactNode) => {
+    const { locale } = useParams()
+    return <Link
+      fontWeight={600}
+      href={`/${locale}${ROUTES.PROFILE_BLOCK}`}
+    >
+      {chunks}
+    </Link>
+  },
+};
 
-export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
+export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
+  const observersList = useRef<MutationObserver[]>([])
+
+  const handleOpenFAQ = useCallback((el: Element, index: number) => {
+    const observer = new MutationObserver((mutationsList) => {
+      const [{ target }] = mutationsList;
+      if ((target as HTMLElement)?.classList?.contains("Mui-expanded")) {
+        onOpenFAQ?.(index)
+      }
+    });
+    // eslint-disable-next-line functional/immutable-data
+    observersList.current[index] = observer
+    const observerConfig = { attributes: true, attributeFilter: ['class'], attributeOldValue: true };
+    observer.observe(el, observerConfig)
+  }, [onOpenFAQ])
+
+  useEffect(() => {
+
+    if (onOpenFAQ) {
+      const accordions = document.querySelectorAll('.MuiAccordion-root');
+      accordions.forEach(handleOpenFAQ)
+    }
+    return () => {
+      observersList.current.forEach((observer) => observer.disconnect())
+       // eslint-disable-next-line functional/immutable-data
+      observersList.current = [];
+    };
+  }, [handleOpenFAQ, onOpenFAQ]);
+
   const t = useTranslations('ioesco');
   // #region entries
   const logoutEntries: FAQEntries[] = [
@@ -160,7 +203,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
     {
       header: t('revokewalletfaq.fifthquestion'),
-      content: t('revokewalletfaq.fifthresponse'),
+      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRick)
     },
   ];
 
