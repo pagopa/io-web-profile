@@ -22,7 +22,7 @@ const unlockioaccessRich = {
 const ThankYouPage = (): React.ReactElement => {
 
   useEffect(() => {
-    window.localStorage.setItem("walletStatus", "deactivated") // todo: simula la disattivazione del wallet
+    global.window?.localStorage?.setItem("walletStatus", "deactivated") // todo: simula la disattivazione del wallet
     trackEvent('IO_ITW_DEACTIVATION_UX_SUCCESS', {
       event_category: 'UX',
       event_type: 'screen_view',

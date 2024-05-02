@@ -59,9 +59,6 @@ const WalletInstanceRevoke = (): React.ReactElement => {
         trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: "" }); // todo: add error reason
         pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
       })
-      .finally(() => {
-        setIsRemovingWallet(false);
-      });
   }, [callFetchWithRetries, pushWithLocale]);
 
   const renderRevokeWalletDialog = useCallback(
@@ -75,7 +72,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
             {t('common.disablewalletpopup')}
           </Typography>
           <Box display="flex" justifyContent="end" columnGap={2}>
-            <Button onClick={() => setIsDialogOpen(false)} variant="outlined">
+            <Button onClick={() => setIsDialogOpen(false)} variant="outlined"  disabled={isRemovingWallet}>
               {t('common.disablewalletcancel')}
             </Button>
             <Button

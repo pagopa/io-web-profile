@@ -20,8 +20,6 @@ import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 import { WalletData } from '@/api/generated/webProfile/WalletData';
 
-const mockWalletStatus = window.localStorage.getItem("walletStatus") // todo: rimuovere una volta che sarà funzionante l'api di revoke
-
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
@@ -73,7 +71,8 @@ const Profile = () => {
     if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'readInfo', [], [500])
         .then((res) => {
-          setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res); // todo: rimuovere una volta che sarà funzionante l'api di revoke
+          const mockWalletStatus = global.window?.localStorage?.getItem("walletStatus") // todo: rimuovere una volta che sarà funzionante l'api di revoke
+          setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res);
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
