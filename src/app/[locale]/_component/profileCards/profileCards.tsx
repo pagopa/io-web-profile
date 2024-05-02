@@ -33,7 +33,7 @@ export const ProfileCards = ({
   };
 
   const handleDisableWalletBtn = () => {
-    // trackEvent('IO_REVOKE_WALLET_START', { event_category: 'UX', event_type: 'action' }); // todo define the event name
+    trackEvent('IO_ITW_DEACTIVATION_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.REVOKE_WALLET);
   };
 

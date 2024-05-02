@@ -11,40 +11,42 @@ import { isIdpKnown } from '../../../_utils/idps';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../../_utils/styles';
 import { trackEvent } from '../../../_utils/mixpanel';
-import { getReferralLockProfile } from '../../../_utils/common';
-import { storageMagicLinkOps } from '../../../_utils/storage';
-import Loader from '../../../_component/loader/loader';
+import Loader from '../../../_component/loader/loader'
+import { usePathname } from 'next/navigation';
 import useFetch from '@/api/webProfileApiClient';
 
+const unlockioaccessRich = {
+  br: () => <br></br>,
+};
+
 const ThankYouPage = (): React.ReactElement => {
-  const t = useTranslations('ioesco');
-  const pushWithLocale = useLocalePush();
-  const isFromMagicLink = storageMagicLinkOps.read();
-  const referral = getReferralLockProfile(isFromMagicLink);
-  const unlockioaccessRich = {
-    br: () => <br></br>,
-  };
-  const { isLoading } = useFetch();
 
   useEffect(() => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_SUCCESS', {
+    window.localStorage.setItem("walletStatus", "deactivated") // todo: simula la disattivazione del wallet
+    trackEvent('IO_ITW_DEACTIVATION_UX_SUCCESS', {
       event_category: 'UX',
       event_type: 'screen_view',
     });
-  }, []);
+    trackEvent('IO_ITW_STATU_PAGE', { event_category: 'UX', event_type: 'screen_view', ITW_status: 'off' });
+  }, [])
+
+  const t = useTranslations('ioesco');
+  const pushWithLocale = useLocalePush();
+  const pathName = usePathname();
+  const { isLoading } = useFetch();
 
   const handleGoProfileBtn = useCallback(() => {
+    trackEvent('IO_BACK_TO_PROFILE', {
+      page_name: pathName,
+      event_category: 'UX',
+      event_type: 'exit',
+    });
     pushWithLocale(ROUTES.PROFILE);
-  }, [pushWithLocale]);
+  }, [pathName, pushWithLocale]);
 
   const handleLockSession = useCallback(() => {
-    trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', {
-      referral,
-      event_category: 'UX',
-      event_type: 'action',
-    });
     pushWithLocale(ROUTES.PROFILE_BLOCK);
-  }, [pushWithLocale, referral]);
+  }, [pushWithLocale]);
 
   const renderSummary = useCallback(
     (isIDPKnown: boolean) => {
@@ -53,8 +55,12 @@ const ThankYouPage = (): React.ReactElement => {
       }
       return <>{t.rich('revokewallet.instancecloseddescription', unlockioaccessRich)}</>;
     },
-    [t, unlockioaccessRich]
+    [t]
   );
+
+  const trackAccordionOpen = useCallback((element:  number) => {
+    trackEvent('IO_ITW_FAQ_OPENED', { event_category: 'UX', event_type: 'action',faq_opened: element+1 });
+  },[])
 
   if (isLoading) {
     return <Loader />;
@@ -95,7 +101,7 @@ const ThankYouPage = (): React.ReactElement => {
           <Typography>{t('revokewallet.lockaccess')}</Typography>
         </Alert>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} />
+      <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen}/>
     </>
   );
 };

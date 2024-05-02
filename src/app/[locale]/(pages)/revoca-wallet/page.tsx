@@ -2,7 +2,7 @@
 import { Box, Button, Dialog, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { Introduction } from '../../_component/introduction/introduction';
@@ -12,6 +12,7 @@ import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import Loader from '../../_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
+import { trackEvent } from '../../_utils/mixpanel';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -20,49 +21,20 @@ const unlockioaccessRich = {
 const WalletInstanceRevoke = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  // const dispatch = useDispatch();
   const pushWithLocale = useLocalePush();
-  // const isFromMagicLink = storageMagicLinkOps.read();
-  // const referral = getReferralLockProfile(isFromMagicLink);
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
   const { callFetchWithRetries, isLoading } = useFetch();
 
-  // const unlockCode = generator.generate({
-  //   length: 9,
-  //   numbers: true,
-  //   lowercase: false,
-  //   uppercase: false,
-  // });
+  useEffect(()=>{
+    trackEvent('IO_ITW_STATU_PAGE', { event_category: 'UX', event_type: 'screen_view', ITW_status: 'on' });
+  },[])
 
   const handleLockSession = () => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
   };
-  // const handleLockSession = () => {
-  //   setIsButtonDisabled(true);
-  //   trackEvent('IO_PROFILE_LOCK_ACCESS_UX_CONVERSION', {
-  //     referral,
-  //     event_category: 'UX',
-  //     event_type: 'action',
-  //   });
-  //   dispatch(createUnlockCode(unlockCode));
-
-  //   callFetchWithRetries(
-  //     WebProfileApi,
-  //     'lockUserSession',
-  //     {
-  //       unlock_code: unlockCode as string & IPatternStringTag<'^\\d{9}$'>,
-  //     },
-  //     [500]
-  //   )
-  //     .then(() => {
-  //       pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
-  //     })
-  //     .catch((_err) => {
-  //       pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
-  //     });
-  // };
 
   const handleDisableWallet = () => {
+    trackEvent('IO_ITW_DEACTIVATION_UX_CONVERSION', { event_category: 'UX', event_type: 'action' });
     setIsDialogOpen(true);
   };
 
@@ -77,13 +49,14 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   );
 
   const handleDisableWalletConfirm = useCallback(() => {
+    trackEvent('IO_ITW_DEACTIVATION_CONFIRMED', { event_category: 'UX', event_type: 'action' });
     setIsRemovingWallet(true);
     callFetchWithRetries(WebProfileApi, 'revoke', [], [500])
       .then(() => {
-        localStorage.setItem("walletStatus", "deactivated") // todo: simula la disattivazione del wallet
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
       .catch(() => {
+        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: "" }); // todo: add error reason
         pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
       })
       .finally(() => {
@@ -118,6 +91,10 @@ const WalletInstanceRevoke = (): React.ReactElement => {
     ),
     [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t]
   );
+
+  const trackAccordionOpen = useCallback((element:  number) => {
+    trackEvent('IO_ITW_FAQ_OPENED', { event_category: 'UX', event_type: 'action',faq_opened: element+1 });
+  },[])
 
   if (isLoading) {
     return <Loader />;
@@ -155,7 +132,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} />
+      <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen}/>
       {renderRevokeWalletDialog()}
     </>
   );

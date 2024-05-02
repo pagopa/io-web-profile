@@ -3,7 +3,7 @@
 import { Grid } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { usePathname } from 'next-intl/client';
 import { FeedbackMessage } from '../../../_component/feedbackMessage/feedbackMessage';
 import { commonBackground } from '../../../_utils/styles';
@@ -14,16 +14,11 @@ const WalletKo = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pathName = usePathname();
 
-  useEffect(() => {
-    // trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR', { event_category: 'KO' }); todo add the right event
-  }, []);
-
   const handleRetryBtn = useCallback(() => {
-    // trackEvent('IO_PROFILE_UNLOCK_ACCESS_ERROR', { event_category: 'KO' }); todo add the right event
-    // trackEvent('IO_PROFILE_UNLOCK_ACCESS_TRY_AGAIN', {
-    //   event_category: 'UX',
-    //   event_type: 'action',
-    // });
+    trackEvent('IO_ITW_DEACTIVATION_TRY_AGAIN', {
+      event_category: 'UX',
+      event_type: 'action',
+    });
   }, []);
 
   const goBackToProfile = useCallback(() => {
