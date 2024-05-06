@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { FeedbackMessage } from '../feedbackMessage';
-import { pushMock } from '../../../../../../jest.setup';
+import { pushMock } from '../../../../../../test.setup';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
 
 describe('FeedbackMessage component', () => {

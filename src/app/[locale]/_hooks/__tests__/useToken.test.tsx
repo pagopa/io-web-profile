@@ -1,24 +1,25 @@
+import { test, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import useToken from '../useToken';
 import * as storageUtils from '../../_utils/storage';
 import * as commonUtils from '../../_utils/common';
 
 // Mock the isBrowser function
-jest.mock('../../_utils/common');
+vi.mock('../../_utils/common');
 
 //Mock storage ops
-jest.mock('../../_utils/storage');
+vi.mock('../../_utils/storage');
 
 afterAll(() => {
-    jest.clearAllMocks();
-})
+  vi.clearAllMocks();
+});
 
 describe('useToken hook', () => {
   beforeEach(() => {
     // Mock the behavior of the isBrowser function
-    jest.spyOn(commonUtils, 'isBrowser').mockReturnValue(true);
+    vi.spyOn(commonUtils, 'isBrowser').mockReturnValue(true);
     // Mock the behavior of storageTokenOps
-    jest.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue('testToken');
+    vi.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue('testToken');
   });
 
   test('should initialize token with value from storage', () => {
@@ -35,15 +36,15 @@ describe('useToken hook', () => {
 
   test('isTokenValid should return false when token is missing', () => {
     // @ts-expect-error need to mock return value undefined to test token is missing
-    jest.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(undefined);
+    vi.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(undefined);
     const { result } = renderHook(() => useToken());
 
     expect(result.current.isTokenValid()).toBe(false);
   });
 
   test('removeToken should delete token and user data from storage', () => {
-    const deleteTokenSpy = jest.spyOn(storageUtils.storageTokenOps, 'delete');
-    const deleteUserSpy = jest.spyOn(storageUtils.storageUserOps, 'delete');
+    const deleteTokenSpy = vi.spyOn(storageUtils.storageTokenOps, 'delete');
+    const deleteUserSpy = vi.spyOn(storageUtils.storageUserOps, 'delete');
 
     const { result } = renderHook(() => useToken());
     result.current.removeToken();

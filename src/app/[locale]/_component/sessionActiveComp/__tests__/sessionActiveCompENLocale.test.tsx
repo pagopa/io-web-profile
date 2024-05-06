@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { test, vi } from 'vitest';
 import SessionActiveComp from '../sessionActiveComp';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
 import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
-jest.mock('../../../_component/accordion/faqDefault.tsx', () => ({
+vi.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   FAQ: () => (
     <div data-testid="mocked-faq">
       Mocked FAQ to avoid SyntaxError: Cannot use import statement outside a module
@@ -12,7 +12,7 @@ jest.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   ),
 }));
 
-jest.mock('../../../_utils/common.ts', () => ({ localeFromStorage: 'en' }));
+vi.mock('../../../_utils/common.ts', () => ({ localeFromStorage: 'en' }));
 
 describe('Sanity Checks', () => {
   test("localeFromStorage should be 'en'", () => {

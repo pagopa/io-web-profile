@@ -4,16 +4,16 @@ import * as commonUtils from '../../_utils/common'; // Adjust the import path as
 import * as storageUtils from '../../_utils/storage';
 import { User } from '../../_model/User';
 import { ROUTES } from '../../_utils/routes';
-import { pushMock } from '../../../../../jest.setup';
+import { pushMock } from '../../../../../test.setup';
+import { expect, test, vi } from 'vitest';
 
 describe('useLogin hook', () => {
   beforeEach(() => {
     // Mock the behavior of the isBrowser function
-    jest.spyOn(commonUtils, 'isBrowser').mockReturnValue(true);
+    vi.spyOn(commonUtils, 'isBrowser').mockReturnValue(true);
   });
 
   test('should set isLoggedIn to true and userLogged when token exists', () => {
-
     const mockUser: User = {
       uid: '12232',
       name: 'Carla',
@@ -25,10 +25,11 @@ describe('useLogin hook', () => {
       },
     };
 
-    const mockToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF84Njo3NDoxZTozNTphZTphNjpkODo0YjpkYzplOTpmYzo4ZTphMDozNTo2ODpiNSJ9.eyJlbWFpbCI6InBpcHBvQHRlc3QuZW1haWwuaXQiLCJmYW1pbHlfbmFtZSI6InF3ZXJ0eSIsImZpc2NhbF9udW1iZXIiOiJRV1JQUFA4MEEwMUg1MDFGIiwibmFtZSI6InBpcHBvIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjgzODQzODY0LWYzYzAtNGRlZi1iYWRiLTdmMTk3NDcxYjcyZSIsImxldmVsIjoiTDIiLCJpYXQiOjE2ODk2OTI4ODcsImV4cCI6MTY4OTcyNTI4NywiYXVkIjoiYXBpLmRldi5zZWxmY2FyZS5wYWdvcGEuaXQiLCJpc3MiOiJTUElEIiwianRpIjoiXzk0ZDJmZTYyMDQ2NTUyODRjMGRjIn0.EDbsdpQgXlJSzyVgRqZy7yuUILe5FUlaerC3n1gv6SQrNvljXJxgm3GTv0912UQ6VV85e4oxGgc4LrcvpyLYZcgVe-5-2gNfbYNIPbIWqicaX4GPucQrSq47H0NEIaAv6-3qI2l1IhdH--72zUls_911RoAg_JdINr7em0vxy7wEoqjWOxgEsfQhEauT8oyRV6dDDied5zA9YQPy7a7KlhvI6juwS4sCdFnaonNzhBcZnqW4qzpec2NaAb1xJuHnnTp_tdMz6zExEhupeopmYdtIzYHUvxfohHr1L7eDRzi5RKEUfnRIldajfQEX_NUL9UTU4EkCcwUs-rSIKskQog';
+    const mockToken =
+      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF84Njo3NDoxZTozNTphZTphNjpkODo0YjpkYzplOTpmYzo4ZTphMDozNTo2ODpiNSJ9.eyJlbWFpbCI6InBpcHBvQHRlc3QuZW1haWwuaXQiLCJmYW1pbHlfbmFtZSI6InF3ZXJ0eSIsImZpc2NhbF9udW1iZXIiOiJRV1JQUFA4MEEwMUg1MDFGIiwibmFtZSI6InBpcHBvIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjgzODQzODY0LWYzYzAtNGRlZi1iYWRiLTdmMTk3NDcxYjcyZSIsImxldmVsIjoiTDIiLCJpYXQiOjE2ODk2OTI4ODcsImV4cCI6MTY4OTcyNTI4NywiYXVkIjoiYXBpLmRldi5zZWxmY2FyZS5wYWdvcGEuaXQiLCJpc3MiOiJTUElEIiwianRpIjoiXzk0ZDJmZTYyMDQ2NTUyODRjMGRjIn0.EDbsdpQgXlJSzyVgRqZy7yuUILe5FUlaerC3n1gv6SQrNvljXJxgm3GTv0912UQ6VV85e4oxGgc4LrcvpyLYZcgVe-5-2gNfbYNIPbIWqicaX4GPucQrSq47H0NEIaAv6-3qI2l1IhdH--72zUls_911RoAg_JdINr7em0vxy7wEoqjWOxgEsfQhEauT8oyRV6dDDied5zA9YQPy7a7KlhvI6juwS4sCdFnaonNzhBcZnqW4qzpec2NaAb1xJuHnnTp_tdMz6zExEhupeopmYdtIzYHUvxfohHr1L7eDRzi5RKEUfnRIldajfQEX_NUL9UTU4EkCcwUs-rSIKskQog';
 
-    jest.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(mockToken);
-    jest.spyOn(storageUtils.storageUserOps, 'read').mockReturnValue(mockUser);
+    vi.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(mockToken);
+    vi.spyOn(storageUtils.storageUserOps, 'read').mockReturnValue(mockUser);
 
     const { result } = renderHook(() => useLogin());
 
@@ -37,10 +38,10 @@ describe('useLogin hook', () => {
   });
 
   test('should set isLoggedIn to false and userLogged to undefined when token does not exist', () => {
-    jest.spyOn(commonUtils, 'isBrowser').mockReturnValue(false);
+    vi.spyOn(commonUtils, 'isBrowser').mockReturnValue(false);
 
     // @ts-expect-error need to mock return value undefined to test token is missing
-    jest.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(undefined);
+    vi.spyOn(storageUtils.storageTokenOps, 'read').mockReturnValue(undefined);
 
     const { result } = renderHook(() => useLogin());
 
@@ -49,7 +50,7 @@ describe('useLogin hook', () => {
   });
 
   test('should call logOut, clear session storage and redirect to login page', () => {
-    const sessionStorageClearMock = jest.spyOn(sessionStorage, 'clear');
+    const sessionStorageClearMock = vi.spyOn(sessionStorage, 'clear');
 
     const { result } = renderHook(() => useLogin());
 
@@ -58,7 +59,7 @@ describe('useLogin hook', () => {
     });
 
     expect(result.current.isLoggedIn).toBe(false);
-    expect(result.current.userLogged).toBeUndefined(); 
+    expect(result.current.userLogged).toBeUndefined();
 
     expect(sessionStorageClearMock).toHaveBeenCalled();
     expect(pushMock).toHaveBeenCalledWith(ROUTES.LOGIN, { locale: 'it' });
