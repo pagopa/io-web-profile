@@ -83,7 +83,7 @@ const ThankYouPage = (): React.ReactElement => {
       </Grid>
       <Grid sx={commonBackgroundLightWithBack}>
         <Alert
-          title="asdasdasdasd"
+          title="info"
           variant="outlined"
           severity="info"
           action={
