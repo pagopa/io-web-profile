@@ -32,6 +32,11 @@ export const commonBackground = {
   },
 };
 
+export const commonBackgroundFullHeight = {
+  ...commonBackground,
+  height: '100vh'
+};
+
 export const loaderOverlay = {
   position: 'fixed',
   display: 'flex',
