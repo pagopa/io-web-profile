@@ -22,6 +22,7 @@ export const ROUTES = {
   NOT_FOUND_PAGE: '/404/',
   INTERNAL_ERROR: '/500/',
   PRIVACY_POLICY: '/informativa-privacy/',
+  EMAIL_CONFIRMATION: '/conferma-email/',
 };
 
 // Get an array of values from the ROUTES object
@@ -36,8 +37,10 @@ export const PUBLIC_ROUTES = [
   ROUTES.NOT_FOUND_PAGE,
   ROUTES.INTERNAL_ERROR,
   ROUTES.PRIVACY_POLICY,
+  ROUTES.EMAIL_CONFIRMATION
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
 
 export const PRIVATE_ROUTES = EXISTING_ROUTES.filter(route => !PUBLIC_ROUTES.includes(route));
+export const EMAIL_VALIDATION_ROUTES = [ROUTES.EMAIL_CONFIRMATION];
