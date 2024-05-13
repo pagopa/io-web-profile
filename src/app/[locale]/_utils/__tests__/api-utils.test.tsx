@@ -1,8 +1,9 @@
+import { vi } from 'vitest';
 import { extractResponse } from '../api-utils';
 import * as t from 'io-ts';
 import { IResponseType } from '@pagopa/ts-commons/lib/requests';
 
-const onRedirectToLogin = jest.fn();
+const onRedirectToLogin = vi.fn();
 
 describe('extractResponse', () => {
   it('should return the response value if it has a success status', async () => {

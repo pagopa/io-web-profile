@@ -1,67 +1,64 @@
-import { useSearchParams } from 'next/navigation';
+import { test, vi } from 'vitest';
+import * as nav from 'next/navigation';
 import { fireEvent, screen } from '@testing-library/react';
 import LoginErrorPage from '../page';
-import { pushMock } from '../../../../../../../jest.setup';
+import { pushMock } from '../../../../../../../test.setup';
 import * as it from '../../../../../../dictionaries/it.json';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
-// Mock the useSearchParams function
-jest.mock('next/navigation', () => ({
-  useSearchParams: jest.fn(),
-}));
 
-// Mock the behavior of useSearchParams
-const mockSearchParams = {
-  get: jest.fn(),
-};
+const searchParamsSpy = vi.spyOn(nav, 'useSearchParams');
+vi.mock('next/navigation');
 
-(useSearchParams as jest.Mock).mockReturnValue(mockSearchParams);
+const setReturnCode = (ret: string | null) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  searchParamsSpy.mockReturnValueOnce({ get: () => ret } as any);
 
 describe('test suite for access error', () => {
   test('should render "Generic error" when errorCode is null', async () => {
-    mockSearchParams.get.mockReturnValue(null);
+    setReturnCode(null);
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.loginerrorretry);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('should render "Credential error" for errorCode 19', async () => {
-    mockSearchParams.get.mockReturnValue('19');
+    setReturnCode('19');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.credentialerror);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('should render "Two-factor need" for errorCode 20', async () => {
-    mockSearchParams.get.mockReturnValue('20');
+    setReturnCode('20');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.twofactorneed);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('should render "Session Expired" for errorCode 21', async () => {
-    mockSearchParams.get.mockReturnValue('21');
+    setReturnCode('21');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.sessionexpired);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('should render "Portal Consents" for errorCode 22', async () => {
-    mockSearchParams.get.mockReturnValue('22');
+    setReturnCode('22');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.portalconsents);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('should render "Spid Revoked" for errorCode 23', async () => {
-    mockSearchParams.get.mockReturnValue('23');
+    setReturnCode('23');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.spidrevoked);
     expect(errorSummary).toBeInTheDocument();
   });
 
   test('should render "Cancel Login" for errorCode 25 and click on cancel button', async () => {
-    mockSearchParams.get.mockReturnValue('25');
+    setReturnCode('25');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.cancellogin);
     expect(errorSummary).toBeInTheDocument();
@@ -73,7 +70,7 @@ describe('test suite for access error', () => {
   });
 
   test('should render "Login Error Retry" in case of not recognized code and click on button retry', async () => {
-    mockSearchParams.get.mockReturnValue('1234');
+    setReturnCode('1234');
     await renderWithProviders(<LoginErrorPage />);
     const errorSummary = screen.getByText(it.ioesco.error.loginerrorretry);
     expect(errorSummary).toBeInTheDocument();

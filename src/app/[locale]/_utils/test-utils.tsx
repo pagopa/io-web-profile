@@ -1,6 +1,8 @@
+import { vi } from 'vitest';
 import { render, RenderResult } from '@testing-library/react';
 import { AbstractIntlMessages, NextIntlProvider } from 'next-intl';
 import { Provider } from 'react-redux';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { store } from '../_redux/store';
 
 export const renderWithProviders = async (
@@ -24,7 +26,7 @@ export const renderWithProviders = async (
 
   if (mockDispatch) {
     // eslint-disable-next-line functional/immutable-data
-    store.dispatch = jest.fn();
+    store.dispatch = vi.fn() as Dispatch<AnyAction>;
   }
 
   return render(
