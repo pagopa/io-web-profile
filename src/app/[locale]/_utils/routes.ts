@@ -40,4 +40,4 @@ export const PUBLIC_ROUTES = [
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
 
-export const PRIVATE_ROUTES = EXISTING_ROUTES.filter((route) => !PUBLIC_ROUTES.includes(route));
+export const PRIVATE_ROUTES = EXISTING_ROUTES.filter(route => !PUBLIC_ROUTES.includes(route));

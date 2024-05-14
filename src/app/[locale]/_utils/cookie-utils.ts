@@ -46,6 +46,6 @@ export function cookieOpsBuilder<T extends CookieValue>(
   return {
     delete: () => cookieDelete(key),
     read: () => cookieRead(key, type),
-    write: (value) => cookieWrite(key, value, type),
+    write: value => cookieWrite(key, value, type),
   };
 }
