@@ -71,7 +71,8 @@ const Profile = () => {
     if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'readInfo', [], [500])
         .then((res) => {
-          const mockWalletStatus = global.window?.localStorage?.getItem("walletStatus") // todo: rimuovere una volta che sarà funzionante l'api di revoke
+          // TODO [SIW-1092]: Remove this mock when the wallet status is available
+          const mockWalletStatus = global.window?.localStorage?.getItem("walletStatus");
           setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res);
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
@@ -79,7 +80,7 @@ const Profile = () => {
   }, [isProfileAvailable]);
 
 
-  const isWalletActive = useMemo(() =>  walletData?.status === 'valid' || walletData?.status === 'operational', [walletData?.status])
+  const isWalletActive = useMemo(() => walletData?.status === 'valid' || walletData?.status === 'operational', [walletData?.status])
 
   const walletCardTitle = useMemo(() => {
     if (isWalletActive) return t('common.walletactive')
