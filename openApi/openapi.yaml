@@ -263,6 +263,10 @@ paths:
           description: Conflict
         '500':
           description: Server Error
+        '502':
+          description: Bad Gateway
+        '504':
+          description: Gateway Timeout
 components:
   securitySchemes:
     bearerAuth:
