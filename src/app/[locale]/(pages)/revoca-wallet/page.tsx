@@ -25,9 +25,9 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
   const { callFetchWithRetries, isLoading } = useFetch();
 
-  useEffect(()=>{
+  useEffect(() => {
     trackEvent('IO_ITW_STATU_PAGE', { event_category: 'UX', event_type: 'screen_view', ITW_status: 'on' });
-  },[])
+  }, [])
 
   const handleLockSession = () => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
@@ -72,7 +72,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
             {t('common.disablewalletpopup')}
           </Typography>
           <Box display="flex" justifyContent="end" columnGap={2}>
-            <Button onClick={() => setIsDialogOpen(false)} variant="outlined"  disabled={isRemovingWallet}>
+            <Button onClick={() => setIsDialogOpen(false)} variant="outlined" disabled={isRemovingWallet}>
               {t('common.disablewalletcancel')}
             </Button>
             <Button
@@ -89,9 +89,9 @@ const WalletInstanceRevoke = (): React.ReactElement => {
     [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t]
   );
 
-  const trackAccordionOpen = useCallback((element:  number) => {
-    trackEvent('IO_ITW_FAQ_OPENED', { event_category: 'UX', event_type: 'action',faq_opened: element+1 });
-  },[])
+  const trackAccordionOpen = useCallback((element: number) => {
+    trackEvent('IO_ITW_FAQ_OPENED', { event_category: 'UX', event_type: 'action', faq_opened: element + 1 });
+  }, [])
 
   if (isLoading) {
     return <Loader />;
@@ -129,7 +129,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen}/>
+      <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen} />
       {renderRevokeWalletDialog()}
     </>
   );

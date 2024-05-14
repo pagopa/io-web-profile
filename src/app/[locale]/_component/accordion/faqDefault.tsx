@@ -8,7 +8,6 @@ import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { ROUTES } from '../../_utils/routes';
-import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react';
 
 
@@ -112,7 +111,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
     }
     return () => {
       observersList.current.forEach((observer) => observer.disconnect())
-       // eslint-disable-next-line functional/immutable-data
+      // eslint-disable-next-line functional/immutable-data
       observersList.current = [];
     };
   }, [handleOpenFAQ, onOpenFAQ]);
