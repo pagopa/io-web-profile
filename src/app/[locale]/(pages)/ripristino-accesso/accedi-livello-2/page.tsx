@@ -120,7 +120,7 @@ const Access = (): React.ReactElement => {
       <SelectIdp
         isOpen={openDialog}
         spidLevel={spidLevel}
-        onClose={(opn) => {
+        onClose={opn => {
           setOpenDialog(opn);
         }}
         currentPage={ROUTES.LOGIN_L2}

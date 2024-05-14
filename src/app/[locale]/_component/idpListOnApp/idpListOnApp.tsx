@@ -38,7 +38,7 @@ export const IdpListOnApp = () => {
         }}
       >
         {mockedIdentityProviders &&
-          mockedIdentityProviders.map((item) => (
+          mockedIdentityProviders.map(item => (
             <Grid key={item.entityId}>
               <Grid container justifyContent={'space-between'} py={2} pl={4} pr={6}>
                 <Grid item>

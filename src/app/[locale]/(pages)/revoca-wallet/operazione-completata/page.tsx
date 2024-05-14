@@ -11,7 +11,7 @@ import { isIdpKnown } from '../../../_utils/idps';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../../_utils/styles';
 import { trackEvent } from '../../../_utils/mixpanel';
-import Loader from '../../../_component/loader/loader'
+import Loader from '../../../_component/loader/loader';
 import { usePathname } from 'next/navigation';
 import useFetch from '@/api/webProfileApiClient';
 
@@ -20,16 +20,19 @@ const unlockioaccessRich = {
 };
 
 const ThankYouPage = (): React.ReactElement => {
-
   useEffect(() => {
     // TODO [SIW-1092]: Remove this line of code after the wallet deactivation feature is implemented
-    global.window?.localStorage?.setItem("walletStatus", "deactivated");
+    global.window?.localStorage?.setItem('walletStatus', 'deactivated');
     trackEvent('IO_ITW_DEACTIVATION_UX_SUCCESS', {
       event_category: 'UX',
       event_type: 'screen_view',
     });
-    trackEvent('IO_ITW_STATU_PAGE', { event_category: 'UX', event_type: 'screen_view', ITW_status: 'off' });
-  }, [])
+    trackEvent('IO_ITW_STATU_PAGE', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+      ITW_status: 'off',
+    });
+  }, []);
 
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
@@ -60,8 +63,12 @@ const ThankYouPage = (): React.ReactElement => {
   );
 
   const trackAccordionOpen = useCallback((element: number) => {
-    trackEvent('IO_ITW_FAQ_OPENED', { event_category: 'UX', event_type: 'action', faq_opened: element + 1 });
-  }, [])
+    trackEvent('IO_ITW_FAQ_OPENED', {
+      event_category: 'UX',
+      event_type: 'action',
+      faq_opened: element + 1,
+    });
+  }, []);
 
   if (isLoading) {
     return <Loader />;

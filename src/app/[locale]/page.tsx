@@ -12,7 +12,12 @@ import { commonBackground } from './_utils/styles';
 import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
-import { getAccessStatus, getSessionStatus, getWalletStatus, localeFromStorage } from './_utils/common';
+import {
+  getAccessStatus,
+  getSessionStatus,
+  getWalletStatus,
+  localeFromStorage,
+} from './_utils/common';
 import useLocalePush from './_hooks/useLocalePush';
 import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
@@ -46,7 +51,7 @@ const Profile = () => {
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getProfile', [], [500])
-      .then((res) => {
+      .then(res => {
         setProfileData(res);
         if (res === 404) {
           setIsProfileAvailable(false);
@@ -60,7 +65,7 @@ const Profile = () => {
   useEffect(() => {
     if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'getUserSessionState', [], [500])
-        .then((res) => {
+        .then(res => {
           setSessionData(res);
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
@@ -70,26 +75,28 @@ const Profile = () => {
   useEffect(() => {
     if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'getWalletInstance', [], [500])
-        .then((res) => {
+        .then(res => {
           // TODO [SIW-1092]: Remove this mock when the wallet status is available
-          const mockWalletStatus = global.window?.localStorage?.getItem("walletStatus");
+          const mockWalletStatus = global.window?.localStorage?.getItem('walletStatus');
           setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res);
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
-
-  const isWalletActive = useMemo(() => walletData?.status === 'valid' || walletData?.status === 'operational', [walletData?.status])
+  const isWalletActive = useMemo(
+    () => walletData?.status === 'valid' || walletData?.status === 'operational',
+    [walletData?.status]
+  );
 
   const walletCardTitle = useMemo(() => {
-    if (isWalletActive) return t('common.walletactive')
-    if (walletData?.status === 'deactivated') return t('common.walletinactive')
-  }, [isWalletActive, t, walletData?.status])
+    if (isWalletActive) return t('common.walletactive');
+    if (walletData?.status === 'deactivated') return t('common.walletinactive');
+  }, [isWalletActive, t, walletData?.status]);
 
   const walletCardTooltip = useMemo(() => {
-    return isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet')
-  }, [isWalletActive, t])
+    return isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet');
+  }, [isWalletActive, t]);
 
   if (isLoading) {
     return <Loader />;
@@ -157,10 +164,10 @@ const Profile = () => {
                   <Typography variant="sidenav">
                     {sessionData?.session_info.active
                       ? t('common.activeduedate', {
-                        date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                          localeFromStorage
-                        ),
-                      })
+                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                            localeFromStorage
+                          ),
+                        })
                       : t('common.noactive')}
                   </Typography>
                 </Grid>
@@ -169,10 +176,10 @@ const Profile = () => {
                     title={
                       sessionData?.session_info.active
                         ? t('tooltip.accesswithoutidp', {
-                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                            localeFromStorage
-                          ),
-                        })
+                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                              localeFromStorage
+                            ),
+                          })
                         : t('tooltip.nosession')
                     }
                     placement="top"
@@ -189,9 +196,7 @@ const Profile = () => {
                 <Grid container>
                   <Grid xs={10} item padding={3}>
                     <Typography variant="body2">{t('common.wallettitle')}</Typography>
-                    <Typography variant="sidenav">
-                      {walletCardTitle}
-                    </Typography>
+                    <Typography variant="sidenav">{walletCardTitle}</Typography>
                   </Grid>
                   <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
                     <Tooltip

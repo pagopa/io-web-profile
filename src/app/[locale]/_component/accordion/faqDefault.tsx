@@ -10,7 +10,6 @@ import { ListComponent, ListItemComponent } from '../listComponents/ListComponen
 import { ROUTES } from '../../_utils/routes';
 import { useCallback, useEffect, useRef } from 'react';
 
-
 type FAQProps = {
   flow?: string;
   onOpenFAQ?: (element: number) => void;
@@ -78,39 +77,44 @@ const fifthBlockFaqRick = {
 };
 const fifthRevokeWalletFaqRick = {
   link: (chunks: React.ReactNode) => {
-    return <Link
-      fontWeight={600}
-      href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}
-    >
-      {chunks}
-    </Link>
+    return (
+      <Link fontWeight={600} href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}>
+        {chunks}
+      </Link>
+    );
   },
 };
 
 export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
-  const observersList = useRef<MutationObserver[]>([])
+  const observersList = useRef<MutationObserver[]>([]);
 
-  const handleOpenFAQ = useCallback((el: Element, index: number) => {
-    const observer = new MutationObserver((mutationsList) => {
-      const [{ target }] = mutationsList;
-      if ((target as HTMLElement)?.classList?.contains("Mui-expanded")) {
-        onOpenFAQ?.(index)
-      }
-    });
-    // eslint-disable-next-line functional/immutable-data
-    observersList.current[index] = observer
-    const observerConfig = { attributes: true, attributeFilter: ['class'], attributeOldValue: true };
-    observer.observe(el, observerConfig)
-  }, [onOpenFAQ])
+  const handleOpenFAQ = useCallback(
+    (el: Element, index: number) => {
+      const observer = new MutationObserver(mutationsList => {
+        const [{ target }] = mutationsList;
+        if ((target as HTMLElement)?.classList?.contains('Mui-expanded')) {
+          onOpenFAQ?.(index);
+        }
+      });
+      // eslint-disable-next-line functional/immutable-data
+      observersList.current[index] = observer;
+      const observerConfig = {
+        attributes: true,
+        attributeFilter: ['class'],
+        attributeOldValue: true,
+      };
+      observer.observe(el, observerConfig);
+    },
+    [onOpenFAQ]
+  );
 
   useEffect(() => {
-
     if (onOpenFAQ) {
       const accordions = document.querySelectorAll('.MuiAccordion-root');
-      accordions.forEach(handleOpenFAQ)
+      accordions.forEach(handleOpenFAQ);
     }
     return () => {
-      observersList.current.forEach((observer) => observer.disconnect())
+      observersList.current.forEach(observer => observer.disconnect());
       // eslint-disable-next-line functional/immutable-data
       observersList.current = [];
     };
@@ -201,12 +205,12 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
     },
     {
       header: t('revokewalletfaq.fifthquestion'),
-      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRick)
+      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRick),
     },
   ];
 
   const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
-    const updatedEntries: FAQEntries[] = entries.map((entry) => ({
+    const updatedEntries: FAQEntries[] = entries.map(entry => ({
       ...entry,
       content: <span style={{ fontSize: theme.typography.body2.fontSize }}>{entry.content}</span>,
     }));

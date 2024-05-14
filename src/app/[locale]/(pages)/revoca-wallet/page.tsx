@@ -26,8 +26,12 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const { callFetchWithRetries, isLoading } = useFetch();
 
   useEffect(() => {
-    trackEvent('IO_ITW_STATU_PAGE', { event_category: 'UX', event_type: 'screen_view', ITW_status: 'on' });
-  }, [])
+    trackEvent('IO_ITW_STATU_PAGE', {
+      event_category: 'UX',
+      event_type: 'screen_view',
+      ITW_status: 'on',
+    });
+  }, []);
 
   const handleLockSession = () => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
@@ -56,9 +60,9 @@ const WalletInstanceRevoke = (): React.ReactElement => {
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
       .catch(() => {
-        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: "" });  // TODO [SIW-1092]: Add here the error reason
+        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: '' }); // TODO [SIW-1092]: Add here the error reason
         pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
-      })
+      });
   }, [callFetchWithRetries, pushWithLocale]);
 
   const renderRevokeWalletDialog = useCallback(
@@ -72,7 +76,11 @@ const WalletInstanceRevoke = (): React.ReactElement => {
             {t('common.disablewalletpopup')}
           </Typography>
           <Box display="flex" justifyContent="end" columnGap={2}>
-            <Button onClick={() => setIsDialogOpen(false)} variant="outlined" disabled={isRemovingWallet}>
+            <Button
+              onClick={() => setIsDialogOpen(false)}
+              variant="outlined"
+              disabled={isRemovingWallet}
+            >
               {t('common.disablewalletcancel')}
             </Button>
             <Button
@@ -90,8 +98,12 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   );
 
   const trackAccordionOpen = useCallback((element: number) => {
-    trackEvent('IO_ITW_FAQ_OPENED', { event_category: 'UX', event_type: 'action', faq_opened: element + 1 });
-  }, [])
+    trackEvent('IO_ITW_FAQ_OPENED', {
+      event_category: 'UX',
+      event_type: 'action',
+      faq_opened: element + 1,
+    });
+  }, []);
 
   if (isLoading) {
     return <Loader />;

@@ -38,8 +38,8 @@ export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off'
 export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 'locked' =>
   sessionData?.access_enabled ? 'unlocked' : 'locked';
 
-export const getWalletStatus = (walletData?: WalletData): "on" | "off" =>
-  walletData?.status === "valid"  || walletData?.status === "operational" ? "on" : "off";
+export const getWalletStatus = (walletData?: WalletData): 'on' | 'off' =>
+  walletData?.status === 'valid' || walletData?.status === 'operational' ? 'on' : 'off';
 
 export const getLoginFlow = (loginInfo: LoginInfo): string | undefined => {
   if (loginInfo) {
@@ -70,7 +70,7 @@ export const getReferralLockProfile = (isMagicLink: MagicLink): string => {
 };
 
 export const decodeObfuscatedEmail = (encodedEmail: string): string =>
-  encodedEmail.replace(/&#@!(\d+);/g, function (match, dec) {
+  encodedEmail.replace(/&#@!(\d+);/g, function(match, dec) {
     return String.fromCharCode(dec);
   });
 
