@@ -22,7 +22,7 @@
       "fourthquestion": "Se disattivo IT Wallet, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
       "fourthresponse": "Sì, continuerai a vedere tutte le carte e i metodi di pagamento che hai aggiunto in precedenza.",
       "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
-      "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di <Link>bloccare l’accesso a IO</Link>."
+      "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di <link>bloccare l’accesso a IO</link>."
     },
     "common": {
       "abled": "Abilitato",

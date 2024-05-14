@@ -78,11 +78,10 @@ const fifthBlockFaqRick = {
   ),
 };
 const fifthRevokeWalletFaqRick = {
-  Link: (chunks: React.ReactNode) => {
-    const { locale } = useParams()
+  link: (chunks: React.ReactNode) => {
     return <Link
       fontWeight={600}
-      href={`/${locale}${ROUTES.PROFILE_BLOCK}`}
+      href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}
     >
       {chunks}
     </Link>
