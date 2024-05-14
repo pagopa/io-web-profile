@@ -77,7 +77,7 @@ const Profile = () => {
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
-  }, [isProfileAvailable]);
+  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
 
   const isWalletActive = useMemo(() => walletData?.status === 'valid' || walletData?.status === 'operational', [walletData?.status])
