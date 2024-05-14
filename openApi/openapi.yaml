@@ -239,6 +239,10 @@ paths:
           description: Not Found
         "500":
           description: Server Error
+        "502":
+          description: Bad Gateway
+        "504":
+          description: Gateway Timeout
   /revoke:
     post:
       summary: Revoke a Wallet Instance
