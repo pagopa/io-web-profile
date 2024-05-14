@@ -60,6 +60,6 @@ export function storageOpsBuilder<T extends StorageValue>(
   return {
     delete: () => storageDelete(key, local),
     read: () => storageRead(key, type, local),
-    write: (value) => storageWrite(key, value, type, local),
+    write: value => storageWrite(key, value, type, local),
   };
 }

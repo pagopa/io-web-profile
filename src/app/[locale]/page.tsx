@@ -42,7 +42,7 @@ const Profile = () => {
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getProfile', [], [500])
-      .then((res) => {
+      .then(res => {
         setProfileData(res);
         if (res === 404) {
           setIsProfileAvailable(false);
@@ -56,7 +56,7 @@ const Profile = () => {
   useEffect(() => {
     if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'getUserSessionState', [], [500])
-        .then((res) => {
+        .then(res => {
           setSessionData(res);
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
