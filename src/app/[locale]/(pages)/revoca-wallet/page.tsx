@@ -51,12 +51,12 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const handleDisableWalletConfirm = useCallback(() => {
     trackEvent('IO_ITW_DEACTIVATION_CONFIRMED', { event_category: 'UX', event_type: 'action' });
     setIsRemovingWallet(true);
-    callFetchWithRetries(WebProfileApi, 'revoke', [], [500])
+    callFetchWithRetries(WebProfileApi, 'revokeWalletInstance', [], [500])
       .then(() => {
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
       .catch(() => {
-        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: "" }); // todo: add error reason
+        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: "" });  // TODO [SIW-1092]: Add here the error reason
         pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
       })
   }, [callFetchWithRetries, pushWithLocale]);

@@ -225,7 +225,7 @@ paths:
     get:
       summary: Retrieve the current Wallet Instance info
       description: Retrieve the current Wallet Instance information details such as the current status
-      operationId: readInfo
+      operationId: getWalletInstance
       responses:
         "200":
           description: Wallet Instance Record created
@@ -247,7 +247,7 @@ paths:
         If the Wallet Instance is already revoked, the operation succeed.
         If the Wallet Instance cannot be revoked due to its current status, 
         a conflict error is returned.
-      operationId: revoke
+      operationId: revokeWalletInstance
       responses:
         '204':
           description: No content

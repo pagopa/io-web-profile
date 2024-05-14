@@ -69,7 +69,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (isProfileAvailable) {
-      callFetchWithRetries(WebProfileApi, 'readInfo', [], [500])
+      callFetchWithRetries(WebProfileApi, 'getWalletInstance', [], [500])
         .then((res) => {
           // TODO [SIW-1092]: Remove this mock when the wallet status is available
           const mockWalletStatus = global.window?.localStorage?.getItem("walletStatus");
