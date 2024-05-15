@@ -23,12 +23,12 @@ import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
-import { WalletData } from '@/api/generated/webProfile/WalletData';
+import { StatusEnum, WalletData } from '@/api/generated/webProfile/WalletData';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
-  const [walletData, setWalletData] = useState<WalletData>();
+  const [walletData, setWalletData] = useState<WalletData>({ status: StatusEnum.installed });
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
@@ -73,7 +73,7 @@ const Profile = () => {
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
   useEffect(() => {
-    if (isProfileAvailable) {
+    if (isProfileAvailable && process.env.NODE_ENV !== "production") {
       callFetchWithRetries(WebProfileApi, 'getWalletInstance', [], [500])
         .then(res => {
           // TODO [SIW-1092]: Remove this mock when the wallet status is available
@@ -164,10 +164,10 @@ const Profile = () => {
                   <Typography variant="sidenav">
                     {sessionData?.session_info.active
                       ? t('common.activeduedate', {
-                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                            localeFromStorage
-                          ),
-                        })
+                        date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                          localeFromStorage
+                        ),
+                      })
                       : t('common.noactive')}
                   </Typography>
                 </Grid>
@@ -176,10 +176,10 @@ const Profile = () => {
                     title={
                       sessionData?.session_info.active
                         ? t('tooltip.accesswithoutidp', {
-                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                              localeFromStorage
-                            ),
-                          })
+                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                            localeFromStorage
+                          ),
+                        })
                         : t('tooltip.nosession')
                     }
                     placement="top"
