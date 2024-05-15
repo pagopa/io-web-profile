@@ -166,10 +166,10 @@ const Profile = () => {
                   <Typography variant="sidenav">
                     {sessionData?.session_info.active
                       ? t('common.activeduedate', {
-                        date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                          localeFromStorage
-                        ),
-                      })
+                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                            localeFromStorage
+                          ),
+                        })
                       : t('common.noactive')}
                   </Typography>
                 </Grid>
@@ -178,10 +178,10 @@ const Profile = () => {
                     title={
                       sessionData?.session_info.active
                         ? t('tooltip.accesswithoutidp', {
-                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                            localeFromStorage
-                          ),
-                        })
+                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                              localeFromStorage
+                            ),
+                          })
                         : t('tooltip.nosession')
                     }
                     placement="top"

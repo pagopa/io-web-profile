@@ -64,7 +64,7 @@ const thirdBlockRich = {
   li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
 };
 
-const fifthBlockFaqRick = {
+const fifthBlockFaqRich = {
   link: (chunks: React.ReactNode) => (
     <Link
       target="_blank"
@@ -75,7 +75,7 @@ const fifthBlockFaqRick = {
     </Link>
   ),
 };
-const fifthRevokeWalletFaqRick = {
+const fifthRevokeWalletFaqRich = {
   link: (chunks: React.ReactNode) => {
     return (
       <Link fontWeight={600} href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}>
@@ -85,13 +85,13 @@ const fifthRevokeWalletFaqRick = {
   },
 };
 
+// TODO [SIW-1137]: as it is currently necessary to monitor the reading of FAQs
+// through custom events, we must implement tracking for when the user opens the
+// accordion. Unfortunately, the accordion component imported from
+// @pagopa/pagopa-editorial-components does not offer a dedicated function for
+// managing such operations. Therefore, we are incorporating an Observable to
+// facilitate tracking when the FAQs are opened.
 export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
-
-  // [SIW-1137] 
-  //As it is currently necessary to monitor the reading of FAQs through custom events, we must implement tracking for when the user opens the accordion.
-  // Unfortunately, the accordion component imported from @pagopa/pagopa-editorial-components does not offer a dedicated function for managing such operations. 
-  //Therefore, we are incorporating an Observable to facilitate tracking when the FAQs are opened
-
   const observersList = useRef<MutationObserver[]>([]);
 
   const handleOpenFAQ = useCallback(
@@ -162,7 +162,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
     },
     {
       header: t('blockfaq.fifthquestion'),
-      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRick),
+      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRich),
     },
   ];
 
@@ -211,7 +211,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
     },
     {
       header: t('revokewalletfaq.fifthquestion'),
-      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRick),
+      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRich),
     },
   ];
 
