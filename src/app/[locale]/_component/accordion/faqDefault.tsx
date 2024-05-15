@@ -86,6 +86,12 @@ const fifthRevokeWalletFaqRick = {
 };
 
 export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
+
+  // [SIW-1137] 
+  //As it is currently necessary to monitor the reading of FAQs through custom events, we must implement tracking for when the user opens the accordion.
+  // Unfortunately, the accordion component imported from @pagopa/pagopa-editorial-components does not offer a dedicated function for managing such operations. 
+  //Therefore, we are incorporating an Observable to facilitate tracking when the FAQs are opened
+
   const observersList = useRef<MutationObserver[]>([]);
 
   const handleOpenFAQ = useCallback(
