@@ -25,6 +25,8 @@ import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 import { StatusEnum, WalletData } from '@/api/generated/webProfile/WalletData';
 
+const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION;
+
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
@@ -73,7 +75,7 @@ const Profile = () => {
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
   useEffect(() => {
-    if (isProfileAvailable && process.env.NODE_ENV !== "production") {
+    if (isProfileAvailable && isWalletRevocationActive) {
       callFetchWithRetries(WebProfileApi, 'getWalletInstance', [], [500])
         .then(res => {
           // TODO [SIW-1092]: Remove this mock when the wallet status is available
