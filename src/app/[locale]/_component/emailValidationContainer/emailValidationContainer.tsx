@@ -12,7 +12,7 @@ type IntroductionProps = {
   icon?: JSX.Element;
   title: string;
   subtitle?: string;
-  summary: string | JSX.Element | React.ReactNode;
+  summary?: string | JSX.Element | React.ReactNode;
   button: ButtonProps;
 };
 
@@ -45,47 +45,48 @@ export function EmailValidationContainer({
             {title}
           </Typography>
         </Grid>
-        {subtitle && <Grid item xs={12} pb={2}>
-          <Typography
-            fontSize={16}
-            fontWeight={600}
-            py={0}
-            px={0}
-            color="textSecondary"
-            sx={{
-              textAlign: 'center',
-            }}
-          >
-            {subtitle}
-          </Typography>
-        </Grid>
-        }
-        <Grid item xs={12} pb={4}>
-          <Typography
-            variant="subtitle1"
-            fontSize={18}
-            fontWeight={400}
-            py={0}
-            px={0}
-            color="textPrimary"
-            sx={{
-              textAlign: 'center',
-            }}
-          >
-            {summary}
-          </Typography>
-        </Grid>
+        {subtitle && (
+          <Grid item xs={12} pb={2}>
+            <Typography
+              fontSize={16}
+              fontWeight={600}
+              py={0}
+              px={0}
+              color="textSecondary"
+              sx={{
+                textAlign: 'center',
+              }}
+            >
+              {subtitle}
+            </Typography>
+          </Grid>
+        )}
+        {summary && (
+          <Grid item xs={12} pb={4}>
+            <Typography
+              variant="subtitle1"
+              fontSize={18}
+              fontWeight={400}
+              py={0}
+              px={0}
+              color="textPrimary"
+              sx={{
+                textAlign: 'center',
+              }}
+            >
+              {summary}
+            </Typography>
+          </Grid>
+        )}
         <Grid item xs={12} textAlign={'center'}>
           <Grid display={'flex'} justifyContent="center">
             <Button
-              onClick={
-                () => {
-                      pushWithLocale(button.href || '/');
-                      if (button.onClick) {
-                        button.onClick();
-                      }
-                    }
-              }
+              onClick={() => {
+                pushWithLocale(button.href || '/');
+                if (button.onClick) {
+                  button.onClick();
+                }
+              }}
               variant={button.variant}
             >
               {button.text}
