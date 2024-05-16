@@ -25,7 +25,7 @@ import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 import { StatusEnum, WalletData } from '@/api/generated/webProfile/WalletData';
 
-const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION;
+const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION === "true";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
@@ -84,7 +84,7 @@ const Profile = () => {
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
-  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
+  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);   
 
   const isWalletActive = useMemo(
     () => walletData?.status === 'valid' || walletData?.status === 'operational',
