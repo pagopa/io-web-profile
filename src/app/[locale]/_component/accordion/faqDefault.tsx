@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
-import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
 import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { ROUTES } from '../../_utils/routes';
+import { Accordion } from './accordion';
 
 type FAQProps = {
   flow?: string;
+  onToogleFAQ?: (isOpen: boolean, element: number) => void;
 };
 // the 'content' property is set to any because
 // the library from which we imported the accordion
@@ -74,7 +75,7 @@ const fifthBlockFaqRick = {
   ),
 };
 
-export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
+export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
   const t = useTranslations('ioesco');
   // #region entries
   const logoutEntries: FAQEntries[] = [
@@ -170,6 +171,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
         theme="light"
         layout="center"
         title={t('common.faqtitle')}
+        onToogleAccordion={onToogleFAQ}
       />
     </Typography>
   );
