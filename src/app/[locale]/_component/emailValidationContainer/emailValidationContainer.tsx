@@ -1,11 +1,9 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
-import useLocalePush from '../../_hooks/useLocalePush';
 
 type ButtonProps = {
-  href?: string;
   text: string;
   variant: 'outlined' | 'contained' | 'text' | 'naked';
-  onClick?: () => void;
+  onClick: () => void;
 };
 
 type IntroductionProps = {
@@ -23,7 +21,6 @@ export function EmailValidationContainer({
   summary,
   button,
 }: IntroductionProps) {
-  const pushWithLocale = useLocalePush();
 
   return (
     <Box sx={{ maxWidth: 500, margin: '0 auto' }}>
@@ -45,21 +42,22 @@ export function EmailValidationContainer({
             {title}
           </Typography>
         </Grid>
-        {subtitle && <Grid item xs={12} pb={2}>
-          <Typography
-            fontSize={16}
-            fontWeight={600}
-            py={0}
-            px={0}
-            color="textSecondary"
-            sx={{
-              textAlign: 'center',
-            }}
-          >
-            {subtitle}
-          </Typography>
-        </Grid>
-        }
+        {subtitle && (
+          <Grid item xs={12} pb={2}>
+            <Typography
+              fontSize={16}
+              fontWeight={600}
+              py={0}
+              px={0}
+              color="textSecondary"
+              sx={{
+                textAlign: 'center',
+              }}
+            >
+              {subtitle}
+            </Typography>
+          </Grid>
+        )}
         <Grid item xs={12} pb={4}>
           <Typography
             variant="subtitle1"
@@ -77,17 +75,7 @@ export function EmailValidationContainer({
         </Grid>
         <Grid item xs={12} textAlign={'center'}>
           <Grid display={'flex'} justifyContent="center">
-            <Button
-              onClick={
-                () => {
-                      pushWithLocale(button.href || '/');
-                      if (button.onClick) {
-                        button.onClick();
-                      }
-                    }
-              }
-              variant={button.variant}
-            >
+            <Button onClick={() => button.onClick()} variant={button.variant}>
               {button.text}
             </Button>
           </Grid>

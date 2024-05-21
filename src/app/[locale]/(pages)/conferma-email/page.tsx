@@ -5,37 +5,81 @@ import { Grid } from '@mui/material';
 import { commonBackgroundFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
 import { useEffect, useState } from 'react';
+import useFetch, { EmailValidationApi } from '@/api/emailValidationApiClient';
+import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
+import Loader from '../../_component/loader/loader';
+// import { ROUTES } from '../../_utils/routes';
+// import useLocalePush from '../../_hooks/useLocalePush';
 
-type UrlParams = {
-  token: string;
-  email: string;
+type UrlParamsType = {
+  token: ValidationToken | null;
+  email?: string;
 };
 
 const EmailConfirmationPage = (): React.ReactElement => {
   // const t = useTranslations('ioesco');
-  const [urlParams, setUrlParams] = useState<UrlParams | undefined>(undefined);
+  const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
+  const { callFetchWithRetries, isLoading } = useFetch();
+  // const pushWithLocale = useLocalePush();
 
   function extractParams() {
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        const encodedEmail = urlParams.get('email');
+      const urlParams = new URLSearchParams(window.location.search);
+      const token: ValidationToken | null = urlParams.get('token') as ValidationToken;
 
-        if (encodedEmail && token) {
-          const email = Buffer.from(decodeURIComponent(encodedEmail), 'base64').toString('utf-8');
-          setUrlParams({ token, email });
-        }
+      if (token) {
+        callFetchWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
+          .then(data => {
+            setUrlParams({ token, email: data.profile_email });
+            console.log('OK', data);
+          })
+          .catch(() => {
+            console.log('KO');
+            // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
+            // IOPID 1559
+            // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+          });
+      }
+      {
+        // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
+        // IOPID 1559
+      }
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
     return null;
   }
 
   useEffect(() => {
     extractParams();
-  },[])
+  }, []);
 
-  
+  useEffect(() => {
+    console.log('isLoading', isLoading);
+  }, [isLoading]);
+
+  const handleConfirmEmail = () => {
+    if (urlParams && urlParams.token) {
+      callFetchWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
+        .then(data => {
+          // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
+          // IOPID 1559/60/61
+          // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+          console.log('OK', data);
+        })
+        .catch(() => {
+          console.log('KO');
+          // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
+          // IOPID 1559/60/61
+          // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+        });
+    }
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <Grid sx={commonBackgroundFullHeight} container>
       <Grid item xs={12} justifySelf={'center'} marginTop={5}>
@@ -50,6 +94,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
           button={{
             variant: 'contained',
             text: 'Sì, confermo',
+            onClick: () => handleConfirmEmail(),
           }}
         />
       </Grid>
