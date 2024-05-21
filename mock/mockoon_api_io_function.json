@@ -1,0 +1,209 @@
+{
+    "uuid": "37494e7e-dd77-4131-aaea-f0cd4b2b37a4",
+    "lastMigration": 28,
+    "name": "IO Web Profile Function API",
+    "endpointPrefix": "public",
+    "latency": 0,
+    "port": 7072,
+    "hostname": "",
+    "folders": [],
+    "routes": [
+        {
+            "uuid": "fa7a063c-de15-4999-aee5-f7199b019017",
+            "type": "http",
+            "documentation": "Validates the token and get email relative to a token.\n",
+            "method": "get",
+            "endpoint": "api/v2/validate-profile-email",
+            "responses": [
+                {
+                    "uuid": "529fcdcf-20d4-4fd2-8b61-f102cad82574",
+                    "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\"\n}",
+                    "latency": 2000,
+                    "statusCode": 200,
+                    "label": "Found",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id"
+                },
+                {
+                    "uuid": "7915e1cc-b71e-4660-9d29-f04c3583f40a",
+                    "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+                    "latency": 0,
+                    "statusCode": 400,
+                    "label": "Validation failed",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id"
+                },
+                {
+                    "uuid": "33505830-6de8-4f49-bc6e-236eba63c9a4",
+                    "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+                    "latency": 0,
+                    "statusCode": 500,
+                    "label": "Internal Server Error",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id"
+                }
+            ],
+            "enabled": true,
+            "responseMode": null
+        },
+        {
+            "uuid": "83a41a1c-64d6-44b1-93c0-5ba2b19ef286",
+            "type": "http",
+            "documentation": "Validates the token and updates the user profile.\n",
+            "method": "post",
+            "endpoint": "api/v2/validate-profile-email",
+            "responses": [
+                {
+                    "uuid": "7adeab7c-1034-4f4e-bd52-17375340026a",
+                    "body": "",
+                    "latency": 2000,
+                    "statusCode": 204,
+                    "label": "Email successfully validated.",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id"
+                },
+                {
+                    "uuid": "6a6b90df-4167-49c2-9944-5d2ac4285b8f",
+                    "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+                    "latency": 0,
+                    "statusCode": 400,
+                    "label": "Validation failed",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id"
+                },
+                {
+                    "uuid": "df6891cd-0bac-4915-8655-db003ad88c28",
+                    "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+                    "latency": 0,
+                    "statusCode": 500,
+                    "label": "Internal Server Error",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": false,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id"
+                }
+            ],
+            "enabled": true,
+            "responseMode": null
+        }
+    ],
+    "rootChildren": [
+        {
+            "type": "route",
+            "uuid": "fa7a063c-de15-4999-aee5-f7199b019017"
+        },
+        {
+            "type": "route",
+            "uuid": "83a41a1c-64d6-44b1-93c0-5ba2b19ef286"
+        }
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+        "enabled": false,
+        "type": "CERT",
+        "pfxPath": "",
+        "certPath": "",
+        "keyPath": "",
+        "caPath": "",
+        "passphrase": ""
+    },
+    "cors": true,
+    "headers": [],
+    "proxyReqHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "proxyResHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "data": []
+}
