@@ -86,7 +86,7 @@ export default useFetch;
 
 export const EmailValidationApi = {
   emailValidationTokenInfo: async (token: ValidationToken) => {
-    const result = await validateEmailApiClient.getTokenInfo({token});
+    const result = await validateEmailApiClient.getTokenInfo({"x-pagopa-email-validation-token":token});
     return extractResponse(result);
   },
   validateEmail: async (token: ValidateProfileEmailPayload) => {

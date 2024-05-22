@@ -32,11 +32,13 @@ paths:
               - "VALIDATE"
             default: "CONFIRM"
       responses:
+        "200":
+          description: See Others
         "303":
           description: See Others
         "400":
           description: Validation Failed
-  /api/v2validate-profile-email:
+  /api/v2/validate-profile-email:
     get:
       operationId: getTokenInfo
       description: |
