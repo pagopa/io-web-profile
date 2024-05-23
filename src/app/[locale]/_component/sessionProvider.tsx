@@ -38,17 +38,7 @@ type LoginStatusNotAuthorized = {
 
 export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusNotAuthorized;
 
-const getHeaderFooter = ({ children, pathName }: { readonly children: React.ReactNode, readonly pathName: string }) => {
-  if (EMAIL_VALIDATION_ROUTES.includes(pathName)) return <> { children }</>;
-
-  return (
-    <>
-      <Header />
-        {children}
-      <Footer />
-    </>
-  );
-};
+const emailValidationEnabled = process.env.NEXT_PUBLIC_VALIDATION_EMAIL === 'true' ? true : false;
 
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
@@ -59,6 +49,19 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const router = useRouter();
 
   const windowAvailable = isBrowser();
+
+  const getHeaderFooter = ({ children, pathName }: { readonly children: React.ReactNode, readonly pathName: string }) => {
+    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && emailValidationEnabled && windowAvailable) return <> { children }</>;
+    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && !emailValidationEnabled && windowAvailable) router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
+  
+    return (
+      <>
+        <Header />
+          {children}
+        <Footer />
+      </>
+    );
+  };
 
   useMemo(() => {
     if (windowAvailable) {
