@@ -14,9 +14,9 @@ const validateEmailApiClient = createClient({
   fetchApi: retryingFetch(),
 });
 
-const useFetch = () => {
+const useFetchEmailValidation = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const callFetchWithRetries = useCallback(
+  const callFetchEmailValidationWithRetries = useCallback(
     async <C extends typeof EmailValidationApi, N extends keyof typeof EmailValidationApi>(
       client: C,
       apiName: N,
@@ -75,13 +75,13 @@ const useFetch = () => {
   );
 
   return {
-    callFetchWithRetries,
+    callFetchEmailValidationWithRetries,
     isLoading,
     setIsLoading
   };
 };
 
-export default useFetch;
+export default useFetchEmailValidation;
 
 
 export const EmailValidationApi = {

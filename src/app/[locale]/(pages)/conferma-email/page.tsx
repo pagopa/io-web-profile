@@ -19,7 +19,7 @@ type UrlParamsType = {
 const EmailConfirmationPage = (): React.ReactElement => {
   // const t = useTranslations('ioesco');
   const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
-  const { callFetchWithRetries, isLoading } = useFetch();
+  const { callFetchEmailValidationWithRetries, isLoading } = useFetch();
   // const pushWithLocale = useLocalePush();
 
   function extractParams() {
@@ -28,7 +28,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
       const token: ValidationToken | null = urlParams.get('token') as ValidationToken;
 
       if (token) {
-        callFetchWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
+        callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
           .then(data => {
             setUrlParams({ token, email: data.profile_email });
             console.log('OK', data);
@@ -54,13 +54,9 @@ const EmailConfirmationPage = (): React.ReactElement => {
     extractParams();
   }, []);
 
-  useEffect(() => {
-    console.log('isLoading', isLoading);
-  }, [isLoading]);
-
   const handleConfirmEmail = () => {
     if (urlParams && urlParams.token) {
-      callFetchWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
+      callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
         .then(data => {
           // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
           // IOPID 1559/60/61
