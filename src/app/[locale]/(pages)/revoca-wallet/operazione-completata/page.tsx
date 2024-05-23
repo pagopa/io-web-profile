@@ -62,12 +62,14 @@ const ThankYouPage = (): React.ReactElement => {
     [t]
   );
 
-  const trackAccordionOpen = useCallback((element: number) => {
-    trackEvent('IO_ITW_FAQ_OPENED', {
-      event_category: 'UX',
-      event_type: 'action',
-      faq_opened: element + 1,
-    });
+  const trackAccordionOpen = useCallback((isOpen: boolean, element: number) => {
+    if (isOpen) {
+      trackEvent('IO_ITW_FAQ_OPENED', {
+        event_category: 'UX',
+        event_type: 'action',
+        faq_opened: element + 1,
+      });
+    }
   }, []);
 
   if (isLoading) {
@@ -109,7 +111,7 @@ const ThankYouPage = (): React.ReactElement => {
           <Typography>{t('revokewallet.lockaccess')}</Typography>
         </Alert>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen} />
+      <FAQ flow={Flows.REVOKEWALLET} onToogleFAQ={trackAccordionOpen} />
     </>
   );
 };
