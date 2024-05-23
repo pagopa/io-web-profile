@@ -221,14 +221,14 @@ paths:
           description: Bad Gateway
         '504':
           description: Gateway Timeout
-  /info:
+  /wallet-instances/current/status:
     get:
-      summary: Retrieve the current Wallet Instance info
-      description: Retrieve the current Wallet Instance information details such as the current status
-      operationId: getWalletInstance
+      summary: Retrieve the current Wallet Instance status
+      description: Retrieve the current Wallet Instance status
+      operationId: getCurrentWalletInstanceStatus
       responses:
         "200":
-          description: Wallet Instance Record created
+          description: Wallet Instance status successfully retrieved
           content:
             application/json:
               schema:
@@ -238,34 +238,53 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Server Error
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
         "502":
           description: Bad Gateway
         "504":
           description: Gateway Timeout
-  /revoke:
-    post:
+  /wallet-instances/{id}/status:
+    put:
       summary: Revoke a Wallet Instance
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
       description: |
         Revoke the Wallet Instance associated with the authenticated user. 
         If the Wallet Instance is already revoked, the operation succeed.
         If the Wallet Instance cannot be revoked due to its current status, 
         a conflict error is returned.
-      operationId: revokeWalletInstance
+      operationId: setWalletInstanceStatus
+      # requestBody:
+      #   content:
+      #     application/json:
+      #       schema:
+      #         type: string
+      #         x-extensible-enum:
+      #           - REVOKED
       responses:
-        '204':
+        "204":
           description: No content
-        '401':
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not Found
-        '409':
-          description: Conflict
-        '500':
-          description: Server Error
-        '502':
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+        "502":
           description: Bad Gateway
-        '504':
+        "504":
           description: Gateway Timeout
 components:
   securitySchemes:
@@ -354,14 +373,13 @@ components:
         Describes the status of the wallet.
       type: object
       properties:
-        status:
-          description: The current status of the Wallet Instance
+        id:
           type: string
-          enum:
-            - installed
-            - operational
-            - valid
-            - deactivated
+        is_revoked:
+          type: boolean
+      required:
+          - id
+          - is_revoked
     SessionInfo:
       $ref: 'https://raw.githubusercontent.com/pagopa/io-functions-fast-login/main/api/internal.yaml#/components/schemas/SessionInfo'
     SessionState:

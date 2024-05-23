@@ -39,7 +39,7 @@ export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 
   sessionData?.access_enabled ? 'unlocked' : 'locked';
 
 export const getWalletStatus = (walletData?: WalletData): 'on' | 'off' =>
-  walletData?.status === 'valid' || walletData?.status === 'operational' ? 'on' : 'off';
+  walletData && walletData?.is_revoked ? 'off' : 'on';
 
 export const getLoginFlow = (loginInfo: LoginInfo): string | undefined => {
   if (loginInfo) {

@@ -23,14 +23,14 @@ import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
-import { StatusEnum, WalletData } from '@/api/generated/webProfile/WalletData';
+import { WalletData } from '@/api/generated/webProfile/WalletData';
 
-const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION === "true";
+const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION === 'true';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
-  const [walletData, setWalletData] = useState<WalletData>({ status: StatusEnum.installed });
+  const [walletRevokeStatus, setWalletRevokeStatus] = useState<WalletData | undefined>();
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
@@ -44,12 +44,12 @@ const Profile = () => {
       trackEvent('IO_PROFILE', {
         session_status: getSessionStatus(sessionData),
         access_status: getAccessStatus(sessionData),
-        ITW_status: getWalletStatus(walletData),
+        ITW_status: getWalletStatus(walletRevokeStatus),
         event_category: 'UX',
         event_type: 'screen_view',
       });
     }
-  }, [profileData, sessionData, walletData]);
+  }, [profileData, sessionData, walletRevokeStatus]);
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getProfile', [], [500])
@@ -76,29 +76,24 @@ const Profile = () => {
 
   useEffect(() => {
     if (isProfileAvailable && isWalletRevocationActive) {
-      callFetchWithRetries(WebProfileApi, 'getWalletInstance', [], [500])
+      callFetchWithRetries(WebProfileApi, 'getCurrentWalletInstanceStatus', [], [500])
         .then(res => {
-          // TODO [SIW-1092]: Remove this mock when the wallet status is available
-          const mockWalletStatus = global.window?.localStorage?.getItem('walletStatus');
-          setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res);
+          setWalletRevokeStatus(res);
+          // saving WI_ID in session storage in order to be passed to revoke api request
+          global.window?.sessionStorage?.setItem('WI_ID', res.id)
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
-  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);   
-
-  const isWalletActive = useMemo(
-    () => walletData?.status === 'valid' || walletData?.status === 'operational',
-    [walletData?.status]
-  );
+  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
   const walletCardTitle = useMemo(() => {
-    if (isWalletActive) return t('common.walletactive');
-    if (walletData?.status === 'deactivated') return t('common.walletinactive');
-  }, [isWalletActive, t, walletData?.status]);
+    if (walletRevokeStatus?.is_revoked) return t('common.walletinactive');
+    if (walletRevokeStatus?.is_revoked === false) return t('common.walletactive');
+  }, [t, walletRevokeStatus]);
 
   const walletCardTooltip = useMemo(() => {
-    return isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet');
-  }, [isWalletActive, t]);
+    return walletRevokeStatus?.is_revoked ? t('tooltip.inactivewallet') : t('tooltip.activewallet');
+  }, [t, walletRevokeStatus]);
 
   if (isLoading) {
     return <Loader />;
@@ -194,7 +189,7 @@ const Profile = () => {
                 </Grid>
               </Grid>
               <Divider />
-              {walletData?.status !== 'installed' && (
+              {walletRevokeStatus !== undefined && (
                 <Grid container>
                   <Grid xs={10} item padding={3}>
                     <Typography variant="body2">{t('common.wallettitle')}</Typography>
@@ -222,7 +217,7 @@ const Profile = () => {
           {sessionData?.access_enabled === true && (
             <ProfileCards
               sessionIsActive={sessionData?.session_info?.active}
-              walletIsActive={isWalletActive}
+              walletIsActive={walletRevokeStatus !== undefined && !walletRevokeStatus?.is_revoked}
             />
           )}
           {sessionData?.access_enabled === false && <RestoreSessionCard />}

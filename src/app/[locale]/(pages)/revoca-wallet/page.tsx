@@ -18,8 +18,11 @@ const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
 };
 
+
 const WalletInstanceRevoke = (): React.ReactElement => {
   const t = useTranslations('ioesco');
+  // reading WI_ID in session storage in order to be passed to revoke api request
+  const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID')
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pushWithLocale = useLocalePush();
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
@@ -55,15 +58,16 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const handleDisableWalletConfirm = useCallback(() => {
     trackEvent('IO_ITW_DEACTIVATION_CONFIRMED', { event_category: 'UX', event_type: 'action' });
     setIsRemovingWallet(true);
-    callFetchWithRetries(WebProfileApi, 'revokeWalletInstance', [], [500])
+    callFetchWithRetries(WebProfileApi, 'setWalletInstanceStatus', [walletInstanceId], [500])
       .then(() => {
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
-      .catch(() => {
-        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: '' }); // TODO [SIW-1092]: Add here the error reason
+      .catch(err => {
+        console.log(err, 'error')
+        trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: err });
         pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
       });
-  }, [callFetchWithRetries, pushWithLocale]);
+  }, [callFetchWithRetries, pushWithLocale, walletInstanceId]);
 
   const renderRevokeWalletDialog = useCallback(
     () => (

@@ -1145,41 +1145,22 @@
     {
       "uuid": "84cfb9c8-4811-4310-83ca-8f39a9d5f38a",
       "type": "http",
-      "documentation": "Retrieve the current Wallet Instance information details such as the current status",
+      "documentation": "Retrieve the current Wallet Instance status",
       "method": "get",
-      "endpoint": "info",
+      "endpoint": "wallet-instances/current/status",
       "responses": [
         {
-          "uuid": "6f18d3b6-49ad-4f24-81fb-b8576a2e9408",
-          "body": "{\n  \"status\": \"valid\"\n}",
+          "uuid": "fac003c1-75d2-4793-8ccc-80dc922263e4",
+          "body": "{\n  \"id\": \"pdh4gT6-j35C-aj3T-auh39f\",\n  \"is_revoked\": {{#if (getGlobalVar 'is_revoked') }}{{ getGlobalVar 'is_revoked' }}{{else}}false{{/if}}\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Status Operational",
+          "label": "Wallet Instance Not Revoked",
           "headers": [
             {
               "key": "Content-Type",
               "value": "application/json"
             }
           ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "fac003c1-75d2-4793-8ccc-80dc922263e4",
-          "body": "{}",
-          "latency": 0,
-          "statusCode": 401,
-          "label": "Unauthorized",
-          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -1231,17 +1212,12 @@
           "callbacks": []
         },
         {
-          "uuid": "fa4ce791-9f3d-410a-bfe3-a2ed3ec7f547",
-          "body": "{\n  \"status\": \"installed\"\n}",
+          "uuid": "d04e4060-f53e-4896-b585-a01f51bc2ced",
+          "body": "{}",
           "latency": 0,
-          "statusCode": 200,
-          "label": "Status Installed",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -1255,35 +1231,11 @@
           "callbacks": []
         },
         {
-          "uuid": "4a1a137a-733c-4bde-8fb3-7c5c87b62ae8",
-          "body": "{\n  \"status\": \"valid\"\n}",
+          "uuid": "6b6ed603-7849-4478-9e80-20d5983eb447",
+          "body": "{\n  \"id\": \"pdh4gT6-j35C-aj3T-auh39f\",\n  \"is_revoked\": true\n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "Status Valid",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": false,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": false,
-          "crudKey": "id",
-          "callbacks": []
-        },
-        {
-          "uuid": "bdf18a4b-267b-4223-ab76-3f4b83915d1e",
-          "body": "{\n  \"status\": \"deactivated\"\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "Status Deactivated",
+          "label": "Wallet Instance Revoked",
           "headers": [
             {
               "key": "Content-Type",
@@ -1308,31 +1260,34 @@
     {
       "uuid": "f2568c1a-6a56-4ba1-9a4b-6ee666d81601",
       "type": "http",
-      "documentation": "Revoke the Wallet Instance associated with the authenticated user.          If the Wallet Instance is already revoked, the operation succeed.         If the Wallet Instance cannot be revoked due to its current status,          a conflict error is returned.",
-      "method": "post",
-      "endpoint": "revoke",
+      "documentation": "Revoke the Wallet Instance associated with the authenticated user. If the Wallet Instance is already revoked, the operation succeed. If the Wallet Instance cannot be revoked due to its current status, a conflict error is returned.",
+      "method": "put",
+      "endpoint": "wallet-instances/:id/status",
       "responses": [
         {
           "uuid": "81e497ea-ab0d-4e3d-be2d-aaa517341729",
-          "body": "{\n  \"message\": \"\"\n}",
+          "body": "{{setGlobalVar 'is_revoked' true}}",
           "latency": 0,
           "statusCode": 204,
-          "label": "",
-          "headers": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
+          "label": "Wallet instance revoke request is fullfilled",
+          "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
+          "default": false,
           "crudKey": "id",
           "callbacks": []
         },
@@ -1341,7 +1296,7 @@
           "body": "{}",
           "latency": 0,
           "statusCode": 401,
-          "label": "",
+          "label": "Unhautorized",
           "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
@@ -1360,7 +1315,7 @@
           "body": "{}",
           "latency": 0,
           "statusCode": 404,
-          "label": "",
+          "label": "Not Found",
           "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
@@ -1379,7 +1334,7 @@
           "body": "{}",
           "latency": 0,
           "statusCode": 409,
-          "label": "",
+          "label": "Conflict",
           "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
@@ -1398,17 +1353,25 @@
           "body": "{}",
           "latency": 0,
           "statusCode": 500,
-          "label": "",
+          "label": "Server Error",
           "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "pdh4gT6-j35C-aj3T-auh39f",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
