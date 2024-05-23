@@ -3,7 +3,7 @@
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ProfileData } from '../../api/generated/webProfile/ProfileData';
 import { Introduction } from './_component/introduction/introduction';
 import { ProfileCards } from './_component/profileCards/profileCards';
@@ -12,19 +12,29 @@ import { commonBackground } from './_utils/styles';
 import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
-import { getAccessStatus, getSessionStatus, localeFromStorage } from './_utils/common';
+import {
+  getAccessStatus,
+  getSessionStatus,
+  getWalletStatus,
+  localeFromStorage,
+} from './_utils/common';
 import useLocalePush from './_hooks/useLocalePush';
 import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
+import { StatusEnum, WalletData } from '@/api/generated/webProfile/WalletData';
+
+const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION === "true";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
+  const [walletData, setWalletData] = useState<WalletData>({ status: StatusEnum.installed });
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
+
   const userFromStorage = storageUserOps.read();
   const pushWithLocale = useLocalePush();
   const { callFetchWithRetries, isLoading } = useFetch();
@@ -34,11 +44,12 @@ const Profile = () => {
       trackEvent('IO_PROFILE', {
         session_status: getSessionStatus(sessionData),
         access_status: getAccessStatus(sessionData),
+        ITW_status: getWalletStatus(walletData),
         event_category: 'UX',
         event_type: 'screen_view',
       });
     }
-  }, [profileData, sessionData]);
+  }, [profileData, sessionData, walletData]);
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getProfile', [], [500])
@@ -63,6 +74,32 @@ const Profile = () => {
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
+  useEffect(() => {
+    if (isProfileAvailable && isWalletRevocationActive) {
+      callFetchWithRetries(WebProfileApi, 'getWalletInstance', [], [500])
+        .then(res => {
+          // TODO [SIW-1092]: Remove this mock when the wallet status is available
+          const mockWalletStatus = global.window?.localStorage?.getItem('walletStatus');
+          setWalletData(mockWalletStatus ? { status: mockWalletStatus } : res);
+        })
+        .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
+    }
+  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);   
+
+  const isWalletActive = useMemo(
+    () => walletData?.status === 'valid' || walletData?.status === 'operational',
+    [walletData?.status]
+  );
+
+  const walletCardTitle = useMemo(() => {
+    if (isWalletActive) return t('common.walletactive');
+    if (walletData?.status === 'deactivated') return t('common.walletinactive');
+  }, [isWalletActive, t, walletData?.status]);
+
+  const walletCardTooltip = useMemo(() => {
+    return isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet');
+  }, [isWalletActive, t]);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -84,7 +121,7 @@ const Profile = () => {
             {t('common.yourprofile')}
           </Typography>
           <Grid container gap={2} mb={2} flexWrap={{ xs: 'wrap', sm: 'nowrap', md: 'nowrap' }}>
-            <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
+            <Grid item xs={12} sm={6} md={6} bgcolor={bgColor} height="max-content">
               <Grid padding={3}>
                 <Typography variant="body2">{t('common.namesurname')}</Typography>
                 <Typography variant="sidenav">{`${userFromStorage?.name} ${userFromStorage?.surname}`}</Typography>
@@ -156,6 +193,26 @@ const Profile = () => {
                   </Tooltip>
                 </Grid>
               </Grid>
+              <Divider />
+              {walletData?.status !== 'installed' && (
+                <Grid container>
+                  <Grid xs={10} item padding={3}>
+                    <Typography variant="body2">{t('common.wallettitle')}</Typography>
+                    <Typography variant="sidenav">{walletCardTitle}</Typography>
+                  </Grid>
+                  <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
+                    <Tooltip
+                      title={walletCardTooltip}
+                      placement="top"
+                      arrow
+                      enterTouchDelay={0}
+                      leaveTouchDelay={10000}
+                    >
+                      <HelpOutlineIcon color="primary" />
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              )}
             </Grid>
           </Grid>
           <Grid item pb={3} mt={6} xs={12} md={12} textAlign={'center'}>
@@ -163,7 +220,10 @@ const Profile = () => {
           </Grid>
 
           {sessionData?.access_enabled === true && (
-            <ProfileCards sessionIsActive={sessionData?.session_info?.active} />
+            <ProfileCards
+              sessionIsActive={sessionData?.session_info?.active}
+              walletIsActive={isWalletActive}
+            />
           )}
           {sessionData?.access_enabled === false && <RestoreSessionCard />}
         </Grid>

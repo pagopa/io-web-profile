@@ -12,9 +12,13 @@ import { trackEvent } from '../../_utils/mixpanel';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
+  walletIsActive: boolean;
 };
 
-export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.ReactElement => {
+export const ProfileCards = ({
+  sessionIsActive,
+  walletIsActive,
+}: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
 
@@ -26,6 +30,11 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
   const handleLockCardBtn = () => {
     trackEvent('IO_PROFILE_LOCK_ACCESS_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.PROFILE_BLOCK);
+  };
+
+  const handleDisableWalletBtn = () => {
+    trackEvent('IO_ITW_DEACTIVATION_START', { event_category: 'UX', event_type: 'action' });
+    pushWithLocale(ROUTES.REVOKE_WALLET);
   };
 
   return (
@@ -83,6 +92,30 @@ export const ProfileCards = ({ sessionIsActive }: ProfileCardsProps): React.Reac
             </CardContent>
           </Card>
         </Grid>
+
+        {walletIsActive && (
+          <Grid item xs={12} md={5} lg={4} xl={3}>
+            <Card sx={commonCardStyle}>
+              <CardContent sx={{ padding: '32px' }}>
+                <HourglassIcon />
+                <Typography variant="h6" pt={2}>
+                  {t('profile.disablewallet')}
+                </Typography>
+                <Typography variant="body2" py={2}>
+                  {t('common.disablewallet')}
+                </Typography>
+                <ButtonNaked
+                  onClick={handleDisableWalletBtn}
+                  color="primary"
+                  endIcon={<ArrowForwardIcon />}
+                  size="medium"
+                >
+                  {t('profile.disablewallet')}
+                </ButtonNaked>
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
       </Grid>
     </>
   );

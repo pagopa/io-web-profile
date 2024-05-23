@@ -145,4 +145,12 @@ export const WebProfileApi = {
     const result = await webProfileApiClientExchange.exchangeToken({});
     return extractResponse(result);
   },
+  getWalletInstance: async () => {
+    const result = await webProfileApiClient.getWalletInstance({});
+    return extractResponse(result);
+  },
+  revokeWalletInstance: async () => {
+    const result = await webProfileApiClient.revokeWalletInstance({});
+    return extractResponse(result);
+  },
 };

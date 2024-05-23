@@ -3,4 +3,5 @@ export const enum Flows {
   BLOCK = 'BLOCK',
   RESTORE = 'RESTORE',
   RESTOREL3 = 'RESTOREL3',
+  REVOKEWALLET = 'REVOKEWALLET',
 }

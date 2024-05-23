@@ -63,7 +63,7 @@ const thirdBlockRich = {
   li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
 };
 
-const fifthBlockFaqRick = {
+const fifthBlockFaqRich = {
   link: (chunks: React.ReactNode) => (
     <Link
       target="_blank"
@@ -73,6 +73,15 @@ const fifthBlockFaqRick = {
       {chunks}
     </Link>
   ),
+};
+const fifthRevokeWalletFaqRich = {
+  link: (chunks: React.ReactNode) => {
+    return (
+      <Link fontWeight={600} href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}>
+        {chunks}
+      </Link>
+    );
+  },
 };
 
 export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
@@ -112,7 +121,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
     },
     {
       header: t('blockfaq.fifthquestion'),
-      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRick),
+      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRich),
     },
   ];
 
@@ -142,6 +151,29 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
     },
   ];
 
+  const revokeWallet: FAQEntries[] = [
+    {
+      header: t('revokewalletfaq.firstquestion'),
+      content: t('revokewalletfaq.firstresponse'),
+    },
+    {
+      header: t('revokewalletfaq.secondquestion'),
+      content: t('revokewalletfaq.secondresponse'),
+    },
+    {
+      header: t('revokewalletfaq.thirdquestion'),
+      content: t('revokewalletfaq.thirdresponse'),
+    },
+    {
+      header: t('revokewalletfaq.fourthquestion'),
+      content: t('revokewalletfaq.fourthresponse'),
+    },
+    {
+      header: t('revokewalletfaq.fifthquestion'),
+      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRich),
+    },
+  ];
+
   const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
     const updatedEntries: FAQEntries[] = entries.map(entry => ({
       ...entry,
@@ -158,6 +190,8 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
         return wrappingFaqContent(restoreEntries);
       case Flows.RESTOREL3:
         return wrappingFaqContent(restoreEntriesL3);
+      case Flows.REVOKEWALLET:
+        return wrappingFaqContent(revokeWallet);
       default:
         return wrappingFaqContent(logoutEntries);
     }
