@@ -20,6 +20,7 @@ export const ProfileCards = ({
   walletIsActive,
 }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
+  const wallettT = useTranslations('itwallet');
   const pushWithLocale = useLocalePush();
 
   const handleLogOutCardBtn = () => {
@@ -99,10 +100,10 @@ export const ProfileCards = ({
               <CardContent sx={{ padding: '32px' }}>
                 <HourglassIcon />
                 <Typography variant="h6" pt={2}>
-                  {t('profile.disablewallet')}
+                  {wallettT('common.disablewallet')}
                 </Typography>
                 <Typography variant="body2" py={2}>
-                  {t('common.disablewallet')}
+                  {wallettT('common.revokewallet')}
                 </Typography>
                 <ButtonNaked
                   onClick={handleDisableWalletBtn}
@@ -110,7 +111,7 @@ export const ProfileCards = ({
                   endIcon={<ArrowForwardIcon />}
                   size="medium"
                 >
-                  {t('profile.disablewallet')}
+                   {wallettT('common.disablewallet')}
                 </ButtonNaked>
               </CardContent>
             </Card>
