@@ -33,6 +33,7 @@ const Profile = () => {
   const [walletData, setWalletData] = useState<WalletData>({ status: StatusEnum.installed });
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
+  const wallettT = useTranslations('itwallet');
   const bgColor = 'background.paper';
 
   const userFromStorage = storageUserOps.read();
@@ -92,13 +93,13 @@ const Profile = () => {
   );
 
   const walletCardTitle = useMemo(() => {
-    if (isWalletActive) return t('common.walletactive');
-    if (walletData?.status === 'deactivated') return t('common.walletinactive');
-  }, [isWalletActive, t, walletData?.status]);
+    if (isWalletActive) return wallettT('common.walletactive');
+    if (walletData?.status === 'deactivated') return wallettT('common.walletinactive');
+  }, [isWalletActive, wallettT, walletData?.status]);
 
   const walletCardTooltip = useMemo(() => {
-    return isWalletActive ? t('tooltip.activewallet') : t('tooltip.inactivewallet');
-  }, [isWalletActive, t]);
+    return isWalletActive ? wallettT('tooltip.activewallet') : wallettT('tooltip.inactivewallet');
+  }, [isWalletActive, wallettT]);
 
   if (isLoading) {
     return <Loader />;
@@ -197,7 +198,7 @@ const Profile = () => {
               {walletData?.status !== 'installed' && (
                 <Grid container>
                   <Grid xs={10} item padding={3}>
-                    <Typography variant="body2">{t('common.wallettitle')}</Typography>
+                    <Typography variant="body2">{wallettT('common.wallettitle')}</Typography>
                     <Typography variant="sidenav">{walletCardTitle}</Typography>
                   </Grid>
                   <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>

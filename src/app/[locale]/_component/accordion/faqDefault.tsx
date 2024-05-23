@@ -127,6 +127,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
   }, [handleOpenFAQ, onOpenFAQ]);
 
   const t = useTranslations('ioesco');
+  const walletT = useTranslations('itwallet');
   // #region entries
   const logoutEntries: FAQEntries[] = [
     {
@@ -194,24 +195,24 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
 
   const revokeWallet: FAQEntries[] = [
     {
-      header: t('revokewalletfaq.firstquestion'),
-      content: t('revokewalletfaq.firstresponse'),
+      header: walletT('revokewalletfaq.firstquestion'),
+      content: walletT('revokewalletfaq.firstresponse'),
     },
     {
-      header: t('revokewalletfaq.secondquestion'),
-      content: t('revokewalletfaq.secondresponse'),
+      header: walletT('revokewalletfaq.secondquestion'),
+      content: walletT('revokewalletfaq.secondresponse'),
     },
     {
-      header: t('revokewalletfaq.thirdquestion'),
-      content: t('revokewalletfaq.thirdresponse'),
+      header: walletT('revokewalletfaq.thirdquestion'),
+      content: walletT('revokewalletfaq.thirdresponse'),
     },
     {
-      header: t('revokewalletfaq.fourthquestion'),
-      content: t('revokewalletfaq.fourthresponse'),
+      header: walletT('revokewalletfaq.fourthquestion'),
+      content: walletT('revokewalletfaq.fourthresponse'),
     },
     {
-      header: t('revokewalletfaq.fifthquestion'),
-      content: t.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRich),
+      header: walletT('revokewalletfaq.fifthquestion'),
+      content: walletT.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRich),
     },
   ];
 

@@ -35,6 +35,7 @@ const ThankYouPage = (): React.ReactElement => {
   }, []);
 
   const t = useTranslations('ioesco');
+  const walletT = useTranslations('itwallet');
   const pushWithLocale = useLocalePush();
   const pathName = usePathname();
   const { isLoading } = useFetch();
@@ -55,11 +56,11 @@ const ThankYouPage = (): React.ReactElement => {
   const renderSummary = useCallback(
     (isIDPKnown: boolean) => {
       if (isIDPKnown) {
-        return <>{t('revokewallet.instanceclosed')}</>;
+        return <>{walletT('common.instanceclosed')}</>;
       }
-      return <>{t.rich('revokewallet.instancecloseddescription', unlockioaccessRich)}</>;
+      return <>{walletT.rich('common.instancecloseddescription', unlockioaccessRich)}</>;
     },
-    [t]
+    [walletT]
   );
 
   const trackAccordionOpen = useCallback((element: number) => {
@@ -78,12 +79,12 @@ const ThankYouPage = (): React.ReactElement => {
     <>
       <Grid sx={commonBackgroundLightWithBack}>
         <Introduction
-          title={t('revokewallet.instanceclosed')}
+          title={walletT('common.instanceclosed')}
           summary={renderSummary(isIdpKnown())}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
-          <Typography mb={5}>{t('revokewallet.instanceclosedconfirm')}</Typography>
+          <Typography mb={5}>{walletT('common.instanceclosedconfirm')}</Typography>
           <Button variant="outlined" size="medium" onClick={handleGoProfileBtn}>
             {t('common.backtoprofile')}
           </Button>
@@ -105,8 +106,8 @@ const ThankYouPage = (): React.ReactElement => {
             </Button>
           }
         >
-          <Typography fontWeight={600}>{t('revokewallet.lostdeviceshort')}</Typography>
-          <Typography>{t('revokewallet.lockaccess')}</Typography>
+          <Typography fontWeight={600}>{walletT('common.lostdeviceshort')}</Typography>
+          <Typography>{walletT('common.lockaccess')}</Typography>
         </Alert>
       </Grid>
       <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen} />
