@@ -17,7 +17,7 @@
       "responses": [
         {
           "uuid": "529fcdcf-20d4-4fd2-8b61-f102cad82574",
-          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\"\n}",
+          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\":\"SUCCESS\"\n}",
           "latency": 2000,
           "statusCode": 200,
           "label": "Found",
@@ -203,7 +203,7 @@
     },
     {
       "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, X-Pagopa-Email-Validation-Token"
     }
   ],
   "proxyReqHeaders": [
