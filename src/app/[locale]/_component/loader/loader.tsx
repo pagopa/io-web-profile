@@ -7,7 +7,12 @@ import { commonBackgroundFullHeight, loaderOverlay } from '../../_utils/styles';
 const Loader = (): React.ReactElement => (
   <>
     <Grid sx={loaderOverlay} />
-    <Grid sx={commonBackgroundFullHeight} container>
+    <Grid
+      sx={commonBackgroundFullHeight}
+      alignItems="center" 
+      justifyContent="center" 
+      container
+    >
       <Grid item xs={12} justifySelf={'center'} maxWidth="100%" textAlign={'center'}>
         <MDSpinner singleColor={theme.palette.primary.main} role="loadingSpinner" />
       </Grid>

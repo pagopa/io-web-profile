@@ -51,8 +51,8 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const windowAvailable = isBrowser();
 
   const getHeaderFooter = ({ children, pathName }: { readonly children: React.ReactNode, readonly pathName: string }) => {
-    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && emailValidationEnabled && windowAvailable) return <> { children }</>;
-    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && !emailValidationEnabled && windowAvailable) router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
+    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && emailValidationEnabled ) return <> { children }</>;
+    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && !emailValidationEnabled) router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
   
     return (
       <>

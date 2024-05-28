@@ -2,7 +2,7 @@
 
 import { Grid } from '@mui/material';
 // import { useTranslations } from 'next-intl';
-import { commonBackgroundFullHeight } from '../../_utils/styles';
+import { commonBackgroundLightFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
 import { useEffect, useState } from 'react';
 import useFetch, { EmailValidationApi } from '@/api/emailValidationApiClient';
@@ -77,8 +77,10 @@ const EmailConfirmationPage = (): React.ReactElement => {
   }
 
   return (
-    <Grid sx={commonBackgroundFullHeight} container>
-      <Grid item xs={12} justifySelf={'center'} marginTop={5}>
+    <Grid sx={commonBackgroundLightFullHeight} alignItems="center" 
+      justifyContent="center" 
+      container>
+      <Grid item xs={12} justifySelf={'center'}>
         <EmailValidationContainer
           title={'È la tua email?'}
           subtitle={urlParams && urlParams.email}
