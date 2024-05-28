@@ -111,7 +111,7 @@ const ThankYouPage = (): React.ReactElement => {
           <Typography>{t('revokewallet.lockaccess')}</Typography>
         </Alert>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onToogleFAQ={trackAccordionOpen} />
+      <FAQ flow={Flows.REVOKEWALLET} onToggleFAQ={trackAccordionOpen} />
     </>
   );
 };

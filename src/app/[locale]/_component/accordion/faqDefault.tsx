@@ -11,7 +11,7 @@ import { Accordion } from './accordion';
 
 type FAQProps = {
   flow?: string;
-  onToogleFAQ?: (isOpen: boolean, element: number) => void;
+  onToggleFAQ?: (isOpen: boolean, element: number) => void;
 };
 // the 'content' property is set to any because
 // the library from which we imported the accordion
@@ -84,7 +84,7 @@ const fifthRevokeWalletFaqRich = {
   },
 };
 
-export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
+export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
   const t = useTranslations('ioesco');
   // #region entries
   const logoutEntries: FAQEntries[] = [
@@ -205,7 +205,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToogleFAQ }: FAQProps) => {
         theme="light"
         layout="center"
         title={t('common.faqtitle')}
-        onToogleAccordion={onToogleFAQ}
+        onToogleAccordion={onToggleFAQ}
       />
     </Typography>
   );

@@ -143,7 +143,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onToogleFAQ={trackAccordionOpen} />
+      <FAQ flow={Flows.REVOKEWALLET} onToggleFAQ={trackAccordionOpen} />
       {renderRevokeWalletDialog()}
     </>
   );
