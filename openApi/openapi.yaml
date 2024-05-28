@@ -262,13 +262,13 @@ paths:
         If the Wallet Instance cannot be revoked due to its current status, 
         a conflict error is returned.
       operationId: setWalletInstanceStatus
-      # requestBody:
-      #   content:
-      #     application/json:
-      #       schema:
-      #         type: string
-      #         x-extensible-enum:
-      #           - REVOKED
+      requestBody:
+         content:
+          text/plain:
+            schema:
+              type: string
+              enum:
+                - REVOKED
       responses:
         "204":
           description: No content
