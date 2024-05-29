@@ -141,3 +141,14 @@ yarn run start-static
 
 ```
 You can access the application in production mode by visiting: http://localhost:3000 in your web browser.
+
+## Enabling Email Validation Flow
+
+To enable the email validation flow routes in your application, you need to set the ```NEXT_PUBLIC_VALIDATION_EMAIL=true``` flag in the .env file.
+
+### Email Validation Routes
+
+With the flag enabled, the /conferma-email routes will be available.
+
+These routes are part of the email validation flow that allows users to confirm their email addresses.
+
