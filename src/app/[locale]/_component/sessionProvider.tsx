@@ -38,7 +38,7 @@ type LoginStatusNotAuthorized = {
 
 export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusNotAuthorized;
 
-const emailValidationEnabled = process.env.NEXT_PUBLIC_VALIDATION_EMAIL === 'true' ? true : false;
+const emailValidationEnabled = process.env.NEXT_PUBLIC_VALIDATION_EMAIL === 'true';
 
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
