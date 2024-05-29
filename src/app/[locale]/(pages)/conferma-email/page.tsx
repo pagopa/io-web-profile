@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 // import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useFetch, { EmailValidationApi } from '@/api/emailValidationApiClient';
 import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
 import Loader from '../../_component/loader/loader';
@@ -22,7 +22,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const { callFetchEmailValidationWithRetries, isLoading } = useFetch();
   // const pushWithLocale = useLocalePush();
 
-  function extractParams() {
+  const extractParams = useCallback(()=> {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const token: ValidationToken | null = urlParams.get('token') as ValidationToken;
@@ -36,37 +36,41 @@ const EmailConfirmationPage = (): React.ReactElement => {
           .catch(() => {
             console.log('KO');
             // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-            // IOPID 1559
+            // https://pagopa.atlassian.net/browse/IOPID-1559
             // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
           });
       }
       {
         // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-        // IOPID 1559
+        // https://pagopa.atlassian.net/browse/IOPID-1559
       }
     } catch (error) {
       console.error(error);
     }
     return null;
-  }
+  }, [callFetchEmailValidationWithRetries]);
 
   useEffect(() => {
     extractParams();
-  }, []);
+  }, [extractParams]);
 
   const handleConfirmEmail = () => {
     if (urlParams && urlParams.token) {
       callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
         .then(data => {
           // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-          // IOPID 1559/60/61
+          // https://pagopa.atlassian.net/browse/IOPID-1559
+          // https://pagopa.atlassian.net/browse/IOPID-1560
+          // https://pagopa.atlassian.net/browse/IOPID-1561
           // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
           console.log('OK', data);
         })
         .catch(() => {
           console.log('KO');
           // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-          // IOPID 1559/60/61
+          // https://pagopa.atlassian.net/browse/IOPID-1559
+          // https://pagopa.atlassian.net/browse/IOPID-1560
+          // https://pagopa.atlassian.net/browse/IOPID-1561
           // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
         });
     }
