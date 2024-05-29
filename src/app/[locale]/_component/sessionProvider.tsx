@@ -38,7 +38,7 @@ type LoginStatusNotAuthorized = {
 
 export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusNotAuthorized;
 
-const emailValidationEnabled = process.env.NEXT_PUBLIC_VALIDATION_EMAIL === 'true';
+const emailValidationEnabled = process.env.NEXT_PUBLIC_VALIDATION_EMAIL === 'true' ? true : false;
 
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
@@ -55,9 +55,11 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
     if (EMAIL_VALIDATION_ROUTES.includes(pathName) && !emailValidationEnabled) router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
   
     return (
+      <>
         <Header />
           {children}
         <Footer />
+      </>
     );
   };
 
