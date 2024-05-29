@@ -55,11 +55,9 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
     if (EMAIL_VALIDATION_ROUTES.includes(pathName) && !emailValidationEnabled) router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
   
     return (
-      <>
         <Header />
           {children}
         <Footer />
-      </>
     );
   };
 
