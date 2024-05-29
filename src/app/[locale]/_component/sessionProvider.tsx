@@ -52,7 +52,6 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
 
   const getHeaderFooter = ({ children, pathName }: { readonly children: React.ReactNode, readonly pathName: string }) => {
     if (EMAIL_VALIDATION_ROUTES.includes(pathName) && emailValidationEnabled ) return <> { children }</>;
-    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && !emailValidationEnabled) router.push(ROUTES.NOT_FOUND_PAGE, { locale: defaultLocale });
   
     return (
       <>
@@ -80,7 +79,16 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
           removeToken();
         }
         if (PUBLIC_ROUTES.includes(pathName)) {
-          setLoginStatus({ status: 'AUTHORIZED' });
+          if (EMAIL_VALIDATION_ROUTES.includes(pathName)) {
+            if(emailValidationEnabled) {
+              setLoginStatus({ status: 'AUTHORIZED' });
+            }
+            else {
+              pushWithLocale(ROUTES.NOT_FOUND_PAGE);
+            }
+          } else {
+            setLoginStatus({ status: 'AUTHORIZED' });
+          }
         }
         if (PRIVATE_ROUTES.includes(pathName)) {
           if (isTokenValid()) {
