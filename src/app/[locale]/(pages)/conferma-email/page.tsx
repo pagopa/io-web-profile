@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
 import { useCallback, useEffect, useState } from 'react';
-import useFetch, { EmailValidationApi } from '@/api/emailValidationApiClient';
+import useFetchEmailValidation , { EmailValidationApi } from '@/api/emailValidationApiClient';
 import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
 import Loader from '../../_component/loader/loader';
 // import { ROUTES } from '../../_utils/routes';
@@ -19,7 +19,7 @@ type UrlParamsType = {
 const EmailConfirmationPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
-  const { callFetchEmailValidationWithRetries, isLoading } = useFetch();
+  const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
   // const pushWithLocale = useLocalePush();
 
   const extractParams = useCallback(()=> {
