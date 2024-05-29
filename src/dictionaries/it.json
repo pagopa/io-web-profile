@@ -201,6 +201,12 @@
       "bloccoaccessomagiclinkscadutodescription": "Il link per bloccare l’accesso a IO non è più valido. Per bloccare l’accesso a IO, accedi con le tue credenziali SPID o CIE.",
       "bloccoaccessomagiclinkscadutotitle": "Il link per bloccare l’accesso a IO è scaduto",
       "bloccoaccessomagiclinktitle": "Blocca l’accesso a IO",
+      "confirmemailalreadytakenerrordescription": "L’email è già stata confermata. Torna su IO per continuare a usare l’app o per modificare la tua email.",
+      "confirmemailalreadytakenerrortitle": "L’email è già stata confermata",
+      "confirmerrorgenericdescription": "Non siamo riusciti a confermare la tua email, torna su IO per chiedere una nuova conferma.",
+      "confirmerrorgenerictitle": "Email non confermata",
+      "confirmexpiredlinkerrordescription": "Torna su IO per chiedere l’invio di una nuova email di conferma per il tuo indirizzo.",
+      "confirmexpiredlinkerrortitle": "Il link è scaduto",
       "erroredescription": "C’è un problema sui nostri sistemi, non è possibile uscire da IO in questo momento. Riprova ad uscire tra poco.",
       "erroretitle": "C’è un problema temporaneo",
       "esciconfermadescription": "Se hai perso il tuo dispositivo o non lo riconosci e hai una sessione attiva su IO, esci dall’app per mantenere i tuoi dati al sicuro.",
@@ -231,7 +237,11 @@
       "ripristinoacessoopcompletatatitle": "Hai sbloccato l’accesso a IO",
       "accedidescription": "Entra nel tuo profilo di IO per vedere i tuoi dati e ottenere le informazioni sull’accesso all’app",
       "accedierroretitle": "Errore di accesso",
-      "accedititle": "Entra su IO, l’app dei servizi pubblici"
+      "accedititle": "Entra su IO, l’app dei servizi pubblici",
+      "confirmemaildescription": "Conferma il tuo indirizzo email per ricevere le comunicazioni da IO.",
+      "confirmemailtitle": "È la tua email?",
+      "confirmedemaildescription": "Hai confermato il tuo indirizzo email. Torna su IO per continuare a usare l’app.",
+      "confirmedemailtitle": "Hai confermato la tua email"
     },
     "profile": {
       "activesession": "Sessione attiva in app",
