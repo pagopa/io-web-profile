@@ -1,9 +1,12 @@
 import { Props } from '../../layout';
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: Props) {
+  const { locale } = params;
+  const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
+
   return {
-    title: 'È la tua email?',
-    description: 'Conferma il tuo indirizzo email per ricevere le comunicazioni da IO.',
+    title: messages.ioesco.metadati.confirmemailtitle,
+    description: messages.ioesco.metadati.confirmemaildescription,
   };
 }
 

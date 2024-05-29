@@ -1,7 +1,7 @@
 'use client';
 
 import { Grid } from '@mui/material';
-// import { useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
 import { useCallback, useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ type UrlParamsType = {
 };
 
 const EmailConfirmationPage = (): React.ReactElement => {
-  // const t = useTranslations('ioesco');
+  const t = useTranslations('ioesco');
   const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
   const { callFetchEmailValidationWithRetries, isLoading } = useFetch();
   // const pushWithLocale = useLocalePush();
@@ -86,16 +86,18 @@ const EmailConfirmationPage = (): React.ReactElement => {
       container>
       <Grid item xs={12} justifySelf={'center'}>
         <EmailValidationContainer
-          title={'È la tua email?'}
+          title={t.rich('emailvalidation.confirmisyouremail', {
+            strong: chunks => <strong>{chunks}</strong>,
+          }) as string}
           subtitle={urlParams && urlParams.email}
           summary={
             <span>
-              {'Se confermi, useremo questo indirizzo per inviarti le comunicazioni di IO.'}
+              {t('emailvalidation.confirmsubtitle')}
             </span>
           }
           button={{
             variant: 'contained',
-            text: 'Sì, confermo',
+            text: t('emailvalidation.confirm'),
             onClick: () => handleConfirmEmail(),
           }}
         />
