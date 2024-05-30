@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
-import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
 import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { ROUTES } from '../../_utils/routes';
-import { useCallback, useEffect, useRef } from 'react';
+import { Accordion } from './accordion';
 
 type FAQProps = {
   flow?: string;
-  onOpenFAQ?: (element: number) => void;
+  onToggleFAQ?: (isOpen: boolean, element: number) => void;
 };
 // the 'content' property is set to any because
 // the library from which we imported the accordion
@@ -85,47 +84,7 @@ const fifthRevokeWalletFaqRich = {
   },
 };
 
-// TODO [SIW-1137]: as it is currently necessary to monitor the reading of FAQs
-// through custom events, we must implement tracking for when the user opens the
-// accordion. Unfortunately, the accordion component imported from
-// @pagopa/pagopa-editorial-components does not offer a dedicated function for
-// managing such operations. Therefore, we are incorporating an Observable to
-// facilitate tracking when the FAQs are opened.
-export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
-  const observersList = useRef<MutationObserver[]>([]);
-
-  const handleOpenFAQ = useCallback(
-    (el: Element, index: number) => {
-      const observer = new MutationObserver(mutationsList => {
-        const [{ target }] = mutationsList;
-        if ((target as HTMLElement)?.classList?.contains('Mui-expanded')) {
-          onOpenFAQ?.(index);
-        }
-      });
-      // eslint-disable-next-line functional/immutable-data
-      observersList.current[index] = observer;
-      const observerConfig = {
-        attributes: true,
-        attributeFilter: ['class'],
-        attributeOldValue: true,
-      };
-      observer.observe(el, observerConfig);
-    },
-    [onOpenFAQ]
-  );
-
-  useEffect(() => {
-    if (onOpenFAQ) {
-      const accordions = document.querySelectorAll('.MuiAccordion-root');
-      accordions.forEach(handleOpenFAQ);
-    }
-    return () => {
-      observersList.current.forEach(observer => observer.disconnect());
-      // eslint-disable-next-line functional/immutable-data
-      observersList.current = [];
-    };
-  }, [handleOpenFAQ, onOpenFAQ]);
-
+export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
   const t = useTranslations('ioesco');
   const walletT = useTranslations('itwallet');
   // #region entries
@@ -247,6 +206,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onOpenFAQ }: FAQProps) => {
         theme="light"
         layout="center"
         title={t('common.faqtitle')}
+        onToogleAccordion={onToggleFAQ}
       />
     </Typography>
   );
