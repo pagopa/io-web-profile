@@ -97,9 +97,9 @@
       "responses": [
         {
           "uuid": "7adeab7c-1034-4f4e-bd52-17375340026a",
-          "body": "",
+          "body": "{\r\n  \"status\": \"SUCCESS\"\r\n}",
           "latency": 2000,
-          "statusCode": 204,
+          "statusCode": 200,
           "label": "Email successfully validated.",
           "headers": [
             {
