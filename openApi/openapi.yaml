@@ -263,9 +263,9 @@ paths:
         a conflict error is returned.
       operationId: setWalletInstanceStatus
       requestBody:
-         content:
+        content:
           text/plain:
-            schema:
+              schema:
               type: string
               enum:
                 - REVOKED

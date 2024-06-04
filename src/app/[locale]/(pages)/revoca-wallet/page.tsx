@@ -63,7 +63,6 @@ const WalletInstanceRevoke = (): React.ReactElement => {
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
       .catch(err => {
-        console.log(err, 'error')
         trackEvent('IO_ITW_DEACTIVATION_ERROR', { event_category: 'KO', reason: err });
         pushWithLocale(ROUTES.WALLET_REVOKE_ERROR);
       });
