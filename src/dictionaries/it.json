@@ -284,6 +284,10 @@
       "activewallet": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
       "inactivewallet": "IT Wallet non è attivo, puoi attivarlo in qualsiasi momento dall'app IO"
     },
+    "metadati": {
+      "revocawalletinstancedescription": "C’è un problema sui nostri sistemi, non è possibile revocare il Wallet in questo momento. Riprova più tardi o contatta l’assistenza.",
+      "revocawalletinstancetitle": "C’è un problema temporaneo"
+    },
     "common": {
       "instanceclosed": "Hai disattivato IT Wallet",
       "instancecloseddescription": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br>Se cambi idea, potrai riaggiungerli direttamente dall’app IO.",
