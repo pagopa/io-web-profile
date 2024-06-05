@@ -95,3 +95,14 @@ export const goTo = (route: string, timeout: number): void => {
     timeout
   );
 };
+
+export const backToIo = (timeout: number): void => {
+  window.setTimeout(
+    () =>
+      window.location.assign(
+        `${process.env.NEXT_PUBLIC_GOTO_IO_URL}`
+      ),
+    timeout
+  );
+};
+

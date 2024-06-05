@@ -8,8 +8,8 @@ import { useCallback, useEffect, useState } from 'react';
 import useFetchEmailValidation , { EmailValidationApi } from '@/api/emailValidationApiClient';
 import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
 import Loader from '../../_component/loader/loader';
-// import { ROUTES } from '../../_utils/routes';
-// import useLocalePush from '../../_hooks/useLocalePush';
+import { ROUTES } from '../../_utils/routes';
+import useLocalePush from '../../_hooks/useLocalePush';
 
 type UrlParamsType = {
   token: ValidationToken | null;
@@ -20,7 +20,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
   const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
-  // const pushWithLocale = useLocalePush();
+  const pushWithLocale = useLocalePush();
 
   const extractParams = useCallback(()=> {
     try {
@@ -57,13 +57,8 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const handleConfirmEmail = () => {
     if (urlParams && urlParams.token) {
       callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
-        .then(data => {
-          // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-          // https://pagopa.atlassian.net/browse/IOPID-1559
-          // https://pagopa.atlassian.net/browse/IOPID-1560
-          // https://pagopa.atlassian.net/browse/IOPID-1561
-          // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
-          console.log('OK', data);
+        .then(() => {
+          pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
         .catch(() => {
           console.log('KO');
