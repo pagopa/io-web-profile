@@ -3,7 +3,7 @@
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProfileData } from '../../api/generated/webProfile/ProfileData';
 import { Introduction } from './_component/introduction/introduction';
 import { ProfileCards } from './_component/profileCards/profileCards';
@@ -24,8 +24,8 @@ import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 import { WalletData } from '@/api/generated/webProfile/WalletData';
+import HomeWalletCard from './_component/homeWalletCard';
 
-const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION === 'true';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
@@ -33,7 +33,6 @@ const Profile = () => {
   const [walletRevokeStatus, setWalletRevokeStatus] = useState<WalletData | undefined>();
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
-  const wallettT = useTranslations('itwallet');
   const bgColor = 'background.paper';
 
   const userFromStorage = storageUserOps.read();
@@ -74,30 +73,6 @@ const Profile = () => {
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
-
-  useEffect(() => {
-    if (isProfileAvailable && isWalletRevocationActive) {
-      callFetchWithRetries(WebProfileApi, 'getCurrentWalletInstanceStatus', [], [500])
-        .then(res => {
-          setWalletRevokeStatus(res);
-          // saving WI_ID in session storage in order to be passed to revoke api request
-          global.window?.sessionStorage?.setItem('WI_ID', res.id)
-        })
-        .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
-    }
-  }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
-
-
-  const walletCardTitle = useMemo(() => {
-    if (walletRevokeStatus?.is_revoked) return wallettT('common.walletinactive');
-    if (walletRevokeStatus?.is_revoked === false) return wallettT('common.walletactive');
-  },[wallettT, walletRevokeStatus?.is_revoked])
-
-
-
-  const walletCardTooltip = useMemo(() => {
-    return walletRevokeStatus?.is_revoked ? wallettT('tooltip.activewallet') : wallettT('tooltip.inactivewallet');
-  }, [walletRevokeStatus?.is_revoked, wallettT]);
 
   if (isLoading) {
     return <Loader />;
@@ -165,10 +140,10 @@ const Profile = () => {
                   <Typography variant="sidenav">
                     {sessionData?.session_info.active
                       ? t('common.activeduedate', {
-                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                            localeFromStorage
-                          ),
-                        })
+                        date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                          localeFromStorage
+                        ),
+                      })
                       : t('common.noactive')}
                   </Typography>
                 </Grid>
@@ -177,10 +152,10 @@ const Profile = () => {
                     title={
                       sessionData?.session_info.active
                         ? t('tooltip.accesswithoutidp', {
-                            date: sessionData?.session_info?.expiration_date.toLocaleDateString(
-                              localeFromStorage
-                            ),
-                          })
+                          date: sessionData?.session_info?.expiration_date.toLocaleDateString(
+                            localeFromStorage
+                          ),
+                        })
                         : t('tooltip.nosession')
                     }
                     placement="top"
@@ -193,25 +168,11 @@ const Profile = () => {
                 </Grid>
               </Grid>
               <Divider />
-              {walletRevokeStatus !== undefined && (
-                <Grid container>
-                  <Grid xs={10} item padding={3}>
-                    <Typography variant="body2">{wallettT('common.wallettitle')}</Typography>
-                    <Typography variant="sidenav">{walletCardTitle}</Typography>
-                  </Grid>
-                  <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>
-                    <Tooltip
-                      title={walletCardTooltip}
-                      placement="top"
-                      arrow
-                      enterTouchDelay={0}
-                      leaveTouchDelay={10000}
-                    >
-                      <HelpOutlineIcon color="primary" />
-                    </Tooltip>
-                  </Grid>
-                </Grid>
-              )}
+              <HomeWalletCard
+                walletRevokeStatus={walletRevokeStatus}
+                isProfileAvailable={!!isProfileAvailable}
+                setWalletRevokeStatus={setWalletRevokeStatus}
+              />
             </Grid>
           </Grid>
           <Grid item pb={3} mt={6} xs={12} md={12} textAlign={'center'}>
