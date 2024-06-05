@@ -34,21 +34,16 @@ const EmailConfirmationPage = (): React.ReactElement => {
             console.log('OK', data);
           })
           .catch(() => {
-            console.log('KO');
-            // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-            // https://pagopa.atlassian.net/browse/IOPID-1559
-            // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+            pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
           });
-      }
-      {
-        // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-        // https://pagopa.atlassian.net/browse/IOPID-1559
+      } else {
+        pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
       }
     } catch (error) {
-      console.error(error);
+      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
     return null;
-  }, [callFetchEmailValidationWithRetries]);
+  }, [callFetchEmailValidationWithRetries, pushWithLocale]);
 
   useEffect(() => {
     extractParams();
@@ -61,12 +56,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
         .catch(() => {
-          console.log('KO');
-          // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-          // https://pagopa.atlassian.net/browse/IOPID-1559
-          // https://pagopa.atlassian.net/browse/IOPID-1560
-          // https://pagopa.atlassian.net/browse/IOPID-1561
-          // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+          pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
         });
     }
   };

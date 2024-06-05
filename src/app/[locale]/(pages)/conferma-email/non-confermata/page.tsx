@@ -1,28 +1,31 @@
 'use client';
 
 import { Grid } from '@mui/material';
-// import { useTranslations } from 'next-intl';
-import { commonBackgroundFullHeight } from '../../../_utils/styles';
+import { useTranslations } from 'next-intl';
+import { commonBackgroundLightFullHeight } from '../../../_utils/styles';
 import { EmailValidationContainer } from '../../../_component/emailValidationContainer/emailValidationContainer';
 import { IllusError } from '@pagopa/mui-italia';
+import { backToIo } from '@/app/[locale]/_utils/common';
 
 const EmailNotConfirmed = (): React.ReactElement => {
-  // const t = useTranslations('ioesco');
-  
+  const t = useTranslations('ioesco');
+
   return (
-    <Grid sx={commonBackgroundFullHeight} container>
+    <Grid
+      sx={commonBackgroundLightFullHeight}
+      alignItems="center"
+      justifyContent="center"
+      container
+    >
       <Grid item xs={12} justifySelf={'center'} marginTop={5}>
         <EmailValidationContainer
           icon={<IllusError />}
-          title={'Non siamo riusciti a confermare la tua email'}
-          summary={
-            <span>
-              {'Riprova o torna su IO per chiedere una nuova conferma.'}
-            </span>
-          }
+          title={t('emailvalidation.genricerrortitle')}
+          subtitle={t('emailvalidation.genricerrorsubtitle')}
           button={{
             variant: 'contained',
-            text: 'Torna su IO',
+            text: t('emailvalidation.backtoio'),
+            onClick: () => backToIo(1000),
           }}
         />
       </Grid>
