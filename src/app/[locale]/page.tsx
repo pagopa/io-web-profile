@@ -33,6 +33,7 @@ const Profile = () => {
   const [walletRevokeStatus, setWalletRevokeStatus] = useState<WalletData | undefined>();
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
+  const wallettT = useTranslations('itwallet');
   const bgColor = 'background.paper';
 
   const userFromStorage = storageUserOps.read();
@@ -86,14 +87,17 @@ const Profile = () => {
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale]);
 
+
   const walletCardTitle = useMemo(() => {
-    if (walletRevokeStatus?.is_revoked) return t('common.walletinactive');
-    if (walletRevokeStatus?.is_revoked === false) return t('common.walletactive');
-  }, [t, walletRevokeStatus]);
+    if (walletRevokeStatus?.is_revoked) return wallettT('common.walletinactive');
+    if (walletRevokeStatus?.is_revoked === false) return wallettT('common.walletactive');
+  },[wallettT, walletRevokeStatus?.is_revoked])
+
+
 
   const walletCardTooltip = useMemo(() => {
-    return walletRevokeStatus?.is_revoked ? t('tooltip.inactivewallet') : t('tooltip.activewallet');
-  }, [t, walletRevokeStatus]);
+    return walletRevokeStatus?.is_revoked ? wallettT('tooltip.activewallet') : wallettT('tooltip.inactivewallet');
+  }, [walletRevokeStatus?.is_revoked, wallettT]);
 
   if (isLoading) {
     return <Loader />;
@@ -192,7 +196,7 @@ const Profile = () => {
               {walletRevokeStatus !== undefined && (
                 <Grid container>
                   <Grid xs={10} item padding={3}>
-                    <Typography variant="body2">{t('common.wallettitle')}</Typography>
+                    <Typography variant="body2">{wallettT('common.wallettitle')}</Typography>
                     <Typography variant="sidenav">{walletCardTitle}</Typography>
                   </Grid>
                   <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>

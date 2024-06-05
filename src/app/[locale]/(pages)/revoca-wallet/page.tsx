@@ -23,6 +23,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   // reading WI_ID in session storage in order to be passed to revoke api request
   const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID')
+  const walletT = useTranslations("itwallet")
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pushWithLocale = useLocalePush();
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
@@ -48,11 +49,11 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const renderSummary = useCallback(
     (hasLostDevice: boolean) => {
       if (hasLostDevice) {
-        return <>{t.rich('common.lostdevicewallet', unlockioaccessRich)}</>;
+        return <>{walletT.rich('common.lostdevicewallet', unlockioaccessRich)}</>;
       }
-      return <>{t('revokewallet.revokewalletinstanceinfo')}</>;
+      return <>{walletT('common.revokewalletinstancedescription')}</>;
     },
-    [t]
+    [walletT]
   );
 
   const handleDisableWalletConfirm = useCallback(() => {
@@ -73,10 +74,10 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       <Dialog open={isDialogOpen}>
         <Box p={4} display="flex" flexDirection="column" gap={2}>
           <Typography fontSize={24} fontWeight={700} color="textPrimary">
-            {t('common.disablewalletconfirm')}
+            {walletT('common.revokewalletconfirm')}
           </Typography>
           <Typography fontSize={16} fontWeight={400} color="textPrimary">
-            {t('common.disablewalletpopup')}
+            {walletT('common.revokewalletpopup')}
           </Typography>
           <Box display="flex" justifyContent="end" columnGap={2}>
             <Button
@@ -84,28 +85,30 @@ const WalletInstanceRevoke = (): React.ReactElement => {
               variant="outlined"
               disabled={isRemovingWallet}
             >
-              {t('common.disablewalletcancel')}
+              {walletT('common.revokewalletcancel')}
             </Button>
             <Button
               onClick={handleDisableWalletConfirm}
               variant="contained"
               disabled={isRemovingWallet}
             >
-              {t('common.disablewalletconfirmbutton')}
+              {walletT('common.revokewalletconfirmbutton')}
             </Button>
           </Box>
         </Box>
       </Dialog>
     ),
-    [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t]
+    [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, walletT]
   );
 
-  const trackAccordionOpen = useCallback((element: number) => {
-    trackEvent('IO_ITW_FAQ_OPENED', {
-      event_category: 'UX',
-      event_type: 'action',
-      faq_opened: element + 1,
-    });
+  const trackAccordionOpen = useCallback((isOpen: boolean, element: number) => {
+    if (isOpen) {
+      trackEvent('IO_ITW_FAQ_OPENED', {
+        event_category: 'UX',
+        event_type: 'action',
+        faq_opened: element + 1,
+      });
+    }
   }, []);
 
   if (isLoading) {
@@ -117,13 +120,13 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       <Grid sx={commonBackgroundLightWithBack}>
         <BackButton />
         <Introduction
-          title={t('revokewallet.revokewalletinstance')}
+          title={walletT('common.revokewalletinstancetitle')}
           summary={renderSummary(false)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
           <Button variant="contained" size="medium" onClick={handleDisableWallet}>
-            {t('revokewallet.revokewallet')}
+            {walletT('common.disablewallet')}
           </Button>
         </Grid>
       </Grid>
@@ -144,7 +147,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onOpenFAQ={trackAccordionOpen} />
+      <FAQ flow={Flows.REVOKEWALLET} onToggleFAQ={trackAccordionOpen} />
       {renderRevokeWalletDialog()}
     </>
   );
