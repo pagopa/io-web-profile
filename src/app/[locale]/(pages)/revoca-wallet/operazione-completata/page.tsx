@@ -27,10 +27,10 @@ const ThankYouPage = (): React.ReactElement => {
       event_category: 'UX',
       event_type: 'screen_view',
     });
-    trackEvent('IO_ITW_STATU_PAGE', {
+    trackEvent('IO_ITW_STATUS_PAGE', {
       event_category: 'UX',
       event_type: 'screen_view',
-      ITW_status: 'off',
+      itw_status: 'off',
     });
   }, []);
 

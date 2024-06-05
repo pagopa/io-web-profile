@@ -45,7 +45,7 @@ const Profile = () => {
       trackEvent('IO_PROFILE', {
         session_status: getSessionStatus(sessionData),
         access_status: getAccessStatus(sessionData),
-        ITW_status: getWalletStatus(walletRevokeStatus),
+        itw_status: getWalletStatus(walletRevokeStatus),
         event_category: 'UX',
         event_type: 'screen_view',
       });

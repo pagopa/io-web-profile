@@ -30,10 +30,10 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const { callFetchWithRetries, isLoading } = useFetch();
 
   useEffect(() => {
-    trackEvent('IO_ITW_STATU_PAGE', {
+    trackEvent('IO_ITW_STATUS_PAGE', {
       event_category: 'UX',
       event_type: 'screen_view',
-      ITW_status: 'on',
+      itw_status: 'on',
     });
   }, []);
 
