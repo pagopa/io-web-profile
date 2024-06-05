@@ -111,7 +111,7 @@ export const ProfileCards = ({
                   endIcon={<ArrowForwardIcon />}
                   size="medium"
                 >
-                   {wallettT('common.disablewallet')}
+                  {wallettT('common.disablewallet')}
                 </ButtonNaked>
               </CardContent>
             </Card>

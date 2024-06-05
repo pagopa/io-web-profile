@@ -18,12 +18,11 @@ const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
 };
 
-
 const WalletInstanceRevoke = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   // reading WI_ID in session storage in order to be passed to revoke api request
-  const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID')
-  const walletT = useTranslations("itwallet")
+  const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID');
+  const walletT = useTranslations('itwallet');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pushWithLocale = useLocalePush();
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);

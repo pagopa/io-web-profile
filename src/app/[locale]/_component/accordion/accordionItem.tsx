@@ -8,20 +8,19 @@ import { Typography } from '@mui/material';
 export interface AccordionItemProps {
   header: string;
   content: string | JSX.Element;
-  onChange?: (isOpen: boolean) => void
+  onChange?: (isOpen: boolean) => void;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
-  header,
-  content,
-  onChange
-}) => {
+export const AccordionItem: React.FC<AccordionItemProps> = ({ header, content, onChange }) => {
   const controlsId = React.useId() + '-controls';
   const headerId = React.useId() + '-header';
 
-  const _onChange = useCallback((_: React.SyntheticEvent<Element, Event>, isOpen: boolean) => {
-    onChange?.(isOpen)
-  },[onChange])
+  const _onChange = useCallback(
+    (_: React.SyntheticEvent<Element, Event>, isOpen: boolean) => {
+      onChange?.(isOpen);
+    },
+    [onChange]
+  );
 
   return (
     <MUIAccordion
@@ -34,21 +33,13 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         },
       }}
     >
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls={controlsId}
-        id={headerId}
-      >
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={controlsId} id={headerId}>
         <Typography sx={{ my: 1.2 }} fontWeight={600}>
           {header}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        {typeof content === 'string' ? (
-          <Typography variant="body2">{content}</Typography>
-        ) : (
-          content
-        )}
+        {typeof content === 'string' ? <Typography variant="body2">{content}</Typography> : content}
       </AccordionDetails>
     </MUIAccordion>
   );

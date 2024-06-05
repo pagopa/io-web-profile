@@ -1,7 +1,6 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import { AccordionItem, AccordionItemProps } from './accordionItem';
 
-
 export interface AccordionProps {
   title: string;
   subtitle?: string;
@@ -9,7 +8,7 @@ export interface AccordionProps {
   accordionItems: AccordionItemProps[];
   theme: 'light' | 'dark';
   layout?: 'left' | 'center' | 'right';
-  onToogleAccordion?: (isOpen: boolean, index: number) => void
+  onToogleAccordion?: (isOpen: boolean, index: number) => void;
 }
 
 export const Accordion = (props: AccordionProps) => {
@@ -20,7 +19,7 @@ export const Accordion = (props: AccordionProps) => {
     accordionItems,
     theme,
     layout = 'left',
-    onToogleAccordion
+    onToogleAccordion,
   } = props;
   const isDarkTheme = theme === 'dark';
   const bgcolor = isDarkTheme ? 'primary.main' : '#FAFAFA';
@@ -36,22 +35,14 @@ export const Accordion = (props: AccordionProps) => {
           <Grid item xs={12} md={isCenterLayout ? 12 : 4}>
             <Stack px={{ xs: 1, md: 0 }} spacing={{ xs: 2, md: 5 }}>
               {/** Title */}
-              <Typography
-                textAlign={textAlignment}
-                color={textColor}
-                variant="h4"
-              >
+              <Typography textAlign={textAlignment} color={textColor} variant="h4">
                 {title}
               </Typography>
 
               {/** Subtitle */}
               {subtitle && (
                 <>
-                  <Typography
-                    textAlign={textAlignment}
-                    color={textColor}
-                    variant="h6"
-                  >
+                  <Typography textAlign={textAlignment} color={textColor} variant="h6">
                     {subtitle}
                   </Typography>
                 </>
@@ -61,11 +52,7 @@ export const Accordion = (props: AccordionProps) => {
               {description && (
                 <>
                   {typeof description === 'string' ? (
-                    <Typography
-                      textAlign={textAlignment}
-                      color={textColor}
-                      variant="body2"
-                    >
+                    <Typography textAlign={textAlignment} color={textColor} variant="body2">
                       {description}
                     </Typography>
                   ) : (
@@ -78,17 +65,15 @@ export const Accordion = (props: AccordionProps) => {
             </Stack>
           </Grid>
         </Grid>
-        <Grid
-          item
-          order={layout === 'right' ? -1 : 1}
-          xs={12}
-          md={isCenterLayout ? 12 : 8}
-          mt={5}
-        >
+        <Grid item order={layout === 'right' ? -1 : 1} xs={12} md={isCenterLayout ? 12 : 8} mt={5}>
           {/** Accordions */}
           <Stack spacing={2}>
             {accordionItems.map((accordionItem, i) => (
-              <AccordionItem key={i} {...accordionItem} onChange={(isOpen) => onToogleAccordion?.(isOpen, i)}/>
+              <AccordionItem
+                key={i}
+                {...accordionItem}
+                onChange={isOpen => onToogleAccordion?.(isOpen, i)}
+              />
             ))}
           </Stack>
         </Grid>
