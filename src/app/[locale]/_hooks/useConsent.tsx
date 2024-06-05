@@ -17,8 +17,8 @@ declare global {
 export function useConsent() {
   useEffect(() => {
     // eslint-disable-next-line functional/immutable-data
-    window.OptanonWrapper = function () {
-      OneTrust.OnConsentChanged(function () {
+    window.OptanonWrapper = function() {
+      OneTrust.OnConsentChanged(function() {
         if (OnetrustActiveGroups.indexOf(targCookiesGroup) > -1) {
           initAnalytics();
         }
@@ -32,7 +32,7 @@ export function useConsent() {
 
 export const hasConsent = () => {
   const OTCookieValue: string =
-    document.cookie.split('; ').find((row) => row.startsWith('OptanonConsent=')) || '';
+    document.cookie.split('; ').find(row => row.startsWith('OptanonConsent=')) || '';
   const checkValue = `${targCookiesGroup}%3A1`;
   return OTCookieValue.indexOf(checkValue) > -1;
 };

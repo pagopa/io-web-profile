@@ -3,14 +3,14 @@ import { User } from '../../_model/User'; // Update the path to point to your ac
 
 describe('Storage Utils', () => {
   const mockUser: User = {
-      uid: '001',
-      taxCode: 'ISPXXXLLMMSSS88',
-      email: 'mario@rossi.com',
-      name: 'Carla',
-      surname: 'Rossi',
-      spidLevel: {
-          value: 'SPIDLevel2'
-      }
+    uid: '001',
+    taxCode: 'ISPXXXLLMMSSS88',
+    email: 'mario@rossi.com',
+    name: 'Carla',
+    surname: 'Rossi',
+    spidLevel: {
+      value: 'SPIDLevel2',
+    },
   };
 
   beforeEach(() => {

@@ -102,3 +102,8 @@ export const commonCardStyle = {
   boxShadow: '0px 8px 38px 7px #002B551A',
   borderRadius: '16px',
 };
+
+export const commonBackgroundLightFullHeight = {
+  ...commonBackgroundLight,
+  height: '100vh'
+};

@@ -142,7 +142,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
   ];
 
   const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
-    const updatedEntries: FAQEntries[] = entries.map((entry) => ({
+    const updatedEntries: FAQEntries[] = entries.map(entry => ({
       ...entry,
       content: <span style={{ fontSize: theme.typography.body2.fontSize }}>{entry.content}</span>,
     }));

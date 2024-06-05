@@ -33,7 +33,7 @@ const LogoutConfirm = (): React.ReactElement => {
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getUserSessionState', [], [500])
-      .then((res) => {
+      .then(res => {
         setSessionData(res);
       })
       .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
