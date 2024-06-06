@@ -31,7 +31,6 @@ const EmailConfirmationPage = (): React.ReactElement => {
         callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
           .then(data => {
             setUrlParams({ token, email: data.profile_email });
-            console.log('OK', data);
           })
           .catch(() => {
             pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
