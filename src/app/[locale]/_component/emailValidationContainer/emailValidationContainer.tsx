@@ -10,7 +10,7 @@ type IntroductionProps = {
   icon?: JSX.Element;
   title: string;
   subtitle?: string;
-  summary: string | JSX.Element | React.ReactNode;
+  summary?: string | JSX.Element | React.ReactNode;
   button: ButtonProps;
 };
 

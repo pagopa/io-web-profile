@@ -26,6 +26,7 @@ export const ROUTES = {
   WALLET_THANK_YOU: '/revoca-wallet/operazione-completata/',
   WALLET_REVOKE_ERROR: '/revoca-wallet/errore/',
   EMAIL_CONFIRMATION: '/conferma-email/',
+  EMAIL_CONFIRMED:'/conferma-email/email-confermata/'
 };
 
 // Get an array of values from the ROUTES object
@@ -41,11 +42,12 @@ export const PUBLIC_ROUTES = [
   ROUTES.INTERNAL_ERROR,
   ROUTES.PRIVACY_POLICY,
   ROUTES.REVOKE_WALLET,
-  ROUTES.EMAIL_CONFIRMATION
+  ROUTES.EMAIL_CONFIRMATION,
+  ROUTES.EMAIL_CONFIRMED
 ];
 
 export const LOGIN_ROUTES = [ROUTES.LOGIN, ROUTES.LOGOUT_INIT];
 
 export const PRIVATE_ROUTES = EXISTING_ROUTES.filter(route => !PUBLIC_ROUTES.includes(route));
-export const EMAIL_VALIDATION_ROUTES = [ROUTES.EMAIL_CONFIRMATION];
+export const EMAIL_VALIDATION_ROUTES = [ROUTES.EMAIL_CONFIRMATION,ROUTES.EMAIL_CONFIRMED];
 
