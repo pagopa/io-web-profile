@@ -48,4 +48,22 @@ describe('Utilities', () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('getWalletStatus', () => {
+    test('returns "on" when the user has an active wallet', () => {
+      const result = common.getWalletStatus({id: "test", is_revoked: false});
+      expect(result).toBe("on");
+    });
+
+    test('returns "off" when the user has a revoked wallet', () => {
+      const result = common.getWalletStatus({id: "test", is_revoked: true});
+      expect(result).toBe("off");
+    });
+
+    test('returns "off" when there is not a wallet instance', () => {
+      const result = common.getWalletStatus();
+      expect(result).toBe("off");
+    });
+  });
+  
 });
