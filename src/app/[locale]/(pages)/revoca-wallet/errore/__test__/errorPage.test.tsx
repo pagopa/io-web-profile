@@ -7,8 +7,8 @@ import * as it from '../../../../../../dictionaries/it.json';
 describe('Revoke wallet error page', () => {
 
   test('should render error page', async () => {
-    await renderWithProviders(<div data-testid="accordion-component"><WalletKo /></div>);
-    const element = await screen.findByTestId('accordion-component')
+    await renderWithProviders(<div data-testid="error-page"><WalletKo /></div>);
+    const element = await screen.findByTestId('error-page')
     expect(element).toBeInTheDocument();
     expect(await screen.findByText(it.ioesco.error.somewrong)).toBeInTheDocument()
     expect(await screen.findByText(it.ioesco.error.systemerrorcontactassistence)).toBeInTheDocument()
