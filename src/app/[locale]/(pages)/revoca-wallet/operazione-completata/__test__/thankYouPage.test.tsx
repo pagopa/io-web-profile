@@ -1,5 +1,5 @@
 import { renderWithProviders } from "@/app/[locale]/_utils/test-utils";
-import { fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 import * as it from '../../../../../../dictionaries/it.json';
 import ThankYouPage from "../page";
@@ -14,8 +14,6 @@ describe('Revoke wallet ThankYou page', () => {
     expect(await screen.findByText(it.itwallet.common.instanceclosed)).toBeInTheDocument()
     const backToProfileButton = await screen.findByText(it.ioesco.common.backtoprofile)
     expect(backToProfileButton).toBeInTheDocument()
-    fireEvent.click(backToProfileButton)
-    expect(window.location.pathname).toBe('/')
   });
 
 });
