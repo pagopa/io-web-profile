@@ -66,7 +66,7 @@ export const getReferralLockProfile = (isMagicLink: MagicLink): string => {
 };
 
 export const decodeObfuscatedEmail = (encodedEmail: string): string =>
-  encodedEmail.replace(/&#@!(\d+);/g, function (match, dec) {
+  encodedEmail.replace(/&#@!(\d+);/g, function(match, dec) {
     return String.fromCharCode(dec);
   });
 
@@ -95,3 +95,14 @@ export const goTo = (route: string, timeout: number): void => {
     timeout
   );
 };
+
+export const backToIo = (timeout: number): void => {
+  window.setTimeout(
+    () =>
+      window.location.assign(
+        `${process.env.NEXT_PUBLIC_GOTO_IO_URL}`
+      ),
+    timeout
+  );
+};
+

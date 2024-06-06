@@ -19,7 +19,7 @@ declare const OneTrust: {
   ToggleInfoDisplay: () => void;
 };
 
-export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
+export default function Footer({ onExit = exitAction => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
 
   const handleCookiePreferencies = () => {
@@ -202,7 +202,7 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
   const companyLegalInfo = (
     <>
       {t.rich('pagopalegal', {
-        strong: (chunks) => <strong>{chunks}</strong>,
+        strong: chunks => <strong>{chunks}</strong>,
       })}
     </>
   );

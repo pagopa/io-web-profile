@@ -37,7 +37,7 @@ export function SelectIdp({ isOpen, spidLevel, onClose, currentPage }: Dialog) {
         </Typography>
         <IdpList spidLevel={level} loginPage={currentPage} />
         <Box p={4}>
-          <Button onClick={(e) => onClose(false, e)} fullWidth variant="outlined">
+          <Button onClick={e => onClose(false, e)} fullWidth variant="outlined">
             Annulla
           </Button>
         </Box>
