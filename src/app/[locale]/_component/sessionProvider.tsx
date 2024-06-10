@@ -63,10 +63,10 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   };
 
   useMemo(() => {
-    if (windowAvailable) {
+    if (windowAvailable && !EMAIL_VALIDATION_ROUTES.includes(pathName)) {
       return initOneTrust();
     }
-  }, [windowAvailable]);
+  }, [pathName, windowAvailable]);
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {

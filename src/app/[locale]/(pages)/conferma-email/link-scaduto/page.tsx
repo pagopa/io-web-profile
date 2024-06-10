@@ -1,27 +1,30 @@
 'use client';
 
 import { Grid } from '@mui/material';
-// import { useTranslations } from 'next-intl';
-import { commonBackgroundFullHeight } from '../../../_utils/styles';
+import { useTranslations } from 'next-intl';
+import { commonBackgroundLightFullHeight } from '../../../_utils/styles';
 import { EmailValidationContainer } from '../../../_component/emailValidationContainer/emailValidationContainer';
 import HourglassIcon from '@/app/[locale]/_icons/hourglass';
+import { backToIo } from '@/app/[locale]/_utils/common';
 
 const EmailConfirmationLinkExpired = (): React.ReactElement => {
-  // const t = useTranslations('ioesco');
+  const t = useTranslations('ioesco');
   return (
-    <Grid sx={commonBackgroundFullHeight} container>
+    <Grid
+      sx={commonBackgroundLightFullHeight}
+      alignItems="center"
+      justifyContent="center"
+      container
+    >
       <Grid item xs={12} justifySelf={'center'} marginTop={5}>
         <EmailValidationContainer
           icon={<HourglassIcon />}
-          title={'Il link è scaduto'}
-          summary={
-            <span>
-              {'Torna su IO e chiedi l’invio di una nuova email di conferma per il tuo indirizzo.'}
-            </span>
-          }
+          title={t('emailvalidation.expiredlinkerrortitle')}
+          summary={t('emailvalidation.expiredlinkerrorsubtitle')}
           button={{
             variant: 'contained',
-            text: 'Torna su IO',
+            text: t('emailvalidation.backtoio'),
+            onClick: () => backToIo(1000),
           }}
         />
       </Grid>

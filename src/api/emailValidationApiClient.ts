@@ -68,7 +68,7 @@ const useFetchEmailValidation = () => {
         }
       } catch (e) {
         setIsLoading(false);
-        throw new Error(`Unexpected status code: ${e}`);
+        throw e;
       }
     },
     []

@@ -10,6 +10,7 @@ import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
 import Loader from '../../_component/loader/loader';
 import { ROUTES } from '../../_utils/routes';
 import useLocalePush from '../../_hooks/useLocalePush';
+import { ReasonEnum as EmailValidationErrorStatusEnum } from '@/api/generated/ioFunction/ValidationErrorsObject';
 
 type UrlParamsType = {
   token: ValidationToken | null;
@@ -32,8 +33,12 @@ const EmailConfirmationPage = (): React.ReactElement => {
           .then(data => {
             setUrlParams({ token, email: data.profile_email });
           })
-          .catch(() => {
-            pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+          .catch((error) => {
+            if(error.left?.filter((e: { value: string; }) => e.value === EmailValidationErrorStatusEnum.TOKEN_EXPIRED).length > 0) {
+              pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED);
+            } else {
+              pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+            }
           });
       } else {
         pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
@@ -54,8 +59,12 @@ const EmailConfirmationPage = (): React.ReactElement => {
         .then(() => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
-        .catch(() => {
-          pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+        .catch((error) => {
+          if(error.left?.filter((e: { value: string; }) => e.value === EmailValidationErrorStatusEnum.TOKEN_EXPIRED).length > 0) {
+            pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED);
+          } else {
+            pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+          }
         });
     }
   };
