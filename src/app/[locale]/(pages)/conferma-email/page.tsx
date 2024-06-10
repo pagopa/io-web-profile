@@ -23,6 +23,26 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
   const pushWithLocale = useLocalePush();
 
+  interface ValidationError {
+    value: string;
+  }
+
+  const handleEmailValidationError = useCallback((error: { left: ValidationError[] }) => {
+    const errorHandlers: { [key: string]: () => void } = {
+      [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
+    };
+    if (error.left) {
+      const matchingError = error.left.find((e) => errorHandlers[e.value]);
+      if (matchingError) {
+        errorHandlers[matchingError.value]();
+      } else {
+        pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+      }
+    } else {
+      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+    }
+  }, [pushWithLocale]);
+
   const extractParams = useCallback(()=> {
     try {
       const urlParams = new URLSearchParams(window.location.search);
@@ -34,11 +54,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
             setUrlParams({ token, email: data.profile_email });
           })
           .catch((error) => {
-            if(error.left?.filter((e: { value: string; }) => e.value === EmailValidationErrorStatusEnum.TOKEN_EXPIRED).length > 0) {
-              pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED);
-            } else {
-              pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
-            }
+            handleEmailValidationError(error)
           });
       } else {
         pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
@@ -47,7 +63,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
       pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
     return null;
-  }, [callFetchEmailValidationWithRetries, pushWithLocale]);
+  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);
 
   useEffect(() => {
     extractParams();
@@ -60,11 +76,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
         .catch((error) => {
-          if(error.left?.filter((e: { value: string; }) => e.value === EmailValidationErrorStatusEnum.TOKEN_EXPIRED).length > 0) {
-            pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED);
-          } else {
-            pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
-          }
+          handleEmailValidationError(error)
         });
     }
   };
