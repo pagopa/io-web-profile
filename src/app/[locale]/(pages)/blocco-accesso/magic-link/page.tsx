@@ -35,7 +35,7 @@ const ExpiredMagicLink = () => {
     setIsButtonDisabled(true);
     if (jwe) {
       callFetchWithRetries(WebProfileApi, 'exchangeToken', [], [500])
-        .then((res) => {
+        .then(res => {
           if (res.jwt) {
             storageJweOps.delete();
             storageTokenOps.write(res.jwt);
@@ -44,7 +44,7 @@ const ExpiredMagicLink = () => {
         })
         .then(() => {
           callFetchWithRetries(WebProfileApi, 'getUserSessionState', [], [500])
-            .then((res) => {
+            .then(res => {
               if (!res.access_enabled) {
                 pushWithLocale(ROUTES.ALREADY_LOCKED);
               } else {

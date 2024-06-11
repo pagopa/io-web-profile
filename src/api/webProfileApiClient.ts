@@ -8,6 +8,8 @@ import { WithDefaultsT, createClient } from './generated/webProfile/client';
 import { goToLogin } from '@/app/[locale]/_utils/common';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageJweOps, storageTokenOps } from '@/app/[locale]/_utils/storage';
+import { SetWalletInstanceStatusDataEnum } from './generated/webProfile/SetWalletInstanceStatusData';
+
 // with withDefaults
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
@@ -46,64 +48,64 @@ const webProfileApiClientExchange = createClient({
 
 const useFetch = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const callFetchWithRetries = useCallback(
-    async <C extends typeof WebProfileApi, N extends keyof typeof WebProfileApi>(
-      client: C,
-      apiName: N,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      params: any,
-      retryStatusCodes = [500],
-      errorHandlers?: () => void
-    ) => {
-      const maxRetries = 3;
-      const retryDelay = 1000;
-      try {
-        setIsLoading(true);
-        // eslint-disable-next-line functional/no-let
-        let retryCount = 0;
-        while (retryCount < maxRetries) {
-          const response = await client[apiName](params);
-          if (isRight(response)) {
-            switch (response.right.status) {
-              case 204:
-              case 200:
-                setIsLoading(false);
-                return response.right.value;
-              case 403:
-                setIsLoading(false);
-                onRedirectToLogin();
-                return;
-              case 404:
-                setIsLoading(false);
-                return new Promise((resolve) => resolve(response.right.status));
-              default:
-                if (retryStatusCodes.includes(response.right.status)) {
-                  if (retryCount === maxRetries - 1) {
-                    if (errorHandlers) {
-                      errorHandlers();
-                      return;
-                    } else {
-                      throw new Error(`Unexpected status code: ${response.right.status}`);
-                    }
+  const callFetchWithRetries = useCallback(async <
+    C extends typeof WebProfileApi,
+    N extends keyof typeof WebProfileApi
+  >(
+    client: C,
+    apiName: N,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    params: any,
+    retryStatusCodes = [500],
+    errorHandlers?: () => void
+  ) => {
+    const maxRetries = 3;
+    const retryDelay = 1000;
+    try {
+      setIsLoading(true);
+      // eslint-disable-next-line functional/no-let
+      let retryCount = 0;
+      while (retryCount < maxRetries) {
+        const response = await client[apiName](params);
+        if (isRight(response)) {
+          switch (response.right.status) {
+            case 204:
+            case 200:
+              setIsLoading(false);
+              return response.right.value;
+            case 403:
+              setIsLoading(false);
+              onRedirectToLogin();
+              return;
+            case 404:
+              setIsLoading(false);
+              return new Promise(resolve => resolve(response.right.status));
+            default:
+              if (retryStatusCodes.includes(response.right.status)) {
+                if (retryCount === maxRetries - 1) {
+                  if (errorHandlers) {
+                    errorHandlers();
+                    return;
+                  } else {
+                    throw new Error(`Unexpected status code: ${response.right.status}`);
                   }
-                  retryCount++;
-                  await new Promise((resolve) => setTimeout(resolve, retryDelay));
-                  setIsLoading(false);
-                  break;
-                } else {
-                  setIsLoading(false);
-                  throw new Error(`Unexpected status code: ${response.right.status}`);
                 }
-            }
+                retryCount++;
+                await new Promise(resolve => setTimeout(resolve, retryDelay));
+                setIsLoading(false);
+                break;
+              } else {
+                setIsLoading(false);
+                throw new Error(`Unexpected status code: ${response.right.status}`);
+              }
           }
         }
-      } catch (e) {
-        setIsLoading(false);
-        throw new Error(`Unexpected status code: ${e}`);
       }
-    },
-    []
-  );
+    } catch (e) {
+      setIsLoading(false);
+      throw new Error(`Unexpected status code: ${e}`);
+    }
+  }, []);
 
   return {
     callFetchWithRetries,
@@ -143,6 +145,14 @@ export const WebProfileApi = {
   },
   exchangeToken: async () => {
     const result = await webProfileApiClientExchange.exchangeToken({});
+    return extractResponse(result);
+  },
+  getCurrentWalletInstanceStatus: async () => {
+    const result = await webProfileApiClient.getCurrentWalletInstanceStatus({});
+    return extractResponse(result);
+  },
+  setWalletInstanceStatus: async (id: SetWalletInstanceStatusDataEnum) => {
+    const result = await webProfileApiClient.setWalletInstanceStatus({ id });
     return extractResponse(result);
   },
 };

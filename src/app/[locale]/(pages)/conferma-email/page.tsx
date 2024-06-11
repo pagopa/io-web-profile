@@ -1,55 +1,109 @@
 'use client';
 
 import { Grid } from '@mui/material';
-// import { useTranslations } from 'next-intl';
-import { commonBackgroundFullHeight } from '../../_utils/styles';
+import { useTranslations } from 'next-intl';
+import { commonBackgroundLightFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import useFetchEmailValidation , { EmailValidationApi } from '@/api/emailValidationApiClient';
+import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
+import Loader from '../../_component/loader/loader';
+import { ROUTES } from '../../_utils/routes';
+import useLocalePush from '../../_hooks/useLocalePush';
+import { ReasonEnum as EmailValidationErrorStatusEnum } from '@/api/generated/ioFunction/ValidationErrorsObject';
 
-type UrlParams = {
-  token: string;
-  email: string;
+type UrlParamsType = {
+  token: ValidationToken | null;
+  email?: string;
 };
 
 const EmailConfirmationPage = (): React.ReactElement => {
-  // const t = useTranslations('ioesco');
-  const [urlParams, setUrlParams] = useState<UrlParams | undefined>(undefined);
+  const t = useTranslations('ioesco');
+  const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
+  const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
+  const pushWithLocale = useLocalePush();
 
-  function extractParams() {
+  interface ValidationError {
+    value: string;
+  }
+
+  const handleEmailValidationError = useCallback((error: { left: ValidationError[] }) => {
+    const errorHandlers: Record<string, () => void> = {
+      [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
+    };
+    if (error.left && error.left.length > 0) {
+      const matchingError = error.left.find((e) => errorHandlers[e.value]);
+      if (matchingError) {
+        errorHandlers[matchingError.value]();
+      } else {
+        pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+      }
+    } else {
+      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+    }
+  }, [pushWithLocale]);
+
+  const extractParams = useCallback(()=> {
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        const encodedEmail = urlParams.get('email');
+      const urlParams = new URLSearchParams(window.location.search);
+      const token: ValidationToken | null = urlParams.get('token') as ValidationToken;
 
-        if (encodedEmail && token) {
-          const email = Buffer.from(decodeURIComponent(encodedEmail), 'base64').toString('utf-8');
-          setUrlParams({ token, email });
-        }
+      if (token) {
+        callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
+          .then(data => {
+            setUrlParams({ token, email: data.profile_email });
+          })
+          .catch((error) => {
+            handleEmailValidationError(error)
+          });
+      } else {
+        pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+      }
     } catch (error) {
-        console.error(error);
+      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
     return null;
-  }
+  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);
 
   useEffect(() => {
     extractParams();
-  },[])
+  }, [extractParams]);
 
-  
+  const handleConfirmEmail = () => {
+    if (urlParams && urlParams.token) {
+      callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
+        .then(() => {
+          pushWithLocale(ROUTES.EMAIL_CONFIRMED);
+        })
+        .catch((error) => {
+          handleEmailValidationError(error)
+        });
+    }
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <Grid sx={commonBackgroundFullHeight} container>
-      <Grid item xs={12} justifySelf={'center'} marginTop={5}>
+    <Grid sx={commonBackgroundLightFullHeight} alignItems="center" 
+      justifyContent="center" 
+      container>
+      <Grid item xs={12} justifySelf={'center'}>
         <EmailValidationContainer
-          title={'È la tua email?'}
+          title={t.rich('emailvalidation.confirmisyouremail', {
+            strong: chunks => <strong>{chunks}</strong>,
+          }) as string}
           subtitle={urlParams && urlParams.email}
           summary={
             <span>
-              {'Se confermi, useremo questo indirizzo per inviarti le comunicazioni di IO.'}
+              {t('emailvalidation.confirmsubtitle')}
             </span>
           }
           button={{
             variant: 'contained',
-            text: 'Sì, confermo',
+            text: t('emailvalidation.confirm'),
+            onClick: () => handleConfirmEmail(),
           }}
         />
       </Grid>

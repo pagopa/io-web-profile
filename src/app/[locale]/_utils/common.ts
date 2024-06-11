@@ -1,6 +1,7 @@
+import { WalletData } from '@/api/generated/webProfile/WalletData';
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
-import { ROUTES } from './routes';
+import { EMAIL_VALIDATION_ROUTES, ROUTES } from './routes';
 import { storageLocaleOps, storageTokenOps, storageUserOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
@@ -13,6 +14,8 @@ export const FLOW_PARAMS = {
 
 export const localeList = ['it'];
 export const defaultLocale = 'it';
+
+export const backToIOTimeDelay = 1000;
 
 export const isBrowser = () => typeof window !== 'undefined';
 
@@ -36,6 +39,9 @@ export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off'
 
 export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 'locked' =>
   sessionData?.access_enabled ? 'unlocked' : 'locked';
+
+export const getWalletStatus = (walletData?: WalletData): 'on' | 'off' =>
+  walletData && !walletData.is_revoked ? 'on' : 'off';
 
 export const getLoginFlow = (loginInfo: LoginInfo): string | undefined => {
   if (loginInfo) {
@@ -66,7 +72,7 @@ export const getReferralLockProfile = (isMagicLink: MagicLink): string => {
 };
 
 export const decodeObfuscatedEmail = (encodedEmail: string): string =>
-  encodedEmail.replace(/&#@!(\d+);/g, function (match, dec) {
+  encodedEmail.replace(/&#@!(\d+);/g, function(match, dec) {
     return String.fromCharCode(dec);
   });
 
@@ -95,3 +101,17 @@ export const goTo = (route: string, timeout: number): void => {
     timeout
   );
 };
+
+export const backToIo = (timeout: number): void => {
+  window.setTimeout(
+    () =>
+      window.location.assign(
+        `${process.env.NEXT_PUBLIC_GOTO_IO_URL}`
+      ),
+    timeout
+  );
+};
+
+export const weAreOnEmailValidationFlow = (pathName: string): boolean => {
+  return EMAIL_VALIDATION_ROUTES.includes(pathName)
+}
