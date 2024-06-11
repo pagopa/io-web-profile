@@ -264,11 +264,9 @@ paths:
       operationId: setWalletInstanceStatus
       requestBody:
         content:
-          text/plain:
+          application/json:
             schema:
-              type: string
-              enum:
-                - REVOKED
+              $ref: '#/components/schemas/SetWalletInstanceStatusData'
       responses:
         '204':
           description: No content
@@ -293,6 +291,9 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    SetWalletInstanceStatusData:
+      type: string
+      enum: ['REVOKED']
     InternalServerError:
       allOf:
         - $ref: '#/components/schemas/ProblemJson'

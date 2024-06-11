@@ -13,8 +13,8 @@
     "lint": "next lint",
     "prepare": "husky install",
     "generate": "npm-run-all generate:*",
-    "clean:api-web-profile": "rimraf src/api/generated/webProfile",
-    "clean:api-io-function": "rimraf src/api/generated/ioFunction",
+    "clean:api-web-profile": "shx rm -rf src/api/generated/webProfile",
+    "clean:api-io-function": "shx rm -rf src/api/generated/ioFunction",
     "generate:api-web-profile": "yarn run clean:api-web-profile && shx mkdir -p src/api/generated/webProfile && gen-api-models --api-spec ./openApi/openapi.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/webProfile",
     "generate:api-io-function": "yarn run clean:api-io-function && shx mkdir -p src/api/generated/ioFunction && gen-api-models --api-spec https://raw.githubusercontent.com/pagopa/io-functions-public/master/openapi/external.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/ioFunction"
   },
