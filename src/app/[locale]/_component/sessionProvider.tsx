@@ -12,12 +12,11 @@ import {
   PRIVATE_ROUTES,
   PUBLIC_ROUTES,
   ROUTES,
-  EMAIL_VALIDATION_ROUTES
 } from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
 
 import { initOneTrust } from '../_utils/onetrust';
-import { defaultLocale, isBrowser, localeList } from '../_utils/common';
+import { defaultLocale, isBrowser, localeList, weAreOnEmailValidationFlow } from '../_utils/common';
 import Loader from './loader/loader';
 import '../_styles/cookieBanner.css';
 import '../_styles/privacyPage.css';
@@ -51,7 +50,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const windowAvailable = isBrowser();
 
   const getHeaderFooter = ({ children, pathName }: { readonly children: React.ReactNode, readonly pathName: string }) => {
-    if (EMAIL_VALIDATION_ROUTES.includes(pathName) && emailValidationEnabled ) return <> { children }</>;
+    if (weAreOnEmailValidationFlow(pathName) && emailValidationEnabled ) return <> { children }</>;
   
     return (
       <>
@@ -63,10 +62,10 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   };
 
   useMemo(() => {
-    if (windowAvailable) {
+    if (windowAvailable && !weAreOnEmailValidationFlow(pathName)) {
       return initOneTrust();
     }
-  }, [windowAvailable]);
+  }, [pathName, windowAvailable]);
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
@@ -79,7 +78,7 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
           removeToken();
         }
         if (PUBLIC_ROUTES.includes(pathName)) {
-          if (EMAIL_VALIDATION_ROUTES.includes(pathName)) {
+          if (weAreOnEmailValidationFlow(pathName)) {
             if(emailValidationEnabled) {
               setLoginStatus({ status: 'AUTHORIZED' });
             }

@@ -1,7 +1,7 @@
 import { WalletData } from '@/api/generated/webProfile/WalletData';
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
-import { ROUTES } from './routes';
+import { EMAIL_VALIDATION_ROUTES, ROUTES } from './routes';
 import { storageLocaleOps, storageTokenOps, storageUserOps } from './storage';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
 
@@ -14,6 +14,8 @@ export const FLOW_PARAMS = {
 
 export const localeList = ['it'];
 export const defaultLocale = 'it';
+
+export const backToIOTimeDelay = 1000;
 
 export const isBrowser = () => typeof window !== 'undefined';
 
@@ -110,3 +112,6 @@ export const backToIo = (timeout: number): void => {
   );
 };
 
+export const weAreOnEmailValidationFlow = (pathName: string): boolean => {
+  return EMAIL_VALIDATION_ROUTES.includes(pathName)
+}
