@@ -31,7 +31,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
     const errorHandlers: Record<string, () => void> = {
       [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
     };
-    if (error.left) {
+    if (error.left && error.left.length > 0) {
       const matchingError = error.left.find((e) => errorHandlers[e.value]);
       if (matchingError) {
         errorHandlers[matchingError.value]();
