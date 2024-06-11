@@ -1,3 +1,4 @@
+import { WalletData } from '@/api/generated/webProfile/WalletData';
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
 import { ROUTES } from './routes';
@@ -36,6 +37,9 @@ export const getSessionStatus = (sessionData: SessionState | null): 'on' | 'off'
 
 export const getAccessStatus = (sessionData: SessionState | null): 'unlocked' | 'locked' =>
   sessionData?.access_enabled ? 'unlocked' : 'locked';
+
+export const getWalletStatus = (walletData?: WalletData): 'on' | 'off' =>
+  walletData && !walletData.is_revoked ? 'on' : 'off';
 
 export const getLoginFlow = (loginInfo: LoginInfo): string | undefined => {
   if (loginInfo) {

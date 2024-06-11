@@ -22,6 +22,9 @@ export const ROUTES = {
   NOT_FOUND_PAGE: '/404/',
   INTERNAL_ERROR: '/500/',
   PRIVACY_POLICY: '/informativa-privacy/',
+  REVOKE_WALLET: '/revoca-wallet/',
+  WALLET_THANK_YOU: '/revoca-wallet/operazione-completata/',
+  WALLET_REVOKE_ERROR: '/revoca-wallet/errore/',
   EMAIL_CONFIRMATION: '/conferma-email/',
   EMAIL_NOT_CONFIRMED: '/conferma-email/non-confermata/',
   EMAIL_CONFIRMED:'/conferma-email/email-confermata/'
@@ -39,6 +42,7 @@ export const PUBLIC_ROUTES = [
   ROUTES.NOT_FOUND_PAGE,
   ROUTES.INTERNAL_ERROR,
   ROUTES.PRIVACY_POLICY,
+  ROUTES.REVOKE_WALLET,
   ROUTES.EMAIL_CONFIRMATION,
   ROUTES.EMAIL_NOT_CONFIRMED,
   ROUTES.EMAIL_CONFIRMED

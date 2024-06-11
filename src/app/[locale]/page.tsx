@@ -12,19 +12,28 @@ import { commonBackground } from './_utils/styles';
 import { storageUserOps } from './_utils/storage';
 import { NoProfile } from './_component/noProfile/noProfile';
 import { trackEvent } from './_utils/mixpanel';
-import { getAccessStatus, getSessionStatus, localeFromStorage } from './_utils/common';
+import {
+  getAccessStatus,
+  getSessionStatus,
+  getWalletStatus,
+  localeFromStorage,
+} from './_utils/common';
 import useLocalePush from './_hooks/useLocalePush';
 import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
+import { WalletData } from '@/api/generated/webProfile/WalletData';
+import HomeWalletCard from './_component/homeWalletCard';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
   const [sessionData, setSessionData] = useState<SessionState>();
+  const [walletRevokeStatus, setWalletRevokeStatus] = useState<WalletData | undefined>();
   const [isProfileAvailable, setIsProfileAvailable] = useState<boolean | undefined>();
   const t = useTranslations('ioesco');
   const bgColor = 'background.paper';
+
   const userFromStorage = storageUserOps.read();
   const pushWithLocale = useLocalePush();
   const { callFetchWithRetries, isLoading } = useFetch();
@@ -34,11 +43,12 @@ const Profile = () => {
       trackEvent('IO_PROFILE', {
         session_status: getSessionStatus(sessionData),
         access_status: getAccessStatus(sessionData),
+        itw_status: getWalletStatus(walletRevokeStatus),
         event_category: 'UX',
         event_type: 'screen_view',
       });
     }
-  }, [profileData, sessionData]);
+  }, [profileData, sessionData, walletRevokeStatus]);
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getProfile', [], [500])
@@ -84,7 +94,7 @@ const Profile = () => {
             {t('common.yourprofile')}
           </Typography>
           <Grid container gap={2} mb={2} flexWrap={{ xs: 'wrap', sm: 'nowrap', md: 'nowrap' }}>
-            <Grid item xs={12} sm={6} md={6} bgcolor={bgColor}>
+            <Grid item xs={12} sm={6} md={6} bgcolor={bgColor} height="max-content">
               <Grid padding={3}>
                 <Typography variant="body2">{t('common.namesurname')}</Typography>
                 <Typography variant="sidenav">{`${userFromStorage?.name} ${userFromStorage?.surname}`}</Typography>
@@ -156,6 +166,12 @@ const Profile = () => {
                   </Tooltip>
                 </Grid>
               </Grid>
+              <Divider />
+              <HomeWalletCard
+                walletRevokeStatus={walletRevokeStatus}
+                isProfileAvailable={!!isProfileAvailable}
+                setWalletRevokeStatus={setWalletRevokeStatus}
+              />
             </Grid>
           </Grid>
           <Grid item pb={3} mt={6} xs={12} md={12} textAlign={'center'}>
@@ -163,7 +179,10 @@ const Profile = () => {
           </Grid>
 
           {sessionData?.access_enabled === true && (
-            <ProfileCards sessionIsActive={sessionData?.session_info?.active} />
+            <ProfileCards
+              sessionIsActive={sessionData?.session_info?.active}
+              walletIsActive={walletRevokeStatus !== undefined && !walletRevokeStatus?.is_revoked}
+            />
           )}
           {sessionData?.access_enabled === false && <RestoreSessionCard />}
         </Grid>

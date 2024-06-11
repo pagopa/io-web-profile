@@ -290,5 +290,48 @@
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
       "nosession": "Non c’è nessuna sessione di IO attiva"
     }
+  },
+  "itwallet": {
+    "revokewalletfaq": {
+      "firstquestion": "Cosa succede se disattivo IT Wallet?",
+      "firstresponse": "Se disattivi IT Wallet, tutti i documenti in versione digitale presenti nel Portafoglio di IO saranno disattivati in modo permanente. Se cambi idea, potrai sempre aggiungerli di nuovo al Portafoglio in futuro.",
+      "secondquestion": "Posso continuare a utilizzare i servizi di IO anche se ho disattivato IT Wallet?",
+      "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO, escluso IT Wallet.",
+      "thirdquestion": "Cosa succede al mio Portafoglio dopo aver rimosso i Documenti?",
+      "thirdresponse": "La tua sezione Portafoglio continuerà ad esistere e funzionare normalmente.",
+      "fourthquestion": "Se disattivo IT Wallet, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
+      "fourthresponse": "Sì, continuerai a vedere tutte le carte e i metodi di pagamento che hai aggiunto in precedenza.",
+      "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
+      "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di <link>bloccare l’accesso a IO</link>."
+    },
+    "tooltip": {
+      "activewallet": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
+      "inactivewallet": "IT Wallet non è attivo, puoi attivarlo in qualsiasi momento dall'app IO"
+    },
+    "metadati": {
+      "revocawalletinstancedescription": "C’è un problema sui nostri sistemi, non è possibile revocare il Wallet in questo momento. Riprova più tardi o contatta l’assistenza.",
+      "revocawalletinstancetitle": "C’è un problema temporaneo"
+    },
+    "common": {
+      "instanceclosed": "Hai disattivato IT Wallet",
+      "instancecloseddescription": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br>Se cambi idea, potrai riaggiungerli direttamente dall’app IO.",
+      "instanceclosedconfirm": "Ti abbiamo inviato una mail di conferma.",
+      "lostdeviceshort": "Hai perso il tuo dispositivo o ti è stato sottratto?",
+      "lockaccess": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
+      "disablewallet": "Disattiva IT Wallet",
+      "revokewalletthankyoutitle": "Thankyou page",
+      "revokewalletthankyoudescription": "Wallet Instance è stata revocata. I documenti non sono più validi/presentabili. eID è stato revocato.",
+      "revokewalletinstancetitle": "Vuoi disattivare IT Wallet?",
+      "revokewalletinstancedescription": "Se continui tutti i documenti presenti nel Portafoglio saranno disattivati in modo permanente.",
+      "wallettitle": "IT Wallet",
+      "walletactive": "Attivo",
+      "walletinactive": "Non attivo",
+      "lostdevicewallet": "Se hai smarrito il tuo dispositivo, ti è stato sottratto, o per altre ragioni non ne hai più il controllo, <strong>blocca l'accesso a IO</strong> per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
+      "revokewallet": "Vuoi rimuovere i documenti digitali presenti nel Portafoglio?",
+      "revokewalletcancel": "Torna indietro",
+      "revokewalletconfirm": "Confermi di voler disattivare IT Wallet?",
+      "revokewalletconfirmbutton": "Conferma",
+      "revokewalletpopup": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente. Inoltre, non riceverai più messaggi che riguardano la sperimentazione."
+    }
   }
 }
