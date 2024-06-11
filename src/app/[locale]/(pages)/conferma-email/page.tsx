@@ -28,7 +28,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
   }
 
   const handleEmailValidationError = useCallback((error: { left: ValidationError[] }) => {
-    const errorHandlers: { [key: string]: () => void } = {
+    const errorHandlers: Record<string, () => void> = {
       [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
     };
     if (error.left) {
