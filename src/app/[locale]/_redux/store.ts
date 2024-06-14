@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { permissionsReducer } from './slices/permissionsSlice';
 import { blockAccessReducer } from './slices/blockAccessSlice';
+import { emailValidationReducer } from './slices/emailValidationSlice';
 
 export const createStore = () =>
   configureStore({
     reducer: {
       permissions: permissionsReducer,
       blockAccess: blockAccessReducer,
+      emailValidation: emailValidationReducer,
     },
   });
 
