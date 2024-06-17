@@ -86,7 +86,6 @@ const fifthRevokeWalletFaqRich = {
 
 export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
   const t = useTranslations('ioesco');
-  const walletT = useTranslations('itwallet');
   // #region entries
   const logoutEntries: FAQEntries[] = [
     {
@@ -154,24 +153,24 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
 
   const revokeWallet: FAQEntries[] = [
     {
-      header: walletT('revokewalletfaq.firstquestion'),
-      content: walletT('revokewalletfaq.firstresponse'),
+      header: t('thankyoupagewalletfaq.firstquestion'),
+      content: t('rowaccordionwallet.firstresponse'),
     },
     {
-      header: walletT('revokewalletfaq.secondquestion'),
-      content: walletT('revokewalletfaq.secondresponse'),
+      header: t('thankyoupagewalletfaq.secondquestion'),
+      content: t('rowaccordionwallet.secondresponse'),
     },
     {
-      header: walletT('revokewalletfaq.thirdquestion'),
-      content: walletT('revokewalletfaq.thirdresponse'),
+      header: t('thankyoupagewalletfaq.thirdquestion'),
+      content: t('rowaccordionwallet.thirdresponse'),
     },
     {
-      header: walletT('revokewalletfaq.fourthquestion'),
-      content: walletT('revokewalletfaq.fourthresponse'),
+      header: t('thankyoupagewalletfaq.fourthquestion'),
+      content: t('rowaccordionwallet.fourthresponse'),
     },
     {
-      header: walletT('revokewalletfaq.fifthquestion'),
-      content: walletT.rich('revokewalletfaq.fifthresponse', fifthRevokeWalletFaqRich),
+      header: t('lockaccessitwallet.fifthquestion'),
+      content: t.rich('rowaccordionwallet.fifthresponse', fifthRevokeWalletFaqRich),
     },
   ];
 

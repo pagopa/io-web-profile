@@ -21,7 +21,7 @@ const HomeWalletCard = ({
   isProfileAvailable,
   setWalletRevokeStatus,
 }: HomeWalletCardProps): React.ReactElement => {
-  const t = useTranslations('itwallet');
+  const t = useTranslations('ioesco');
   const { callFetchWithRetries } = useFetch();
   const pushWithLocale = useLocalePush();
 
@@ -38,18 +38,20 @@ const HomeWalletCard = ({
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale, setWalletRevokeStatus]);
 
   const walletCardTitle = useMemo(() => {
-    if (walletRevokeStatus?.is_revoked) return t('common.walletinactive');
-    if (walletRevokeStatus?.is_revoked === false) return t('common.walletactive');
+    // TODO before new dictionary, we sets inactive status as "Non attivo"
+    if (walletRevokeStatus?.is_revoked) return t('common.noactive');
+    if (walletRevokeStatus?.is_revoked === false) return t('common.active');
   }, [t, walletRevokeStatus?.is_revoked]);
 
   const walletCardTooltip = useMemo(() => {
-    return walletRevokeStatus?.is_revoked ? t('tooltip.inactivewallet') : t('tooltip.activewallet');
+    // TODO key for tooltip in inactive status doesn't exist in new dictionary
+    return walletRevokeStatus?.is_revoked ? t('tooltip.inactivewallet') : t('profile.walletbullettooltip');
   }, [walletRevokeStatus?.is_revoked, t]);
 
   return walletRevokeStatus !== undefined ? (
     <Grid container>
       <Grid xs={10} item padding={3}>
-        <Typography variant="body2">{t('common.wallettitle')}</Typography>
+        <Typography variant="body2">{t('profile.walletbullet')}</Typography>
         <Typography variant="sidenav">{walletCardTitle}</Typography>
       </Grid>
       <Grid xs={2} item textAlign={'center'} alignSelf={'center'}>

@@ -35,7 +35,6 @@ const ThankYouPage = (): React.ReactElement => {
   }, []);
 
   const t = useTranslations('ioesco');
-  const walletT = useTranslations('itwallet');
   const pushWithLocale = useLocalePush();
   const pathName = usePathname();
   const { isLoading } = useFetch();
@@ -56,11 +55,11 @@ const ThankYouPage = (): React.ReactElement => {
   const renderSummary = useCallback(
     (isIDPKnown: boolean) => {
       if (isIDPKnown) {
-        return <>{walletT('common.instanceclosed')}</>;
+        return <>{t('thankyoupagewallet.title')}</>;
       }
-      return <>{walletT.rich('common.instancecloseddescription', unlockioaccessRich)}</>;
+      return <>{t.rich('thankyoupagewallet.description', unlockioaccessRich)}</>;
     },
-    [walletT]
+    [t]
   );
 
   const trackAccordionOpen = useCallback((isOpen: boolean, element: number) => {
@@ -81,12 +80,11 @@ const ThankYouPage = (): React.ReactElement => {
     <>
       <Grid sx={commonBackgroundLightWithBack}>
         <Introduction
-          title={walletT('common.instanceclosed')}
+          title={t('thankyoupagewallet.title')}
           summary={renderSummary(isIdpKnown())}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
-          <Typography mb={5}>{walletT('common.instanceclosedconfirm')}</Typography>
           <Button variant="outlined" size="medium" onClick={handleGoProfileBtn}>
             {t('common.backtoprofile')}
           </Button>
@@ -108,8 +106,8 @@ const ThankYouPage = (): React.ReactElement => {
             </Button>
           }
         >
-          <Typography fontWeight={600}>{walletT('common.lostdeviceshort')}</Typography>
-          <Typography>{walletT('common.lockaccess')}</Typography>
+          <Typography fontWeight={600}>{t('thankyoupagewallet.banner')}</Typography>
+          <Typography>{t('thankyoupagewallet.bannertext')}</Typography>
         </Alert>
       </Grid>
       <FAQ flow={Flows.REVOKEWALLET} onToggleFAQ={trackAccordionOpen} />
