@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export type EmailValidationProps = {
-  email: string | undefined;
+  email?: string;
 };
 const initialState: EmailValidationProps = {
   email: undefined,
