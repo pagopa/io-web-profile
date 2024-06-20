@@ -9,7 +9,7 @@ const initialState: EmailValidationProps = {
 };
 
 export const EmailValidationPropsSlice = createSlice({
-  name: ' emailValidation',
+  name: 'emailValidation',
   initialState,
   reducers: {
     setEmailValidation: (state, action: PayloadAction<string | undefined>) => ({
