@@ -91,7 +91,6 @@ const WalletInstanceRevoke = (): React.ReactElement => {
               variant="contained"
               disabled={isRemovingWallet}
             >
-              {/* TODO key for Confirm button in modal is missing in new dictionary */}
               {t('common.confirm')}
             </Button>
           </Box>

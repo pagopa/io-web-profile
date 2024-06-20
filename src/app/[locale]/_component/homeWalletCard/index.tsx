@@ -38,7 +38,6 @@ const HomeWalletCard = ({
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale, setWalletRevokeStatus]);
 
   const walletCardTitle = useMemo(() => {
-    // TODO before new dictionary, we sets inactive status as "Non attivo"
     if (walletRevokeStatus?.is_revoked) return t('common.noactive');
     if (walletRevokeStatus?.is_revoked === false) return t('common.active');
   }, [t, walletRevokeStatus?.is_revoked]);
