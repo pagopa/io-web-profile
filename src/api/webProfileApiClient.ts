@@ -8,7 +8,6 @@ import { WithDefaultsT, createClient } from './generated/webProfile/client';
 import { goToLogin } from '@/app/[locale]/_utils/common';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageJweOps, storageTokenOps } from '@/app/[locale]/_utils/storage';
-import { SetWalletInstanceStatusDataEnum } from './generated/webProfile/SetWalletInstanceStatusData';
 
 // with withDefaults
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
@@ -151,7 +150,7 @@ export const WebProfileApi = {
     const result = await webProfileApiClient.getCurrentWalletInstanceStatus({});
     return extractResponse(result);
   },
-  setWalletInstanceStatus: async (id: SetWalletInstanceStatusDataEnum) => {
+  setWalletInstanceStatus: async (id: string) => {
     const result = await webProfileApiClient.setWalletInstanceStatus({ id });
     return extractResponse(result);
   },
