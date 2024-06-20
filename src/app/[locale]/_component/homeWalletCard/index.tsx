@@ -45,7 +45,7 @@ const HomeWalletCard = ({
 
   const walletCardTooltip = useMemo(() => {
     // TODO key for tooltip in inactive status doesn't exist in new dictionary
-    return walletRevokeStatus?.is_revoked ? t('tooltip.inactivewallet') : t('profile.walletbullettooltip');
+    return walletRevokeStatus?.is_revoked ? t('common.noactive') : t('profile.walletbullettooltip');
   }, [walletRevokeStatus?.is_revoked, t]);
 
   return walletRevokeStatus !== undefined ? (
