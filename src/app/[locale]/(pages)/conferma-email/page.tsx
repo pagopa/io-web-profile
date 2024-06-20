@@ -10,6 +10,7 @@ import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
 import Loader from '../../_component/loader/loader';
 import { ROUTES } from '../../_utils/routes';
 import useLocalePush from '../../_hooks/useLocalePush';
+import { ReasonEnum as EmailValidationErrorStatusEnum } from '@/api/generated/ioFunction/ValidationErrorsObject';
 
 type UrlParamsType = {
   token: ValidationToken | null;
@@ -22,6 +23,26 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
   const pushWithLocale = useLocalePush();
 
+  interface ValidationError {
+    value: string;
+  }
+
+  const handleEmailValidationError = useCallback((error: { left: ValidationError[] }) => {
+    const errorHandlers: Record<string, () => void> = {
+      [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
+    };
+    if (error.left && error.left.length > 0) {
+      const matchingError = error.left.find((e) => errorHandlers[e.value]);
+      if (matchingError) {
+        errorHandlers[matchingError.value]();
+      } else {
+        pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+      }
+    } else {
+      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+    }
+  }, [pushWithLocale]);
+
   const extractParams = useCallback(()=> {
     try {
       const urlParams = new URLSearchParams(window.location.search);
@@ -31,24 +52,18 @@ const EmailConfirmationPage = (): React.ReactElement => {
         callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
           .then(data => {
             setUrlParams({ token, email: data.profile_email });
-            console.log('OK', data);
           })
-          .catch(() => {
-            console.log('KO');
-            // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-            // https://pagopa.atlassian.net/browse/IOPID-1559
-            // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+          .catch((error) => {
+            handleEmailValidationError(error)
           });
-      }
-      {
-        // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-        // https://pagopa.atlassian.net/browse/IOPID-1559
+      } else {
+        pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
       }
     } catch (error) {
-      console.error(error);
+      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
     return null;
-  }, [callFetchEmailValidationWithRetries]);
+  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);
 
   useEffect(() => {
     extractParams();
@@ -60,13 +75,8 @@ const EmailConfirmationPage = (): React.ReactElement => {
         .then(() => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
-        .catch(() => {
-          console.log('KO');
-          // TO ADD CORRECT EMAIL VALIDATION ERROR PAGE
-          // https://pagopa.atlassian.net/browse/IOPID-1559
-          // https://pagopa.atlassian.net/browse/IOPID-1560
-          // https://pagopa.atlassian.net/browse/IOPID-1561
-          // pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
+        .catch((error) => {
+          handleEmailValidationError(error)
         });
     }
   };

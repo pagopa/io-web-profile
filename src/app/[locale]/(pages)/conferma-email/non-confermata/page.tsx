@@ -4,10 +4,10 @@ import { Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../../_utils/styles';
 import { EmailValidationContainer } from '../../../_component/emailValidationContainer/emailValidationContainer';
-import { IllusCompleted } from '@pagopa/mui-italia';
+import { IllusError } from '@pagopa/mui-italia';
 import { backToIOTimeDelay, backToIo } from '@/app/[locale]/_utils/common';
 
-const EmailConfirmedPage = (): React.ReactElement => {
+const EmailNotConfirmed = (): React.ReactElement => {
   const t = useTranslations('ioesco');
 
   return (
@@ -19,13 +19,9 @@ const EmailConfirmedPage = (): React.ReactElement => {
     >
       <Grid item xs={12} justifySelf={'center'} marginTop={5}>
         <EmailValidationContainer
-          icon={<IllusCompleted />}
-          title={
-            t.rich('emailvalidation.done', {
-              strong: chunks => <strong>{chunks}</strong>,
-            }) as string
-          }
-          subtitle={t('emailvalidation.emailconfirmed')}
+          icon={<IllusError />}
+          title={t('emailvalidation.genricerrortitle')}
+          subtitle={t('emailvalidation.genricerrorsubtitle')}
           button={{
             variant: 'contained',
             text: t('emailvalidation.backtoio'),
@@ -37,4 +33,4 @@ const EmailConfirmedPage = (): React.ReactElement => {
   );
 };
 
-export default EmailConfirmedPage;
+export default EmailNotConfirmed;
