@@ -111,7 +111,7 @@
     },
     "emailvalidation": {
       "backtoio": "Torna su IO",
-      "emailalreadytakenerrorsubtitle": "L’email <strong> nome.cognome@pagopa.it </strong> è già stata confermata. Torna su IO per continuare a usare l’app o per modificare la tua email.",
+      "emailalreadytakenerrorsubtitle": "L’email <strong> {email} </strong> è già stata confermata. Torna su IO per continuare a usare l’app o per modificare la tua email.",
       "emailalreadytakenerrortitle": "Hai già confermato questa email",
       "emailconfirmed": "Hai confermato la tua email! Torna su IO per continuare a usare l’app.",
       "expiredlinkerrorsubtitle": "Torna su IO e chiedi l’invio di una nuova email di conferma per il tuo indirizzo.",
