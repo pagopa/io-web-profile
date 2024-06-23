@@ -17,6 +17,7 @@ import {
   toFetch,
 } from '@pagopa/ts-commons/lib/fetch';
 import { RetriableTask, TransientError, withRetries } from '@pagopa/ts-commons/lib/tasks';
+import { ReasonEnum as EmailValidationErrorStatusEnum } from '@/api/generated/ioFunction/ValidationErrorsObject';
 
 //
 // Returns a fetch wrapped with timeout and retry logic
@@ -59,6 +60,13 @@ export const extractResponse = async (
   } else {
     // here we come if we have an error status code not mampped in the response field on our openAPI spec,
     // and different from the ones used in the retry logic.
+    const error = response.left;
+    const typeError = error?.[0]?.value;
+    
+    if (typeError === EmailValidationErrorStatusEnum.EMAIL_ALREADY_TAKEN || typeError === EmailValidationErrorStatusEnum.TOKEN_EXPIRED) {
+      throw response;
+    }
+    
     console.error('Something gone wrong while fetching data');
     console.error(JSON.stringify(response.left));
     throw response;
