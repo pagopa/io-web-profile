@@ -7,7 +7,7 @@ import ThankYouPage from "../page";
 
 describe('Revoke wallet ThankYou page', () => {
 
-  test('should render error page', async () => {
+  test('should render thank you page', async () => {
     await renderWithProviders(<div data-testid="thank-you-page"><ThankYouPage /></div>);
     const element = await screen.findByTestId('thank-you-page')
     expect(element).toBeInTheDocument();
