@@ -264,11 +264,9 @@ paths:
       operationId: setWalletInstanceStatus
       requestBody:
         content:
-          text/plain:
-              schema:
-              type: string
-              enum:
-                - REVOKED
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetWalletInstanceStatusData"
       responses:
         '204':
           description: No content
@@ -381,8 +379,8 @@ components:
         is_revoked:
           type: boolean
       required:
-          - id
-          - is_revoked
+        - id
+        - is_revoked
     SessionInfo:
       $ref: 'https://raw.githubusercontent.com/pagopa/io-functions-fast-login/main/api/internal.yaml#/components/schemas/SessionInfo'
     SessionState:
