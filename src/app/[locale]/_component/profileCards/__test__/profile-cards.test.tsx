@@ -22,8 +22,8 @@ describe('ProfileCards component', () => {
     const element = await screen.findByTestId('profile-cards')
     expect(element).toBeInTheDocument();
     const disableTitle = screen.getAllByText(it.ioesco.profile.lockwallet)
-    expect(disbaleTitle.length).toBe(2)
-    disbaleTitle.forEach((el) => {
+    expect(disableTitle.length).toBe(2)
+    disableTitle.forEach((el) => {
       expect(el).toBeInTheDocument();
     })
   });
