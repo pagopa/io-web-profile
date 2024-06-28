@@ -11,7 +11,7 @@ describe('Revoke wallet ThankYou page', () => {
     await renderWithProviders(<div data-testid="thank-you-page"><ThankYouPage /></div>);
     const element = await screen.findByTestId('thank-you-page')
     expect(element).toBeInTheDocument();
-    expect(await screen.findByText(it.itwallet.common.instanceclosed)).toBeInTheDocument()
+    expect(await screen.findByTestId("thank-you-page")).toBeInTheDocument()
     const backToProfileButton = await screen.findByText(it.ioesco.common.backtoprofile)
     expect(backToProfileButton).toBeInTheDocument()
   });

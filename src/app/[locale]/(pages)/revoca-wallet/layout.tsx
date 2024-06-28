@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.itwallet.metadati.revocawalletinstancetitle,
-    description: messages.itwallet.metadati.revocawalletinstancedescription,
+    title: messages.ioesco.metadati.erroretitle,
+    description: messages.ioesco.metadati.somewrong,
   };
 }
 
