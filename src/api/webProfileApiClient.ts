@@ -13,6 +13,11 @@ import { SetWalletInstanceStatusDataEnum } from './generated/webProfile/SetWalle
 // with withDefaults
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
+
+// with Wallet Test Base Url
+const WALLET_BASE_URL = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_URL}`;
+const WALLET_BASE_PATH = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_PATH}`;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const token = storageTokenOps.read();
@@ -23,6 +28,17 @@ const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (p
   });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const withXFunctions: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
+  const token = storageTokenOps.read();
+  // wrappedOperation and params are correctly inferred
+  return wrappedOperation({
+    ...params,
+    bearerAuth: token,
+    FunctionsKey: process.env.NEXT_PUBLIC_WALLET_FUNCTIONS_KEY
+  });
+    
+};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJweBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const jwe = storageJweOps.read();
@@ -37,6 +53,13 @@ const webProfileApiClient = createClient({
   basePath: BASE_PATH,
   fetchApi: retryingFetch(),
   withDefaults: withJwtBearer,
+});
+
+const webWalletApiClient = createClient({
+  baseUrl: WALLET_BASE_URL,
+  basePath: WALLET_BASE_PATH,
+  fetchApi: retryingFetch(),
+  withDefaults: withXFunctions,
 });
 
 const webProfileApiClientExchange = createClient({
@@ -148,7 +171,7 @@ export const WebProfileApi = {
     return extractResponse(result);
   },
   getCurrentWalletInstanceStatus: async () => {
-    const result = await webProfileApiClient.getCurrentWalletInstanceStatus({});
+    const result = await webWalletApiClient.getCurrentWalletInstanceStatus({});
     return extractResponse(result);
   },
   setWalletInstanceStatus: async (id: SetWalletInstanceStatusDataEnum) => {

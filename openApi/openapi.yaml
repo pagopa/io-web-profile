@@ -226,6 +226,9 @@ paths:
       summary: Retrieve the current Wallet Instance status
       description: Retrieve the current Wallet Instance status
       operationId: getCurrentWalletInstanceStatus
+      security:
+        - FunctionsKey: []
+          BearerAuth: []
       responses:
         '200':
           description: Wallet Instance status successfully retrieved
@@ -286,6 +289,10 @@ paths:
           description: Gateway Timeout
 components:
   securitySchemes:
+    FunctionsKey:
+      type: apiKey
+      name: X-Functions-Key
+      in: header
     bearerAuth:
       type: http
       scheme: bearer

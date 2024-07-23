@@ -30,8 +30,6 @@ const HomeWalletCard = ({
       callFetchWithRetries(WebProfileApi, 'getCurrentWalletInstanceStatus', [], [500])
         .then(res => {
           setWalletRevokeStatus(res);
-          // saving WI_ID in session storage in order to be passed to revoke api request
-          global.window?.sessionStorage?.setItem('WI_ID', res.id);
         })
         .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }

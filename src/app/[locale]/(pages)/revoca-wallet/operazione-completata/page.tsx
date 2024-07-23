@@ -21,8 +21,6 @@ const unlockioaccessRich = {
 
 const ThankYouPage = (): React.ReactElement => {
   useEffect(() => {
-    // TODO [SIW-1092]: Remove this line of code after the wallet deactivation feature is implemented
-    global.window?.localStorage?.setItem('walletStatus', 'deactivated');
     trackEvent('IO_ITW_DEACTIVATION_UX_SUCCESS', {
       event_category: 'UX',
       event_type: 'screen_view',
