@@ -3,7 +3,7 @@ import { Grid, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useEffect, useMemo } from 'react';
-import { WalletData } from '@/api/generated/webProfile/WalletData';
+import { WalletData } from '@/api/generated/walletInstance/WalletData';
 import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';

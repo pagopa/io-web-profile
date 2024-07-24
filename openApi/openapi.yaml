@@ -221,60 +221,6 @@ paths:
           description: Bad Gateway
         '504':
           description: Gateway Timeout
-  /wallet-instances/current/status:
-    get:
-      summary: Retrieve the current Wallet Instance status
-      operationId: getCurrentWalletInstanceStatus
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Wallet Instance status successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WalletData'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: "#/components/responses/Forbidden"
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /wallet-instances/{id}/status:
-    put:
-      summary: Revoke a Wallet Instance
-      operationId: setWalletInstanceStatus
-      security:
-        - bearerAuth: []
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      description: |
-        Revoke the Wallet Instance associated with the authenticated user. 
-        If the Wallet Instance is already revoked, the operation succeed.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SetWalletInstanceStatusData"
-      responses:
-        "204":
-          description: Wallet Instance status successfully set
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "422":
-          $ref: "#/components/responses/UnprocessableContent"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
 components:
   securitySchemes:
     bearerAuth:
@@ -324,9 +270,6 @@ components:
           schema:
             $ref: "#/components/schemas/ProblemJson"
   schemas:
-    SetWalletInstanceStatusData:
-      type: string
-      enum: ['REVOKED']
     InternalServerError:
       allOf:
         - $ref: '#/components/schemas/ProblemJson'
@@ -402,18 +345,6 @@ components:
           type: string
           format: email
           example: foobar@example.com
-    WalletData:
-      description: |-
-        Describes the status of the wallet.
-      type: object
-      properties:
-        id:
-          type: string
-        is_revoked:
-          type: boolean
-      required:
-        - id
-        - is_revoked
     SessionInfo:
       $ref: 'https://raw.githubusercontent.com/pagopa/io-functions-fast-login/main/api/internal.yaml#/components/schemas/SessionInfo'
     SessionState:

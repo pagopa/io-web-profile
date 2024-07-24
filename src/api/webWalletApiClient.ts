@@ -2,10 +2,10 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import { isRight } from 'fp-ts/lib/Either';
 import { useCallback, useState } from 'react';
-import { WithDefaultsT, createClient } from './generated/webProfile/client';
+import { WithDefaultsT, createClient } from './generated/walletInstance/client';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageTokenOps } from '@/app/[locale]/_utils/storage';
-import { SetWalletInstanceStatusDataEnum } from './generated/webProfile/SetWalletInstanceStatusData';
+import { SetWalletInstanceStatusDataEnum } from './generated/walletInstance/SetWalletInstanceStatusData';
 
 // with Wallet Base Url
 const WALLET_BASE_URL = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_URL}`;
