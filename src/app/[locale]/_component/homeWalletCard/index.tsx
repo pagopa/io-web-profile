@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { useEffect, useMemo } from 'react';
 import { WalletData } from '@/api/generated/webProfile/WalletData';
-import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
+import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 
@@ -25,19 +25,19 @@ const HomeWalletCard = ({
 
   useEffect(() => {
     if (isProfileAvailable) {
-      callFetchWithRetries(WebProfileApi, 'getCurrentWalletInstanceStatus', [], [500])
+      callFetchWithRetries(WebWalletApi, 'getCurrentWalletInstanceStatus', [], [500])
         .then(res => {
-          if (res && typeof res !== "number") {
+          if (res) {
             setWalletRevokeStatus(res);
             global.window?.sessionStorage?.setItem('WI_ID', res?.id);
-            return;
           }
-          if(res === 401 || res === 404){
+        }).catch((e) => {
+          if(e?.status){
+            // TODO SIW-918 -> handle different error 4xx statuses
             return
           }
-          throw new Error("Something went wrong")
-
-        }).catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
+          pushWithLocale(ROUTES.INTERNAL_ERROR)
+        });
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale, setWalletRevokeStatus]);
 

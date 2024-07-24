@@ -237,6 +237,8 @@ paths:
                 $ref: '#/components/schemas/WalletData'
         '401':
           description: Unauthorized
+        '403':
+          $ref: "#/components/responses/Forbidden"
         '404':
           description: Not Found
         '500':
