@@ -28,7 +28,6 @@ const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (p
   });
 };
 
-// TODO -> SIW 918: remove this in production to use the right token and use 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withCustomToken: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const token = IS_MOCK_USER_ENABLED ? global.window.localStorage.getItem("customToken") : storageTokenOps.read();

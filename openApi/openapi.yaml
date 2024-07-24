@@ -284,10 +284,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 components:
   securitySchemes:
-    FunctionsKey:
-      type: apiKey
-      name: X-Functions-Key
-      in: header
     bearerAuth:
       type: http
       scheme: bearer
