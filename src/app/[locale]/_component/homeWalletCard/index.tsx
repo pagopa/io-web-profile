@@ -29,11 +29,21 @@ const HomeWalletCard = ({
     if (isProfileAvailable && isWalletRevocationActive) {
       callFetchWithRetries(WebProfileApi, 'getCurrentWalletInstanceStatus', [], [500])
         .then(res => {
-          setWalletRevokeStatus(res);
-        })
-        .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
+          if (res && typeof res !== "number") {
+            setWalletRevokeStatus(res);
+            global.window?.sessionStorage?.setItem('WI_ID', res?.id);
+            return;
+          }
+          if(res === 401 || res === 404){
+            return
+          }
+          throw new Error("Something went wrong")
+
+        }).catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale, setWalletRevokeStatus]);
+
+
 
   const walletCardTitle = useMemo(() => {
     if (walletRevokeStatus?.is_revoked) return t('common.noactive');

@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
   version: $npm_package_version
   title: IO Web Profile Function API
@@ -227,8 +227,7 @@ paths:
       description: Retrieve the current Wallet Instance status
       operationId: getCurrentWalletInstanceStatus
       security:
-        - FunctionsKey: []
-          BearerAuth: []
+        - bearerAuth: []
       responses:
         '200':
           description: Wallet Instance status successfully retrieved
@@ -253,6 +252,9 @@ paths:
   /wallet-instances/{id}/status:
     put:
       summary: Revoke a Wallet Instance
+      operationId: setWalletInstanceStatus
+      security:
+        - bearerAuth: []
       parameters:
         - in: path
           name: id
@@ -262,31 +264,24 @@ paths:
       description: |
         Revoke the Wallet Instance associated with the authenticated user. 
         If the Wallet Instance is already revoked, the operation succeed.
-        If the Wallet Instance cannot be revoked due to its current status, 
-        a conflict error is returned.
-      operationId: setWalletInstanceStatus
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/SetWalletInstanceStatusData"
       responses:
-        '204':
-          description: No content
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerError'
-        '502':
-          description: Bad Gateway
-        '504':
-          description: Gateway Timeout
+        "204":
+          description: Wallet Instance status successfully set
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "422":
+          $ref: "#/components/responses/UnprocessableContent"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 components:
   securitySchemes:
     FunctionsKey:
@@ -297,6 +292,48 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  responses:
+    Forbidden:
+      description: The server understands the request but refuses to authorize it
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
+
+    BadRequest:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
+
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
+
+    UnprocessableContent:
+      description: Unprocessable Content
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
+
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
   schemas:
     SetWalletInstanceStatusData:
       type: string

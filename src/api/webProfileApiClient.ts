@@ -14,9 +14,9 @@ import { SetWalletInstanceStatusDataEnum } from './generated/webProfile/SetWalle
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
 
-// with Wallet Test Base Url
+// with Wallet Base Url
 const WALLET_BASE_URL = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_URL}`;
-const WALLET_BASE_PATH = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_PATH}`;
+const IS_MOCK_USER_ENABLED = process.env.NEXT_PUBLIC_WALLET_MOCK_USER === "true"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
@@ -28,16 +28,15 @@ const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (p
   });
 };
 
+// TODO -> SIW 918: remove this in production to use the right token and use 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const withXFunctions: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
-  const token = storageTokenOps.read();
+const withCustomToken: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
+  const token = IS_MOCK_USER_ENABLED ? global.window.localStorage.getItem("customToken") : storageTokenOps.read();
   // wrappedOperation and params are correctly inferred
   return wrappedOperation({
     ...params,
     bearerAuth: token,
-    FunctionsKey: process.env.NEXT_PUBLIC_WALLET_FUNCTIONS_KEY
   });
-    
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJweBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
@@ -57,9 +56,9 @@ const webProfileApiClient = createClient({
 
 const webWalletApiClient = createClient({
   baseUrl: WALLET_BASE_URL,
-  basePath: WALLET_BASE_PATH,
+  basePath: BASE_PATH,
   fetchApi: retryingFetch(),
-  withDefaults: withXFunctions,
+  withDefaults: withCustomToken,
 });
 
 const webProfileApiClientExchange = createClient({
@@ -100,6 +99,7 @@ const useFetch = () => {
               setIsLoading(false);
               onRedirectToLogin();
               return;
+            case 401:
             case 404:
               setIsLoading(false);
               return new Promise(resolve => resolve(response.right.status));
@@ -174,8 +174,8 @@ export const WebProfileApi = {
     const result = await webWalletApiClient.getCurrentWalletInstanceStatus({});
     return extractResponse(result);
   },
-  setWalletInstanceStatus: async (id: SetWalletInstanceStatusDataEnum) => {
-    const result = await webProfileApiClient.setWalletInstanceStatus({ id });
+  setWalletInstanceStatus: async (id: string) => {
+    const result = await webWalletApiClient.setWalletInstanceStatus({ id, body: SetWalletInstanceStatusDataEnum.REVOKED });
     return extractResponse(result);
   },
 };
