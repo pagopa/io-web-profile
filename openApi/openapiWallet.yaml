@@ -27,9 +27,9 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
         "502":
-          $ref: "#/components/responses/InternalServerError"
+          $ref: "#/components/responses/BadGateway"
         "504":
-          $ref: "#/components/responses/InternalServerError"
+          $ref: "#/components/responses/GatewayTimeout"
   /wallet-instances/{id}/status:
     put:
       summary: Revoke a Wallet Instance
@@ -64,9 +64,9 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
         "502":
-          $ref: "#/components/responses/InternalServerError"
+          $ref: "#/components/responses/BadGateway"
         "504":
-          $ref: "#/components/responses/InternalServerError"
+          $ref: "#/components/responses/GatewayTimeout"
 components:
   securitySchemes:
     bearerAuth:
@@ -116,7 +116,18 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ProblemJson"
-
+    BadGateway:
+      description: Bad Gateway
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
+    GatewayTimeout:
+      description: Gateway Timeout
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProblemJson"
   schemas:
     SetWalletInstanceStatusData:
       type: string
