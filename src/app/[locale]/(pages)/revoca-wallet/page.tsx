@@ -11,8 +11,8 @@ import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import Loader from '../../_component/loader/loader';
-import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '../../_utils/mixpanel';
+import useFetch,{ WebWalletApi } from '@/api/webWalletApiClient';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -58,7 +58,7 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const handleDisableWalletConfirm = useCallback(() => {
     trackEvent('IO_ITW_DEACTIVATION_CONFIRMED', { event_category: 'UX', event_type: 'action' });
     setIsRemovingWallet(true);
-    callFetchWithRetries(WebProfileApi, 'setWalletInstanceStatus', [walletInstanceId], [500])
+    callFetchWithRetries(WebWalletApi, 'setWalletInstanceStatus', [walletInstanceId], [500])
       .then(() => {
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
