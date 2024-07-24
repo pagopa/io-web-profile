@@ -8,15 +8,10 @@ import { WithDefaultsT, createClient } from './generated/webProfile/client';
 import { goToLogin } from '@/app/[locale]/_utils/common';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageJweOps, storageTokenOps } from '@/app/[locale]/_utils/storage';
-import { SetWalletInstanceStatusDataEnum } from './generated/webProfile/SetWalletInstanceStatusData';
 
 // with withDefaults
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
-
-// with Wallet Base Url
-const WALLET_BASE_URL = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_URL}`;
-const IS_MOCK_USER_ENABLED = process.env.NEXT_PUBLIC_WALLET_MOCK_USER === "true"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
@@ -28,15 +23,6 @@ const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (p
   });
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const withCustomToken: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
-  const token = IS_MOCK_USER_ENABLED ? global.window.localStorage.getItem("customToken") : storageTokenOps.read();
-  // wrappedOperation and params are correctly inferred
-  return wrappedOperation({
-    ...params,
-    bearerAuth: token,
-  });
-};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJweBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const jwe = storageJweOps.read();
@@ -51,13 +37,6 @@ const webProfileApiClient = createClient({
   basePath: BASE_PATH,
   fetchApi: retryingFetch(),
   withDefaults: withJwtBearer,
-});
-
-const webWalletApiClient = createClient({
-  baseUrl: WALLET_BASE_URL,
-  basePath: BASE_PATH,
-  fetchApi: retryingFetch(),
-  withDefaults: withCustomToken,
 });
 
 const webProfileApiClientExchange = createClient({
@@ -98,7 +77,6 @@ const useFetch = () => {
               setIsLoading(false);
               onRedirectToLogin();
               return;
-            case 401:
             case 404:
               setIsLoading(false);
               return new Promise(resolve => resolve(response.right.status));
@@ -168,13 +146,5 @@ export const WebProfileApi = {
   exchangeToken: async () => {
     const result = await webProfileApiClientExchange.exchangeToken({});
     return extractResponse(result);
-  },
-  getCurrentWalletInstanceStatus: async () => {
-    const result = await webWalletApiClient.getCurrentWalletInstanceStatus({});
-    return extractResponse(result);
-  },
-  setWalletInstanceStatus: async (id: string) => {
-    const result = await webWalletApiClient.setWalletInstanceStatus({ id, body: SetWalletInstanceStatusDataEnum.REVOKED });
-    return extractResponse(result);
-  },
+  }
 };
