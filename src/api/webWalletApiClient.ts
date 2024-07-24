@@ -60,7 +60,7 @@ const useFetch = () => {
             case 401:
             case 403:
             case 404:
-            case 42:
+            case 422:
               setIsLoading(false);
               return new Promise((_, reject) => reject({ status: response.right.status }));
             default:
