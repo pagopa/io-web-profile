@@ -56,6 +56,7 @@ const useFetch = () => {
             case 200:
               setIsLoading(false);
               return response.right.value;
+            case 400:
             case 401:
             case 403:
             case 404:
