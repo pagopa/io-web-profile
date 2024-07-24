@@ -8,8 +8,6 @@ import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 
-const isWalletRevocationActive = process.env.NEXT_PUBLIC_FF_WALLET_REVOCATION === 'true';
-
 type HomeWalletCardProps = {
   walletRevokeStatus?: WalletData;
   isProfileAvailable: boolean;
@@ -26,7 +24,7 @@ const HomeWalletCard = ({
   const pushWithLocale = useLocalePush();
 
   useEffect(() => {
-    if (isProfileAvailable && isWalletRevocationActive) {
+    if (isProfileAvailable) {
       callFetchWithRetries(WebProfileApi, 'getCurrentWalletInstanceStatus', [], [500])
         .then(res => {
           if (res && typeof res !== "number") {
