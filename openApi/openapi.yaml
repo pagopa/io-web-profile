@@ -227,48 +227,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-  responses:
-    Forbidden:
-      description: The server understands the request but refuses to authorize it
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ProblemJson"
-
-    BadRequest:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ProblemJson"
-
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ProblemJson"
-
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ProblemJson"
-
-    UnprocessableContent:
-      description: Unprocessable Content
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ProblemJson"
-
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ProblemJson"
   schemas:
     InternalServerError:
       allOf:

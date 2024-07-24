@@ -1,4 +1,4 @@
-import { WalletData } from '@/api/generated/walletInstance/WalletData';
+import { WalletData } from '@/api/generated/wallet/WalletData';
 import { LoginInfo } from '../_model/LoginInfo';
 import { MagicLink } from '../_model/MagicLink';
 import { EMAIL_VALIDATION_ROUTES, ROUTES } from './routes';

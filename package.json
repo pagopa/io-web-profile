@@ -15,9 +15,10 @@
     "generate": "npm-run-all generate:*",
     "clean:api-web-profile": "shx rm -rf src/api/generated/webProfile",
     "clean:api-io-function": "shx rm -rf src/api/generated/ioFunction",
+    "clean:api-wallet": "shx rm -rf src/api/generated/wallet",
     "generate:api-web-profile": "yarn run clean:api-web-profile && shx mkdir -p src/api/generated/webProfile && gen-api-models --api-spec ./openApi/openapi.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/webProfile",
     "generate:api-io-function": "yarn run clean:api-io-function && shx mkdir -p src/api/generated/ioFunction && gen-api-models --api-spec https://raw.githubusercontent.com/pagopa/io-functions-public/master/openapi/external.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/ioFunction",
-    "generate:api-wallet-instance": "shx mkdir -p src/api/generated/walletInstance && gen-api-models --api-spec ./openApi/openapi.wallet.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/walletInstance"
+    "generate:api-wallet": "yarn run clean:api-wallet shx mkdir -p src/api/generated/wallet && gen-api-models --api-spec ./openApi/openapiWallet.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/wallet"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
