@@ -224,7 +224,6 @@ paths:
   /wallet-instances/current/status:
     get:
       summary: Retrieve the current Wallet Instance status
-      description: Retrieve the current Wallet Instance status
       operationId: getCurrentWalletInstanceStatus
       security:
         - bearerAuth: []
@@ -236,21 +235,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/WalletData'
         '401':
-          description: Unauthorized
+          $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: "#/components/responses/Forbidden"
         '404':
-          description: Not Found
+          $ref: '#/components/responses/NotFound'
         '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerError'
-        '502':
-          description: Bad Gateway
-        '504':
-          description: Gateway Timeout
+          $ref: '#/components/responses/InternalServerError'
   /wallet-instances/{id}/status:
     put:
       summary: Revoke a Wallet Instance
