@@ -72,6 +72,7 @@
       "noactive": "Non attiva",
       "noprofile": "Non risulta nessun profilo IO associato alla tua identità. Per accedere a tutte le funzionalità, scarica l’app IO sul tuo dispositivo ed entra con SPID o CIE.",
       "norestorecode": "Non hai il codice di ripristino?",
+      "notactive": "Non attivo",
       "nothavespid": "Non hai SPID o CIE?",
       "pagopaspa": "PagoPA S.p.A.",
       "playstore": "Play Store",
@@ -320,7 +321,7 @@
     "thankyoupagewallet": {
       "banner": "Hai perso il tuo dispositivo o ti è stato sottratto?",
       "bannertext": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
-      "description": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br> Se cambi idea, potrai riaggiungerli direttamente dall’app IO. <br></br> <br></br> Ti abbiamo inviato un’email di conferma.",
+      "description": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br> Se cambi idea, potrai riaggiungerli direttamente dall’app IO. <br></br> <br></br>",
       "title": "Fatto!"
     },
     "thankyoupagewalletfaq": {
