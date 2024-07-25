@@ -44,13 +44,13 @@ const HomeWalletCard = ({
 
 
   const walletCardTitle = useMemo(() => {
-    if (walletRevokeStatus?.is_revoked) return t('common.noactive');
+    if (walletRevokeStatus?.is_revoked) return t('common.notactive');
     if (walletRevokeStatus?.is_revoked === false) return t('common.active');
   }, [t, walletRevokeStatus?.is_revoked]);
 
   const walletCardTooltip = useMemo(() => {
     // TODO key for tooltip in inactive status doesn't exist in new dictionary
-    return walletRevokeStatus?.is_revoked ? t('common.noactive') : t('profile.walletbullettooltip');
+    return walletRevokeStatus?.is_revoked ? t('common.notactive') : t('profile.walletbullettooltip');
   }, [walletRevokeStatus?.is_revoked, t]);
 
   return walletRevokeStatus !== undefined ? (

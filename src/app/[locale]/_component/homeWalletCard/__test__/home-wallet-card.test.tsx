@@ -42,7 +42,7 @@ describe('HomeWalletCard component', () => {
     await renderWithProviders(<div data-testid="wallet-card-inactive"><HomeWalletCard  {...inActiveWalletProps} /></div>);
     const element = await screen.findByTestId('wallet-card-inactive')
     expect(element).toBeInTheDocument();
-    const notActiveTitle = screen.getByText(it.ioesco.common.noactive)
+    const notActiveTitle = screen.getByText(it.ioesco.common.notactive)
     expect(notActiveTitle).toBeInTheDocument();
     // TODO missing key in dictionary to set bullettooltip when WI status deactivated
     // const tooltipTitle = screen.getByLabelText(it.ioesco.profile.walletbullettooltip)
