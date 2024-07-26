@@ -169,7 +169,7 @@
     "lgdesktopdrawer": {
       "title": "Confermi di voler disattivare IT Wallet?",
       "back": "Torna indietro",
-      "description": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente. Inoltre, non riceverai più messaggi che riguardano la sperimentazione."
+      "description": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente."
     },
     "lockaccess": {
       "accessidentity": "Qui trovi le identità digitali che hai utilizzato per entrare su IO. Se non hai effettuato tu l’accesso, puoi bloccarlo e mantenere i tuoi dati al sicuro. ",
