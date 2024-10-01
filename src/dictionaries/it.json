@@ -1,5 +1,16 @@
 {
   "ioesco": {
+    "profile": {
+      "lockwallet": "Disattiva IT Wallet",
+      "activesession": "Sessione attiva in app",
+      "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione e accesso al tuo profilo in app.",
+      "lockaccess": "Blocca l’accesso a IO",
+      "lockwalletdescription": "Vuoi rimuovere i documenti digitali presenti nel Portafoglio?",
+      "lostdevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account.",
+      "nodevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e termina la sessiona attiva.",
+      "walletbullet": "IT Wallet",
+      "walletbullettooltip": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO"
+    },
     "blockfaq": {
       "fifthquestion": "Come posso mettere in sicurezza la mia identità digitale?",
       "fifthresponse": "Per mettere in sicurezza SPID, modifica le credenziali di accesso o contatta il tuo fornitore. Se vuoi invece modificare la password della tua CIE, <link>visita questo sito</link>.",
@@ -16,8 +27,9 @@
       "abled": "Abilitato",
       "accessabled": "Accesso abilitato",
       "accessibilitydeclaration": "Dichiarazione di accessibilità",
+      "active": "Attivo",
       "activeduedate": "Attiva fino al {date}",
-      "anagraphicinfo": "Qui trovi i dati del tuo profilo su IO e le informazioni sull’accesso all’app.",
+      "anagraphicinfo": "Qui trovi i dati del tuo profilo su IO, le informazioni sull’accesso all’app e le funzionalità di blocco e disattivazione a distanza.",
       "appaccess": "Accesso a IO",
       "appsession": "Validità sessione",
       "appstore": "App Store",
@@ -42,6 +54,7 @@
       "lockappaccess": "Pensi che la tua identità digitale sia compromessa? Blocca l’accesso all’app IO.",
       "lockio": "Blocca l’accesso a IO",
       "lockioaccess": "Vuoi bloccare l’accesso a IO?",
+      "lockwallet": "Disattiva IT Wallet",
       "locked": "Bloccato (livello 2)",
       "lockedioaccess": "Hai bloccato l’accesso a IO",
       "login": "Accedi",
@@ -57,8 +70,9 @@
       "namesurname": "Nome e Cognome",
       "noaccesspossible": "Non è stato possibile accedere",
       "noactive": "Non attiva",
-      "noprofile": "Non risulta nessun profilo IO associato alla tua identità. Per accedere a tutte le funzionalità, scarica l’app IO sul tuo dispositivo e accedi con SPID o CIE.",
+      "noprofile": "Non risulta nessun profilo IO associato alla tua identità. Per accedere a tutte le funzionalità, scarica l’app IO sul tuo dispositivo ed entra con SPID o CIE.",
       "norestorecode": "Non hai il codice di ripristino?",
+      "notactive": "Non attivo",
       "nothavespid": "Non hai SPID o CIE?",
       "pagopaspa": "PagoPA S.p.A.",
       "playstore": "Play Store",
@@ -76,6 +90,7 @@
       "youridentityonio": "Le tue identitÀ Sull’ APP IO:",
       "yourprofile": "Il tuo profilo",
       "backtohome": "Torna alla home",
+      "confirm": "Conferma",
       "copy": "Copia",
       "devicemodel": "{deviceModel}",
       "email": "{email}",
@@ -111,7 +126,7 @@
     },
     "emailvalidation": {
       "backtoio": "Torna su IO",
-      "emailalreadytakenerrorsubtitle": "L’email <strong> nome.cognome@pagopa.it </strong> è già stata confermata. Torna su IO per continuare a usare l’app o per modificare la tua email.",
+      "emailalreadytakenerrorsubtitle": "L’email <strong> {email} </strong> è già stata confermata. Torna su IO per continuare a usare l’app o per modificare la tua email.",
       "emailalreadytakenerrortitle": "Hai già confermato questa email",
       "emailconfirmed": "Hai confermato la tua email! Torna su IO per continuare a usare l’app.",
       "expiredlinkerrorsubtitle": "Torna su IO e chiedi l’invio di una nuova email di conferma per il tuo indirizzo.",
@@ -151,6 +166,11 @@
       "toomuchtime": "È passato troppo tempo",
       "twofactorneed": "Per motivi di sicurezza, devi utilizzare un’identità con un livello di sicurezza superiore. Per avere più informazioni, contatta il tuo fornitore di identità SPID."
     },
+    "lgdesktopdrawer": {
+      "title": "Confermi di voler disattivare IT Wallet?",
+      "back": "Torna indietro",
+      "description": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente."
+    },
     "lockaccess": {
       "accessidentity": "Qui trovi le identità digitali che hai utilizzato per entrare su IO. Se non hai effettuato tu l’accesso, puoi bloccarlo e mantenere i tuoi dati al sicuro. ",
       "accessidentitycompromise": "Se pensi che la tua identità digitale possa essere compromessa, blocca l’accesso all’app IO.",
@@ -158,6 +178,19 @@
       "lastaccess": "Ultimo accesso il {date} alle {hour}",
       "tooltiplockaccess": "L’accesso a IO è bloccato con livello di sicurezza 2",
       "l2identity": "identità di livello 2"
+    },
+    "lockaccessitwallet": {
+      "description": "Se continui tutti i documenti presenti nel Portafoglio dell’app IO saranno disattivati in modo permanente.",
+      "description2": "Se sospetti un accesso non autorizzato in app con le tue credenziali SPID o CIE, <strong> blocca l’accesso a IO </strong> per mantenere al sicuro i tuoi dati e i tuoi documenti IT Wallet. <br></br> Potrai abilitare nuovamente l’accesso a IO dopo aver messo in sicurezza la tua identità.",
+      "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
+      "tilte2": "Pensi ci sia stato un accesso non autorizzato?",
+      "title": "Vuoi disattivare IT Wallet?"
+    },
+    "lockaccessitwalletfaq": {
+      "firstquestion": "Cosa succede se disattivo IT Wallet?",
+      "forthquestion": "Continuerò a vedere le Carte e metodi di pagamento presenti nel Portafoglio?",
+      "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato IT Wallet?",
+      "thirdquestion": "Cosa succede alla mia sezione Portafoglio dopo aver rimosso i Documenti?"
     },
     "logoutfaq": {
       "firstquestion": "Qualcuno ha utilizzato l’app IO al mio posto. Cosa posso fare?",
@@ -171,7 +204,7 @@
       "logout": "Esci da IO per mantenere al sicuro i tuoi dati, messaggi e metodi di pagamento.",
       "nodevice": "Non hai più il tuo dispositivo?",
       "nospidorcie": "Non hai SPID o CIE?",
-      "selectauthmethod": "Entra con SPID o CIE per vedere le informazioni del tuo profilo e gestire l’accesso all’app."
+      "selectauthmethod": "Entra con SPID o CIE per gestire la sicurezza dell'app o disattivare alcune funzionalità se non hai più il controllo del tuo dispositivo"
     },
     "lplogout": {
       "activesession": "Al momento hai una sessione attiva sull’app IO, valida fino al {date}. Se non hai più il dispositivo, termina la sessione. Potrai accedere in qualsiasi momento da un altro dispositivo.",
@@ -243,13 +276,6 @@
       "confirmedemaildescription": "Hai confermato il tuo indirizzo email. Torna su IO per continuare a usare l’app.",
       "confirmedemailtitle": "Hai confermato la tua email"
     },
-    "profile": {
-      "activesession": "Sessione attiva in app",
-      "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione e accesso al tuo profilo in app.",
-      "lockaccess": "Blocca l’accesso a IO",
-      "lostdevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account.",
-      "nodevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e termina la sessiona attiva."
-    },
     "profilelogout": {
       "logout": "Vuoi uscire da IO?"
     },
@@ -280,58 +306,34 @@
       "secondquestion": "Cosa posso fare se non ho più il codice di ripristino?",
       "secondresponse": "Puoi accedere autenticandoti<link> da questa pagina</link> con CIE o SPID con livello di sicurezza 3 o puoi chiedere <u>supporto all’assistenza</u>."
     },
+    "rowaccordionwallet": {
+      "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di bloccare l’accesso a IO.",
+      "firstresponse": "Se disattivi IT Wallet, tutti i documenti in versione digitale presenti nel Portafoglio di IO saranno disattivati in modo permanente. Se cambi idea, potrai sempre aggiungerli di nuovo al Portafoglio in futuro.",
+      "fourthresponse": "Sì, continuerai a vedere tutte le carte e i metodi di pagamento che hai aggiunto in precedenza.",
+      "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO, escluso IT Wallet.",
+      "thirdresponse": "La tua sezione Portafoglio continuerà ad esistere e funzionare normalmente."
+    },
     "thankyoupage": {
       "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
       "enterbackio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo.",
       "enterbackonio": "Per entrare nuovamente in app IO, ti basterà accedere con le tue credenziali SPID o CIE da qualsiasi dispositivo."
     },
+    "thankyoupagewallet": {
+      "banner": "Hai perso il tuo dispositivo o ti è stato sottratto?",
+      "bannertext": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
+      "description": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br> Se cambi idea, potrai riaggiungerli direttamente dall’app IO. <br></br> <br></br>",
+      "title": "Fatto!"
+    },
+    "thankyoupagewalletfaq": {
+      "firstquestion": "Cosa succede se disattivo IT Wallet?",
+      "fourthquestion": "Se disattivo IT Wallet, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
+      "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato IT Wallet?",
+      "thirdquestion": "Cosa succede al mio Portafoglio dopo aver rimosso i documenti?"
+    },
     "tooltip": {
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",
       "enabledl3": "Prevede il massimo livello di sicurezza (livello 3)",
       "nosession": "Non c’è nessuna sessione di IO attiva"
-    }
-  },
-  "itwallet": {
-    "revokewalletfaq": {
-      "firstquestion": "Cosa succede se disattivo IT Wallet?",
-      "firstresponse": "Se disattivi IT Wallet, tutti i documenti in versione digitale presenti nel Portafoglio di IO saranno disattivati in modo permanente. Se cambi idea, potrai sempre aggiungerli di nuovo al Portafoglio in futuro.",
-      "secondquestion": "Posso continuare a utilizzare i servizi di IO anche se ho disattivato IT Wallet?",
-      "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO, escluso IT Wallet.",
-      "thirdquestion": "Cosa succede al mio Portafoglio dopo aver rimosso i Documenti?",
-      "thirdresponse": "La tua sezione Portafoglio continuerà ad esistere e funzionare normalmente.",
-      "fourthquestion": "Se disattivo IT Wallet, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
-      "fourthresponse": "Sì, continuerai a vedere tutte le carte e i metodi di pagamento che hai aggiunto in precedenza.",
-      "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
-      "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di <link>bloccare l’accesso a IO</link>."
-    },
-    "tooltip": {
-      "activewallet": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
-      "inactivewallet": "IT Wallet non è attivo, puoi attivarlo in qualsiasi momento dall'app IO"
-    },
-    "metadati": {
-      "revocawalletinstancedescription": "C’è un problema sui nostri sistemi, non è possibile revocare il Wallet in questo momento. Riprova più tardi o contatta l’assistenza.",
-      "revocawalletinstancetitle": "C’è un problema temporaneo"
-    },
-    "common": {
-      "instanceclosed": "Hai disattivato IT Wallet",
-      "instancecloseddescription": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br>Se cambi idea, potrai riaggiungerli direttamente dall’app IO.",
-      "instanceclosedconfirm": "Ti abbiamo inviato una mail di conferma.",
-      "lostdeviceshort": "Hai perso il tuo dispositivo o ti è stato sottratto?",
-      "lockaccess": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
-      "disablewallet": "Disattiva IT Wallet",
-      "revokewalletthankyoutitle": "Thankyou page",
-      "revokewalletthankyoudescription": "Wallet Instance è stata revocata. I documenti non sono più validi/presentabili. eID è stato revocato.",
-      "revokewalletinstancetitle": "Vuoi disattivare IT Wallet?",
-      "revokewalletinstancedescription": "Se continui tutti i documenti presenti nel Portafoglio saranno disattivati in modo permanente.",
-      "wallettitle": "IT Wallet",
-      "walletactive": "Attivo",
-      "walletinactive": "Non attivo",
-      "lostdevicewallet": "Se hai smarrito il tuo dispositivo, ti è stato sottratto, o per altre ragioni non ne hai più il controllo, <strong>blocca l'accesso a IO</strong> per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
-      "revokewallet": "Vuoi rimuovere i documenti digitali presenti nel Portafoglio?",
-      "revokewalletcancel": "Torna indietro",
-      "revokewalletconfirm": "Confermi di voler disattivare IT Wallet?",
-      "revokewalletconfirmbutton": "Conferma",
-      "revokewalletpopup": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente. Inoltre, non riceverai più messaggi che riguardano la sperimentazione."
     }
   }
 }

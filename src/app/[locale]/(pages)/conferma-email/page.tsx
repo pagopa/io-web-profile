@@ -11,6 +11,8 @@ import Loader from '../../_component/loader/loader';
 import { ROUTES } from '../../_utils/routes';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ReasonEnum as EmailValidationErrorStatusEnum } from '@/api/generated/ioFunction/ValidationErrorsObject';
+import { setEmailValidation } from '../../_redux/slices/emailValidationSlice';
+import { useDispatch } from 'react-redux';
 
 type UrlParamsType = {
   token: ValidationToken | null;
@@ -22,17 +24,36 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const [urlParams, setUrlParams] = useState<UrlParamsType | undefined>(undefined);
   const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
   const pushWithLocale = useLocalePush();
+  const dispatch = useDispatch();
 
   interface ValidationError {
     value: string;
+    context: Array<{
+      key: string;
+      actual: {
+        profile_email: string;
+      };
+    }>;
   }
 
-  const handleEmailValidationError = useCallback((error: { left: ValidationError[] }) => {
+  const findEmailInResponse = useCallback((response: ValidationError[]): string | undefined => {
+    const contextItem = response.find(item =>
+      item.context.some(ctx => ctx.actual && ctx.actual.profile_email)
+    );
+    return contextItem
+      ? contextItem.context.find(ctx => ctx.actual && ctx.actual.profile_email)?.actual
+          .profile_email
+      : undefined;
+  }, []);
+  
+  const handleEmailValidationError = useCallback((error: { left: ValidationError[] },) => {
     const errorHandlers: Record<string, () => void> = {
       [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
+      [EmailValidationErrorStatusEnum.EMAIL_ALREADY_TAKEN]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_ALREADY_COMPLETED),
     };
     if (error.left && error.left.length > 0) {
       const matchingError = error.left.find((e) => errorHandlers[e.value]);
+      dispatch(setEmailValidation(findEmailInResponse(error.left)));
       if (matchingError) {
         errorHandlers[matchingError.value]();
       } else {
@@ -41,7 +62,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
     } else {
       pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
-  }, [pushWithLocale]);
+  }, [dispatch, findEmailInResponse, pushWithLocale]);
 
   const extractParams = useCallback(()=> {
     try {

@@ -23,7 +23,7 @@ import { ROUTES } from './_utils/routes';
 import Loader from './_component/loader/loader';
 import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { SessionState } from '@/api/generated/webProfile/SessionState';
-import { WalletData } from '@/api/generated/webProfile/WalletData';
+import { WalletData } from '@/api/generated/wallet/WalletData';
 import HomeWalletCard from './_component/homeWalletCard';
 
 const Profile = () => {

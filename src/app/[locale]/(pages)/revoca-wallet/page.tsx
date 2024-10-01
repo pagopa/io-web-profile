@@ -11,18 +11,18 @@ import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import Loader from '../../_component/loader/loader';
-import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import { trackEvent } from '../../_utils/mixpanel';
+import useFetch,{ WebWalletApi } from '@/api/webWalletApiClient';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
+  br: () => <br />
 };
 
 const WalletInstanceRevoke = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   // reading WI_ID in session storage in order to be passed to revoke api request
   const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID');
-  const walletT = useTranslations('itwallet');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pushWithLocale = useLocalePush();
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
@@ -48,17 +48,17 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const renderSummary = useCallback(
     (hasLostDevice: boolean) => {
       if (hasLostDevice) {
-        return <>{walletT.rich('common.lostdevicewallet', unlockioaccessRich)}</>;
+        return <>{t.rich('lockaccessitwallet.description2', unlockioaccessRich)}</>;
       }
-      return <>{walletT('common.revokewalletinstancedescription')}</>;
+      return <>{t('lockaccessitwallet.description')}</>;
     },
-    [walletT]
+    [t]
   );
 
   const handleDisableWalletConfirm = useCallback(() => {
     trackEvent('IO_ITW_DEACTIVATION_CONFIRMED', { event_category: 'UX', event_type: 'action' });
     setIsRemovingWallet(true);
-    callFetchWithRetries(WebProfileApi, 'setWalletInstanceStatus', [walletInstanceId], [500])
+    callFetchWithRetries(WebWalletApi, 'setWalletInstanceStatus', [walletInstanceId], [500])
       .then(() => {
         pushWithLocale(ROUTES.WALLET_THANK_YOU);
       })
@@ -73,10 +73,10 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       <Dialog open={isDialogOpen}>
         <Box p={4} display="flex" flexDirection="column" gap={2}>
           <Typography fontSize={24} fontWeight={700} color="textPrimary">
-            {walletT('common.revokewalletconfirm')}
+            {t('lgdesktopdrawer.title')}
           </Typography>
           <Typography fontSize={16} fontWeight={400} color="textPrimary">
-            {walletT('common.revokewalletpopup')}
+            {t('lgdesktopdrawer.description')}
           </Typography>
           <Box display="flex" justifyContent="end" columnGap={2}>
             <Button
@@ -84,20 +84,20 @@ const WalletInstanceRevoke = (): React.ReactElement => {
               variant="outlined"
               disabled={isRemovingWallet}
             >
-              {walletT('common.revokewalletcancel')}
+              {t('lgdesktopdrawer.back')}
             </Button>
             <Button
               onClick={handleDisableWalletConfirm}
               variant="contained"
               disabled={isRemovingWallet}
             >
-              {walletT('common.revokewalletconfirmbutton')}
+              {t('common.confirm')}
             </Button>
           </Box>
         </Box>
       </Dialog>
     ),
-    [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, walletT]
+    [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t]
   );
 
   const trackAccordionOpen = useCallback((isOpen: boolean, element: number) => {
@@ -119,19 +119,19 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       <Grid sx={commonBackgroundLightWithBack}>
         <BackButton />
         <Introduction
-          title={walletT('common.revokewalletinstancetitle')}
+          title={t('lockaccessitwallet.title')}
           summary={renderSummary(false)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
           <Button variant="contained" size="medium" onClick={handleDisableWallet}>
-            {walletT('common.disablewallet')}
+            {t('profile.lockwallet')}
           </Button>
         </Grid>
       </Grid>
       <Grid sx={commonBackgroundLightWithBack}>
         <Introduction
-          title={t('common.lostdevice')}
+          title={t('lockaccessitwallet.tilte2')}
           summary={renderSummary(true)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
