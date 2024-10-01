@@ -19,7 +19,7 @@ declare const OneTrust: {
   ToggleInfoDisplay: () => void;
 };
 
-export default function Footer({ onExit = (exitAction) => exitAction() }: IOFooterProps) {
+export default function Footer({ onExit = exitAction => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
 
   const handleCookiePreferencies = () => {
@@ -168,7 +168,7 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
           linkType: 'internal',
           onClick: () =>
             window.open(
-              'https://form.agid.gov.it/view/ae682bf0-bba3-11ee-acff-47d32a6bd211',
+              'https://form.agid.gov.it/view/9eb85420-773f-11ef-b8bf-4f02c3f2bc4b',
               '_blank'
             ),
         },
@@ -195,14 +195,14 @@ export default function Footer({ onExit = (exitAction) => exitAction() }: IOFoot
       linkType: 'internal',
       // eslint-disable-next-line sonarjs/no-identical-functions
       onClick: () =>
-        window.open('https://form.agid.gov.it/view/ae682bf0-bba3-11ee-acff-47d32a6bd211', '_blank'),
+        window.open('https://form.agid.gov.it/view/9eb85420-773f-11ef-b8bf-4f02c3f2bc4b', '_blank'),
     },
   ];
 
   const companyLegalInfo = (
     <>
       {t.rich('pagopalegal', {
-        strong: (chunks) => <strong>{chunks}</strong>,
+        strong: chunks => <strong>{chunks}</strong>,
       })}
     </>
   );

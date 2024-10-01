@@ -1,8 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode, Suspense } from 'react';
 import SessionProviderComponent from '../[locale]/_component/sessionProvider';
-import Footer from './_component/footer/footer';
-import Header from './_component/header/header';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
 import { localeList, defaultLocale } from './_utils/common';
@@ -14,7 +12,7 @@ export type Props = {
 };
 
 export async function generateStaticParams() {
-  return localeList.map((locale) => ({ locale }));
+  return localeList.map(locale => ({ locale }));
 }
 
 async function getMessages(locale: string) {
@@ -48,9 +46,7 @@ export default async function RootLayoutWithLocaleAndTheme({
           <Providers>
             <NextIntlClientProvider locale={locale} messages={messages}>
               <ThemeProviderComponent>
-                <Header />
                 <SessionProviderComponent>{children}</SessionProviderComponent>
-                <Footer />
               </ThemeProviderComponent>
             </NextIntlClientProvider>
           </Providers>

@@ -33,11 +33,11 @@ const LogoutConfirm = (): React.ReactElement => {
 
   useEffect(() => {
     callFetchWithRetries(WebProfileApi, 'getUserSessionState', [], [500])
-      .then((res) => {
+      .then(res => {
         setSessionData(res);
       })
       .catch(() => pushWithLocale(ROUTES.INTERNAL_ERROR));
-  }, []);
+  }, [callFetchWithRetries, pushWithLocale]);
 
   const renderSessionActive = (): React.ReactElement => {
     if (sessionData?.session_info.active) {

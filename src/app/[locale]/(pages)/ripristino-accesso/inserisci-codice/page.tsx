@@ -70,7 +70,7 @@ const ReactivateCode = (): React.ReactElement => {
         setErrorMessage('');
         pushWithLocale(ROUTES.RESTORE_THANK_YOU);
       })
-      .catch((err) => {
+      .catch(err => {
         if (err === MAXRETRY_ERROR) {
           pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
         } else {

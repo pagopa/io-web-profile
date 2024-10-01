@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { test, vi } from 'vitest';
 import SessionActiveComp from '../sessionActiveComp';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
 import { localeFromStorage } from '@/app/[locale]/_utils/common';
 
-jest.mock('../../../_component/accordion/faqDefault.tsx', () => ({
+vi.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   FAQ: () => (
     <div data-testid="mocked-faq">
       Mocked FAQ to avoid SyntaxError: Cannot use import statement outside a module
@@ -12,7 +12,7 @@ jest.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   ),
 }));
 
-jest.mock('../../../_utils/common.ts', () => ({ localeFromStorage: 'it' }));
+vi.mock('../../../_utils/common.ts', () => ({ localeFromStorage: 'it' }));
 
 describe('Sanity Checks', () => {
   test("localeFromStorage should be 'it'", () => {
@@ -42,6 +42,6 @@ describe('SessionActiveComp', () => {
       // We expect an error to be thrown
       expect(error).toBeDefined();
     }
-    expect(getByText(/31\/1\/2022./i)).toBeInTheDocument();
+    expect(getByText(/31\/01\/2022./i)).toBeInTheDocument();
   });
 });

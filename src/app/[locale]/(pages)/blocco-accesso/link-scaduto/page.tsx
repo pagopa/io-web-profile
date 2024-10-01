@@ -72,7 +72,7 @@ const ExpiredMagicLink = () => {
                 variant="contained"
                 fullWidth
                 startIcon={<SpidIcon />}
-                onClick={(event) => {
+                onClick={event => {
                   event.preventDefault();
                   setOpenDialog(true);
                 }}
@@ -106,7 +106,7 @@ const ExpiredMagicLink = () => {
       <SelectIdp
         isOpen={openDialog}
         spidLevel={spidLevel}
-        onClose={(open) => {
+        onClose={open => {
           setOpenDialog(open);
         }}
         currentPage={ROUTES.EXPIRED_MAGIC_LINK}

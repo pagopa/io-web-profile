@@ -1,9 +1,10 @@
+import { vi } from 'vitest';
 import { storageLocaleOps } from './../storage';
 import { addSpacesEvery3Chars, localeFromStorage, isBrowser } from '../common';
 import * as common from '../common';
 
 afterEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('Utilities', () => {
@@ -29,7 +30,7 @@ describe('Utilities', () => {
     });
 
     test('returns default value if storage is not available', () => {
-      jest.spyOn(window, 'localStorage', 'get');
+      vi.spyOn(window, 'localStorage', 'get');
       const result = localeFromStorage;
       expect(result).toBe('it');
     });
@@ -41,11 +42,28 @@ describe('Utilities', () => {
       expect(result).toBe(true);
     });
 
-
-  test('returns false when running in a non-browser environment', () => {  
-    jest.spyOn(common,"isBrowser").mockReturnValue(false);
-    const result = isBrowser();
-    expect(result).toBe(false);
+    test('returns false when running in a non-browser environment', () => {
+      vi.spyOn(common, 'isBrowser').mockReturnValue(false);
+      const result = isBrowser();
+      expect(result).toBe(false);
     });
   });
+
+  describe('getWalletStatus', () => {
+    test('returns "on" when the user has an active wallet', () => {
+      const result = common.getWalletStatus({id: "test", is_revoked: false});
+      expect(result).toBe("on");
+    });
+
+    test('returns "off" when the user has a revoked wallet', () => {
+      const result = common.getWalletStatus({id: "test", is_revoked: true});
+      expect(result).toBe("off");
+    });
+
+    test('returns "off" when there is not a wallet instance', () => {
+      const result = common.getWalletStatus();
+      expect(result).toBe("off");
+    });
+  });
+  
 });

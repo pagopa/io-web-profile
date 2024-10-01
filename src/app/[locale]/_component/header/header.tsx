@@ -55,7 +55,15 @@ const Header = (): React.ReactElement => {
             },
           ]
         : userMenuActionsBasic,
-    [JWT_SPID_LEVEL_L1, isLoggedIn, pushWithLocale, userLogged?.spidLevel, userMenuActionsBasic]
+    [
+      JWT_SPID_LEVEL_L1,
+      isLoggedIn,
+      pathName,
+      pushWithLocale,
+      t,
+      userLogged?.spidLevel,
+      userMenuActionsBasic,
+    ]
   );
 
   const sortedUserMenuActions = useMemo(

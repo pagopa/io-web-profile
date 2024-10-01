@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
-import { Accordion } from '@pagopa/pagopa-editorial-components';
 import { Link, Typography } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
 import { Flows } from '../../_enums/Flows';
 import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/common';
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { ROUTES } from '../../_utils/routes';
+import { Accordion } from './accordion';
 
 type FAQProps = {
   flow?: string;
+  onToggleFAQ?: (isOpen: boolean, element: number) => void;
 };
 // the 'content' property is set to any because
 // the library from which we imported the accordion
@@ -62,7 +63,7 @@ const thirdBlockRich = {
   li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
 };
 
-const fifthBlockFaqRick = {
+const fifthBlockFaqRich = {
   link: (chunks: React.ReactNode) => (
     <Link
       target="_blank"
@@ -73,8 +74,17 @@ const fifthBlockFaqRick = {
     </Link>
   ),
 };
+const fifthRevokeWalletFaqRich = {
+  link: (chunks: React.ReactNode) => {
+    return (
+      <Link fontWeight={600} href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}>
+        {chunks}
+      </Link>
+    );
+  },
+};
 
-export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
+export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
   const t = useTranslations('ioesco');
   // #region entries
   const logoutEntries: FAQEntries[] = [
@@ -111,7 +121,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
     {
       header: t('blockfaq.fifthquestion'),
-      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRick),
+      content: t.rich('blockfaq.fifthresponse', fifthBlockFaqRich),
     },
   ];
 
@@ -141,8 +151,31 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
     },
   ];
 
+  const revokeWallet: FAQEntries[] = [
+    {
+      header: t('thankyoupagewalletfaq.firstquestion'),
+      content: t('rowaccordionwallet.firstresponse'),
+    },
+    {
+      header: t('thankyoupagewalletfaq.secondquestion'),
+      content: t('rowaccordionwallet.secondresponse'),
+    },
+    {
+      header: t('thankyoupagewalletfaq.thirdquestion'),
+      content: t('rowaccordionwallet.thirdresponse'),
+    },
+    {
+      header: t('thankyoupagewalletfaq.fourthquestion'),
+      content: t('rowaccordionwallet.fourthresponse'),
+    },
+    {
+      header: t('lockaccessitwallet.fifthquestion'),
+      content: t.rich('rowaccordionwallet.fifthresponse', fifthRevokeWalletFaqRich),
+    },
+  ];
+
   const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
-    const updatedEntries: FAQEntries[] = entries.map((entry) => ({
+    const updatedEntries: FAQEntries[] = entries.map(entry => ({
       ...entry,
       content: <span style={{ fontSize: theme.typography.body2.fontSize }}>{entry.content}</span>,
     }));
@@ -157,6 +190,8 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
         return wrappingFaqContent(restoreEntries);
       case Flows.RESTOREL3:
         return wrappingFaqContent(restoreEntriesL3);
+      case Flows.REVOKEWALLET:
+        return wrappingFaqContent(revokeWallet);
       default:
         return wrappingFaqContent(logoutEntries);
     }
@@ -170,6 +205,7 @@ export const FAQ = ({ flow = Flows.LOGOUT }: FAQProps) => {
         theme="light"
         layout="center"
         title={t('common.faqtitle')}
+        onToogleAccordion={onToggleFAQ}
       />
     </Typography>
   );

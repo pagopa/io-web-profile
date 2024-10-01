@@ -1,16 +1,18 @@
 'use client';
 /* eslint-disable sonarjs/cognitive-complexity */
 import { isRight } from 'fp-ts/lib/Either';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { LockSessionData } from './generated/webProfile/LockSessionData';
 import { UnlockSessionData } from './generated/webProfile/UnlockSessionData';
 import { WithDefaultsT, createClient } from './generated/webProfile/client';
 import { goToLogin } from '@/app/[locale]/_utils/common';
 import { extractResponse, retryingFetch } from '@/app/[locale]/_utils/api-utils';
 import { storageJweOps, storageTokenOps } from '@/app/[locale]/_utils/storage';
+
 // with withDefaults
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withJwtBearer: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
   const token = storageTokenOps.read();
@@ -46,7 +48,7 @@ const webProfileApiClientExchange = createClient({
 
 const useFetch = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const callFetchWithRetries = async <
+  const callFetchWithRetries = useCallback(async <
     C extends typeof WebProfileApi,
     N extends keyof typeof WebProfileApi
   >(
@@ -77,7 +79,7 @@ const useFetch = () => {
               return;
             case 404:
               setIsLoading(false);
-              return new Promise((resolve) => resolve(response.right.status));
+              return new Promise(resolve => resolve(response.right.status));
             default:
               if (retryStatusCodes.includes(response.right.status)) {
                 if (retryCount === maxRetries - 1) {
@@ -89,7 +91,7 @@ const useFetch = () => {
                   }
                 }
                 retryCount++;
-                await new Promise((resolve) => setTimeout(resolve, retryDelay));
+                await new Promise(resolve => setTimeout(resolve, retryDelay));
                 setIsLoading(false);
                 break;
               } else {
@@ -103,7 +105,7 @@ const useFetch = () => {
       setIsLoading(false);
       throw new Error(`Unexpected status code: ${e}`);
     }
-  };
+  }, []);
 
   return {
     callFetchWithRetries,
@@ -144,5 +146,5 @@ export const WebProfileApi = {
   exchangeToken: async () => {
     const result = await webProfileApiClientExchange.exchangeToken({});
     return extractResponse(result);
-  },
+  }
 };

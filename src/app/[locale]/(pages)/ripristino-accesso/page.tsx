@@ -32,7 +32,7 @@ const RestoreProfile = (): React.ReactElement => {
         .then(() => {
           pushWithLocale(ROUTES.RESTORE_THANK_YOU);
         })
-        .catch((_err) => {
+        .catch(() => {
           pushWithLocale(ROUTES.PROFILE_RESTORE_KO);
         });
     } else {
@@ -59,7 +59,7 @@ const RestoreProfile = (): React.ReactElement => {
           <Grid item sm={10} md={7}>
             <Typography mb={5} fontSize={'20px'}>
               {t.rich('restore.needrestorecode', {
-                strong: (chunks) => <strong>{chunks}</strong>,
+                strong: chunks => <strong>{chunks}</strong>,
               })}
             </Typography>
           </Grid>

@@ -64,7 +64,7 @@ const ProfileBlock = (): React.ReactElement => {
       .then(() => {
         pushWithLocale(ROUTES.PROFILE_BLOCK_SUCCESS);
       })
-      .catch((_err) => {
+      .catch(() => {
         pushWithLocale(ROUTES.PROFILE_BLOCK_KO);
       });
   };

@@ -38,7 +38,7 @@ export const IdpListOnApp = () => {
         }}
       >
         {mockedIdentityProviders &&
-          mockedIdentityProviders.map((item) => (
+          mockedIdentityProviders.map(item => (
             <Grid key={item.entityId}>
               <Grid container justifyContent={'space-between'} py={2} pl={4} pr={6}>
                 <Grid item>
@@ -49,6 +49,7 @@ export const IdpListOnApp = () => {
                   <Icon
                     sx={{ width: '100px', height: '48px', display: 'flex', alignItems: 'center' }}
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img width="85.44px" src={item.imageUrl} alt={item.entityId} />
                   </Icon>
                 </Grid>

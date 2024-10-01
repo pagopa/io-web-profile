@@ -1,15 +1,15 @@
-import { render, renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import useLocalePush from '../useLocalePush';
-// import { useRouter } from 'next-intl/client';
+import { test, vi } from 'vitest';
 
-jest.mock('next-intl/client', () => ({
-    useRouter() {
-      return {
-        push: () => jest.fn(),
-        replace: () => jest.fn(),
-      };
-    },
-  }));
+vi.mock('next-intl/client', () => ({
+  useRouter() {
+    return {
+      push: () => vi.fn(),
+      replace: () => vi.fn(),
+    };
+  },
+}));
 
 test('render hook', () => {
   renderHook(() => useLocalePush());

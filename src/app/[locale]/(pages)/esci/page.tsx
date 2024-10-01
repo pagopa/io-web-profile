@@ -62,7 +62,7 @@ const Init = (): React.ReactElement => {
                   backgroundColor: '#ffffff',
                 },
               }}
-              onClick={(event) => {
+              onClick={event => {
                 event.preventDefault();
                 handleSPIDLogin();
               }}

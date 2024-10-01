@@ -32,6 +32,11 @@ export const commonBackground = {
   },
 };
 
+export const commonBackgroundFullHeight = {
+  ...commonBackground,
+  height: '100vh'
+};
+
 export const loaderOverlay = {
   position: 'fixed',
   display: 'flex',
@@ -96,4 +101,9 @@ export const commonCardStyle = {
   height: '100%',
   boxShadow: '0px 8px 38px 7px #002B551A',
   borderRadius: '16px',
+};
+
+export const commonBackgroundLightFullHeight = {
+  ...commonBackgroundLight,
+  height: '100vh'
 };
