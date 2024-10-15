@@ -6,7 +6,6 @@ import { useEffect, useMemo } from 'react';
 import { WalletData } from '@/api/generated/wallet/WalletData';
 import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
 import useLocalePush from '../../_hooks/useLocalePush';
-import { ROUTES } from '../../_utils/routes';
 
 type HomeWalletCardProps = {
   walletRevokeStatus?: WalletData;
@@ -33,10 +32,8 @@ const HomeWalletCard = ({
           }
         }).catch((e) => {
           if(e?.status){
-            // TODO SIW-918 -> handle different error 4xx statuses
             return
           }
-          pushWithLocale(ROUTES.INTERNAL_ERROR)
         });
     }
   }, [callFetchWithRetries, isProfileAvailable, pushWithLocale, setWalletRevokeStatus]);
@@ -49,7 +46,6 @@ const HomeWalletCard = ({
   }, [t, walletRevokeStatus?.is_revoked]);
 
   const walletCardTooltip = useMemo(() => {
-    // TODO key for tooltip in inactive status doesn't exist in new dictionary
     return walletRevokeStatus?.is_revoked ? t('common.notactive') : t('profile.walletbullettooltip');
   }, [walletRevokeStatus?.is_revoked, t]);
 

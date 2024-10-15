@@ -1,15 +1,15 @@
 {
   "ioesco": {
     "profile": {
-      "lockwallet": "Disattiva IT Wallet",
+      "lockwallet": "Disattiva Documenti su IO",
       "activesession": "Sessione attiva in app",
       "anagraphicinfo": "Qui trovi i tuoi dati anagrafici e di contatto utilizzati da app IO e le funzionalità di gestione e accesso al tuo profilo in app.",
       "lockaccess": "Blocca l’accesso a IO",
       "lockwalletdescription": "Vuoi rimuovere i documenti digitali presenti nel Portafoglio?",
       "lostdevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account.",
       "nodevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e termina la sessiona attiva.",
-      "walletbullet": "IT Wallet",
-      "walletbullettooltip": "IT Wallet è pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO"
+      "walletbullet": "Documenti su IO",
+      "walletbullettooltip": "Pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO"
     },
     "blockfaq": {
       "fifthquestion": "Come posso mettere in sicurezza la mia identità digitale?",
@@ -54,7 +54,7 @@
       "lockappaccess": "Pensi che la tua identità digitale sia compromessa? Blocca l’accesso all’app IO.",
       "lockio": "Blocca l’accesso a IO",
       "lockioaccess": "Vuoi bloccare l’accesso a IO?",
-      "lockwallet": "Disattiva IT Wallet",
+      "lockwallet": "Disattiva Documenti su IO",
       "locked": "Bloccato (livello 2)",
       "lockedioaccess": "Hai bloccato l’accesso a IO",
       "login": "Accedi",
@@ -167,7 +167,7 @@
       "twofactorneed": "Per motivi di sicurezza, devi utilizzare un’identità con un livello di sicurezza superiore. Per avere più informazioni, contatta il tuo fornitore di identità SPID."
     },
     "lgdesktopdrawer": {
-      "title": "Confermi di voler disattivare IT Wallet?",
+      "title": "Confermi di voler disattivare Documenti su IO?",
       "back": "Torna indietro",
       "description": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente."
     },
@@ -181,16 +181,16 @@
     },
     "lockaccessitwallet": {
       "description": "Se continui tutti i documenti presenti nel Portafoglio dell’app IO saranno disattivati in modo permanente.",
-      "description2": "Se sospetti un accesso non autorizzato in app con le tue credenziali SPID o CIE, <strong> blocca l’accesso a IO </strong> per mantenere al sicuro i tuoi dati e i tuoi documenti IT Wallet. <br></br> Potrai abilitare nuovamente l’accesso a IO dopo aver messo in sicurezza la tua identità.",
+      "description2": "Se sospetti un accesso non autorizzato in app con le tue credenziali SPID o CIE, <strong> blocca l’accesso a IO </strong> per mantenere al sicuro i tuoi dati e i tuoi Documenti su IO. <br></br> Potrai abilitare nuovamente l’accesso a IO dopo aver messo in sicurezza la tua identità.",
       "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
       "tilte2": "Pensi ci sia stato un accesso non autorizzato?",
-      "title": "Vuoi disattivare IT Wallet?"
+      "title": "Vuoi disattivare Documenti su IO?"
     },
     "lockaccessitwalletfaq": {
-      "firstquestion": "Cosa succede se disattivo IT Wallet?",
+      "firstquestion": "Cosa succede se disattivo Documenti su IO?",
       "forthquestion": "Continuerò a vedere le Carte e metodi di pagamento presenti nel Portafoglio?",
-      "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato IT Wallet?",
-      "thirdquestion": "Cosa succede alla mia sezione Portafoglio dopo aver rimosso i Documenti?"
+      "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato Documenti su IO?",
+      "thirdquestion": "Cosa succede alla mia sezione Portafoglio dopo aver rimosso i documenti?"
     },
     "logoutfaq": {
       "firstquestion": "Qualcuno ha utilizzato l’app IO al mio posto. Cosa posso fare?",
@@ -308,9 +308,9 @@
     },
     "rowaccordionwallet": {
       "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di bloccare l’accesso a IO.",
-      "firstresponse": "Se disattivi IT Wallet, tutti i documenti in versione digitale presenti nel Portafoglio di IO saranno disattivati in modo permanente. Se cambi idea, potrai sempre aggiungerli di nuovo al Portafoglio in futuro.",
+      "firstresponse": "Tutti i documenti in versione digitale presenti nel Portafoglio di IO saranno disattivati in modo permanente. Se cambi idea, potrai sempre aggiungerli di nuovo al Portafoglio in futuro.",
       "fourthresponse": "Sì, continuerai a vedere tutte le carte e i metodi di pagamento che hai aggiunto in precedenza.",
-      "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO, escluso IT Wallet.",
+      "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO, escluso Documenti su IO.",
       "thirdresponse": "La tua sezione Portafoglio continuerà ad esistere e funzionare normalmente."
     },
     "thankyoupage": {
@@ -321,13 +321,13 @@
     "thankyoupagewallet": {
       "banner": "Hai perso il tuo dispositivo o ti è stato sottratto?",
       "bannertext": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
-      "description": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati. <br></br> Se cambi idea, potrai riaggiungerli direttamente dall’app IO. <br></br> <br></br>",
-      "title": "Fatto!"
+      "description": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati.Se cambi idea, potrai aggiungerli di nuovo direttamente dall’app IO. Ti abbiamo inviato una email di conferma. ",
+      "title": "Hai disattivato Documenti su IO"
     },
     "thankyoupagewalletfaq": {
-      "firstquestion": "Cosa succede se disattivo IT Wallet?",
-      "fourthquestion": "Se disattivo IT Wallet, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
-      "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato IT Wallet?",
+      "firstquestion": "Cosa succede se disattivo Documenti su IO?",
+      "fourthquestion": "Se disattivo Documenti su IO, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
+      "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato Documenti su IO?",
       "thirdquestion": "Cosa succede al mio Portafoglio dopo aver rimosso i documenti?"
     },
     "tooltip": {
