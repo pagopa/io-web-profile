@@ -33,7 +33,7 @@
     "crypto-js": "^4.1.1",
     "generate-password-ts": "^1.6.3",
     "mixpanel-browser": "^2.47.0",
-    "next": "13.4.9",
+    "next": "14.2.7",
     "next-intl": "2.19.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
