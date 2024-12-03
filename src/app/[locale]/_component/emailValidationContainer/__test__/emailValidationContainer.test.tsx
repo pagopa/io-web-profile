@@ -29,11 +29,10 @@ describe('EmailValidationContainer component', () => {
 
   test('should trigger onClick when the button is clicked', async () => {
     await renderWithProviders(<EmailValidationContainer {...defaultProps} />);
-    
+
     const button = await screen.findByText('FirstButton');
     fireEvent.click(button);
 
     expect(handleClick).toHaveBeenCalled();
   });
-
 });

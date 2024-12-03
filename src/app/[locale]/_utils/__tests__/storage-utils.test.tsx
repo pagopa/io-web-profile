@@ -4,7 +4,7 @@ import {
   storageWrite,
   storageOpsBuilder,
   StorageOps,
-} from './../storage-utils';
+} from '../storage-utils';
 
 describe('Storage Functions', () => {
   const key = 'testKey';

@@ -1270,7 +1270,12 @@
           "latency": 0,
           "statusCode": 204,
           "label": "Wallet instance revoke request is fullfilled",
-          "headers": [],
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -1444,18 +1449,8 @@
       "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
     }
   ],
-  "proxyReqHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "proxyResHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
+  "proxyReqHeaders": [],
+  "proxyResHeaders": [],
   "data": [],
   "callbacks": []
 }

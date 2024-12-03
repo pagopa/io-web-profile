@@ -4,7 +4,7 @@ import AppleIcon from '@mui/icons-material/Apple';
 import { Button, Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { Introduction } from '../../_component/introduction/introduction';
+import { Introduction } from '../introduction/introduction';
 import { commonBackground } from '../../_utils/styles';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { storageUserOps } from '../../_utils/storage';

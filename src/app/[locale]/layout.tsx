@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode, Suspense } from 'react';
-import SessionProviderComponent from '../[locale]/_component/sessionProvider';
+import SessionProviderComponent from './_component/sessionProvider';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
 import { localeList, defaultLocale } from './_utils/common';

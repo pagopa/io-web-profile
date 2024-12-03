@@ -146,5 +146,5 @@ export const WebProfileApi = {
   exchangeToken: async () => {
     const result = await webProfileApiClientExchange.exchangeToken({});
     return extractResponse(result);
-  }
+  },
 };

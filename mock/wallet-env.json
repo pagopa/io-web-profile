@@ -1,0 +1,308 @@
+{
+  "uuid": "516ec40a-85dd-4b4b-8f17-6b2d8f302a0b",
+  "lastMigration": 32,
+  "name": "Wallet env",
+  "endpointPrefix": "wallet/api/v1",
+  "latency": 0,
+  "port": 7072,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "61e0fc4d-00d6-492b-b828-56a494692f55",
+      "type": "http",
+      "documentation": "Revoke the Wallet Instance associated with the authenticated user. If the Wallet Instance is already revoked, the operation succeed. If the Wallet Instance cannot be revoked due to its current status, a conflict error is returned.",
+      "method": "put",
+      "endpoint": "wallet-instances/:id/status",
+      "responses": [
+        {
+          "uuid": "5982f33c-cd26-419e-a0c4-a3585a8f11db",
+          "body": "{{setGlobalVar 'is_revoked' true}}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Wallet instance revoke request is fullfilled",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5b13211c-8dc8-48c3-90a1-4a0e1360fba9",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unhautorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "af60cdf9-ec51-4108-bf61-dbe51e91951f",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Not Found",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a047fd59-416c-494c-a92f-49e370b85e22",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 409,
+          "label": "Conflict",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "400eb21e-1369-4141-8fea-b974a95fb032",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Server Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "pdh4gT6-j35C-aj3T-auh39f",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "d992936c-5efc-483f-ba24-e17bd1f4fbc0",
+      "type": "http",
+      "documentation": "Retrieve the current Wallet Instance status",
+      "method": "get",
+      "endpoint": "wallet-instances/current/status",
+      "responses": [
+        {
+          "uuid": "c300f4a7-046b-4fe7-bcf0-7b8720129b15",
+          "body": "{\n  \"id\": \"pdh4gT6-j35C-aj3T-auh39f\",\n  \"is_revoked\": {{#if (getGlobalVar 'is_revoked') }}{{ getGlobalVar 'is_revoked' }}{{else}}false{{/if}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Wallet Instance Not Revoked",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "057e3159-7c7e-48ce-a37d-7a33af2453e8",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Not Found",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f2513619-43c3-4f6e-8fa5-5f8abad4ee48",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Server Error",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0a34d18b-d593-4e8e-b654-557598bd5bce",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7e5852c2-ee09-4b0d-a4de-47831b2bcadd",
+          "body": "{\n  \"id\": \"pdh4gT6-j35C-aj3T-auh39f\",\n  \"is_revoked\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Wallet Instance Revoked",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "61e0fc4d-00d6-492b-b828-56a494692f55"
+    },
+    {
+      "type": "route",
+      "uuid": "d992936c-5efc-483f-ba24-e17bd1f4fbc0"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

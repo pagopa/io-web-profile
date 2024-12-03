@@ -4,45 +4,50 @@ import HomeWalletCard from '..';
 import { screen } from '@testing-library/react';
 import * as it from '../../../../../dictionaries/it.json';
 
-
 const baseProps = {
   isProfileAvailable: true,
-  setWalletRevokeStatus: () => null
-}
+  setWalletRevokeStatus: () => null,
+};
 const activeWalletProps = {
   walletRevokeStatus: {
-    id: "Test",
-    is_revoked: false
+    id: 'Test',
+    is_revoked: false,
   },
-  ...baseProps
+  ...baseProps,
 };
 
 const inActiveWalletProps = {
   walletRevokeStatus: {
-    id: "Test",
-    is_revoked: true
+    id: 'Test',
+    is_revoked: true,
   },
-  ...baseProps
+  ...baseProps,
 };
 
-
 describe('HomeWalletCard component', () => {
-
   test('should render active wallet card', async () => {
-    await renderWithProviders(<div data-testid="wallet-card-active"><HomeWalletCard  {...activeWalletProps} /></div>);
-    const element = await screen.findByTestId('wallet-card-active')
+    await renderWithProviders(
+      <div data-testid="wallet-card-active">
+        <HomeWalletCard {...activeWalletProps} />
+      </div>
+    );
+    const element = await screen.findByTestId('wallet-card-active');
     expect(element).toBeInTheDocument();
-    const activeTitle = screen.getByText(it.ioesco.common.active)
+    const activeTitle = screen.getByText(it.ioesco.common.active);
     expect(activeTitle).toBeInTheDocument();
-    const tooltipTitle = screen.getByLabelText(it.ioesco.profile.walletbullettooltip)
+    const tooltipTitle = screen.getByLabelText(it.ioesco.profile.walletbullettooltip);
     expect(tooltipTitle).toBeInTheDocument();
   });
 
   test('should render inactive wallet card', async () => {
-    await renderWithProviders(<div data-testid="wallet-card-inactive"><HomeWalletCard  {...inActiveWalletProps} /></div>);
-    const element = await screen.findByTestId('wallet-card-inactive')
+    await renderWithProviders(
+      <div data-testid="wallet-card-inactive">
+        <HomeWalletCard {...inActiveWalletProps} />
+      </div>
+    );
+    const element = await screen.findByTestId('wallet-card-inactive');
     expect(element).toBeInTheDocument();
-    const notActiveTitle = screen.getByText(it.ioesco.common.notactive)
+    const notActiveTitle = screen.getByText(it.ioesco.common.notactive);
     expect(notActiveTitle).toBeInTheDocument();
     // TODO missing key in dictionary to set bullettooltip when WI status deactivated
     // const tooltipTitle = screen.getByLabelText(it.ioesco.profile.walletbullettooltip)
@@ -50,9 +55,12 @@ describe('HomeWalletCard component', () => {
   });
 
   test('should not render wallet card', async () => {
-    await renderWithProviders(<div data-testid="wallet-card-wrapper"><HomeWalletCard {...baseProps} /></div>);
-    const element = await screen.findByTestId('wallet-card-wrapper')
+    await renderWithProviders(
+      <div data-testid="wallet-card-wrapper">
+        <HomeWalletCard {...baseProps} />
+      </div>
+    );
+    const element = await screen.findByTestId('wallet-card-wrapper');
     expect(element).toBeEmptyDOMElement();
   });
-  
 });
