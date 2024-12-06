@@ -142,7 +142,7 @@ jobs:
               --name ${{ env.ENDPOINT_NAME_OLD }} \
               --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
               --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
-              --content-paths "/*""
+              --content-paths "/*"
   
   purge_cdn_frontdoor:
     needs: deploy_portal
@@ -157,4 +157,4 @@ jobs:
               --endpoint-name ${{ env.ENDPOINT_NAME_NEW }} \
               --profile-name ${{ env.PROFILE_CDN_NAME_NEW }} \
               --resource-group ${{ env.RESOURCE_GROUP_NAME_NEW }} \
-              --content-paths "/*""
+              --content-paths "/*"
