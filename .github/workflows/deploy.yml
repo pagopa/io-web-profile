@@ -1,17 +1,11 @@
 name: Release a new version and deploy to production IoWebProfile
 
 on:
+  push:
+    branches:
+      - IOPID-2397
   workflow_dispatch:
     inputs:
-      RELEASE_SEMVER:
-        description: 'Version bump to apply (major, minor, patch)'
-        required: true
-        default: 'minor'
-        type: choice
-        options:
-          - major
-          - minor
-          - patch
       DEPLOY:
         description: 'Where to deploy'
         required: true
