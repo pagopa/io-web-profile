@@ -115,6 +115,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: StaticSite
+          path: ./
 
       - name: Empty the Storage
         uses: azure/CLI@v2
@@ -136,6 +137,17 @@ jobs:
               --destination '$web' \
               --overwrite
 
+      - name: Purge the CDN (Frontdoor)
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az afd endpoint purge \
+              --endpoint-name ${{ env.ENDPOINT_NAME_NEW }} \
+              --profile-name ${{ env.PROFILE_CDN_NAME_NEW }} \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME_NEW }} \
+              --content-paths "/*"
+
+  # TODO fix
   # purge_cdn_classic:
   #   if: {{ inputs.DEPLOY == 'ioapp.it' }}
   #   name: Purge CDN (Classic)
@@ -151,19 +163,3 @@ jobs:
   #             --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
   #             --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
   #             --content-paths "/*"
-
-  purge_cdn_frontdoor:
-    needs: deploy_portal
-    if: ${{ inputs.DEPLOY != 'ioapp.it' }}
-    name: Purge CDN (Frontdoor)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Purge the CDN (Frontdoor)
-        uses: azure/CLI@v2
-        with:
-          inlineScript: |
-            az afd endpoint purge \
-              --endpoint-name ${{ env.ENDPOINT_NAME_NEW }} \
-              --profile-name ${{ env.PROFILE_CDN_NAME_NEW }} \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME_NEW }} \
-              --content-paths "/*"
