@@ -97,6 +97,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare_artifact
     environment: app-prod-cd
+    permissions:
+      id-token: write
     env:
       STORAGE_ACCOUNT_NAME: 'iopitniowebprofilest01'
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
