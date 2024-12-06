@@ -1,136 +1,89 @@
-name:  Release a new version and deploy to production IoWebProfile
+name: Release a new version and deploy to production IoWebProfile
 
 on:
   workflow_dispatch:
     inputs:
       RELEASE_SEMVER:
-        description: "Version bump to apply (major, minor, patch)"
+        description: 'Version bump to apply (major, minor, patch)'
         required: true
-        default: "minor"
+        default: 'minor'
         type: choice
         options:
           - major
           - minor
           - patch
       DEPLOY:
-        description: "Where to deploy"
+        description: 'Where to deploy'
         required: true
-        default: "account.ioapp.it"
+        default: 'account.ioapp.it'
         type: choice
         options:
-          - "account.ioapp.it"
-          - "ioapp.it"
+          - 'account.ioapp.it'
+          - 'ioapp.it'
 
 env:
-  AZURE_SUBSCRIPTION: ${{ secrets.PROD_AZURE_SUBSCRIPTION }}
-  AZURE_SERVICE_CONN: ${{ secrets.PROD_AZURE_SERVICE_CONN }}
-  STORAGE_ACCOUNT_NAME: ${{ secrets.PROD_STORAGE_ACCOUNT_NAME }}
-  PROFILE_CDN_NAME: ${{ secrets.PROD_PROFILE_CDN_NAME }}
-  ENDPOINT_NAME: ${{ secrets.PROD_ENDPOINT_NAME }}
-  RESOURCE_GROUP_NAME: ${{ secrets.PROD_RESOURCE_GROUP_NAME }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-
+  # ioapp.it variables
+  STORAGE_ACCOUNT_NAME_OLD: 'iopweuiowebportalsa'
+  PROFILE_CDN_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-profile'
+  ENDPOINT_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-endpoint'
+  RESOURCE_GROUP_NAME_OLD: 'io-p-weu-ioweb-fe-rg'
+  # account.ioapp.it variables
+  STORAGE_ACCOUNT_NAME_NEW: 'iopitniowebprofilest01'
+  PROFILE_CDN_NAME_NEW: 'io-p-ioweb-profile-portal-afd-01'
+  ENDPOINT_NAME_NEW: 'io-p-itn-ioweb-profile-fde-01'
+  RESOURCE_GROUP_NAME_NEW: 'io-p-itn-ioweb-fe-rg-01'
+  # Common variables
+  AZURE_SUBSCRIPTION: 'PROD-IO'
 
 permissions:
   contents: write
 
 jobs:
-
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - id: get_version
-        name: Get Version
-        run: |
-          PACKAGE_FILE="package.json"
-          if [[ -f "$PACKAGE_FILE" ]]; then
-            echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
-          else
-            echo "::error title=Pipeline error::Pipeline could not find package.json file"
-            exit 1
-          fi
-        shell: bash
-
-      - name: Bump Package Version
-        id: bump
-        uses: pagopa/github-actions-template/bump-semver@main
-        with:
-          semver: ${{ inputs.RELEASE_SEMVER  }}
-          current_version: ${{ env.version }}
-
-      - name: Create Release tag
-        uses: ncipollo/release-action@v1.12.0
-        with:
-          commit: ${{ github.event.release.tag_name }}
-          tag: ${{ steps.bump.outputs.new_version }}
-          name: Release ${{ steps.bump.outputs.new_version }}
-          makeLatest: latest
-          generateReleaseNotes: true
-          prerelease: false
-      
-      - name: Make new commit
-        id: commit
-        shell: bash
-        run: |
-          contents="$(jq '.version = "${{ steps.bump.outputs.new_version }}"' package.json)"
-          echo -E "${contents}" > package.json
-          
-          git add .
-          git config --global user.email "github-bot@pagopa.it"
-          git config --global user.name "pagopa-github-bot"
-          git commit -m "Bump to version ${{ steps.bump.outputs.new_version }}" || exit 0
-          git push origin main
-        
   prepare_artifact:
     name: Prepare artifact IoWebProfile
     needs: release
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout primary repository
         uses: actions/checkout@v4
 
       - name: Setup Node Environment
         uses: actions/setup-node@v3
         with:
-          node-version-file: ".node-version"
+          node-version-file: '.node-version'
 
       - name: Build Application
         env:
-          NEXT_PUBLIC_URL_SPID_LOGIN: ${{ vars.TF_PUBLIC_URL_SPID_LOGIN }}
-          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: ${{ vars.TF_PUBLIC_JWT_SPID_LEVEL_VALUE_L1 }}
-          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2: ${{ vars.TF_PUBLIC_JWT_SPID_LEVEL_VALUE_L2 }}
-          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3: ${{ vars.TF_PUBLIC_JWT_SPID_LEVEL_VALUE_L3 }}
-          NEXT_PUBLIC_API_BASE_URL: ${{ vars.TF_PUBLIC_API_BASE_URL }}
-          NEXT_PUBLIC_API_BASE_PATH: ${{ vars.TF_PUBLIC_API_BASE_PATH }}
-          NEXT_PUBLIC_API_FETCH_TIMEOUT: ${{ vars.TF_PUBLIC_API_FETCH_TIMEOUT }}
-          NEXT_PUBLIC_API_FETCH_MAX_RETRY: ${{ vars.TF_PUBLIC_API_FETCH_MAX_RETRY }}
-          NEXT_PUBLIC_FEATURE_FLAG: ${{ vars.TF_PUBLIC_SESSION_LIST_FF }}
-          NEXT_PUBLIC_SPID_CIE_ENTITY_ID: ${{ vars.TF_PUBLIC_CIE_ENTITY_ID }}
-          NEXT_PUBLIC_ANALYTICS_ENABLE: ${{ vars.TF_PUBLIC_ANALYTICS_ENABLE }}
-          NEXT_PUBLIC_ANALYTICS_MOCK: ${{ vars.TF_PUBLIC_ANALYTICS_MOCK }}
-          NEXT_PUBLIC_ANALYTICS_API_HOST: ${{ vars.TF_PUBLIC_ANALYTICS_API_HOST }}
-          NEXT_PUBLIC_ANALYTICS_PERSISTENCE: ${{ vars.TF_PUBLIC_ANALYTICS_PERSISTENCE }}
-          NEXT_PUBLIC_ANALYTICS_LOG_IP: ${{ vars.TF_PUBLIC_ANALYTICS_LOG_IP }}
-          NEXT_PUBLIC_ANALYTICS_DEBUG: ${{ vars.TF_PUBLIC_ANALYTICS_DEBUG }}
-          NEXT_PUBLIC_SPID_TEST_ENV_ENABLED: ${{ vars.TF_PUBLIC_SPID_TEST_ENV_ENABLED }}
+          NEXT_IS_ACCOUNT_SUBDOMAIN: true
+          NEXT_PUBLIC_URL_SPID_LOGIN: 'https://api-web.io.pagopa.it/ioweb/auth/v1/login'
+          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: 'https://www.spid.gov.it/SpidL1'
+          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2: 'https://www.spid.gov.it/SpidL2'
+          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3: 'https://www.spid.gov.it/SpidL3'
+          NEXT_PUBLIC_API_BASE_URL: 'https://api-web.io.pagopa.it/ioweb/backend'
+          NEXT_PUBLIC_API_BASE_PATH: '/api/v1' 
+          NEXT_PUBLIC_API_FETCH_TIMEOUT: 5000
+          NEXT_PUBLIC_API_FETCH_MAX_RETRY: 5
+          NEXT_PUBLIC_FEATURE_FLAG: false
+          NEXT_PUBLIC_SPID_CIE_ENTITY_ID: 'xx_servizicie'
+          NEXT_PUBLIC_ANALYTICS_ENABLE: true
+          NEXT_PUBLIC_ANALYTICS_MOCK: false
+          NEXT_PUBLIC_ANALYTICS_API_HOST: 'https://api-eu.mixpanel.com'
+          NEXT_PUBLIC_ANALYTICS_PERSISTENCE: 'localStorage'
+          NEXT_PUBLIC_ANALYTICS_LOG_IP: false
+          NEXT_PUBLIC_ANALYTICS_DEBUG: false
+          NEXT_PUBLIC_SPID_TEST_ENV_ENABLED: false
           NEXT_PUBLIC_SPID_TEST_ENV_UAT_ENABLED: 'false'
           NEXT_PUBLIC_CIE_UAT_LOGIN_ENABLED: 'false'
-          NEXT_PUBLIC_FOOTER_PRODUCT_LIST: ${{ vars.TF_PUBLIC_FOOTER_PRODUCT_LIST }}
-          NEXT_PUBLIC_ANALYTICS_TOKEN: ${{ vars.TF_PUBLIC_ANALYTICS_TOKEN }}
+          NEXT_PUBLIC_FOOTER_PRODUCT_LIST: 'https://ioapp.it/assets/products.json'
+          # the following mixpanel project token is not a secret in any way.
+          # ref -> https://developer.mixpanel.com/reference/project-token
+          NEXT_PUBLIC_ANALYTICS_TOKEN: 'cc8f0687d3eeb055a44fff7b779ba535'
         run: |
-          gitReference="${{ github.ref_name }}"
-          echo "Building with reference: $gitReference"
-          echo "NEXT_PUBLIC_URL_SPID_LOGIN: $NEXT_PUBLIC_URL_SPID_LOGIN"
-          echo "NEXT_PUBLIC_API_BASE_URL: $NEXT_PUBLIC_API_BASE_URL"
-          echo "NEXT_PUBLIC_API_BASE_PATH: $NEXT_PUBLIC_API_BASE_PATH"
+          gitReference='${{ github.ref_name }}'
+          echo 'Building with reference: $gitReference'
+          echo 'NEXT_PUBLIC_URL_SPID_LOGIN: $NEXT_PUBLIC_URL_SPID_LOGIN'
+          echo 'NEXT_PUBLIC_API_BASE_URL: $NEXT_PUBLIC_API_BASE_URL'
+          echo 'NEXT_PUBLIC_API_BASE_PATH: $NEXT_PUBLIC_API_BASE_PATH'
           yarn install --immutable
           yarn run generate
           yarn run build:prod
@@ -147,13 +100,8 @@ jobs:
     name: Deploy Portal
     runs-on: ubuntu-latest
     needs: prepare_artifact
-    env:      
-      AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION }}
-      STORAGE_ACCOUNT_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && secrets.PROD_STORAGE_ACCOUNT_NAME ||  secrets.SUBDOMAIN_STORAGE_ACCOUNT_NAME }}
-      ENDPOINT_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && secrets.PROD_DEPLOY ||  secrets.SUBDOMAIN_DEPLOY }}
-      PROFILE_CDN_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && secrets.PROD_PROFILE_CDN_NAME ||  secrets.SUBDOMAIN_PROFILE_CDN_NAME }}
-      RESOURCE_GROUP_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && secrets.PROD_RESOURCE_GROUP_NAME ||  secrets.SUBDOMAIN_RESOURCE_GROUP_NAME }}
-      # TODO: Add to-be defined variable
+    env:
+      STORAGE_ACCOUNT_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && env.STORAGE_ACCOUNT_NAME_OLD ||  env.STORAGE_ACCOUNT_NAME_NEW }}
 
     steps:
       - name: Download Artifact
@@ -181,12 +129,32 @@ jobs:
               --destination "$web" \
               --overwrite
 
-      - name: Purge the CDN
+  purge_cdn_classic:
+    if: {{ inputs.DEPLOY == 'ioapp.it' }}
+    name: Purge CDN (Classic)
+    runs-on: ubuntu-latest
+    needs: deploy_portal
+      - name: Purge the CDN (Classic)
         uses: azure/CLI@v2
         with:
           inlineScript: |
             az cdn endpoint purge \
-              --name ${{ env.ENDPOINT_NAME }} \
-              --profile-name ${{ env.PROFILE_CDN_NAME }} \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME }} \
-              --content-paths "/*"
+              --name ${{ env.ENDPOINT_NAME_OLD }} \
+              --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
+              --content-paths "/*""
+  
+  purge_cdn_frontdoor:
+    needs: deploy_portal
+    if: {{ inputs.DEPLOY != 'ioapp.it' }}
+    name: Purge CDN (Frontdoor)
+    runs-on: ubuntu-latest
+      - name: Purge the CDN (Frontdoor)
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az afd endpoint purge \
+              --endpoint-name ${{ env.ENDPOINT_NAME_NEW }} \
+              --profile-name ${{ env.PROFILE_CDN_NAME_NEW }} \
+              --resource-group ${{ env.RESOURCE_GROUP_NAME_NEW }} \
+              --content-paths "/*""
