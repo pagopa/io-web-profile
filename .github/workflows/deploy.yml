@@ -23,10 +23,10 @@ on:
 
 env:
   # ioapp.it variables
-  STORAGE_ACCOUNT_NAME_OLD: 'iopweuiowebportalsa'
-  PROFILE_CDN_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-profile'
-  ENDPOINT_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-endpoint'
-  RESOURCE_GROUP_NAME_OLD: 'io-p-weu-ioweb-fe-rg'
+  # STORAGE_ACCOUNT_NAME_OLD: 'iopweuiowebportalsa'
+  # PROFILE_CDN_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-profile'
+  # ENDPOINT_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-endpoint'
+  # RESOURCE_GROUP_NAME_OLD: 'io-p-weu-ioweb-fe-rg'
   # account.ioapp.it variables
   STORAGE_ACCOUNT_NAME_NEW: 'iopitniowebprofilest01'
   PROFILE_CDN_NAME_NEW: 'io-p-ioweb-profile-portal-afd-01'
@@ -34,6 +34,8 @@ env:
   RESOURCE_GROUP_NAME_NEW: 'io-p-itn-ioweb-fe-rg-01'
   # Common variables
   AZURE_SUBSCRIPTION: 'PROD-IO'
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 permissions:
   contents: write
@@ -54,6 +56,7 @@ jobs:
 
       - name: Build Application
         env:
+          # TODO
           NEXT_IS_ACCOUNT_SUBDOMAIN: true
           NEXT_PUBLIC_URL_SPID_LOGIN: 'https://api-web.io.pagopa.it/ioweb/auth/v1/login'
           NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: 'https://www.spid.gov.it/SpidL1'
@@ -100,10 +103,19 @@ jobs:
     name: Deploy Portal
     runs-on: ubuntu-latest
     needs: prepare_artifact
+    environment: app-prod-cd
     env:
-      STORAGE_ACCOUNT_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && env.STORAGE_ACCOUNT_NAME_OLD ||  env.STORAGE_ACCOUNT_NAME_NEW }}
+      STORAGE_ACCOUNT_NAME: ${{ env.STORAGE_ACCOUNT_NAME_NEW }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
 
     steps:
+      - name: Azure Login
+        uses: azure/login@v2 # v2.0.0
+        with:
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
+      
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
@@ -129,20 +141,20 @@ jobs:
               --destination "$web" \
               --overwrite
 
-  purge_cdn_classic:
-    if: {{ inputs.DEPLOY == 'ioapp.it' }}
-    name: Purge CDN (Classic)
-    runs-on: ubuntu-latest
-    needs: deploy_portal
-      - name: Purge the CDN (Classic)
-        uses: azure/CLI@v2
-        with:
-          inlineScript: |
-            az cdn endpoint purge \
-              --name ${{ env.ENDPOINT_NAME_OLD }} \
-              --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
-              --content-paths "/*"
+  # purge_cdn_classic:
+  #   if: {{ inputs.DEPLOY == 'ioapp.it' }}
+  #   name: Purge CDN (Classic)
+  #   runs-on: ubuntu-latest
+  #   needs: deploy_portal
+  #     - name: Purge the CDN (Classic)
+  #       uses: azure/CLI@v2
+  #       with:
+  #         inlineScript: |
+  #           az cdn endpoint purge \
+  #             --name ${{ env.ENDPOINT_NAME_OLD }} \
+  #             --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
+  #             --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
+  #             --content-paths "/*"
   
   purge_cdn_frontdoor:
     needs: deploy_portal
