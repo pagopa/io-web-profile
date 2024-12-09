@@ -77,6 +77,7 @@ jobs:
           NEXT_PUBLIC_ANALYTICS_TOKEN: 'cc8f0687d3eeb055a44fff7b779ba535'
         run: |
           gitReference='${{ github.ref_name }}'
+          echo "Input DEPLOY: ${{ github.event.inputs.DEPLOY }}"
           yarn install --immutable
           yarn run generate
           yarn run build:prod
