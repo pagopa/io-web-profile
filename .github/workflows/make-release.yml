@@ -1,0 +1,39 @@
+on:
+  workflow_dispatch:
+  # on merge on main branch
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+jobs:
+  release:
+    # run this job only if the PR was containing the specific release label
+    if: contains( github.event.pull_request.labels.*.name, 'release') ||  github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      # contents write permissions required for release
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - id: get_version
+        name: Get Version
+        run: |
+          PACKAGE_FILE="package.json"
+          if [[ -f "$PACKAGE_FILE" ]]; then
+            echo "new_version=$(jq -r .version package.json)" >> $GITHUB_ENV
+          else
+            echo "::error title=Pipeline error::Pipeline could not find package.json file"
+            exit 1
+          fi
+        shell: bash
+      - name: Create Release tag
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          commit: ${{ github.ref_name }}
+          tag: v${{ env.new_version }}
+          name: Release ${{ env.new_version }}
+          makeLatest: latest
+          generateReleaseNotes: true
+          prerelease: false
