@@ -36,26 +36,17 @@ jobs:
         with:
           node-version-file: '.node-version'
 
-      - id: get_version
-        name: Get Version
-        run: |
-          PACKAGE_FILE="package.json"
-          if [[ -f "$PACKAGE_FILE" ]]; then
-            echo "version=$(jq .version package.json)" >> $GITHUB_ENV
-          fi
-        shell: bash
-
       - name: Bump Package Version
         id: bump
-        uses: pagopa/github-actions-template/bump-semver@main
-        with:
-          semver: ${{ inputs.semver  }}
-          current_version: ${{ env.version }}
+        run: |
+          npm version ${{ inputs.semver }} --no-git-tag-version
+        shell: bash
 
       - id: semver
         name: New Version
         run: |
-          echo "new_version=${{ steps.bump.outputs.new_version}}" >> $GITHUB_OUTPUT
+          NEXT_VERSION=$(jq -r .version package.json)
+          echo "new_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Push New Version to new branch
