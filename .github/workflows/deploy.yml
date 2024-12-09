@@ -2,7 +2,7 @@ name: Release a new version and deploy to production IoWebProfile
 
 on:
   push:
-  # TODO: remove
+    # TODO: remove
     branches:
       - IOPID-2397
   workflow_dispatch:
@@ -149,5 +149,4 @@ jobs:
               echo "Purge CDN Classic"
             else
               echo "Purge Front Door CDN"
-          fi
-
+            fi
