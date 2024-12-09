@@ -1,0 +1,148 @@
+name: Release a new version and deploy to production IoWebProfile
+
+on:
+  workflow_dispatch:
+    inputs:
+      DEPLOY:
+        description: 'Where to deploy'
+        required: true
+        default: 'account.ioapp.it'
+        type: choice
+        options:
+          - 'account.ioapp.it'
+          - 'ioapp.it'
+
+env:
+  # ioapp.it variables
+  PROFILE_CDN_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-profile'
+  ENDPOINT_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-endpoint'
+  RESOURCE_GROUP_NAME_OLD: 'io-p-weu-ioweb-fe-rg'
+  # account.ioapp.it variables
+  PROFILE_CDN_NAME_NEW: 'io-p-ioweb-profile-portal-afd-01'
+  ENDPOINT_NAME_NEW: 'io-p-itn-ioweb-profile-fde-01'
+  RESOURCE_GROUP_NAME_NEW: 'io-p-itn-ioweb-fe-rg-01'
+  # Common variables
+  AZURE_SUBSCRIPTION: 'PROD-IO'
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+permissions:
+  contents: write
+
+jobs:
+  prepare_artifact:
+    name: Prepare artifact IoWebProfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout primary repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+
+      - name: Build Application
+        env:
+          NEXT_IS_ACCOUNT_SUBDOMAIN: ${{ inputs.DEPLOY == 'ioapp.it' && 'false' || 'true' }}
+          NEXT_PUBLIC_FOOTER_PRODUCT_LIST: ${{ inputs.DEPLOY == 'ioapp.it' && 'https://ioapp.it/assets/products.json' || 'https://account.ioapp.it/assets/products.json' }}
+          NEXT_PUBLIC_URL_SPID_LOGIN: 'https://api-web.io.pagopa.it/ioweb/auth/v1/login'
+          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: 'https://www.spid.gov.it/SpidL1'
+          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2: 'https://www.spid.gov.it/SpidL2'
+          NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L3: 'https://www.spid.gov.it/SpidL3'
+          NEXT_PUBLIC_API_BASE_URL: 'https://api-web.io.pagopa.it/ioweb/backend'
+          NEXT_PUBLIC_API_BASE_PATH: '/api/v1'
+          NEXT_PUBLIC_API_FETCH_TIMEOUT: 5000
+          NEXT_PUBLIC_API_FETCH_MAX_RETRY: 5
+          NEXT_PUBLIC_FEATURE_FLAG: false
+          NEXT_PUBLIC_SPID_CIE_ENTITY_ID: 'xx_servizicie'
+          NEXT_PUBLIC_ANALYTICS_ENABLE: true
+          NEXT_PUBLIC_ANALYTICS_MOCK: false
+          NEXT_PUBLIC_ANALYTICS_API_HOST: 'https://api-eu.mixpanel.com'
+          NEXT_PUBLIC_ANALYTICS_PERSISTENCE: 'localStorage'
+          NEXT_PUBLIC_ANALYTICS_LOG_IP: false
+          NEXT_PUBLIC_ANALYTICS_DEBUG: false
+          NEXT_PUBLIC_SPID_TEST_ENV_ENABLED: false
+          NEXT_PUBLIC_SPID_TEST_ENV_UAT_ENABLED: 'false'
+          NEXT_PUBLIC_CIE_UAT_LOGIN_ENABLED: 'false'
+          # the following mixpanel project token is not a secret in any way.
+          # ref -> https://developer.mixpanel.com/reference/project-token
+          NEXT_PUBLIC_ANALYTICS_TOKEN: 'cc8f0687d3eeb055a44fff7b779ba535'
+        run: |
+          gitReference='${{ github.ref_name }}'
+          yarn install --immutable
+          yarn run generate
+          yarn run build:prod
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StaticSite
+          path: ./out
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy_portal:
+    name: Deploy Portal
+    runs-on: ubuntu-latest
+    needs: prepare_artifact
+    environment: app-prod-cd
+    permissions:
+      id-token: write
+    env:
+      STORAGE_ACCOUNT_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && 'iopweuiowebportalsa' || 'iopitniowebprofilest01' }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v2 # v2.0.0
+        with:
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Download Artifact
+        id: download_artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: StaticSite
+
+      - name: Empty the Storage
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az storage blob delete-batch \
+              --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
+              --subscription ${{ env.AZURE_SUBSCRIPTION }} \
+              --source '$web'
+
+      - name: Upload to Storage
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az storage blob upload-batch \
+              --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
+              --subscription ${{ env.AZURE_SUBSCRIPTION }} \
+              --source '${{steps.download_artifact.outputs.download-path}}' \
+              --destination '$web' \
+              --overwrite
+
+      - name: Purge the CDN
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            if [ "${{ inputs.DEPLOY }}" == "ioapp.it" ]; then
+              echo "Purge CDN Classic"
+              az cdn endpoint purge \
+                --name ${{ env.ENDPOINT_NAME_OLD }} \
+                --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
+                --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
+                --content-paths "/*"
+            else
+              echo "Purge Front Door CDN"
+              az afd endpoint purge \
+                --endpoint-name ${{ env.ENDPOINT_NAME_NEW }} \
+                --profile-name ${{ env.PROFILE_CDN_NAME_NEW }} \
+                --resource-group ${{ env.RESOURCE_GROUP_NAME_NEW }} \
+                --content-paths "/*"
+            fi
