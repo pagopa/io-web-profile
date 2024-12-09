@@ -2,6 +2,7 @@ name: Release a new version and deploy to production IoWebProfile
 
 on:
   push:
+  # TODO: remove
     branches:
       - IOPID-2397
   workflow_dispatch:
@@ -22,7 +23,7 @@ env:
   # ENDPOINT_NAME_OLD: 'io-p-weu-ioweb-portal-cdn-endpoint'
   # RESOURCE_GROUP_NAME_OLD: 'io-p-weu-ioweb-fe-rg'
   # account.ioapp.it variables
-  STORAGE_ACCOUNT_NAME_NEW: 'iopitniowebprofilest01'
+  # STORAGE_ACCOUNT_NAME_NEW: 'iopitniowebprofilest01'
   PROFILE_CDN_NAME_NEW: 'io-p-ioweb-profile-portal-afd-01'
   ENDPOINT_NAME_NEW: 'io-p-itn-ioweb-profile-fde-01'
   RESOURCE_GROUP_NAME_NEW: 'io-p-itn-ioweb-fe-rg-01'
@@ -49,8 +50,7 @@ jobs:
 
       - name: Build Application
         env:
-          # TODO
-          NEXT_IS_ACCOUNT_SUBDOMAIN: true
+          NEXT_IS_ACCOUNT_SUBDOMAIN: ${{ inputs.DEPLOY == 'ioapp.it' && false || true }}
           NEXT_PUBLIC_URL_SPID_LOGIN: 'https://api-web.io.pagopa.it/ioweb/auth/v1/login'
           NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: 'https://www.spid.gov.it/SpidL1'
           NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2: 'https://www.spid.gov.it/SpidL2'
@@ -80,6 +80,7 @@ jobs:
           echo 'NEXT_PUBLIC_URL_SPID_LOGIN: $NEXT_PUBLIC_URL_SPID_LOGIN'
           echo 'NEXT_PUBLIC_API_BASE_URL: $NEXT_PUBLIC_API_BASE_URL'
           echo 'NEXT_PUBLIC_API_BASE_PATH: $NEXT_PUBLIC_API_BASE_PATH'
+          echo 'NEXT_IS_ACCOUNT_SUBDOMAIN: $NEXT_IS_ACCOUNT_SUBDOMAIN'
           yarn install --immutable
           yarn run generate
           yarn run build:prod
@@ -100,7 +101,8 @@ jobs:
     permissions:
       id-token: write
     env:
-      STORAGE_ACCOUNT_NAME: 'iopitniowebprofilest01'
+      # TODO: fix name
+      STORAGE_ACCOUNT_NAME: ${{ inputs.DEPLOY == 'ioapp.it' && 'iopweuiowebportalsaa' || 'iopitniowebprofilest01' }}
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
 
     steps:
@@ -111,57 +113,41 @@ jobs:
           tenant-id: ${{ env.ARM_TENANT_ID }}
           subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
 
-      - name: Download Artifact
-        id: download_artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: StaticSite
+      # - name: Download Artifact
+      #   id: download_artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: StaticSite
 
-      - name: Empty the Storage
+      # - name: Empty the Storage
+      #   uses: azure/CLI@v2
+      #   with:
+      #     inlineScript: |
+      #       az storage blob delete-batch \
+      #         --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
+      #         --subscription ${{ env.AZURE_SUBSCRIPTION }} \
+      #         --source '$web'
+
+      # - name: Upload to Storage
+      #   uses: azure/CLI@v2
+      #   with:
+      #     inlineScript: |
+      #       pwd
+      #       ls
+      #       az storage blob upload-batch \
+      #         --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
+      #         --subscription ${{ env.AZURE_SUBSCRIPTION }} \
+      #         --source '${{steps.download_artifact.outputs.download-path}}' \
+      #         --destination '$web' \
+      #         --overwrite
+
+      - name: Purge the CDN
         uses: azure/CLI@v2
         with:
           inlineScript: |
-            az storage blob delete-batch \
-              --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
-              --subscription ${{ env.AZURE_SUBSCRIPTION }} \
-              --source '$web'
+            if [ "${{ inputs.DEPLOY }}" == "ioapp.it" ]; then
+              echo "Purge CDN Classic"
+            else
+              echo "Purge Front Door CDN"
+          fi
 
-      - name: Upload to Storage
-        uses: azure/CLI@v2
-        with:
-          inlineScript: |
-            pwd
-            ls
-            az storage blob upload-batch \
-              --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
-              --subscription ${{ env.AZURE_SUBSCRIPTION }} \
-              --source '${{steps.download_artifact.outputs.download-path}}' \
-              --destination '$web' \
-              --overwrite
-
-      - name: Purge the CDN (Frontdoor)
-        uses: azure/CLI@v2
-        with:
-          inlineScript: |
-            az afd endpoint purge \
-              --endpoint-name ${{ env.ENDPOINT_NAME_NEW }} \
-              --profile-name ${{ env.PROFILE_CDN_NAME_NEW }} \
-              --resource-group ${{ env.RESOURCE_GROUP_NAME_NEW }} \
-              --content-paths "/*"
-
-  # TODO fix
-  # purge_cdn_classic:
-  #   if: {{ inputs.DEPLOY == 'ioapp.it' }}
-  #   name: Purge CDN (Classic)
-  #   runs-on: ubuntu-latest
-  #   needs: deploy_portal
-  #   steps:
-  #     - name: Purge the CDN (Classic)
-  #       uses: azure/CLI@v2
-  #       with:
-  #         inlineScript: |
-  #           az cdn endpoint purge \
-  #             --name ${{ env.ENDPOINT_NAME_OLD }} \
-  #             --profile-name ${{ env.PROFILE_CDN_NAME_OLD }} \
-  #             --resource-group ${{ env.RESOURCE_GROUP_NAME_OLD }} \
-  #             --content-paths "/*"
