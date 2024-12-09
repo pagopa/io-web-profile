@@ -10,7 +10,8 @@ on:
       DEPLOY:
         description: 'Where to deploy'
         required: true
-        default: 'account.ioapp.it'
+        # TODO
+        default: 'ioapp.it'
         type: choice
         options:
           - 'account.ioapp.it'
@@ -76,11 +77,6 @@ jobs:
           NEXT_PUBLIC_ANALYTICS_TOKEN: 'cc8f0687d3eeb055a44fff7b779ba535'
         run: |
           gitReference='${{ github.ref_name }}'
-          echo 'Building with reference: $gitReference'
-          echo 'NEXT_PUBLIC_URL_SPID_LOGIN: $NEXT_PUBLIC_URL_SPID_LOGIN'
-          echo 'NEXT_PUBLIC_API_BASE_URL: $NEXT_PUBLIC_API_BASE_URL'
-          echo 'NEXT_PUBLIC_API_BASE_PATH: $NEXT_PUBLIC_API_BASE_PATH'
-          echo 'NEXT_IS_ACCOUNT_SUBDOMAIN: $NEXT_IS_ACCOUNT_SUBDOMAIN'
           yarn install --immutable
           yarn run generate
           yarn run build:prod
