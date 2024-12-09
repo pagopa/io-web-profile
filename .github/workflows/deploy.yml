@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Application
         env:
-          NEXT_IS_ACCOUNT_SUBDOMAIN: ${{ inputs.DEPLOY == 'ioapp.it' && false || true }}
+          NEXT_IS_ACCOUNT_SUBDOMAIN: ${{ inputs.DEPLOY == 'ioapp.it' && 'false' || 'true' }}
           NEXT_PUBLIC_URL_SPID_LOGIN: 'https://api-web.io.pagopa.it/ioweb/auth/v1/login'
           NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: 'https://www.spid.gov.it/SpidL1'
           NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L2: 'https://www.spid.gov.it/SpidL2'
