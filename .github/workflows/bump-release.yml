@@ -1,9 +1,9 @@
-name: Make Release
+name: Bump Release
 
 on:
   workflow_dispatch:
     branches:
-      - main
+      - master
     inputs:
       semver:
         required: true
@@ -78,4 +78,4 @@ jobs:
       - name: Create release pull request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create -B main -H ${{ steps.new_branch_push.outputs.new_branch_name }} --title 'Release version ${{ steps.semver.outputs.new_version }} pull request' --body 'This PR has been created by a Github Action' -l 'release'
+        run: gh pr create -B master -H ${{ steps.new_branch_push.outputs.new_branch_name }} --title 'Release version ${{ steps.semver.outputs.new_version }} pull request' --body 'This PR has been created by a Github Action' -l 'release'

@@ -1,11 +1,11 @@
 on:
   workflow_dispatch:
-  # on merge on main branch
+  # on merge on master branch
   pull_request:
     types:
       - closed
     branches:
-      - main
+      - master
 jobs:
   release:
     # run this job only if the PR was containing the specific release label
