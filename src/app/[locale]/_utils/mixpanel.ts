@@ -3,6 +3,12 @@ import { hasConsent } from '../_hooks/useConsent';
 
 const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
 const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK === 'true' ? true : false;
+/**
+ * In order to perform this task https://pagopa.atlassian.net/browse/IOPID-2522 is required:
+ * 1. generate the token for the new project.
+ * 2. add the logic that checks what the domain is and pass the
+ * correct token based on the domain to the mixpanel.init function
+ */
 const ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_ANALYTICS_TOKEN || '';
 const ANALYTICS_API_HOST = process.env.NEXT_PUBLIC_ANALYTICS_API_HOST;
 const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;

@@ -19,6 +19,10 @@ declare const OneTrust: {
   ToggleInfoDisplay: () => void;
 };
 
+export const domainUrl = process.env.NEXT_IS_ACCOUNT_SUBDOMAIN
+  ? 'https://account.ioapp.it'
+  : 'https://ioapp.it';
+
 export default function Footer({ onExit = exitAction => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
 
@@ -30,7 +34,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
-  const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
+  const baseUrl = isDevMode() ? 'http://localhost:3000' : domainUrl;
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {

@@ -18,13 +18,16 @@ import {
   ListComponent,
   ListItemComponent,
 } from '@/app/[locale]/_component/listComponents/ListComponents';
+import { domainUrl } from '@/app/[locale]/_component/footer/footer';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
   ul: (chunks: React.ReactNode) => <ListComponent chunks={chunks} marginBottom="40px" />,
   li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
+  //TODO: delete this code when the portal switch is finished
+  domain: process.env.NEXT_IS_ACCOUNT_SUBDOMAIN ? 'account.ioapp.it' : 'ioapp.it',
   u: (chunks: React.ReactNode) => (
-    <Link target="_blank" fontWeight={600} href="https://ioapp.it/" color="textPrimary">
+    <Link target="_blank" fontWeight={600} href={domainUrl} color="textPrimary">
       {chunks}
     </Link>
   ),
