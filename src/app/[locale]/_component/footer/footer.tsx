@@ -8,7 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
-import { isDevMode, localeFromStorage } from '../../_utils/common';
+import { isDevMode, isEnvConfigEnabled, localeFromStorage } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
@@ -19,7 +19,7 @@ declare const OneTrust: {
   ToggleInfoDisplay: () => void;
 };
 
-export const domainUrl = process.env.NEXT_IS_ACCOUNT_SUBDOMAIN
+export const domainUrl = isEnvConfigEnabled(process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN)
   ? 'https://account.ioapp.it'
   : 'https://ioapp.it';
 
@@ -29,6 +29,11 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
   const handleCookiePreferencies = () => {
     OneTrust.ToggleInfoDisplay();
   };
+
+  console.log(
+    'process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN',
+    isEnvConfigEnabled(process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN)
+  );
 
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
