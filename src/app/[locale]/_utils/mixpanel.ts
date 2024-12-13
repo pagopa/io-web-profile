@@ -1,13 +1,14 @@
 import mixpanel from 'mixpanel-browser';
 import { hasConsent } from '../_hooks/useConsent';
+import { isEnvConfigEnabled } from './common';
 
 const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
-const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK === 'true' ? true : false;
+const ANALYTICS_MOCK = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_MOCK);
 const ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_ANALYTICS_TOKEN || '';
 const ANALYTICS_API_HOST = process.env.NEXT_PUBLIC_ANALYTICS_API_HOST;
 const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;
-const ANALYTICS_LOG_IP = process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP === 'true' ? true : false;
-const ANALYTICS_DEBUG = process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' ? true : false;
+const ANALYTICS_LOG_IP = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP);
+const ANALYTICS_DEBUG = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_DEBUG);
 
 type EventCategory = 'KO' | 'TECH' | 'UX';
 

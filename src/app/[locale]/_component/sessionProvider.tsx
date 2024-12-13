@@ -16,7 +16,13 @@ import {
 import { storageLocaleOps } from '../_utils/storage';
 
 import { initOneTrust } from '../_utils/onetrust';
-import { defaultLocale, isBrowser, localeList, weAreOnEmailValidationFlow } from '../_utils/common';
+import {
+  defaultLocale,
+  isBrowser,
+  isEnvConfigEnabled,
+  localeList,
+  weAreOnEmailValidationFlow,
+} from '../_utils/common';
 import Loader from './loader/loader';
 import '../_styles/cookieBanner.css';
 import '../_styles/privacyPage.css';
@@ -37,7 +43,7 @@ type LoginStatusNotAuthorized = {
 
 export type LoginStatus = LoginStatusIdle | LoginStatusAuthorized | LoginStatusNotAuthorized;
 
-const emailValidationEnabled = process.env.NEXT_PUBLIC_VALIDATION_EMAIL === 'true' ? true : false;
+const emailValidationEnabled = isEnvConfigEnabled(process.env.NEXT_PUBLIC_VALIDATION_EMAIL);
 
 const SessionProviderComponent = ({ children }: { readonly children: React.ReactNode }) => {
   const [loginStatus, setLoginStatus] = useState<LoginStatus>({ status: 'IDLE' });
@@ -49,13 +55,19 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
 
   const windowAvailable = isBrowser();
 
-  const getHeaderFooter = ({ children, pathName }: { readonly children: React.ReactNode, readonly pathName: string }) => {
-    if (weAreOnEmailValidationFlow(pathName) && emailValidationEnabled ) return <> { children }</>;
-  
+  const getHeaderFooter = ({
+    children,
+    pathName,
+  }: {
+    readonly children: React.ReactNode;
+    readonly pathName: string;
+  }) => {
+    if (weAreOnEmailValidationFlow(pathName) && emailValidationEnabled) return <> {children}</>;
+
     return (
       <>
         <Header />
-          {children}
+        {children}
         <Footer />
       </>
     );
@@ -79,10 +91,9 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
         }
         if (PUBLIC_ROUTES.includes(pathName)) {
           if (weAreOnEmailValidationFlow(pathName)) {
-            if(emailValidationEnabled) {
+            if (emailValidationEnabled) {
               setLoginStatus({ status: 'AUTHORIZED' });
-            }
-            else {
+            } else {
               pushWithLocale(ROUTES.NOT_FOUND_PAGE);
             }
           } else {

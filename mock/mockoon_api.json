@@ -795,7 +795,7 @@
       "responses": [
         {
           "uuid": "5ce51fb4-5c36-4485-b8d8-e5018a8f4490",
-          "body": "{\n  \"access_enabled\": true,\n  \"session_info\": {\n    \"active\": true,\n    \"expiration_date\":\"2025-10-13\",\n    \"type\":\"LEGACY\"\n  }\n}",
+          "body": "{\n  \"access_enabled\": true,\n  \"session_info\": {\n    \"active\": false,\n    \"expiration_date\":\"2025-10-13\",\n    \"type\":\"LEGACY\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",

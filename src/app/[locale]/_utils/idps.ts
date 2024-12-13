@@ -121,7 +121,7 @@ if (isEnvConfigEnabled(process.env.NEXT_PUBLIC_CIE_UAT_LOGIN_ENABLED)) {
 export { IDPS };
 
 // TODO remove this temporary flag isIdpKnownafter getSessionsList API is ready in a future version
-export const isIdpKnown = (): boolean => process.env.NEXT_PUBLIC_FEATURE_FLAG === 'true';
+export const isIdpKnown = (): boolean => isEnvConfigEnabled(process.env.NEXT_PUBLIC_FEATURE_FLAG);
 
 export const goCIE = (spidLevel: SpidLevels, page: string) => {
   storageLoginInfoOps.write({

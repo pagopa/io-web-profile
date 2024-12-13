@@ -10,11 +10,10 @@ import { SetWalletInstanceStatusDataEnum } from './generated/wallet/SetWalletIns
 // with Wallet Base Url
 const WALLET_BASE_URL = `${process.env.NEXT_PUBLIC_WALLET_API_BASE_URL}`;
 const BASE_PATH = `${process.env.NEXT_PUBLIC_API_BASE_PATH}`;
-const IS_MOCK_USER_ENABLED = process.env.NEXT_PUBLIC_WALLET_MOCK_USER === "true"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withCustomToken: WithDefaultsT<'bearerAuth'> = (wrappedOperation: any) => (params: any) => {
-  const token = IS_MOCK_USER_ENABLED ? global.window.localStorage.getItem("customToken") : storageTokenOps.read();
+  const token = storageTokenOps.read();
   // wrappedOperation and params are correctly inferred
   return wrappedOperation({
     ...params,
@@ -98,14 +97,16 @@ const useFetch = () => {
 
 export default useFetch;
 
-
 export const WebWalletApi = {
   getCurrentWalletInstanceStatus: async () => {
     const result = await webWalletApiClient.getCurrentWalletInstanceStatus({});
     return extractResponse(result);
   },
   setWalletInstanceStatus: async (id: string) => {
-    const result = await webWalletApiClient.setWalletInstanceStatus({ id, body: SetWalletInstanceStatusDataEnum.REVOKED });
+    const result = await webWalletApiClient.setWalletInstanceStatus({
+      id,
+      body: SetWalletInstanceStatusDataEnum.REVOKED,
+    });
     return extractResponse(result);
   },
 };
