@@ -1,6 +1,6 @@
 {
   "uuid": "37494e7e-dd77-4131-aaea-f0cd4b2b37a4",
-  "lastMigration": 28,
+  "lastMigration": 32,
   "name": "IO Web Profile Function API",
   "endpointPrefix": "public",
   "latency": 0,
@@ -11,13 +11,13 @@
     {
       "uuid": "fa7a063c-de15-4999-aee5-f7199b019017",
       "type": "http",
-      "documentation": "Validates the token and get email relative to a token.\n",
+      "documentation": "Validates the token and gets the email relative to a token.",
       "method": "get",
       "endpoint": "api/v2/validate-profile-email",
       "responses": [
         {
           "uuid": "529fcdcf-20d4-4fd2-8b61-f102cad82574",
-          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\":\"SUCCESS\"\n}",
+          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\": \"SUCCESS\"\n}",
           "latency": 2000,
           "statusCode": 200,
           "label": "Found",
@@ -35,15 +35,16 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id"
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "7915e1cc-b71e-4660-9d29-f04c3583f40a",
-          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "body": "{\n  \"type\": \"https://example.com/problem/token-expired\",\n  \"title\": \"Token Expired\",\n  \"status\": 401,\n  \"detail\": \"The provided token has expired. Please request a new token.\",\n  \"instance\": \"\"\n}",
           "latency": 0,
-          "statusCode": 400,
-          "label": "Validation failed",
+          "statusCode": 401,
+          "label": "Token Expired",
           "headers": [
             {
               "key": "Content-Type",
@@ -59,11 +60,60 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "33505830-6de8-4f49-bc6e-236eba63c9a4",
-          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "body": "{\n  \"type\": \"https://example.com/problem/email-already-taken\",\n  \"title\": \"Email Already Taken\",\n  \"status\": 400,\n  \"detail\": \"The provided email is already associated with an existing profile. Please use a different email.\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Email Already Taken",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a617d5c2-91a5-4976-b99a-110d4177fe99",
+          "body": "{\n  \"type\": \"https://example.com/problem/invalid-token\",\n  \"title\": \"Invalid Token\",\n  \"status\": 401,\n  \"detail\": \"The token provided is invalid. Please check the token and try again.\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Invalid Token",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f5cb4963-c74c-4b72-b68b-bd2648a73a88",
+          "body": "{\n  \"type\": \"https://example.com/problem/internal-server-error\",\n  \"title\": \"Internal Server Error\",\n  \"status\": 500,\n  \"detail\": \"There was an error processing the request. Please try again later.\",\n  \"instance\": \"\"\n}",
           "latency": 0,
           "statusCode": 500,
           "label": "Internal Server Error",
@@ -82,16 +132,16 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     },
     {
       "uuid": "83a41a1c-64d6-44b1-93c0-5ba2b19ef286",
       "type": "http",
-      "documentation": "Validates the token and updates the user profile.\n",
+      "documentation": "Validates the token and updates the user profile.",
       "method": "post",
       "endpoint": "api/v2/validate-profile-email",
       "responses": [
@@ -115,15 +165,16 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id"
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "6a6b90df-4167-49c2-9944-5d2ac4285b8f",
-          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 400,\n  \"detail\": \"There was an error processing the request. Please check the token and try again.\",\n  \"instance\": \"\"\n}",
           "latency": 0,
           "statusCode": 400,
-          "label": "Validation failed",
+          "label": "Validation Failed",
           "headers": [
             {
               "key": "Content-Type",
@@ -139,11 +190,12 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         },
         {
           "uuid": "df6891cd-0bac-4915-8655-db003ad88c28",
-          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "body": "{\n  \"type\": \"https://example.com/problem/internal-server-error\",\n  \"title\": \"\",\n  \"status\": 500,\n  \"detail\": \"There was an error processing the request. Please try again later.\",\n  \"instance\": \"\"\n}",
           "latency": 0,
           "statusCode": 500,
           "label": "Internal Server Error",
@@ -162,10 +214,10 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false,
-          "crudKey": "id"
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
-      "enabled": true,
       "responseMode": null
     }
   ],
@@ -192,31 +244,9 @@
     "passphrase": ""
   },
   "cors": true,
-  "headers": [
-    {
-      "key": "Access-Control-Allow-Origin",
-      "value": "*"
-    },
-    {
-      "key": "Access-Control-Allow-Methods",
-      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
-    },
-    {
-      "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, X-Pagopa-Email-Validation-Token"
-    }
-  ],
-  "proxyReqHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "proxyResHeaders": [
-    {
-      "key": "",
-      "value": ""
-    }
-  ],
-  "data": []
+  "headers": [],
+  "proxyReqHeaders": [],
+  "proxyResHeaders": [],
+  "data": [],
+  "callbacks": []
 }
