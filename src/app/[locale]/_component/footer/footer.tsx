@@ -30,11 +30,6 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
     OneTrust.ToggleInfoDisplay();
   };
 
-  console.log(
-    'process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN',
-    isEnvConfigEnabled(process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN)
-  );
-
   const ariaLabel = (label: string) => `Vai al Link: ${t(label)}`;
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
