@@ -62,7 +62,7 @@ const Access = (): React.ReactElement => {
       pushWithLocale(ROUTES.ERROR); // Redirect to the error route
       console.error('Error while manipulating the URL:', error);
     }
-  }, [pushWithLocale]); // Include pushWithLocale as a dependency for useCallback
+  }, [pushWithLocale]);
 
   useEffect(() => {
     if (isBrowser()) {
