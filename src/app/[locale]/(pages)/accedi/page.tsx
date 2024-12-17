@@ -99,6 +99,7 @@ const Access = (): React.ReactElement => {
             break;
         }
       } else {
+        // TODO: delete after domain switch. This is a wokaround.
         replaceOriginAndRedirect();
       }
     }
