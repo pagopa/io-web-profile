@@ -8,7 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
-import { isDevMode, isEnvConfigEnabled, localeFromStorage } from '../../_utils/common';
+import { isBrowser, isEnvConfigEnabled, localeFromStorage } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
@@ -34,7 +34,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
-  const baseUrl = isDevMode() ? 'http://localhost:3000' : domainUrl;
+  const baseUrl = isBrowser() ? window.location.origin : domainUrl;
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {

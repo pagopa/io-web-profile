@@ -38,24 +38,23 @@ const Access = (): React.ReactElement => {
       const url = new URL(currentUrl);
 
       // Check if the current origin is "https://ioapp.it" or "http://localhost:3000"
-      if (url.origin === 'https://ioapp.it' || url.origin === 'http://localhost:3000') {
-        // Modify the host property of the URL object to update the origin
-        // eslint-disable-next-line functional/immutable-data
-        if (url.origin === 'https://ioapp.it') {
+      switch (url.origin) {
+        case 'https://ioapp.it':
           // If the origin is the production domain, replace it with "account.ioapp.it"
           // eslint-disable-next-line functional/immutable-data
           url.host = 'account.ioapp.it';
-        } else {
+          // Reassign the modified URL, which triggers a redirect to the new URL
+          window.location.assign(url.href);
+          break;
+        case 'http://localhost:3000':
           // If the origin is localhost, replace it with "sub.localhost:3000" (testing scenario)
           // eslint-disable-next-line functional/immutable-data
           url.host = 'sub.localhost:3000';
-        }
-
-        // Reassign the modified URL, which triggers a redirect to the new URL
-        window.location.assign(url.href);
-      } else {
-        // If the origin does not match the expected domains, redirect to the error route
-        pushWithLocale(ROUTES.ERROR);
+          // Reassign the modified URL, which triggers a redirect to the new URL
+          window.location.assign(url.href);
+          break;
+        default:
+          pushWithLocale(ROUTES.ERROR);
       }
     } catch (error) {
       // Handle any errors that may occur during URL manipulation
