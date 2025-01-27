@@ -2,7 +2,7 @@ import React from 'react';
 import { test, vi } from 'vitest';
 import SessionActiveComp from '../sessionActiveComp';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
-import { localeFromStorage } from '@/app/[locale]/_utils/common';
+import { isBrowser, localeFromStorage } from '@/app/[locale]/_utils/common';
 
 vi.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   FAQ: () => (
@@ -12,7 +12,11 @@ vi.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   ),
 }));
 
-vi.mock('../../../_utils/common.ts', () => ({ localeFromStorage: 'en' }));
+vi.mock('../../../_utils/common.ts', () => ({
+  localeFromStorage: 'en',
+  isEnvConfigEnabled: (envVar: string | undefined) => envVar === 'true',
+  isBrowser: () => true,
+}));
 
 describe('Sanity Checks', () => {
   test("localeFromStorage should be 'en'", () => {
