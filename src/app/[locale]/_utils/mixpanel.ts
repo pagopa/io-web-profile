@@ -43,7 +43,7 @@ export const initAnalytics = (): void => {
       // eslint-disable-next-line no-console
       console.log('Mixpanel events mock on console log.');
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line
       if (isBrowser() && !(window as Window & windowMPValues).initMixPanel) {
         mixpanel.init(ANALYTICS_TOKEN, {
           api_host: ANALYTICS_API_HOST,
@@ -51,7 +51,7 @@ export const initAnalytics = (): void => {
           ip: ANALYTICS_LOG_IP,
           debug: ANALYTICS_DEBUG,
         });
-        // eslint-disable-next-line functional/immutable-data, @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line functional/immutable-data
         (window as Window & windowMPValues).initMixPanel = true;
       }
       /**
@@ -59,10 +59,10 @@ export const initAnalytics = (): void => {
        * is landing on the portal from the showcase site.
        * Only in this case does it have the device_id in the cookies
        */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line
       if (DEVICE_ID && IS_SUBDOMAIN && !(window as Window & windowMPValues).mixPanelIdentify) {
         mixpanel.identify(DEVICE_ID);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any, functional/immutable-data
+        // eslint-disable-next-line functional/immutable-data
         (window as Window & windowMPValues).mixPanelIdentify = true;
       }
     }
@@ -75,13 +75,13 @@ export const initAnalytics = (): void => {
  * @property properties: the additional payload sent with the event
  * @property callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line
 export const trackEvent = (
   event_name: string,
   properties?: EventProperties,
   callback?: () => void
 ): void => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line
   if (ANALYTICS_ENABLE && (window as Window & windowMPValues).initMixPanel && hasConsent()) {
     if (ANALYTICS_MOCK) {
       // eslint-disable-next-line no-console
