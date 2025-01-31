@@ -1,6 +1,6 @@
 import mixpanel, { Persistence } from 'mixpanel-browser';
 import { hasConsent } from '../_hooks/useConsent';
-import { isBrowser, isEnvConfigEnabled } from './common';
+import { isEnvConfigEnabled } from './common';
 
 const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
 const ANALYTICS_MOCK = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_MOCK);
@@ -37,23 +37,19 @@ export const initAnalytics = (): void => {
   if (ANALYTICS_ENABLE && !(window as windowMPValues).initMixPanelIoWeb) {
     if (ANALYTICS_MOCK) {
       console.log('Mixpanel events mock on console log.');
-      // eslint-disable-next-line functional/immutable-data
-      (window as windowMPValues).initMixPanelIoWeb = true;
     } else {
-      if (isBrowser()) {
-        mixpanel.init(ANALYTICS_TOKEN, {
-          api_host: ANALYTICS_API_HOST,
-          persistence: ANALYTICS_PERSISTENCE as Persistence,
-          cookie_expiration: 0,
-          secure_cookie: false,
-          cookie_domain: '.ioapp.it',
-          ip: ANALYTICS_LOG_IP,
-          debug: ANALYTICS_DEBUG,
-        });
-        // eslint-disable-next-line functional/immutable-data
-        (window as windowMPValues).initMixPanelIoWeb = true;
-      }
+      mixpanel.init(ANALYTICS_TOKEN, {
+        api_host: ANALYTICS_API_HOST,
+        persistence: ANALYTICS_PERSISTENCE as Persistence,
+        cookie_expiration: 0,
+        secure_cookie: false,
+        cookie_domain: '.ioapp.it',
+        ip: ANALYTICS_LOG_IP,
+        debug: ANALYTICS_DEBUG,
+      });
     }
+    // eslint-disable-next-line functional/immutable-data
+    (window as windowMPValues).initMixPanelIoWeb = true;
   }
 };
 
