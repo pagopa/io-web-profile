@@ -26,6 +26,21 @@ export interface EventProperties {
   event_category?: EventCategory;
   [key: string]: unknown;
 }
+// eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
+let mockSuperProperties: Record<string, unknown> = {};
+
+const addIsIoWebSuperProperty = () => {
+  if (ANALYTICS_MOCK) {
+    mockSuperProperties = {
+      ...mockSuperProperties,
+      IS_IOWEB: true,
+    };
+  } else {
+    mixpanel.register({
+      IS_IOWEB: true,
+    });
+  }
+};
 
 /** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
@@ -43,6 +58,9 @@ export const initAnalytics = (): void => {
         debug: ANALYTICS_DEBUG,
       });
     }
+    // In order the IS_IOWEB super property setted in every moment
+    // and in every event is better call this function after the init
+    addIsIoWebSuperProperty();
   }
 };
 
@@ -62,7 +80,7 @@ export const trackEvent = (
   if (ANALYTICS_ENABLE && (window as any).initMixPanel && hasConsent()) {
     if (ANALYTICS_MOCK) {
       // eslint-disable-next-line no-console
-      console.log(event_name, properties);
+      console.log(event_name, { ...mockSuperProperties, ...properties });
       if (callback) {
         callback();
       }
