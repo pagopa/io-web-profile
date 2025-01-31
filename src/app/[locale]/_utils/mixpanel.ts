@@ -1,15 +1,20 @@
-import mixpanel from 'mixpanel-browser';
+import mixpanel, { Persistence } from 'mixpanel-browser';
 import { hasConsent } from '../_hooks/useConsent';
+import { isBrowser, isEnvConfigEnabled } from './common';
 
 const ANALYTICS_ENABLE = process.env.NEXT_PUBLIC_ANALYTICS_ENABLE;
-const ANALYTICS_MOCK = process.env.NEXT_PUBLIC_ANALYTICS_MOCK === 'true' ? true : false;
+const ANALYTICS_MOCK = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_MOCK);
 const ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_ANALYTICS_TOKEN || '';
 const ANALYTICS_API_HOST = process.env.NEXT_PUBLIC_ANALYTICS_API_HOST;
 const ANALYTICS_PERSISTENCE = process.env.NEXT_PUBLIC_ANALYTICS_PERSISTENCE;
-const ANALYTICS_LOG_IP = process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP === 'true' ? true : false;
-const ANALYTICS_DEBUG = process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' ? true : false;
+const ANALYTICS_LOG_IP = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_LOG_IP);
+const ANALYTICS_DEBUG = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_DEBUG);
 
 type EventCategory = 'KO' | 'TECH' | 'UX';
+
+type windowMPValues = {
+  initMixPanelIoWeb?: boolean;
+} & Window;
 
 type EventType =
   | 'action'
@@ -29,19 +34,25 @@ export interface EventProperties {
 
 /** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
-  if (ANALYTICS_ENABLE) {
-    // eslint-disable-next-line functional/immutable-data, @typescript-eslint/no-explicit-any
-    (window as any).initMixPanel = true;
+  if (ANALYTICS_ENABLE && !(window as windowMPValues).initMixPanelIoWeb) {
     if (ANALYTICS_MOCK) {
-      // eslint-disable-next-line no-console
       console.log('Mixpanel events mock on console log.');
+      // eslint-disable-next-line functional/immutable-data
+      (window as windowMPValues).initMixPanelIoWeb = true;
     } else {
-      mixpanel.init(ANALYTICS_TOKEN, {
-        api_host: ANALYTICS_API_HOST,
-        persistence: ANALYTICS_PERSISTENCE as 'cookie' | 'localStorage',
-        ip: ANALYTICS_LOG_IP,
-        debug: ANALYTICS_DEBUG,
-      });
+      if (isBrowser()) {
+        mixpanel.init(ANALYTICS_TOKEN, {
+          api_host: ANALYTICS_API_HOST,
+          persistence: ANALYTICS_PERSISTENCE as Persistence,
+          cookie_expiration: 0,
+          secure_cookie: false,
+          cookie_domain: '.ioapp.it',
+          ip: ANALYTICS_LOG_IP,
+          debug: ANALYTICS_DEBUG,
+        });
+        // eslint-disable-next-line functional/immutable-data
+        (window as windowMPValues).initMixPanelIoWeb = true;
+      }
     }
   }
 };
@@ -52,14 +63,12 @@ export const initAnalytics = (): void => {
  * @property properties: the additional payload sent with the event
  * @property callback: an action taken when the track has completed (If the action taken immediately after the track is an exit action from the application, it's better to use this callback to perform the exit, in order to give to mixPanel the time to send the event)
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const trackEvent = (
   event_name: string,
   properties?: EventProperties,
   callback?: () => void
 ): void => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (ANALYTICS_ENABLE && (window as any).initMixPanel && hasConsent()) {
+  if (ANALYTICS_ENABLE && (window as windowMPValues).initMixPanelIoWeb && hasConsent()) {
     if (ANALYTICS_MOCK) {
       // eslint-disable-next-line no-console
       console.log(event_name, properties);
@@ -78,11 +87,9 @@ export const trackEvent = (
 
 const trackEventThroughAnalyticTool = (
   event_name: string,
-  // eslint-disable-next-line
   properties?: EventProperties,
   callback?: () => void
 ): void => {
-  // eslint-disable-next-line functional/no-let
   let called = false;
   const wrappedCallback = callback
     ? () => {
