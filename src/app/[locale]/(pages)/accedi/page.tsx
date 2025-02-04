@@ -39,17 +39,17 @@ const Access = (): React.ReactElement => {
 
       // Check if the current origin is "https://ioapp.it" or "http://localhost:3000"
       switch (url.origin) {
-        case 'https://ioapp.it':
+        case 'https://account.ioapp.it':
           // If the origin is the production domain, replace it with "account.ioapp.it"
           // eslint-disable-next-line functional/immutable-data
-          url.host = 'account.ioapp.it';
+          url.host = 'ioapp.it';
           // Reassign the modified URL, which triggers a redirect to the new URL
           window.location.assign(url.href);
           break;
-        case 'http://localhost:3000':
+        case 'http://sub.localhost:3000':
           // If the origin is localhost, replace it with "sub.localhost:3000" (testing scenario)
           // eslint-disable-next-line functional/immutable-data
-          url.host = 'sub.localhost:3000';
+          url.host = 'localhost:3000';
           // Reassign the modified URL, which triggers a redirect to the new URL
           window.location.assign(url.href);
           break;
