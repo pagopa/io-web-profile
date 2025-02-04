@@ -12,7 +12,7 @@ const ANALYTICS_DEBUG = isEnvConfigEnabled(process.env.NEXT_PUBLIC_ANALYTICS_DEB
 
 type EventCategory = 'KO' | 'TECH' | 'UX';
 
-type windowMPValues = {
+type WindowMPValues = {
   initMixPanelIoWeb?: boolean;
 } & Window;
 
@@ -34,7 +34,7 @@ export interface EventProperties {
 
 /** To call in order to start the analytics service, otherwise no event will be sent */
 export const initAnalytics = (): void => {
-  if (ANALYTICS_ENABLE && !(window as windowMPValues).initMixPanelIoWeb) {
+  if (ANALYTICS_ENABLE && !(window as WindowMPValues).initMixPanelIoWeb) {
     if (ANALYTICS_MOCK) {
       console.log('Mixpanel events mock on console log.');
     } else {
@@ -42,14 +42,14 @@ export const initAnalytics = (): void => {
         api_host: ANALYTICS_API_HOST,
         persistence: ANALYTICS_PERSISTENCE as Persistence,
         cookie_expiration: 0,
-        secure_cookie: false,
-        cookie_domain: '.ioapp.it',
+        secure_cookie: true, // change this value as false if you run in local .env
+        cookie_domain: '.ioapp.it', // change this value with your dev domain
         ip: ANALYTICS_LOG_IP,
         debug: ANALYTICS_DEBUG,
       });
     }
     // eslint-disable-next-line functional/immutable-data
-    (window as windowMPValues).initMixPanelIoWeb = true;
+    (window as WindowMPValues).initMixPanelIoWeb = true;
   }
 };
 
@@ -64,7 +64,7 @@ export const trackEvent = (
   properties?: EventProperties,
   callback?: () => void
 ): void => {
-  if (ANALYTICS_ENABLE && (window as windowMPValues).initMixPanelIoWeb && hasConsent()) {
+  if (ANALYTICS_ENABLE && (window as WindowMPValues).initMixPanelIoWeb && hasConsent()) {
     if (ANALYTICS_MOCK) {
       // eslint-disable-next-line no-console
       console.log(event_name, properties);
