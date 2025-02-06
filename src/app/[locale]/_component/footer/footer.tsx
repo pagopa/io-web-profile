@@ -172,7 +172,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           linkType: 'internal',
           onClick: () =>
             window.open(
-              'https://form.agid.gov.it/view/9eb85420-773f-11ef-b8bf-4f02c3f2bc4b',
+              'https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10',
               '_blank'
             ),
         },
@@ -199,7 +199,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       linkType: 'internal',
       // eslint-disable-next-line sonarjs/no-identical-functions
       onClick: () =>
-        window.open('https://form.agid.gov.it/view/9eb85420-773f-11ef-b8bf-4f02c3f2bc4b', '_blank'),
+        window.open('https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10', '_blank'),
     },
   ];
 
