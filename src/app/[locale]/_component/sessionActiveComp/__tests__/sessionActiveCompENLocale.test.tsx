@@ -12,7 +12,11 @@ vi.mock('../../../_component/accordion/faqDefault.tsx', () => ({
   ),
 }));
 
-vi.mock('../../../_utils/common.ts', () => ({ localeFromStorage: 'en' }));
+vi.mock('../../../_utils/common.ts', () => ({
+  localeFromStorage: 'en',
+  isEnvConfigEnabled: (envVar: string | undefined) => envVar === 'true',
+  isBrowser: () => true,
+}));
 
 describe('Sanity Checks', () => {
   test("localeFromStorage should be 'en'", () => {
