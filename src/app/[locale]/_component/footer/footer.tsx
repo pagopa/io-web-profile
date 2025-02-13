@@ -96,7 +96,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           linkType: 'internal',
           onClick: () =>
             window.open(
-              'https://www.pagopa.it/it/politiche-per-la-sicurezza-delle-informazioni/',
+              'https://www.pagopa.it/it/politiche-sulla-sicurezza-delle-informazioni-e-sulla-qualita/',
               '_blank'
             ),
         },
