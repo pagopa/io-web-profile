@@ -8,7 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
-import { isBrowser, isEnvConfigEnabled, localeFromStorage } from '../../_utils/common';
+import { BASE_URL, localeFromStorage } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
@@ -18,10 +18,6 @@ type IOFooterProps = {
 declare const OneTrust: {
   ToggleInfoDisplay: () => void;
 };
-
-export const domainUrl = isEnvConfigEnabled(process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN)
-  ? 'https://account.ioapp.it'
-  : 'https://ioapp.it';
 
 export default function Footer({ onExit = exitAction => exitAction() }: IOFooterProps) {
   const t = useTranslations('ioesco.commonfooter');
@@ -34,7 +30,6 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
-  const baseUrl = isBrowser() ? window.location.origin : domainUrl;
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -76,7 +71,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
           onClick: () =>
-            window.open(`${baseUrl}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+            window.open(`${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
         },
         {
           label: t('cookiesperefercies'),
@@ -185,7 +180,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
       onClick: () =>
-        window.open(`${baseUrl}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+        window.open(`${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
     },
     {
       label: t('cookiesperefercies'),

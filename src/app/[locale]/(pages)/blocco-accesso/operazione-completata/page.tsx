@@ -10,7 +10,7 @@ import { Introduction } from '../../../_component/introduction/introduction';
 import { isIdpKnown } from '../../../_utils/idps';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLight } from '../../../_utils/styles';
-import { addSpacesEvery3Chars, isEnvConfigEnabled } from '@/app/[locale]/_utils/common';
+import { addSpacesEvery3Chars, BASE_URL } from '@/app/[locale]/_utils/common';
 import useLocalePush from '@/app/[locale]/_hooks/useLocalePush';
 import { unlockCodeSelector } from '@/app/[locale]/_redux/slices/blockAccessSlice';
 import { trackEvent } from '@/app/[locale]/_utils/mixpanel';
@@ -18,18 +18,15 @@ import {
   ListComponent,
   ListItemComponent,
 } from '@/app/[locale]/_component/listComponents/ListComponents';
-import { domainUrl } from '@/app/[locale]/_component/footer/footer';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
   ul: (chunks: React.ReactNode) => <ListComponent chunks={chunks} marginBottom="40px" />,
   li: (chunks: React.ReactNode) => <ListItemComponent chunks={chunks} />,
   //TODO: delete this code when the portal switch is finished
-  domain: isEnvConfigEnabled(process.env.NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN)
-    ? 'account.ioapp.it'
-    : 'ioapp.it',
+  domain: BASE_URL,
   u: (chunks: React.ReactNode) => (
-    <Link target="_blank" fontWeight={600} href={domainUrl} color="textPrimary">
+    <Link target="_blank" fontWeight={600} href={BASE_URL} color="textPrimary">
       {chunks}
     </Link>
   ),
