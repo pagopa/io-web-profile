@@ -38,34 +38,32 @@ const Access = (): React.ReactElement => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
-      if (loginInfo) {
-        trackEvent('IO_LOGIN_SUCCESS', {
-          SPID_IDP_ID: loginInfo.idpId,
-          SPID_IDP_NAME: loginInfo.idpName,
-          Flow: getLoginFlow(loginInfo),
-          event_category: 'TECH',
-        });
 
-        switch (getLoginFlow(loginInfo)) {
-          case FLOW_PARAMS.FLOW_SESSION_EXIT:
-            pushWithLocale(ROUTES.LOGOUT_CONFIRM);
-            break;
-          case FLOW_PARAMS.FLOW_PROFILE:
+      trackEvent('IO_LOGIN_SUCCESS', {
+        SPID_IDP_ID: loginInfo.idpId,
+        SPID_IDP_NAME: loginInfo.idpName,
+        Flow: getLoginFlow(loginInfo),
+        event_category: 'TECH',
+      });
+
+      switch (getLoginFlow(loginInfo)) {
+        case FLOW_PARAMS.FLOW_SESSION_EXIT:
+          pushWithLocale(ROUTES.LOGOUT_CONFIRM);
+          break;
+        case FLOW_PARAMS.FLOW_PROFILE:
+          pushWithLocale(ROUTES.PROFILE);
+          break;
+        case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
+        case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
+          if (checkElevationIntegrity()) {
+            pushWithLocale(ROUTES.PROFILE_RESTORE);
+          } else {
             pushWithLocale(ROUTES.PROFILE);
-            break;
-          case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
-          case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
-            if (checkElevationIntegrity()) {
-              pushWithLocale(ROUTES.PROFILE_RESTORE);
-            } else {
-              pushWithLocale(ROUTES.PROFILE);
-            }
-            break;
-        }
+          }
+          break;
       }
-      pushWithLocale(ROUTES.ERROR);
+      storageLoginInfoOps.delete();
     }
-    storageLoginInfoOps.delete();
   }, [loginInfo, pushWithLocale, token, userFromToken]);
 
   const handleLogoutBtn = () => {
