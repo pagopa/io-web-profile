@@ -8,7 +8,7 @@ import {
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
-import { isDevMode, localeFromStorage } from '../../_utils/common';
+import { BASE_URL, localeFromStorage } from '../../_utils/common';
 import { LANGUAGES, pagoPALink } from './footerConfig';
 
 type IOFooterProps = {
@@ -30,7 +30,6 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
   const socialAriaLabel = (social: string) => `Link: Vai al sito ${social} di PagoPA S.p.A.`;
   const productListUrl = process.env.NEXT_PUBLIC_FOOTER_PRODUCT_LIST;
 
-  const baseUrl = isDevMode() ? 'http://localhost:3000' : 'https://ioapp.it';
   const preLoginLinks: PreLoginFooterLinksType = {
     // First column
     aboutUs: {
@@ -72,7 +71,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
           onClick: () =>
-            window.open(`${baseUrl}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+            window.open(`${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
         },
         {
           label: t('cookiesperefercies'),
@@ -92,7 +91,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           linkType: 'internal',
           onClick: () =>
             window.open(
-              'https://www.pagopa.it/it/politiche-per-la-sicurezza-delle-informazioni/',
+              'https://www.pagopa.it/it/politiche-sulla-sicurezza-delle-informazioni-e-sulla-qualita/',
               '_blank'
             ),
         },
@@ -168,7 +167,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           linkType: 'internal',
           onClick: () =>
             window.open(
-              'https://form.agid.gov.it/view/9eb85420-773f-11ef-b8bf-4f02c3f2bc4b',
+              'https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10',
               '_blank'
             ),
         },
@@ -181,7 +180,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
       onClick: () =>
-        window.open(`${baseUrl}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+        window.open(`${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
     },
     {
       label: t('cookiesperefercies'),
@@ -195,7 +194,7 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       linkType: 'internal',
       // eslint-disable-next-line sonarjs/no-identical-functions
       onClick: () =>
-        window.open('https://form.agid.gov.it/view/9eb85420-773f-11ef-b8bf-4f02c3f2bc4b', '_blank'),
+        window.open('https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10', '_blank'),
     },
   ];
 

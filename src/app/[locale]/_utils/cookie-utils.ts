@@ -1,4 +1,5 @@
 import { CookieValueTypes, deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { OptionsType } from 'cookies-next/lib/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type CookieValue = string | object;
@@ -10,13 +11,18 @@ export function cookieDelete(key: string) {
 }
 
 /** Write value into cookie */
-export function cookieWrite(key: string, value: CookieValue, type: CookieValueType) {
+export function cookieWrite(
+  key: string,
+  value: CookieValue,
+  type: CookieValueType,
+  options?: OptionsType
+) {
   const stringifyFn: { [key in CookieValueType]: () => string } = {
     string: () => value as string,
     object: () => JSON.stringify(value),
   };
   const stringified = stringifyFn[type]();
-  setCookie(key, stringified);
+  setCookie(key, stringified, options);
 }
 
 /** Read value from cookie */

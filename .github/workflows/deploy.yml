@@ -35,16 +35,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout primary repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup Node Environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
         with:
           node-version-file: '.node-version'
 
       - name: Build Application
         env:
-          NEXT_IS_ACCOUNT_SUBDOMAIN: ${{ inputs.DEPLOY == 'ioapp.it' && 'false' || 'true' }}
+          NEXT_PUBLIC_IS_ACCOUNT_SUBDOMAIN: ${{ inputs.DEPLOY == 'ioapp.it' && 'false' || 'true' }}
           NEXT_PUBLIC_FOOTER_PRODUCT_LIST: ${{ inputs.DEPLOY == 'ioapp.it' && 'https://ioapp.it/assets/products.json' || 'https://account.ioapp.it/assets/products.json' }}
           NEXT_PUBLIC_URL_SPID_LOGIN: 'https://api-web.io.pagopa.it/ioweb/auth/v1/login'
           NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1: 'https://www.spid.gov.it/SpidL1'
@@ -59,7 +59,7 @@ jobs:
           NEXT_PUBLIC_ANALYTICS_ENABLE: true
           NEXT_PUBLIC_ANALYTICS_MOCK: false
           NEXT_PUBLIC_ANALYTICS_API_HOST: 'https://api-eu.mixpanel.com'
-          NEXT_PUBLIC_ANALYTICS_PERSISTENCE: 'localStorage'
+          NEXT_PUBLIC_ANALYTICS_PERSISTENCE: 'cookie'
           NEXT_PUBLIC_ANALYTICS_LOG_IP: false
           NEXT_PUBLIC_ANALYTICS_DEBUG: false
           NEXT_PUBLIC_SPID_TEST_ENV_ENABLED: false
@@ -75,7 +75,7 @@ jobs:
           yarn run build:prod
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
         with:
           name: StaticSite
           path: ./out
@@ -95,7 +95,7 @@ jobs:
 
     steps:
       - name: Azure Login
-        uses: azure/login@v2 # v2.0.0
+        uses: azure/login@a65d910e8af852a8061c627c456678983e180302 # v2
         with:
           client-id: ${{ env.ARM_CLIENT_ID }}
           tenant-id: ${{ env.ARM_TENANT_ID }}
@@ -103,12 +103,12 @@ jobs:
 
       - name: Download Artifact
         id: download_artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4
         with:
           name: StaticSite
 
       - name: Empty the Storage
-        uses: azure/CLI@v2
+        uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd # v2
         with:
           inlineScript: |
             az storage blob delete-batch \
@@ -117,7 +117,7 @@ jobs:
               --source '$web'
 
       - name: Upload to Storage
-        uses: azure/CLI@v2
+        uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd # v2
         with:
           inlineScript: |
             az storage blob upload-batch \
@@ -128,7 +128,7 @@ jobs:
               --overwrite
 
       - name: Purge the CDN
-        uses: azure/CLI@v2
+        uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd # v2
         with:
           inlineScript: |
             if [ "${{ inputs.DEPLOY }}" == "ioapp.it" ]; then
