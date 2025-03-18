@@ -25,7 +25,7 @@ export const COOKIE_NOTICE_ID = isDevMode()
 
 export function initOneTrust() {
   const scriptEl = document.createElement('script');
-  scriptEl.setAttribute('src', 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js');
+  scriptEl.setAttribute('src', '/onetrust/scripttemplates/otSDKStub.js');
   scriptEl.setAttribute('type', 'text/javascript');
   scriptEl.setAttribute('charset', 'UTF-8');
   scriptEl.setAttribute('data-domain-script', COOKIE_NOTICE_ID);
