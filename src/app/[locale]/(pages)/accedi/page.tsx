@@ -3,7 +3,7 @@ import { Box, Button, Card, CardContent, Divider, Grid, Typography, Link } from 
 import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
 import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SpidLevels } from '../../_component/selectIdp/idpList';
 import { SelectIdp } from '../../_component/selectIdp/selectIdp';
 import useLocalePush from '../../_hooks/useLocalePush';
@@ -28,41 +28,6 @@ const Access = (): React.ReactElement => {
   const userFromToken = token && parseJwt(token) ? userFromJwtToken(token) : undefined;
   const loginInfo = storageLoginInfoOps.read();
 
-  // Function to replace the origin and redirect the user to the modified URL
-  const replaceOriginAndRedirect = useCallback(() => {
-    // Retrieve the current URL from the browser window
-    const currentUrl = window.location.href;
-
-    try {
-      // Create a URL object to safely manipulate the URL components
-      const url = new URL(currentUrl);
-
-      // Check if the current origin is "https://account.ioapp.it" or "http://sub.localhost:3000"
-      switch (url.origin) {
-        case 'https://account.ioapp.it':
-          // If the origin is the production domain, replace it with "ioapp.it"
-          // eslint-disable-next-line functional/immutable-data
-          url.host = 'ioapp.it';
-          // Reassign the modified URL, which triggers a redirect to the new URL
-          window.location.assign(url.href);
-          break;
-        case 'http://sub.localhost:3000':
-          // If the origin is localhost, replace it with "localhost:3000" (testing scenario)
-          // eslint-disable-next-line functional/immutable-data
-          url.host = 'localhost:3000';
-          // Reassign the modified URL, which triggers a redirect to the new URL
-          window.location.assign(url.href);
-          break;
-        default:
-          pushWithLocale(ROUTES.ERROR);
-      }
-    } catch (error) {
-      // Handle any errors that may occur during URL manipulation
-      pushWithLocale(ROUTES.ERROR); // Redirect to the error route
-      console.error('Error while manipulating the URL:', error);
-    }
-  }, [pushWithLocale]);
-
   useEffect(() => {
     if (isBrowser()) {
       trackEvent('IO_LOGIN', { event_category: 'UX', event_type: 'screen_view' });
@@ -73,37 +38,33 @@ const Access = (): React.ReactElement => {
     if (token && userFromToken && localeFromStorage) {
       storageTokenOps.write(token);
       storageUserOps.write(userFromToken);
-      if (loginInfo) {
-        trackEvent('IO_LOGIN_SUCCESS', {
-          SPID_IDP_ID: loginInfo.idpId,
-          SPID_IDP_NAME: loginInfo.idpName,
-          Flow: getLoginFlow(loginInfo),
-          event_category: 'TECH',
-        });
 
-        switch (getLoginFlow(loginInfo)) {
-          case FLOW_PARAMS.FLOW_SESSION_EXIT:
-            pushWithLocale(ROUTES.LOGOUT_CONFIRM);
-            break;
-          case FLOW_PARAMS.FLOW_PROFILE:
+      trackEvent('IO_LOGIN_SUCCESS', {
+        SPID_IDP_ID: loginInfo.idpId,
+        SPID_IDP_NAME: loginInfo.idpName,
+        Flow: getLoginFlow(loginInfo),
+        event_category: 'TECH',
+      });
+
+      switch (getLoginFlow(loginInfo)) {
+        case FLOW_PARAMS.FLOW_SESSION_EXIT:
+          pushWithLocale(ROUTES.LOGOUT_CONFIRM);
+          break;
+        case FLOW_PARAMS.FLOW_PROFILE:
+          pushWithLocale(ROUTES.PROFILE);
+          break;
+        case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
+        case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
+          if (checkElevationIntegrity()) {
+            pushWithLocale(ROUTES.PROFILE_RESTORE);
+          } else {
             pushWithLocale(ROUTES.PROFILE);
-            break;
-          case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L3:
-          case FLOW_PARAMS.FLOW_UNLOCK_ACCESS_L2:
-            if (checkElevationIntegrity()) {
-              pushWithLocale(ROUTES.PROFILE_RESTORE);
-            } else {
-              pushWithLocale(ROUTES.PROFILE);
-            }
-            break;
-        }
-      } else {
-        // TODO: delete after domain switch. This is a wokaround.
-        replaceOriginAndRedirect();
+          }
+          break;
       }
+      storageLoginInfoOps.delete();
     }
-    storageLoginInfoOps.delete();
-  }, [loginInfo, pushWithLocale, replaceOriginAndRedirect, token, userFromToken]);
+  }, [loginInfo, pushWithLocale, token, userFromToken]);
 
   const handleLogoutBtn = () => {
     trackEvent('IO_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });
