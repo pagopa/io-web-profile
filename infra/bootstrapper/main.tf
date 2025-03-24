@@ -102,9 +102,7 @@ module "repo" {
   additional_resource_group_ids = [
     azurerm_resource_group.sec_weu.id,
     azurerm_resource_group.fe_weu_01.id,
-    azurerm_resource_group.ioweb_common_weu.id,
     azurerm_resource_group.fe_weu.id,
-    azurerm_resource_group.storage_weu.id,
   ]
 
   entraid_groups = {
