@@ -8,7 +8,7 @@ import Loader from './_component/loader/loader';
 
 export type Props = {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export async function generateStaticParams() {
@@ -23,7 +23,8 @@ async function getMessages(locale: string) {
   }
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
   const { locale } = params;
   const messages = (await import(`../../dictionaries/${locale}.json`)).default;
 
@@ -33,10 +34,17 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function RootLayoutWithLocaleAndTheme({
-  children,
-  params: { locale },
-}: Props) {
+export default async function RootLayoutWithLocaleAndTheme(props: Props) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const {
+    children
+  } = props;
+
   const messages = await getMessages(locale);
 
   return (
