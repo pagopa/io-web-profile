@@ -199,7 +199,7 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
   // #endregion
 
   return (
-    <Typography>
+    <Typography component="div">
       <Accordion
         accordionItems={getEntriesByFlow(flow)}
         theme="light"

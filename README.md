@@ -102,6 +102,12 @@ No need to run `hub-spid-login` in this case.
 
 ---
 
+## 🪄 Magic Link
+
+In order to test magic link flow you can use [this link](http://localhost:3000/it/blocco-accesso/magic-link/#token=jwetoken)
+
+---
+
 ## ✉️ Email Validation Flow (Optional)
 
 > [!Note]
@@ -114,6 +120,8 @@ NEXT_PUBLIC_VALIDATION_EMAIL=true
 ```
 
 This activates the `/conferma-email` routes used to validate user email addresses.
+
+In order to test email validation flow you can use [this link](http://localhost:3000/it/conferma-email/?token=05QSY3JXN8XF47LTKRW9EMHZBX:179aeae8dcc01abdab31e5ba)
 
 ---
 
