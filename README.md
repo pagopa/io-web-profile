@@ -157,7 +157,7 @@ Then open [http://localhost:3000](http://localhost:3000)
 ### Production Build
 
 ```bash
-yarn build
+yarn build:prod
 yarn start-static
 ```
 
