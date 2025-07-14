@@ -5,11 +5,31 @@ This repository contains the full source code of the front-end project.
 
 ---
 
-## 🚀 Running the Application
+## 📦 Technologies
+
+This project uses:
+
+- TypeScript
+- React
+- Next.js 14 (App Router)
+
+---
+
+## 📋 Prerequisites
+
+Before you start, ensure your machine has:
+
+- **Node.js** v20.12.0
+- **Yarn** v1.22
+
+You can use `nodenv` to manage Node versions and `corepack` (included with Node) to manage Yarn.
+
+---
+
+## 💻 Configurations
 
 There are **three different ways** to run the app, depending on your needs and environment.
 
----
 
 ### 1. 🧪 Local Login Flow — Using `hub-spid-login` + Mock Backend (Mockoon)
 
@@ -40,7 +60,6 @@ NEXT_PUBLIC_DEV_MODE=true
 2. Open the app and load `mock/mockoon_api.json`
 3. Click the ▶ icon to start the mock server
 
----
 
 ### 2. 🔗 Real Backend — Using `hub-spid-login` + Production APIs
 
@@ -65,7 +84,6 @@ NEXT_PUBLIC_WALLET_API_BASE_URL=https://api-web.io.pagopa.it/ioweb/wallet
 NEXT_PUBLIC_DEV_MODE=true
 ```
 
----
 
 ### 3. 💻 Fully Local — Mockoon Only (No `hub-spid-login`)
 
@@ -84,47 +102,18 @@ No need to run `hub-spid-login` in this case.
 
 ---
 
-## 📦 Technologies
+## ✉️ Email Validation Flow (Optional)
 
-This project uses:
+> [!Note]
+> This feature is only in local environment (not yet in production)
 
-- TypeScript
-- React
-- Next.js 14 (App Router)
+To enable the email confirmation flow, add this to your `.env.local`:
 
----
-
-## 📋 Prerequisites
-
-Before you start, ensure your machine has:
-
-- **Node.js** v20.12.0
-- **Yarn** v1.22
-
-You can use `nodenv` to manage Node versions and `corepack` (included with Node) to manage Yarn.
-
----
-
-## 📁 Project Structure
-
+```env
+NEXT_PUBLIC_VALIDATION_EMAIL=true
 ```
-io-web-profile/
-├── mock/             → Mockoon environments and local mocks
-├── openApi/          → OpenAPI specs for API clients
-├── public/           → Static assets (SPID/CIE metadata, OneTrust, etc.)
-├── src/
-│   ├── api/          → Auto-generated API clients
-│   ├── dictionaries/ → Localization dictionaries
-│   ├── app/[locale]/
-│   │   ├── (pages)/      → Application routes
-│   │   ├── _component/   → Shared UI components
-│   │   ├── _enums/       → Enums and constants
-│   │   ├── _hooks/       → Custom React hooks
-│   │   ├── _icons/       → Project icons
-│   │   ├── _model/       → Data models and types
-│   │   ├── _redux/       → Redux state and logic
-│   │   └── _utils/       → Utility functions
-```
+
+This activates the `/conferma-email` routes used to validate user email addresses.
 
 ---
 
@@ -168,17 +157,23 @@ The static version will be served at [http://localhost:3000](http://localhost:30
 
 ---
 
-## ✉️ Email Validation Flow (Optional)
+## 📁 Project Structure
 
-> [!Note]
-> This feature is only in local environment (not yet in production)
-
-To enable the email confirmation flow, add this to your `.env.local`:
-
-```env
-NEXT_PUBLIC_VALIDATION_EMAIL=true
 ```
-
-This activates the `/conferma-email` routes used to validate user email addresses.
-
----
+io-web-profile/
+├── mock/             → Mockoon environments and local mocks
+├── openApi/          → OpenAPI specs for API clients
+├── public/           → Static assets (SPID/CIE metadata, OneTrust, etc.)
+├── src/
+│   ├── api/          → Auto-generated API clients
+│   ├── dictionaries/ → Localization dictionaries
+│   ├── app/[locale]/
+│   │   ├── (pages)/      → Application routes
+│   │   ├── _component/   → Shared UI components
+│   │   ├── _enums/       → Enums and constants
+│   │   ├── _hooks/       → Custom React hooks
+│   │   ├── _icons/       → Project icons
+│   │   ├── _model/       → Data models and types
+│   │   ├── _redux/       → Redux state and logic
+│   │   └── _utils/       → Utility functions
+```
