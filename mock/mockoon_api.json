@@ -132,7 +132,7 @@
       "responses": [
         {
           "uuid": "fad0a8e1-bfb5-4fe5-8b33-875dd97fb4a5",
-          "body": "",
+          "body": "{{setGlobalVar 'session_locked' true}}",
           "latency": 0,
           "statusCode": 204,
           "label": "No Content",
@@ -334,7 +334,7 @@
       "responses": [
         {
           "uuid": "c75f776d-bde0-4776-b930-0b83fa5893e1",
-          "body": "",
+          "body": "{{setGlobalVar 'session_locked' false}}",
           "latency": 0,
           "statusCode": 204,
           "label": "No Content",
@@ -868,7 +868,7 @@
       "responses": [
         {
           "uuid": "5ce51fb4-5c36-4485-b8d8-e5018a8f4490",
-          "body": "{\n  \"access_enabled\": true,\n  \"session_info\": {\n    \"active\": true,\n    \"expiration_date\":\"2025-10-13\",\n    \"type\":\"LEGACY\"\n  }\n}",
+          "body": "{\n  \"access_enabled\": {{#unless (getGlobalVar 'session_locked')}}true{{else}}false{{/unless}},\n  \"session_info\": {\n    \"active\": true,\n    \"expiration_date\":\"2025-10-13\",\n    \"type\":\"LEGACY\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -1729,6 +1729,14 @@
       "value": ""
     }
   ],
-  "data": [],
+  "data": [
+    {
+      "uuid": "63dcc625-9b3e-49b0-a844-83db9b7b6350",
+      "id": "nnzz",
+      "name": "New data",
+      "documentation": "",
+      "value": "{\n  \"session_locked\": false,\n  \"is_revoked\": false\n}"
+    }
+  ],
   "callbacks": []
 }
