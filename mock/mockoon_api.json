@@ -2,18 +2,91 @@
   "uuid": "73afdc1b-9f6f-4d04-bf87-4b0c81f76ebd",
   "lastMigration": 32,
   "name": "IO Web Profile Function API",
-  "endpointPrefix": "api/v1",
+  "endpointPrefix": "",
   "latency": 0,
   "port": 7071,
   "hostname": "",
-  "folders": [],
+  "folders": [
+    {
+      "uuid": "31a2d7c0-f188-4518-a7c9-f9e9eebaa6ec",
+      "name": "io-web-email-validation",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "2417c5cf-1a26-4920-8486-96d63da912e0"
+        },
+        {
+          "type": "route",
+          "uuid": "19708260-deb3-40f9-a512-52c371a35a82"
+        }
+      ]
+    },
+    {
+      "uuid": "02072fd7-8c4a-4158-b3f2-7aca3a977855",
+      "name": "io-web-wallet",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "f2568c1a-6a56-4ba1-9a4b-6ee666d81601"
+        },
+        {
+          "type": "route",
+          "uuid": "84cfb9c8-4811-4310-83ca-8f39a9d5f38a"
+        }
+      ]
+    },
+    {
+      "uuid": "13686019-a3f0-4064-be44-9ce9348c4b81",
+      "name": "io-web-login",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "f1e81bab-c3c8-4869-99e2-637a056041d6"
+        }
+      ]
+    },
+    {
+      "uuid": "39bb5ab7-5e87-45f1-a6a8-71c66c146674",
+      "name": "io-web",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "dd8962ad-9abb-4943-b519-888f808597ab"
+        },
+        {
+          "type": "route",
+          "uuid": "7002b62c-8a8f-41b3-93d6-8e6b09957a92"
+        },
+        {
+          "type": "route",
+          "uuid": "8537cd03-046e-4bc1-94e7-4e4cee6b8273"
+        },
+        {
+          "type": "route",
+          "uuid": "5d5cf1b6-f423-4f91-a177-1cdeef901cb0"
+        },
+        {
+          "type": "route",
+          "uuid": "760c2def-434d-47d6-89b2-75b0b533ad5a"
+        },
+        {
+          "type": "route",
+          "uuid": "46dea5eb-41af-40fe-b2eb-602b6621f8f2"
+        },
+        {
+          "type": "route",
+          "uuid": "94a2fbdd-69a3-4389-876e-4d5e881e9053"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "uuid": "46dea5eb-41af-40fe-b2eb-602b6621f8f2",
       "type": "http",
       "documentation": "GetServiceStatus",
       "method": "get",
-      "endpoint": "ping",
+      "endpoint": "api/v1/ping",
       "responses": [
         {
           "uuid": "cf2ed1b8-0ede-4ebf-be45-548b31be2573",
@@ -55,7 +128,7 @@
       "type": "http",
       "documentation": "LockUserSession",
       "method": "post",
-      "endpoint": "lock-session",
+      "endpoint": "api/v1/lock-session",
       "responses": [
         {
           "uuid": "fad0a8e1-bfb5-4fe5-8b33-875dd97fb4a5",
@@ -257,7 +330,7 @@
       "type": "http",
       "documentation": "UnlockUserSession",
       "method": "post",
-      "endpoint": "unlock-session",
+      "endpoint": "api/v1/unlock-session",
       "responses": [
         {
           "uuid": "c75f776d-bde0-4776-b930-0b83fa5893e1",
@@ -459,7 +532,7 @@
       "type": "http",
       "documentation": "LogoutFromIOApp",
       "method": "post",
-      "endpoint": "logout",
+      "endpoint": "api/v1/logout",
       "responses": [
         {
           "uuid": "d1d3a608-4dff-43d5-8c60-c562578e12d1",
@@ -613,7 +686,7 @@
       "type": "http",
       "documentation": "GetProfile",
       "method": "get",
-      "endpoint": "profile",
+      "endpoint": "api/v1/profile",
       "responses": [
         {
           "uuid": "f7cb97e2-5ddb-4317-afbb-e81ce06bb27d",
@@ -791,7 +864,7 @@
       "type": "http",
       "documentation": "GetUserSessionState",
       "method": "get",
-      "endpoint": "session-state",
+      "endpoint": "api/v1/session-state",
       "responses": [
         {
           "uuid": "5ce51fb4-5c36-4485-b8d8-e5018a8f4490",
@@ -969,7 +1042,7 @@
       "type": "http",
       "documentation": "ExchangeToken",
       "method": "post",
-      "endpoint": "exchange",
+      "endpoint": "api/v1/exchange",
       "responses": [
         {
           "uuid": "be219bcd-778c-4bc2-842f-9f8f9fc04ec8",
@@ -1147,7 +1220,7 @@
       "type": "http",
       "documentation": "Retrieve the current Wallet Instance status",
       "method": "get",
-      "endpoint": "wallet-instances/current/status",
+      "endpoint": "api/v1/wallet-instances/current/status",
       "responses": [
         {
           "uuid": "fac003c1-75d2-4793-8ccc-80dc922263e4",
@@ -1262,7 +1335,7 @@
       "type": "http",
       "documentation": "Revoke the Wallet Instance associated with the authenticated user. If the Wallet Instance is already revoked, the operation succeed. If the Wallet Instance cannot be revoked due to its current status, a conflict error is returned.",
       "method": "put",
-      "endpoint": "wallet-instances/:id/status",
+      "endpoint": "api/v1/wallet-instances/:id/status",
       "responses": [
         {
           "uuid": "81e497ea-ab0d-4e3d-be2d-aaa517341729",
@@ -1377,44 +1450,244 @@
         }
       ],
       "responseMode": null
+    },
+    {
+      "uuid": "f1e81bab-c3c8-4869-99e2-637a056041d6",
+      "documentation": "SPID login with rules",
+      "method": "get",
+      "endpoint": "login",
+      "responses": [
+        {
+          "uuid": "d56f9580-22a0-4cb4-9078-18d8b0835ad2",
+          "statusCode": 302,
+          "label": "Redirect with token",
+          "headers": [
+            {
+              "key": "Location",
+              "value": "http://localhost:3000/it/accedi/#token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF84Njo3NDoxZTozNTphZTphNjpkODo0YjpkYzplOTpmYzo4ZTphMDozNTo2ODpiNSJ9.eyJlbWFpbCI6InBpcHBvQHRlc3QuZW1haWwuaXQiLCJmYW1pbHlfbmFtZSI6InF3ZXJ0eSIsImZpc2NhbF9udW1iZXIiOiJRV1JQUFA4MEEwMUg1MDFGIiwibmFtZSI6InBpcHBvIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjgzODQzODY0LWYzYzAtNGRlZi1iYWRiLTdmMTk3NDcxYjcyZSIsImxldmVsIjoiTDIiLCJpYXQiOjE2ODk2OTI4ODcsImV4cCI6MTY4OTcyNTI4NywiYXVkIjoiYXBpLmRldi5zZWxmY2FyZS5wYWdvcGEuaXQiLCJpc3MiOiJTUElEIiwianRpIjoiXzk0ZDJmZTYyMDQ2NTUyODRjMGRjIn0.EDbsdpQgXlJSzyVgRqZy7yuUILe5FUlaerC3n1gv6SQrNvljXJxgm3GTv0912UQ6VV85e4oxGgc4LrcvpyLYZcgVe-5-2gNfbYNIPbIWqicaX4GPucQrSq47H0NEIaAv6-3qI2l1IhdH--72zUls_911RoAg_JdINr7em0vxy7wEoqjWOxgEsfQhEauT8oyRV6dDDied5zA9YQPy7a7KlhvI6juwS4sCdFnaonNzhBcZnqW4qzpec2NaAb1xJuHnnTp_tdMz6zExEhupeopmYdtIzYHUvxfohHr1L7eDRzi5RKEUfnRIldajfQEX_NUL9UTU4EkCcwUs-rSIKskQog"
+            }
+          ],
+          "body": "",
+          "bodyType": "INLINE",
+          "default": true,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "entityID",
+              "value": "xx_testenv2",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "authLevel",
+              "value": "SpidL2",
+              "operator": "equals",
+              "invert": false
+            },
+            {
+              "target": "body",
+              "modifier": "RelayState",
+              "value": "ioapp",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "fallbackTo404": false,
+          "latency": 0,
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "type": "http",
+      "responseMode": null
+    },
+    {
+      "uuid": "2417c5cf-1a26-4920-8486-96d63da912e0",
+      "type": "http",
+      "documentation": "Validates the token and get email relative to a token.\n",
+      "method": "get",
+      "endpoint": "public/api/v2/validate-profile-email",
+      "responses": [
+        {
+          "uuid": "9d2b66ec-db8f-4f56-b12a-ca49e56e29ac",
+          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\":\"SUCCESS\"\n}",
+          "latency": 2000,
+          "statusCode": 200,
+          "label": "Found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "842225fd-6e82-482a-a755-39372a0411e2",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Validation failed",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "41f943fb-eefa-4a31-8e98-2abc94e909aa",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "19708260-deb3-40f9-a512-52c371a35a82",
+      "type": "http",
+      "documentation": "Validates the token and updates the user profile.\n",
+      "method": "post",
+      "endpoint": "public/api/v2/validate-profile-email",
+      "responses": [
+        {
+          "uuid": "eb936acb-970c-4d37-9b24-0dde506020bd",
+          "body": "{\r\n  \"status\": \"SUCCESS\"\r\n}",
+          "latency": 2000,
+          "statusCode": 200,
+          "label": "Email successfully validated.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "7a616d91-eb4a-48eb-8898-390f6902f76e",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Validation failed",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "91ae1018-95c4-4d07-92e0-4d2a48e40af7",
+          "body": "{\n  \"type\": \"https://example.com/problem/constraint-violation\",\n  \"title\": \"\",\n  \"status\": 200,\n  \"detail\": \"There was an error processing the request\",\n  \"instance\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
     }
   ],
   "rootChildren": [
     {
-      "type": "route",
-      "uuid": "46dea5eb-41af-40fe-b2eb-602b6621f8f2"
+      "type": "folder",
+      "uuid": "02072fd7-8c4a-4158-b3f2-7aca3a977855"
     },
     {
-      "type": "route",
-      "uuid": "94a2fbdd-69a3-4389-876e-4d5e881e9053"
+      "type": "folder",
+      "uuid": "31a2d7c0-f188-4518-a7c9-f9e9eebaa6ec"
     },
     {
-      "type": "route",
-      "uuid": "760c2def-434d-47d6-89b2-75b0b533ad5a"
+      "type": "folder",
+      "uuid": "13686019-a3f0-4064-be44-9ce9348c4b81"
     },
     {
-      "type": "route",
-      "uuid": "5d5cf1b6-f423-4f91-a177-1cdeef901cb0"
-    },
-    {
-      "type": "route",
-      "uuid": "7002b62c-8a8f-41b3-93d6-8e6b09957a92"
-    },
-    {
-      "type": "route",
-      "uuid": "8537cd03-046e-4bc1-94e7-4e4cee6b8273"
-    },
-    {
-      "type": "route",
-      "uuid": "dd8962ad-9abb-4943-b519-888f808597ab"
-    },
-    {
-      "type": "route",
-      "uuid": "84cfb9c8-4811-4310-83ca-8f39a9d5f38a"
-    },
-    {
-      "type": "route",
-      "uuid": "f2568c1a-6a56-4ba1-9a4b-6ee666d81601"
+      "type": "folder",
+      "uuid": "39bb5ab7-5e87-45f1-a6a8-71c66c146674"
     }
   ],
   "proxyMode": false,
@@ -1441,7 +1714,7 @@
     },
     {
       "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, x-pagopa-email-validation-token"
     }
   ],
   "proxyReqHeaders": [
