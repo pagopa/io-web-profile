@@ -1714,7 +1714,7 @@
     },
     {
       "key": "Access-Control-Allow-Headers",
-      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With, x-pagopa-email-validation-token"
     }
   ],
   "proxyReqHeaders": [
