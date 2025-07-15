@@ -1,6 +1,7 @@
 import { Props } from '../../layout';
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
   const { locale } = params;
   const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
 
