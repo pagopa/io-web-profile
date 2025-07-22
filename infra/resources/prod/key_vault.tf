@@ -12,8 +12,3 @@ module "key_vaults" {
 
   tags = local.tags
 }
-
-import {
-  to = module.key_vaults.azurerm_key_vault.ioweb
-  id = "/subscriptions/ec285037-c673-4f58-b594-d7c480da4e8b/resourceGroups/io-p-itn-auth-main-rg-01/providers/Microsoft.KeyVault/vaults/io-p-itn-ioweb-kv-01"
-}
