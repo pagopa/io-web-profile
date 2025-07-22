@@ -73,20 +73,9 @@ data "azuread_group" "externals" {
   display_name = local.adgroups.externals_name
 }
 
-import {
-  to = module.repo.github_branch_default.main
-  id = "io-web-profile"
-}
-
-import {
-  to = module.repo.github_repository.this
-  id = "io-web-profile"
-}
-
-
 module "repo" {
   source  = "pagopa-dx/azure-github-environment-bootstrap/azurerm"
-  version = "~>1.0"
+  version = "~>2.0"
 
   environment = {
     prefix          = local.prefix
