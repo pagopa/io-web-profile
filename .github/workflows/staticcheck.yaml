@@ -1,6 +1,17 @@
+
+name: Static Check
+
 on:
-  - pull_request
-  - workflow_call
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - "!infra/**"
+      - "!.terraform-version"
+      - "!.pre-commit-config.yaml"
+      - "!.trivyignore"
+
+  workflow_call:
+
 jobs:
   checks:
     runs-on: ubuntu-latest
