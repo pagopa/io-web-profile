@@ -1,0 +1,22 @@
+name: Release Infrastructure
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "infra/resources/**"
+      # Terraform version edit
+      - ".terraform-version"
+
+jobs:
+  release_prod:
+    uses: pagopa/dx/.github/workflows/infra_apply.yaml@733af875ece52e5fd593f013ea9abf9a8d32d1d1
+    name: Release Infrastructure
+    secrets: inherit
+    with:
+      environment: prod
+      base_path: infra/resources
+      override_github_environment: "infra-prod"
+      use_private_agent: false

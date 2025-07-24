@@ -1,0 +1,27 @@
+name: PR Infrastructure Plan
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - "infra/resources/**"
+      - ".github/workflows/**_infra.yaml"
+      # Terraform version edit
+      - ".terraform-version"
+
+jobs:
+  code_review_prod:
+    uses: pagopa/dx/.github/workflows/infra_plan.yaml@733af875ece52e5fd593f013ea9abf9a8d32d1d1
+    name: Code Review Infrastructure Plan
+    secrets: inherit
+    with:
+      environment: prod
+      base_path: infra/resources
+      override_github_environment: "infra-prod"
+      use_private_agent: false
