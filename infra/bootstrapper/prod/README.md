@@ -20,7 +20,9 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_repo"></a> [repo](#module\_repo) | pagopa-dx/azure-github-environment-bootstrap/azurerm | ~>2.0 |
+| <a name="module_auth_infra_cd"></a> [auth\_infra\_cd](#module\_auth\_infra\_cd) | pagopa-dx/azure-role-assignments/azurerm | ~> 1.2 |
+| <a name="module_auth_infra_ci"></a> [auth\_infra\_ci](#module\_auth\_infra\_ci) | pagopa-dx/azure-role-assignments/azurerm | ~> 1.2 |
+| <a name="module_repo"></a> [repo](#module\_repo) | pagopa-dx/azure-github-environment-bootstrap/azurerm | ~> 3.0 |
 
 ## Resources
 
@@ -38,6 +40,8 @@
 | [azurerm_resource_group.common_weu](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.dashboards](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
+| [azurerm_user_assigned_identity.infra_cd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/user_assigned_identity) | data source |
+| [azurerm_user_assigned_identity.infra_ci](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/user_assigned_identity) | data source |
 | [azurerm_virtual_network.common](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/virtual_network) | data source |
 
 ## Inputs
