@@ -12,24 +12,24 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        "200":
+        '200':
           description: Wallet Instance status successfully retrieved
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WalletData"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-        "502":
-          $ref: "#/components/responses/BadGateway"
-        "504":
-          $ref: "#/components/responses/GatewayTimeout"
+                $ref: '#/components/schemas/WalletData'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /wallet-instances/{id}/status:
     put:
       summary: Revoke a Wallet Instance
@@ -49,24 +49,47 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SetWalletInstanceStatusData"
+              $ref: '#/components/schemas/SetWalletInstanceStatusData'
       responses:
-        "204":
+        '204':
           description: Wallet Instance status successfully set
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "422":
-          $ref: "#/components/responses/UnprocessableContent"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-        "502":
-          $ref: "#/components/responses/BadGateway"
-        "504":
-          $ref: "#/components/responses/GatewayTimeout"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+  /whitelisted-fiscal-code:
+    get:
+      summary: Check if the fiscal code is whitelisted
+      operationId: isFiscalCodeWhitelisted
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhitelistedFiscalCodeData'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableContent'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          $ref: '#/components/responses/BadGateway'
 components:
   securitySchemes:
     bearerAuth:
@@ -80,58 +103,58 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
 
     BadRequest:
       description: Validation error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
 
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
 
     NotFound:
       description: The specified resource was not found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
 
     UnprocessableContent:
       description: Unprocessable Content
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
 
     InternalServerError:
       description: Internal Server Error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
     BadGateway:
       description: Bad Gateway
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
     GatewayTimeout:
       description: Gateway Timeout
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ProblemJson"
+            $ref: '#/components/schemas/ProblemJson'
   schemas:
     SetWalletInstanceStatusData:
       type: string
-      enum: ["REVOKED"]
+      enum: ['REVOKED']
 
     WalletData:
       description: |-
@@ -145,6 +168,15 @@ components:
       required:
         - id
         - is_revoked
+    WhitelistedFiscalCodeData:
+      description: |-
+        Describes if the fiscal code is whitelisted.
+      type: object
+      properties:
+        is_whitelisted:
+          type: boolean
+      required:
+        - is_whitelisted
     ProblemJson:
       type: object
       properties:

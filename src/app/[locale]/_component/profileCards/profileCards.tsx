@@ -6,9 +6,12 @@ import { useTranslations } from 'next-intl';
 import useLocalePush from '../../_hooks/useLocalePush';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
+import CardRemovedIcon from '../../_icons/cardremoved';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
 import { trackEvent } from '../../_utils/mixpanel';
+import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
+import { useEffect, useMemo, useState } from 'react';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
@@ -21,6 +24,22 @@ export const ProfileCards = ({
 }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
+  const { callFetchWithRetries } = useFetch();
+  const [isFiscalCodeWhitelisted, setIsFiscalCodeWhitelisted] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    if (walletIsActive) {
+      callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
+        .then(res => {
+          setIsFiscalCodeWhitelisted(res);
+        })
+        .catch(e => {
+          if (e?.status) {
+            return;
+          }
+        });
+    }
+  }, [callFetchWithRetries, walletIsActive]);
 
   const handleLogOutCardBtn = () => {
     trackEvent('IO_PROFILE_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });
@@ -36,6 +55,30 @@ export const ProfileCards = ({
     trackEvent('IO_ITW_DEACTIVATION_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.REVOKE_WALLET);
   };
+
+  const lockWallet = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwallet');
+    } else {
+      return t('profile.lockwallet');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
+
+  const lockWalletDescription = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwalletdescription');
+    } else {
+      return t('profile.lockwalletdescription');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
+
+  const lockWalletAction = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwalletaction');
+    } else {
+      return t('profile.lockwallet');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
 
   return (
     <>
@@ -97,12 +140,12 @@ export const ProfileCards = ({
           <Grid item xs={12} md={5} lg={4} xl={3}>
             <Card sx={commonCardStyle}>
               <CardContent sx={{ padding: '32px' }}>
-                <HourglassIcon />
+                <CardRemovedIcon />
                 <Typography variant="h6" pt={2}>
-                  {t('profile.lockwallet')}
+                  {lockWallet}
                 </Typography>
                 <Typography variant="body2" py={2}>
-                  {t('profile.lockwalletdescription')}
+                  {lockWalletDescription}
                 </Typography>
                 <ButtonNaked
                   onClick={handleDisableWalletBtn}
@@ -110,7 +153,7 @@ export const ProfileCards = ({
                   endIcon={<ArrowForwardIcon />}
                   size="medium"
                 >
-                  {t('profile.lockwallet')}
+                  {lockWalletAction}
                 </ButtonNaked>
               </CardContent>
             </Card>

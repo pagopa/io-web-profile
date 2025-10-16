@@ -1,30 +1,30 @@
 /* eslint-disable no-console */
 'use client';
+import { WalletData } from '@/api/generated/wallet/WalletData';
+import { SessionState } from '@/api/generated/webProfile/SessionState';
+import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Divider, Grid, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { ProfileData } from '../../api/generated/webProfile/ProfileData';
+import HomeWalletCard from './_component/homeWalletCard';
 import { Introduction } from './_component/introduction/introduction';
+import Loader from './_component/loader/loader';
+import { NoProfile } from './_component/noProfile/noProfile';
 import { ProfileCards } from './_component/profileCards/profileCards';
 import { RestoreSessionCard } from './_component/profileCards/restoreSessionCard';
-import { commonBackground } from './_utils/styles';
-import { storageUserOps } from './_utils/storage';
-import { NoProfile } from './_component/noProfile/noProfile';
-import { trackEvent } from './_utils/mixpanel';
+import useLocalePush from './_hooks/useLocalePush';
 import {
   getAccessStatus,
   getSessionStatus,
   getWalletStatus,
   localeFromStorage,
 } from './_utils/common';
-import useLocalePush from './_hooks/useLocalePush';
+import { trackEvent } from './_utils/mixpanel';
 import { ROUTES } from './_utils/routes';
-import Loader from './_component/loader/loader';
-import useFetch, { WebProfileApi } from '@/api/webProfileApiClient';
-import { SessionState } from '@/api/generated/webProfile/SessionState';
-import { WalletData } from '@/api/generated/wallet/WalletData';
-import HomeWalletCard from './_component/homeWalletCard';
+import { storageUserOps } from './_utils/storage';
+import { commonBackground } from './_utils/styles';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();

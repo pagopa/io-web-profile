@@ -2,7 +2,7 @@
 import { Box, Button, Dialog, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FAQ } from '../../_component/accordion/faqDefault';
 import { BackButton } from '../../_component/backButton/backButton';
 import { Introduction } from '../../_component/introduction/introduction';
@@ -12,11 +12,11 @@ import { ROUTES } from '../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import Loader from '../../_component/loader/loader';
 import { trackEvent } from '../../_utils/mixpanel';
-import useFetch,{ WebWalletApi } from '@/api/webWalletApiClient';
+import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
-  br: () => <br />
+  br: () => <br />,
 };
 
 const WalletInstanceRevoke = (): React.ReactElement => {
@@ -24,6 +24,8 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   // reading WI_ID in session storage in order to be passed to revoke api request
   const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isFiscalCodeWhitelisted, setIsFiscalCodeWhitelisted] = useState<boolean | undefined>();
+
   const pushWithLocale = useLocalePush();
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
   const { callFetchWithRetries, isLoading } = useFetch();
@@ -35,6 +37,18 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       itw_status: 'on',
     });
   }, []);
+
+  useEffect(() => {
+    callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
+      .then(res => {
+        setIsFiscalCodeWhitelisted(res);
+      })
+      .catch(e => {
+        if (e?.status) {
+          return;
+        }
+      });
+  }, [callFetchWithRetries]);
 
   const handleLockSession = () => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
@@ -48,11 +62,17 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   const renderSummary = useCallback(
     (hasLostDevice: boolean) => {
       if (hasLostDevice) {
+        if (isFiscalCodeWhitelisted) {
+          return <>{t.rich('lockaccessitwallet.itwallet.description2', unlockioaccessRich)}</>;
+        }
         return <>{t.rich('lockaccessitwallet.description2', unlockioaccessRich)}</>;
+      }
+      if (isFiscalCodeWhitelisted) {
+        return <>{t('lockaccessitwallet.itwallet.description')}</>;
       }
       return <>{t('lockaccessitwallet.description')}</>;
     },
-    [t]
+    [t, isFiscalCodeWhitelisted]
   );
 
   const handleDisableWalletConfirm = useCallback(() => {
@@ -68,15 +88,19 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       });
   }, [callFetchWithRetries, pushWithLocale, walletInstanceId]);
 
-  const renderRevokeWalletDialog = useCallback(
-    () => (
+  const renderRevokeWalletDialog = useCallback(() => {
+    const lgdesktopdrawer = isFiscalCodeWhitelisted
+      ? 'lgdesktopdrawer.itwallet'
+      : 'lgdesktopdrawer';
+
+    return (
       <Dialog open={isDialogOpen}>
         <Box p={4} display="flex" flexDirection="column" gap={2}>
           <Typography fontSize={24} fontWeight={700} color="textPrimary">
-            {t('lgdesktopdrawer.title')}
+            {t(`${lgdesktopdrawer}.title`)}
           </Typography>
           <Typography fontSize={16} fontWeight={400} color="textPrimary">
-            {t('lgdesktopdrawer.description')}
+            {t(`${lgdesktopdrawer}.description`)}
           </Typography>
           <Box display="flex" justifyContent="end" columnGap={2}>
             <Button
@@ -96,9 +120,8 @@ const WalletInstanceRevoke = (): React.ReactElement => {
           </Box>
         </Box>
       </Dialog>
-    ),
-    [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t]
-  );
+    );
+  }, [handleDisableWalletConfirm, isDialogOpen, isRemovingWallet, t, isFiscalCodeWhitelisted]);
 
   const trackAccordionOpen = useCallback((isOpen: boolean, element: number) => {
     if (isOpen) {
@@ -110,6 +133,30 @@ const WalletInstanceRevoke = (): React.ReactElement => {
     }
   }, []);
 
+  const title1 = useMemo(
+    () =>
+      isFiscalCodeWhitelisted
+        ? t('lockaccessitwallet.itwallet.title')
+        : t('lockaccessitwallet.title'),
+    [t, isFiscalCodeWhitelisted]
+  );
+
+  const title2 = useMemo(
+    () =>
+      isFiscalCodeWhitelisted
+        ? t('lockaccessitwallet.itwallet.title2')
+        : t('lockaccessitwallet.title2'),
+    [t, isFiscalCodeWhitelisted]
+  );
+
+  const lockWalletAction = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwalletaction');
+    } else {
+      return t('profile.lockwallet');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -119,19 +166,19 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       <Grid sx={commonBackgroundLightWithBack}>
         <BackButton />
         <Introduction
-          title={t('lockaccessitwallet.title')}
+          title={title1}
           summary={renderSummary(false)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
         <Grid sx={{ maxWidth: '576px' }}>
           <Button variant="contained" size="medium" onClick={handleDisableWallet}>
-            {t('profile.lockwallet')}
+            {lockWalletAction}
           </Button>
         </Grid>
       </Grid>
       <Grid sx={commonBackgroundLightWithBack}>
         <Introduction
-          title={t('lockaccessitwallet.tilte2')}
+          title={title2}
           summary={renderSummary(true)}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
@@ -146,7 +193,11 @@ const WalletInstanceRevoke = (): React.ReactElement => {
           </Button>
         </Grid>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onToggleFAQ={trackAccordionOpen} />
+      <FAQ
+        flow={Flows.REVOKEWALLET}
+        onToggleFAQ={trackAccordionOpen}
+        isFiscalCodeWhitelisted={isFiscalCodeWhitelisted}
+      />
       {renderRevokeWalletDialog()}
     </>
   );
