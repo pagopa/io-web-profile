@@ -3,15 +3,15 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import useFiscalCodeWhitelisted from '../../_hooks/useFiscalCodeWhitelisted';
 import useLocalePush from '../../_hooks/useLocalePush';
+import CardRemovedIcon from '../../_icons/cardremoved';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
-import CardRemovedIcon from '../../_icons/cardremoved';
+import { trackEvent } from '../../_utils/mixpanel';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
-import { trackEvent } from '../../_utils/mixpanel';
-import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
-import { useEffect, useMemo, useState } from 'react';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
@@ -24,22 +24,8 @@ export const ProfileCards = ({
 }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
-  const { callFetchWithRetries } = useFetch();
-  const [isFiscalCodeWhitelisted, setIsFiscalCodeWhitelisted] = useState<boolean | undefined>();
 
-  useEffect(() => {
-    if (walletIsActive) {
-      callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
-        .then(res => {
-          setIsFiscalCodeWhitelisted(res);
-        })
-        .catch(e => {
-          if (e?.status) {
-            return;
-          }
-        });
-    }
-  }, [callFetchWithRetries, walletIsActive]);
+  const isFiscalCodeWhitelisted = useFiscalCodeWhitelisted();
 
   const handleLogOutCardBtn = () => {
     trackEvent('IO_PROFILE_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });

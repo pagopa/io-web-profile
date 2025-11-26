@@ -4,7 +4,8 @@ import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { Grid, Tooltip, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
+import useFiscalCodeWhitelisted from '../../_hooks/useFiscalCodeWhitelisted';
 
 type HomeWalletCardProps = {
   walletRevokeStatus?: WalletData;
@@ -20,7 +21,7 @@ const HomeWalletCard = ({
   const t = useTranslations('ioesco');
   const { callFetchWithRetries } = useFetch();
 
-  const [isFiscalCodeWhitelisted, setIsFiscalCodeWhitelisted] = useState<boolean | undefined>();
+  const isFiscalCodeWhitelisted = useFiscalCodeWhitelisted();
 
   useEffect(() => {
     if (isProfileAvailable) {
@@ -30,16 +31,6 @@ const HomeWalletCard = ({
             setWalletRevokeStatus(res);
             global.window?.sessionStorage?.setItem('WI_ID', res?.id);
           }
-        })
-        .catch(e => {
-          if (e?.status) {
-            return;
-          }
-        });
-
-      callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
-        .then(res => {
-          setIsFiscalCodeWhitelisted(res);
         })
         .catch(e => {
           if (e?.status) {

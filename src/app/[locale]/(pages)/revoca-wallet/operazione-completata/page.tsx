@@ -1,20 +1,20 @@
 'use client';
+import useFetch from '@/api/webProfileApiClient';
+import useFiscalCodeWhitelisted from '@/app/[locale]/_hooks/useFiscalCodeWhitelisted';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Alert, Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useMemo } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
+import Loader from '../../../_component/loader/loader';
 import { Flows } from '../../../_enums/Flows';
 import useLocalePush from '../../../_hooks/useLocalePush';
 import { isIdpKnown } from '../../../_utils/idps';
+import { trackEvent } from '../../../_utils/mixpanel';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../../_utils/styles';
-import { trackEvent } from '../../../_utils/mixpanel';
-import Loader from '../../../_component/loader/loader';
-import { usePathname } from 'next/navigation';
-import useFetch from '@/api/webProfileApiClient';
-import useWalletFetch, { WebWalletApi } from '@/api/webWalletApiClient';
 
 const unlockioaccessRich = {
   br: () => <br></br>,
@@ -36,9 +36,9 @@ const ThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const pathName = usePathname();
-  const [isFiscalCodeWhitelisted, setIsFiscalCodeWhitelisted] = useState<boolean | undefined>();
+  
   const { isLoading } = useFetch();
-  const { callFetchWithRetries } = useWalletFetch();
+  const isFiscalCodeWhitelisted = useFiscalCodeWhitelisted();
 
   const handleGoProfileBtn = useCallback(() => {
     trackEvent('IO_BACK_TO_PROFILE', {
@@ -52,18 +52,6 @@ const ThankYouPage = (): React.ReactElement => {
   const handleLockSession = useCallback(() => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
   }, [pushWithLocale]);
-
-  useEffect(() => {
-    callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
-      .then(res => {
-        setIsFiscalCodeWhitelisted(res);
-      })
-      .catch(e => {
-        if (e?.status) {
-          return;
-        }
-      });
-  }, [callFetchWithRetries]);
 
   const thankyoupagewallet = useMemo(
     () => (isFiscalCodeWhitelisted ? 'thankyoupagewallet.itwallet' : 'thankyoupagewallet'),

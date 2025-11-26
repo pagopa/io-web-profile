@@ -13,6 +13,7 @@ import { commonBackgroundLightWithBack } from '../../_utils/styles';
 import Loader from '../../_component/loader/loader';
 import { trackEvent } from '../../_utils/mixpanel';
 import useFetch, { WebWalletApi } from '@/api/webWalletApiClient';
+import useFiscalCodeWhitelisted from '../../_hooks/useFiscalCodeWhitelisted';
 
 const unlockioaccessRich = {
   strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>,
@@ -24,7 +25,8 @@ const WalletInstanceRevoke = (): React.ReactElement => {
   // reading WI_ID in session storage in order to be passed to revoke api request
   const walletInstanceId = global.window?.sessionStorage?.getItem('WI_ID');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isFiscalCodeWhitelisted, setIsFiscalCodeWhitelisted] = useState<boolean | undefined>();
+
+  const isFiscalCodeWhitelisted = useFiscalCodeWhitelisted();
 
   const pushWithLocale = useLocalePush();
   const [isRemovingWallet, setIsRemovingWallet] = useState(false);
@@ -37,18 +39,6 @@ const WalletInstanceRevoke = (): React.ReactElement => {
       itw_status: 'on',
     });
   }, []);
-
-  useEffect(() => {
-    callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
-      .then(res => {
-        setIsFiscalCodeWhitelisted(res);
-      })
-      .catch(e => {
-        if (e?.status) {
-          return;
-        }
-      });
-  }, [callFetchWithRetries]);
 
   const handleLockSession = () => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
