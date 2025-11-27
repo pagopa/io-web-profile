@@ -1,19 +1,20 @@
 'use client';
+import useFetch from '@/api/webProfileApiClient';
+import useFiscalCodeWhitelisted from '@/app/[locale]/_hooks/useFiscalCodeWhitelisted';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Alert, Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useCallback, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useMemo } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
+import Loader from '../../../_component/loader/loader';
 import { Flows } from '../../../_enums/Flows';
 import useLocalePush from '../../../_hooks/useLocalePush';
 import { isIdpKnown } from '../../../_utils/idps';
+import { trackEvent } from '../../../_utils/mixpanel';
 import { ROUTES } from '../../../_utils/routes';
 import { commonBackgroundLightWithBack } from '../../../_utils/styles';
-import { trackEvent } from '../../../_utils/mixpanel';
-import Loader from '../../../_component/loader/loader';
-import { usePathname } from 'next/navigation';
-import useFetch from '@/api/webProfileApiClient';
 
 const unlockioaccessRich = {
   br: () => <br></br>,
@@ -35,7 +36,9 @@ const ThankYouPage = (): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
   const pathName = usePathname();
+  
   const { isLoading } = useFetch();
+  const isFiscalCodeWhitelisted = useFiscalCodeWhitelisted();
 
   const handleGoProfileBtn = useCallback(() => {
     trackEvent('IO_BACK_TO_PROFILE', {
@@ -50,14 +53,19 @@ const ThankYouPage = (): React.ReactElement => {
     pushWithLocale(ROUTES.PROFILE_BLOCK);
   }, [pushWithLocale]);
 
+  const thankyoupagewallet = useMemo(
+    () => (isFiscalCodeWhitelisted ? 'thankyoupagewallet.itwallet' : 'thankyoupagewallet'),
+    [isFiscalCodeWhitelisted]
+  );
+
   const renderSummary = useCallback(
     (isIDPKnown: boolean) => {
       if (isIDPKnown) {
-        return <>{t('thankyoupagewallet.title')}</>;
+        return <>{t(`${thankyoupagewallet}.title`)}</>;
       }
-      return <>{t.rich('thankyoupagewallet.description', unlockioaccessRich)}</>;
+      return <>{t.rich(`${thankyoupagewallet}.description`, unlockioaccessRich)}</>;
     },
-    [t]
+    [t, thankyoupagewallet]
   );
 
   const trackAccordionOpen = useCallback((isOpen: boolean, element: number) => {
@@ -78,7 +86,7 @@ const ThankYouPage = (): React.ReactElement => {
     <>
       <Grid sx={commonBackgroundLightWithBack}>
         <Introduction
-          title={t('thankyoupagewallet.title')}
+          title={t(`${thankyoupagewallet}.title`)}
           summary={renderSummary(isIdpKnown())}
           summaryColumns={{ xs: 12, md: 7.5 }}
         />
@@ -104,11 +112,15 @@ const ThankYouPage = (): React.ReactElement => {
             </Button>
           }
         >
-          <Typography fontWeight={600}>{t('thankyoupagewallet.banner')}</Typography>
-          <Typography>{t('thankyoupagewallet.bannertext')}</Typography>
+          <Typography fontWeight={600}>{t(`${thankyoupagewallet}.banner`)}</Typography>
+          <Typography>{t(`${thankyoupagewallet}.bannertext`)}</Typography>
         </Alert>
       </Grid>
-      <FAQ flow={Flows.REVOKEWALLET} onToggleFAQ={trackAccordionOpen} />
+      <FAQ
+        flow={Flows.REVOKEWALLET}
+        onToggleFAQ={trackAccordionOpen}
+        isFiscalCodeWhitelisted={isFiscalCodeWhitelisted}
+      />
     </>
   );
 };

@@ -8,10 +8,12 @@ import { assistenceEmail, isBrowser, localeFromStorage } from '../../_utils/comm
 import { ListComponent, ListItemComponent } from '../listComponents/ListComponents';
 import { ROUTES } from '../../_utils/routes';
 import { Accordion } from './accordion';
+import { useMemo } from 'react';
 
 type FAQProps = {
   flow?: string;
   onToggleFAQ?: (isOpen: boolean, element: number) => void;
+  isFiscalCodeWhitelisted?: boolean;
 };
 // the 'content' property is set to any because
 // the library from which we imported the accordion
@@ -77,14 +79,18 @@ const fifthBlockFaqRich = {
 const fifthRevokeWalletFaqRich = {
   link: (chunks: React.ReactNode) => {
     return (
-      <Link fontWeight={600} href={`/${baseUrl}/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}>
+      <Link fontWeight={600} href={`/${localeFromStorage}${ROUTES.PROFILE_BLOCK}`}>
         {chunks}
       </Link>
     );
   },
 };
 
-export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
+export const FAQ = ({
+  flow = Flows.LOGOUT,
+  onToggleFAQ,
+  isFiscalCodeWhitelisted = false,
+}: FAQProps) => {
   const t = useTranslations('ioesco');
   // #region entries
   const logoutEntries: FAQEntries[] = [
@@ -151,28 +157,48 @@ export const FAQ = ({ flow = Flows.LOGOUT, onToggleFAQ }: FAQProps) => {
     },
   ];
 
-  const revokeWallet: FAQEntries[] = [
-    {
-      header: t('thankyoupagewalletfaq.firstquestion'),
-      content: t('rowaccordionwallet.firstresponse'),
-    },
-    {
-      header: t('thankyoupagewalletfaq.secondquestion'),
-      content: t('rowaccordionwallet.secondresponse'),
-    },
-    {
-      header: t('thankyoupagewalletfaq.thirdquestion'),
-      content: t('rowaccordionwallet.thirdresponse'),
-    },
-    {
-      header: t('thankyoupagewalletfaq.fourthquestion'),
-      content: t('rowaccordionwallet.fourthresponse'),
-    },
-    {
-      header: t('lockaccessitwallet.fifthquestion'),
-      content: t.rich('rowaccordionwallet.fifthresponse', fifthRevokeWalletFaqRich),
-    },
-  ];
+  const revokeWallet: FAQEntries[] = useMemo(() => {
+    const thankyouPageWalletFaq = isFiscalCodeWhitelisted
+      ? 'thankyoupagewalletfaq.itwallet'
+      : 'thankyoupagewalletfaq';
+    const lockAccessItWallet = isFiscalCodeWhitelisted
+      ? 'lockaccessitwallet.itwallet'
+      : 'lockaccessitwallet';
+    const rowAccordionWallet = isFiscalCodeWhitelisted
+      ? 'rowaccordionwallet.itwallet'
+      : 'rowaccordionwallet';
+
+    return [
+      {
+        header: t(`${thankyouPageWalletFaq}.firstquestion`),
+        content: t(`${rowAccordionWallet}.firstresponse`),
+      },
+      {
+        header: t(`${thankyouPageWalletFaq}.secondquestion`),
+        content: t(`${rowAccordionWallet}.secondresponse`),
+      },
+      {
+        header: t(`${thankyouPageWalletFaq}.thirdquestion`),
+        content: t(`rowaccordionwallet.thirdresponse`),
+      },
+      {
+        header: t(`${thankyouPageWalletFaq}.fourthquestion`),
+        content: t(`rowaccordionwallet.fourthresponse`),
+      },
+      {
+        header: t(`${lockAccessItWallet}.fifthquestion`),
+        content: t.rich(`${rowAccordionWallet}.fifthresponse`, fifthRevokeWalletFaqRich),
+      },
+      ...(isFiscalCodeWhitelisted
+        ? [
+            {
+              header: t(`${lockAccessItWallet}.sixthquestion`),
+              content: t.rich(`${rowAccordionWallet}.sixthresponse`, fifthRevokeWalletFaqRich),
+            },
+          ]
+        : []),
+    ];
+  }, [isFiscalCodeWhitelisted, t]);
 
   const wrappingFaqContent = (entries: FAQEntries[]): FAQEntries[] => {
     const updatedEntries: FAQEntries[] = entries.map(entry => ({

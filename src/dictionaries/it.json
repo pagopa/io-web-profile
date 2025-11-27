@@ -9,7 +9,14 @@
       "lostdevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e scollega il tuo account.",
       "nodevicelogout": "Non hai più il tuo dispositivo ed era attiva una sessione sull’app IO? Tieni al sicuro i tuoi dati e termina la sessiona attiva.",
       "walletbullet": "Documenti su IO",
-      "walletbullettooltip": "Pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO"
+      "walletbullettooltip": "Pronto a ricevere la versione digitale dei tuoi documenti nel Portafoglio di IO",
+      "itwallet": {
+        "lockwallet": "Rimuovi i documenti digitali",
+        "lockwalletdescription": "Disattiverai le funzionalità IT-Wallet o Documenti su IO.",
+        "lockwalletaction": "Rimuovi documenti digitali",
+        "walletbullet": "Documenti digitali",
+        "walletbullettooltip": "IO è pronta a ricevere i tuoi documenti digitali nel Portafoglio "
+      }
     },
     "blockfaq": {
       "fifthquestion": "Come posso mettere in sicurezza la mia identità digitale?",
@@ -169,7 +176,11 @@
     "lgdesktopdrawer": {
       "title": "Confermi di voler disattivare Documenti su IO?",
       "back": "Torna indietro",
-      "description": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente."
+      "description": "Tutti i documenti in versione digitale presenti nel tuo Portafoglio saranno disattivati in modo permanente.",
+      "itwallet": {
+        "title": "Confermi di voler rimuovere i documenti digitali?",
+        "description": "Tutti i documenti personali digitali presenti nel tuo Portafoglio saranno rimossi in modo permanente e le funzionalità IT-Wallet o Documenti su IO disattivate. "
+      }
     },
     "lockaccess": {
       "accessidentity": "Qui trovi le identità digitali che hai utilizzato per entrare su IO. Se non hai effettuato tu l’accesso, puoi bloccarlo e mantenere i tuoi dati al sicuro. ",
@@ -184,7 +195,15 @@
       "description2": "Se sospetti un accesso non autorizzato in app con le tue credenziali SPID o CIE, <strong> blocca l’accesso a IO </strong> per mantenere al sicuro i tuoi dati e i tuoi Documenti su IO. <br></br> Potrai abilitare nuovamente l’accesso a IO dopo aver messo in sicurezza la tua identità.",
       "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
       "tilte2": "Pensi ci sia stato un accesso non autorizzato?",
-      "title": "Vuoi disattivare Documenti su IO?"
+      "title": "Vuoi disattivare Documenti su IO?",
+      "itwallet": {
+        "title": "Vuoi rimuovere i documenti digitali dal Portafoglio di IO?",
+        "description": "Se continui disattiverai IT-Wallet o Documenti su IO e i tuoi documenti digitali saranno rimossi in modo permanente.",
+        "title2": "Sospetti un accesso non autorizzato o hai perso il tuo dispositivo?",
+        "description2": "Se pensi ci sia stato un accesso non autorizzato in app con le tue credenziali SPID o CIE, o hai perso il controllo del tuo dispositivo, <strong>blocca l’accesso a IO</strong> per mantenere al sicuro i tuoi dati e i tuoi documenti digitali. <br></br>Potrai abilitare nuovamente l’accesso a IO dopo aver messo in sicurezza la tua identità.",
+        "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
+        "sixthquestion": "Sospetto che qualcuno abbia usato le mie credenziali SPID o CIE per accedere a IO, cosa posso fare?"
+      }
     },
     "lockaccessitwalletfaq": {
       "firstquestion": "Cosa succede se disattivo Documenti su IO?",
@@ -311,7 +330,13 @@
       "firstresponse": "Tutti i documenti in versione digitale presenti nel Portafoglio di IO saranno disattivati in modo permanente. Se cambi idea, potrai sempre aggiungerli di nuovo al Portafoglio in futuro.",
       "fourthresponse": "Sì, continuerai a vedere tutte le carte e i metodi di pagamento che hai aggiunto in precedenza.",
       "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO, escluso Documenti su IO.",
-      "thirdresponse": "La tua sezione Portafoglio continuerà ad esistere e funzionare normalmente."
+      "thirdresponse": "La tua sezione Portafoglio continuerà ad esistere e funzionare normalmente.",
+      "itwallet": {
+        "firstresponse": "Se scegli di rimuovere i tuoi documenti digitali da IO questi saranno eliminati in modo permanente e le funzionalità IT-Wallet o Documenti su IO disattivate. Se cambi idea, potrai sempre riattivare le funzionalità dall’app in futuro.",
+        "secondresponse": "Certo. Potrai continuare ad utilizzare normalmente tutti i servizi, i messaggi e le funzioni dell’app IO.",
+        "fifthresponse": "Se hai perso il tuo dispositivo, te l’hanno sottratto o non ne hai più il controllo, ti suggeriamo di <link>bloccare l’accesso a IO</link>.",
+        "sixthresponse": "Se pensi ci sia stato un furto delle tue credenziali SPID o CIE, puoi <link>bloccare l’accesso a IO</link>."
+      }
     },
     "thankyoupage": {
       "accesslocked": "D’ora in poi potrai entrare solo con la tua identità digitale con un <link>livello di sicurezza 3</link>. <br></br>In alternativa, puoi sbloccare l’accesso all’app attraverso questo <strong>codice di ripristino</strong>. Salvalo e tienilo al sicuro!",
@@ -322,13 +347,25 @@
       "banner": "Hai perso il tuo dispositivo o ti è stato sottratto?",
       "bannertext": "Blocca l’accesso a IO per mantenere al sicuro i tuoi documenti, i messaggi e i metodi di pagamento.",
       "description": "Tutti i documenti presenti nel tuo Portafoglio sono stati disattivati.Se cambi idea, potrai aggiungerli di nuovo direttamente dall’app IO. Ti abbiamo inviato una email di conferma. ",
-      "title": "Hai disattivato Documenti su IO"
+      "title": "Hai disattivato Documenti su IO",
+      "itwallet": {
+        "title": "Hai rimosso da IO i tuoi documenti digitali",
+        "description": "Tutti i documenti digitali presenti nel tuo Portafoglio sono stati rimossi e le funzionalità IT-Wallet o Documenti su IO disattivate. Se cambi idea, potrai ottenerli di nuovo direttamente dall’app IO.<br></br><br></br>Ti abbiamo inviato una mail di conferma.",
+        "banner": "Sospetti un accesso non autorizzato o hai perso il tuo dispositivo?",
+        "bannertext": "Blocca l’accesso a IO per mantenere al sicuro i tuoi dati, i messaggi e i metodi di pagamento."
+      }
     },
     "thankyoupagewalletfaq": {
       "firstquestion": "Cosa succede se disattivo Documenti su IO?",
       "fourthquestion": "Se disattivo Documenti su IO, continuerò a vedere le carte e i metodi di pagamento presenti nel Portafoglio?",
       "secondquestion": "Posso continuare ad utilizzare i servizi di IO anche se ho disattivato Documenti su IO?",
-      "thirdquestion": "Cosa succede al mio Portafoglio dopo aver rimosso i documenti?"
+      "thirdquestion": "Cosa succede al mio Portafoglio dopo aver rimosso i documenti?",
+      "itwallet": {
+        "firstquestion": "Cosa succede se rimuovo da IO i miei documenti digitali?",
+        "secondquestion": "Posso continuare a utilizzare i servizi di IO anche se ho disattivato IT-Wallet o Documenti su IO?",
+        "thirdquestion": "Cosa succede alla mia sezione Portafoglio dopo aver rimosso i documenti digitali?",
+        "fourthquestion": "Continuerò a vedere le Carte e metodi di pagamento presenti nel Portafoglio?"
+      }
     },
     "tooltip": {
       "accesswithoutidp": "Fino al {date} accedi a IO senza login SPID o CIE",

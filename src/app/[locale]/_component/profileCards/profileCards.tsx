@@ -3,12 +3,15 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import useFiscalCodeWhitelisted from '../../_hooks/useFiscalCodeWhitelisted';
 import useLocalePush from '../../_hooks/useLocalePush';
+import CardRemovedIcon from '../../_icons/cardremoved';
 import HourglassIcon from '../../_icons/hourglass';
 import QuestionIcon from '../../_icons/question';
+import { trackEvent } from '../../_utils/mixpanel';
 import { ROUTES } from '../../_utils/routes';
 import { commonCardStyle } from '../../_utils/styles';
-import { trackEvent } from '../../_utils/mixpanel';
 
 type ProfileCardsProps = {
   sessionIsActive: boolean;
@@ -21,6 +24,8 @@ export const ProfileCards = ({
 }: ProfileCardsProps): React.ReactElement => {
   const t = useTranslations('ioesco');
   const pushWithLocale = useLocalePush();
+
+  const isFiscalCodeWhitelisted = useFiscalCodeWhitelisted();
 
   const handleLogOutCardBtn = () => {
     trackEvent('IO_PROFILE_SESSION_EXIT_START', { event_category: 'UX', event_type: 'action' });
@@ -36,6 +41,30 @@ export const ProfileCards = ({
     trackEvent('IO_ITW_DEACTIVATION_START', { event_category: 'UX', event_type: 'action' });
     pushWithLocale(ROUTES.REVOKE_WALLET);
   };
+
+  const lockWallet = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwallet');
+    } else {
+      return t('profile.lockwallet');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
+
+  const lockWalletDescription = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwalletdescription');
+    } else {
+      return t('profile.lockwalletdescription');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
+
+  const lockWalletAction = useMemo(() => {
+    if (isFiscalCodeWhitelisted) {
+      return t('profile.itwallet.lockwalletaction');
+    } else {
+      return t('profile.lockwallet');
+    }
+  }, [isFiscalCodeWhitelisted, t]);
 
   return (
     <>
@@ -97,12 +126,12 @@ export const ProfileCards = ({
           <Grid item xs={12} md={5} lg={4} xl={3}>
             <Card sx={commonCardStyle}>
               <CardContent sx={{ padding: '32px' }}>
-                <HourglassIcon />
+                <CardRemovedIcon />
                 <Typography variant="h6" pt={2}>
-                  {t('profile.lockwallet')}
+                  {lockWallet}
                 </Typography>
                 <Typography variant="body2" py={2}>
-                  {t('profile.lockwalletdescription')}
+                  {lockWalletDescription}
                 </Typography>
                 <ButtonNaked
                   onClick={handleDisableWalletBtn}
@@ -110,7 +139,7 @@ export const ProfileCards = ({
                   endIcon={<ArrowForwardIcon />}
                   size="medium"
                 >
-                  {t('profile.lockwallet')}
+                  {lockWalletAction}
                 </ButtonNaked>
               </CardContent>
             </Card>

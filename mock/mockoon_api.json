@@ -1,6 +1,6 @@
 {
   "uuid": "73afdc1b-9f6f-4d04-bf87-4b0c81f76ebd",
-  "lastMigration": 32,
+  "lastMigration": 33,
   "name": "IO Web Profile Function API",
   "endpointPrefix": "",
   "latency": 0,
@@ -32,6 +32,10 @@
         {
           "type": "route",
           "uuid": "84cfb9c8-4811-4310-83ca-8f39a9d5f38a"
+        },
+        {
+          "type": "route",
+          "uuid": "b2e6f0f8-9b52-4f4f-82e7-5c9b6d9a6f32"
         }
       ]
     },
@@ -121,7 +125,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "94a2fbdd-69a3-4389-876e-4d5e881e9053",
@@ -323,7 +329,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "760c2def-434d-47d6-89b2-75b0b533ad5a",
@@ -525,7 +533,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "5d5cf1b6-f423-4f91-a177-1cdeef901cb0",
@@ -679,7 +689,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "7002b62c-8a8f-41b3-93d6-8e6b09957a92",
@@ -857,7 +869,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "8537cd03-046e-4bc1-94e7-4e4cee6b8273",
@@ -1035,7 +1049,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "dd8962ad-9abb-4943-b519-888f808597ab",
@@ -1213,7 +1229,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "84cfb9c8-4811-4310-83ca-8f39a9d5f38a",
@@ -1328,7 +1346,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "f2568c1a-6a56-4ba1-9a4b-6ee666d81601",
@@ -1449,7 +1469,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "f1e81bab-c3c8-4869-99e2-637a056041d6",
@@ -1505,7 +1527,9 @@
         }
       ],
       "type": "http",
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "2417c5cf-1a26-4920-8486-96d63da912e0",
@@ -1587,7 +1611,9 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     },
     {
       "uuid": "19708260-deb3-40f9-a512-52c371a35a82",
@@ -1669,7 +1695,165 @@
           "callbacks": []
         }
       ],
-      "responseMode": null
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b2e6f0f8-9b52-4f4f-82e7-5c9b6d9a6f32",
+      "type": "http",
+      "documentation": "Check if the fiscal code is whitelisted",
+      "method": "get",
+      "endpoint": "api/v1/whitelisted-fiscal-code",
+      "responses": [
+        {
+          "uuid": "61ffb3f1-5c68-4db9-9d34-6b03d4f7dcab",
+          "body": "{\n  \"is_whitelisted\": true\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successfully retrieved",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "49cde533-8a1a-4c91-bbfd-28db8b4f2245",
+          "statusCode": 400,
+          "label": "Bad Request",
+          "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"Bad Request\",\n  \"status\": 400,\n  \"detail\": \"Validation error\"\n}",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "latency": 0,
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6b5ae36b-b4e1-44f0-b82a-64da47469277",
+          "statusCode": 401,
+          "label": "Unauthorized",
+          "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"Unauthorized\",\n  \"status\": 401,\n  \"detail\": \"Invalid or missing credentials\"\n}",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "latency": 0,
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9e2baf35-b129-49e8-a314-26c1baf28b2c",
+          "statusCode": 422,
+          "label": "Unprocessable Content",
+          "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"Unprocessable Content\",\n  \"status\": 422,\n  \"detail\": \"The request could not be processed\"\n}",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "latency": 0,
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3e61c0ff-3196-4c9a-84f1-d4cf83f877d2",
+          "statusCode": 500,
+          "label": "Internal Server Error",
+          "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"Internal Server Error\",\n  \"status\": 500,\n  \"detail\": \"Unexpected error occurred\"\n}",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "latency": 0,
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bdf7d8cd-6f9b-4d2f-9d3f-52052d9c3f4f",
+          "statusCode": 503,
+          "label": "Service Unavailable",
+          "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"Service Unavailable\",\n  \"status\": 503,\n  \"detail\": \"Service temporarily unavailable\"\n}",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "latency": 0,
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
