@@ -82,7 +82,7 @@ jobs:
 
     steps:
       - name: Azure Login
-        uses: pagopa/dx/.github/actions/csp-login@main
+        uses: pagopa/dx/actions/csp-login@main
         env:
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID }}
