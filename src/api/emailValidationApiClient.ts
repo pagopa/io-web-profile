@@ -48,10 +48,6 @@ const useFetchEmailValidation = () => {
                 'status' in value &&
                 (value as { status: string }).status === 'FAILURE'
               ) {
-                console.log(
-                  '🐛 FIXING BUG: Found FAILURE in 200 response, converting to error format'
-                );
-
                 const failureValue = value as { status: 'FAILURE'; reason: string };
 
                 // Convert to error format compatible with handleEmailValidationError

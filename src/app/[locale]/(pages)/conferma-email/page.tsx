@@ -107,9 +107,12 @@ const EmailConfirmationPage = (): React.ReactElement => {
 
   const handleConfirmEmail = () => {
     if (urlParams && urlParams.token) {
-      callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [
-        500,
-      ])
+      callFetchEmailValidationWithRetries(
+        EmailValidationApi,
+        'validateEmail',
+        { token: urlParams.token },
+        [500]
+      )
         .then(() => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
