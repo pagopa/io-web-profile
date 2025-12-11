@@ -4,8 +4,8 @@ import { Grid } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../_utils/styles';
 import { EmailValidationContainer } from '../../_component/emailValidationContainer/emailValidationContainer';
-import { useCallback, useEffect, useState } from 'react';
-import useFetchEmailValidation , { EmailValidationApi } from '@/api/emailValidationApiClient';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import useFetchEmailValidation, { EmailValidationApi } from '@/api/emailValidationApiClient';
 import { ValidationToken } from '@/api/generated/ioFunction/ValidationToken';
 import Loader from '../../_component/loader/loader';
 import { ROUTES } from '../../_utils/routes';
@@ -25,6 +25,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
   const { callFetchEmailValidationWithRetries, isLoading } = useFetchEmailValidation();
   const pushWithLocale = useLocalePush();
   const dispatch = useDispatch();
+  const hasCalledApi = useRef(false);
 
   interface ValidationError {
     value: string;
@@ -45,37 +46,51 @@ const EmailConfirmationPage = (): React.ReactElement => {
           .profile_email
       : undefined;
   }, []);
-  
-  const handleEmailValidationError = useCallback((error: { left: ValidationError[] },) => {
-    const errorHandlers: Record<string, () => void> = {
-      [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
-      [EmailValidationErrorStatusEnum.EMAIL_ALREADY_TAKEN]: () => pushWithLocale(ROUTES.EMAIL_CONFIRMATION_ALREADY_COMPLETED),
-    };
-    if (error.left && error.left.length > 0) {
-      const matchingError = error.left.find((e) => errorHandlers[e.value]);
-      dispatch(setEmailValidation(findEmailInResponse(error.left)));
-      if (matchingError) {
-        errorHandlers[matchingError.value]();
+
+  const handleEmailValidationError = useCallback(
+    (error: { left: ValidationError[] }) => {
+      const errorHandlers: Record<string, () => void> = {
+        [EmailValidationErrorStatusEnum.TOKEN_EXPIRED]: () =>
+          pushWithLocale(ROUTES.EMAIL_CONFIRMATION_LINK_EXPIRED),
+        [EmailValidationErrorStatusEnum.EMAIL_ALREADY_TAKEN]: () =>
+          pushWithLocale(ROUTES.EMAIL_CONFIRMATION_ALREADY_COMPLETED),
+      };
+      if (error.left && error.left.length > 0) {
+        const matchingError = error.left.find(e => errorHandlers[e.value]);
+        dispatch(setEmailValidation(findEmailInResponse(error.left)));
+        if (matchingError) {
+          errorHandlers[matchingError.value]();
+        } else {
+          pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
+        }
       } else {
         pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
       }
-    } else {
-      pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
-    }
-  }, [dispatch, findEmailInResponse, pushWithLocale]);
+    },
+    [dispatch, findEmailInResponse, pushWithLocale]
+  );
 
-  const extractParams = useCallback(()=> {
+  const extractParams = useCallback(() => {
+    if (hasCalledApi.current) {
+      return null;
+    }
+
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const token: ValidationToken | null = urlParams.get('token') as ValidationToken;
 
       if (token) {
-        callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [500])
+        // eslint-disable-next-line functional/immutable-data
+        hasCalledApi.current = true;
+
+        callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [
+          500,
+        ])
           .then(data => {
             setUrlParams({ token, email: data.profile_email });
           })
-          .catch((error) => {
-            handleEmailValidationError(error)
+          .catch(error => {
+            handleEmailValidationError(error);
           });
       } else {
         pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
@@ -84,7 +99,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
       pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
     return null;
-  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);
+  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]); // 🔧 FIX: Ripristina le dipendenze corrette
 
   useEffect(() => {
     extractParams();
@@ -92,12 +107,14 @@ const EmailConfirmationPage = (): React.ReactElement => {
 
   const handleConfirmEmail = () => {
     if (urlParams && urlParams.token) {
-      callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [500])
+      callFetchEmailValidationWithRetries(EmailValidationApi, 'validateEmail', urlParams.token, [
+        500,
+      ])
         .then(() => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMED);
         })
-        .catch((error) => {
-          handleEmailValidationError(error)
+        .catch(error => {
+          handleEmailValidationError(error);
         });
     }
   };
@@ -107,20 +124,21 @@ const EmailConfirmationPage = (): React.ReactElement => {
   }
 
   return (
-    <Grid sx={commonBackgroundLightFullHeight} alignItems="center" 
-      justifyContent="center" 
-      container>
+    <Grid
+      sx={commonBackgroundLightFullHeight}
+      alignItems="center"
+      justifyContent="center"
+      container
+    >
       <Grid item xs={12} justifySelf={'center'}>
         <EmailValidationContainer
-          title={t.rich('emailvalidation.confirmisyouremail', {
-            strong: chunks => <strong>{chunks}</strong>,
-          }) as string}
-          subtitle={urlParams && urlParams.email}
-          summary={
-            <span>
-              {t('emailvalidation.confirmsubtitle')}
-            </span>
+          title={
+            t.rich('emailvalidation.confirmisyouremail', {
+              strong: chunks => <strong>{chunks}</strong>,
+            }) as string
           }
+          subtitle={urlParams && urlParams.email}
+          summary={<span>{t('emailvalidation.confirmsubtitle')}</span>}
           button={{
             variant: 'contained',
             text: t('emailvalidation.confirm'),
