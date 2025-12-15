@@ -5,8 +5,8 @@ export async function generateMetadata({ params }: Props) {
   const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
 
   return {
-    title: messages.ioesco.metadati.confirmexpiredlinkerrortitle,
-    description: messages.ioesco.metadati.confirmexpiredlinkerrordescription,
+    title: messages.ioesco.metadati.confirmemailalreadytakenerrortitle,
+    description: messages.ioesco.metadati.confirmemailalreadytakenerrordescription,
   };
 }
 

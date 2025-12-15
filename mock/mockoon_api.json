@@ -1380,7 +1380,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         },
@@ -1464,7 +1464,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
+          "default": false,
           "crudKey": "id",
           "callbacks": []
         }
@@ -1540,10 +1540,106 @@
       "responses": [
         {
           "uuid": "9d2b66ec-db8f-4f56-b12a-ca49e56e29ac",
-          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\":\"SUCCESS\"\n}",
-          "latency": 2000,
+          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\": \"SUCCESS\"\n}",
+          "latency": 500,
           "statusCode": 200,
-          "label": "Found",
+          "label": "Success - Valid Token",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-pagopa-email-validation-token",
+              "value": "valid-token-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a6a822e5-8190-45d8-b9ce-9da966c53f80",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\"\n}",
+          "latency": 500,
+          "statusCode": 200,
+          "label": "200 - Token Expired (CASE 1)",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-pagopa-email-validation-token",
+              "value": "expired-token-456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a20f96bc-c489-4366-91b7-f8ed72209813",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\"\n}",
+          "latency": 500,
+          "statusCode": 200,
+          "label": "200 - Email Already Taken (CASE 1)",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-pagopa-email-validation-token",
+              "value": "email-taken-789",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d5dab73c-4445-4e4d-b047-000645679cf4",
+          "body": "{\n  \"profile_email\": \"default@example.com\",\n  \"status\": \"SUCCESS\"\n}",
+          "latency": 500,
+          "statusCode": 200,
+          "label": "Default Success Response",
           "headers": [
             {
               "key": "Content-Type",
@@ -1609,6 +1705,38 @@
           "default": false,
           "crudKey": "id",
           "callbacks": []
+        },
+        {
+          "uuid": "40960439-5848-43c5-b666-fad2ec0cbbbd",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"INVALID_TOKEN\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Session Expired",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "x-pagopa-email-validation-token",
+              "value": "token-401",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
         }
       ],
       "responseMode": null,
@@ -1624,10 +1752,106 @@
       "responses": [
         {
           "uuid": "eb936acb-970c-4d37-9b24-0dde506020bd",
-          "body": "{\r\n  \"status\": \"SUCCESS\"\r\n}",
-          "latency": 2000,
+          "body": "{\n  \"status\": \"SUCCESS\"\n}",
+          "latency": 500,
           "statusCode": 200,
-          "label": "Email successfully validated.",
+          "label": "Success - Email Validated",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "token",
+              "value": "valid-token-123",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "38088e51-3972-46ed-8af9-8863fab9ecf8",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\"\n}",
+          "latency": 500,
+          "statusCode": 200,
+          "label": "200 - Token Expired on Validation (CASE 1)",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "token",
+              "value": "expired-token-456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1e8f46c5-8c78-4690-b809-e8a143072ed8",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\"\n}",
+          "latency": 500,
+          "statusCode": 200,
+          "label": "200 - Email Already Taken on Validation (CASE 1)",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "token",
+              "value": "email-taken-789",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4fec6ee9-8c71-4de7-8f5b-021f71cd1934",
+          "body": "{\n  \"status\": \"SUCCESS\"\n}",
+          "latency": 500,
+          "statusCode": 200,
+          "label": "Default Success Response",
           "headers": [
             {
               "key": "Content-Type",

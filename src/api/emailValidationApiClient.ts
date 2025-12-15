@@ -16,81 +16,109 @@ const validateEmailApiClient = createClient({
 
 const useFetchEmailValidation = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const callFetchEmailValidationWithRetries = useCallback(
-    async <C extends typeof EmailValidationApi, N extends keyof typeof EmailValidationApi>(
-      client: C,
-      apiName: N,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      params: any,
-      retryStatusCodes = [500],
-      errorHandlers?: () => void
-    ) => {
-      const maxRetries = 3;
-      const retryDelay = 1000;
-      try {
-        setIsLoading(true);
-        // eslint-disable-next-line functional/no-let
-        let retryCount = 0;
-        while (retryCount < maxRetries) {
-          const response = await client[apiName](params);
-          if (isRight(response)) {
-            switch (response.right.status) {
-              case 204:
-              case 200:
+  const callFetchEmailValidationWithRetries = useCallback(async <
+    C extends typeof EmailValidationApi,
+    N extends keyof typeof EmailValidationApi
+  >(
+    client: C,
+    apiName: N,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    params: any,
+    retryStatusCodes = [500],
+    errorHandlers?: () => void
+  ) => {
+    const maxRetries = 3;
+    const retryDelay = 1000;
+    try {
+      setIsLoading(true);
+      // eslint-disable-next-line functional/no-let
+      let retryCount = 0;
+      while (retryCount < maxRetries) {
+        const response = await client[apiName](params);
+        if (isRight(response)) {
+          switch (response.right.status) {
+            case 200:
+              const value = response.right.value;
+
+              // Check if it is a 200 response with an error (ValidationErrorsObject)
+              if (value?.status === 'FAILURE') {
+                const failureValue = value as { status: 'FAILURE'; reason: string };
+                // TODO: [IOPID-3625] When the BE also returns profile_email in error responses (EMAIL_ALREADY_TAKEN, TOKEN_EXPIRED),
+                // update the error structure to include profile_email and simplify extraction in findEmailInResponse.
+                // See: https://pagopa.atlassian.net/browse/IOPID-3625
+                // Convert to error format compatible with handleEmailValidationError
+                const errorResponse = {
+                  left: [
+                    {
+                      value: failureValue.reason, // TOKEN_EXPIRED or EMAIL_ALREADY_TAKEN
+                      context: [
+                        {
+                          key: 'response',
+                          actual: value,
+                        },
+                      ],
+                    },
+                  ],
+                };
+
                 setIsLoading(false);
-                return response.right.value;
-              case 403:
-                setIsLoading(false);
-                return;
-              case 404:
-                setIsLoading(false);
-                return new Promise((resolve) => resolve(response.right.status));
-              default:
-                if (retryStatusCodes.includes(response.right.status)) {
-                  if (retryCount === maxRetries - 1) {
-                    if (errorHandlers) {
-                      errorHandlers();
-                      return;
-                    } else {
-                      throw new Error(`Unexpected status code: ${response.right.status}`);
-                    }
+                throw errorResponse;
+              }
+
+              setIsLoading(false);
+              return value;
+            case 404:
+              setIsLoading(false);
+              return new Promise(resolve => resolve(response.right.status));
+            default:
+              if (retryStatusCodes.includes(response.right.status)) {
+                if (retryCount === maxRetries - 1) {
+                  if (errorHandlers) {
+                    errorHandlers();
+                    return;
+                  } else {
+                    throw new Error(`Unexpected status code: ${response.right.status}`);
                   }
-                  retryCount++;
-                  await new Promise((resolve) => setTimeout(resolve, retryDelay));
-                  setIsLoading(false);
-                  break;
-                } else {
-                  setIsLoading(false);
-                  throw new Error(`Unexpected status code: ${response.right.status}`);
                 }
-            }
+                retryCount++;
+                await new Promise(resolve => setTimeout(resolve, retryDelay));
+                setIsLoading(false);
+                break;
+              } else {
+                setIsLoading(false);
+                throw new Error(`Unexpected status code: ${response.right.status}`);
+              }
           }
+        } else {
+          // Explicit management of Left: no retry, immediately throw the error
+          setIsLoading(false);
+          throw response;
         }
-      } catch (e) {
-        setIsLoading(false);
-        throw e;
       }
-    },
-    []
-  );
+    } catch (e) {
+      setIsLoading(false);
+      throw e;
+    }
+  }, []);
 
   return {
     callFetchEmailValidationWithRetries,
     isLoading,
-    setIsLoading
+    setIsLoading,
   };
 };
 
 export default useFetchEmailValidation;
 
-
 export const EmailValidationApi = {
   emailValidationTokenInfo: async (token: ValidationToken) => {
-    const result = await validateEmailApiClient.getTokenInfo({"x-pagopa-email-validation-token":token});
+    const result = await validateEmailApiClient.getTokenInfo({
+      'x-pagopa-email-validation-token': token,
+    });
     return extractResponse(result);
   },
   validateEmail: async (token: ValidateProfileEmailPayload) => {
-    const result = await validateEmailApiClient.validateProfileEmail({body: token});
+    const result = await validateEmailApiClient.validateProfileEmail({ body: token });
     return extractResponse(result);
-  }
+  },
 };
