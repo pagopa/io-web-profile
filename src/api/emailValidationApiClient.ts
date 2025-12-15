@@ -42,14 +42,11 @@ const useFetchEmailValidation = () => {
               const value = response.right.value;
 
               // Check if it is a 200 response with an error (ValidationErrorsObject)
-              if (
-                value &&
-                typeof value === 'object' &&
-                'status' in value &&
-                (value as { status: string }).status === 'FAILURE'
-              ) {
+              if (value?.status === 'FAILURE') {
                 const failureValue = value as { status: 'FAILURE'; reason: string };
-
+                // TODO: [IOPID-3625] When the BE also returns profile_email in error responses (EMAIL_ALREADY_TAKEN, TOKEN_EXPIRED),
+                // update the error structure to include profile_email and simplify extraction in findEmailInResponse.
+                // See: https://pagopa.atlassian.net/browse/IOPID-3625
                 // Convert to error format compatible with handleEmailValidationError
                 const errorResponse = {
                   left: [
@@ -71,9 +68,6 @@ const useFetchEmailValidation = () => {
 
               setIsLoading(false);
               return value;
-            case 403:
-              setIsLoading(false);
-              return;
             case 404:
               setIsLoading(false);
               return new Promise(resolve => resolve(response.right.status));
@@ -96,6 +90,10 @@ const useFetchEmailValidation = () => {
                 throw new Error(`Unexpected status code: ${response.right.status}`);
               }
           }
+        } else {
+          // Explicit management of Left: no retry, immediately throw the error
+          setIsLoading(false);
+          throw response;
         }
       }
     } catch (e) {

@@ -37,6 +37,9 @@ const EmailConfirmationPage = (): React.ReactElement => {
     }>;
   }
 
+  // TODO: [IOPID-3625] When the BE also returns profile_email in error responses (EMAIL_ALREADY_TAKEN, TOKEN_EXPIRED),
+  // update the error structure to include profile_email and simplify extraction in findEmailInResponse.
+  // See: https://pagopa.atlassian.net/browse/IOPID-3625
   const findEmailInResponse = useCallback((response: ValidationError[]): string | undefined => {
     const contextItem = response.find(item =>
       item.context.some(ctx => ctx.actual && ctx.actual.profile_email)
@@ -99,7 +102,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
       pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
     return null;
-  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]); // 🔧 FIX: Ripristina le dipendenze corrette
+  }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);
 
   useEffect(() => {
     extractParams();

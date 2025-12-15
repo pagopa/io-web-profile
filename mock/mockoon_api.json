@@ -1380,7 +1380,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         },
@@ -1464,7 +1464,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
+          "default": false,
           "crudKey": "id",
           "callbacks": []
         }
@@ -1575,7 +1575,7 @@
           "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\"\n}",
           "latency": 500,
           "statusCode": 200,
-          "label": "200 - Token Expired (PROBLEMA 1)",
+          "label": "200 - Token Expired (CASE 1)",
           "headers": [
             {
               "key": "Content-Type",
@@ -1607,7 +1607,7 @@
           "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\"\n}",
           "latency": 500,
           "statusCode": 200,
-          "label": "200 - Email Already Taken (PROBLEMA 1)",
+          "label": "200 - Email Already Taken (CASE 1)",
           "headers": [
             {
               "key": "Content-Type",
@@ -1654,7 +1654,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         },
@@ -1734,7 +1734,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
+          "default": false,
           "crudKey": "id",
           "callbacks": []
         }
@@ -1769,7 +1769,7 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "",
+              "modifier": "token",
               "value": "valid-token-123",
               "invert": false,
               "operator": "equals"
@@ -1787,7 +1787,7 @@
           "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\"\n}",
           "latency": 500,
           "statusCode": 200,
-          "label": "200 - Token Expired on Validation (PROBLEMA 1)",
+          "label": "200 - Token Expired on Validation (CASE 1)",
           "headers": [
             {
               "key": "Content-Type",
@@ -1801,7 +1801,7 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "",
+              "modifier": "token",
               "value": "expired-token-456",
               "invert": false,
               "operator": "equals"
@@ -1819,7 +1819,7 @@
           "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\"\n}",
           "latency": 500,
           "statusCode": 200,
-          "label": "200 - Email Already Taken on Validation (PROBLEMA 1)",
+          "label": "200 - Email Already Taken on Validation (CASE 1)",
           "headers": [
             {
               "key": "Content-Type",
@@ -1833,7 +1833,7 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "",
+              "modifier": "token",
               "value": "email-taken-789",
               "invert": false,
               "operator": "equals"
