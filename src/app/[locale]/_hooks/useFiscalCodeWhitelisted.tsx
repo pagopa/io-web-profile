@@ -9,8 +9,8 @@ const useFiscalCodeWhitelisted = (): boolean | undefined => {
 
   useEffect(() => {
     callFetchWithRetries(WebWalletApi, 'getIsFiscalCodeWhitelisted', [], [500])
-      .then((res: boolean) => {
-        setIsFiscalCodeWhitelisted(res);
+      .then(res => {
+        setIsFiscalCodeWhitelisted(res?.is_whitelisted ?? false);
       })
       .catch(e => {
         if (e?.status) {
