@@ -73,19 +73,16 @@ const EmailConfirmationPage = (): React.ReactElement => {
     [dispatch, findEmailInResponse, pushWithLocale]
   );
 
-  const extractParams = useCallback(() => {
+  useEffect(() => {
     if (hasCalledApi.current) {
-      return null;
+      return;
     }
-
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const token: ValidationToken | null = urlParams.get('token') as ValidationToken;
-
       if (token) {
         // eslint-disable-next-line functional/immutable-data
         hasCalledApi.current = true;
-
         callFetchEmailValidationWithRetries(EmailValidationApi, 'emailValidationTokenInfo', token, [
           500,
         ])
@@ -101,12 +98,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
     } catch (error) {
       pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
-    return null;
   }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);
-
-  useEffect(() => {
-    extractParams();
-  }, [extractParams]);
 
   const handleConfirmEmail = () => {
     if (urlParams && urlParams.token) {
