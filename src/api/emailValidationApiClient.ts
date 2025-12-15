@@ -37,7 +37,6 @@ const useFetchEmailValidation = () => {
         const response = await client[apiName](params);
         if (isRight(response)) {
           switch (response.right.status) {
-            case 204:
             case 200:
               const value = response.right.value;
 
