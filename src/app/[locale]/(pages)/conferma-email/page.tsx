@@ -37,8 +37,10 @@ const EmailConfirmationPage = (): React.ReactElement => {
           pushWithLocale(ROUTES.EMAIL_CONFIRMATION_ALREADY_COMPLETED),
       };
       if (error.left) {
-        dispatch(setEmailValidation(error.left.profile_email));
-        const handler = errorHandlers[error.left.reason];
+        if (error.left.profile_email) {
+          dispatch(setEmailValidation(error.left.profile_email));
+        }
+        const handler = error.left.reason ? errorHandlers[error.left.reason] : undefined;
         if (handler) {
           handler();
         } else {
