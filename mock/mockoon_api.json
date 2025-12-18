@@ -702,7 +702,7 @@
       "responses": [
         {
           "uuid": "f7cb97e2-5ddb-4317-afbb-e81ce06bb27d",
-          "body": "{\n  \"email\": \"foobar@example.com\"\n}",
+          "body": "{\n  \"email\": \"{{faker 'internet.email'}}\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "Success",
@@ -1572,7 +1572,7 @@
         },
         {
           "uuid": "a6a822e5-8190-45d8-b9ce-9da966c53f80",
-          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\"\n}",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\",\n  \"profile_email\": \"{{faker 'internet.email'}}\"\n}",
           "latency": 500,
           "statusCode": 200,
           "label": "200 - Token Expired (CASE 1)",
@@ -1604,7 +1604,7 @@
         },
         {
           "uuid": "a20f96bc-c489-4366-91b7-f8ed72209813",
-          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\"\n}",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\",\n  \"profile_email\": \"{{faker 'internet.email'}}\"\n}",
           "latency": 500,
           "statusCode": 200,
           "label": "200 - Email Already Taken (CASE 1)",
@@ -1636,7 +1636,7 @@
         },
         {
           "uuid": "d5dab73c-4445-4e4d-b047-000645679cf4",
-          "body": "{\n  \"profile_email\": \"default@example.com\",\n  \"status\": \"SUCCESS\"\n}",
+          "body": "{\n  \"profile_email\": \"{{faker 'internet.email'}}\",\n  \"status\": \"SUCCESS\"\n}",
           "latency": 500,
           "statusCode": 200,
           "label": "Default Success Response",
@@ -1784,7 +1784,7 @@
         },
         {
           "uuid": "38088e51-3972-46ed-8af9-8863fab9ecf8",
-          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\"\n}",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"TOKEN_EXPIRED\",\n  \"profile_email\": \"{{faker 'internet.email'}}\"\n}",
           "latency": 500,
           "statusCode": 200,
           "label": "200 - Token Expired on Validation (CASE 1)",
@@ -1816,7 +1816,7 @@
         },
         {
           "uuid": "1e8f46c5-8c78-4690-b809-e8a143072ed8",
-          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\"\n}",
+          "body": "{\n  \"status\": \"FAILURE\",\n  \"reason\": \"EMAIL_ALREADY_TAKEN\",\n  \"profile_email\": \"{{faker 'internet.email'}}\"\n}",
           "latency": 500,
           "statusCode": 200,
           "label": "200 - Email Already Taken on Validation (CASE 1)",
