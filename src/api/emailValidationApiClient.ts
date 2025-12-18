@@ -42,27 +42,8 @@ const useFetchEmailValidation = () => {
 
               // Check if it is a 200 response with an error (ValidationErrorsObject)
               if (value?.status === 'FAILURE') {
-                const failureValue = value as { status: 'FAILURE'; reason: string };
-                // TODO: [IOPID-3625] When the BE also returns profile_email in error responses (EMAIL_ALREADY_TAKEN, TOKEN_EXPIRED),
-                // update the error structure to include profile_email and simplify extraction in findEmailInResponse.
-                // See: https://pagopa.atlassian.net/browse/IOPID-3625
-                // Convert to error format compatible with handleEmailValidationError
-                const errorResponse = {
-                  left: [
-                    {
-                      value: failureValue.reason, // TOKEN_EXPIRED or EMAIL_ALREADY_TAKEN
-                      context: [
-                        {
-                          key: 'response',
-                          actual: value,
-                        },
-                      ],
-                    },
-                  ],
-                };
-
                 setIsLoading(false);
-                throw errorResponse;
+                throw { left: value };
               }
 
               setIsLoading(false);
