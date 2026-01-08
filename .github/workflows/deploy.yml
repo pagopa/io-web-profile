@@ -50,6 +50,8 @@ jobs:
           NEXT_PUBLIC_SPID_TEST_ENV_ENABLED: false
           NEXT_PUBLIC_SPID_TEST_ENV_UAT_ENABLED: 'false'
           NEXT_PUBLIC_CIE_UAT_LOGIN_ENABLED: 'false'
+          NEXT_PUBLIC_IO_FUNCTION_API_BASE_URL: 'https://api.io.pagopa.it'
+          NEXT_PUBLIC_VALIDATION_EMAIL: true
           # the following mixpanel project token is not a secret in any way.
           # ref -> https://developer.mixpanel.com/reference/project-token
           NEXT_PUBLIC_ANALYTICS_TOKEN: 'cc8f0687d3eeb055a44fff7b779ba535'
@@ -104,4 +106,3 @@ jobs:
           profile_name: ${{ env.PROFILE_CDN_NAME }}
           endpoint_name: ${{ env.ENDPOINT_NAME }}
           sync_dir_name: ${{steps.download_artifact.outputs.download-path}}
-
