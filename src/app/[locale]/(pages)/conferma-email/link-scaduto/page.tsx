@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../../_utils/styles';
 import { EmailValidationContainer } from '../../../_component/emailValidationContainer/emailValidationContainer';
 import HourglassIcon from '@/app/[locale]/_icons/hourglass';
-import { backToIOTimeDelay, backToIo } from '@/app/[locale]/_utils/common';
+import { backToIo } from '@/app/[locale]/_utils/common';
 
 const EmailConfirmationLinkExpired = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -24,7 +24,7 @@ const EmailConfirmationLinkExpired = (): React.ReactElement => {
           button={{
             variant: 'contained',
             text: t('emailvalidation.backtoio'),
-            onClick: () => backToIo(backToIOTimeDelay),
+            onClick: backToIo,
           }}
         />
       </Grid>

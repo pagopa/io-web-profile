@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../../_utils/styles';
 import { EmailValidationContainer } from '../../../_component/emailValidationContainer/emailValidationContainer';
 import { IllusError } from '@pagopa/mui-italia';
-import { backToIOTimeDelay, backToIo } from '@/app/[locale]/_utils/common';
+import { backToIo } from '@/app/[locale]/_utils/common';
 
 const EmailNotConfirmed = (): React.ReactElement => {
   const t = useTranslations('ioesco');
@@ -25,7 +25,7 @@ const EmailNotConfirmed = (): React.ReactElement => {
           button={{
             variant: 'contained',
             text: t('emailvalidation.backtoio'),
-            onClick: () => backToIo(backToIOTimeDelay),
+            onClick: backToIo,
           }}
         />
       </Grid>
