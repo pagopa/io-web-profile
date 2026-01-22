@@ -15,8 +15,6 @@ export const FLOW_PARAMS = {
 export const localeList = ['it'];
 export const defaultLocale = 'it';
 
-export const backToIOTimeDelay = 1000;
-
 export const isBrowser = () => typeof window !== 'undefined';
 
 export const addSpacesEvery3Chars = (input: string, startIndex = 0): string => {
@@ -102,11 +100,8 @@ export const goTo = (route: string, timeout: number): void => {
   );
 };
 
-export const backToIo = (timeout: number): void => {
-  window.setTimeout(
-    () => window.location.assign(`${process.env.NEXT_PUBLIC_GOTO_IO_URL}`),
-    timeout
-  );
+export const backToIo = (): void => {
+  window.location.assign(`${process.env.NEXT_PUBLIC_GOTO_IO_URL}`);
 };
 
 export const weAreOnEmailValidationFlow = (pathName: string): boolean => {

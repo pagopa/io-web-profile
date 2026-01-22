@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { commonBackgroundLightFullHeight } from '../../../_utils/styles';
 import { EmailValidationContainer } from '../../../_component/emailValidationContainer/emailValidationContainer';
 import { IllusEmailValidation } from '@pagopa/mui-italia';
-import { backToIOTimeDelay, backToIo } from '@/app/[locale]/_utils/common';
+import { backToIo } from '@/app/[locale]/_utils/common';
 import { emailValidationSelector } from '@/app/[locale]/_redux/slices/emailValidationSlice';
 import { useSelector } from 'react-redux';
 
@@ -33,7 +33,7 @@ const EmailAlreadyConfirmedPage = (): React.ReactElement => {
           button={{
             variant: 'contained',
             text: t('emailvalidation.backtoio'),
-            onClick: () => backToIo(backToIOTimeDelay),
+            onClick: backToIo,
           }}
         />
       </Grid>
