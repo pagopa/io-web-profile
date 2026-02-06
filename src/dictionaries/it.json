@@ -194,7 +194,7 @@
       "description": "Se continui tutti i documenti presenti nel Portafoglio dell’app IO saranno disattivati in modo permanente.",
       "description2": "Se sospetti un accesso non autorizzato in app con le tue credenziali SPID o CIE, <strong> blocca l’accesso a IO </strong> per mantenere al sicuro i tuoi dati e i tuoi Documenti su IO. <br></br> Potrai abilitare nuovamente l’accesso a IO dopo aver messo in sicurezza la tua identità.",
       "fifthquestion": "Ho perso o mi hanno sottratto il dispositivo, cosa posso fare?",
-      "tilte2": "Pensi ci sia stato un accesso non autorizzato?",
+      "title2": "Pensi ci sia stato un accesso non autorizzato?",
       "title": "Vuoi disattivare Documenti su IO?",
       "itwallet": {
         "title": "Vuoi rimuovere i documenti digitali dal Portafoglio di IO?",
