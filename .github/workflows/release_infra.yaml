@@ -12,7 +12,7 @@ on:
 
 jobs:
   release_prod:
-    uses: pagopa/dx/.github/workflows/infra_apply.yaml@733af875ece52e5fd593f013ea9abf9a8d32d1d1
+    uses: pagopa/dx/.github/workflows/infra_apply.yaml@main
     name: Release Infrastructure
     secrets: inherit
     with:
