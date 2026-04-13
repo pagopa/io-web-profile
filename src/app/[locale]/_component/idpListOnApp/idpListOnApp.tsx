@@ -8,19 +8,19 @@ export const IdpListOnApp = () => {
       identifier: 'Ultimo accesso il 06 ott 2022 alle 16:43',
       entityId: 'arubaid',
       name: 'Aruba.it ID',
-      imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-arubaid.png',
+      imageUrl: 'https://assets.io.pagopa.it/spid/idps/spid-idp-arubaid.png',
     },
     {
       identifier: 'Sessione attiva in app',
       entityId: 'posteid',
       name: 'Poste ID',
-      imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-posteid.png',
+      imageUrl: 'https://assets.io.pagopa.it/spid/idps/spid-idp-posteid.png',
     },
     {
       identifier: 'Ultimo accesso il 21 gen 2023 alle 11:07',
       entityId: 'infocertid',
       name: 'Infocert ID',
-      imageUrl: 'https://assets.cdn.io.italia.it/spid/idps/spid-idp-infocertid.png',
+      imageUrl: 'https://assets.io.pagopa.it/spid/idps/spid-idp-infocertid.png',
     },
   ];
 
