@@ -116,13 +116,3 @@ module "repo" {
 
   tags = local.tags
 }
-
-moved {
-  from = module.repo.azurerm_key_vault_access_policy.infra_cd_kv_common
-  to   = azurerm_key_vault_access_policy.infra_cd_kv_common
-}
-
-moved {
-  from = module.repo.azurerm_key_vault_access_policy.infra_ci_kv_common
-  to   = azurerm_key_vault_access_policy.infra_ci_kv_common
-}

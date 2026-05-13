@@ -19,7 +19,7 @@ module "auth_infra_ci" {
     name                = "io-p-ioweb-kv"
     resource_group_name = "io-p-ioweb-sec-rg"
     has_rbac_support    = false
-    description         = "Allow IO Auth monorepo infra github ci to read data from key vault"
+    description         = "Allow IO Auth monorepo infra github ci to read secrets from key vault"
     roles = {
       secrets = "reader"
     }
@@ -37,7 +37,7 @@ module "auth_infra_cd" {
     name                = "io-p-ioweb-kv"
     resource_group_name = "io-p-ioweb-sec-rg"
     has_rbac_support    = false
-    description         = "Allow IO Auth monorepo infra github ci to write data to key vault"
+    description         = "Allow IO Auth monorepo infra github ci to read secrets from key vault"
     roles = {
       secrets = "writer"
     }
