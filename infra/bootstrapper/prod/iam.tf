@@ -43,3 +43,23 @@ module "auth_infra_cd" {
     }
   }]
 }
+
+resource "azurerm_key_vault_access_policy" "infra_cd_kv_common" {
+  for_each = toset(local.keyvault_common_ids)
+
+  key_vault_id = each.key
+  tenant_id    = data.azurerm_subscription.current.tenant_id
+  object_id    = module.repo.identities.infra.cd.principal_id
+
+  secret_permissions = ["Get", "List", "Set"]
+}
+
+resource "azurerm_key_vault_access_policy" "infra_ci_kv_common" {
+  for_each = toset(local.keyvault_common_ids)
+
+  key_vault_id = each.key
+  tenant_id    = data.azurerm_subscription.current.tenant_id
+  object_id    = module.repo.identities.infra.ci.principal_id
+
+  secret_permissions = ["Get", "List"]
+}
