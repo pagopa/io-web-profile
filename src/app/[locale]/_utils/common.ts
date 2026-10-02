@@ -12,7 +12,7 @@ export const FLOW_PARAMS = {
   FLOW_UNLOCK_ACCESS_L3: `login_to_UnlockAccessL3`,
 };
 
-export const localeList = ['it'];
+export const locales = ['it'];
 export const defaultLocale = 'it';
 
 export const isBrowser = () => typeof window !== 'undefined';

@@ -62,7 +62,7 @@ describe('useLogin hook', () => {
     expect(result.current.userLogged).toBeUndefined();
 
     expect(sessionStorageClearMock).toHaveBeenCalled();
-    expect(pushMock).toHaveBeenCalledWith(ROUTES.LOGIN, { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith(`/it${ROUTES.LOGIN}`);
 
     sessionStorageClearMock.mockRestore();
   });

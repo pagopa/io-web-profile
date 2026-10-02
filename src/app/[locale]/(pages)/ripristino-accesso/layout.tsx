@@ -1,14 +1,15 @@
+import { getTranslations } from 'next-intl/server';
 import { Props } from '../../layout';
 
-export async function generateMetadata({ params }: Props) {
-  const { locale } = params;
-  const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
+export async function generateMetadata() {
+  const t = await getTranslations('ioesco.metadati');
 
   return {
-    title: messages.ioesco.metadati.ripristinoaccessol2title,
-    description: messages.ioesco.metadati.ripristinoaccessol2description,
+    title: t('ripristinoaccessol2title'),
+    description: t('ripristinoaccessol2description'),
   };
 }
+
 export default function RestoreAccessLayout({ children }: Props) {
   return children;
 }

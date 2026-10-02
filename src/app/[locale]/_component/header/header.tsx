@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next-intl/client';
+import { usePathname } from '@/i18n/navigation';
 import { Link } from '@mui/material';
 import useLogin from '../../_hooks/useLogin';
 import useLocalePush from '../../_hooks/useLocalePush';
@@ -19,7 +19,6 @@ const Header = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
   const pathName = usePathname();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const userMenuActionsBasic = [
     {
       id: '2',
@@ -105,12 +104,10 @@ const Header = (): React.ReactElement => {
           }
         }}
         onLogin={(): void => {
-          // eslint-disable-next-line no-console
           console.log('User login');
         }}
         enableLogin={isLoggedIn}
         enableAssistanceButton={isLoggedIn}
-        // eslint-disable-next-line functional/immutable-data
         userActions={sortedUserMenuActions}
       />
       <HeaderProduct

@@ -1,5 +1,5 @@
 'use client';
-/* eslint-disable sonarjs/cognitive-complexity */
+
 import { isRight } from 'fp-ts/lib/Either';
 import { useCallback, useState } from 'react';
 import { createClient } from './generated/ioFunction/client';
@@ -31,7 +31,7 @@ const useFetchEmailValidation = () => {
     const retryDelay = 1000;
     try {
       setIsLoading(true);
-      // eslint-disable-next-line functional/no-let
+
       let retryCount = 0;
       while (retryCount < maxRetries) {
         const response = await client[apiName](params);
@@ -50,7 +50,7 @@ const useFetchEmailValidation = () => {
               return value;
             case 404:
               setIsLoading(false);
-              return new Promise(resolve => resolve(response.right.status));
+              return Promise.resolve(response.right.status);
             default:
               if (retryStatusCodes.includes(response.right.status)) {
                 if (retryCount === maxRetries - 1) {

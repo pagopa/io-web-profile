@@ -3,7 +3,7 @@
 import { Grid } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next-intl/client';
+import { usePathname } from '@/i18n/navigation';
 import { useEffect } from 'react';
 import { FeedbackMessage } from '../../../_component/feedbackMessage/feedbackMessage';
 import { commonBackground } from '../../../_utils/styles';

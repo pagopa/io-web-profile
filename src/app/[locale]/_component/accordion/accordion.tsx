@@ -4,7 +4,7 @@ import { AccordionItem, AccordionItemProps } from './accordionItem';
 export interface AccordionProps {
   title: string;
   subtitle?: string;
-  description?: string | JSX.Element;
+  description?: React.ReactNode;
   accordionItems: AccordionItemProps[];
   theme: 'light' | 'dark';
   layout?: 'left' | 'center' | 'right';

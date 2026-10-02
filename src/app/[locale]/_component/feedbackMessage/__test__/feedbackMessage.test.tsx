@@ -35,8 +35,8 @@ describe('FeedbackMessage component', () => {
     await renderWithProviders(<FeedbackMessage {...defaultProps} />);
 
     fireEvent.click(await screen.findByText('FirstButton'));
-    expect(pushMock).toHaveBeenCalledWith('/first', { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith('/it/first');
     fireEvent.click(await screen.findByText('SecondButton'));
-    expect(pushMock).toHaveBeenCalledWith('/second', { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith('/it/second');
   });
 });

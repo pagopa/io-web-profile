@@ -1,6 +1,3 @@
-/* eslint-disable functional/immutable-data */
-/* eslint-disable no-console */
-import { URL } from 'url';
 import { agent } from '@pagopa/ts-commons';
 import { ApiRequestType, IResponseType, TypeofApiResponse } from '@pagopa/ts-commons/lib/requests';
 import { Millisecond } from '@pagopa/ts-commons/lib/units';
@@ -54,7 +51,6 @@ export const extractResponse = async (
     TypeofApiResponse<ApiRequestType<any, any, any, IResponseType<any, any, any>>>
   >
 ) => {
-  // eslint-disable-next-line sonarjs/no-all-duplicated-branches
   if (isRight(response)) {
     return response;
   } else {

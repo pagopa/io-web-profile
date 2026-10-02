@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# yarn berry (nodeLinker: node-modules) local install cache
+.yarn/install-state.gz
+
 # testing
 /coverage
 
