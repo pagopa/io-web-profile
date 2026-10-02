@@ -1,9 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 import { Props } from '../../../layout';
 
-export async function generateMetadata({ params }: Props) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'ioesco.metadati' });
+export async function generateMetadata() {
+  const t = await getTranslations('ioesco.metadati');
 
   return {
     title: t('confirmerrorgenerictitle'),

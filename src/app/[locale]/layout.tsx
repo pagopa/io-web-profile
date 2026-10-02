@@ -16,9 +16,8 @@ export async function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'ioesco.metadati' });
+export async function generateMetadata() {
+  const t = await getTranslations('ioesco.metadati');
 
   return {
     title: t('profilotitle'),
