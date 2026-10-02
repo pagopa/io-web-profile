@@ -1,5 +1,5 @@
 'use client';
-/* eslint-disable sonarjs/cognitive-complexity */
+
 import { isRight } from 'fp-ts/lib/Either';
 import { useCallback, useState } from 'react';
 import { WithDefaultsT, createClient } from './generated/wallet/client';
@@ -48,7 +48,6 @@ const useFetch = () => {
     const retryDelay = 1000;
     try {
       setIsLoading(true);
-      // eslint-disable-next-line functional/no-let
       let retryCount = 0;
       while (retryCount < maxRetries) {
         const response = await client[apiName](params);
@@ -64,7 +63,7 @@ const useFetch = () => {
             case 404:
             case 422:
               setIsLoading(false);
-              return new Promise((_, reject) => reject({ status: response.right.status }));
+              return Promise.reject({ status: response.right.status });
             default:
               if (retryStatusCodes.includes(response.right.status)) {
                 if (retryCount === maxRetries - 1) {

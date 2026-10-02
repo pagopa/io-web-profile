@@ -7,7 +7,6 @@ import { onLoadPrivacyPolicy } from '../../_utils/onetrust';
 import useLocalePush from '../../_hooks/useLocalePush';
 import { ROUTES } from '../../_utils/routes';
 
-// eslint-disable-next-line sonarjs/no-duplicate-string
 const addImportanttoCssProp = (property: string) => property + ' !important';
 
 const OneTrustPrivacyNotice = styled('div')(() => ({

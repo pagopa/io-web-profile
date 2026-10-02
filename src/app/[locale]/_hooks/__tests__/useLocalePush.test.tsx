@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import useLocalePush from '../useLocalePush';
 import { test, vi } from 'vitest';
 
-vi.mock('next-intl/client', () => ({
+vi.mock('next/navigation', () => ({
   useRouter() {
     return {
       push: () => vi.fn(),

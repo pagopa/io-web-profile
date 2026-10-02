@@ -2,7 +2,7 @@
 import { Button, Grid, Typography, Link } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 import { useEffect } from 'react';
 import { CopyCodeCard } from '../../../_component/copyCodeCard/copyCodeCard';
 import { IdpListOnApp } from '../../../_component/idpListOnApp/idpListOnApp';

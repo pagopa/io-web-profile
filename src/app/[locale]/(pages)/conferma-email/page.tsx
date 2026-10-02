@@ -75,7 +75,7 @@ const EmailConfirmationPage = (): React.ReactElement => {
       } else {
         pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
       }
-    } catch (error) {
+    } catch {
       pushWithLocale(ROUTES.EMAIL_NOT_CONFIRMED);
     }
   }, [callFetchEmailValidationWithRetries, handleEmailValidationError, pushWithLocale]);

@@ -1,6 +1,0 @@
-src/locale/
-tsconfig.json
-**/__tests__/**
-.eslintrc.js
-definitions/*
-**/generated/**

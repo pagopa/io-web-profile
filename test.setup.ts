@@ -7,12 +7,20 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import { vi, type Mock } from 'vitest';
 import '@testing-library/jest-dom/extend-expect';
-import { useRouter } from 'next-intl/client';
+import { useRouter } from 'next/navigation';
 import * as storageUtils from './src/app/[locale]/_utils/storage';
 
-vi.mock('next-intl/client', () => ({
-  useRouter: vi.fn(),
-  usePathname: () => vi.fn(),
+vi.mock('next/navigation', async importOriginal => {
+  const actual = await importOriginal<typeof import('next/navigation')>();
+  return {
+    ...actual,
+    useRouter: vi.fn(),
+    usePathname: () => '/it/',
+  };
+});
+
+vi.mock('@/i18n/navigation', () => ({
+  usePathname: () => '/it/',
 }));
 
 export const pushMock = vi.fn();
@@ -23,16 +31,9 @@ beforeEach(() => {
   });
 });
 
-// Mock Link component globally
-vi.mock('next-intl/link', () => ({
-  __esModule: true,
-  default: ({ children }: { children: any }) => children, // Mocking Link as a simple wrapper around its children
-}));
-
 // Mock localStorage
 
 const localStorageMock = (() => {
-  // eslint-disable-next-line functional/no-let
   let store: { [key: string]: any } = {};
 
   return {
@@ -52,7 +53,6 @@ const localStorageMock = (() => {
 // Mock SessionStorage
 
 const sessionStorageMock = (() => {
-  // eslint-disable-next-line functional/no-let
   let store: { [key: string]: any } = {};
 
   return {

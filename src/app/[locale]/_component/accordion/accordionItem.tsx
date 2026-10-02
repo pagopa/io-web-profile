@@ -7,7 +7,7 @@ import { Typography } from '@mui/material';
 
 export interface AccordionItemProps {
   header: string;
-  content: string | JSX.Element;
+  content: React.ReactNode;
   onChange?: (isOpen: boolean) => void;
 }
 

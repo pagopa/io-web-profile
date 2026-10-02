@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import { render, RenderResult } from '@testing-library/react';
-import { AbstractIntlMessages, NextIntlProvider } from 'next-intl';
+import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 import { Provider } from 'react-redux';
-import { AnyAction, Dispatch } from '@reduxjs/toolkit';
+import { UnknownAction, Dispatch } from '@reduxjs/toolkit';
 import { store } from '../_redux/store';
 
 export const renderWithProviders = async (
@@ -16,7 +16,6 @@ export const renderWithProviders = async (
 
       return messagesModule.default;
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error loading messages:', error);
       return {};
     }
@@ -26,12 +25,12 @@ export const renderWithProviders = async (
 
   if (mockDispatch) {
     // eslint-disable-next-line functional/immutable-data
-    store.dispatch = vi.fn() as Dispatch<AnyAction>;
+    store.dispatch = vi.fn() as Dispatch<UnknownAction>;
   }
 
   return render(
-    <NextIntlProvider messages={messages} locale={locale}>
+    <NextIntlClientProvider messages={messages} locale={locale}>
       <Provider store={store}>{component}</Provider>
-    </NextIntlProvider>
+    </NextIntlClientProvider>
   );
 };

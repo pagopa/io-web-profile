@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable sonarjs/no-duplicate-string */
 import { useTranslations } from 'next-intl';
 import { Link, Typography } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';

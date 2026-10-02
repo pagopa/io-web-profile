@@ -1,12 +1,13 @@
+import { getTranslations } from 'next-intl/server';
 import { Props } from '../../layout';
 
 export async function generateMetadata({ params }: Props) {
-  const { locale } = params;
-  const messages = (await import(`../../../../dictionaries/${locale}.json`)).default;
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'ioesco.metadati' });
 
   return {
-    title: messages.ioesco.metadati.escititle,
-    description: messages.ioesco.metadati.escidescription,
+    title: t('escititle'),
+    description: t('escidescription'),
   };
 }
 

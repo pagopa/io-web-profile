@@ -1,4 +1,4 @@
-import { useRouter } from 'next-intl/client';
+import { useRouter } from 'next/navigation';
 
 const usePushBack = () => {
   const router = useRouter();

@@ -31,7 +31,6 @@ export interface EventProperties {
   event_category?: EventCategory;
   [key: string]: unknown;
 }
-// eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
 let mockSuperProperties: Record<string, unknown> = {};
 
 const addIsIoWebSuperProperty = () => {
@@ -84,7 +83,6 @@ export const trackEvent = (
 ): void => {
   if (ANALYTICS_ENABLE && (window as WindowMPValues).initMixPanelIoWeb && hasConsent()) {
     if (ANALYTICS_MOCK) {
-      // eslint-disable-next-line no-console
       console.log(event_name, { ...mockSuperProperties, ...properties });
       if (callback) {
         callback();
@@ -111,7 +109,6 @@ const trackEventThroughAnalyticTool = (
           called = true;
           callback();
         } catch (reason) {
-          // eslint-disable-next-line no-console
           console.error(
             `Something gone wrong while calling trackEvent ${event_name} callback`,
             reason
@@ -129,9 +126,7 @@ const trackEventThroughAnalyticTool = (
       wrappedCallback
     );
   } catch (reason) {
-    // eslint-disable-next-line no-console
     console.error('Something gone wrong while sending data to mixpanel:', reason);
-    // eslint-disable-next-line no-console
     console.log(event_name, properties);
 
     if (wrappedCallback && !called) {

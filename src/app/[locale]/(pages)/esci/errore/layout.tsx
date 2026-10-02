@@ -1,14 +1,16 @@
+import { getTranslations } from 'next-intl/server';
 import { Props } from '../../../layout';
 
 export async function generateMetadata({ params }: Props) {
-  const { locale } = params;
-  const messages = (await import(`../../../../../dictionaries/${locale}.json`)).default;
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'ioesco.metadati' });
 
   return {
-    title: messages.ioesco.metadati.erroretitle,
-    description: messages.ioesco.metadati.erroredescription,
+    title: t('erroretitle'),
+    description: t('erroredescription'),
   };
 }
+
 export default function LogOutErrorLayout({ children }: Props) {
   return children;
 }

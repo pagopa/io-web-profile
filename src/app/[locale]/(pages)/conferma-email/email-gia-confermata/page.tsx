@@ -26,7 +26,7 @@ const EmailAlreadyConfirmedPage = (): React.ReactElement => {
           title={t('emailvalidation.emailalreadytakenerrortitle')}
           summary={
             t.rich('emailvalidation.emailalreadytakenerrorsubtitle', {
-              email: emailValidation,
+              email: emailValidation ?? '',
               strong: chunks => <strong>{chunks}</strong>,
             }) as string
           }
