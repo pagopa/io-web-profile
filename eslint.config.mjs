@@ -1,9 +1,8 @@
 import { defineConfig } from "eslint/config";
-import nextPlugin from "@next/eslint-plugin-next";
-import eslintConfigPrettier from "eslint-config-prettier";
-import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
+import prettier from "eslint-config-prettier";
 import functional from "eslint-plugin-functional";
-import globals from "globals";
 
 export default defineConfig([
   {
@@ -18,32 +17,28 @@ export default defineConfig([
       '**/*.mts',
     ],
   },
-  {
-    plugins: {
-      "@next/next": nextPlugin,
-    },
-    rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-    },
-  },
-  ...typescriptEslintPlugin.configs['flat/recommended'],
+  ...nextVitals,
+  ...nextTypescript,
   {
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
       parserOptions: {
         projectService: true,
       }
     },
+  },
+  {
     plugins: {
       functional,
     },
     rules: {
       'functional/immutable-data': 'error',
+      // react-hooks v7 (bundled transitively by eslint-config-next) flags
+      // "read from storage, then setState in useEffect" as an error. This
+      // is an established hydration pattern used across this codebase
+      // (useLogin, useToken, sessionProvider, selectIdp); keep it as a
+      // warning rather than blocking lint/CI.
+      'react-hooks/set-state-in-effect': 'warn',
     }
   },
-  eslintConfigPrettier
+  prettier
 ]);

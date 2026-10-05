@@ -1,6 +1,6 @@
 'use client';
 import { HeaderAccount, HeaderProduct, LogoIOApp } from '@pagopa/mui-italia';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useTranslations } from 'next-intl';
@@ -19,20 +19,24 @@ const Header = (): React.ReactElement => {
   const pushWithLocale = useLocalePush();
   const JWT_SPID_LEVEL_L1 = process.env.NEXT_PUBLIC_JWT_SPID_LEVEL_VALUE_L1;
   const pathName = usePathname();
-  const userMenuActionsBasic = [
-    {
-      id: '2',
-      label: t('common.logoutprofile'),
-      onClick: () => {
-        trackEvent('IO_LOGOUT', {
-          event_category: 'UX',
-          event_type: 'action',
-        });
-        logOut();
+
+  const userMenuActionsBasic = useMemo(
+    () => [
+      {
+        id: '2',
+        label: t('common.logoutprofile'),
+        onClick: () => {
+          trackEvent('IO_LOGOUT', {
+            event_category: 'UX',
+            event_type: 'action',
+          });
+          logOut();
+        },
+        icon: <ExitToAppIcon fontSize="small" color="inherit" />,
       },
-      icon: <ExitToAppIcon fontSize="small" color="inherit" />,
-    },
-  ];
+    ],
+    [t, logOut]
+  );
 
   const userMenuActions = useMemo(
     () =>
