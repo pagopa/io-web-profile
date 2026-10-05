@@ -1,4 +1,3 @@
-import React from 'react';
 import { test, vi } from 'vitest';
 import SessionActiveComp from '../sessionActiveComp';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';

@@ -1,7 +1,6 @@
 'use client';
 import { Box, Button, Card, CardContent, Divider, Grid, Typography, Link } from '@mui/material';
-import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
-import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
+import { CieIcon, SpidIcon } from '@pagopa/mui-italia/icons';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';

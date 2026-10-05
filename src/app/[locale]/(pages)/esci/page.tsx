@@ -2,8 +2,7 @@
 
 import { Grid, Button } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
-import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
+import { CieIcon, SpidIcon } from '@pagopa/mui-italia/icons';
 import { useEffect, useState } from 'react';
 import { Introduction } from '../../_component/introduction/introduction';
 import { commonBackgroundDark } from '../../_utils/styles';
