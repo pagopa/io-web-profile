@@ -1,7 +1,7 @@
 'use client';
 import { useLocale } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useLocalePush from '../_hooks/useLocalePush';
 import useToken from '../_hooks/useToken';
 import {
@@ -13,8 +13,7 @@ import {
 } from '../_utils/routes';
 import { storageLocaleOps } from '../_utils/storage';
 
-import { initOneTrust } from '../_utils/onetrust';
-import { defaultLocale, isBrowser, locales, weAreOnEmailValidationFlow } from '../_utils/common';
+import { defaultLocale, locales, weAreOnEmailValidationFlow } from '../_utils/common';
 import Loader from './loader/loader';
 import '../_styles/cookieBanner.css';
 import '../_styles/privacyPage.css';
@@ -44,8 +43,6 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
   const pathName = usePathname();
   const locale = useLocale();
 
-  const windowAvailable = isBrowser();
-
   const getHeaderFooter = ({
     children,
     pathName,
@@ -65,12 +62,6 @@ const SessionProviderComponent = ({ children }: { readonly children: React.React
       </>
     );
   };
-
-  useMemo(() => {
-    if (windowAvailable && !weAreOnEmailValidationFlow(pathName)) {
-      return initOneTrust();
-    }
-  }, [pathName, windowAvailable]);
 
   useEffect(() => {
     if (locales.includes(locale)) {

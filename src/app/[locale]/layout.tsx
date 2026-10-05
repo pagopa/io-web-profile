@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { ReactNode, Suspense } from 'react';
+import OneTrustScript from './_component/oneTrustScript';
 import SessionProviderComponent from '../[locale]/_component/sessionProvider';
 import ThemeProviderComponent from './_component/themeProvider/themeProvider';
 import { Providers } from './_redux/provider';
@@ -37,6 +38,7 @@ export default async function RootLayoutWithLocaleAndTheme({ children, params }:
           <Providers>
             <NextIntlClientProvider locale={locale} messages={messages}>
               <ThemeProviderComponent>
+                <OneTrustScript />
                 <SessionProviderComponent>{children}</SessionProviderComponent>
               </ThemeProviderComponent>
             </NextIntlClientProvider>
