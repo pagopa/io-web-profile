@@ -10,8 +10,9 @@ This repository contains the full source code of the front-end project.
 This project uses:
 
 - TypeScript
-- React
-- Next.js 14 (App Router)
+- React 19
+- Next.js 16
+- MUI 5 and `@pagopa/mui-italia`
 
 ---
 
@@ -19,8 +20,8 @@ This project uses:
 
 Before you start, ensure your machine has:
 
-- **Node.js** v20.12.0
-- **Yarn** v1.22
+- **Node.js** v22.16.0 (see `.node-version`)
+- **Yarn** v4.1.1 (see `packageManager` in `package.json`)
 
 You can use `nodenv` to manage Node versions and `corepack` (included with Node) to manage Yarn.
 
