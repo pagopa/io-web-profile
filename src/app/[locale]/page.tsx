@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 'use client';
 import { WalletData } from '@/api/generated/wallet/WalletData';
 import { SessionState } from '@/api/generated/webProfile/SessionState';

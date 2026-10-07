@@ -12,6 +12,11 @@ export default defineConfig({
       exclude: ['src/api/generated'],
     },
     setupFiles: ['./test.setup.ts'],
+    server: {
+      deps: {
+        inline: ['@pagopa/mui-italia'],
+      },
+    },
   },
   resolve: {
     alias: {

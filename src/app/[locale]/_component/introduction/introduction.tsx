@@ -1,11 +1,10 @@
-import React from 'react';
 import { Typography, Grid } from '@mui/material';
 
 type IntroductionObj = {
   title: string;
   summaryColor?: string;
   titleColor?: string;
-  summary: string | JSX.Element | React.ReactNodeArray | React.ReactNode;
+  summary: React.ReactNode;
   summaryColumns: {
     xs: number;
     sm?: number;

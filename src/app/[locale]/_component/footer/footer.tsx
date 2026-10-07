@@ -1,10 +1,9 @@
-/* eslint-disable max-lines-per-function */
 'use client';
 import {
   FooterLinksType,
   Footer as MuiItaliaFooter,
   PreLoginFooterLinksType,
-} from '@pagopa/mui-italia/dist/components/Footer/Footer';
+} from '@pagopa/mui-italia';
 import { useTranslations } from 'next-intl';
 import useLogin from '../../_hooks/useLogin';
 import { ROUTES } from '../../_utils/routes';
@@ -39,26 +38,40 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           label: t('aboutus'),
           ariaLabel: ariaLabel('aboutus'),
           linkType: 'internal',
-          onClick: () => window.open('https://www.pagopa.it/it/societa/chi-siamo/', '_blank'),
+          onClick: () =>
+            window.open(
+              'https://www.pagopa.it/it/societa/chi-siamo/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           label: t('pnrr'),
           ariaLabel: ariaLabel('pnrr'),
           linkType: 'internal',
           onClick: () =>
-            window.open('https://www.pagopa.it/it/opportunita/pnrr/progetti/', '_blank'),
+            window.open(
+              'https://www.pagopa.it/it/opportunita/pnrr/progetti/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           label: t('media'),
           ariaLabel: ariaLabel('media'),
           linkType: 'internal',
-          onClick: () => window.open('https://www.pagopa.it/it/', '_blank'),
+          onClick: () => window.open('https://www.pagopa.it/it/', '_blank', 'noopener,noreferrer'),
         },
         {
           label: t('workwithus'),
           ariaLabel: ariaLabel('workwithus'),
           linkType: 'internal',
-          onClick: () => window.open('https://www.pagopa.it/it/lavora-con-noi/', '_blank'),
+          onClick: () =>
+            window.open(
+              'https://www.pagopa.it/it/lavora-con-noi/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
       ],
     },
@@ -71,7 +84,11 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           ariaLabel: ariaLabel('privacypolicy'),
           linkType: 'internal',
           onClick: () =>
-            window.open(`${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+            window.open(
+              `${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`,
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           label: t('cookiesperefercies'),
@@ -83,7 +100,12 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           label: t('certifications'),
           ariaLabel: ariaLabel('certifications'),
           linkType: 'internal',
-          onClick: () => window.open('https://www.pagopa.it/it/certificazioni/', '_blank'),
+          onClick: () =>
+            window.open(
+              'https://www.pagopa.it/it/certificazioni/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           label: t('informationssecurity'),
@@ -92,7 +114,9 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           onClick: () =>
             window.open(
               'https://www.pagopa.it/it/politiche-sulla-sicurezza-delle-informazioni-e-sulla-qualita/',
-              '_blank'
+              '_blank',
+
+              'noopener,noreferrer'
             ),
         },
         {
@@ -102,7 +126,9 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           onClick: () =>
             window.open(
               'https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8',
-              '_blank'
+              '_blank',
+
+              'noopener,noreferrer'
             ),
         },
         {
@@ -110,14 +136,22 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           ariaLabel: ariaLabel('society'),
           linkType: 'internal',
           onClick: () =>
-            window.open('https://pagopa.portaleamministrazionetrasparente.it/', '_blank'),
+            window.open(
+              'https://pagopa.portaleamministrazionetrasparente.it/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           label: t('disclosurepolicy'),
           ariaLabel: ariaLabel('disclosurepolicy'),
           linkType: 'internal',
           onClick: () =>
-            window.open('https://www.pagopa.it/it/responsible-disclosure-policy/', '_blank'),
+            window.open(
+              'https://www.pagopa.it/it/responsible-disclosure-policy/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           label: t('231model'),
@@ -126,7 +160,9 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           onClick: () =>
             window.open(
               'https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html',
-              '_blank'
+              '_blank',
+
+              'noopener,noreferrer'
             ),
         },
       ],
@@ -139,25 +175,32 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           icon: 'linkedin',
           title: 'LinkedIn',
           ariaLabel: socialAriaLabel('LinkedIn'),
-          onClick: () => window.open('https://www.linkedin.com/company/pagopa/', '_blank'),
+          onClick: () =>
+            window.open(
+              'https://www.linkedin.com/company/pagopa/',
+              '_blank',
+              'noopener,noreferrer'
+            ),
         },
         {
           title: 'Twitter',
           icon: 'twitter',
           ariaLabel: socialAriaLabel('Twitter'),
-          onClick: () => window.open('https://twitter.com/pagopa', '_blank'),
+          onClick: () => window.open('https://twitter.com/pagopa', '_blank', 'noopener,noreferrer'),
         },
         {
           icon: 'instagram',
           title: 'Instagram',
           ariaLabel: socialAriaLabel('Instagram'),
-          onClick: () => window.open('https://www.instagram.com/pagopaspa/', '_blank'),
+          onClick: () =>
+            window.open('https://www.instagram.com/pagopaspa/', '_blank', 'noopener,noreferrer'),
         },
         {
           icon: 'medium',
           title: 'Medium',
           ariaLabel: socialAriaLabel('Medium'),
-          onClick: () => window.open('https://medium.com/pagopa-spa', '_blank'),
+          onClick: () =>
+            window.open('https://medium.com/pagopa-spa', '_blank', 'noopener,noreferrer'),
         },
       ],
       links: [
@@ -168,7 +211,9 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
           onClick: () =>
             window.open(
               'https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10',
-              '_blank'
+              '_blank',
+
+              'noopener,noreferrer'
             ),
         },
       ],
@@ -180,7 +225,11 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       ariaLabel: ariaLabel('privacypolicy'),
       linkType: 'internal',
       onClick: () =>
-        window.open(`${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`, '_blank'),
+        window.open(
+          `${BASE_URL}/${localeFromStorage}${ROUTES.PRIVACY_POLICY}`,
+          '_blank',
+          'noopener,noreferrer'
+        ),
     },
     {
       label: t('cookiesperefercies'),
@@ -192,9 +241,12 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       label: t('accessibility'),
       ariaLabel: ariaLabel('accessibility'),
       linkType: 'internal',
-      // eslint-disable-next-line sonarjs/no-identical-functions
       onClick: () =>
-        window.open('https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10', '_blank'),
+        window.open(
+          'https://form.agid.gov.it/view/cf4a7360-df2d-11ef-8637-9f856ac3da10',
+          '_blank',
+          'noopener,noreferrer'
+        ),
     },
   ];
 
@@ -217,7 +269,6 @@ export default function Footer({ onExit = exitAction => exitAction() }: IOFooter
       loggedUser={isLoggedIn}
       onExit={onExit}
       languages={LANGUAGES}
-      // eslint-disable-next-line no-console
       onLanguageChanged={(language: string) => console.log(language)}
       currentLangCode="it"
       productsJsonUrl={productListUrl || undefined}

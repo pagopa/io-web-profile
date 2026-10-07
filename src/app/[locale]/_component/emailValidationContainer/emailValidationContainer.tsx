@@ -7,10 +7,10 @@ type ButtonProps = {
 };
 
 type IntroductionProps = {
-  icon?: JSX.Element;
+  icon?: React.ReactNode;
   title: string;
   subtitle?: string;
-  summary?: string | JSX.Element | React.ReactNode;
+  summary?: React.ReactNode;
   button: ButtonProps;
 };
 
@@ -21,7 +21,6 @@ export function EmailValidationContainer({
   summary,
   button,
 }: IntroductionProps) {
-
   return (
     <Box sx={{ maxWidth: 500, margin: '0 auto' }}>
       <Grid container>

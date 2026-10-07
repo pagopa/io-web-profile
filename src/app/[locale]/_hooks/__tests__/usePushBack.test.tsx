@@ -2,7 +2,7 @@ import { test, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import usePushBack from '../usePushBack';
 
-vi.mock('next-intl/client', () => ({
+vi.mock('next/navigation', () => ({
   useRouter() {
     return {
       back: () => vi.fn(),

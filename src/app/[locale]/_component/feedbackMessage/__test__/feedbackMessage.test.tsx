@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { FeedbackMessage } from '../feedbackMessage';
 import { pushMock } from '../../../../../../test.setup';
@@ -35,8 +34,8 @@ describe('FeedbackMessage component', () => {
     await renderWithProviders(<FeedbackMessage {...defaultProps} />);
 
     fireEvent.click(await screen.findByText('FirstButton'));
-    expect(pushMock).toHaveBeenCalledWith('/first', { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith('/it/first');
     fireEvent.click(await screen.findByText('SecondButton'));
-    expect(pushMock).toHaveBeenCalledWith('/second', { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith('/it/second');
   });
 });

@@ -1,4 +1,3 @@
-import React from 'react';
 import { test, vi } from 'vitest';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import ProfileBlock from '../page';

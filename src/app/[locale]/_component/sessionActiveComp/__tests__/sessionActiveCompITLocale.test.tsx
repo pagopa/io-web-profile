@@ -1,4 +1,3 @@
-import React from 'react';
 import { test, vi } from 'vitest';
 import SessionActiveComp from '../sessionActiveComp';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
@@ -37,15 +36,8 @@ describe('SessionActiveComp', () => {
       />
     );
 
-    try {
-      // We expect getByText to throw an error
-      // because the date is formatted in the wrong locale
-      getByText(/1\/31\/2022./i);
-      fail('should not be here');
-    } catch (error) {
-      // We expect an error to be thrown
-      expect(error).toBeDefined();
-    }
+    // We expect getByText to throw an error because the date is formatted in the wrong locale
+    expect(() => getByText(/1\/31\/2022./i)).toThrow();
     expect(getByText(/31\/01\/2022./i)).toBeInTheDocument();
   });
 });

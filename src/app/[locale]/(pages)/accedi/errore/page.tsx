@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
 import { IllusError } from '@pagopa/mui-italia';

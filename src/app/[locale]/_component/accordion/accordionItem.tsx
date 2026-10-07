@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback, useId } from 'react';
 import MUIAccordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -7,13 +7,13 @@ import { Typography } from '@mui/material';
 
 export interface AccordionItemProps {
   header: string;
-  content: string | JSX.Element;
+  content: React.ReactNode;
   onChange?: (isOpen: boolean) => void;
 }
 
 export const AccordionItem: React.FC<AccordionItemProps> = ({ header, content, onChange }) => {
-  const controlsId = React.useId() + '-controls';
-  const headerId = React.useId() + '-header';
+  const controlsId = useId() + '-controls';
+  const headerId = useId() + '-header';
 
   const _onChange = useCallback(
     (_: React.SyntheticEvent<Element, Event>, isOpen: boolean) => {

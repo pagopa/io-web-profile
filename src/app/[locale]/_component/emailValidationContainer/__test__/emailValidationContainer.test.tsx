@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { EmailValidationContainer } from '../emailValidationContainer';
 import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
@@ -29,11 +28,10 @@ describe('EmailValidationContainer component', () => {
 
   test('should trigger onClick when the button is clicked', async () => {
     await renderWithProviders(<EmailValidationContainer {...defaultProps} />);
-    
+
     const button = await screen.findByText('FirstButton');
     fireEvent.click(button);
 
     expect(handleClick).toHaveBeenCalled();
   });
-
 });

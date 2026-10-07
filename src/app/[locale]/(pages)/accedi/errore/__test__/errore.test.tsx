@@ -8,7 +8,6 @@ import { renderWithProviders } from '@/app/[locale]/_utils/test-utils';
 import { ROUTES } from '@/app/[locale]/_utils/routes';
 
 const searchParamsSpy = vi.spyOn(nav, 'useSearchParams');
-vi.mock('next/navigation');
 
 const setReturnCode = (ret: string | null) =>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,7 +65,7 @@ describe('test suite for access error', () => {
     const cancelBtn = screen.getByText(it.ioesco.common.close);
     expect(cancelBtn).toBeInTheDocument();
     fireEvent.click(cancelBtn);
-    expect(pushMock).toHaveBeenCalledWith(ROUTES.LOGIN, { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith(`/it${ROUTES.LOGIN}`);
   });
 
   test('should render "Login Error Retry" in case of not recognized code and click on button retry', async () => {
@@ -78,6 +77,6 @@ describe('test suite for access error', () => {
     const retryBtn = screen.getByText(it.ioesco.error.retry);
     expect(retryBtn).toBeInTheDocument();
     fireEvent.click(retryBtn);
-    expect(pushMock).toHaveBeenCalledWith(ROUTES.LOGIN, { locale: 'it' });
+    expect(pushMock).toHaveBeenCalledWith(`/it${ROUTES.LOGIN}`);
   });
 });

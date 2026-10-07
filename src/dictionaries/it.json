@@ -293,7 +293,9 @@
       "confirmemaildescription": "Conferma il tuo indirizzo email per ricevere le comunicazioni da IO.",
       "confirmemailtitle": "È la tua email?",
       "confirmedemaildescription": "Hai confermato il tuo indirizzo email. Torna su IO per continuare a usare l’app.",
-      "confirmedemailtitle": "Hai confermato la tua email"
+      "confirmedemailtitle": "Hai confermato la tua email",
+      "revokewalletthankyoutitle": "",
+      "revokewalletthankyoudescription": ""
     },
     "profilelogout": {
       "logout": "Vuoi uscire da IO?"

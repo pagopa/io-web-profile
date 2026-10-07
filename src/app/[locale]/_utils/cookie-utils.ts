@@ -1,7 +1,6 @@
 import { CookieValueTypes, deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { OptionsType } from 'cookies-next/lib/types';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type CookieValue = string | object;
 type CookieValueType = 'string' | 'object';
 

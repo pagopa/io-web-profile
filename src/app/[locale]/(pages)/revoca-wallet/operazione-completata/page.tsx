@@ -4,7 +4,7 @@ import useFiscalCodeWhitelisted from '@/app/[locale]/_hooks/useFiscalCodeWhiteli
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Alert, Button, Grid, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 import { useCallback, useEffect, useMemo } from 'react';
 import { FAQ } from '../../../_component/accordion/faqDefault';
 import { Introduction } from '../../../_component/introduction/introduction';
