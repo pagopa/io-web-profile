@@ -4,6 +4,7 @@ import { AbstractIntlMessages, NextIntlProvider } from 'next-intl';
 import { Provider } from 'react-redux';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { store } from '../_redux/store';
+import ThemeProviderComponent from '../_component/themeProvider/themeProvider';
 
 export const renderWithProviders = async (
   component: React.ReactElement,
@@ -31,7 +32,9 @@ export const renderWithProviders = async (
 
   return render(
     <NextIntlProvider messages={messages} locale={locale}>
-      <Provider store={store}>{component}</Provider>
+      <Provider store={store}>
+        <ThemeProviderComponent>{component}</ThemeProviderComponent>
+      </Provider>
     </NextIntlProvider>
   );
 };

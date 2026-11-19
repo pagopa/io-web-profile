@@ -21,13 +21,14 @@
     "generate:api-wallet": "yarn run clean:api-wallet shx mkdir -p src/api/generated/wallet && gen-api-models --api-spec ./openApi/openapiWallet.yaml --request-types --response-decoders  --no-strict --client --out-dir src/api/generated/wallet"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^5.14.3",
     "@mui/lab": "^5.0.0-alpha.142",
     "@mui/material": "^5.14.5",
     "@mui/system": "^5.14.5",
-    "@pagopa/mui-italia": "1.1.0",
+    "@mui/x-date-pickers": "^6.17.0",
+    "@pagopa/mui-italia": "^2.8.2",
     "@reduxjs/toolkit": "^1.9.5",
     "cookies-next": "^2.1.2",
     "crypto-js": "^4.1.1",
@@ -35,9 +36,8 @@
     "mixpanel-browser": "^2.47.0",
     "next": "14.2.30",
     "next-intl": "2.19.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-md-spinner": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-redux": "^8.1.1"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/crypto-js": "^4.1.2",
     "@types/mixpanel-browser": "^2.47.0",
-    "@types/node": "20.4.1",
+    "@types/node": "^24.0.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
@@ -68,5 +68,6 @@
     "shx": "^0.3.4",
     "typescript": "^5.4.5",
     "vitest": "^1.5.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

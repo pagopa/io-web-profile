@@ -1,7 +1,7 @@
 'use client';
 import { Button, Grid, Typography } from '@mui/material';
-import { CieIcon } from '@pagopa/mui-italia/dist/icons/CieIcon';
-import { SpidIcon } from '@pagopa/mui-italia/dist/icons/SpidIcon';
+import { CieIcon } from '@pagopa/mui-italia/icons/CieIcon';
+import { SpidIcon } from '@pagopa/mui-italia/icons/SpidIcon';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SpidLevels } from '../../../_component/selectIdp/idpList';

@@ -28,6 +28,9 @@ jobs:
         with:
           node-version-file: '.node-version'
 
+      - name: Setup yarn
+        run: corepack enable
+
       - name: Build Application
         env:
           NEXT_PUBLIC_FOOTER_PRODUCT_LIST: 'https://account.ioapp.it/assets/products.json'
