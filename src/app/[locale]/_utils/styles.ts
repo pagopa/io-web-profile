@@ -32,22 +32,6 @@ export const commonBackground = {
   },
 };
 
-export const commonBackgroundFullHeight = {
-  ...commonBackground,
-  height: '100vh',
-};
-
-export const loaderOverlay = {
-  position: 'fixed',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  inset: '0px',
-  WebkitTapHighlightColor: 'transparent',
-  backgroundColor: 'rgba(23, 50, 77, 0.7)',
-  'z-index': '1',
-};
-
 export const commonBackgroundWithBack = {
   backgroundColor: 'background.default',
   paddingTop: '34px',
