@@ -40,9 +40,7 @@ export const commonBackgroundFullHeight = {
 export const loaderOverlay = {
   position: 'fixed',
   display: 'flex',
-  WebkitBoxAlign: 'center',
   alignItems: 'center',
-  WebkitBoxPack: 'center',
   justifyContent: 'center',
   inset: '0px',
   WebkitTapHighlightColor: 'transparent',
