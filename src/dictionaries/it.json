@@ -56,6 +56,7 @@
       "identitysecurityrestore": "Hai bloccato l’accesso a IO per ragioni di sicurezza? Ripristina l’accesso all’app.",
       "infocert": "InfoCert ID",
       "legalnotes": "Note legali",
+      "loading": "Caricamento in corso",
       "lockaccess": "Accesso bloccato",
       "lockaccessinfo": "Se blocchi l’accesso, non potrai entrare con tutte le tue <link>identità con un livello di sicurezza 2</link>. Potrai sbloccare l’accesso dopo aver messo in sicurezza la tua identità digitale.",
       "lockappaccess": "Pensi che la tua identità digitale sia compromessa? Blocca l’accesso all’app IO.",

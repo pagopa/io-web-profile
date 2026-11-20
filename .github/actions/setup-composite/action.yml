@@ -7,6 +7,9 @@ runs:
       uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
       with:
         node-version-file: '.node-version'
+    - id: setup-yarn
+      run: corepack enable
+      shell: bash
     - id: yarn-cache-dir-path
       run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
       shell: bash

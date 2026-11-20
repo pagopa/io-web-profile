@@ -19,7 +19,7 @@ This project uses:
 
 Before you start, ensure your machine has:
 
-- **Node.js** v20.12.0
+- **Node.js** v24.22.3
 - **Yarn** v1.22
 
 You can use `nodenv` to manage Node versions and `corepack` (included with Node) to manage Yarn.

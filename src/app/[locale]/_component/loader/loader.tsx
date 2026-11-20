@@ -1,23 +1,26 @@
 'use client';
-import { Grid } from '@mui/material';
-import MDSpinner from 'react-md-spinner';
-import { theme } from '@pagopa/mui-italia';
-import { commonBackgroundFullHeight, loaderOverlay } from '../../_utils/styles';
+import { Backdrop, Box } from '@mui/material';
+import { MISpinner } from '@pagopa/mui-italia';
+import { useTranslations } from 'next-intl';
 
-const Loader = (): React.ReactElement => (
-  <>
-    <Grid sx={loaderOverlay} />
-    <Grid
-      sx={commonBackgroundFullHeight}
-      alignItems="center" 
-      justifyContent="center" 
-      container
-    >
-      <Grid item xs={12} justifySelf={'center'} maxWidth="100%" textAlign={'center'}>
-        <MDSpinner singleColor={theme.palette.primary.main} role="loadingSpinner" />
-      </Grid>
-    </Grid>
-  </>
-);
+const Loader = (): React.ReactElement => {
+  const t = useTranslations('ioesco.common');
+
+  return (
+    <>
+      <Box sx={{ minHeight: '100vh' }} />
+      <Backdrop
+        open
+        slotProps={{ root: { 'aria-hidden': false } }}
+        sx={{
+          backgroundColor: 'rgba(23, 50, 77, 0.7)',
+          zIndex: theme => theme.zIndex.modal,
+        }}
+      >
+        <MISpinner color="primary" size={32} aria-label={t('loading')} />
+      </Backdrop>
+    </>
+  );
+};
 
 export default Loader;

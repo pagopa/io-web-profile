@@ -28,6 +28,9 @@ jobs:
         with:
           node-version-file: '.node-version'
 
+      - name: Setup yarn
+        run: corepack enable
+
       - name: Build Application
         env:
           NEXT_PUBLIC_FOOTER_PRODUCT_LIST: 'https://account.ioapp.it/assets/products.json'
@@ -57,7 +60,7 @@ jobs:
           NEXT_PUBLIC_ANALYTICS_TOKEN: 'cc8f0687d3eeb055a44fff7b779ba535'
         run: |
           gitReference='${{ github.ref_name }}'
-          yarn install --immutable
+          yarn install --frozen-lockfile
           yarn run generate
           yarn run build:prod
 

@@ -42,15 +42,15 @@ export default async function RootLayoutWithLocaleAndTheme({
   return (
     <html lang={locale}>
       <body style={{ margin: '0' }}>
-        <Suspense fallback={<Loader />}>
-          <Providers>
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              <ThemeProviderComponent>
+        <Providers>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <ThemeProviderComponent>
+              <Suspense fallback={<Loader />}>
                 <SessionProviderComponent>{children}</SessionProviderComponent>
-              </ThemeProviderComponent>
-            </NextIntlClientProvider>
-          </Providers>
-        </Suspense>
+              </Suspense>
+            </ThemeProviderComponent>
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );
