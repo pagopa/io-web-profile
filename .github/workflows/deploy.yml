@@ -87,7 +87,7 @@ jobs:
 
     steps:
       - name: Azure Login
-        uses: pagopa/dx/actions/csp-login@main
+        uses: pagopa/dx/actions/csp-login@4096ba9f421ebb4a452ccec6953e67bc2872657f # main
         env:
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID }}
@@ -101,7 +101,7 @@ jobs:
           name: StaticSite
 
       - name: Deploy to Azure
-        uses: pagopa/dx/actions/static-assets-deploy@main
+        uses: pagopa/dx/actions/static-assets-deploy@4096ba9f421ebb4a452ccec6953e67bc2872657f # main
         with:
           storage_account_name: ${{ env.STORAGE_ACCOUNT_NAME }}
           blob_container_name: $web
